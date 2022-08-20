@@ -2,7 +2,7 @@
 layout: post
 title:  "점프 투 장고 공부 4"
 date:   2022-08-20 22:50:10 +0900
-categories: 점프투장고
+categories: jumptodjango
 ---
 
 ## 초보자를 위한 HTML5
