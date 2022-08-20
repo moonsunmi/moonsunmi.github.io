@@ -1,4 +1,3 @@
-
 ---
 layout: post
 title:  "연오의 파이썬 공부 2"
