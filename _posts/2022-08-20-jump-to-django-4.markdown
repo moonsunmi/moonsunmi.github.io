@@ -37,7 +37,10 @@ categories: jumptodjango
 ### 파이참 단축키
 * option + 클릭: 자동 임포트
 * command + 클릭: 함수가 정의된 곳으로 이동
-```
+
+
+```html
+{% raw %}
         {% csrf_token %}
         <!-- 오류 표시 start -->
         {% if form.errors %}
@@ -53,5 +56,5 @@ categories: jumptodjango
         </div>
         {% endif %}
         <!-- 오류 표시 end -->
+{% endraw %}
 ```
-
