@@ -10,6 +10,9 @@ categories: jumptodjango
 ### 3-01 내비게이션바
 
 navbar.html
+
+{% raw %}
+
 ```html
 <!-- 내비게이션바 start -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -35,12 +38,16 @@ navbar.html
 
 <!-- 내비게이션바 end -->
 ```
+{% endraw %}
+
 
 
 navbar.html 파일은 다른 템플릿들에서 중복되어 사용되지는 않지만 독립된 하나의 템플릿으로 관리하는 것이 유지 보수에 유리하므로 분리하였다.
 
 
 views.py
+
+{% raw %}
 
 ```python
 from django.core.paginator import Paginator
@@ -57,6 +64,8 @@ def index(request):
     context = {'question_list': page_obj}
     return render(request, 'pybo/question_list.html', context)
 ```
+{% endraw %}
+
 
 
 `page = request.GET.get('page', '1')`은 http://localhost:8000/pybo/?page=1 처럼 GET 방식으로 호출된 URL에서 page값을 가져올 때 사용한다. 
@@ -123,6 +132,7 @@ question_list.html
 
 pybo_filter.py
 
+{% raw %}
 ```python
 from django import template
 
@@ -133,6 +143,7 @@ register = template.Library()
 def sub(value, arg):
     return value - arg
 ```
+{% endraw %}
 
 
 글 번호 순서대로 잘 나오게 하기
