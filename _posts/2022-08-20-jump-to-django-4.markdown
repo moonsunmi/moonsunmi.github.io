@@ -40,6 +40,7 @@ categories: jumptodjango
 
 
 ```html
+{% raw %}
         {% csrf_token %}
         <!-- 오류 표시 start -->
         {% if form.errors %}
@@ -55,4 +56,5 @@ categories: jumptodjango
         </div>
         {% endif %}
         <!-- 오류 표시 end -->
+{% endraw %}
 ```
