@@ -39,8 +39,7 @@ categories: jumptodjango
 * command + 클릭: 함수가 정의된 곳으로 이동
 
 
-{% highlight python %}
-```
+```html
         {% csrf_token %}
         <!-- 오류 표시 start -->
         {% if form.errors %}
@@ -57,4 +56,3 @@ categories: jumptodjango
         {% endif %}
         <!-- 오류 표시 end -->
 ```
-{% endhighlight%}
