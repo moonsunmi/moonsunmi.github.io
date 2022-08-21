@@ -10,7 +10,7 @@ categories: jumptodjango
 ### 3-01 내비게이션바
 
 navbar.html
-```
+```html
 <!-- 내비게이션바 start -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
    <div class="container-fluid">
@@ -41,7 +41,8 @@ navbar.html 파일은 다른 템플릿들에서 중복되어 사용되지는 않
 
 
 views.py
-```
+
+```python
 from django.core.paginator import Paginator
 
 from .models import Question
@@ -121,6 +122,7 @@ question_list.html
 장고에는 빼기 필터가 없으므로 직접 만든다. `@register.filter` 애너테이션을 적용하면 템플릿에서 해당 함수를 필터로 사용할 수 있다.
 
 pybo_filter.py
+
 ```python
 from django import template
 
@@ -136,6 +138,7 @@ def sub(value, arg):
 글 번호 순서대로 잘 나오게 하기
 
 question_list.html
+
 {% raw %}
 ```html
         {% if question_list %}
