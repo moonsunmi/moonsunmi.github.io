@@ -119,23 +119,27 @@ urlpatterns=[
 ### `<label>`
 입력 요소에 라벨을 붙이는 역할
 1. 태그의 안에 입력 요소를 포함시키는 방식
+{% raw %}
 ```html
 <label>
   아이디
   <input type="text">
 </label>
 ```
+{% endraw %}
 
 2. 입력 요소의 id를 기반으로 <label> 태그와 입력 요소를 짝 지어주는 방식 
+{% raw %}
 ```html
 <label for="pw">비밀번호</label>
 <input id="pw" type="password">
 ```
-
+{% endraw %}
 
 ### HTML `name` 속성
 요소 안에 포함되는 각 입력 요소에는 name 속성을 추가하여 각 입력 항목의 역할을 구별해줄 수 있다.
 
+{% raw %}
 ```html
 <body>
   <form method="post" action="fake_server.php">
@@ -152,6 +156,7 @@ urlpatterns=[
   </form>
 </body>
 ```
+{% endraw %}
 
-<p>id나 class가 있는데, 왜 또 name이 들어 갔을까?</p>
-각 입력 요소에 지정된 name 속성은 폼 안에서 입력 요소를 구분하는 역할을 함과 동시에, <b>서버에 전송된 입력 값의 이름으로 사용</b>
+* id나 class가 있는데, 왜 또 name이 들어 갔을까?
+각 입력 요소에 지정된 name 속성은 폼 안에서 입력 요소를 구분하는 역할을 함과 동시에, 서버에 전송된 입력 값의 이름으로 사용
