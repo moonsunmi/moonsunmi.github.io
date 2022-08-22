@@ -37,6 +37,7 @@ LoginView는 registraion 템플릿 디렉터리에서 login.html 파일을 찾�
 `path('login/', auth_views.LoginView.as_view(template_name='common/login.html'), name='login')`
 
 login.html
+{% raw %}
 ```html
 {% extends "base.html" %}
 
@@ -59,9 +60,10 @@ login.html
 {% endblock %}
 
 ```
-
+{% endraw %}
 
 form_error.html(얘는 common 앱 안에 소속되지 않고, mysite/templates 안에 넣었다.)
+{% raw %}
 ```html
 <!-- 필드 오류와 넌필드 오류를 출력한다. 시작 -->
 {% if form.errors %}
@@ -87,9 +89,11 @@ form_error.html(얘는 common 앱 안에 소속되지 않고, mysite/templates �
 {% endif %}
 <!-- 필드 오류와 넌필드 오류를 출력한다. 끝 -->
 ```
+{% endraw %}
+
 
 common/urls.py
-
+{% raw %}
 ```python
 from django.urls import path
 from django.contrib.auth import views as auth_views
@@ -101,7 +105,7 @@ urlpatterns=[
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 ]
 ```
-
+{% endraw %}
 
 
 ## HTML 
