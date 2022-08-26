@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "점프투 장고"
+title:  "점프투 장고 공부 1"
 date:   2022-08-17 22:18:24 +0900
 categories: jumptodjango
 ---
