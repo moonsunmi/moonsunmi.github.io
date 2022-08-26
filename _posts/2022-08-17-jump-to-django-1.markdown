@@ -45,10 +45,12 @@ urlpatterns = [
    path('admin/', admin.site.urls),
    path('pybo/', views.index)
 ]
+```
 views.index는 views.py 파일의 index 함수를 의미한다.
 
 
 
+```python
 from django.shortcuts import render
 from django.http import HttpResponse
 
