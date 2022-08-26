@@ -111,6 +111,7 @@ views.results()   —(reverse(‘polls:results’, args=3,) URL 추출)    —> 
 
 
 results.hml
+{% raw %}
 ```html
 <h1> {{ question.question_text }} </h1>
 
@@ -122,7 +123,7 @@ results.hml
 
 <a href="{% url 'polls.detail' question.id %}">Vote again?</a>
 ```
-
+{% endraw %}
 
 
 result()
