@@ -122,22 +122,6 @@ class restaurant(models.Model):
 ```
 
 
-## 관계 매니저
-
-모델 간 관계를 다루기 위한 클래스를 의미한다. 1:N, N:N 관계에서만 관계 매니저가 사용된다.
-
-```python
-class Owner(models.Model):
-
-class Album(models.Model):
-    owner = models.ForeignKey('auth.User')
-
-user1.album_set  # 관계 매니저 클래스 객체
-album1.owner     # 관계 매니저 클래스 객체
-```
-
-### 관계 매니저 메서드
-
 
 
 
