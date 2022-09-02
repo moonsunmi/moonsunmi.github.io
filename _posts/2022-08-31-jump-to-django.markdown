@@ -47,18 +47,9 @@ ALLOWED_HOSTS = ['43.200.117.214']
 
 
 
-### 설정 자동화
+### 로컬 설정 자동화
 
-DJANGO_SETTINGS_MODULE 환경 변수는 장고 서버 실행 시 사용하는 `--settings=config.settings.local` 옵션을 대신하는 환경변수
-
-
-다음과 같은 에러가 난다.
+로컬 설정 자동화를 했는데도 다음과 같은 에러가 난다.
 
 `CommandError: You must set settings.ALLOWED_HOSTS if DEBUG is False.`
-
-
-
-
-
-
 
