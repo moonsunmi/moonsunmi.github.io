@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "파이썬 웹 프로그래밍 공부 1(13장)"
+title:  "파이썬 웹 프로그래밍 실전편 공부 1(13장)"
 date:   2022-08-29 22:45:13 +0900
 categories: python-web-programming-practice
 ---
