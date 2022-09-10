@@ -141,7 +141,7 @@ make_object_list가 True이면 해당 연도에 해당하는 객체의 리스트
 
 템플릿 파일에서 URL을 추출하는 문법 2가지
 * get_absolute_url()
-* {% url %}
+* {%raw}{% url %}{% endraw %}
 
 
 
