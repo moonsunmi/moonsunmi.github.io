@@ -131,7 +131,11 @@ make_object_list가 True이면 해당 연도에 해당하는 객체의 리스트
 
 날짜를 "July 07, 2019" 형식으로 출력한다.
 
-`{{ post.modify_dt|date:"N d, Y" }}`
+{% raw %}
+```html
+{{ post.modify_dt|date:"N d, Y" }}
+```
+{% endraw %}
 
 
 
