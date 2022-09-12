@@ -413,10 +413,6 @@ taggit_post_list.html
 
 
 
-## 7장
-
-
-
 
 
 
