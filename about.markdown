@@ -22,7 +22,7 @@ permalink: /about/
 | ![Image](https://drive.google.com/uc?export=view&id=1yWYb9hPtQQjdv3G4d2nA7tX9dpFw6sBF)<br>함께 자라기 | 기간: ? <br>범위: 전체<br> | - |
 
 
-``
+
 <!--
 | ![Image](https://drive.google.com/uc?export=view&id=1iA7hHRlVuoq4JWUbAh1AV8hibHMVp6bX)<br>혼자 공부하는 자바스크립트 | 목표: ㅁㅁㅁㅁ | ing |
 | ![Image](https://drive.google.com/uc?export=view&id=1hAMRkudBnp6lpF_H8SUhs4b9MIcIC1kV)<br>모던 웹을 위한 HTML5+CSS3 바이블 | 목표: ㅁㅁㅁㅁ | ing |
@@ -33,5 +33,4 @@ permalink: /about/
 | ![Image](https://drive.google.com/uc?export=view&id=193bRe754yhz5N2GIv9C0yF1Bl6D7mi4m)<br>CODE(코드) | 목표: ㅁㅁㅁㅁ | 전자책 |
 
 -->
-``
 
