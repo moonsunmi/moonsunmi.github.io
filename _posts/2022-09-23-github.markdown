@@ -1,0 +1,127 @@
+---
+layout: post
+title:  "<팀 개발을 위한 Git Github 시작하기> 2, john-smilga Project"
+date:   2022-09-23 22:18:07 +0900
+categories: etc
+---
+
+|           | 뽀모도리  |
+|-----------|-------|
+| 일간(달성/목표) | 8/8   |
+| 주간(달성/목표) | 24/40 |
+
+
+다음 명령어는 원격 저장소를 origin이라는 이름으로 추가하라는 뜻이었다.
+
+```git remote add origin https://github.com/moonsunmi/github.git```
+
+'master'란 커밋을 올리는 줄기 중 기본을 뜻한다.
+
+로컬 컴퓨터에 있는 가장 최신 커밋에 master가 붙어 있고, 원격 저장소에 있는 가장 최신 커밋에 origin/master가 붙어 있게 된다.
+
+
+### Git과 SVN 같은 버전관리 시스템과의 차이
+SVN은 기존 파일에 수정이 생길 경우, 차이점만 저장하지만, Git은 전체 파일을 저장한다. 커밋들은 변경된 파일들이 다 묶여 저장되어 있는 것이다.
+
+
+### Git으로 관리하는 파일의 네 가지 상태
+
+1. 추적 안 됨: 만들어진 후 아직 add된 적이 없는 파일
+2. 수정 안 됨: 스테이지로 add된 적이 있어 아직 스테이지에 남아 있지만, 수정을 안 해서 변경이 없는 상태.
+3. 수정됨: 스테이지에 있던 파일이 수정됨.
+4. 스테이지됨: '추적 안됨', '수정됨' 상태의 파일들이 스테이지에 오를 경우
+
+스테이지: git add로 수정된 파일을 추가하면, 그 파일들은 스테이지에 오른다. 커밋을 하면 그 스테이지 상태가 저장이 되는 것.
+
+HEAD: 커밋과 브랜치를 가리킬 수 있는 특수 포인터. 
+
+
+
+
+# <모던 웹을 위한 HTML5+CSS3 바이블> 다시..
+
+### 구조 선택자
+
+#### 일반 구조 선택자
+
+특정한 위치에 있는 태그를 가져올 수 있는 선택자. 보통 자손 선택자와 함께 쓰인다. (몇 번째 위치에 있는.. 그런 형태라서...)
+
+`:first-child, :last-child, :nth-child, :nth-last-child` 
+
+#### 형태 구조 선택자
+
+이게 뭔지에 대한 설명은 책에 없다. 코드를 보고 알아채라는데, 일반 구조 선택자와 다를 게 뭔지 모르겠다.
+
+
+### 문자 속성 선택자
+다음처럼 문자 속성값에 규칙이 있는 경우 이용할 수 있는 선택자.
+
+```html
+<div class="col-12" id="header"> ...
+<div class="col-3" id="section"> ...
+
+div[class|=col] <!-- 이렇게 하면 위의 두 줄을 선택할 수 있다. -->
+```
+
+* div[class~=col]: 속성값을 단어로 포함하는 태그(class="col mid") ko-kr 하이픈 하나의 단어로 포함해서 인식'
+* div[class|=col]: 속성값을 단어로 포함하는 태그(class="col mid") ko-kr을 ko와 kr, 두 개로 인식
+* div[class^=col]: 속성값이 col로 시작하는 태그(class="cola" ...)
+* div[class$=col]: 속성값이 col로 끝나는 태그(class="protocol" ...)
+
+
+## CSS
+
+### 단위
+
+* 150% = 1.5em
+* px: 절대적인 크기
+
+
+HEX 코드: 16진수로 RGB 색상 조합을 표현한다.
+#000000(RED값 16진수 두 자리, GREEN값 16진수 두 자리, BLUE값 16진수 두 자리)
+
+
+### 박스 속성
+
+div의 width는 글자가 들어가는 영역을 말한다. 
+마진 - 보더 - 패딩 - [글자] - 패딩 - 보더 - 마진
+
+
+
+# john-smilga project
+
+### em vs. rem
+em: 상위 요소 크기의 몇 배인지로 크기를 정한다.
+rem: html 요소 기준. 문서의 최상위 요소(html 요소의 크기의 몇 배인지)
+
+```
+html { font-size: 16px; }
+body { font-size: 1.5em; }
+.a { font-size: 2.0em; }
+```
+
+a의 상위 요소인 body 기준으로 2.0배.
+
+
+```
+html { font-size: 16px; }
+body { font-size: 1.5em; }
+.a { font-size: 2.0rem; }
+```
+
+문서의 최상위 요소인 html 기준으로 2.0배
+
+
+
+### visual studio code에서 유용한 단축키
+> * `!`: <!DOCTYPE html>로 시작하는 HTML 기본 구조를 자동으로 완성해 준다.
+> * `Lorem20`: Lorem ipsum dolor, ... 이 테스트용 문장을 자동으로 입력해 준다.
+> * `li*3`: 하나의 태그(li)를 여러 개(3) 입력하려 할 때
+
+
+## Project1. Default Starter
+
+React를 쓴다면 normalize.css를 import해야 하지만, 여기서는 그냥 html 만드는 것이니까 단순히 다운로드 버튼을 누르거나 코드를 복사붙여넣기해도 된다.
+
+https://necolas.github.io/normalize.css/
+
