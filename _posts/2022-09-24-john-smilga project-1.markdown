@@ -168,8 +168,8 @@ JS HTML Dom까지
 
 
 ### CSS frameworks
-bootstrap: 웹사이트가 많이 비슷해 보임. 
-Tailwind CSS: 정식 웹사이트 document에서 'core concept'를 공부하면 됨.(정식 유튜브도 있음)
+* bootstrap: 웹사이트가 많이 비슷해 보임. 
+* Tailwind CSS: 정식 웹사이트 document에서 'core concept'를 공부하면 됨.(정식 유튜브도 있음)
 
 
 ### Javascript frameworks
