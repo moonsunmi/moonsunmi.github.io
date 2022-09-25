@@ -162,9 +162,9 @@ https://www.youtube.com/watch?v=C-EHoNfkoDM
 ## 프론트엔드 배우기
 
 w3schools.com
-HTML은 HTML graphics까지 배운다.
-CSS는 CSS Grid까지
-JS HTML Dom까지
+* HTML은 HTML graphics까지 배운다.
+* CSS는 CSS Grid까지
+* JS HTML Dom까지
 
 
 ### CSS frameworks
