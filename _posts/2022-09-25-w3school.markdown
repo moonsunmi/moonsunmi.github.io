@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "w3school"
+title:  "w3school HTML"
 date:   2022-09-25 22:18:07 +0900
 categories: HTML+CSS
 ---
@@ -14,7 +14,7 @@ categories: HTML+CSS
 
 * `<p title="it's toolkit">`: title은 커서를 놓았을 때 뜨는 도움말을 표시해 준다.
 
-* ```<p style="color:blue">```: 색 지정하려면
+* `<p style="color:blue">`: 색 지정하려면
 
 * `<p style="text-align:center;">This is a paragraph.</p>`: 가운데 정렬
 
@@ -81,7 +81,8 @@ p 태그마다 2px의 경계를 지정해 준다.
 ```
 
 
-* 북마크하는 법: href에 "#"+ id값 
+* 북마크하는 법
+
 ```html
 <h2 id="C4">Chapter 4</h2>
 ...
