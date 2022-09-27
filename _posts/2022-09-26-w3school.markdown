@@ -62,6 +62,7 @@ bootstrap: 너무 유명해서 엄청 자주 들어 본.
 * nav: 네비게이션 링크들을 모아 둠.
 * aside: 각주 같은 것. `float: right;` 같은 것 써서 화면 오른쪽에 텍스트 상자 띄워 주면 좋다.
 * figure
+
 ```html
 <figure>
   <img src="pic_trulli.jpg" alt="Trulli" style="width:100%">
@@ -79,6 +80,7 @@ bootstrap: 너무 유명해서 엄청 자주 들어 본.
 4. 속성 이름도 소문자로
 5. 속성값은 따옴표로 감싸주기
 6. 그림을 실을 때 alt, width, height는 무조건 지정하기. 웹 페이지가 로딩될 때 width와 height로 그림용 영역을 마련해 두기 때문에 꼭 필요.
+
 ```html
 <img src="html5.gif" alt="HTML5" style="width:128px;height:128px">
 ```
@@ -90,10 +92,12 @@ bootstrap: 너무 유명해서 엄청 자주 들어 본.
 12. `<html lang="en-us">` 이것도 잊지 말고.
 13. `<meta charset="UTF-8">` 얘도.
 13. 뷰포트를 세팅하자.
+
 ```html
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 ```
 14. 주석 긴 건 이렇게.
+
 ```html
 <!--
   This is a long comment example. This is a long comment example.
