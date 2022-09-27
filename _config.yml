@@ -36,7 +36,7 @@ plugins:
 # I added.
 encoding: UTF-8
 url: moonsunmi.github.io
-
+future: true
 
 # Exclude from processing.
 # The following items will not be processed, by default.
