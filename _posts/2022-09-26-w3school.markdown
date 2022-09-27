@@ -70,8 +70,6 @@ bootstrap: 너무 유명해서 엄청 자주 들어 본.
 </figure>
 ```
 
-
-
 ## HTML 스타일 지키기
 
 1. 도큐먼트 타입은 무조건 선언한다. `<!DOCTYPE html>`
@@ -84,6 +82,7 @@ bootstrap: 너무 유명해서 엄청 자주 들어 본.
 ```html
 <img src="html5.gif" alt="HTML5" style="width:128px;height:128px">
 ```
+
 7. 대입문의 '=' 양쪽에 공백 넣지 말기.
 8. 한 줄을 너무 길게 하지마.
 9. 이유 없이 빈 줄 넣지 않기. 읽기 좋게 하기 위해서 구분해서 넣어야 한다.
@@ -96,6 +95,7 @@ bootstrap: 너무 유명해서 엄청 자주 들어 본.
 ```html
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 ```
+
 14. 주석 긴 건 이렇게.
 
 ```html
@@ -104,6 +104,7 @@ bootstrap: 너무 유명해서 엄청 자주 들어 본.
   This is a long comment example. This is a long comment example.
 -->
 ```
+
 15. 스타일 시트를 쓰세요.
 16. 파일 이름도 소문자로
 
@@ -118,6 +119,7 @@ bootstrap: 너무 유명해서 엄청 자주 들어 본.
 * `<form>` 태그는 입력 받는 요소(텍스트 필드, 체크 박스 등)들을 담은 그릇임. 따라서 form 태그는 화면에 보이지도 않음.
 
 * input 요소는 가장 자주 사용되는 입력 폼.
+
 ```html
 <input type="text">
 <input type="radio">
@@ -180,6 +182,7 @@ bootstrap: 너무 유명해서 엄청 자주 들어 본.
 ### input 속성들
 
 파일 첨부를 여러 개 가능하게 하고 싶다면, multiple 속성 추가해야 한다.
+
 ```html
 <input type="file" id="files" name="files" multiple>
 ```
@@ -196,7 +199,6 @@ bootstrap: 너무 유명해서 엄청 자주 들어 본.
 * required: 필수 입력 항목
 
 * autofocus: 화면 열리자마자 커서가 가 있을 곳 지정.
-* 
 
 
 <hr />
