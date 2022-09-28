@@ -1,0 +1,194 @@
+---
+layout: post
+title:  "w3school HTML+CSS"
+date:   2022-09-27 22:18:07 +0900
+categories: HTML+CSS
+---
+
+|           | 뽀모도리 | 등운동 | 가슴운동 |
+|-----------|------|-----|------|
+| 일간(달성/목표) | 3/4  | 5/5 | 5/5  |
+| 주간(달성/목표) | 7/40 |     |      |
+
+
+
+### Input Form 속성
+
+form 태그 안에 input이 있어도 되고,
+
+```html
+<form action="/action_page.php" id="form1">
+  <label for="fname">First name:</label>
+  <input type="text" id="fname" name="fname"><br><br>
+</form>
+```
+
+input 혼자 있어도 된다. 이때 form 속성값을 넣어 줘야 함.
+
+```html
+<label for="lname">Last name:</label>
+<input type="text" id="lname" name="lname" form="form1">
+```
+
+formaction 속성을 넣어 주면 <form> 태그의 action을 덮어 쓴다.
+
+```html
+<form action="/action_page.php">
+  ...
+  <input type="submit" value="Submit">
+  <input type="submit" formaction="/action_page2.php" value="Submit as Admin">
+</form>
+```
+
+* formenctype은 method가 post일 때만 사용할 수 있는데, 어떻게 인코딩될지 정한다.
+
+* formmethod는 form 태그의 메서드 값을 오버라이드한다. 원래 get 메서드 폼인데, 하나만 post로 하고 싶거나 할 때 쓰면 된다.
+
+```html
+<form action="/action_page.php" method="get">
+  <label for="fname">First name:</label>
+  <input type="text" id="fname" name="fname"><br><br>
+  <label for="lname">Last name:</label>
+  <input type="text" id="lname" name="lname"><br><br>
+  <input type="submit" value="Submit using GET">
+  <input type="submit" formmethod="post" value="Submit using POST">
+</form>
+```
+
+* formtarget: target 속성값을 오버라이드.
+
+* formnovalidate: novalidate 속성값을 오버라이드.
+
+* novalidate: 유효성 검사 필요 없음.
+
+
+### Canvas
+
+canvas는 자바스크립트를 통해서 그림 그려주는 것. id, width, height는 필수로 넣어 주어야 하고, 테두리를 넣으려면 style 속성으로.
+
+```html
+<canvas id="myCanvas" width="200" height="100" style="border:1px solid #000000;">
+</canvas>
+```
+
+## CSS!!
+
+CSS는 셀렉터와 선언으로 이루어져 있다.
+
+```css
+p {
+  color: red;
+  text-align: center;
+}
+```
+
+* p: 셀렉터
+* color: 프로퍼티
+* red: 프로퍼티 값
+
+
+### 셀렉터
+
+셀렉터는 스타일 매기고자 하는 HTML 요소를 찾을 때 사용한다.
+
+
+* ID 값으로 찾을 때는 `#`
+
+```html
+#para1 {
+  text-align: center;
+  color: red;
+}
+```
+
+* `class` 값으로 찾을 때는 `.`
+
+```html
+.center {
+  text-align: center;
+  color: red;
+}
+```
+
+* `<p>` 엘리먼트 중에서 `class`가 `center`인 것만
+
+```html
+p.center {
+  text-align: center;
+  color: red;
+}
+```
+
+
+* 전체 요소는 `*`
+
+```html
+* {
+  text-align: center;
+  color: blue;
+}
+```
+
+#### 스타일 우선순위
+
+스타일이 겹치는 경우 나중의 것으로 나온다. 다음은 orange 색이 안 됨.
+
+```html
+<style>
+h1 {
+  color: orange;
+}
+</style>
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+```
+
+`link`와 `style`의 엘리먼트 위치를 바꾼다면, orange 색이 된다.
+
+
+우선순위<br />
+1. Inline style (inside an HTML element)
+2. External and internal style sheets (in the head section)
+3. Browser default
+
+
+### 주석
+
+여러 줄 주석은 다음과 같이.
+
+```css
+/* This is
+a multi-line
+comment */
+```
+
+`<style>` 엘리먼트 안에서 CSS 주석은 `/* */`로, HTML 주석은 `<!-- -->`로.
+
+
+### 세 자리 HEX 색 코드
+
+같은 값 두 개가 반복해서 나올 때만 세 자리 코드를 쓸 수 있다.
+
+* #ff00cc => #f0c
+* #ff00ff => #f0f
+
+
+
+### CSS background
+
+투명도값을 줄 수 있다.
+
+```css
+div {
+  background-color: green;
+  opacity: 0.3;
+}
+```
+
+
+
+
+
+
+
+
+
