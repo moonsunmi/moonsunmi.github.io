@@ -1,0 +1,54 @@
+---
+layout: post
+title:  "reactjs.org 튜토리얼"
+date:   2022-09-30 12:18:07 +0900
+categories: HTML+CSS
+---
+
+|           | 뽀모도리  | 등운동 | 가슴운동 |
+|-----------|-------|-----|------|
+| 일간(달성/목표) | 2/8   | 5/5 | 5/5  |
+| 주간(달성/목표) | 17/40 |     |      |
+
+
+
+리액트는 자바스크립트 라이브러리로, '컴포넌트'라고 불리는 코드 파편을 이용해서 UI를 구성한다.
+
+```js
+class ShoppingList extends React.component{
+    render(){
+        return(
+            <div className="shopping-List">
+                <h1>shopping List for {this.props.name}</h>
+                <ul>
+                    <li>Instagram</li>
+                    <li>What's app</li>
+                    <li>Oculus</li>
+                </ul>
+            </div>
+        );
+    }
+}
+```
+리액트에는 여러 컴포넌트가 있지만, 여기서는 React.component를 사용한다. 여기에서 `ShoppingList`는 리액트 컴포넌트 클래스(타입)이다. `prop`라는 매개변수를 받아서 처리한 후 `render` 함수를 통해 뷰 계층 구조를 전달한다.
+
+`render()` 함수는 보고자 하는 화면 내용을 전달한다. 전달을 위해서 리액트는 render의 리턴값을 경량화된 React 엘리먼트로 전환한다.
+
+위에서 `<div>` 구문은 다음과 같이 전환된다.
+
+```js
+return React.createElement('div', {className:'shopping-list'},
+  React.createElement('h1', ...),
+  React.createElement('ul', ...)
+);
+```
+
+JSX의 중괄호 안에는 어떤 자바스크립트 코드도 쓸 수 있다. 리액트 엘리먼트는 자바스크립트 객체의 일종이다. 리액트 컴포넌트는 독립, 캡슐화되어 있다.
+
+
+<hr />
+궁금한 점?
+리액트 엘리먼트 vs. 리액트 컴포넌트?
+
+
+
