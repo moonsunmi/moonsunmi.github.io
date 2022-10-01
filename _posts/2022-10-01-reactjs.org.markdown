@@ -5,14 +5,15 @@ date:   2022-10-01 12:18:07 +0900
 categories: reactjs
 ---
 
-|           | 뽀모도리    | 등운동 | 가슴운동 |
-|-----------|---------|-----|------|
-| 일간(달성/목표) | ?/12+6  | 5/5 | 5/5  |
-| 주간(달성/목표) | 17+?/40 |     |      |
+|                   | 뽀모도리    | 등 운동 | 가슴 운동 |
+|-------------------|---------|------|-------|
+| 1일<br>(달성/목표)     | 12/16+5 | 5/5  | 5/5   |
+| 1주<br>(달성/목표)     | 37/40   |      |       |
 
 
 
-w3school의 javascript의 Exercise 문제 풀면서 복습해 봄.
+## w3school의 javascript
+Exercise 문제 풀면서 복습해 봄.
 
 
 
@@ -36,7 +37,7 @@ class ShoppingList extends React.component{
     }
 }
 ```
-리액트에는 여러 컴포넌트가 있지만, 여기서는 React.component를 사용한다. 여기에서 `ShoppingList`는 리액트 컴포넌트 클래스(타입)이다. `prop`라는 매개변수를 받아서 처리한 후 `render` 함수를 통해 뷰 계층 구조를 전달한다.
+리액트에는 여러 컴포넌트가 있지만, 여기서는 React.component를 사용한다. 여기에서 `ShoppingList`는 리액트 컴포넌트 클래스(타입)이다. `prop`라는 프로퍼티를 받아서 처리한 후 `render` 함수를 통해 뷰 계층 구조를 전달한다.
 
 `render()` 함수는 보고자 하는 화면 내용을 전달한다. 전달을 위해서 리액트는 render의 리턴값을 경량화된 React 엘리먼트로 전환한다.
 
@@ -62,7 +63,7 @@ JSX의 중괄호 안에는 어떤 자바스크립트 코드도 쓸 수 있다. �
 * Game: 보드판을 렌더링한다.
 
 
-부모인 Board 컴포넌트에서 자식인 Square 컴포넌트로 prop를 이용해 정보를 전달하자. 리액트에서 정보가 흘러가는 방식이다.
+부모인 Board 컴포넌트에서 자식인 Square 컴포넌트로 프로퍼티를 이용해 정보를 전달하자. 리액트에서 정보가 흘러가는 방식이다.
 
 ```js
 class Square extends React.Component {
@@ -151,17 +152,222 @@ class Square extends React.Component{
 ```
 
 `Square` 클래스의 `render` 메서드에 있는 `onClick` 핸들러 덕분에 클릭할 때마다 `this.setState`가 호출된다.<br>
-`setState`는 값이 변할 때마다 그 안에 있는 자식 컴포넌트(여기에서는 `this.state.value`를 자동으로 업데이트된다.
+`setState`는 값이 변할 때마다 그 안에 있는 자식 컴포넌트(여기에서는 `this.state.value`)를 자동으로 업데이트된다.
+
+### Sqaure의 상태 한곳에서 저장하기
+
+`Square`의 상태를 각각의 `Square` 자체에서 저장하고 있으면 되지 않나 생각할 수 있지만, 비효율적이다. 부모인 `Board` 컴포넌트가 가지고 있는 게 좋다. 
+
+자식 컴포넌트들의 값을 모아두거나, 컴포넌트끼리 정보를 전달하기 위해서 부모 컴포넌트는 공유할 state를 저장해 둔다. 그리고 프로퍼티를 이용해서 정보를 전달한다.
+
+부모 컴포넌트인 `Board`에 다음과 같이 자식(`squares`) 컴포넌트 값을 모아 둔다.
+
+```js
+class Board extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      squares: Array(9).fill(null),
+    };
+  }
+...
+}
+
+```
+
+* 틱택토 상자 안에 있는 숫자(1, 2, 3 ..., 9)는 부모인 `Board` 컴포넌트에서 전달 받았고, 클릭되었을 때 "X" 표시는 `Square` 자체에서 처리하였다.
 
 
+`Board` 컴포넌트에서 `Square` 값을 저장해 두었기 때문에 `renderSquare`는 다음과 같이 수정한다.
+```js
+renderSquare(i) {
+  return <Square value={this.state.squares[i]}/>; 
+}
+```
+
+#### square가 클릭되었을 때 상태 바꾸기
+
+state는 컴포넌트 안에서 private하게 운영되므로, Square를 바꿔서 Board를 직접 업데이트할 수는 없다.
+
+Board의 renderState를 다음과 같이 수정.
+
+```js
+renderSquare(i) {
+  return (<Square
+           value={this.state.squares[i]},
+           onclick={() => this.handleClick(i)}
+          />
+  );
+}
+```
+
+Square에서 더 이상 state를 쓰지 않으므로 state는 constructor를 지우고, 부모 Board에게 받은 값을 이용하도록 `this.state. ...`을 `this.prop. ...`으로 수정한다.
+
+```js
+class Square extends React.Component {
+  render() {
+    return (
+      <button
+        className="square"
+        onClick={() => this.prop.onClick()}
+      >
+        {this.prop.value}
+      </button>
+    );
+  }
+}
+
+```
+
+이러면 이제, square가 클릭되면 Board에 있는 onclick 함수가 호출된다.
+
+1. `onClick`은 DOM에 내장되어 있는 프로퍼티이다. square에 있는 button이 눌리면, button은 리액트한테 click 이벤트 리스트너를 세팅하라고 한다.
+2. 버튼이 눌리면, `Square`의 `render` 함수에 있는 `onClick` 핸들러가 호출된다.
+3. 이벤트 핸들러는 `this.prop.onClick()`을 호출하고, Square의 `onClick`은 Board에 의해서 값이 특정된다.
+4. Board가 Square에게 `onclick={() => this.handleClick(i)}`을 전달했으니, Square가 Board의 `handleClick(i)`를 호출한다.
+5. 아직 `handleClick`을 정의하지 않아 오류가 난다.
+
+> Button에서의 onClick과 Board, Square에서의 onClick
+> 
+> `<Button>` 엘리먼트에서의 `onClick` 속성은 내장된 컴포넌트이다. 그런데 Board, Square처럼 우리가 만든 컴포넌트에서의 onClick은 아무렇게나 이름을 붙일 수 있긴 하다.
+> 그렇지만 관습적으로, 프로퍼티 이름은 `on[Event]`, 그 이벤트를 다루는 메서드는 `handle[Event]`로 이름 붙인다.
 
 
+```js
+class Board extends React.Component {
+  ...
+  handleClick(i){
+    const squares = this.state.squares.slice();
+    squares[i] = 'X';
+    this.setState({squares: squares});
+  }
+  ...
+}
+```
+
+지금까지의 수정으로 결과물이 달라진 건 없지만, 원래 Square에서 저장해 두었던 `this.state`를 Board로 옮겼다. Board에 업데이트가 생기면 Square가 자동으로 다시 렌더링된다.
+
+Square 컴포넌트는 더 이상 컨트롤하는 게 없고, Board가 모든 걸 지휘한다.
+
+`this.state.squres.slice()`를 이용해서 `this.state.squares` 배열의 복사본을 사용했다. 원본 배열은 건드리지 않음. 
+
+
+## 불변(Immutability)이 중요한 이유
+
+데이터를 변경할 때 접근법이 두 가지가 있다.
+
+1. 원본 데이터를 직접 수정하는 것
+2. 데이터의 복사본을 만들어서 수정한 후 복사본으로 대체하는 것
+
+2번으로 하는 게, 심플하고, 오류를 잡기도 쉽고, 여러모로 좋다.
+
+
+## Function Component
+
+Square는 이제 state가 없이 render 메서드만 가지고 있으니, function component로 바꾸자. `React.Component`를 extends할 필요도 없고, 그냥 프로퍼티만 받아서 심플하게 작성할 수 있다.
+
+```js
+function Square(prop) {
+  return(
+    <button className="square" onClick={prop.onClick}>
+      {prop.value}
+    </button>
+  );
+}
+```
+
+### O X 교대로 나오게 하기
+
+Board state에다가 xIsNext라는 boolean 값을 만들고, 교대로 바꿔 준다.
+
+```js
+handleClick(i){
+  const squares = this.state.squares.slice();
+  squares[i] = this.state.xIsNext? 'X' : 'O';
+  this.setState({
+    squares: squares,
+    xIsNext: !this.state.xIsNext;
+  });
+}
+
+```
+
+
+### 승자 결정하기
+
+이 사이트에서 제공하는 승자 `calculateWinner`를 이용해서 승자를 판별했다. 
+
+```js
+render() {
+const winner = calculateWinner(this.state.squares);
+let status;
+if (winner) {
+  status = 'Winner: ' + winner;
+} else {
+  status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+}
+```
+
+잘못 클릭하거나 승자가 이미 결정되어 클릭을 무시하려면,
+
+```js
+handleClick(i) {
+const squares = this.state.squares.slice();
+if (calculateWinner(squares) || squares[i]) {
+  return;
+}
+```
+
+### 히스토리 기록하기
+
+히스토리를 남겨 두기 위해서 한 번 할 때마다 다음과 같이 상태를 기록해 둘 것이다.
+```js
+history = [
+  {
+    squares: [
+      null, null, null,
+      null, 'X', null,
+      null, null, 'O',
+    ]
+  },
+]
+```
+
+이 히스토리는 Game 컴포넌트에 저장한다. Board에 저장해 두었던 state와 승자 계산하는 것들 전부 Game 컴포넌트 쪽으로 옮겨 온다.
+
+Game의 render
+```js
+render(){
+  const history = this.state.history;
+  const current = history[history.length - 1];
+  const winner = calculateWinner(current.squares);
+  let status;
+  if (winner) {
+    status = 'Winner: ' + winner;
+  } else {
+    status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+  }
+  
+  return (
+    <div className="game">
+    <div className="game-board">
+      <Board
+        squares={current.squares}
+        onClick={(i) => this.handleClick(i)}
+      />
+    </div>
+    <div className="game-info">
+      <div>{status}</div>
+      <ol>{/* TODO */}</ol>
+    </div>
+  </div>
+  );
+}
+```
 
 
 
 
 <hr />
-궁금한 점?
-리액트 엘리먼트 vs. 리액트 컴포넌트?
-
+리액트 엘리먼트 vs. 리액트 컴포넌트? | corresponding: ~에 상응하는,
 
