@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "reactjs.org 튜토리얼"
+title:  "w3school CSS"
 date:   2022-09-30 12:18:07 +0900
 categories: HTML+CSS
 ---
@@ -11,44 +11,88 @@ categories: HTML+CSS
 | 주간(달성/목표) | 17/40 |     |      |
 
 
+### CSS Attribute Selector
 
-리액트는 자바스크립트 라이브러리로, '컴포넌트'라고 불리는 코드 파편을 이용해서 UI를 구성한다.
+attribute를 선택해서 스타일을 지정할 수도 있다.
 
-```js
-class ShoppingList extends React.component{
-    render(){
-        return(
-            <div className="shopping-List">
-                <h1>shopping List for {this.props.name}</h>
-                <ul>
-                    <li>Instagram</li>
-                    <li>What's app</li>
-                    <li>Oculus</li>
-                </ul>
-            </div>
-        );
-    }
+```html
+a[target] {
+  background-color: yellow;
+}
+...
+<a href="http://www.disney.com" target="_blank">disney.com</a>
+```
+
+attribute가 특정값을 가지는 것만도 선택할 수 있다.
+
+```html
+a[target="_blank"] {
+  background-color: yellow;
 }
 ```
-리액트에는 여러 컴포넌트가 있지만, 여기서는 React.component를 사용한다. 여기에서 `ShoppingList`는 리액트 컴포넌트 클래스(타입)이다. `prop`라는 매개변수를 받아서 처리한 후 `render` 함수를 통해 뷰 계층 구조를 전달한다.
 
-`render()` 함수는 보고자 하는 화면 내용을 전달한다. 전달을 위해서 리액트는 render의 리턴값을 경량화된 React 엘리먼트로 전환한다.
+다음과 같이 물결 표시를 쓰면, 'flower'가 포함된 게 다 선택된다.
 
-위에서 `<div>` 구문은 다음과 같이 전환된다.
-
-```js
-return React.createElement('div', {className:'shopping-list'},
-  React.createElement('h1', ...),
-  React.createElement('ul', ...)
-);
+```html
+[title~="flower"]
 ```
 
-JSX의 중괄호 안에는 어떤 자바스크립트 코드도 쓸 수 있다. 리액트 엘리먼트는 자바스크립트 객체의 일종이다. 리액트 컴포넌트는 독립, 캡슐화되어 있다.
+다음과 같이 된 것도 선택됨.(title="flower"라면 다음의 것이 선택 안 됨.)
+
+```html
+title="klematis flower"
+```
+
+다음과 같이 `|`을 이용하면 하이픈으로 구분되기 전까지의 단어로 구분하는 것도 가능하다. 
+
+```html
+[class|="top"] {
+  background: yellow;
+}
+...
+<p class="top-text">Hello world!</p> <!-- 선택됨 (하이픈 전까지의 단어가 top) -->
+<p class="topcontent">Are you learning CSS?</p>  <!-- 선택 안 됨 (하이픈 기준임) -->
+```
+
+단순히 어떤 단어로 시작하는 attribute값을 선택하고 싶다면 `^`를 이용한다.
+
+```html
+[class^="top"] {
+  background: yellow;
+}
+...
+<p class="top-text">Hello world!</p> <!-- 선택됨 -->
+<p class="topcontent">Are you learning CSS?</p>  <!-- 선택 됨 -->
+```
+
+test로 '끝나는' 단어 선택하고 싶다면 `$`
+```html
+[class$="test"] {
+  background: yellow;
+}
+...
+<div class="my-test">The third div element.</div> <!-- 선택 됨 -->
+<p class="mytest">This is some text in a paragraph.</p> <!-- 선택 됨 -->
+```
+
+다른 조건 없이 포함하기만 하면 무조건 '*'
 
 
-<hr />
-궁금한 점?
-리액트 엘리먼트 vs. 리액트 컴포넌트?
+```html
+[class*="te"] {
+  background: yellow;
+}
+<div class="hitejava">The third div element.</div> <!-- 선택 됨 -->
+<p class="mytest">This is some text in a paragraph.</p> <!-- 선택 됨 -->
+```
+
+class나 ID 없는 폼필드를 스타일링할 때 유용합니다.
+```html
+input[type=text] {
+}
+...
+  Firstname:<input type="text" name="Name" value="Peter" size="20">
+```
 
 
 
