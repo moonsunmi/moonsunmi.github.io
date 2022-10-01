@@ -1,0 +1,167 @@
+---
+layout: post
+title:  "reactjs.org 튜토리얼"
+date:   2022-10-01 12:18:07 +0900
+categories: reactjs
+---
+
+|           | 뽀모도리    | 등운동 | 가슴운동 |
+|-----------|---------|-----|------|
+| 일간(달성/목표) | ?/12+6  | 5/5 | 5/5  |
+| 주간(달성/목표) | 17+?/40 |     |      |
+
+
+
+w3school의 javascript의 Exercise 문제 풀면서 복습해 봄.
+
+
+
+## reactjs.org
+
+리액트는 자바스크립트 라이브러리로, '컴포넌트'라고 불리는 코드 파편을 이용해서 UI를 구성한다.
+
+```js
+class ShoppingList extends React.component{
+    render(){
+        return(
+            <div className="shopping-List">
+                <h1>shopping List for {this.props.name}</h1>
+                <ul>
+                    <li>Instagram</li>
+                    <li>What's app</li>
+                    <li>Oculus</li>
+                </ul>
+            </div>
+        );
+    }
+}
+```
+리액트에는 여러 컴포넌트가 있지만, 여기서는 React.component를 사용한다. 여기에서 `ShoppingList`는 리액트 컴포넌트 클래스(타입)이다. `prop`라는 매개변수를 받아서 처리한 후 `render` 함수를 통해 뷰 계층 구조를 전달한다.
+
+`render()` 함수는 보고자 하는 화면 내용을 전달한다. 전달을 위해서 리액트는 render의 리턴값을 경량화된 React 엘리먼트로 전환한다.
+
+위에서 `<div>` 구문은 다음과 같이 전환된다.
+
+```js
+return React.createElement('div', {className:'shopping-list'},
+  React.createElement('h1', ...),
+  React.createElement('ul', ...)
+);
+```
+
+JSX의 중괄호 안에는 어떤 자바스크립트 코드도 쓸 수 있다. 리액트 엘리먼트는 자바스크립트 객체의 일종이다. 리액트 컴포넌트는 독립, 캡슐화되어 있다.
+
+
+
+## Tic-Tac-Toa 만들기
+
+### 초기에 설정되어 있는 리액트 컴포넌트
+
+* Square: 보드판에 안에 있는 작은 칸 하나하나
+* Board: Square 9개를 구성하는 보드판 하나
+* Game: 보드판을 렌더링한다.
+
+
+부모인 Board 컴포넌트에서 자식인 Square 컴포넌트로 prop를 이용해 정보를 전달하자. 리액트에서 정보가 흘러가는 방식이다.
+
+```js
+class Square extends React.Component {
+  render() {
+    return (
+      <button className="square">
+        {this.props.value}
+      </button>
+    );
+  }
+}
+```
+
+```js
+class Board extends React.Component {
+  renderSquare(i){
+    return <Square value={i} />;
+  }
+}
+```
+
+
+
+
+square 한 칸 클릭했을 때 인식하고 log 남기기.
+
+```js
+class Square extends React.Component {
+...
+    <button className="square" onclick={function() { console.log('click'); }}>
+```
+
+> arrow function
+>
+> `function(){ ... }`를 줄여서 쓰기 위해서 화살표 함수(`() => `)를 이용한다.
+>
+> ```js
+> class Square extends React.Component {
+> ...
+>     <button className="square" onclick={() => console.log('click');}>
+> ```
+
+
+그다음 단계는 클릭된 square가 자기가 클린된 상태라는 걸 기억해서 X라고 표시하는 것이다. 뭔가를 '저장을 할 때' `constructor` 안에서 `state`를 사용한다.
+
+```js
+class Square extends React.Componenet {
+    constructor(props){
+        super(props);
+        this.state = {
+            value: null,
+        };
+    }
+}
+```
+하위 클래스의 `constructor`를 선언할 때는 늘 `super`를 호출해 줘야 한다. 세트로 나온다고 생각.
+
+```js
+    constructor(props){
+        super(props);
+```
+
+#### 클릭한 박스에 X 표시하기
+
+
+```js
+class Square extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      value: null,
+    };
+  }
+  
+  render(){
+    return(
+      <button
+        className="square" 
+        onClick={() => this.setState({value: 'X'})}
+      >
+        {this.state.value}
+      </button>
+    );
+  }
+}
+```
+
+`Square` 클래스의 `render` 메서드에 있는 `onClick` 핸들러 덕분에 클릭할 때마다 `this.setState`가 호출된다.<br>
+`setState`는 값이 변할 때마다 그 안에 있는 자식 컴포넌트(여기에서는 `this.state.value`를 자동으로 업데이트된다.
+
+
+
+
+
+
+
+
+<hr />
+궁금한 점?
+리액트 엘리먼트 vs. 리액트 컴포넌트?
+
+
