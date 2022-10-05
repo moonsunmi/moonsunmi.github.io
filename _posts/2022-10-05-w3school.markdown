@@ -5,10 +5,10 @@ date:   2022-10-05 12:18:07 +0900
 categories: javascript
 ---
 
-| (달성/목표) | 뽀모도리   | 등 | 가슴 | 배 |
-|----|--------|---|-------|----|
-| 1일 | ?/4    | 5/5 | 5/5 | 3/3 |
-| 1주 | 5+?/40 |   |       |
+| (달성/목표) | 뽀모도리  | 등 | 가슴 | 배 |
+|----|-------|---|-------|----|
+| 1일 | 5/4   | 5/5 | 5/5 | 3/3 |
+| 1주 | 10/40 |   |       |
 
 
 ### JS 프로미스
@@ -175,6 +175,71 @@ function validateForm() {
 
 
 ### DOM CSS
+
+이벤트 이용해서 스타일 바꾸기
+
+```html
+<button type="button" onclick="document.getElementById('id1').style.color = 'red'">Click Me.</button>
+```
+
+### Animation
+
+```js
+function myMove(){
+  let id = null;
+  const elem = document.getElementById("animate");
+  let pos = 0;
+  clearInterval(id);
+  id = setInterval(frame, 5);
+  function frame() {
+    if (pos == 350) { // 네모 박스가 마지막까지 움직였다면,
+      clearInterval(id);
+    } else {
+      pos++;
+      elem.style.top = pos + 'px';
+      elem.style.left = pos + 'px';
+    }
+  }
+}
+```
+
+
+### DOM Event Listener
+
+`addEventListener()`는 엘리먼트에 이벤트 핸들러를 붙여 준다. 하나의 엘리먼트에 많은 이벤트 핸들러를 붙일 수도 있다.
+
+
+#### Event Bubbling or Event Capturing?
+
+`<div>` 엘리먼트 안에 있는 `<p>` 엘리먼트가 클릭되었다면(p가 클릭되었다고 볼 수도 있고, div가 클릭되었다고 볼 수도 있으므로...) 어떤 이벤트가 먼저 handled되어야 할까?
+
+* Bubbling: 가장 안에 있는 `<p>` 엘리먼트부터 핸들링하는 것
+* Capturing: 가장 밖에 있는 `<div>` 엘리먼트부터 핸들링하는 것
+
+`addEventListener()` 세 번째 파라미터에서 Capturing 여부를 지정한다. (기본은 false. 즉, 가장 안에 있는 것부터 처리)
+```js
+document.getElementById("myP").addEventListener("click", myfunction, true);
+document.getElementById("myDiv").addEventListener("click", myfunction, true);
+```
+
+### DOM Navagation
+
+`<p>`는 'Hello world'라는 아이를 하나 가지고 있다.
+
+```html
+    <p>Hello world!</p>
+```
+
+여기서 p가 가진 것은 'text'가 아니라 'text node'이다. "Hello world!"라는 값을 가진 text node. 이 텍스트 노드는 innerHTML 프러퍼티로 접근이 가능하다.
+
+`....innerHTML`과 `....firstChild.nodeValue`는 같다. p의 자식인 Hello world의 nodeValue값이므로.
+
+
+* nodeType 프러퍼티는 타입을 숫자로 표현해서 반환한다.
+
+
+
+
 
 
 
