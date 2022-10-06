@@ -1,0 +1,123 @@
+---
+layout: post
+title:  "w3school Javascript + React JS Crash Course"
+date:   2022-10-06 12:18:07 +0900
+categories: javascript
+---
+
+| (달성/목표) | 뽀모도리    | 등 | 가슴 | 배 |
+|----|---------|---|-------|----|
+| 1일 | ?/4     | 5/5 | 5/5 | 3/3 |
+| 1주 | 10+?/40 |   |       |
+
+
+### DOM Nodes
+
+새 노드 만들기
+
+```html
+<div id="div1">
+  <p id="p1">This is a paragraph.</p>
+  <p id="p2">This is another paragraph.</p>
+</div>
+
+<script>
+const para = document.createElement("p");
+const node = document.createTextNode("Hello");
+para.appendChild(node);
+
+const element = document.getElementById("div1");
+element.appendChild(para);
+</script>
+
+```
+
+뒤가 아닌 앞에 추가하고 싶다면 `insertBefore()`. `appendChild()`의 앞부분 버전이므로, 부모가 호출해야 하는 걸 잊지 말자.
+
+```html
+<div id="div1">
+  <p id="p1">This is a paragraph.</p>
+  <p id="p2">This is another paragraph.</p>
+</div>
+
+const para = document.createElement("p");
+const node = document.createTextNode("Hello");
+para.appendChild(node);
+
+const element = document.getElementById("div1");
+const child = document.getElementById("p1");
+element.insertBefore(para, child);  // 
+```
+
+
+삭제도 마찬가지, 부모 노드에서 자식 노드를 삭제하는 것이다. 따라서 삭제하려는 노드의 부모의 자식(결국 삭제하려는 노드가 된다)을 찾는 방법으로 삭제한다. 
+
+```js
+const = document.getElementById("p1");
+p1.parentNode.removeChild(child);
+```
+
+바꾸려면 `replaceChild()` 이용한다.
+
+
+### DOM Collections
+
+`getElementsByTagName()` 메서드는 HTML Collection 오브젝트를 반환한다. HTML Collection은 HTML 엘리먼트의 배열과 비슷한 리스트이다. (배열이 아니므로 `pop()` 같은 메서드 쓸 수 없다.)
+
+```js
+const myCollection = document.getElementsByTagName("p");
+for(let i = 0; i < myCollection.length; i++){
+  myCollection[i].style.color = "red";
+}
+```
+
+### DOM NodeList
+
+nodeList는 노드의 리스트. HTML Collection과 거의 비슷하다. `querySelectorAll()` 메서드가 반환하는 것.
+
+```js
+const myNodeList = document.querySelectorAll("p");
+```
+
+
+
+
+## React JS Crash Course
+
+컴포넌트는 state라는 오브젝트를 가진다. state는 컴포넌트가 어떻게 렌더링하고 행동할지를 결정한다.
+
+App state와 Global state는 모든 컴포넌트에 영향을끼친다.
+
+컴포넌트는 함수 혹은 클래스가 될 수 있는데, 요즘에는 훅과 함께 함수로 많이 이용한다.
+
+### 설치
+
+node.js를 설치한 후, chrome에서 react developer tool을 추가한다.
+
+다음 명령어로 react app 만들기
+```
+npx create-react-app react-task-tracker
+```
+
+terminal에서 npm으로 server run.!
+
+### 생성된 파일들
+
+index.html 안에 id가 root인 div가 있다. 여기가 ui로 가는 게이트웨이이다.
+
+App.js) App은 root 컴포넌트이다. header, footer 같은 것들이 들어 있다.
+
+```js
+function App() {
+  return (
+    <div className="App">
+      <h1>Hello From React</h1>
+    </div>
+    <h2>Hello</h2> // 에러가 난다. jsx는 부모 엘리먼트가 한 개만 있어야 한다.
+  );
+}
+```
+
+
+
+
