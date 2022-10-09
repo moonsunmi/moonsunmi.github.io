@@ -1,0 +1,151 @@
+---
+layout: post
+title:  "React JS Crash Course"
+date:   2022-10-09 12:18:07 +0900
+categories: react
+---
+
+| (달성/목표) | 뽀모도리  | 등 | 가슴 | 배 |
+|----|-------|---|-------|----|
+| 1일 | 8/8   | 5/5 | 5/5 | 3/3 |
+| 1주 | 40/40 |   |       |
+
+
+### fetch API
+
+fetch API 쓰는 법: https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+
+fetch API는 request, response 오브젝트에 대한 일반적인 정의를 제공한다. 자료를 요청하고 가져오기 위해서 `fetch()` 메서드를 사용한다. 
+
+fetch() 메서드는, 자료가 있는 주소를 필수 argument로 받고, promise를 반환한다.
+
+> w3school Javascript: Fetch API
+> 
+> API는 Application Programming Interface의 약자로 web을 위한 인터페이스이다. web browser, web server 등의 기능을 확장할 수 있다. 브라우저에는 내장된 API가 존재한다. 3rd party API도 있는데, 다운로드받으면 쓸 수 있다.
+> 
+> Fetch API는 server를 향한 HTTP request를 만들 수 있다. Fetch API는 async, await와 함께 쓰인다.
+> `async function getText(file){`
+> `  let myObject = await fetch(file);`
+> `  let myText = await myObject.text();`
+> `  myDisplay(myText);`
+
+
+
+### Add Task 
+이제 서버에서도 Task가 add 되도록 만들자.
+
+App.js
+```js
+const addTask = async (task) => {
+  const res = await fetch("http://localhost:5000/tasks", {
+    method: "POST",
+    headers{ "Content-type": "application/json" },
+    body: JSON.stringify(task),
+  });
+  
+  const data = await res.json();
+  setTasks([...tasks, data])
+}
+```
+
+### toggle reminder
+
+```js
+const fetchTask = async(id) => {
+  const res = await fetch(`http://localhost:5000/tasks/${id}`);
+  const data = res.json();
+  
+  return data;
+}
+
+const toggleReminder = async (id) => {
+  const taskToToggle = await fetchTask(id);
+  const updTask = { ...taskToToggle, reminder: !taskToToggle.reminder };
+  
+  // Update the task in server
+  const res = await fetch(`http://localhost:5000/tasks/${id}`, {
+    method: 'PUT',
+    headers: { "Content-type": "application/json" },
+    body: JSON.stringify(updTask);  // 오브젝트를 JSON 텍스트로.
+  )
+  const data = await res.json();  // data를 다시 오브젝트로
+  setTasks(
+    tasks.map((task) =>
+      task.id === id ? {...task, reminder: !data.reminder } : task
+    )
+  );
+}
+```
+
+setTasks에서 왜 또 data를 가져온 걸까? updTask를 만들어 놨으니 다음과 같이 써도 되지 않나?
+
+```js
+setTasks(tasks.map((task) => (task.id === id ? updTask : task)));
+```
+
+
+
+### React Router
+
+React Router 설치하기
+
+`npm i react-router-dom@latest`
+
+다음과 같이 import
+```js
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+```
+
+About.js
+```js
+const About = () => {
+  return (
+    <div>
+      <h4>Version 1.0.0</h4>
+      <a href="/">Go Back</a>
+    </div>
+  );
+};
+
+export default About;
+```
+
+Go Back을 누르면 페이지가 reload된다. 이걸 원하지 않으니 react-router-dom을 이용한다. 그러면 페이지 로딩되는 시간이 걸리지 않고 바로 변한다.
+
+About.js
+```js
+import { Link } from "react-router-dom";
+...
+<Link herf="/">Go Back</Link>
+```
+
+
+
+Footer.js
+```js
+const Footer = () => {
+  return (
+    <footer>
+      <p>Copyright &copy; 2022</p>
+      <a href="/about">About</a>
+    </footer>
+  );
+};
+
+export default Footer;
+```
+
+
+route를 쓰고 싶은 곳에 `<router>`로 감싸 줘야 한다.
+App.js
+```js
+<Router>
+  <Routes>
+    <Route path="about/>
+  </Routes>
+</Router>
+```
+
+
+
+
