@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "주경야독학) 10주차 - w3school HTML+CSS 졸업, ReactJS 틱택토"
-date:   2022-10-02 12:34:31 +0900
+title:  "주경야독학) 11주차 - w3school Javascript 졸업, Task Tracker"
+date:   2022-10-09 12:34:31 +0900
 categories: week-report
 ---
 ## 뽀모도로 목표와 달성 개수
