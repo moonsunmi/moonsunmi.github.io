@@ -221,7 +221,7 @@ redux까지 함께
 npx create-react-app linkedin-clone-yt --template redux
 ```
 
-`yearn start`. npm 쓰고 싶으면 써도 됨.
+`yarn start`. npm 쓰고 싶으면 써도 됨.
 
 
 firebase
