@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "w3school React"
-date:   2022-10-14 12:18:07 +0900
+date:   2022-10-15 12:18:07 +0900
 categories: react
 ---
 
@@ -218,8 +218,7 @@ export default useFetch;
 
 redux까지 함께 
 ```
-npx create-react-app linkedin-clone-yt --templat
-e redux
+npx create-react-app linkedin-clone-yt --template redux
 ```
 
 `yearn start`. npm 쓰고 싶으면 써도 됨.
@@ -231,7 +230,6 @@ firebase
    `allow read, write;`
 3. Authentication에서 이메일 사용을 설정한다.
 4. '설정 - 프로젝트 설정'에서 </> 아이콘을 눌러 웹 앱에 firebase를 추가한다.
-5. 
 
 
 ### visual 
