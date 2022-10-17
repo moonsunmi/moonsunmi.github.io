@@ -1,0 +1,320 @@
+---
+layout: post
+title:  "Liked in Clong Coding"
+date:   2022-10-17 12:18:07 +0900
+categories: react
+---
+
+| (달성/목표) | 뽀모도리 | 등   | 가슴  | 배   |
+|----|------|-----|-----|-----|
+| 1일 | 5/5  | 0/5 | 0/5 | 3/3 |
+| 1주 | 5/40 |     |     |
+
+
+### CSS
+
+* `object-fit: cover`: 이미지의 사이즈와 다르게 width, height를 지정해 주더라도 가로:세로 1:1 비율이 깨지지 않도록 유지해 준다. 1:1 비율을 넘는 부분은 잘린다.
+
+* `justify-content`: 컨테이너 아이템들의 배치 방법을 지정한다.
+
+* `flex: 1`: 남은 공간 전부 차지하도록
+
+
+Header.js
+
+```js
+import React from "react";
+import SearchIcon from "@mui/icons-material/Search";
+import HomeIcon from "@mui/icons-material/Home";
+import GroupIcon from "@mui/icons-material/Group";
+import WorkIcon from "@mui/icons-material/Work";
+import TextsmsIcon from "@mui/icons-material/Textsms";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+
+import "./Header.css";
+import HeaderOption from "./HeaderOption";
+
+const Header = () => {
+  return (
+    <div className="header">
+      <div className="header__left">
+        <img
+          src="https://drive.google.com/uc?export=view&id=14Ut_BLcjdgZnDZ-2o9ZelmSMkUfGYGa3"
+          alt=""
+        />
+
+        <div className="header__search">
+          <SearchIcon />
+          <input type="text" />
+        </div>
+      </div>
+      <div className="header__right">
+        <HeaderOption Icon={HomeIcon} title="Home" />
+        <HeaderOption Icon={GroupIcon} title="My Network" />
+        <HeaderOption Icon={WorkIcon} title="Job" />
+        <HeaderOption Icon={TextsmsIcon} title="Chat" />
+        <HeaderOption Icon={NotificationsIcon} title="Notifications" />
+        <HeaderOption Icon={AccountCircleIcon} title="me" />
+      </div>
+    </div>
+  );
+};
+
+export default Header;
+```
+
+Header.css
+
+```css
+.header {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  display: flex;
+  justify-content: space-evenly;
+  border-bottom: 0.1px solid lightgray;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  z-index: 999;
+}
+
+.header__left {
+  display: flex;
+}
+
+.header__left > img {
+  object-fit: contain;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.header__search {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  height: 22px;
+  color: grey;
+  background-color: #eef3f8;
+}
+
+.header__search > input {
+  outline: none;
+  border: none;
+  background: none;
+}
+
+.header__right {
+  display: flex;
+}
+```
+
+
+HeaderOption.js
+```js
+import React from "react";
+import "./HeaderOption.css";
+
+const HeaderOption = ({ avatar, Icon, title }) => {
+  return (
+    <div className="headerOption">
+      {Icon && <Icon className="headerOption__icon" />}
+      <h3 className="headerOption__title"> {title}</h3>
+    </div>
+  );
+};
+
+export default HeaderOption;
+
+```
+
+HeaderOption.css
+```css
+.headerOption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px;
+  color: gray;
+  cursor: pointer;
+}
+
+.headerOption__title {
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.headerOption__icon {
+  object-fit: contain;
+  height: 25px !important;
+  width: 25px !important;
+}
+
+.headerOption:hover {
+  color: black;
+}
+
+```
+
+
+Sidebar.js
+```js
+import React from "react";
+import "./Sidebar.css";
+import { Avatar } from "@mui/material";
+
+const Sidebar = () => {
+  const recentItem = (topic) => (
+    <div className="sidebar__recentItem">
+      <span className="sidebar__hash">#</span>
+      <p>{topic}</p>
+    </div>
+  );
+  return (
+    <div className="sidebar">
+      <div className="sidebar__top">
+        <img
+          src="https://drive.google.com/uc?export=view&id=1xeTuuFf5NNugOgSf-2yjtUXi3whybZp2"
+          alt=""
+        />
+        <Avatar className="sidebar__avatar" />
+        <h2>Sonny Sangha</h2>
+        <h4>sonny.sangha@gmail.com</h4>
+      </div>
+
+      <div className="sidebar__stats">
+        <div className="sidebar__stat">
+          <p>Who viwed you</p>
+          <p className="sidebar__statNumber">2,543</p>
+        </div>
+        <div className="sidebar__stat">
+          <p>Views on post</p>
+          <p className="sidebar__statNumber">2,400</p>
+        </div>
+      </div>
+
+      <div className="sidebar__bottom">
+        <p>Recent</p>
+        {recentItem("reactJs")}
+        {recentItem("programming")}
+        {recentItem("softwareenginering")}
+        {recentItem("developer")}
+      </div>
+    </div>
+  );
+};
+
+export default Sidebar;
+
+```
+
+
+Sidebar.css
+```css
+.sidebar {
+  position: sticky;
+  top: 80px;
+  flex: 0.2;
+  border-radius: 10px;
+  text-align: center;
+  height: fit-content;
+}
+
+.sidebar__avatar {
+  margin-bottom: 10px;
+}
+
+.sidebar__top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid lightgray;
+  border-bottom: 0;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: white;
+  padding-bottom: 10px;
+}
+
+.sidebar__top > h4 {
+  color: gray;
+  font-size: 12px;
+}
+
+.sidebar__top > h2 {
+  font-size: 18px;
+}
+
+.sidebar__top > img {
+  margin-bottom: -10px;
+  width: 100%;
+  height: 60px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  object-fit: cover;
+}
+
+.sidebar__stat {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.sidebar__stat > p {
+  color: gray;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.sidebar__stats {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid lightgray;
+  background-color: white;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.sidebar__statNumber {
+  color: #0a66c2 !important;
+  font-weight: bold;
+}
+
+.sidebar__bottom {
+  text-align: left;
+  padding: 10px;
+  border: 1px solid lightgray;
+  background-color: white;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.sidebar__bottom > p {
+  font-size: 13px;
+  padding-bottom: 10px;
+}
+
+.sidebar__recentItem {
+  display: flex;
+  font-size: 13px;
+  color: grey;
+  font-weight: bolder;
+  /* cursor: pointer;*/
+  margin-bottom: 5px;
+  padding: 5px;
+}
+
+.sidebar__recentItem:hover {
+  background-color: whitesmoke;
+  border-radius: 10px;
+  cursor: pointer;
+  color: black;
+}
+
+.sidebar__hash {
+  margin-left: 10px;
+  margin-right: 5px;
+}
+```
