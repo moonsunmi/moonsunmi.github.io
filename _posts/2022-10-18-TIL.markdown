@@ -1,0 +1,111 @@
+---
+layout: post
+title:  "Liked in Clong Coding"
+date:   2022-10-18 12:18:07 +0900
+categories: react
+---
+
+| (달성/목표) | 뽀모도리 | 등   | 가슴  | 배   |
+|----|------|-----|-----|-----|
+| 1일 | 3/3  | 5/5 | 5/5 | 3/3 |
+| 1주 | 8/40 |     |     |
+
+
+
+* `overflow-wrap`: 한 단어가 아주 길 때, 개행을 어떻게 할 것인지 정한다.
+    * default: 단어가 아무리 길어도 자르지 않는다.
+    * `anywhere`, `break-word`: 단어가 길면 끝 부분에서 잘라 다음 줄로 넘겨 준다. 
+
+포스트 올릴 때마다 페이지를 다시 불러오길 원하지 않으므로, 다음과 같이 `event.preventDefault()`를 설정해 준다.
+
+
+```js
+  const sendPost = (e) => {
+    e.preventDefault();
+  };
+```
+
+
+### firebase
+
+firebase 웹 사이트에서 Firebase 옵션을 SDK snippet의 Config로 선택. 소스코드를 복사한 후 firebase.js 파일 안에 붙여넣는다.
+
+터미널에서 firebase 설치 명령어 입력
+
+`yarn add firebase`
+
+그다음 firebase를 import해 오고, 데이터베이스, 권한을 설정.
+
+firebase.js
+```js
+import firebase from "firebase";
+const firebaseConfig = {
+  apiKey: "AIzaSyBcpwYJDNGnymlpVJMDOwz2OGmaQlaw_NQ",
+  authDomain: "linkedin-clone-yt-85c34.firebaseapp.com",
+  projectId: "linkedin-clone-yt-85c34",
+  storageBucket: "linkedin-clone-yt-85c34.appspot.com",
+  messagingSenderId: "743616791248",
+  appId: "1:743616791248:web:d3ad3ec2c3545a5fde94d5",
+  measurementId: "G-N1TMN34NL3",
+};
+
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+const db = firebaseApp.firestore();
+const auth = firebase.auth();
+
+export {db, auth};
+
+```
+
+다음과 같은 에러가 난다. 다음 stackoverflow를 통해 오류를 수정했다. import 경로를 다르게 지정해 준다.
+
+https://stackoverflow.com/questions/70445014/module-not-found-error-package-path-is-not-exported-from-package
+
+```js
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
+```
+
+
+useEffect의 디펜던시를 빈배열로 지정해 준다. post에 변화가 있을 때(추가 or 삭제) Post 변수에 해당 내용이 업데이트된다. 
+
+```js
+  useEffect(() => {
+    db.collection("posts").onSnapshot((snapshot) =>
+      setPosts(
+        snapshot.docs.map((doc) => ({
+          id: doc.id,
+          data: doc.data,
+        }))
+      )
+    );
+  }, []);
+```
+
+'Send' 버튼을 누르면, firebase 데이터베이스에도 저장되도록 한다.
+
+```js
+  const sendPost = (e) => {
+    e.preventDefault();
+    db.collection("posts").add({
+      name: "Sonny Sangha",
+      description: "this is a test",
+      message: input,
+      photoUrl: "",
+      timestamp: firebase.firsestore.FieldValue.serverTimesmap(),
+    });
+  };
+```
+
+`input`은 다음과 같이 지정해 준다. 
+
+```js
+<input
+  value={input}
+  onChange={(e) => setInput(e.target.value)}
+  type="text"
+/>
+```
+
+
