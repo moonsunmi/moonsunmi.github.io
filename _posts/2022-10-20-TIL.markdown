@@ -1,0 +1,136 @@
+---
+layout: post
+title:  "Likedin Clone Coding"
+date:   2022-10-20 12:18:07 +0900
+categories: react
+---
+
+| (달성/목표) | 뽀모도리  | 등   | 가슴  | 배   |
+|----|-------|-----|-----|-----|
+| 1일 | 3/3   | 5/5 | 5/5 | 3/3 |
+| 1주 | 18/40 |     |     |
+
+
+
+App.js
+```js
+import React, { useEffect } from "react";
+import Header from "./Header";
+import Sidebar from "./Sidebar";
+import Feed from "./Feed";
+import "./App.css";
+import { login, logout, selectUser } from "./features/userSlice";
+import Login from "./Login";
+import { useDispatch, useSelector } from "react-redux";
+import { auth } from "./firebase";
+
+function App() {
+  const user = useSelector(selectUser);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    auth.onAuthStateChanged((userAuth) => {
+      if (userAuth) {
+        // user is logged in
+        dispatch(
+          login({
+            email: userAuth.email,
+            uid: userAuth.uid,
+            displayName: userAuth.displayName,
+            photoUrl: userAuth.photoURL,
+          })
+        );
+      } else {
+        // user is logged out
+        dispatch(logout());
+      }
+    });
+  }, []);
+  return (
+    <div className="app">
+      <Header />
+      {!user ? (
+        <Login />
+      ) : (
+        <div className="app__body">
+          <Sidebar />
+          <Feed />
+          {/* Sidebar */}
+          {/* feed */}
+          {/* widgets */}
+        </div>
+      )}
+      ;
+    </div>
+  );
+}
+
+export default App;
+
+```
+
+
+
+Header.js
+```js
+import React from "react";
+import SearchIcon from "@mui/icons-material/Search";
+import HomeIcon from "@mui/icons-material/Home";
+import GroupIcon from "@mui/icons-material/Group";
+import WorkIcon from "@mui/icons-material/Work";
+import TextsmsIcon from "@mui/icons-material/Textsms";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+
+import "./Header.css";
+import HeaderOption from "./HeaderOption";
+import { useDispatch, useSelector } from "react-redux";
+import { auth } from "./firebase";
+import { logout, selectUser } from "./features/userSlice";
+
+const Header = () => {
+  const user = useSelector(selectUser);
+  const dispatch = useDispatch();
+
+  const logoutOfApp = () => {
+    dispatch(logout());
+    auth.signOut();
+  };
+  return (
+    <div className="header">
+      <div className="header__left">
+        <img
+          src="https://drive.google.com/uc?export=view&id=14Ut_BLcjdgZnDZ-2o9ZelmSMkUfGYGa3"
+          alt=""
+        />
+
+        <div className="header__search">
+          <SearchIcon />
+          <input type="text" placeholder="Search" />
+        </div>
+      </div>
+      <div className="header__right">
+        <HeaderOption Icon={HomeIcon} title="Home" />
+        <HeaderOption Icon={GroupIcon} title="My Network" />
+        <HeaderOption Icon={WorkIcon} title="Job" />
+        <HeaderOption Icon={TextsmsIcon} title="Chat" />
+        <HeaderOption Icon={NotificationsIcon} title="Notifications" />
+        <HeaderOption
+          avatar={user.photoUrl}
+          Icon={AccountCircleIcon}
+          title="me"
+          onClick={logoutOfApp}
+        />
+      </div>
+    </div>
+  );
+};
+
+export default Header;
+
+```
+
+
+
+
+
