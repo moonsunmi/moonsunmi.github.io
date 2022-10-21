@@ -66,10 +66,10 @@ couterSlice.js 이름을 userSlice.js로 바꾸어 원하는 기능으로 수정
 
 지금의 컴포넌트를 트리 구조로 나타내 본다면 다음과 같다.
 
-App.js
-ㄴLogin.js
-ㄴFeed.js ..
-  ㄴPost.js
+App.js<br>
+ㄴLogin.js<br>
+ㄴFeed.js ..<br>
+  ㄴPost.js<br>
 
 App.js가 먼저 렌더링된 다음, App.js가 Login.js, Feed.js를 각각렌더링한다.  Feed.js는 Post.js를 렌더링한다. 
 
