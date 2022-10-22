@@ -1,0 +1,213 @@
+---
+layout: post
+title:  "Hulu Clone Coding(Next.js, Tailwind CSS, Responsive)"
+date:   2022-10-22 12:18:07 +0900
+categories: react
+---
+
+| (달성/목표) | 뽀모도리  | 등   | 가슴  | 배   |
+|----|-------|-----|-----|-----|
+| 1일 | 9/8   | 5/5 | 5/5 | 3/3 |
+| 1주 | 35/40 |     |     |
+
+
+
+```js
+<form action="/create_process" method="post"
+  onSubmit={(e) => {
+    e.preventDefault();
+    debugger;
+  }}
+  >
+  <input type="text" name="title"></input>
+  <input type="submit"></input>
+```
+
+submit 버튼을 눌러서 debugger 표시에서 멈추게 한 후 e.target을 살펴 보자. e.target은 `<form>` 그 자체를 나타낸다.(`<input type="submit"`이 아니라)
+
+form 객체에는 title(input의 name)이라는 프러퍼티가 있는데, 그게 바로 `<form>` 안에 있는 `<input>`을 가리킨다. 값에 접근하고 싶다면 `e.target.title.value`처럼 하면 된다.
+
+<br><font color="grey">--<생활코딩 리액트 프로그래밍 끝> 1뽀도모리 소요--</font>
+
+## Hulu Clone Coding (with )
+
+css grid와 flexbox를 이용해서 반응형 웹을 만들 것이다. 모바일 정도의 사이즈에서 아주 큰 모니터 정도의 사이즈까지 다 커버할 수 있는. 아이콘에서 애니메이션도 넣고.
+
+* Heroicon
+* Next.js
+* tailwind css
+* Flexbox & CSS Grid
+* REST API 
+* tmdb database
+* 환경변수 사용하는 법
+
+
+### NEXT.js
+
+HTML, CSS Javascript는 웹 개발의 펀더멘털이다. 리액트 라이브러리가 있고, 리액트가 이 것들즌 전부 합해서 파워풀 앱을 만들고. 그 가장 위에 next.js
+seo friendly server-side rendered 
+
+
+설치. create-react-app이 아니라 create-next-app이다.
+
+```
+npx create-next-app hulu-clone-yt
+```
+
+
+
+### tailwind css
+
+modern website를 빠르게 빌드할 수 있다.
+
+다음을 참고로 설치한다.
+
+https://tailwindcss.com/docs/installation
+
+설치: `yarn add -D tailwindcss`
+설정 파일 만들기: `npx tailwindcss init`
+
+영상에서는 tailwind config, post css config가 생성된다고 하는데, 지금 시점에는 `tailwind.config.js`만 생성된다.
+
+
+### 실행
+
+다음 명령어로 실행
+
+`yarn run dev`
+
+Hulu는 다음과 같이 세 개의 큰 컴포넌트로 이루어져 있다.
+
+```js
+{/* Header */}
+{/* Nav */}
+{/* Results */}
+```
+
+components 폴더를 만들어서, 내가 만드는 컴포넌트는 이 폴더에 집어 넣자.
+
+
+
+### Header.js
+
+단축키 _rfce를 하면 react를 컴포넌트하지 않는 리액트 컴포넌트를 만들 수 있다고 하는데, 안 되고 있다. 그냥 rfce를 입력해서 `import "react"`를 제거해 주었다.
+
+
+`<Image />`: Next.js 이미지 태그이다. lazy loeading된다.
+
+> lazy loading
+> 한 화면에 나올 모든 내용이 한꺼번에 다 로딩될 필요는 없다. 화면에 보이는 위치에 있는 것들만 로딩해서 띄우고, 밑에 있는 것들은 스크롤될 때 로딩하면 된다.
+> 그런데 `<img>` HTML 엘리먼트는 lazy loading으로 동작하지 않는다. 따라서 next.js의 `<Image />` 컴포넌트 사용
+
+그런데 다음과 같이 하면 에러가 난다.
+
+```js
+<Image src="https://links.papareact.com/ua6" width={200} height={200} />
+에러: hostname "links.papareact.com" is not configured under images in your `next.config.js`
+```
+
+이미지를 쓸 때, next.js의 config 파일에 해당 도메인을 등록해 주어야 한다.
+
+next.config.js
+```js
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  swcMinify: true,
+  images: {
+    domains: ["links.papareact.com", "image.tmdb.org"],
+  },
+};
+module.exports = nextConfig;
+```
+
+images 부분을 등록해 주었다. `image.tmdb.org`는 나중에 쓰일 이미지의 도메인을 미리 등록해 둔 것.
+
+
+### 웹 사이트 전체의 스타일 바꾸기
+
+tailwind css의 스타일은 다음과 같이 클래스 이름으로 적용한다.
+
+```css
+  <div class="bg-sky-50 aspect-square"></div>
+```
+* 'background-color-shade' 형식임.
+
+웹 사이트의 전체의 backgound-color가 파란색이다. 이걸 수정하려면, styles 폴더에 있는 globals.css를 수정하면 된다.
+
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#06202a] text-gray-300;
+  }
+}
+
+```
+
+`@layer`는 여기에 접근한다는 이야기. 기본에서 body 엘리먼트에서 background와 text의 color를 적용해준다는 것.
+
+
+### Header의 아이콘들
+
+Header의 아이콘을 재사용하기 위해 컴포넌트로 만든다. heroicons를 설치한다. 사이트에서 검색했을 때 나오는 결과물의 이름을 확인하자. '결과물이름 + Icon'이 컴포넌트의 이름이다.
+
+svg: scalable vector icons. vector 이미지라서 아무리 크기가 커져도 깨지지 않는다.
+
+
+Header.js
+```js
+import Image from "next/image";
+import HeaderItem from "./HeaderItem";
+import { HomeIcon } from "@heroicons/react/24/outline";
+
+function Header() {
+  return (
+    <header className="">
+      <div>
+        <HeaderItem title="HOHME" Icon={HomeIcon} />
+      </div>
+      <Image
+        className="object-contain"
+        src="https://links.papareact.com/ua6"
+        width={200}
+        height={200}
+      />
+    </header>
+  );
+}
+
+export default Header;
+```
+
+`Icon`은 컴포넌트이기 때문에 대문자로 표기한다.
+
+h-8: `height: 2rem;` 
+
+
+
+tailwindcss에서는 active states를 적용할 수 있다. 마우스를 올렸을 때만 title이 표시되도록 한다.
+
+```js
+<p className="opacity-0 hover:opacity-100 tracking-widest">{title}</p>
+```
+
+그런데 아이콘에 마우스를 올려도 title이 표시되어야 한다. 아이콘+텍스트 같이 움직여야 한다. 그래서 그룹으로 다룬다.
+
+```js
+<div className="flex flex-col items-center group w-12">
+```
+
+
+디폴트로 flex를 하고, flex-column. 
+
+
+모바일 환경도 고려를 해야 하기 때문에 우선 가장 작은 화면에서 맞춰 놓고 시작한 후 크기를 키워 가면서 맞춘다.
+
+
+
+
