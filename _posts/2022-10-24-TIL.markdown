@@ -1,0 +1,141 @@
+---
+layout: post
+title:  "Hulu Clone Coding(Next.js, Tailwind CSS, Responsive)"
+date:   2022-10-23 12:18:07 +0900
+categories: react
+---
+
+| (달성/목표) | 뽀모도리  |
+|----|-------|
+| 1일 | ?/5   |
+| 1주 | ? /40 |
+
+
+
+### Nav에 query 연결하기
+
+`useRouter` next의 hook을 사용한다.
+
+```js
+import { useRouter } from "next/router";
+import requests from "../utils/requests";
+
+const Nav = () => {
+  const router = useRouter();
+  
+            <h2
+            key={key}
+            onClick={() => router.push(`/?genre=${key}`)}
+```
+
+
+### Nav의 스크롤바 없애기
+
+tailwind-scrollbar-hide 플러그인을 설치한다.
+
+https://github.com/reslear/tailwind-scrollbar-hide
+
+tailwind.conig.js에 다음과 같이 플러그인을 추가해 주고,
+
+```js
+  plugins: [
+    require('tailwind-scrollbar-hide')
+    // ...
+  ]
+```
+
+원하는 위치에서 `scrollbar-hide`를 지정해 주기만 하면 된다.
+
+
+
+### tmdb에서 API Key 가져 오기
+회원 가입 후 API Key를 생성한다. 그다음 'env.local' 파일을 만들고 다음과 같이 적어 둔다.
+
+env.local
+```
+API_KEY=thisismyprivatekey
+```
+(내 API_KEY로 입력함)
+
+
+
+### Next.js
+
+SSR(Server Side Rendering)을 해준다. javascript를 서버상에서 돌리고 나서, 결과를 prop을 통해 유저에게 전달한다.
+
+getServerSideProps 함수에서 server side rendering된 후에 `Home` 컴포넌트에 프러퍼티로 값을 전달해 준다. 
+
+```js
+import Head from "next/head";
+import Header from "../components/Header";
+import Nav from "../components/Nav";
+import Results from "../components/Results";
+import requests from "../utils/requests";
+
+// client rendered
+export default function Home(props) {
+  console.log(props);
+  return (
+    <div>
+      <Head>
+        <title>Hulu 2.0</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      <Header />
+      <Nav />
+      <Results />
+    </div>
+  );
+}
+
+// server rendered
+export async function getServerSideProps(context) {
+  const genre = context.query.genre;
+
+  console.log(genre);
+  const request = await fetch(
+    `https://api.themoviedb.org/3${
+      requests[genre]?.url || requests.fetchTrending.url
+    }`
+  ).then((res) => res.json());
+
+  return {
+    props: {
+      results: request.results,
+    },
+  };
+}
+
+```
+
+* async function이므로 fetch 시 await를 해야 한다. 
+
+* context: 중요한 디테일을 가지고 있다. 유저가 들어온 url이 뭔지 같은. 여기에서 url을 알아야 한다. 그래야 영화 장르를 알아낼 수 있고 하니깐.
+
+* HeaderItem 엘리먼트를 클릭했을 때 장르를 query로 작업했다.
+
+
+그런데 다음과 같은 에러가 났다. 직렬화에서 오류가 났다는데.. google에서 다른 사람의 케이스를 검색해 봤는데, 내 경우와 같지는 않은 것 같았다.
+```
+error - SerializableError: Error serializing `.results` returned from `getServerSideProps` in "/".
+Reason: `undefined` cannot be serialized as JSON. Please use `null` or omit this value.
+```
+
+`results`의 직렬화에서 오류가 났다고 나오지만, `genre` 값부터 `undefined`였다. 거슬러 가 보니 API_KEY를 제대로 가져오지 못하고 있었다.
+
+`'/trending/all/week?api_key=undefined&language=en-US'`
+
+파일을 '.env.local'로 만들어야 하는데, 'env.local'로 만들어서 난 오류였다. 
+
+
+<hr />
+visual studio code 단축키
+ctrl + t: 파일 이름 찾기
+
+
+<hr />
+월) 운동
+| 의자스쿼트 | 종아리운동 | 삼두 | 뒷벅지 |
+| 3/3 | 3/3 | 3/3 | 3/3 |
+
