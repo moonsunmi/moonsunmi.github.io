@@ -1,0 +1,127 @@
+---
+layout: post
+title:  "Hulu Clone Coding(Next.js, Tailwind CSS, Responsive)"
+date:   2022-10-25 12:18:07 +0900
+categories: react
+---
+
+| (달성/목표) | 뽀모도리  |
+|----|-------|
+| 1일 | 3/3   |
+| 1주 | 8 /40 |
+
+
+
+### Thumbnail component
+
+
+Thumbnail.js
+```js
+import { HandThumbUpIcon } from "@heroicons/react/24/outline";
+import Image from "next/image";
+
+function Thumbnail({ result }) {
+  const BASE_URL = "https://image.tmdb.org/t/p/original";
+
+  return (
+    <div className="p-2 group cursor-pointer transition duration-100 ease-in transform sm:hover:scale-105 hover:z-50">
+      {console.log(result.backdrop_path, result.poster_path)}
+      <Image
+        layout="responsive"
+        src={
+          `${BASE_URL}${result.backdrop_path || result.poster_path}` ||
+          `${BASE_URL}${result.poster_path}`
+        }
+        height={1080}
+        width={1920}
+      />
+      <div className="p-2">
+        <p className="truncate max-w-md">{result.overview}</p>
+
+        <h2 className="mt-1 text-2xl text-white transition-all duration-100 ease-in-out group-hover:font-bold">
+          {result.title || result.original_name}
+        </h2>
+
+        <p className="flex items-center opacity-0 group-hover:opacity-100 ">
+          {result.media_type && `${result.media_type} *`}
+          {"  "}
+          {result.release_date || result.first_air_date} • {"  "}
+          <HandThumbUpIcon className="h-5 mx-2" />
+          {result.vote_count}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+export default Thumbnail;
+```
+
+map을 이용할 때마다 key를 사용해야 하는 걸 잊지 말자.
+
+next의 Image 컴포넌트에는 layout이라는 프러퍼티가 있다. layout 프러퍼티는 fill, fixed, intrinsic, responsive 옵션을 가진다.
+
+result 오브젝트에서 `poster_path`를 이용할 텐데, base url이 없는 형태다.(`"file_path": "/fCayJrkfRaCRCTh8GqN30f8oyQF.jpg"`로 나옴)
+TMDB에서 가져온 이미지 url은 세 가지(base ulr, size, file_path) 파트로 나뉘어져 있다.
+
+```
+https://image.tmdb.org/t/p/w500/8uO0gUM8aNqYLs1OsTBQiXu0fEv.jpg
+```
+
+`truncate`: 긴 텍스트 결과물을 줄여서 보여준다.
+`mx`: margin x axis. (left, right margin 주는 것)
+
+
+### CSS Grid
+
+모바일용 1칸, 아이패드용 2칸, 브레이크 포인트 xl까지 만들 수 있다.
+
+```js
+<div className="px-5 my-10 sm:grid md:grid-cols-2 xl:grid-cols-3 ">
+```
+
+그러나 아주아주 넓은 화면에서 적용하기는 좋지 않다. 이때 커스텀 grid를 만들면 된다.
+3xl를 내가 만들어 본다.
+
+tailwind.config.js
+```js
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      screen: {
+        "3xl": "2000px",
+      },
+    },
+  },
+  plugins: [require("tailwind-scrollbar-hide")],
+};
+
+```
+
+theme 오브젝트 안의 extend 오브젝트 안에 다음을 추가한다.
+
+```js
+screen: {
+  "3xl": "2000px",
+},
+```
+
+
+
+<hr />
+truncate: (아래나 위를 잘라서) 길이를 줄이다[짧게 하다]
+
+
+<hr />
+화) 운동
+
+| 의자스쿼트 | 종아리운동 | 복근|
+|---------|-------|-------|
+| 3/3 | 3/3 | 3/3 |
+
+
