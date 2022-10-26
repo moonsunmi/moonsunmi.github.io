@@ -1,0 +1,85 @@
+---
+layout: post
+title:  "TIL) Hulu Clone Coding(Next.js, Tailwind CSS, Responsive)"
+date:   2022-10-26 12:18:07 +0900
+categories: react
+---
+
+| (달성/목표) | 뽀모도리   |
+|----|--------|
+| 1일 | 5/5    |
+| 1주 | 13 /40 |
+
+
+
+
+next가 
+
+새 이미지 포맷인 webp을 이용하는데, 매우 작다.
+
+lower res image for the lower resolutions
+
+
+
+### flip 애니메이션
+
+react-flip-move 설치 후 
+
+```js
+import Thumbnail from "./Thumbnail";
+import FlipMove from "react-flip-move";
+
+const Results = ({ results }) => {
+  return (
+    <FlipMove className="px-5 my-10 sm:grid md:grid-cols-2 xl:grid-cols-3 3xl:flex flex-wrap justify-center">
+      {results.map((result) => (
+        <Thumbnail key={result.id} result={result} />
+      ))}
+    </FlipMove>
+  );
+};
+
+export default Results;
+```
+
+`forwardRef`: 부모 컴포넌트로부터 레퍼런스를 받는다. 유효한 키를 가지고 있어야 제대로 렌더링되기 때문에 
+
+
+
+
+### 배포
+
+vercel 사이트에서 접속한다. import project를 이용해서.
+이떄, '환경 변수' 부분을 등록해 줘야 한다. `.env.local`에서 지정해 주었던 API_KEY 값을 지정해 주면 된다.
+
+배포하려는데, 에러가 났다. 살펴보니 더 이상 `FlipMove`를 지원하지 않는다고 한다.(official을 본 게 아니라 개인의 댓글을 본 거라 확실하지는 않다.)
+
+우선은 FlipMove를 div로 바꾸어서 만들었다.
+
+
+<!-- 뽀모도리 3개까지 -->
+
+## Facebook Clone Coding
+
+tailwindcss를 사용하면 h1, h2 같은 스타일들을 잃게 된다. 다음 세 줄 전부 같은 스타일로 나온다.
+
+```html
+<h1>Let's build facebook</h1>
+<h2>Let's build facebook</h2>
+<h3>Let's build facebook</h3>
+```
+
+왜냐하면 tailwindcss는 빈 캔버스 방식에서 시작하기 때문이다. 
+
+components 디렉터리를 만들고, 그 안에 새로 만들 컴포넌트들을 넣도록 하자. pages 디렉터리는 정말 특정 페이지를 말한다. 컴포넌트는 재사용 가능한 컴포넌트를 말한다.  
+
+
+
+<hr />
+수) 운동
+
+| 의자스쿼트 | 종아리 | 이두  | 등 |
+|---------|-----|-----|----|
+| 3/3 | 3/3 | 3/3 | 3/3 |
+
+
