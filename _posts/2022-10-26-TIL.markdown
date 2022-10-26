@@ -12,15 +12,6 @@ categories: react
 
 
 
-
-next가 
-
-새 이미지 포맷인 webp을 이용하는데, 매우 작다.
-
-lower res image for the lower resolutions
-
-
-
 ### flip 애니메이션
 
 react-flip-move 설치 후 
