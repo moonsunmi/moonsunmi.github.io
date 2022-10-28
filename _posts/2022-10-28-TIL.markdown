@@ -5,10 +5,76 @@ date:   2022-10-28 12:18:07 +0900
 categories: react
 ---
 
-| (달성/목표) | 뽀모도리       |
-|----|------------|
-| 1일 | ?/8        |
-| 1주 | 16 + ? /40 |
+| (달성/목표) | 뽀모도리   |
+|----|--------|
+| 1일 | 8/8    |
+| 1주 | 24 /40 |
+
+
+Header.js
+```js
+const Header = () => {
+  return (
+    <div className="sticky top-0 z-50 bg-white flex items-center p-2 lg:p-5 shadow-md">
+```
+Header에 z값을 주어서 다른 컴포넌트 밑에 배치되는 일이 없도록 한다.
+bg-white를 해서 투명이 아니라 하얀 배경으로..
+
+
+현재 위치를 아이콘으로 표시해 준다.(active로..)
+```js
+<Icon
+className={`h-5 text-gray-500 text-center sm:h-7 mx-auto group-hover:text-blue-500 ${
+  active && "text-blue-500"
+}`
+```
+
+globals.css에서 커스텀 유틸리티 클래스를 만들 수 있다. 나만의 스타일을 적용하기가 쉬워진다.
+
+globals.css
+```css
+@layer components {
+  .icon {
+    @apply hidden lg:inline-flex p-2 h-10 w-10 bg-gray-200 rounded-full text-gray-700 cursor-pointer hover:bg-gray-50;
+  }
+}
+
+```
+
+### nextAuth.js
+
+Authentication for next.js
+
+추가하는 방법은 nextAuth 홈페이지에 나온다.
+
+https://next-auth.js.org/configuration/providers/oauth#built-in-providers
+
+[...nextauth].js
+```js
+import NextAuth from "next-auth/next";
+import FacebookProvider from "next-auth/providers/facebook";
+
+export default NextAuth({
+  providers: [
+    FacebookProvider({
+      clientId: process.env.FACEBOOK_CLIENT_ID,
+      clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+    }),
+  ],
+});
+```
+
+이제 여기에 나오는 `clientId`와 `clientSecret`을 알아야 한다.
+
+https://developers.facebook.com/에서 개발자용 앱을 만든다. '소비자용'
+기본 설정에 나와 있는 정보에서 앱 ID와 시크릿 코드를 얻을 수 있다.
+
+.env.local 파일을 만들어서 정보를 적어준다.
+```
+FACEBOOK_CLIENT_ID=...
+FACEBOOK_CLIENT_SECRET=...
+NEXTAUTH_URL=http://localhost:3000
+```
 
 
 
@@ -18,8 +84,8 @@ categories: react
 <hr />
 금) 운동
 
-| 앞벅지1 | 앞벅지2 | 종아리 | 복근  |
-|-------|-------|-----|-----|
+| 이두 | 등 | 가슴 | 어깨  |
+|--|-------|-----|-----|
 | 3/3 | 3/3 | 3/3 | 3/3 |
 
 
