@@ -1,0 +1,61 @@
+---
+layout: post
+title:  "TIL) Facebook Clone Coding(Next.js, Tailwind CSS, Responsive)"
+date:   2022-11-01 12:18:07 +0900
+categories: react
+---
+
+| (달성/목표) | 뽀모도리  |
+|----|-------|
+| 1일 | 3/3   |
+| 1주 | 8 /40 |
+
+
+
+### Blob
+Binary Large Object. 그림, 사운드, 영상 같은 멀티미디어 데이터를 다룰 때 사용한다.
+
+firebase가 많이 바뀌었고, 그래서 이미지를 업로드하는 과정에서 막혔다. 업로드를 어떻게 하는 것일까..?
+
+```js
+
+  const sendPost = (e) => {
+    e.preventDefault();
+
+    if (!inputRef.current.value) return;
+
+    try {
+      const docRef = addDoc(collection(db, "post"), {
+        message: inputRef.current.value,
+        name: session.user.name,
+        email: session.user.email,
+        image: session.user.image,
+        timestamp: serverTimestamp(),
+      }).then((docRef) => {
+        if (imageToPost) {
+          const storage = getStorage(app);
+          const storageRef = ref(storage, `post/${doc.id}`);
+
+          removeImage();
+        }
+      });
+      console.log("Document written with ID: ", docRef.id);
+    } catch (e) {
+      console.error("Error adding document: ", e);
+    }
+
+    inputRef.current.value = "";
+  };
+
+```
+
+
+
+<hr />
+화) 운동
+
+| 복근  | 
+|-----|
+| 3/3 |
+
+
