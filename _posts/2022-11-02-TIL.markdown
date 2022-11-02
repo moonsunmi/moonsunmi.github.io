@@ -1,0 +1,86 @@
+---
+layout: post
+title:  "TIL) Facebook Clone Coding(Next.js, Tailwind CSS, Responsive)"
+date:   2022-11-02 12:18:07 +0900
+categories: react
+---
+
+| (달성/목표) | 뽀모도리   |
+|----|--------|
+| 1일 | 5/5    |
+| 1주 | 13 /40 |
+
+
+###
+공식 문서를 이용해서 파일 업로드를 구현했다. 새로운 방법이 훨씬 간단하고 편리하다.
+
+```js
+if (imageToPost) {
+  const storage = getStorage(app);
+  const storageRef = ref(storage, `post/${uuidv4()}`);
+
+  removeImage();
+
+  // 'file' comes from the Blob or File API
+  uploadBytes(storageRef, imageBlob).then((snapshot) => {
+    console.log("Uploaded a blob or file!", imageBlob);
+  });
+}
+```
+
+파일 이름은 uuidv4를 이용해 중복되지 않게 했다. Blob이나 File을 넣으라는 공간에 도대체 뭘 넣어야 할지를 몰랐었는데, 파일을 업로드할 때 눌렀던 부분(photo 아이콘 부분) `<input type="file"`에서 이벤트가 발생하면 `e.target.files`에 해당 그림 파일이 지정되었다. 그 부분을 넣어 주었다. 다른 메서드에 있기에 어떻게 넘겨줄까 고민하다가 state를 썼는데... 좋은 방법인 건지는 잘 모르겠다.
+
+
+
+### react-firbase-hooks
+파이어베이스에 업로드를 한 파일을 화면으로 다시 가져와서 보여 주어야 한다. Post 컴포넌트 구현. `useCollections` 훅은 query를 매개변수로 받아 snapshot, loading(boolean), error 세 값을 반환한다. 
+
+Posts.js
+```js
+import { useCollection } from "react-firebase-hooks/firestore";
+import { db, app } from "../firebase";
+import { getFirestore, collection } from "firebase/firestore";
+import Post from "./Post";
+
+const Posts = () => {
+  const [realtimePosts, loading, error] = useCollection(
+    collection(getFirestore(app), "post"),
+    { snapshotListenOptions: { includeMetadataChanges: true } }
+    //db.collection("post").orderBy("timestamp", "desc")
+  );
+  return (
+    <div>
+      {error && <strong>Error: {JSON.stringify(error)}</strong>}
+      {loading && <span>Collection: Loading...</span>}
+      {realtimePosts &&
+        realtimePosts.docs.map((post) => (
+          <Post
+            key={post.id}
+            message={post.data().message}
+            name={post.data().name}
+            email={post.data().email}
+            image={post.data().image}
+            postImage={post.data().postImage}
+            timestamp={post.data().timestamp}
+          />
+        ))}
+    </div>
+  );
+};
+
+export default Posts;
+```
+
+
+fill은 부모가 relative가 아니면 엉망이 된다고...
+
+
+
+<hr />
+수) 운동
+
+| 이두  | 등   | 
+|-----|-----|
+| 3/3 | 3/3 |
+
+
