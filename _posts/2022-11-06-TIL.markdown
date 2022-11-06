@@ -1,0 +1,268 @@
+---
+layout: post
+title:  "TIL) 리액트를 다루는 기술"
+date:   2022-11-06 12:18:07 +0900
+categories: react
+---
+
+| (달성/목표) | 뽀모도리   |
+|----|--------|
+| 1일 | 8/8    |
+| 1주 | 41 /40 |
+
+
+
+## 리액트를 다루는 기술
+
+### useState
+상태값을 저장하고, 관리하는 훅
+
+```js
+import { useState } from "react";
+
+const Info = () => {
+  const [name, setName] = useState("");
+  const [nickname, setNickname] = useState("");
+
+  const changeNickname = (e) => {
+    setNickname(e.target.value);
+  };
+  const changeName = (e) => {
+    setName(e.target.value);
+  };
+  return (
+    <div>
+      <div>
+        <input onChange={changeName} />
+        <input onChange={changeNickname} />
+      </div>
+      <div>
+        <p>이름: {name}</p>
+        <p>닉네임: {nickname}</p>
+      </div>
+    </div>
+  );
+};
+
+export default Info;
+```
+
+### 인풋이 여러 개일 때, useState 사용법
+매번 useState 훅을 사용할 게 아니라, 오브젝트로 묶어서 함께 다루는 것이 좋다.
+
+* useRef: DOM에 직접 접근해야 할 때 사용한다. 보통 focus를 지정할 때 많이 사용하는 듯.
+
+```js
+import React, { useRef, useState } from "react";
+
+const InputSample = () => {
+  const [user, setUser] = useState({ username: "", nickname: "" });
+
+  const { username, nickname } = user;
+
+  const inputRef = useRef();
+
+  const clearInput = () => {
+    setUser({
+      username: "",
+      nickname: "",
+    });
+    inputRef.current.focus();
+  };
+  const changeInput = (e) => {
+    const { name, value } = e.target;
+    setUser({ ...user, [name]: value });
+  };
+  return (
+    <div>
+      <hr />
+      <h1>InputSample</h1>
+      <input
+        name="username"
+        ref={inputRef}
+        placeholder="이름"
+        value={user.username}
+        onChange={changeInput}
+      />
+      <input
+        name="nickname"
+        placeholder="닉네임"
+        value={user.nickname}
+        onChange={changeInput}
+      />
+      <button onClick={clearInput}>초기화</button>
+      <div>
+        값: {user.username} ({user.nickname})
+      </div>
+    </div>
+  );
+};
+
+export default InputSample;
+```
+
+
+
+### useReducer
+
+상태를 관리하는 건 useState와 같으나, 상태 업데이트 로직을 컴포넌트 외부에서 관리할 수 있다. state에 변화가 필요하면 action을 발동한다.
+
+```js
+import React, { useReducer } from "react";
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "INCREMENT":
+      return state + 1;
+    case "DECREMENT":
+      return state - 1;
+    default:
+      return state;
+  }
+}
+
+function Counter() {
+  const [number, dispatch] = useReducer(reducer, 0);
+  return (
+    <div>
+      <p>현재 카운터 값은 {number}입니다.</p>
+      <button
+        onClick={() => {
+          dispatch({ type: "INCREMENT" });
+        }}
+      >
+        +1
+      </button>
+      <button
+        onClick={() => {
+          dispatch({ type: "DECREMENT" });
+        }}
+      >
+        -1
+      </button>
+    </div>
+  );
+}
+
+export default Counter;
+
+```
+
+
+### 배열 렌더링하기
+
+```js
+import React from "react";
+
+function User({ user }) {
+  return (
+    <div>
+      <b>{user.username}</b> (<span>{user.nickname}</span>)
+    </div>
+  );
+}
+
+const UserList = () => {
+  const users = [
+    { id: 1, username: "도민준", nickname: "민준맘" },
+    { id: 2, username: "공유", nickname: "도깨비" },
+    { id: 3, username: "곽상준", nickname: "각도기" },
+  ];
+  return (
+    <div>
+      {users.map((user) => (
+        <User user={user} key={user.id} />
+      ))}
+    </div>
+  );
+};
+
+export default UserList;
+```
+
+### 배열에 항목 제거/수정하기
+
+불변성을 지키면서 배열의 항목을 제거하기에는 filter를 이용하는 방법이 가장 적절하다. 제거하려는 항목만 걸리지 않도록 한다. 수정할 때는 map을 사용했다. filter나 map은 쓸 때마다 헷갈려 하는 것 같다.
+
+```js
+import Info from "./Info";
+import "./App.css";
+import Counter from "./Counter";
+import CreateUser from "./CreateUser";
+import InputSample from "./InputSample";
+import UserList from "./UserList";
+import { useRef, useState } from "react";
+
+function App() {
+  const [inputs, setInputs] = useState({ username: "", nickname: "" });
+  const { username, nickname } = inputs; // <<<<<<
+  const nextId = useRef(4);
+  const [users, setUsers] = useState([
+    { id: 1, username: "도민준", nickname: "민준맘", active: true },
+    { id: 2, username: "공유", nickname: "도깨비", active: false },
+    { id: 3, username: "곽상준", nickname: "각도기", active: false },
+  ]);
+
+  const onChange = (e) => {
+    const { name, value } = e.target;
+
+    setInputs({ ...inputs, [name]: value });
+  };
+
+  const onCreate = () => {
+    const user = {
+      id: nextId.current,
+      username,
+      nickname,
+    };
+    setUsers([...users, user]);
+    nextId.current += 1;
+    console.log(users);
+  };
+
+  const onRemove = (id) => {
+    setUsers(users.filter((user) => user.id != id));
+  };
+
+  const onToggleActive = (id) => {
+    setUsers(
+      users.map((user) =>
+        user.id === id ? { ...user, active: !user.active } : user
+      )
+    );
+  };
+
+  return (
+    <div className="App">
+      <CreateUser
+        username={username}
+        nickname={nickname}
+        onChange={onChange}
+        onCreate={onCreate}
+      />
+      {/* props 전달 */}
+      <InputSample />
+      <hr />
+      <UserList
+        users={users}
+        onRemove={onRemove}
+        onToggleActive={onToggleActive}
+      />
+    </div>
+  );
+}
+
+export default App;
+
+```
+
+
+<hr />
+일) 운동
+
+| 가슴  | 어깨 |  
+|-----|-----|
+| 3/3 | 3/3 |
+
+
+
