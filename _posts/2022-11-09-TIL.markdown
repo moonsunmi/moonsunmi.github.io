@@ -1,0 +1,84 @@
+---
+layout: post
+title:  "TIL) POMO-WEEKLY 프로젝트 로그 만드는 중"
+date:   2022-11-09 12:18:07 +0900
+categories: react
+---
+
+| (달성/목표) | 뽀모도리   |
+|----|--------|
+| 1일 | 5 / 5  |
+| 1주 | 10 /40 |
+
+
+
+### 로그를 만들어 보자
+
+LOG를 기록하고 출력하기 위해서 logs를 useState로 만들었다. 지금 버전은 props를 계속 전달해 주고 있는데, 조만간 redux를 공부해서 데이터를 조금 더 체계적으로 관리해야 할 것 같다.
+
+로그를 남기는 순간은 Counter 컴포넌트 안에 있는 버튼을 누를 때기 때문에 Counter 컴포넌트의 버튼에서 log 데이터를 저장해 주는 코드를 추가했다.
+
+log는 id, start, end 값을 가지는 오브젝트이다. 하나의 로그는 시작 시간과 끝 시간을 가지는 덩어리로 간주했다.
+
+로그의 개수는 useRef로 다룬다.
+
+index.js
+```js
+const [logs, setLogs] = useState([{ id: 0, start: Date(), end: Date() }]);
+const nextLogId = useRef(0);
+```
+
+
+Counter.js
+```js
+function getTimeRecord(now) {
+  return `${now.getFullYear()}년 ${now.getMonth()}월 ${now.getDate()}일 ${now.getHours()}시 ${now.getMinutes()}분 `;
+}
+const Counter = ({ minutes, seconds, nextLogId, logs, addLogs }) => {
+  let initPomodori = minutes * 60 + seconds;
+
+  const [countdownNumber, setCountdownNumber] = useState(initPomodori);
+  const [isCounting, setIsCounting] = useState(false);
+
+  let startStopButton;
+  let now = new Date();
+
+  const startTimer = () => {
+    // start는 로그 자체를 추가하고, end는 마지막 로그에 값만 추가하는 것이다.
+    let timeRecord = getTimeRecord(now);
+    addLogs([...logs, { id: nextLogId.current, start: timeRecord, end: "" }]); // end 넣을 필요가 있을까?
+    setIsCounting(true);
+    nextLogId.current += 1;
+  };
+
+  const stopTimer = () => {
+    // start는 로그 자체를 추가하고, end는 마지막 로그에 값만 추가하는 것이다.
+    let lastLogId = nextLogId.current - 1;
+    let timeRecord = getTimeRecord(now);
+    addLogs(
+      logs.map((log) =>
+        log.id == lastLogId ? { ...log, end: timeRecord } : log
+      )
+    );
+    setIsCounting(false);
+  };
+```
+
+### 겪었던 오류
+
+objects are not valid as a react child (found: [object date]). if you meant to render a collection of children, use an array instead.
+
+children의 컬렉션을 렌더링하고 싶다면 배열을 쓰라는 이야기. 찾아 보니 내가 Date() 오브젝트를 사용했었고, 그걸 그대로 출력하려고 했더니 문제가 생긴 거였다.
+
+
+
+
+<hr />
+수) 운동
+
+| 종아리 | 앞벅지 | 이두  | 등   |  
+|--------|-----|-----|-----|
+| 3/3    | 3/3 | 0/3 | 3/3 |
+
+
+
