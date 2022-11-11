@@ -1,0 +1,116 @@
+---
+layout: post
+title:  "TIL) 리액트를 다루는 기술(useReducer)"
+date:   2022-11-11 12:18:07 +0900
+categories: react
+---
+
+| (달성/목표) | 뽀모도리   |
+|----|--------|
+| 1일 | 5 / 8  |
+| 1주 | 19 /40 |
+
+
+### useReducer
+
+현재 상태(state) 객체와 행동(action) 객체를 인자로 받아서 새로운 상태(state) 객체를 반환하는 함수이다.
+
+```js
+const [상태객체, dispatch함수] = useReducer(reducer 함수, 초기 상태값)
+```
+
+
+useReducer를 써서 onChange, onCreate, onRemove, onToggleActive 만들기 
+
+```js
+  const onChange = useCallback((e) => {
+    const { name, value } = e.target;
+    console.log("onChange called");
+    dispatch({ type: "CHANGE_INPUT", name, value });
+  }, []);
+
+  const onCreate = useCallback(() => {
+    console.log("onCreate:", username, nickname);
+    dispatch({
+      type: "CREATE_USER",
+      user: {
+        id: nextId.current,
+        username,
+        nickname,
+      },
+    });
+    nextId.current += 1;
+  }, [username, nickname]);
+
+  const onRemove = useCallback(
+    (id) => {
+      dispatch({ type: "REMOVE_USER", id });
+    },
+    [users]
+  );
+
+  const onToggleActive = useCallback(
+    (id) => {
+      dispatch({ type: "TOGGLE_USER", id });
+    },
+    [users]
+  );
+
+  const activeUserNumber = useMemo(() => {
+    return getActiveUserNumber(users);
+  }, [users]);
+
+```
+
+reducer 함수는 다음과 같다.
+```js
+function reducer(state, action) {
+  // action: dispatch 함수에서 넘겨 준 값.
+  //         onChange의 경우 { type: "CHANGE_INPUT", name, value }
+  //         onCreate의 경우 { type: "CREATE_USER", user: { id: nextId.current, username, nickname },}
+  console.log("action:", action);
+  console.log("state:", state);
+  console.log("action.user:", action.user);
+  switch (action.type) {
+    case "CHANGE_INPUT":
+      return {
+        ...state,
+        inputs: { ...state.inputs, [action.name]: action.value },
+      };
+    case "CREATE_USER":
+      return {
+        inputs: initialState.inputs,
+        users: state.users.concat(action.user),
+      };
+    case "REMOVE_USER":
+      return {
+        ...state,
+        users: state.users.filter((user) => user.id != action.id),
+      };
+    case "TOGGLE_USER":
+      return {
+        ...state,
+        users: state.users.map((user) =>
+          user.id === action.id ? { ...user, active: !user.active } : user
+        ),
+      };
+    case "ACTIVE_NUMBER_USER":
+      return {
+        ...state,
+      };
+    default:
+      return state;
+  }
+}
+```
+
+
+<hr />
+금) 운동
+
+| 이두  | 등   | 가슴  | 어깨 | 
+|-----|-----|-----|-----|
+| 0/3 | 0/3 | 0/3 |0/3 |
+
+
+
