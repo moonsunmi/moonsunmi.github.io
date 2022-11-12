@@ -1,0 +1,57 @@
+---
+layout: post
+title:  "TIL) 리액트를 다루는 기술(useReducer)"
+date:   2022-11-12 12:18:07 +0900
+categories: react
+---
+
+| (달성/목표) | 뽀모도리   |
+|----|--------|
+| 1일 | 7 / 8  |
+| 1주 | 26 /40 |
+
+
+의존성 배열: 의존성 배열이 변경되지 않으면, 이전에 반환된 값을 재사용한다. 만약 배열의 값이 변경됐으면 그 값으로 함수를 실행하고, 반환값을 기억해 둔다.
+
+```js
+const onChange = useCallback(
+  (e) => {
+    const { value, name } = e.target;
+    dispatch({ type: "CHANGE_INPUTS", value, name });
+  },
+  [state.inputs] // state.inputs: {username, nickname}
+);
+```
+
+의존성 배열이 변경되지 않으면(즉, username, nickname이 변경되지 않으면) 그전에 기억해둔 값을 쓴다.
+
+따라서 user를 create할 때도, 의존성 배열은 inputs이어야 한다. 빈칸이었던 inputs에 무언가 채워진 상태여야 create가 의미가 있으므로. 
+
+```js
+  const onCreate = useCallback(() => {
+    dispatch({
+      type: "CREATE_USERS",
+      user: {
+        id: nextId.current,
+        username,
+        nickname,
+        active: false,
+      },
+    });
+    nextId.current += 1;
+  }, [state.inputs]);
+```
+
+
+
+
+<hr />
+* 모르겠는 것: onRemove에서 id는 어떻게(어디에서) 얻어 오는 것일까?
+
+
+
+<hr />
+토) 운동<br>
+일일 헬스 1시간 했다.
+
+
