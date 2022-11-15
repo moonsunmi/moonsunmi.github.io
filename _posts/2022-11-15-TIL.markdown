@@ -1,0 +1,140 @@
+---
+layout: post
+title:  "TIL) 리액트를 다루는 기술(라우팅 시도...)"
+date:   2022-11-15 12:18:07 +0900
+categories: react
+---
+
+| (달성/목표) | 뽀모도리   |
+|----|--------|
+| 1일 | 9 / 8  |
+| 1주 | 14 /40 |
+
+
+
+### 라우팅
+라우팅: 다른 주소에 따라 다른 뷰를 보여주는 것
+
+렌더링을 서버에서만 담당하는 것은 부담이 된다. 따라서 유저의 브라우저가 뷰의 렌더링을 담당하게 하고, 애플리케이션을 우선 렌더링하고 꼭 필요한 데이터부터 보여준다.
+
+react-router 라이브러리는 따로 설치해야 한다.
+
+BrowserRouter를 다음과 같이 만든다.
+
+```js
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Root />,
+    errorElement: <ErrorPage />,
+    children: [{ path: "contacts/:contactId", element: <Contact /> }],
+  },
+]);
+```
+
+만든 라우터는 다음과 같이 제공한다.
+
+```js
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(
+  <React.StrictMode>
+    <RouterProvider router={router} />
+  </React.StrictMode>
+);
+```
+
+주소는 다음과 같이.
+
+```js
+<li>
+  <Link to={`contacts/1`}>Your Name</Link>
+</li>
+<li>
+  <Link to={`contacts/2`}>Your Friend</Link>
+</li>
+```
+
+화면 전체가 바뀌는 게 아니라 내용에 해당하는 공간만 바뀌길 바란다면, 다음과 같이 `<Outlet />`으로.
+
+```js
+<div id="detail">
+  <Outlet />
+</div>
+```
+
+
+
+
+<!-- 
+https://reactrouter.com/en/main/start/tutorial#loading-data
+Loading Data 전까지 공부함.
+-->
+
+
+
+
+### POMO-WEEKLY 페이지 조정
+
+상단에 헤더를 추가했다. 뽀모도로 예약 창을 접근하거나 로그인하거나 weekly 로그를 확인할 때 사용할 예정이다. 아이콘은 heroIcon을 사용했다. 
+
+```js
+import React from "react";
+import { Bars3Icon, PlusIcon } from "@heroicons/react/24/solid";
+
+const Header = () => {
+  return (
+    <div className="flex shadow-md w-full bg-gray-50 mb-4 justify-between">
+      <Bars3Icon className="text-lime-600 h-7 m-1 mx-4" />
+      <p className="font-NotoSansKorea text-xl m-1 text-gray-600 mx-4 text-lime-700  font-semibold">
+        POMO WEEKLY
+      </p>
+      <p className=" cursor-pointer">
+        <PlusIcon className=" border-2 border-lime-600 bg-lime-300 rounded-full text-lime-600 h-7  content-center align-middle m-1 mx-4 shadow-md font-bold" />
+      </p>
+    </div>
+  );
+};
+
+export default Header;
+```
+
+
+현재 창이 TimerContainer, States, TimeLogs 컴포넌트 세 개로 분리되어 있는데, 이 세 개를 다 포함하는 Excution 컴포넌트를 만들었다.
+
+라우터 기능을 추가하여 메인 페이지에서만 이 컴포넌트가 보이게 할 것이다. 
+
+```js
+import React from "react";
+import States from "./States";
+import TimerContainer from "./TimerContainer";
+
+const Excution = ({ minutes, seconds, nextLogId, addTimeLogs }) => {
+  return (
+    <div>
+      <TimerContainer
+        minutes={minutes}
+        seconds={seconds}
+        nextLogId={nextLogId}
+        addTimeLogs={addTimeLogs}
+      />
+      <States nextLogId={nextLogId} />
+
+      <TimeLogs />
+    </div>
+  );
+};
+
+export default Excution;
+```
+
+라우팅 시도 중에 에러가 났는데, 아직 해결 못하고 있다. 
+
+
+<hr />
+화) 운동<br>
+
+
+
+
+
+
