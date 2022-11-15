@@ -132,7 +132,7 @@ export default Excution;
 
 <hr />
 화) 운동<br>
-
+어깨 운동(횟수 제한 없이 힘들 때까지 3세트)
 
 
 
