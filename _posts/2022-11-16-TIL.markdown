@@ -16,7 +16,7 @@ categories: react
 next.js에서는 useRouter 훅을 쓰면 쉽게 라우팅할 수 있었다. next.js에서는 pages 폴더 안의 컴포넌트 이름을 그대로 경로로 바꿔 준다.
 
 
-```js
+```jsx
 const Header = () => {
   const router = useRouter();
 
