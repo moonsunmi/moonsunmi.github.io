@@ -1,0 +1,135 @@
+---
+layout: post
+title:  "TIL) 뽀모 프로젝트 라우팅 기능(useRouter) 추가"
+date:   2022-11-16 12:18:07 +0900
+categories: react
+---
+
+| (달성/목표) | 뽀모도리   |
+|----|--------|
+| 1일 | 5 / 5  |
+| 1주 | 19 /40 |
+
+
+
+### 라우팅
+next.js에서는 useRouter 훅을 쓰면 쉽게 라우팅할 수 있었다. next.js에서는 pages 폴더 안의 컴포넌트 이름을 그대로 경로로 바꿔 준다.
+
+
+```js
+const Header = () => {
+  const router = useRouter();
+
+  const handleClick = (e, href) => {
+    e.preventDefault();
+    router.push(href);
+  };
+
+  return (
+    <div className="flex shadow-md w-full bg-gray-50 mb-4 justify-between">
+      <Bars3Icon className="text-lime-600 h-7 m-1 mx-4" />
+      <p
+        onClick={() => {
+          handleClick(event, "/");
+        }}
+        className=" cursor-pointer font-NotoSansKorea text-xl m-1 text-gray-600 mx-4 text-lime-700  font-semibold"
+      >
+        POMO WEEKLY
+      </p>
+      <p
+        className=" cursor-pointer"
+        onClick={() => handleClick(event, "components/Reservation")}
+      >
+        <PlusIcon className=" border-2 border-lime-600 bg-lime-300 rounded-full text-lime-600 h-7  content-center align-middle m-1 mx-4 shadow-md font-bold" />
+      </p>
+    </div>
+  );
+};
+
+export default Header;
+```
+
+
+### Header는 _app.js에 추가
+
+Header 컴포넌트를 _app.js에 추가해 주면, 페이지가 바뀌더라도 항상 상단에 떠 있게 할 수 있다. 그리고 전역 변수를 여기에 저장해 두면 접근하기 쉽다.
+
+_app.js
+```js
+import React, { useRef, useState } from "react";
+import "../styles/globals.css";
+import Header from "./components/Header";
+
+export const timeLogsContext = React.createContext(null);
+export const nextLogIdContext = React.createContext(0);
+
+function MyApp({ Component, pageProps }) {
+  let unitPomodori = 1;
+  const [timeLogs, setTimeLogs] = useState([{ id: 0, start: "", end: "" }]); //
+  const [testTimeLogs, setTestTimeLogs] = useState([
+    { id: 0, start: Date(), end: Date() },
+  ]);
+
+  const nextLogId = useRef(0);
+
+  return (
+    <div>
+      <timeLogsContext.Provider value={timeLogs}>
+        <nextLogIdContext.Provider value={nextLogId}>
+          <Header />
+
+          <Component
+            {...pageProps}
+            unitPomodori={unitPomodori}
+            nextLogId={nextLogId}
+            setTimeLogs={setTimeLogs}
+          />
+        </nextLogIdContext.Provider>
+      </timeLogsContext.Provider>
+    </div>
+  );
+}
+
+export default MyApp;
+
+```
+
+### getInitialProps
+넥스트에서는 getInitialProps라는 함수를 이용해서 페이지 컴포넌트로 속성값을 전달한다. 각 페이지의 getInitialProps 함수는 페이지 진입 직전에 호출된다.
+
+HTTP 요청 객체, 쿼리 파라미터 정보 등 다양한 정보가 전달된다. 이 함수를 이용하면 에러 페이지를 만들 수 있다.
+
+_error.js
+```js
+function Error({ statusCode }) {
+  return (
+    <div className="flex justify-center">
+      <p className="mainContainer justify-center">
+        {statusCode
+          ? `An error ${statusCode} occurred on server`
+          : "An error occurred on client"}
+      </p>
+    </div>
+  );
+}
+
+Error.getInitialProps = ({ res, err }) => {
+  const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
+  return { statusCode };
+};
+
+export default Error;
+
+```
+
+
+<hr />
+화) 운동<br>
+
+| 이두   | 등 |
+|------|-----|
+| 3/3  | 3/3 |
+
+
+
+
