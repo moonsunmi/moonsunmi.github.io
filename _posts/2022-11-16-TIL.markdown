@@ -55,7 +55,7 @@ export default Header;
 Header 컴포넌트를 _app.js에 추가해 주면, 페이지가 바뀌더라도 항상 상단에 떠 있게 할 수 있다. 그리고 전역 변수를 여기에 저장해 두면 접근하기 쉽다.
 
 _app.js
-```js
+```jsx
 import React, { useRef, useState } from "react";
 import "../styles/globals.css";
 import Header from "./components/Header";
@@ -100,7 +100,7 @@ export default MyApp;
 HTTP 요청 객체, 쿼리 파라미터 정보 등 다양한 정보가 전달된다. 이 함수를 이용하면 에러 페이지를 만들 수 있다.
 
 _error.js
-```js
+```jsx
 function Error({ statusCode }) {
   return (
     <div className="flex justify-center">
