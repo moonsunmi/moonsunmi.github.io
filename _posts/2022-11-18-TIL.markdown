@@ -1,0 +1,54 @@
+---
+layout: post
+title:  "TIL) 뽀모 프로젝트 라우팅 기능(useRouter) 추가"
+date:   2022-11-18 12:18:07 +0900
+categories: react
+---
+
+| (달성/목표) | 뽀모도리   |
+|----|--------|
+| 1일 | 7 / 8  |
+| 1주 | 26 /40 |
+
+
+
+### prop-type에서 나만의 타입 함수 만들기
+
+다음과 같이 함수로 타입의 조건을 만들 수 있다.
+
+```jsx
+Schedule.propTypes = {
+  age: function (props, propName, componentName) {
+    const value = props[propName];
+    if (value < 10 || value > 20) {
+      return new Error(
+        `Invalid prop ${propName} supplied to ${componentName}.
+        It must be 10 <= value <= 20.`
+      );
+    }
+  },
+};
+```
+
+## 리액트 컴포넌트 패턴
+
+### 프레젠테이션 and 컨테이너 컴포넌트
+
+훅이 나오면서 이제는 더 이상 유효하지 않은 구조. 로직과 UI를 다른 컴포넌트로 구별해서 관리한다.
+
+
+### component & custom hook 패턴 
+
+프레젠테이션 and 컨테이너 컴포넌트의 로직 부분을 custom hook으로 만들고, 컴포넌트에서 UI를 다룬다.
+
+내일은 커스텀 훅 만들기를 공부해야겠다.
+
+
+
+<hr />
+금) 운동<br>
+
+
+
+
+
