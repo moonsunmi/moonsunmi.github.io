@@ -1,0 +1,204 @@
+---
+layout: post
+title:  "TIL) 뽀모 프로젝트 라우팅 기능(useRouter) 추가"
+date:   2022-11-19 12:18:07 +0900
+categories: react
+---
+
+| (달성/목표) | 뽀모도리   |
+|----|--------|
+| 1일 | 10 / 8 |
+| 1주 | 36 /40 |
+
+
+### 파일 구조
+
+내가 따르기로 한 파일 구조는 다음과 같다.
+
+1. 도메인 기준으로 나누고,
+2. 도메인 이름을 따른 폴더 안에는 `hook`과 `test` 폴더를 둔다.
+3. `hook`에는 'component & custom hook 패턴'을 따르기 위해 만들어지는 커스텀 훅들이 들어가고, `test`에는 컴포넌트 테스트를 위한 것이 들어간다.
+
+test도 나중에 제대로 공부해야 할 것 같다. 공부하면 할수록 점점 더 공부할 게 많아만 진다..
+
+
+
+### 커스텀 훅
+
+내 뽀모도로 프로젝트에서는 뽀모도로 시작 시간과 목표 개수를 예약할 수 있도록 만들 것이다. 
+
+그러기 위해서 Reservation 컴포넌트를 만들었다.
+
+Reservation 컴포넌트에는 input 엘리먼트가 많이 나와서 커스텀 훅을 공부하고 사용해 보기에 딱 좋았다.
+
+Reservation.js
+```jsx
+import React, { useContext, useState } from "react";
+import { timeLogsContext } from "../../_app";
+import useInputs from "../common/hooks/useInputs";
+import useSelectOptions from "../common/hooks/useSelectOptions";
+import useTasks from "../common/hooks/useTasks";
+import Schedule from "../Schedule";
+
+const dateToString_yyyy_MM_dd = (date) => {
+  return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+};
+
+const timeToString_mm_ss = (date) => {
+  return `${date.getHours()}:${date.getMinutes()}`;
+};
+
+const categoryOptions = [
+  { value: "banana", text: "banana" },
+  { value: "kiwi", text: "kiwi" },
+  { value: "tomato", text: "tomato" },
+];
+
+const Reservation = () => {
+  const testLogs = useContext(timeLogsContext);
+  const [age, setAge] = useState(18); // for test. must be deleted.
+  const today = new Date();
+
+  const [selectedCategory, onChangeOption, resetOption] =
+    useSelectOptions(categoryOptions);
+
+  const [{ taskName, date, time }, onChangeInput, resetInput] = useInputs({
+    taskName: "",
+    date: dateToString_yyyy_MM_dd(today),
+    time: timeToString_mm_ss(today),
+  });
+  const [tasks] = useTasks({ taksName: "", category: "", date: "", time: "" });
+
+  const onReset = () => {
+    resetInput();
+    resetOption();
+  };
+  return (
+    <div className="flex content-center">
+      <div className="mainContainer ">
+        <input
+          className="border border-yellow-400 mb-2 bg-yellow-50"
+          name="taskName"
+          placeholder="Task Name"
+          value={taskName}
+          onChange={onChangeInput}
+        />
+        <select
+          name="category"
+          value={selectedCategory}
+          onChange={onChangeOption}
+        >
+          {categoryOptions.map((option) => (
+            <option value={option.value} key={option.value}>
+              {option.text}
+            </option>
+          ))}
+        </select>
+        <input
+          className="border border-yellow-400  bg-yellow-50  mb-2"
+          name="date"
+          type="date"
+          id="startDate"
+          value={date}
+          onChange={onChangeInput}
+        />
+        <input
+          className="border border-yellow-400  bg-yellow-50  mb-2"
+          name="time"
+          type="time"
+          value={time}
+          onChange={onChangeInput}
+        />
+        <button className="button w-60" onClick={onReset}>
+          뽀모도로 예약
+        </button>
+        {testLogs.map((log) => log.id) /* must be deleted */}
+      </div>
+      <Schedule age={age} />
+    </div>
+  );
+};
+
+export default Reservation;
+```
+
+카테고리 부분은 아직 하드코딩되어 있다.
+
+useInputs와 useSelectOptions를 만들었다. select/option은 취급하는 방법이 나머지 input과 달라서 훅을 따로 만들었는데, 더 좋은 방법이 있지 않을까 싶다.
+
+
+useInputs.js
+```jsx
+import React, { useCallback, useState } from "react";
+import { PropTypes } from "prop-types";
+
+const useInputs = (initialState) => {
+  const [inputs, setInputs] = useState(initialState);
+
+  const onChange = useCallback((e) => {
+    const { name, value } = e.target;
+    setInputs((inputs) => ({ ...inputs, [name]: value }));
+  }, []);
+
+  const reset = useCallback(() => {
+    setInputs(initialState);
+  }, [initialState]);
+
+  return [inputs, onChange, reset];
+};
+
+useInputs.propTypes = {
+  initialState: PropTypes.shape({
+    taskName: PropTypes.string,
+    date: PropTypes.string,
+    time: PropTypes.string,
+  }),
+};
+
+export default useInputs;
+
+```
+
+
+useSelectOptions.js
+
+```jsx
+import { useCallback, useState } from "react";
+import PropTypes from "prop-types";
+
+const useSelectOptions = (options) => {
+  const [selected, setSelected] = useState(options[0].value);
+
+  const onChange = useCallback((e) => {
+    setSelected(e.target.value);
+  }, []);
+
+  const onReset = useCallback(() => {
+    setSelected(options[0].value);
+  }, [options]);
+
+  return [selected, onChange, onReset];
+};
+
+useSelectOptions.propTypes = {
+  options: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.string,
+      text: PropTypes.string,
+    })
+  ),
+};
+
+export default useSelectOptions;
+
+```
+
+
+
+<hr />
+금) 운동<br>
+
+
+
+
+
