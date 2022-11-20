@@ -1,0 +1,123 @@
+---
+layout: post
+title:  "TIL) 뽀모 프로젝트  추가"
+date:   2022-11-20 12:18:07 +0900
+categories: react
+---
+
+| (달성/목표) | 뽀모도리   |
+|----|--------|
+| 1일 | 6 / 8  |
+| 1주 | 42 /40 |
+
+
+### 커스텀 훅과 컨텍스트 API 조합
+
+뽀모도로 예약 정보를 저장해 둘 task. 그런데 커스텀 훅과 컨텍스트 API를 함께 적용해야 할 것 같았다. 그런데 어떻게 해야 할지 잘 모르겠더라.
+
+이상해진
+Reservation.js
+```jsx
+  // -------------------- Schdule ----------------------
+  const testLogs = useContext(timeLogsContext); //<???
+  const [age, setAge] = useState(18); // for test. must be deleted.
+
+  const initialTasks = useContext(tasksContext);
+  const [tasks, addTask] = useTasks(initialTasks); // {taskName: "샘플 테스크", category: "샘플 카테고리", date: "샘플 데이트", time: "샘플 타임"},
+
+  console.log(tasks);
+  //const [task, setTask] = useState({});
+
+  const onAddTask = () => {
+    addTask({
+      taskName: { taskName },
+      category: { selectedCategory },
+      date: { date },
+      time: { time },
+    });
+    resetInput();
+    resetOption();
+  };
+
+  return (
+    <div className="flex content-center">
+      <div className="mainContainer ">
+        {/* 하단의 input들을 컴포넌트로 만들어야 할까? */}
+        <input
+          className="border border-yellow-400 mb-2 bg-yellow-50"
+          name="taskName"
+          placeholder="Task Name"
+          value={taskName}
+          onChange={onChangeInput}
+        />
+        <select
+          name="category"
+          value={selectedCategory}
+          onChange={onChangeOption}
+        >
+          {categoryOptions.map((option) => (
+            <option value={option.value} key={option.value}>
+              {option.text}
+            </option>
+          ))}
+        </select>
+        <input
+          className="border border-yellow-400  bg-yellow-50  mb-2"
+          name="date"
+          type="date"
+          id="startDate"
+          value={date}
+          onChange={onChangeInput}
+        />
+        <input
+          className="border border-yellow-400  bg-yellow-50  mb-2"
+          name="time"
+          type="time"
+          value={time}
+          onChange={onChangeInput}
+        />
+        <button className="button w-60" onClick={onAddTask}>
+          뽀모도로 예약
+        </button>
+        {testLogs.map((log) => log.id) /* must be deleted */}
+      </div>
+      <hr />
+      <Schedule age={age} />
+    </div>
+  );
+};
+```
+
+useTasks 훅 안에서 context를 접근해야 하나 싶었는데, 그것도 좀... 이상한 방법인 것 같다.
+
+useTasks.js
+```jsx
+import React, { useState } from "react";
+import { tasksContext } from "../../../_app";
+
+const useTasks = (initialTasks) => {
+  const [tasks, setTasks] = useState(initialTasks); // {taskName: "샘플 테스크", category: "샘플 카테고리", date: "샘플 데이트", time: "샘플 타임"},
+
+  //const tasks = useContext(tasksContext);
+
+  const addTask = (task) => {
+    setTasks([...tasks, task]);
+  };
+  return [tasks, addTask];
+};
+
+export default useTasks;
+```
+
+검색해 봐도 딱히 괜찮은 정보를 찾지는 못했다. 컨텍스트 API와 커스텀 훅에 대한 공부가 좀 부족해서 그런 거 아닐까 싶다.
+
+다시 기본으로 돌아가 봐야겠다.
+
+
+<hr />
+일) 운동<br>
+
+
+
+
+
