@@ -1,0 +1,84 @@
+---
+layout: post
+title:  "TIL) 뽀모 프로젝트 예약 기능 - 반복 일정을 위해 rrule"
+date:   2022-11-23 12:18:07 +0900
+categories: react
+---
+
+| (달성/목표) | 뽀모도리   |
+|----|--------|
+| 1일 | 5 / 5  |
+| 1주 | 17 /40 |
+
+
+### 반복되는 일정을 위한 rrule
+뽀모 프로젝트는 목표 뽀모도리 개수 대비 달성을 보여 주기 때문에 반복되는 일정을 저장해야 한다. 그래서 rrule을 사용한다. 다음은 rrule의 예제
+
+rrule.js
+```jsx
+import { RRule, RRuleSet, rrulestr } from "rrule";
+
+const TestingRrule = () => {
+  const rule = new RRule({
+    freq: RRule.WEEKLY,
+    byweekday: [RRule.MO, RRule.FR],
+    dtstart: new Date(2022, 10, 1, 10, 30),
+    until: new Date(),
+  });
+  const dates = rule.all();
+
+  console.log(dates);
+
+  return (
+    <div>
+      TestringRrule.js
+      {dates.map((date) => (
+        <span>{date.getUTCMonth()}</span>
+      ))}
+    </div>
+  );
+};
+
+export default TestingRrule;
+```
+
+
+### 타임로그 date 타입으로
+
+타임로그를 date 타입으로 변경했다.
+
+```jsx
+function getDateFormat(day) {
+  const days = ["일", "월", "화", "수", "목", "금", "토"];
+  return `(${days[day.getDay()]}) ${day.getFullYear().toString().slice(2, 4)}.
+    ${day.getMonth().toString().padStart(2, "0")}. 
+    ${day.getDate().toString().padStart(2, "0")}. 
+    ${day.getHours().toString().padStart(2, "0")} :
+    ${day.getMinutes().toString().padStart(2, "0")}`;
+}
+
+const TimeLog = ({ timeLog }) => {
+  // 여기서 useContext를 쓸 수도 있다.
+  return (
+    <div className="logContainer">
+      {getDateFormat(timeLog.start)} -{" "}
+      {timeLog.end && getDateFormat(timeLog.end)}
+    </div>
+  );
+};
+
+export default TimeLog;
+```
+
+
+
+<hr />
+수) 운동<br>
+
+* 덤벨컬 좌우 번갈아가며 5분간
+* 크로스 크런치 힘들 때까지 5세트
+* 
+
+
+
+
