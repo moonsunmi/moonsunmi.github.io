@@ -1,0 +1,73 @@
+---
+layout: post
+title:  "TIL) 뽀모 프로젝트 예약 기능 - useInput 커스텀훅 재점검"
+date:   2022-11-24 12:18:07 +0900
+categories: react
+---
+
+| (달성/목표) | 뽀모도리   |
+|----|--------|
+| 1일 | 3 / 3  |
+| 1주 | 20 /40 |
+
+
+### 이름 재점검
+
+오늘/이번주 뽀모도리 개수 등을 보여주는 부분을 'States'라고 했는데, 리액트에서 자주 나오는 상태와 표현이 같다. 헷갈릴 수 있으므로 report로 변경했다.
+
+
+### useInput 훅 재점검
+
+훅 안에 initialInput이 있는 게 이상해서... useInput 훅을 사용하는 쪽에서 initial 값을 넘겨 주게 하려고 했는데 오류가 나 버렸다.ㅠ 내일 고쳐야지...
+
+```jsx
+import React, { useCallback, useReducer, useState } from "react";
+import { PropTypes } from "prop-types";
+
+function inputReducer(state, action) {
+  switch (action.type) {
+    case "CHANGE": // type, name, value
+      return { ...state, [action.name]: action.value };
+    case "RESET":
+      return { ...action.initialInput };
+    default:
+      return new Error(`Not Handled Action Type ${action.type}`);
+  }
+}
+
+const useInputs = ({ initialInput }) => {
+  console.log(initialInput);
+  const [inputs, dispatch] = useReducer(inputReducer, initialInput);
+
+  const onChangeInput = useCallback((e) => {
+    const { name, value } = e.target;
+    dispatch({ type: "CHANGE", name, value });
+  }, []);
+
+  const resetInput = useCallback(() => {
+    dispatch({ type: "RESET" }, initialInput);
+  }, []);
+
+  console.log(inputs);
+  return [inputs, onChangeInput, resetInput];
+};
+
+useInputs.propTypes = {
+  initialState: PropTypes.shape({
+    taskName: PropTypes.string,
+    date: PropTypes.Date,
+  }),
+};
+
+export default useInputs;
+
+```
+
+
+<hr />
+목) 운동<br>
+
+* 허벅지 운동 20회 * 3세트
+
+
+
