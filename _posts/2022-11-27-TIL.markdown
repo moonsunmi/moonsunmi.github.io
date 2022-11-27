@@ -1,0 +1,73 @@
+---
+layout: post
+title:  "TIL) 재정비, styled-components"
+date:   2022-11-27 12:18:07 +0900
+categories: react
+---
+
+| (달성/목표) | 뽀모도리   |
+|----|--------|
+| 1일 | 4 / 8  |
+| 1주 | 38 /40 |
+
+
+
+### 방황의 시기
+
+어떤 작업을 해야 할지 모르겠는 상황이 되었다. 잠시 일시정지하고, 내가 뭘 원하는지부터 생각해 보기로.
+
+내가 원하는 형태의 결과물은 아마도 다음과 같다.
+```jsx
+{
+  taskName: "리액트 공부하기", // text
+  category: "공부",  // text
+  goalNumber: 8,  // number or text
+  repeat: ['월', '수'] // arrray(RRule)
+  startDate: 2022-11-28,  // Date(RRule)
+  stopDate: 2024-12-30,  // Date(RRule)
+}
+```
+
+repeat 부분은 사실, 저 정보만으로는 부족할 것 같다.
+
+reservation은 다음과 같이 저장하면 될 것 같고, 
+
+```jsx
+{
+  taskName: "리액트 공부하기", // text
+  category: "공부",  // text
+  goalNumber: 8,  // number or text
+  repeat: {freq: ... } // RRule
+}
+```
+
+
+매일의 기록이 필요하니, 다음과 같은 형태의 정보도 저장해 두어야 할 것 같다.
+
+```jsx
+{
+  date: 2022-12-15,
+  [{
+    taskName: "리액트 공부하기",
+    category: "공부",
+    goalNumber: 4,
+    doneNumber: 3,
+    },
+    {
+    taskName: "블로그 쓰기",
+    category: "블로그",
+    goalNumber: 3,
+    doneNumber: 3,
+    },
+  ]
+```
+
+
+화면 구성을 끝내지 않은 상태에서 프로그래밍을 하다 보니, 뭘 원하는지 그림이 구체적으로 안 나오는 것 같다.
+
+그래서 우선 화면부터 조금 더 만들어 두기로 했다. 지금까지는 tailwindcss를 썼는데, tailwindcss는 child에 대한 접근을 지원하지 않더라. 플러그인을 이용하면 되는 것 같은데, 조금 찜찜하다.
+
+tailwindcss는 편하긴 하지만, css를 공부까지 해야 하는 내 입장에서는 썩 적절하지 않은 것 같아서 쓰면서도 내내 "바꿔야 하나?" 하는 고민을 했다. 이 시점에서 바꿔야 할 것 같다.
+
+
+
