@@ -1,0 +1,54 @@
+---
+layout: post
+title:  "TIL) 모범 사례 react-trello-board 배워서 내 스타일 만들기"
+date:   2022-12-08 12:18:07 +0900
+categories: react
+---
+
+| (달성/목표) | 뽀모도리  |
+|----|-------|
+| 1일 | 3 / 3 |
+| 1주 | 7 /40 |
+
+
+
+### react-trello-board
+
+List처럼 여러 컴포넌트를 나열해서 보여주는 곳에서는 maring-bottom 값으로 여백을 추가해 주었다.
+
+input 스타일을 따로 만들어 주었다.
+
+```jsx
+import styled, { css } from "styled-components";
+import { lighten, darken } from "polished";
+
+const Input = styled.input`
+  border-radius: 0.5rem;
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 0.75rem;
+  ${(props) => {
+    const color = props.color ? props.theme[props.color] : props.theme.primary;
+    return css`
+      ::-webkit-input-placeholder {
+        /* Edge */
+        color: ${darken(0.1, color)};
+      }
+
+      :-ms-input-placeholder {
+        /* Internet Explorer 10-11 */
+        color: ${darken(0.1, color)};
+      }
+
+      ::placeholder {
+        color: ${darken(0.1, color)};
+      }
+      /*background: ${lighten(0.15, color)};*/
+    `;
+  }}
+`;
+
+export default Input;
+
+```
+
