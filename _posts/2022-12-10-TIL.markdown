@@ -1,0 +1,56 @@
+---
+layout: post
+title:  "TIL) 뻘짓 되돌리기.."
+date:   2022-12-10 12:18:07 +0900
+categories: react
+---
+
+| (달성/목표) | 뽀모도리   |
+|----|--------|
+| 1일 | 10 / 8 |
+| 1주 | 19 /40 |
+
+
+### trello에서의 버튼 처리
+
+IconButton 컴포넌트 안에, IconButton과 IconButton.ButtonContainer를 만들어 두었다. IconButton 컴포넌트는 iconType을 props로 받아서 타입에 맞는 아이콘을 보여준다.
+
+여백을 조정하기 위해 IconButton.ButtonContainer가 IconButton을 감싼다. IconButton.ButtonContainer는 상황에 맞게(보여 줄 버튼이 상황에 따라 달라지므로) 위치를 조정해 준다.
+
+
+
+### next.js => React.js
+
+클론 코딩을 할 때, next.js를 종종 써서 SSR의 장점이 있으니까~ 하면서 별생각 없이 선택했는데... 내 코드는 그냥 React.js와 다를 바가 없다.
+
+next.js를 써 본 적이 있냐고 하면, '네'라고 답할 수도 없다...; 꽤 오래 전부터 생각하고 있었지만 미루고 있던 작업이다. 첫 프로젝트를 헤매고 있기도 하니 이거부터 해 보기로.
+
+tailwindCSS를 styled-components로 바꾸는 작업도 이번 기회에 끝내려고 한다.
+
+모르는 상태로 혼자 하다 보니 별별 시행착오를 다 겪는다...
+
+그래도 좋은 점은 있다. 자잘하게 바뀌는 구석이 있으니 내가 짠 코드를 복습하게 됐다. 분명히 내가 짠 코드건만... 다시 보니 너무 새롭다. 익숙해지려면 시간이 많이 필요할 것 같다.
+
+
+### React-Router-Dom 복습
+
+* `<BrouserRouter>`: HTML 5를 지원하는 브라우저의 주소를 감지한다.
+* `<Routes>`: `<Route>`를 감싼다. 그리고 규칙에 해당하는 `<Route>`를 골라 그 컴포넌트만 렌더링하게 한다.
+* `<Route>`: URL과 컴포넌트를 연결시켜준다. path 속성에 경로, element 속성에 컴포넌트를 넣어 준다.
+
+```jsx
+<BrowserRouter>
+  <Header />
+  <Routes>
+    <Route path="/" element={<Excution />}></Route>
+    <Route path="/reservation" element={<Reservation />}></Route>
+    <Route path="/report" element={<Week />}></Route>
+  </Routes>
+</BrowserRouter>
+```
+
+뽀모 위클리의 메인 페이지는 뽀모도로 시작 화면이기 때문에 `Excution` 컴포넌트를 연결시켜 주었다.
+
+
+
+
