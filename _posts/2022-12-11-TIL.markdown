@@ -1,0 +1,75 @@
+---
+layout: post
+title:  "TIL) 내 코드 복습&리뉴얼 중"
+date:   2022-12-11 12:18:07 +0900
+categories: react
+---
+
+| (달성/목표) | 뽀모도리   |
+|----|--------|
+| 1일 | 9 / 8  |
+| 1주 | 28 /40 |
+
+
+### Context 조금 더 낫게 만들기
+
+Context에는 Provider라는 컴포넌트가 들어 있다. 컴포넌트 간에 공유하고자 하는 값을 value Prop로 설정하면 된다. 
+
+Context마다 파일을 따로 만들고 context 폴더 안에 넣어 주었다.
+
+TimeLogsContext.js
+```jsx
+import React, { useState } from "react";
+export const TimeLogsContext = React.createContext(null);
+
+const TimeLogsContextProvider = (props) => {
+  //const [timeLogs, setTimeLogs] = useState([
+  const timeLogsState = useState([{ id: 0, start: Date(), end: Date() }]); // timeLogs 값과, 함수를 배열로 담아서 전달한다.
+
+  return (
+    <TimeLogsContext.Provider value={timeLogsState}>
+      {props.children}
+    </TimeLogsContext.Provider>
+  );
+};
+
+export default TimeLogsContextProvider;
+```
+
+
+예전에는 Context로 값만 넘겨 주고, 함수는 props로 넘겨 주었다. (매우 이상한 형태)
+
+```jsx
+<timeLogsContext.Provider value={timeLogs}>
+  <tasksContext.Provider value={tasks}>
+    <ThemeProvider theme={theme}>
+      <Header />
+      <TestingRrule />
+
+      <Component
+        {...pageProps}
+        unitPomodori={unitPomodori}
+        setTimeLogs={setTimeLogs}
+      />
+    </ThemeProvider>
+  </tasksContext.Provider>
+</timeLogsContext.Provider>
+```
+
+그런데 유동적인 값을 가지는 context는 다음과 같이 value와 function을 배열로 함께 전달해 주면 되는 거였다.(Context를 커스텀 훅으로 만들었다.)
+
+```jsx
+const useTimeLogsState = () => {
+  const value = useContext(TimeLogsContext);
+```
+
+다음과 같이 간단하게 사용할 수 있다. value, function을 가지는 훅이라는 걸 알려주기 위해서 훅 이름에 -State를 붙였다.
+
+```jsx
+  const [timeLogs, setTimeLogs] = useTimeLogsState();
+```
+
+
+
+
+
