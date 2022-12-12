@@ -1,0 +1,59 @@
+---
+layout: post
+title:  "TIL) 내 코드 복습&리뉴얼 중"
+date:   2022-12-12 12:18:07 +0900
+categories: react
+---
+
+| (달성/목표) | 뽀모도리  |
+|----|-------|
+| 1일 | 4 / 5 |
+| 1주 | 4 /40 |
+
+
+### font awsome icon이 표시되지 않는 현상 수정
+
+다음과 같이 임포트하고, 원하는 아이콘을 누르면 나오는 코드(`<FontAwesomeIcon icon="fa-solid fa-bars" />`)를 적었더니 아이콘이 나타나지 않았다.
+
+```jsx
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+```
+
+다음과 같이 free-solid-svg-icons에서 아이콘마다 임포트를 한 후 값을 넣어 줘야 하더라.
+```jsx
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+...
+          <FontAwesomeIcon icon={faArrowLeft} />
+          <FontAwesomeIcon icon={faArrowRight} />          
+```
+
+### context와 커스텀 훅 한 파일에 합치기
+
+컨텍스트 따로, 커스텀 훅 따로 파일을 분리해 놨는데... 한꺼번에 넣어 두는 게 좋을 것 같다.
+
+1. 훅 안에 컨텍스트 코드 넣기
+2. 컨텍스트를 접근하는 코드가 있다면 위치 바꿔 주기
+
+
+
+### nextId도 컨텍스트 사용하여 커스텀훅으로 만들기
+
+```jsx
+import { createContext, useRef } from "react";
+
+export const nextLogIdContext = createContext(0);
+
+const NextLogIdContextProvider = (props) => {
+  const nextLogId = useRef(0);
+  return (
+    <nextLogIdContext.Provider value={nextLogId}>
+      {props.children}
+    </nextLogIdContext.Provider>
+  );
+};
+
+export default NextLogIdContextProvider;
+```
+
+
