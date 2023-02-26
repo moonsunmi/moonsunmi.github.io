@@ -1,0 +1,76 @@
+---
+layout: post
+title:  "TIL) <파이썬웹프로그래밍:실전편>을 DRF로 실습하기"
+date:   2023-02-27 12:18:07 +0900
+categories: django
+---
+
+
+### model에서 정의한 메서드값은 어떻게 가져오나?
+
+책에서 블로그 앱을 만드는데, ``Post`` 모델은 다음과 같다.
+
+
+```python
+class Post(models.Model):
+    title = models.CharField('TITLE', max_length=100)
+    slug = models.SlugField('SLUG', unique=True, allow_unicode=True, help_text='one word for title alias.')
+    description = models.CharField('DESCRIPTION', max_length=200, blank=True)
+    content = models.TextField('CONTENT')
+    create_dt = models.DateTimeField('CREATE DATE', auto_now_add=True)  # 최초에만 now가 add.
+    modify_dt = models.DateTimeField('MODIFY DATE', auto_now=True)  # 수정될 때마다 now가 변경되는 것
+
+    class Meta:
+        verbose_name = 'post'
+        verbose_name_plural = 'posts'
+        db_table = 'blog_posts'
+        ordering = ('-modify_dt',)
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('blog:detail', args=(self.slug,))
+
+```
+
+필드들은 시리얼라이저로 쉽게 변환할 수 있지만, `get_absoulte_url` 같은 메서드의 값은 어떻게 처리해야 할지 몰랐다.
+
+찾아 보니 다음과 같이 처리한다.
+
+URLField를 하나 만들고, `source` 매개변수에 인자로 `get_absolute_url` 메서드를 지정해 주면 된다.
+
+```python
+class PostDetailSerializer(serializers.ModelSerializer):
+    """블로그 앱 포스트 하나의 디테일 시리얼라이저"""
+    absolute_url = serializers.URLField(source='get_absolute_url', read_only=True)
+
+    class Meta:
+        model = Post
+        fields = ['id', 'title', 'slug', 'description', 'content',
+                  'modify_dt', 'create_dt', 'absolute_url']
+```
+
+
+### ArchiveView는 어떻게 처리하나?
+
+기존의 책에서는 아카이브를 다음과 같이 `django.views.generic.dates`의 [YearArchiveView](https://docs.djangoproject.com/en/4.1/ref/class-based-views/generic-date-based/)를 사용해서 작성했다.
+
+```python
+class PostYAV(YearArchiveView):
+    model = Post
+    date_field = 'modify_dt'
+```
+
+이와 같은 역할을 하는 restframework 뷰가 있는지 검색해 보니 나오지 않았다. filter를 이용하면 될 것 같다.
+
+```python
+class PostYearArchiveView(APIView):
+    """포스트 연(year) 단위 아카이브 뷰."""
+
+    def get(self, request, year):
+        posts = Post.objects.filter(modify_dt__year=year)
+        serializer = PostListSerializer(posts, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+```
+
