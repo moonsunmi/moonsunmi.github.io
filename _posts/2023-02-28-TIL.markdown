@@ -1,0 +1,59 @@
+---
+layout: post
+title:  "TIL) <파이썬웹프로그래밍:실전편>을 DRF로 실습하기 - taggit 이용"
+date:   2023-02-28 12:18:07 +0900
+categories: django
+---
+
+
+### Tags Search field에 추가하기
+
+태그를 적용하기 위해 [django-taggit](https://django-taggit.readthedocs.io/)을 이용하였다.
+모델에서는 `TaggableMnager`로 지정한다.
+
+
+```python
+class Post(models.Model):
+    title = models.CharField('TITLE', max_length=100)
+    slug = models.SlugField('SLUG', unique=True, allow_unicode=True, help_text='one word for title alias.')
+    description = models.CharField('DESCRIPTION', max_length=200, blank=True)
+    content = models.TextField('CONTENT')
+    create_dt = models.DateTimeField('CREATE DATE', auto_now_add=True)  # 최초에만 now가 add.
+    modify_dt = models.DateTimeField('MODIFY DATE', auto_now=True)  # 수정될 때마다 now가 변경되는 것
+    tags = TaggableManager(blank=True)
+```
+
+
+admin의 search_fields에 추가해 주고 싶다면 `tags__name`으로 해 줘야 한다.
+
+```python
+class BlogAdmin(admin.ModelAdmin):
+    list_display = ['id', 'title', 'modify_dt', 'tag_list', 'get_queryset']
+    list_filter = ['modify_dt']
+    search_fields = ['title', 'content', 'tags__name']  # TaggableManager에서 name으로 search_field 추가
+```
+
+시리얼라이저에서는 다음과 같이 써야 한다. `TaggitSerializer` 상속 받고, `TagListSerilizerField`로 지정
+
+```python
+class PostDetailSerializer(TaggitSerializer, serializers.ModelSerializer):
+    """블로그 앱 포스트 하나의 디테일 시리얼라이저"""
+    absolute_url = serializers.URLField(source='get_absolute_url', read_only=True)
+    tags = TagListSerializerField()
+
+    class Meta:
+        model = Post
+        fields = ['id', 'title', 'slug', 'description', 'content',
+                  'modify_dt', 'create_dt', 'absolute_url', 'tags']
+```
+
+여러 개의 태그는 다음과 같은 형태를 띔
+
+```json
+"tags": [
+    "name",
+    "putin",
+    "BTS"
+]
+```
+
