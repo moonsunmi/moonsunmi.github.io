@@ -1,0 +1,37 @@
+---
+layout: post
+title:  "TIL) select_related, prefetch_related"
+date:   2023-03-4 12:18:07 +0900
+categories: django
+---
+
+
+## 쿼리 수 줄이기
+
+어떤 정보가 필요할지 미리 알고 있다면, 데이터베이스를 여러 번 히팅할 게 아니라 한번에 불러오는 게 좋다. 
+
+다음과 같은 경우는 데이터 베이스를 두 번 히팅한다.
+
+```python
+e = Entry.objects.get(id=5)  # 한 번 히팅
+b = e.blog  # 참조하고 있는 blog를 가져오기 위해 또 히팅.
+```
+
+참조하고 있는 `blog`까지 한꺼번에 가져오면 데이터베이스를 한 번만 히팅하게 된다.
+
+이렇게 관련 있는 정보를 가져오기 위해 `select_related`와 `prefetch_related`를 사용할 수 있다.
+
+`Entry`가 `blog`를 정참조할 때, 다음과 같이 `select_related`를 사용한다. 
+
+```python
+e = Entry.objects.select_related('blog').get(id=5)  # 한 번 히팅
+b = e.blog  # selec_related로 한꺼번에 가져왔으므로 DB 히팅하지 않음
+```
+
+`Blog`가 `Entry` 역참조할 때, 다음과 같이 `prefetch_related`를 사용한다.
+
+```python
+b = Blog.objects.prefetch_related('entry').get(id=5)  # 한 번 히팅
+e = b.entity  # prefetch_related로 한꺼번에 가져왔으므로 DB 히팅하지 않음
+```
+
