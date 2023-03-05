@@ -1,0 +1,21 @@
+---
+layout: post
+title:  "TIL) Dictionary in Python vs. QueryDict in Django"
+date:   2023-03-05 12:18:07 +0900
+categories: django
+---
+
+### Dictionary in Python
+
+Dictionary는 key-value 쌍을 가지는, 파이썬의 기본 데이터 구조.
+key는 유니크한 값이어야 하고, 불변 객체여야 한다는 제한이 있지만, value에는 어떤 객체든 올 수 있다.
+
+
+### QueryDict in Django
+QueryDict는 장고에서 쓰이는 특별한 객체이다. `request.data`가 QueryDict형. key-value로 되어 있는 등 파이썬 dictionary와 비슷한 면이 많지만 몇 가지 차이점이 있다.
+
+1. dictionary에서는 같은 key에 다른 value를 넣을 수 없다. 더 정확하게 말하자면, 같은 key에 다른 value를 넣으면 기존의 value 값을 새 value가 덮어쓴다.<br>
+그러나 QueryDict는 같은 key에 할당된 여러 value를 전부 저장해 둘 수 있다. 리스트 형태로 저장해 둔다.
+2. QueryDict는 `get()`, `items()` 같은 dictionary 메서드를 사용할 수 있고, QueryDict 용 메서드를 추가적으로 사용할 수 있다. 예를 들어, 인코드된 데이터를 처리하기 위한 `urlencode()`, `urlencode_partial()` 같은 메서드들이다.
+3. QueryDict는 dictionary와 달리 불변 객체이다. 따라서 새로운 데이터가 추가될 수 없다.
+
