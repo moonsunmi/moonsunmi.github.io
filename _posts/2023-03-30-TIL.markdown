@@ -1,0 +1,48 @@
+### 문자열 Enum
+
+Enum은 고유한 상숫값에 연결된 기호 이름(멤버)의 집합이다. String의 Enum을 사용하고 싶다면 다음과 같은 장치를 사용하더라.
+
+
+```python
+from enum import Enum, auto
+
+class StrEnum(str, Enum):
+    def _generate_next_value_(name, start, count, last_values):
+        return name
+
+    def __repr__(self):
+        return self.value
+
+    def __str__(self):
+        return self.value
+
+
+class stringEnum(StrEnum):
+    HTML = 'HTML'
+```
+
+그런데 string 값을 반환하고 싶다면 다음처럼 `__str__`을 오버라이드하면 되지 않나 생각했다.
+
+
+```python
+class presentStringEnum(Enum):
+    HTML = 'HTML'
+    
+    def __str__(self):
+        return self.value
+```
+
+그렇지만 멤버의 `value`를 넘겨주는 것일 뿐, 실제 데이터의 타입이 `string`인 건 아니다. `StrEum` 클래스를 사용하면 멤버 자체의 타입이 `string`이 된다.
+
+```python
+def test():
+    print(presentStringEnum.HTML)                   # 출력: HTML
+    print(isinstance(presentStringEnum.HTML, str))  # 출력: False (실제로는 string 타입이 아니다)
+    print(presentStringEnum.HTML.value)                   # 출력: HTML
+    print(isinstance(presentStringEnum.HTML.value, str))  # 출력: True
+    
+    print(stringEnum.HTML)                   # 출력: HTML
+    print(isinstance(stringEnum.HTML, str))  # 출력: True (HTML 멤버의 타입 자체가 string)
+    
+test()
+```
