@@ -1,3 +1,10 @@
+---
+layout: post
+title:  "TIL) 문자열 Enum"
+date:   2023-03-30 12:18:07 +0900
+categories: Python
+---
+
 ### 문자열 Enum
 
 Enum은 고유한 상숫값에 연결된 기호 이름(멤버)의 집합이다. String의 Enum을 사용하고 싶다면 다음과 같은 장치를 사용하더라.
