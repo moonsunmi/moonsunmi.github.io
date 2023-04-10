@@ -1,0 +1,35 @@
+---
+layout: post
+title:  "TIL) postgresql permission denied for schema public"
+date:   2023-04-10 12:18:07 +0900
+categories: DB
+---
+
+postgresql의 user를 바꾸게 되었는데, 다음과 같은 에러가 발생했다.
+
+```
+django.db.migrations.exceptions.MigrationSchemaMissing: Unable to create the django_migrations table (permission denied for schema public
+LINE 1: CREATE TABLE "django_migrations" ("id" bigserial NOT NULL PR...
+```
+
+다음과 같은 명령어를 이용해 새로 만든 계정에 모든 privilege도 다 주었는데, 왜 안 되는 걸까 한참 찾았다.
+
+```
+GRANT ALL ON DATABASE mydb TO admin;
+```
+
+알고 보니, 소유자가 아니면 public 스키마의 데이터 베이스 생성이 안 된다고 한다.
+
+열심히 검색하다가 다음과 같은 문구를 발견했다.
+
+PostgreSQL 15 also revokes the CREATE permission from all users except a database owner from the public (or default) schema.
+
+소유자가 아닌 사용자에게는 CREATE 권한을 거부한다는 것이다.
+
+나는 superuser에서 새 계정과 새 데이터베이스를 만들었었다. 그래서 새 데이터베이스의 주인은 superuser였다. 그래서 다음과 같이 소유자를 바꾸어 주었다.
+
+```
+ALTER DATABASE mydb OWNER TO admin;
+```
+
+소유자를 사용하려는 계정으로 바꿔 주었더니 정상 작동했다!
