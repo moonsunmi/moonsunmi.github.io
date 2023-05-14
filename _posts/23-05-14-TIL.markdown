@@ -1,0 +1,28 @@
+---
+layout: post
+title:  "TIL) serializer fields 넣어줄 때 유의점"
+date:   2023-05-14 12:18:07 +0900
+categories: Django, REST framework
+---
+
+모델의 정의와 밀접한 관련이 있는 serializer를 만들 게 될 경우가 많다.
+
+모델에서 만든 필드를 전부 serializer로 만들고 싶다면 다음과 같이 `fields = ‘__all__’`을 지정해 주면 된다.
+
+```
+class AccountSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Account
+        fields = '__all__'
+```
+
+그런데 이걸 쓰는 게 좋지 않을 수도 있다. 나중에 모델의 필드가 변경될 수도 있는데, 공개되면 안 되는 필드가 추가되었어도 모르고 넘어가 버릴 수 있기 때문이다.
+
+다음과 같이 모든 필드를 그냥 나열해 주는 게 낫다.
+
+```
+class AccountSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Account
+        fields = ['id', 'account_name', 'users', 'created']
+```
