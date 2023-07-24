@@ -45,6 +45,7 @@ def import_as_csv(self, request):
 그런데 보다시피, csv 파일을 업로드할 페이지(csv_form.html)를 따로 만들어야 한다. 
 
 ```django
+{% raw %}
 {% extends 'admin/base.html' %}
 
 {% block content %}
@@ -59,6 +60,7 @@ def import_as_csv(self, request):
     <br />
 
 {% endblock %}
+{% endraw %}
 ```
 
 (장고 template 정말 오랜만에 봄..)
