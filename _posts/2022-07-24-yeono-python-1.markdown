@@ -2,6 +2,7 @@
 layout: post
 title:  "연오의 파이썬 공부 1"
 date:   2022-07-24 16:50:00 +0900
+author: "moon sunmi"
 categories: yeono-python
 ---
 
