@@ -1,17 +1,42 @@
+# Site settings
 title: 주경야독학) 개발공부로그
 email: celebmoon@naver.com
 description: >- # this means to ignore newlines until "baseurl:"
   주경야독, 독학으로 웹 프로그래밍을 공부하고 있습니다.
-baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://moonsunmi.github.io" # the base hostname & protocol for your site, e.g. http://example.com
-# twitter_username: jekyllrb
-github_username:  moonsunmi
+
+# Google Analytics
+google_analytics: UA—XXXXXXXX-X
+
+# Author
+author:
+  name:         Sunmi Moon
+  url:          https://moonsunmi.github.io
+  email:        celebmoon@naver.com
+
 # Build settings
-theme: minima
+markdown:       kramdown
+include:
+  - _pages
+
+# Assets
+sass:
+  sass_dir:     _sass
+  style:        compressed
+
+# Gems
 plugins:
   - jekyll-feed
-# I added.
-encoding: UTF-8
-url: moonsunmi.github.io
+  - jekyll-paginate
+  - jekyll-seo-tag
+  # - jemoji #Uncomment this to allow emoji in your post
 
-future: true
+# Permalinks
+permalink:      /:year-:month-:day/:title
+paginate:       5
+
+# Excludes
+exclude: [ Gemfile, Gemfile.lock, tale.gemspec ]
+
+# Disqus (Set to your disqus id)
+disqus:         jekyll-tale
