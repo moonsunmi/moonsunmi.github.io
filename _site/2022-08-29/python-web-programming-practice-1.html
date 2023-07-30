@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>파이썬 웹 프로그래밍 실전편 공부 1(13장) | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="파이썬 웹 프로그래밍 실전편 공부 1(13장)" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="13장 Model" />
+<meta property="og:description" content="13장 Model" />
+<link rel="canonical" href="http://localhost:4000/2022-08-29/python-web-programming-practice-1" />
+<meta property="og:url" content="http://localhost:4000/2022-08-29/python-web-programming-practice-1" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-08-29T22:45:13+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="파이썬 웹 프로그래밍 실전편 공부 1(13장)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-08-29T22:45:13+09:00","datePublished":"2022-08-29T22:45:13+09:00","description":"13장 Model","headline":"파이썬 웹 프로그래밍 실전편 공부 1(13장)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-08-29/python-web-programming-practice-1"},"url":"http://localhost:4000/2022-08-29/python-web-programming-practice-1"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Sunmi Moon
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2022-08-29 22:45:13 +0900">August 29, 2022</time>
+    
+  </div>
+
+  <h1 class="post-title">파이썬 웹 프로그래밍 실전편 공부 1(13장)</h1>
+  <div class="post-line"></div>
+
+  <h1 id="13장-model">13장 Model</h1>
+
+<h2 id="모델-정의">모델 정의</h2>
+
+<p>models.py 파일에는 테이블을 정의하는 것이 기본.
+ORM 방식에서는 관련 변수 메소드를 추가적으로 정의할 수 있는 장점이 있다.</p>
+
+<p>테이블의 컬럼(장고에서는 테이블의 필드 또는 모델 필드라고 함)은 모델 클래스의 속성으로 정의, 테이블과 관련된 함수는 모델 클래스의 메소드로 정의</p>
+
+<h3 id="모델-속성">모델 속성</h3>
+
+<p>필드를 정의하려면 다음처럼.</p>
+
+<p>descript = models.CharField(max_length=10)</p>
+
+<ul>
+  <li>필드명: <code class="language-plaintext highlighter-rouge">descript</code></li>
+  <li>필드 타입: <code class="language-plaintext highlighter-rouge">models.CharField</code></li>
+  <li>필드 옵션: <code class="language-plaintext highlighter-rouge">max_length=10</code>(<code class="language-plaintext highlighter-rouge">CharField</code> 타입에서 <code class="language-plaintext highlighter-rouge">max_length</code>는 필수)</li>
+</ul>
+
+<h4 id="필드-타입의-역할">필드 타입의 역할</h4>
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">descript</code> 컬럼의 타입을 지정한다. <code class="language-plaintext highlighter-rouge">CharField</code>는 <code class="language-plaintext highlighter-rouge">VARCHAR</code> 타입으로 반환된다.</li>
+  <li>폼으로 렌더링되는 경우, HTML 위젯을 지정한다. <code class="language-plaintext highlighter-rouge">&lt;input type="text"&gt;</code> 태그로</li>
+  <li>필드 또는 폼에 대한 유효성 검사 시 최소 기준이 된다.</li>
+</ol>
+
+<blockquote>
+  <p>장고의 커스텀 필드 타입을 정의할 수도 있다. (장고 사이트 참고)</p>
+</blockquote>
+
+<h3 id="모델-메서드">모델 메서드</h3>
+
+<p>장고에서는 객체 메서드만 사용한다. 즉, 모델 클래스에 정의하는 메서드는 모두 객체 메서드이며, 항상 <code class="language-plaintext highlighter-rouge">self</code> 인자를 가진다.</p>
+
+<p>그러므로 레코드의 총 개수를 반환하는 것처럼, 테이블 레벨의 동작은 별도의 Manager 클래스를 정의해서 사용한다.</p>
+
+<blockquote>
+  <p><code class="language-plaintext highlighter-rouge">__str__()</code>는 항상 정의해 주는 게 좋다.</p>
+</blockquote>
+
+<p><code class="language-plaintext highlighter-rouge">get_absolute_url()</code>: 자신이 정의된 객체를 지칭하는 URL을 반환. URLconf에서 DetailView 제네릭 뷰를 사용하는 경우가 좋은 예.</p>
+
+<h3 id="meta-내부-클래스-속성">Meta 내부 클래스 속성</h3>
+
+<p>모델 클래스 필드는 아니지만, 모델 클래스에 필요하긴 한 항목을 Meta 내부 클래스에 정의한다.
+(필드 속성과 그 외 속성을 따로 관리)</p>
+
+<h4 id="ordering">ordering</h4>
+<p>데이터베이스에서 가져온 데이터를 정렬해서 출력한다. 데이터베이스에 저장하는 순서가 아님.
+<code class="language-plaintext highlighter-rouge">ordering = ['-pub_date', 'author']</code>
+날짜 내림차순 정렬 후 저자 오름차순 정렬 순서</p>
+
+<h4 id="db_table">db_table</h4>
+<p>테이블 이름 지정. 지정하지 않으면 디폴트로 앱명_클래스명(소문자)로 지정된다.</p>
+
+<h4 id="verbose_name">verbose_name</h4>
+<p>모델 객체의 별칭.</p>
+
+<h3 id="manage-속성">Manage 속성</h3>
+
+<p>모든 모델은 반드시 Manager 속성을 가진다. 디폴트 이름은 objects.</p>
+
+<p>Manager 속성은 모델 클래스를 통해서만 액세스할 수 있다.(모델 객체를 통해서 불가)</p>
+
+<p>QuerySet 객체를 반환하는 동작처럼 테이블 레벨에서의 기능은 Manager 클래스의 메서드로 이루어진다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Album.objects.all()</code></p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Album</code>: 모델 클래스(모델 객체 아님)</li>
+  <li><code class="language-plaintext highlighter-rouge">objects</code>: Manager 속성명</li>
+  <li><code class="language-plaintext highlighter-rouge">all()</code>: Manager 클래스의 메서드</li>
+</ul>
+
+<p>모델 클래스에서 Manager 속성은 여러 개 정의할 수 있다.</p>
+
+<h2 id="모델-간-관계">모델 간 관계</h2>
+
+<p>관계가 맺어진 양쪽 모두의 모델에서 정의가 필요한 것이 원칙이지만, 한쪽에서 관계를 정의했다면 상대편은 자동으로 정의를 해준다.</p>
+
+<h3 id="1n-관계">1:N 관계</h3>
+<p>N 모델에서 ForeignKey 필드를 정의하면서, 필수 인자로 1 모델을 지정한다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Owner</span><span class="p">(</span><span class="n">models</span><span class="p">.</span><span class="n">Model</span><span class="p">):</span>
+
+<span class="k">class</span> <span class="nc">Album</span><span class="p">(</span><span class="n">models</span><span class="p">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">owner</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">ForeignKey</span><span class="p">(</span><span class="s">'auth.User'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="nn-관계">N:N 관계</h3>
+<p>두 모델 중 어느 쪽에서 ManyToManyField를 정의해도 상관 없지만, 한쪽에만 정의해야 한다. 양쪽에 정의하면 안 된다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Album</span><span class="p">(</span><span class="n">models</span><span class="p">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="c1"># albums ManyToManyField 정의하지 않았음.
+</span>
+<span class="k">class</span> <span class="nc">Publication</span><span class="p">(</span><span class="n">models</span><span class="p">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">albums</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">ManyToManyField</span><span class="p">(</span><span class="n">Album</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<h3 id="11-관계">1:1 관계</h3>
+<p>OneToOneField 필드 타입도 관계를 맺고자 하는 모델 클래스를 필수 인자로 지정한다. OneToOneField 필드 타입은 ForeignKey 필드에 unique=True 옵션을 준 것과 유사하다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">place</span><span class="p">(</span><span class="n">models</span><span class="p">.</span><span class="n">Model</span><span class="p">):</span>
+    
+    
+<span class="k">class</span> <span class="nc">restaurant</span><span class="p">(</span><span class="n">models</span><span class="p">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">place</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">OneToOneField</span><span class="p">(</span><span class="n">Place</span><span class="p">,</span> <span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="p">.</span><span class="n">CASCADE</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/2022-08-30/python-web-programming-practice-2" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/2022-08-28/jump-to-django-11" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-07-30 14:29:33 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

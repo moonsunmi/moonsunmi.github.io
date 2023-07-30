@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>파이썬 웹 프로그래밍 공부 2 | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="파이썬 웹 프로그래밍 공부 2" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="요청 헤더를 지정해서 보내고 싶다면 ulr 인자에 Request 객체를 지정한다. from urllib.request import urlopen, Request from urllib.parse import urlencode url = &#39;http://127.0.0.1:8000&#39; data = { &#39;name&#39;: &#39;김석훈&#39;, &#39;email&#39;: &#39;shkim@naver.com&#39;, &#39;url&#39;: &#39;http://www.naver.com&#39;, } encData = urlencode(data) postData = bytes(encData, encoding=&#39;utf-8&#39;) req = Request(url, data=postData) req.add_header(&#39;Content-Type&#39;, &#39;application/x-www-form-urlencoded&#39;) f = urlopen(req) print(f.info()) print(f.read(500).decode(&#39;utf-8&#39;)) 인증 데이터, 쿠키 데이터를 추가하여 요청을 보내는 등 HTTP의 고급 기능을 포함하여 요청을 보낼 수도 있다. 핸들러 객체를 정의하면 됨. from urllib.request import HTTPBasicAuthHandler, build_opener auth_handler = HTTPBasicAuthHandler() auth_handler.add_password(realm=&#39;ksh&#39;, user=&#39;shkim&#39;, passwd=&#39;shkimadmin&#39;, uri=&#39;http://127.0.0.1:8000/auth/&#39;) opener = build_opener(auth_handler) resp = opener.open(&#39;http://127.0.0.1:8000/auth/&#39;) print(resp.read().decode(&#39;utf-8&#39;)) 쿠키 데이터를 처리하는 프로그램: from urllib.request import Request, HTTPCookieProcessor, build_opener # 쿠키를 담기 위한 준비를 하고, 서버로 요청을 보낸다. url = &#39;http://127.0.0.1:8000/cookie/&#39; cookie_handler = HTTPCookieProcessor() opener = build_opener(cookie_handler) req = Request(url) res = opener.open(req) print(res.info()) print(res.read().decode(&#39;utf-8&#39;)) print(&quot;--------&quot;) # 첫 번째 응답에서 받은 쿠키를 헤더에 담아서 요청을 보낸다. data = &quot;language=python&amp;framework=django&quot; encData = bytes(data, encoding=&#39;utf-8&#39;) req = Request(url, encData) res = opener.open(req) print(res.info()) print(res.read().decode(&#39;utf-8&#39;)) 프록시 서버를 통과해서 웹 서버로 요청 보내기 import urllib.request url = &#39;http://www.example.com&#39; proxyServer = &#39;http://www.proxy.com:3128/&#39; # 프록시 서버를 통해 웹 서버로 요청을 보냄 proxy_handler = urllib.request.ProxyHandler({&#39;http&#39;: proxyServer}) # 프록시 서버 설정을 무시하고 웹 서버로 요청을 보낸다. proxy_handler = urllib.request.ProxyHandler({}) proxy_auth_handler = urllib.request.ProxyBasicAuthHandler() proxy_auth_handler.add_password(&#39;realm&#39;, &#39;host&#39;, &#39;username&#39;, &#39;password&#39;) opener = urllib.request.build_opener(proxy_handler, proxy_auth_handler) urllib.request.install_opener(opener) f = urllib.request.urlopen(url) print(&quot;geturl():&quot;, f.geturl()) print(f.read().decode(&#39;utf-8&#39;)) urllib.request 구글 메인 화면의 이미지 가져오는 예제. 공부하면서 기록할 만한 내용은 주석으로 달았다. parse_image.py from urllib.request import urlopen from html.parser import HTMLParser class ImageParser(HTMLParser): def handle_starttag(self, tag, attrs): if tag != &#39;img&#39;: return if not hasattr(self, &#39;result&#39;): self.result = [] for name, value in attrs: if name == &#39;src&#39;: self.result.append(value) def parse_image(data): parser = ImageParser() parser.feed(data) # HTML 문장을 feed() 함수에 주면 파싱하여 parser.result 리스트에 추가해줌. data_set = set(x for x in parser.result) # 파싱 결과를 중복 없이 받는다. return sorted(data_set) # 책에서는 main에서 data_set을 sort해 주는데, 여기에서 해 주는 것도 괜찮을 거 같아서 바꿈. def main(): url = &quot;http://www.google.co.kr&quot; with urlopen(url) as f: # 사이트에서 가져오는 데이터는 인코딩된 상태이므로, 인코딩 방식을 알아내어 그 방식으로 인코딩해 줍니다. charset = f.info().get_param(&#39;charset&#39;) data = f.read().decode(charset) data_set = parse_image(data) print(&#39;\n&gt;&gt;&gt;&gt;&gt;&gt;&gt; Fetch Images from&#39;, url) print(&#39;\n&#39;.join(data_set)) if __name__ == &#39;__main__&#39;: main() 같은 코드를 외부 라이브러리인 requests와 beautifulsoup4로 작성한 것(부록 A) import requests from bs4 import BeautifulSoup def parse_image(data): soup = BeautifulSoup(data, &#39;html.parser&#39;) img_tag_list = soup.find_all(&#39;img&#39;) data_set = set(x.attrs[&#39;src&#39;] for x in img_tag_list) return sorted(data_set) def main(): url = &#39;http://www.google.co.kr&#39; res = requests.get(url) charset = res.encoding data = res.content.decode(charset) data_set = parse_image(data) print(&#39;\n&gt;&gt;&gt;&gt;&gt;&gt;&gt; Fetch Images from&#39;, url) print(&#39;\n&#39;.join(data_set)) if __name__ == &#39;__main__&#39;: main() http.client 모듈 urllib.request 모듈로는 쉽게 처리할 수 없는 경우, HTTP 프로토콜 요청에 대한 저수준의 세밀한 기능이 필요한 경우 사용. 연결 객체 생성 요청을 보냄 응답 객체 생성 응답 데이터 읽음 연결 닫음 http.client GET 방식으로 from http.client import HTTPConnection host = &#39;www.example.com&#39; # http:// 붙이면 오류가 발생한다. conn = HTTPConnection(host) conn.request(&#39;GET&#39;, &#39;/&#39;) r1 = conn.getresponse() print(r1.status, r1.reason) data1 = r1.read() data1 = r1.read(100) conn.request(&#39;GET&#39;, &#39;/&#39;) r2 = conn.getresponse() print(r2.status, r2.reason) data2 = r2.read() print(data2.decode()) conn.close() http.client HEAD 방식으로 from http.client import HTTPConnection conn = HTTPConnection(&#39;www.example.com&#39;) conn.request(&#39;HEAD&#39;, &#39;/&#39;) resp = conn.getresponse() print(resp.status, resp.reason) data = resp.read() print(len(data)) print(data == b&#39;&#39;) http.client 모듈을 사용하여 POST 메서드로 요청 보내기 from http.client import HTTPConnection from urllib.parse import urlencode host = &#39;127.0.0.1:8000&#39; params = urlencode({ &#39;language&#39;: &#39;python&#39;, &#39;name&#39;: &#39;김석훈&#39;, &#39;email&#39;: &#39;shkim@naver.com&#39;, }) headers = { &#39;Content-Type&#39;: &#39;application/x-www-form-urlencoded&#39;, &#39;Accept&#39;: &#39;text/plain&#39; } conn = HTTPConnection(host) conn.request(&#39;POST&#39;, &#39;&#39;, params, headers) resp = conn.getresponse() print(resp.status, resp.reason) data = resp.read() print(data.decode(&#39;utf-8&#39;)) conn.close() http.client 모듈 사용하여 PUT 메서드로 요청 보내기 from http.client import HTTPConnection from urllib.parse import urlencode host = &#39;127.0.0.1:8000&#39; params = urlencode({ &#39;language&#39;: &#39;python&#39;, &#39;name&#39;: &#39;김석훈&#39;, &#39;email&#39;: &#39;shkim@naver.com&#39;, }) headers = { &#39;Content-Type&#39;: &#39;application/x-www-form-urlencoded&#39;, &#39;Accept&#39;: &#39;text/pain&#39;, } conn = HTTPConnection(host) conn.request(&#39;PUT&#39;, &#39;&#39;, params, headers) resp = conn.getresponse() print(resp.status, resp.reason) data = resp.read() print(data.decode(&#39;utf-8&#39;)) conn.close() http.client 모듈을 이용한 이미지 다운로드하는 코드 import os.path from http.client import HTTPConnection from urllib.parse import urljoin, urlunparse from urllib.request import urlretrieve from html.parser import HTMLParser class ImageParser(HTMLParser): &quot;&quot;&quot;img 태그를 파서하는 듯?&quot;&quot;&quot; def handle_starttag(self, tag: str, attrs): if tag != &#39;img&#39;: return if not hasattr(self, &#39;result&#39;): self.result = [] for name, value in attrs: if name == &#39;src&#39;: self.result.append(value) def download_image(url, data): &quot;&quot;&quot;HTML 문장이 주어지면 ImageParser 클래스를 이용해서 이미지를 찾고, 그 이미지들을 DOWNLOAD 디렉토리에 다운로드한다.&quot;&quot;&quot; if not os.path.exists(&#39;DOWNLOAD&#39;): os.makedirs(&#39;DOWNLOAD&#39;) parser = ImageParser() parser.feed(data) #parser.result에 결과 넣어줌 dataSet = set(x for x in parser.result) for x in sorted(dataSet): imageUrl = urljoin(url, x) # url과 타깃 파일명 지정함. basename = os.path.basename(imageUrl) targetFile = os.path.join(&#39;DOWNLOAD&#39;, basename) print(&#39;Downloading...&#39;, imageUrl) urlretrieve(imageUrl, targetFile) # image 다운로드 함수. def main(): host = &#39;www.google.co.kr&#39; conn = HTTPConnection(host) conn.request(&#39;GET&#39;, &#39;&#39;) resp = conn.getresponse() charset = resp.msg.get_param(&#39;charset&#39;) data = resp.read().decode(charset) conn.close() print(&quot;\n&gt;&gt;&gt;&gt;&gt; Download Images from&quot;, host) url = urlunparse((&#39;http&#39;, host, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;)) download_image(url, data) if __name__ == &#39;__main__&#39;: main() http.client 모듈 예제 beautifulsoup으로 재작성(부록A) import requests import os from urllib.parse import urljoin from bs4 import BeautifulSoup def parse_image(data): soup = BeautifulSoup(data, &#39;html.parser&#39;) imgTagList = soup.find_all(&#39;img&#39;) dataSet = set(x.attrs[&#39;src&#39;] for x in imgTagList) return sorted(dataSet) def download_image(url, dataSet): if not os.path.exists(&#39;DOWNLOAD&#39;): os.makedirs(&#39;DOWNLOAD&#39;) for x in dataSet: imageUrl = urljoin(url, x) basename = os.path.basename(imageUrl) targetFile = os.path.join(&#39;DOWNLOAD&#39;, basename) print(&#39;Downloading...&#39;, imageUrl) res = requests.get(imageUrl) with open(targetFile, &#39;wb&#39;) as f: f.write(res.content) def main(): url = &quot;http://www.google.co.kr&quot; res = requests.get(url) charset = res.encoding data = res.content.decode(charset) dataSet = parse_image(data) print(&#39;\n&gt;&gt;&gt;&gt;&gt;&gt; Download Images from&#39;, url) download_image(url, dataSet) if __name__ == &#39;__main__&#39;: main() 웹 서버 라이브러리 웹 서버의 역할: http 통신에서 클라이언트의 요청을 받고 이를 처리하여 결과를 되돌려주는 것 간단하지만, 웹 서버를 만드는 가장 기본적인 방법을 따른 것 from http.server import HTTPServer, BaseHTTPRequestHandler class MyHandler(BaseHTTPRequestHandler): &quot;&quot;&quot;웹 클라이언트로부터 요청을 받고 &#39;Hello World&#39;라는 문장을 되돌려 주는 웹 서버&quot;&quot;&quot; def do_GET(self): self.send_response_only(200, &#39;OK&#39;) self.send_header(&#39;Content-Type&#39;, &#39;text/plain&#39;) self.end_headers() self.wfile.write(b&#39;Hello World&#39;) if __name__ == &#39;__main__&#39;: server = HTTPServer((&#39;&#39;, 8888), MyHandler) # HTTPServer 객체 생성(인자: 서버의 IP, PORT, 핸들러 클래스) print(&#39;Started WebServer on port 8888...&#39;) print(&#39;Press ^C to quit WebServer.&#39;) server.serve_forever() HTTPServer와 BaseHTTPRequestHandler가 기반이 되는 클래스. HTTP 프로토콜을 처리해 주는 기능이 있어서 이 클래스들을 상속받으면 관련 로직을 코딩하지 않아도 된다. CGI 웹 서버용 CGI 스크립트 import cgi form = cgi.FieldStorage() # FieldStorage 클래스의 인스턴스를 생성해야 한다. name = form.getvalue(&#39;name&#39;) # 그리고 그 인스턴스의 getvalue() 메서드를 호출해야 한다. email = form.getvalue(&#39;email&#39;) url = form.getvalue(&#39;url&#39;) print(&#39;Content-Type: text/plain&#39;) print() print(&#39;Welcome... CGI Scripts&#39;) print(&#39;name is&#39;, name) print(&#39;email is&#39;, email) print(&#39;url is&#39;, url) CGI 웹 서버 시험용 클라이언트 from urllib.request import urlopen from urllib.parse import urlencode url = &#39;http://127.0.0.1:8888/cgi-bin/script.py&#39; data = { &#39;name&#39;: &#39;김석훈&#39;, &#39;email&#39;: &#39;shkim@naver.com&#39;, &#39;url&#39;: &#39;http://www.naver.com&#39; } enc_data = urlencode(data) post_data = enc_data.encode(&#39;ascii&#39;) f = urlopen(url, post_data) print(f.read().decode(&#39;cp949&#39;)) xxxHTTPServer 모듈 간의 관계 모든 HTTP 웹 서버는 BaseHTTPServer 모듈의 HTTPServer 클래스를 사용하여 작성된다. 웹 서버에 사용되는 핸들러는 BaseHTTPServer 모듈의 BaseHTTPRequestHandler를 상속 받아 작성" />
+<meta property="og:description" content="요청 헤더를 지정해서 보내고 싶다면 ulr 인자에 Request 객체를 지정한다. from urllib.request import urlopen, Request from urllib.parse import urlencode url = &#39;http://127.0.0.1:8000&#39; data = { &#39;name&#39;: &#39;김석훈&#39;, &#39;email&#39;: &#39;shkim@naver.com&#39;, &#39;url&#39;: &#39;http://www.naver.com&#39;, } encData = urlencode(data) postData = bytes(encData, encoding=&#39;utf-8&#39;) req = Request(url, data=postData) req.add_header(&#39;Content-Type&#39;, &#39;application/x-www-form-urlencoded&#39;) f = urlopen(req) print(f.info()) print(f.read(500).decode(&#39;utf-8&#39;)) 인증 데이터, 쿠키 데이터를 추가하여 요청을 보내는 등 HTTP의 고급 기능을 포함하여 요청을 보낼 수도 있다. 핸들러 객체를 정의하면 됨. from urllib.request import HTTPBasicAuthHandler, build_opener auth_handler = HTTPBasicAuthHandler() auth_handler.add_password(realm=&#39;ksh&#39;, user=&#39;shkim&#39;, passwd=&#39;shkimadmin&#39;, uri=&#39;http://127.0.0.1:8000/auth/&#39;) opener = build_opener(auth_handler) resp = opener.open(&#39;http://127.0.0.1:8000/auth/&#39;) print(resp.read().decode(&#39;utf-8&#39;)) 쿠키 데이터를 처리하는 프로그램: from urllib.request import Request, HTTPCookieProcessor, build_opener # 쿠키를 담기 위한 준비를 하고, 서버로 요청을 보낸다. url = &#39;http://127.0.0.1:8000/cookie/&#39; cookie_handler = HTTPCookieProcessor() opener = build_opener(cookie_handler) req = Request(url) res = opener.open(req) print(res.info()) print(res.read().decode(&#39;utf-8&#39;)) print(&quot;--------&quot;) # 첫 번째 응답에서 받은 쿠키를 헤더에 담아서 요청을 보낸다. data = &quot;language=python&amp;framework=django&quot; encData = bytes(data, encoding=&#39;utf-8&#39;) req = Request(url, encData) res = opener.open(req) print(res.info()) print(res.read().decode(&#39;utf-8&#39;)) 프록시 서버를 통과해서 웹 서버로 요청 보내기 import urllib.request url = &#39;http://www.example.com&#39; proxyServer = &#39;http://www.proxy.com:3128/&#39; # 프록시 서버를 통해 웹 서버로 요청을 보냄 proxy_handler = urllib.request.ProxyHandler({&#39;http&#39;: proxyServer}) # 프록시 서버 설정을 무시하고 웹 서버로 요청을 보낸다. proxy_handler = urllib.request.ProxyHandler({}) proxy_auth_handler = urllib.request.ProxyBasicAuthHandler() proxy_auth_handler.add_password(&#39;realm&#39;, &#39;host&#39;, &#39;username&#39;, &#39;password&#39;) opener = urllib.request.build_opener(proxy_handler, proxy_auth_handler) urllib.request.install_opener(opener) f = urllib.request.urlopen(url) print(&quot;geturl():&quot;, f.geturl()) print(f.read().decode(&#39;utf-8&#39;)) urllib.request 구글 메인 화면의 이미지 가져오는 예제. 공부하면서 기록할 만한 내용은 주석으로 달았다. parse_image.py from urllib.request import urlopen from html.parser import HTMLParser class ImageParser(HTMLParser): def handle_starttag(self, tag, attrs): if tag != &#39;img&#39;: return if not hasattr(self, &#39;result&#39;): self.result = [] for name, value in attrs: if name == &#39;src&#39;: self.result.append(value) def parse_image(data): parser = ImageParser() parser.feed(data) # HTML 문장을 feed() 함수에 주면 파싱하여 parser.result 리스트에 추가해줌. data_set = set(x for x in parser.result) # 파싱 결과를 중복 없이 받는다. return sorted(data_set) # 책에서는 main에서 data_set을 sort해 주는데, 여기에서 해 주는 것도 괜찮을 거 같아서 바꿈. def main(): url = &quot;http://www.google.co.kr&quot; with urlopen(url) as f: # 사이트에서 가져오는 데이터는 인코딩된 상태이므로, 인코딩 방식을 알아내어 그 방식으로 인코딩해 줍니다. charset = f.info().get_param(&#39;charset&#39;) data = f.read().decode(charset) data_set = parse_image(data) print(&#39;\n&gt;&gt;&gt;&gt;&gt;&gt;&gt; Fetch Images from&#39;, url) print(&#39;\n&#39;.join(data_set)) if __name__ == &#39;__main__&#39;: main() 같은 코드를 외부 라이브러리인 requests와 beautifulsoup4로 작성한 것(부록 A) import requests from bs4 import BeautifulSoup def parse_image(data): soup = BeautifulSoup(data, &#39;html.parser&#39;) img_tag_list = soup.find_all(&#39;img&#39;) data_set = set(x.attrs[&#39;src&#39;] for x in img_tag_list) return sorted(data_set) def main(): url = &#39;http://www.google.co.kr&#39; res = requests.get(url) charset = res.encoding data = res.content.decode(charset) data_set = parse_image(data) print(&#39;\n&gt;&gt;&gt;&gt;&gt;&gt;&gt; Fetch Images from&#39;, url) print(&#39;\n&#39;.join(data_set)) if __name__ == &#39;__main__&#39;: main() http.client 모듈 urllib.request 모듈로는 쉽게 처리할 수 없는 경우, HTTP 프로토콜 요청에 대한 저수준의 세밀한 기능이 필요한 경우 사용. 연결 객체 생성 요청을 보냄 응답 객체 생성 응답 데이터 읽음 연결 닫음 http.client GET 방식으로 from http.client import HTTPConnection host = &#39;www.example.com&#39; # http:// 붙이면 오류가 발생한다. conn = HTTPConnection(host) conn.request(&#39;GET&#39;, &#39;/&#39;) r1 = conn.getresponse() print(r1.status, r1.reason) data1 = r1.read() data1 = r1.read(100) conn.request(&#39;GET&#39;, &#39;/&#39;) r2 = conn.getresponse() print(r2.status, r2.reason) data2 = r2.read() print(data2.decode()) conn.close() http.client HEAD 방식으로 from http.client import HTTPConnection conn = HTTPConnection(&#39;www.example.com&#39;) conn.request(&#39;HEAD&#39;, &#39;/&#39;) resp = conn.getresponse() print(resp.status, resp.reason) data = resp.read() print(len(data)) print(data == b&#39;&#39;) http.client 모듈을 사용하여 POST 메서드로 요청 보내기 from http.client import HTTPConnection from urllib.parse import urlencode host = &#39;127.0.0.1:8000&#39; params = urlencode({ &#39;language&#39;: &#39;python&#39;, &#39;name&#39;: &#39;김석훈&#39;, &#39;email&#39;: &#39;shkim@naver.com&#39;, }) headers = { &#39;Content-Type&#39;: &#39;application/x-www-form-urlencoded&#39;, &#39;Accept&#39;: &#39;text/plain&#39; } conn = HTTPConnection(host) conn.request(&#39;POST&#39;, &#39;&#39;, params, headers) resp = conn.getresponse() print(resp.status, resp.reason) data = resp.read() print(data.decode(&#39;utf-8&#39;)) conn.close() http.client 모듈 사용하여 PUT 메서드로 요청 보내기 from http.client import HTTPConnection from urllib.parse import urlencode host = &#39;127.0.0.1:8000&#39; params = urlencode({ &#39;language&#39;: &#39;python&#39;, &#39;name&#39;: &#39;김석훈&#39;, &#39;email&#39;: &#39;shkim@naver.com&#39;, }) headers = { &#39;Content-Type&#39;: &#39;application/x-www-form-urlencoded&#39;, &#39;Accept&#39;: &#39;text/pain&#39;, } conn = HTTPConnection(host) conn.request(&#39;PUT&#39;, &#39;&#39;, params, headers) resp = conn.getresponse() print(resp.status, resp.reason) data = resp.read() print(data.decode(&#39;utf-8&#39;)) conn.close() http.client 모듈을 이용한 이미지 다운로드하는 코드 import os.path from http.client import HTTPConnection from urllib.parse import urljoin, urlunparse from urllib.request import urlretrieve from html.parser import HTMLParser class ImageParser(HTMLParser): &quot;&quot;&quot;img 태그를 파서하는 듯?&quot;&quot;&quot; def handle_starttag(self, tag: str, attrs): if tag != &#39;img&#39;: return if not hasattr(self, &#39;result&#39;): self.result = [] for name, value in attrs: if name == &#39;src&#39;: self.result.append(value) def download_image(url, data): &quot;&quot;&quot;HTML 문장이 주어지면 ImageParser 클래스를 이용해서 이미지를 찾고, 그 이미지들을 DOWNLOAD 디렉토리에 다운로드한다.&quot;&quot;&quot; if not os.path.exists(&#39;DOWNLOAD&#39;): os.makedirs(&#39;DOWNLOAD&#39;) parser = ImageParser() parser.feed(data) #parser.result에 결과 넣어줌 dataSet = set(x for x in parser.result) for x in sorted(dataSet): imageUrl = urljoin(url, x) # url과 타깃 파일명 지정함. basename = os.path.basename(imageUrl) targetFile = os.path.join(&#39;DOWNLOAD&#39;, basename) print(&#39;Downloading...&#39;, imageUrl) urlretrieve(imageUrl, targetFile) # image 다운로드 함수. def main(): host = &#39;www.google.co.kr&#39; conn = HTTPConnection(host) conn.request(&#39;GET&#39;, &#39;&#39;) resp = conn.getresponse() charset = resp.msg.get_param(&#39;charset&#39;) data = resp.read().decode(charset) conn.close() print(&quot;\n&gt;&gt;&gt;&gt;&gt; Download Images from&quot;, host) url = urlunparse((&#39;http&#39;, host, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;)) download_image(url, data) if __name__ == &#39;__main__&#39;: main() http.client 모듈 예제 beautifulsoup으로 재작성(부록A) import requests import os from urllib.parse import urljoin from bs4 import BeautifulSoup def parse_image(data): soup = BeautifulSoup(data, &#39;html.parser&#39;) imgTagList = soup.find_all(&#39;img&#39;) dataSet = set(x.attrs[&#39;src&#39;] for x in imgTagList) return sorted(dataSet) def download_image(url, dataSet): if not os.path.exists(&#39;DOWNLOAD&#39;): os.makedirs(&#39;DOWNLOAD&#39;) for x in dataSet: imageUrl = urljoin(url, x) basename = os.path.basename(imageUrl) targetFile = os.path.join(&#39;DOWNLOAD&#39;, basename) print(&#39;Downloading...&#39;, imageUrl) res = requests.get(imageUrl) with open(targetFile, &#39;wb&#39;) as f: f.write(res.content) def main(): url = &quot;http://www.google.co.kr&quot; res = requests.get(url) charset = res.encoding data = res.content.decode(charset) dataSet = parse_image(data) print(&#39;\n&gt;&gt;&gt;&gt;&gt;&gt; Download Images from&#39;, url) download_image(url, dataSet) if __name__ == &#39;__main__&#39;: main() 웹 서버 라이브러리 웹 서버의 역할: http 통신에서 클라이언트의 요청을 받고 이를 처리하여 결과를 되돌려주는 것 간단하지만, 웹 서버를 만드는 가장 기본적인 방법을 따른 것 from http.server import HTTPServer, BaseHTTPRequestHandler class MyHandler(BaseHTTPRequestHandler): &quot;&quot;&quot;웹 클라이언트로부터 요청을 받고 &#39;Hello World&#39;라는 문장을 되돌려 주는 웹 서버&quot;&quot;&quot; def do_GET(self): self.send_response_only(200, &#39;OK&#39;) self.send_header(&#39;Content-Type&#39;, &#39;text/plain&#39;) self.end_headers() self.wfile.write(b&#39;Hello World&#39;) if __name__ == &#39;__main__&#39;: server = HTTPServer((&#39;&#39;, 8888), MyHandler) # HTTPServer 객체 생성(인자: 서버의 IP, PORT, 핸들러 클래스) print(&#39;Started WebServer on port 8888...&#39;) print(&#39;Press ^C to quit WebServer.&#39;) server.serve_forever() HTTPServer와 BaseHTTPRequestHandler가 기반이 되는 클래스. HTTP 프로토콜을 처리해 주는 기능이 있어서 이 클래스들을 상속받으면 관련 로직을 코딩하지 않아도 된다. CGI 웹 서버용 CGI 스크립트 import cgi form = cgi.FieldStorage() # FieldStorage 클래스의 인스턴스를 생성해야 한다. name = form.getvalue(&#39;name&#39;) # 그리고 그 인스턴스의 getvalue() 메서드를 호출해야 한다. email = form.getvalue(&#39;email&#39;) url = form.getvalue(&#39;url&#39;) print(&#39;Content-Type: text/plain&#39;) print() print(&#39;Welcome... CGI Scripts&#39;) print(&#39;name is&#39;, name) print(&#39;email is&#39;, email) print(&#39;url is&#39;, url) CGI 웹 서버 시험용 클라이언트 from urllib.request import urlopen from urllib.parse import urlencode url = &#39;http://127.0.0.1:8888/cgi-bin/script.py&#39; data = { &#39;name&#39;: &#39;김석훈&#39;, &#39;email&#39;: &#39;shkim@naver.com&#39;, &#39;url&#39;: &#39;http://www.naver.com&#39; } enc_data = urlencode(data) post_data = enc_data.encode(&#39;ascii&#39;) f = urlopen(url, post_data) print(f.read().decode(&#39;cp949&#39;)) xxxHTTPServer 모듈 간의 관계 모든 HTTP 웹 서버는 BaseHTTPServer 모듈의 HTTPServer 클래스를 사용하여 작성된다. 웹 서버에 사용되는 핸들러는 BaseHTTPServer 모듈의 BaseHTTPRequestHandler를 상속 받아 작성" />
+<link rel="canonical" href="http://localhost:4000/2022-08-14/python-web-programming-2" />
+<meta property="og:url" content="http://localhost:4000/2022-08-14/python-web-programming-2" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-08-14T22:17:31+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="파이썬 웹 프로그래밍 공부 2" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-08-14T22:17:31+09:00","datePublished":"2022-08-14T22:17:31+09:00","description":"요청 헤더를 지정해서 보내고 싶다면 ulr 인자에 Request 객체를 지정한다. from urllib.request import urlopen, Request from urllib.parse import urlencode url = &#39;http://127.0.0.1:8000&#39; data = { &#39;name&#39;: &#39;김석훈&#39;, &#39;email&#39;: &#39;shkim@naver.com&#39;, &#39;url&#39;: &#39;http://www.naver.com&#39;, } encData = urlencode(data) postData = bytes(encData, encoding=&#39;utf-8&#39;) req = Request(url, data=postData) req.add_header(&#39;Content-Type&#39;, &#39;application/x-www-form-urlencoded&#39;) f = urlopen(req) print(f.info()) print(f.read(500).decode(&#39;utf-8&#39;)) 인증 데이터, 쿠키 데이터를 추가하여 요청을 보내는 등 HTTP의 고급 기능을 포함하여 요청을 보낼 수도 있다. 핸들러 객체를 정의하면 됨. from urllib.request import HTTPBasicAuthHandler, build_opener auth_handler = HTTPBasicAuthHandler() auth_handler.add_password(realm=&#39;ksh&#39;, user=&#39;shkim&#39;, passwd=&#39;shkimadmin&#39;, uri=&#39;http://127.0.0.1:8000/auth/&#39;) opener = build_opener(auth_handler) resp = opener.open(&#39;http://127.0.0.1:8000/auth/&#39;) print(resp.read().decode(&#39;utf-8&#39;)) 쿠키 데이터를 처리하는 프로그램: from urllib.request import Request, HTTPCookieProcessor, build_opener # 쿠키를 담기 위한 준비를 하고, 서버로 요청을 보낸다. url = &#39;http://127.0.0.1:8000/cookie/&#39; cookie_handler = HTTPCookieProcessor() opener = build_opener(cookie_handler) req = Request(url) res = opener.open(req) print(res.info()) print(res.read().decode(&#39;utf-8&#39;)) print(&quot;--------&quot;) # 첫 번째 응답에서 받은 쿠키를 헤더에 담아서 요청을 보낸다. data = &quot;language=python&amp;framework=django&quot; encData = bytes(data, encoding=&#39;utf-8&#39;) req = Request(url, encData) res = opener.open(req) print(res.info()) print(res.read().decode(&#39;utf-8&#39;)) 프록시 서버를 통과해서 웹 서버로 요청 보내기 import urllib.request url = &#39;http://www.example.com&#39; proxyServer = &#39;http://www.proxy.com:3128/&#39; # 프록시 서버를 통해 웹 서버로 요청을 보냄 proxy_handler = urllib.request.ProxyHandler({&#39;http&#39;: proxyServer}) # 프록시 서버 설정을 무시하고 웹 서버로 요청을 보낸다. proxy_handler = urllib.request.ProxyHandler({}) proxy_auth_handler = urllib.request.ProxyBasicAuthHandler() proxy_auth_handler.add_password(&#39;realm&#39;, &#39;host&#39;, &#39;username&#39;, &#39;password&#39;) opener = urllib.request.build_opener(proxy_handler, proxy_auth_handler) urllib.request.install_opener(opener) f = urllib.request.urlopen(url) print(&quot;geturl():&quot;, f.geturl()) print(f.read().decode(&#39;utf-8&#39;)) urllib.request 구글 메인 화면의 이미지 가져오는 예제. 공부하면서 기록할 만한 내용은 주석으로 달았다. parse_image.py from urllib.request import urlopen from html.parser import HTMLParser class ImageParser(HTMLParser): def handle_starttag(self, tag, attrs): if tag != &#39;img&#39;: return if not hasattr(self, &#39;result&#39;): self.result = [] for name, value in attrs: if name == &#39;src&#39;: self.result.append(value) def parse_image(data): parser = ImageParser() parser.feed(data) # HTML 문장을 feed() 함수에 주면 파싱하여 parser.result 리스트에 추가해줌. data_set = set(x for x in parser.result) # 파싱 결과를 중복 없이 받는다. return sorted(data_set) # 책에서는 main에서 data_set을 sort해 주는데, 여기에서 해 주는 것도 괜찮을 거 같아서 바꿈. def main(): url = &quot;http://www.google.co.kr&quot; with urlopen(url) as f: # 사이트에서 가져오는 데이터는 인코딩된 상태이므로, 인코딩 방식을 알아내어 그 방식으로 인코딩해 줍니다. charset = f.info().get_param(&#39;charset&#39;) data = f.read().decode(charset) data_set = parse_image(data) print(&#39;\\n&gt;&gt;&gt;&gt;&gt;&gt;&gt; Fetch Images from&#39;, url) print(&#39;\\n&#39;.join(data_set)) if __name__ == &#39;__main__&#39;: main() 같은 코드를 외부 라이브러리인 requests와 beautifulsoup4로 작성한 것(부록 A) import requests from bs4 import BeautifulSoup def parse_image(data): soup = BeautifulSoup(data, &#39;html.parser&#39;) img_tag_list = soup.find_all(&#39;img&#39;) data_set = set(x.attrs[&#39;src&#39;] for x in img_tag_list) return sorted(data_set) def main(): url = &#39;http://www.google.co.kr&#39; res = requests.get(url) charset = res.encoding data = res.content.decode(charset) data_set = parse_image(data) print(&#39;\\n&gt;&gt;&gt;&gt;&gt;&gt;&gt; Fetch Images from&#39;, url) print(&#39;\\n&#39;.join(data_set)) if __name__ == &#39;__main__&#39;: main() http.client 모듈 urllib.request 모듈로는 쉽게 처리할 수 없는 경우, HTTP 프로토콜 요청에 대한 저수준의 세밀한 기능이 필요한 경우 사용. 연결 객체 생성 요청을 보냄 응답 객체 생성 응답 데이터 읽음 연결 닫음 http.client GET 방식으로 from http.client import HTTPConnection host = &#39;www.example.com&#39; # http:// 붙이면 오류가 발생한다. conn = HTTPConnection(host) conn.request(&#39;GET&#39;, &#39;/&#39;) r1 = conn.getresponse() print(r1.status, r1.reason) data1 = r1.read() data1 = r1.read(100) conn.request(&#39;GET&#39;, &#39;/&#39;) r2 = conn.getresponse() print(r2.status, r2.reason) data2 = r2.read() print(data2.decode()) conn.close() http.client HEAD 방식으로 from http.client import HTTPConnection conn = HTTPConnection(&#39;www.example.com&#39;) conn.request(&#39;HEAD&#39;, &#39;/&#39;) resp = conn.getresponse() print(resp.status, resp.reason) data = resp.read() print(len(data)) print(data == b&#39;&#39;) http.client 모듈을 사용하여 POST 메서드로 요청 보내기 from http.client import HTTPConnection from urllib.parse import urlencode host = &#39;127.0.0.1:8000&#39; params = urlencode({ &#39;language&#39;: &#39;python&#39;, &#39;name&#39;: &#39;김석훈&#39;, &#39;email&#39;: &#39;shkim@naver.com&#39;, }) headers = { &#39;Content-Type&#39;: &#39;application/x-www-form-urlencoded&#39;, &#39;Accept&#39;: &#39;text/plain&#39; } conn = HTTPConnection(host) conn.request(&#39;POST&#39;, &#39;&#39;, params, headers) resp = conn.getresponse() print(resp.status, resp.reason) data = resp.read() print(data.decode(&#39;utf-8&#39;)) conn.close() http.client 모듈 사용하여 PUT 메서드로 요청 보내기 from http.client import HTTPConnection from urllib.parse import urlencode host = &#39;127.0.0.1:8000&#39; params = urlencode({ &#39;language&#39;: &#39;python&#39;, &#39;name&#39;: &#39;김석훈&#39;, &#39;email&#39;: &#39;shkim@naver.com&#39;, }) headers = { &#39;Content-Type&#39;: &#39;application/x-www-form-urlencoded&#39;, &#39;Accept&#39;: &#39;text/pain&#39;, } conn = HTTPConnection(host) conn.request(&#39;PUT&#39;, &#39;&#39;, params, headers) resp = conn.getresponse() print(resp.status, resp.reason) data = resp.read() print(data.decode(&#39;utf-8&#39;)) conn.close() http.client 모듈을 이용한 이미지 다운로드하는 코드 import os.path from http.client import HTTPConnection from urllib.parse import urljoin, urlunparse from urllib.request import urlretrieve from html.parser import HTMLParser class ImageParser(HTMLParser): &quot;&quot;&quot;img 태그를 파서하는 듯?&quot;&quot;&quot; def handle_starttag(self, tag: str, attrs): if tag != &#39;img&#39;: return if not hasattr(self, &#39;result&#39;): self.result = [] for name, value in attrs: if name == &#39;src&#39;: self.result.append(value) def download_image(url, data): &quot;&quot;&quot;HTML 문장이 주어지면 ImageParser 클래스를 이용해서 이미지를 찾고, 그 이미지들을 DOWNLOAD 디렉토리에 다운로드한다.&quot;&quot;&quot; if not os.path.exists(&#39;DOWNLOAD&#39;): os.makedirs(&#39;DOWNLOAD&#39;) parser = ImageParser() parser.feed(data) #parser.result에 결과 넣어줌 dataSet = set(x for x in parser.result) for x in sorted(dataSet): imageUrl = urljoin(url, x) # url과 타깃 파일명 지정함. basename = os.path.basename(imageUrl) targetFile = os.path.join(&#39;DOWNLOAD&#39;, basename) print(&#39;Downloading...&#39;, imageUrl) urlretrieve(imageUrl, targetFile) # image 다운로드 함수. def main(): host = &#39;www.google.co.kr&#39; conn = HTTPConnection(host) conn.request(&#39;GET&#39;, &#39;&#39;) resp = conn.getresponse() charset = resp.msg.get_param(&#39;charset&#39;) data = resp.read().decode(charset) conn.close() print(&quot;\\n&gt;&gt;&gt;&gt;&gt; Download Images from&quot;, host) url = urlunparse((&#39;http&#39;, host, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;)) download_image(url, data) if __name__ == &#39;__main__&#39;: main() http.client 모듈 예제 beautifulsoup으로 재작성(부록A) import requests import os from urllib.parse import urljoin from bs4 import BeautifulSoup def parse_image(data): soup = BeautifulSoup(data, &#39;html.parser&#39;) imgTagList = soup.find_all(&#39;img&#39;) dataSet = set(x.attrs[&#39;src&#39;] for x in imgTagList) return sorted(dataSet) def download_image(url, dataSet): if not os.path.exists(&#39;DOWNLOAD&#39;): os.makedirs(&#39;DOWNLOAD&#39;) for x in dataSet: imageUrl = urljoin(url, x) basename = os.path.basename(imageUrl) targetFile = os.path.join(&#39;DOWNLOAD&#39;, basename) print(&#39;Downloading...&#39;, imageUrl) res = requests.get(imageUrl) with open(targetFile, &#39;wb&#39;) as f: f.write(res.content) def main(): url = &quot;http://www.google.co.kr&quot; res = requests.get(url) charset = res.encoding data = res.content.decode(charset) dataSet = parse_image(data) print(&#39;\\n&gt;&gt;&gt;&gt;&gt;&gt; Download Images from&#39;, url) download_image(url, dataSet) if __name__ == &#39;__main__&#39;: main() 웹 서버 라이브러리 웹 서버의 역할: http 통신에서 클라이언트의 요청을 받고 이를 처리하여 결과를 되돌려주는 것 간단하지만, 웹 서버를 만드는 가장 기본적인 방법을 따른 것 from http.server import HTTPServer, BaseHTTPRequestHandler class MyHandler(BaseHTTPRequestHandler): &quot;&quot;&quot;웹 클라이언트로부터 요청을 받고 &#39;Hello World&#39;라는 문장을 되돌려 주는 웹 서버&quot;&quot;&quot; def do_GET(self): self.send_response_only(200, &#39;OK&#39;) self.send_header(&#39;Content-Type&#39;, &#39;text/plain&#39;) self.end_headers() self.wfile.write(b&#39;Hello World&#39;) if __name__ == &#39;__main__&#39;: server = HTTPServer((&#39;&#39;, 8888), MyHandler) # HTTPServer 객체 생성(인자: 서버의 IP, PORT, 핸들러 클래스) print(&#39;Started WebServer on port 8888...&#39;) print(&#39;Press ^C to quit WebServer.&#39;) server.serve_forever() HTTPServer와 BaseHTTPRequestHandler가 기반이 되는 클래스. HTTP 프로토콜을 처리해 주는 기능이 있어서 이 클래스들을 상속받으면 관련 로직을 코딩하지 않아도 된다. CGI 웹 서버용 CGI 스크립트 import cgi form = cgi.FieldStorage() # FieldStorage 클래스의 인스턴스를 생성해야 한다. name = form.getvalue(&#39;name&#39;) # 그리고 그 인스턴스의 getvalue() 메서드를 호출해야 한다. email = form.getvalue(&#39;email&#39;) url = form.getvalue(&#39;url&#39;) print(&#39;Content-Type: text/plain&#39;) print() print(&#39;Welcome... CGI Scripts&#39;) print(&#39;name is&#39;, name) print(&#39;email is&#39;, email) print(&#39;url is&#39;, url) CGI 웹 서버 시험용 클라이언트 from urllib.request import urlopen from urllib.parse import urlencode url = &#39;http://127.0.0.1:8888/cgi-bin/script.py&#39; data = { &#39;name&#39;: &#39;김석훈&#39;, &#39;email&#39;: &#39;shkim@naver.com&#39;, &#39;url&#39;: &#39;http://www.naver.com&#39; } enc_data = urlencode(data) post_data = enc_data.encode(&#39;ascii&#39;) f = urlopen(url, post_data) print(f.read().decode(&#39;cp949&#39;)) xxxHTTPServer 모듈 간의 관계 모든 HTTP 웹 서버는 BaseHTTPServer 모듈의 HTTPServer 클래스를 사용하여 작성된다. 웹 서버에 사용되는 핸들러는 BaseHTTPServer 모듈의 BaseHTTPRequestHandler를 상속 받아 작성","headline":"파이썬 웹 프로그래밍 공부 2","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-08-14/python-web-programming-2"},"url":"http://localhost:4000/2022-08-14/python-web-programming-2"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Sunmi Moon
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2022-08-14 22:17:31 +0900">August 14, 2022</time>
+    
+  </div>
+
+  <h1 class="post-title">파이썬 웹 프로그래밍 공부 2</h1>
+  <div class="post-line"></div>
+
+  <p>요청 헤더를 지정해서 보내고 싶다면 ulr 인자에 Request 객체를 지정한다.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span><span class="p">,</span> <span class="n">Request</span>
+<span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">urlencode</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">'http://127.0.0.1:8000'</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="s">'name'</span><span class="p">:</span> <span class="s">'김석훈'</span><span class="p">,</span>
+   <span class="s">'email'</span><span class="p">:</span> <span class="s">'shkim@naver.com'</span><span class="p">,</span>
+   <span class="s">'url'</span><span class="p">:</span> <span class="s">'http://www.naver.com'</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">encData</span> <span class="o">=</span> <span class="n">urlencode</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">postData</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">encData</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">'utf-8'</span><span class="p">)</span>
+<span class="n">req</span> <span class="o">=</span> <span class="n">Request</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">postData</span><span class="p">)</span>
+<span class="n">req</span><span class="p">.</span><span class="n">add_header</span><span class="p">(</span><span class="s">'Content-Type'</span><span class="p">,</span> <span class="s">'application/x-www-form-urlencoded'</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="n">info</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="mi">500</span><span class="p">).</span><span class="n">decode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>인증 데이터, 쿠키 데이터를 추가하여 요청을 보내는 등 HTTP의 고급 기능을 포함하여 요청을 보낼 수도 있다. 핸들러 객체를 정의하면 됨.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">HTTPBasicAuthHandler</span><span class="p">,</span> <span class="n">build_opener</span>
+
+<span class="n">auth_handler</span> <span class="o">=</span> <span class="n">HTTPBasicAuthHandler</span><span class="p">()</span>
+<span class="n">auth_handler</span><span class="p">.</span><span class="n">add_password</span><span class="p">(</span><span class="n">realm</span><span class="o">=</span><span class="s">'ksh'</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="s">'shkim'</span><span class="p">,</span> <span class="n">passwd</span><span class="o">=</span><span class="s">'shkimadmin'</span><span class="p">,</span> <span class="n">uri</span><span class="o">=</span><span class="s">'http://127.0.0.1:8000/auth/'</span><span class="p">)</span>
+<span class="n">opener</span> <span class="o">=</span> <span class="n">build_opener</span><span class="p">(</span><span class="n">auth_handler</span><span class="p">)</span>
+<span class="n">resp</span> <span class="o">=</span> <span class="n">opener</span><span class="p">.</span><span class="nb">open</span><span class="p">(</span><span class="s">'http://127.0.0.1:8000/auth/'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">resp</span><span class="p">.</span><span class="n">read</span><span class="p">().</span><span class="n">decode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>쿠키 데이터를 처리하는 프로그램:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">Request</span><span class="p">,</span> <span class="n">HTTPCookieProcessor</span><span class="p">,</span> <span class="n">build_opener</span>
+
+<span class="c1"># 쿠키를 담기 위한 준비를 하고, 서버로 요청을 보낸다.
+</span><span class="n">url</span> <span class="o">=</span> <span class="s">'http://127.0.0.1:8000/cookie/'</span>
+
+<span class="n">cookie_handler</span> <span class="o">=</span> <span class="n">HTTPCookieProcessor</span><span class="p">()</span>
+<span class="n">opener</span> <span class="o">=</span> <span class="n">build_opener</span><span class="p">(</span><span class="n">cookie_handler</span><span class="p">)</span>
+
+<span class="n">req</span> <span class="o">=</span> <span class="n">Request</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">opener</span><span class="p">.</span><span class="nb">open</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="n">info</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="n">read</span><span class="p">().</span><span class="n">decode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">))</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">"--------"</span><span class="p">)</span>
+
+<span class="c1"># 첫 번째 응답에서 받은 쿠키를 헤더에 담아서 요청을 보낸다.
+</span><span class="n">data</span> <span class="o">=</span> <span class="s">"language=python&amp;framework=django"</span>
+<span class="n">encData</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">'utf-8'</span><span class="p">)</span>
+
+<span class="n">req</span> <span class="o">=</span> <span class="n">Request</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">encData</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">opener</span><span class="p">.</span><span class="nb">open</span><span class="p">(</span><span class="n">req</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="n">info</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="n">read</span><span class="p">().</span><span class="n">decode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>프록시 서버를 통과해서 웹 서버로 요청 보내기</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">urllib.request</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">'http://www.example.com'</span>
+<span class="n">proxyServer</span> <span class="o">=</span> <span class="s">'http://www.proxy.com:3128/'</span>
+
+<span class="c1"># 프록시 서버를 통해 웹 서버로 요청을 보냄
+</span><span class="n">proxy_handler</span> <span class="o">=</span> <span class="n">urllib</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">ProxyHandler</span><span class="p">({</span><span class="s">'http'</span><span class="p">:</span> <span class="n">proxyServer</span><span class="p">})</span>
+
+<span class="c1"># 프록시 서버 설정을 무시하고 웹 서버로 요청을 보낸다.
+</span><span class="n">proxy_handler</span> <span class="o">=</span> <span class="n">urllib</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">ProxyHandler</span><span class="p">({})</span>
+
+<span class="n">proxy_auth_handler</span> <span class="o">=</span> <span class="n">urllib</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">ProxyBasicAuthHandler</span><span class="p">()</span>
+<span class="n">proxy_auth_handler</span><span class="p">.</span><span class="n">add_password</span><span class="p">(</span><span class="s">'realm'</span><span class="p">,</span> <span class="s">'host'</span><span class="p">,</span> <span class="s">'username'</span><span class="p">,</span> <span class="s">'password'</span><span class="p">)</span>
+
+<span class="n">opener</span> <span class="o">=</span> <span class="n">urllib</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">build_opener</span><span class="p">(</span><span class="n">proxy_handler</span><span class="p">,</span> <span class="n">proxy_auth_handler</span><span class="p">)</span>
+
+<span class="n">urllib</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">install_opener</span><span class="p">(</span><span class="n">opener</span><span class="p">)</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">urllib</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">"geturl():"</span><span class="p">,</span> <span class="n">f</span><span class="p">.</span><span class="n">geturl</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="n">read</span><span class="p">().</span><span class="n">decode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>urllib.request 구글 메인 화면의 이미지 가져오는 예제. 공부하면서 기록할 만한 내용은 주석으로 달았다.</p>
+
+<p>parse_image.py</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span>
+<span class="kn">from</span> <span class="nn">html.parser</span> <span class="kn">import</span> <span class="n">HTMLParser</span>
+
+<span class="k">class</span> <span class="nc">ImageParser</span><span class="p">(</span><span class="n">HTMLParser</span><span class="p">):</span>
+   <span class="k">def</span> <span class="nf">handle_starttag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tag</span><span class="p">,</span> <span class="n">attrs</span><span class="p">):</span>
+       <span class="k">if</span> <span class="n">tag</span> <span class="o">!=</span> <span class="s">'img'</span><span class="p">:</span>
+           <span class="k">return</span>
+       <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">'result'</span><span class="p">):</span>
+           <span class="bp">self</span><span class="p">.</span><span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+       <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">attrs</span><span class="p">:</span>
+           <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s">'src'</span><span class="p">:</span>
+               <span class="bp">self</span><span class="p">.</span><span class="n">result</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">parse_image</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+   <span class="n">parser</span> <span class="o">=</span> <span class="n">ImageParser</span><span class="p">()</span>
+   <span class="n">parser</span><span class="p">.</span><span class="n">feed</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>  <span class="c1"># HTML 문장을 feed() 함수에 주면 파싱하여 parser.result 리스트에 추가해줌.
+</span>   <span class="n">data_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">parser</span><span class="p">.</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># 파싱 결과를 중복 없이 받는다.
+</span>   <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data_set</span><span class="p">)</span>  <span class="c1"># 책에서는 main에서 data_set을 sort해 주는데, 여기에서 해 주는 것도 괜찮을 거 같아서 바꿈.
+</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+   <span class="n">url</span> <span class="o">=</span> <span class="s">"http://www.google.co.kr"</span>
+
+   <span class="k">with</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+       <span class="c1"># 사이트에서 가져오는 데이터는 인코딩된 상태이므로, 인코딩 방식을 알아내어 그 방식으로 인코딩해 줍니다.
+</span>       <span class="n">charset</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="n">info</span><span class="p">().</span><span class="n">get_param</span><span class="p">(</span><span class="s">'charset'</span><span class="p">)</span>
+       <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="p">.</span><span class="n">read</span><span class="p">().</span><span class="n">decode</span><span class="p">(</span><span class="n">charset</span><span class="p">)</span>
+
+   <span class="n">data_set</span> <span class="o">=</span> <span class="n">parse_image</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+   <span class="k">print</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">&gt;&gt;&gt;&gt;&gt;&gt;&gt; Fetch Images from'</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+   <span class="k">print</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_set</span><span class="p">))</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+   <span class="n">main</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>같은 코드를 외부 라이브러리인 requests와 beautifulsoup4로 작성한 것(부록 A)</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+
+
+<span class="k">def</span> <span class="nf">parse_image</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+   <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s">'html.parser'</span><span class="p">)</span>
+   <span class="n">img_tag_list</span> <span class="o">=</span> <span class="n">soup</span><span class="p">.</span><span class="n">find_all</span><span class="p">(</span><span class="s">'img'</span><span class="p">)</span>
+   <span class="n">data_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">attrs</span><span class="p">[</span><span class="s">'src'</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">img_tag_list</span><span class="p">)</span>
+   <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">data_set</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+   <span class="n">url</span> <span class="o">=</span> <span class="s">'http://www.google.co.kr'</span>
+  
+   <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+   <span class="n">charset</span> <span class="o">=</span> <span class="n">res</span><span class="p">.</span><span class="n">encoding</span>
+   <span class="n">data</span> <span class="o">=</span> <span class="n">res</span><span class="p">.</span><span class="n">content</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="n">charset</span><span class="p">)</span>
+  
+   <span class="n">data_set</span> <span class="o">=</span> <span class="n">parse_image</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+   <span class="k">print</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">&gt;&gt;&gt;&gt;&gt;&gt;&gt; Fetch Images from'</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+   <span class="k">print</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_set</span><span class="p">))</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+   <span class="n">main</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>http.client 모듈
+<code class="language-plaintext highlighter-rouge">urllib.request</code> 모듈로는 쉽게 처리할 수 없는 경우, HTTP 프로토콜 요청에 대한 저수준의 세밀한 기능이 필요한 경우 사용.</p>
+
+<ul>
+  <li>연결 객체 생성</li>
+  <li>요청을 보냄</li>
+  <li>응답 객체 생성</li>
+  <li>응답 데이터 읽음</li>
+  <li>연결 닫음</li>
+</ul>
+
+<p>http.client GET 방식으로</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">http.client</span> <span class="kn">import</span> <span class="n">HTTPConnection</span>
+
+<span class="n">host</span> <span class="o">=</span> <span class="s">'www.example.com'</span>  <span class="c1"># http:// 붙이면 오류가 발생한다.
+</span>
+<span class="n">conn</span> <span class="o">=</span> <span class="n">HTTPConnection</span><span class="p">(</span><span class="n">host</span><span class="p">)</span>
+<span class="n">conn</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">'GET'</span><span class="p">,</span> <span class="s">'/'</span><span class="p">)</span>
+<span class="n">r1</span> <span class="o">=</span> <span class="n">conn</span><span class="p">.</span><span class="n">getresponse</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">r1</span><span class="p">.</span><span class="n">status</span><span class="p">,</span> <span class="n">r1</span><span class="p">.</span><span class="n">reason</span><span class="p">)</span>
+
+
+<span class="n">data1</span> <span class="o">=</span> <span class="n">r1</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">data1</span> <span class="o">=</span> <span class="n">r1</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="n">conn</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">'GET'</span><span class="p">,</span> <span class="s">'/'</span><span class="p">)</span>
+<span class="n">r2</span> <span class="o">=</span> <span class="n">conn</span><span class="p">.</span><span class="n">getresponse</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">r2</span><span class="p">.</span><span class="n">status</span><span class="p">,</span> <span class="n">r2</span><span class="p">.</span><span class="n">reason</span><span class="p">)</span>
+
+<span class="n">data2</span> <span class="o">=</span> <span class="n">r2</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">data2</span><span class="p">.</span><span class="n">decode</span><span class="p">())</span>
+<span class="n">conn</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>http.client HEAD 방식으로</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">http.client</span> <span class="kn">import</span> <span class="n">HTTPConnection</span>
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">HTTPConnection</span><span class="p">(</span><span class="s">'www.example.com'</span><span class="p">)</span>
+<span class="n">conn</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">'HEAD'</span><span class="p">,</span> <span class="s">'/'</span><span class="p">)</span>
+<span class="n">resp</span> <span class="o">=</span> <span class="n">conn</span><span class="p">.</span><span class="n">getresponse</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">resp</span><span class="p">.</span><span class="n">status</span><span class="p">,</span> <span class="n">resp</span><span class="p">.</span><span class="n">reason</span><span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">resp</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">data</span> <span class="o">==</span> <span class="sa">b</span><span class="s">''</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>http.client 모듈을 사용하여 POST 메서드로 요청 보내기</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">http.client</span> <span class="kn">import</span> <span class="n">HTTPConnection</span>
+<span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">urlencode</span>
+
+<span class="n">host</span> <span class="o">=</span> <span class="s">'127.0.0.1:8000'</span>
+<span class="n">params</span> <span class="o">=</span> <span class="n">urlencode</span><span class="p">({</span>
+   <span class="s">'language'</span><span class="p">:</span> <span class="s">'python'</span><span class="p">,</span>
+   <span class="s">'name'</span><span class="p">:</span> <span class="s">'김석훈'</span><span class="p">,</span>
+   <span class="s">'email'</span><span class="p">:</span> <span class="s">'shkim@naver.com'</span><span class="p">,</span>
+<span class="p">})</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/x-www-form-urlencoded'</span><span class="p">,</span>
+   <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/plain'</span>
+<span class="p">}</span>
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">HTTPConnection</span><span class="p">(</span><span class="n">host</span><span class="p">)</span>
+<span class="n">conn</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">'POST'</span><span class="p">,</span> <span class="s">''</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+<span class="n">resp</span> <span class="o">=</span> <span class="n">conn</span><span class="p">.</span><span class="n">getresponse</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">resp</span><span class="p">.</span><span class="n">status</span><span class="p">,</span> <span class="n">resp</span><span class="p">.</span><span class="n">reason</span><span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">resp</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">))</span>
+
+<span class="n">conn</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>http.client 모듈 사용하여 PUT 메서드로 요청 보내기</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">http.client</span> <span class="kn">import</span> <span class="n">HTTPConnection</span>
+<span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">urlencode</span>
+
+<span class="n">host</span> <span class="o">=</span> <span class="s">'127.0.0.1:8000'</span>
+<span class="n">params</span> <span class="o">=</span> <span class="n">urlencode</span><span class="p">({</span>
+   <span class="s">'language'</span><span class="p">:</span> <span class="s">'python'</span><span class="p">,</span>
+   <span class="s">'name'</span><span class="p">:</span> <span class="s">'김석훈'</span><span class="p">,</span>
+   <span class="s">'email'</span><span class="p">:</span> <span class="s">'shkim@naver.com'</span><span class="p">,</span>
+<span class="p">})</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="s">'Content-Type'</span><span class="p">:</span> <span class="s">'application/x-www-form-urlencoded'</span><span class="p">,</span>
+   <span class="s">'Accept'</span><span class="p">:</span> <span class="s">'text/pain'</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">conn</span> <span class="o">=</span> <span class="n">HTTPConnection</span><span class="p">(</span><span class="n">host</span><span class="p">)</span>
+<span class="n">conn</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">'PUT'</span><span class="p">,</span> <span class="s">''</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
+<span class="n">resp</span> <span class="o">=</span> <span class="n">conn</span><span class="p">.</span><span class="n">getresponse</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">resp</span><span class="p">.</span><span class="n">status</span><span class="p">,</span> <span class="n">resp</span><span class="p">.</span><span class="n">reason</span><span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">resp</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">data</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">))</span>
+
+<span class="n">conn</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>http.client 모듈을 이용한 이미지 다운로드하는 코드</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">os.path</span>
+<span class="kn">from</span> <span class="nn">http.client</span> <span class="kn">import</span> <span class="n">HTTPConnection</span>
+<span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">urljoin</span><span class="p">,</span> <span class="n">urlunparse</span>
+<span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlretrieve</span>
+<span class="kn">from</span> <span class="nn">html.parser</span> <span class="kn">import</span> <span class="n">HTMLParser</span>
+
+
+<span class="k">class</span> <span class="nc">ImageParser</span><span class="p">(</span><span class="n">HTMLParser</span><span class="p">):</span>
+   <span class="s">"""img 태그를 파서하는 듯?"""</span>
+   <span class="k">def</span> <span class="nf">handle_starttag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tag</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">attrs</span><span class="p">):</span>
+       <span class="k">if</span> <span class="n">tag</span> <span class="o">!=</span> <span class="s">'img'</span><span class="p">:</span>
+           <span class="k">return</span>
+       <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s">'result'</span><span class="p">):</span>
+           <span class="bp">self</span><span class="p">.</span><span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+       <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">attrs</span><span class="p">:</span>
+           <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s">'src'</span><span class="p">:</span>
+               <span class="bp">self</span><span class="p">.</span><span class="n">result</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">download_image</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+   <span class="s">"""HTML 문장이 주어지면 ImageParser 클래스를 이용해서 이미지를 찾고, 그 이미지들을 DOWNLOAD 디렉토리에 다운로드한다."""</span>
+
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">exists</span><span class="p">(</span><span class="s">'DOWNLOAD'</span><span class="p">):</span>
+       <span class="n">os</span><span class="p">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s">'DOWNLOAD'</span><span class="p">)</span>
+
+   <span class="n">parser</span> <span class="o">=</span> <span class="n">ImageParser</span><span class="p">()</span>
+   <span class="n">parser</span><span class="p">.</span><span class="n">feed</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>  <span class="c1">#parser.result에 결과 넣어줌
+</span>   <span class="n">dataSet</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">parser</span><span class="p">.</span><span class="n">result</span><span class="p">)</span>
+
+   <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">dataSet</span><span class="p">):</span>
+       <span class="n">imageUrl</span> <span class="o">=</span> <span class="n">urljoin</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>  <span class="c1"># url과 타깃 파일명 지정함.
+</span>       <span class="n">basename</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">basename</span><span class="p">(</span><span class="n">imageUrl</span><span class="p">)</span>
+       <span class="n">targetFile</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="s">'DOWNLOAD'</span><span class="p">,</span> <span class="n">basename</span><span class="p">)</span>
+
+       <span class="k">print</span><span class="p">(</span><span class="s">'Downloading...'</span><span class="p">,</span> <span class="n">imageUrl</span><span class="p">)</span>
+       <span class="n">urlretrieve</span><span class="p">(</span><span class="n">imageUrl</span><span class="p">,</span> <span class="n">targetFile</span><span class="p">)</span>  <span class="c1"># image 다운로드 함수.
+</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+   <span class="n">host</span> <span class="o">=</span> <span class="s">'www.google.co.kr'</span>
+
+   <span class="n">conn</span> <span class="o">=</span> <span class="n">HTTPConnection</span><span class="p">(</span><span class="n">host</span><span class="p">)</span>
+   <span class="n">conn</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s">'GET'</span><span class="p">,</span> <span class="s">''</span><span class="p">)</span>
+   <span class="n">resp</span> <span class="o">=</span> <span class="n">conn</span><span class="p">.</span><span class="n">getresponse</span><span class="p">()</span>
+
+   <span class="n">charset</span> <span class="o">=</span> <span class="n">resp</span><span class="p">.</span><span class="n">msg</span><span class="p">.</span><span class="n">get_param</span><span class="p">(</span><span class="s">'charset'</span><span class="p">)</span>
+   <span class="n">data</span> <span class="o">=</span> <span class="n">resp</span><span class="p">.</span><span class="n">read</span><span class="p">().</span><span class="n">decode</span><span class="p">(</span><span class="n">charset</span><span class="p">)</span>
+   <span class="n">conn</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+
+   <span class="k">print</span><span class="p">(</span><span class="s">"</span><span class="se">\n</span><span class="s">&gt;&gt;&gt;&gt;&gt; Download Images from"</span><span class="p">,</span> <span class="n">host</span><span class="p">)</span>
+   <span class="n">url</span> <span class="o">=</span> <span class="n">urlunparse</span><span class="p">((</span><span class="s">'http'</span><span class="p">,</span> <span class="n">host</span><span class="p">,</span> <span class="s">''</span><span class="p">,</span> <span class="s">''</span><span class="p">,</span> <span class="s">''</span><span class="p">,</span> <span class="s">''</span><span class="p">))</span>
+   <span class="n">download_image</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+   <span class="n">main</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>http.client 모듈 예제 beautifulsoup으로 재작성(부록A)</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">urljoin</span>
+<span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+
+
+<span class="k">def</span> <span class="nf">parse_image</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+   <span class="n">soup</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="s">'html.parser'</span><span class="p">)</span>
+   <span class="n">imgTagList</span> <span class="o">=</span> <span class="n">soup</span><span class="p">.</span><span class="n">find_all</span><span class="p">(</span><span class="s">'img'</span><span class="p">)</span>
+   <span class="n">dataSet</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">attrs</span><span class="p">[</span><span class="s">'src'</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">imgTagList</span><span class="p">)</span>
+   <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">dataSet</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">download_image</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">dataSet</span><span class="p">):</span>
+
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">exists</span><span class="p">(</span><span class="s">'DOWNLOAD'</span><span class="p">):</span>
+       <span class="n">os</span><span class="p">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s">'DOWNLOAD'</span><span class="p">)</span>
+
+   <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">dataSet</span><span class="p">:</span>
+       <span class="n">imageUrl</span> <span class="o">=</span> <span class="n">urljoin</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+       <span class="n">basename</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">basename</span><span class="p">(</span><span class="n">imageUrl</span><span class="p">)</span>
+       <span class="n">targetFile</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="s">'DOWNLOAD'</span><span class="p">,</span> <span class="n">basename</span><span class="p">)</span>
+
+       <span class="k">print</span><span class="p">(</span><span class="s">'Downloading...'</span><span class="p">,</span> <span class="n">imageUrl</span><span class="p">)</span>
+       <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">imageUrl</span><span class="p">)</span>
+       <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">targetFile</span><span class="p">,</span> <span class="s">'wb'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+           <span class="n">f</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="n">res</span><span class="p">.</span><span class="n">content</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+   <span class="n">url</span> <span class="o">=</span> <span class="s">"http://www.google.co.kr"</span>
+
+   <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+   <span class="n">charset</span> <span class="o">=</span> <span class="n">res</span><span class="p">.</span><span class="n">encoding</span>
+   <span class="n">data</span> <span class="o">=</span> <span class="n">res</span><span class="p">.</span><span class="n">content</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="n">charset</span><span class="p">)</span>
+
+   <span class="n">dataSet</span> <span class="o">=</span> <span class="n">parse_image</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+   <span class="k">print</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">&gt;&gt;&gt;&gt;&gt;&gt; Download Images from'</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+   <span class="n">download_image</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">dataSet</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+   <span class="n">main</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>웹 서버 라이브러리</p>
+
+<p>웹 서버의 역할: http 통신에서 클라이언트의 요청을 받고 이를 처리하여 결과를 되돌려주는 것</p>
+
+<p>간단하지만, 웹 서버를 만드는 가장 기본적인 방법을 따른 것</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">http.server</span> <span class="kn">import</span> <span class="n">HTTPServer</span><span class="p">,</span> <span class="n">BaseHTTPRequestHandler</span>
+
+<span class="k">class</span> <span class="nc">MyHandler</span><span class="p">(</span><span class="n">BaseHTTPRequestHandler</span><span class="p">):</span>
+   <span class="s">"""웹 클라이언트로부터 요청을 받고 'Hello World'라는 문장을 되돌려 주는 웹 서버"""</span>
+   <span class="k">def</span> <span class="nf">do_GET</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="bp">self</span><span class="p">.</span><span class="n">send_response_only</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="s">'OK'</span><span class="p">)</span>
+       <span class="bp">self</span><span class="p">.</span><span class="n">send_header</span><span class="p">(</span><span class="s">'Content-Type'</span><span class="p">,</span> <span class="s">'text/plain'</span><span class="p">)</span>
+       <span class="bp">self</span><span class="p">.</span><span class="n">end_headers</span><span class="p">()</span>
+       <span class="bp">self</span><span class="p">.</span><span class="n">wfile</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s">'Hello World'</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+   <span class="n">server</span> <span class="o">=</span> <span class="n">HTTPServer</span><span class="p">((</span><span class="s">''</span><span class="p">,</span> <span class="mi">8888</span><span class="p">),</span> <span class="n">MyHandler</span><span class="p">)</span>  <span class="c1"># HTTPServer 객체 생성(인자: 서버의 IP, PORT, 핸들러 클래스)
+</span>   <span class="k">print</span><span class="p">(</span><span class="s">'Started WebServer on port 8888...'</span><span class="p">)</span>
+   <span class="k">print</span><span class="p">(</span><span class="s">'Press ^C to quit WebServer.'</span><span class="p">)</span>
+   <span class="n">server</span><span class="p">.</span><span class="n">serve_forever</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">HTTPServer</code>와 <code class="language-plaintext highlighter-rouge">BaseHTTPRequestHandler</code>가 기반이 되는 클래스. HTTP 프로토콜을 처리해 주는 기능이 있어서 이 클래스들을 상속받으면 관련 로직을 코딩하지 않아도 된다.</p>
+
+<p>CGI 웹 서버용 CGI 스크립트</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">cgi</span>
+
+<span class="n">form</span> <span class="o">=</span> <span class="n">cgi</span><span class="p">.</span><span class="n">FieldStorage</span><span class="p">()</span>  <span class="c1"># FieldStorage 클래스의 인스턴스를 생성해야 한다.
+</span><span class="n">name</span> <span class="o">=</span> <span class="n">form</span><span class="p">.</span><span class="n">getvalue</span><span class="p">(</span><span class="s">'name'</span><span class="p">)</span>  <span class="c1"># 그리고 그 인스턴스의 getvalue() 메서드를 호출해야 한다.
+</span><span class="n">email</span> <span class="o">=</span> <span class="n">form</span><span class="p">.</span><span class="n">getvalue</span><span class="p">(</span><span class="s">'email'</span><span class="p">)</span>
+<span class="n">url</span> <span class="o">=</span> <span class="n">form</span><span class="p">.</span><span class="n">getvalue</span><span class="p">(</span><span class="s">'url'</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">'Content-Type: text/plain'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">'Welcome... CGI Scripts'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'name is'</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'email is'</span><span class="p">,</span> <span class="n">email</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'url is'</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>CGI 웹 서버 시험용 클라이언트</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span>
+<span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">urlencode</span>
+
+<span class="n">url</span> <span class="o">=</span> <span class="s">'http://127.0.0.1:8888/cgi-bin/script.py'</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="s">'name'</span><span class="p">:</span> <span class="s">'김석훈'</span><span class="p">,</span>
+   <span class="s">'email'</span><span class="p">:</span> <span class="s">'shkim@naver.com'</span><span class="p">,</span>
+   <span class="s">'url'</span><span class="p">:</span> <span class="s">'http://www.naver.com'</span>
+<span class="p">}</span>
+
+<span class="n">enc_data</span> <span class="o">=</span> <span class="n">urlencode</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">post_data</span> <span class="o">=</span> <span class="n">enc_data</span><span class="p">.</span><span class="n">encode</span><span class="p">(</span><span class="s">'ascii'</span><span class="p">)</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">post_data</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="n">read</span><span class="p">().</span><span class="n">decode</span><span class="p">(</span><span class="s">'cp949'</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h4 id="xxxhttpserver-모듈-간의-관계">xxxHTTPServer 모듈 간의 관계</h4>
+
+<p>모든 HTTP 웹 서버는 BaseHTTPServer 모듈의 HTTPServer 클래스를 사용하여 작성된다.
+웹 서버에 사용되는 핸들러는 BaseHTTPServer 모듈의 BaseHTTPRequestHandler를 상속 받아 작성</p>
+
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/2022-08-15/python-web-programming-3" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/2022-08-13/python-web-programming-1" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-07-30 14:29:33 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

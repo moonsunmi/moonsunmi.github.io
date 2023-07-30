@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TIL) 뽀모 프로젝트 Reservation 기능 추가 시도 | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="TIL) 뽀모 프로젝트 Reservation 기능 추가 시도" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="(달성/목표) 뽀모도리 1일 6 / 8 1주 42 /40" />
+<meta property="og:description" content="(달성/목표) 뽀모도리 1일 6 / 8 1주 42 /40" />
+<link rel="canonical" href="http://localhost:4000/2022-11-20/TIL" />
+<meta property="og:url" content="http://localhost:4000/2022-11-20/TIL" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-11-20T12:18:07+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TIL) 뽀모 프로젝트 Reservation 기능 추가 시도" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-11-20T12:18:07+09:00","datePublished":"2022-11-20T12:18:07+09:00","description":"(달성/목표) 뽀모도리 1일 6 / 8 1주 42 /40","headline":"TIL) 뽀모 프로젝트 Reservation 기능 추가 시도","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-11-20/TIL"},"url":"http://localhost:4000/2022-11-20/TIL"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Sunmi Moon
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2022-11-20 12:18:07 +0900">November 20, 2022</time>
+    
+  </div>
+
+  <h1 class="post-title">TIL) 뽀모 프로젝트 Reservation 기능 추가 시도</h1>
+  <div class="post-line"></div>
+
+  <table>
+  <thead>
+    <tr>
+      <th>(달성/목표)</th>
+      <th>뽀모도리</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1일</td>
+      <td>6 / 8</td>
+    </tr>
+    <tr>
+      <td>1주</td>
+      <td>42 /40</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="커스텀-훅과-컨텍스트-api-조합">커스텀 훅과 컨텍스트 API 조합</h3>
+
+<p>뽀모도로 예약 정보를 저장해 둘 task. 그런데 커스텀 훅과 컨텍스트 API를 함께 적용해야 할 것 같았다. 그런데 어떻게 해야 할지 잘 모르겠더라.</p>
+
+<p>이상해진
+Reservation.js</p>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="c1">// -------------------- Schdule ----------------------</span>
+  <span class="kd">const</span> <span class="nx">testLogs</span> <span class="o">=</span> <span class="nx">useContext</span><span class="p">(</span><span class="nx">timeLogsContext</span><span class="p">);</span> <span class="c1">//&lt;???</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">age</span><span class="p">,</span> <span class="nx">setAge</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="mi">18</span><span class="p">);</span> <span class="c1">// for test. must be deleted.</span>
+
+  <span class="kd">const</span> <span class="nx">initialTasks</span> <span class="o">=</span> <span class="nx">useContext</span><span class="p">(</span><span class="nx">tasksContext</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">tasks</span><span class="p">,</span> <span class="nx">addTask</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useTasks</span><span class="p">(</span><span class="nx">initialTasks</span><span class="p">);</span> <span class="c1">// {taskName: "샘플 테스크", category: "샘플 카테고리", date: "샘플 데이트", time: "샘플 타임"},</span>
+
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">tasks</span><span class="p">);</span>
+  <span class="c1">//const [task, setTask] = useState({});</span>
+
+  <span class="kd">const</span> <span class="nx">onAddTask</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">addTask</span><span class="p">({</span>
+      <span class="na">taskName</span><span class="p">:</span> <span class="p">{</span> <span class="nx">taskName</span> <span class="p">},</span>
+      <span class="na">category</span><span class="p">:</span> <span class="p">{</span> <span class="nx">selectedCategory</span> <span class="p">},</span>
+      <span class="na">date</span><span class="p">:</span> <span class="p">{</span> <span class="nx">date</span> <span class="p">},</span>
+      <span class="na">time</span><span class="p">:</span> <span class="p">{</span> <span class="nx">time</span> <span class="p">},</span>
+    <span class="p">});</span>
+    <span class="nx">resetInput</span><span class="p">();</span>
+    <span class="nx">resetOption</span><span class="p">();</span>
+  <span class="p">};</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"flex content-center"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"mainContainer "</span><span class="p">&gt;</span>
+        <span class="si">{</span><span class="cm">/* 하단의 input들을 컴포넌트로 만들어야 할까? */</span><span class="si">}</span>
+        <span class="p">&lt;</span><span class="nt">input</span>
+          <span class="na">className</span><span class="p">=</span><span class="s">"border border-yellow-400 mb-2 bg-yellow-50"</span>
+          <span class="na">name</span><span class="p">=</span><span class="s">"taskName"</span>
+          <span class="na">placeholder</span><span class="p">=</span><span class="s">"Task Name"</span>
+          <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="nx">taskName</span><span class="si">}</span>
+          <span class="na">onChange</span><span class="p">=</span><span class="si">{</span><span class="nx">onChangeInput</span><span class="si">}</span>
+        <span class="p">/&gt;</span>
+        <span class="p">&lt;</span><span class="nt">select</span>
+          <span class="na">name</span><span class="p">=</span><span class="s">"category"</span>
+          <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="nx">selectedCategory</span><span class="si">}</span>
+          <span class="na">onChange</span><span class="p">=</span><span class="si">{</span><span class="nx">onChangeOption</span><span class="si">}</span>
+        <span class="p">&gt;</span>
+          <span class="si">{</span><span class="nx">categoryOptions</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">option</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
+            <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="nx">option</span><span class="p">.</span><span class="nx">value</span><span class="si">}</span> <span class="na">key</span><span class="p">=</span><span class="si">{</span><span class="nx">option</span><span class="p">.</span><span class="nx">value</span><span class="si">}</span><span class="p">&gt;</span>
+              <span class="si">{</span><span class="nx">option</span><span class="p">.</span><span class="nx">text</span><span class="si">}</span>
+            <span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+          <span class="p">))</span><span class="si">}</span>
+        <span class="p">&lt;/</span><span class="nt">select</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">input</span>
+          <span class="na">className</span><span class="p">=</span><span class="s">"border border-yellow-400  bg-yellow-50  mb-2"</span>
+          <span class="na">name</span><span class="p">=</span><span class="s">"date"</span>
+          <span class="na">type</span><span class="p">=</span><span class="s">"date"</span>
+          <span class="na">id</span><span class="p">=</span><span class="s">"startDate"</span>
+          <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="nx">date</span><span class="si">}</span>
+          <span class="na">onChange</span><span class="p">=</span><span class="si">{</span><span class="nx">onChangeInput</span><span class="si">}</span>
+        <span class="p">/&gt;</span>
+        <span class="p">&lt;</span><span class="nt">input</span>
+          <span class="na">className</span><span class="p">=</span><span class="s">"border border-yellow-400  bg-yellow-50  mb-2"</span>
+          <span class="na">name</span><span class="p">=</span><span class="s">"time"</span>
+          <span class="na">type</span><span class="p">=</span><span class="s">"time"</span>
+          <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="nx">time</span><span class="si">}</span>
+          <span class="na">onChange</span><span class="p">=</span><span class="si">{</span><span class="nx">onChangeInput</span><span class="si">}</span>
+        <span class="p">/&gt;</span>
+        <span class="p">&lt;</span><span class="nt">button</span> <span class="na">className</span><span class="p">=</span><span class="s">"button w-60"</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="nx">onAddTask</span><span class="si">}</span><span class="p">&gt;</span>
+          뽀모도로 예약
+        <span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+        <span class="si">{</span><span class="nx">testLogs</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">log</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">log</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span> <span class="cm">/* must be deleted */</span><span class="si">}</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">hr</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Schedule</span> <span class="na">age</span><span class="p">=</span><span class="si">{</span><span class="nx">age</span><span class="si">}</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>useTasks 훅 안에서 context를 접근해야 하나 싶었는데, 그것도 좀… 이상한 방법인 것 같다.</p>
+
+<p>useTasks.js</p>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">tasksContext</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">../../../_app</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">useTasks</span> <span class="o">=</span> <span class="p">(</span><span class="nx">initialTasks</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">tasks</span><span class="p">,</span> <span class="nx">setTasks</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="nx">initialTasks</span><span class="p">);</span> <span class="c1">// {taskName: "샘플 테스크", category: "샘플 카테고리", date: "샘플 데이트", time: "샘플 타임"},</span>
+
+  <span class="c1">//const tasks = useContext(tasksContext);</span>
+
+  <span class="kd">const</span> <span class="nx">addTask</span> <span class="o">=</span> <span class="p">(</span><span class="nx">task</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setTasks</span><span class="p">([...</span><span class="nx">tasks</span><span class="p">,</span> <span class="nx">task</span><span class="p">]);</span>
+  <span class="p">};</span>
+  <span class="k">return</span> <span class="p">[</span><span class="nx">tasks</span><span class="p">,</span> <span class="nx">addTask</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">useTasks</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>검색해 봐도 딱히 괜찮은 정보를 찾지는 못했다. 컨텍스트 API와 커스텀 훅에 대한 공부가 좀 부족해서 그런 거 아닐까 싶다.</p>
+
+<p>다시 기본으로 돌아가 봐야겠다.</p>
+
+<hr />
+
+<p>일) 운동<br /></p>
+
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/2022-11-20/17th-week" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/2022-11-19/TIL" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-07-30 14:29:33 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

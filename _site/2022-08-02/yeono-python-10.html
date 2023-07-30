@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>연오의 파이썬 공부 10 | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="연오의 파이썬 공부 10" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="연습문제 7-11 용의자 = [ {&#39;이름&#39;: &#39;멍멍&#39;, &#39;털&#39;: &#39;흰색&#39;, &#39;주둥이&#39;: &#39;크다&#39;, &#39;발&#39;: &#39;크다&#39;}, {&#39;이름&#39;: &#39;킁킁&#39;, &#39;털&#39;: &#39;검은색&#39;, &#39;주둥이&#39;: &#39;작다&#39;, &#39;발&#39;: &#39;크다&#39;}, {&#39;이름&#39;: &#39;왈왈&#39;, &#39;털&#39;: &#39;흰색&#39;, &#39;주둥이&#39;: &#39;작다&#39;, &#39;발&#39;: &#39;크다&#39;}, {&#39;이름&#39;: &#39;꿀꿀&#39;, &#39;털&#39;: &#39;검은색&#39;, &#39;주둥이&#39;: &#39;작다&#39;, &#39;발&#39;: &#39;작다&#39;}, {&#39;이름&#39;: &#39;낑낑&#39;, &#39;털&#39;: &#39;흰색&#39;, &#39;주둥이&#39;: &#39;작다&#39;, &#39;발&#39;: &#39;작다&#39;}, ] # 범인: 주둥이가 작고, 발이 크고, 흰색 털을 가진 개 유력_용의자 = [] for 개 in 용의자: if 개[&#39;털&#39;] == &#39;흰색&#39; and 개[&#39;발&#39;] == &#39;크다&#39; and 개[&#39;주둥이&#39;] == &#39;작다&#39;: 유력_용의자.append(개[&#39;이름&#39;]) #for 개 in 용의자: # 용의자.remove(개) print() print(유력_용의자) 연습문제 7-11 filter 함수 사용해서 작성하기 용의자 = [ {&#39;이름&#39;: &#39;멍멍&#39;, &#39;털&#39;: &#39;흰색&#39;, &#39;주둥이&#39;: &#39;크다&#39;, &#39;발&#39;: &#39;크다&#39;}, {&#39;이름&#39;: &#39;킁킁&#39;, &#39;털&#39;: &#39;검은색&#39;, &#39;주둥이&#39;: &#39;작다&#39;, &#39;발&#39;: &#39;크다&#39;}, {&#39;이름&#39;: &#39;왈왈&#39;, &#39;털&#39;: &#39;흰색&#39;, &#39;주둥이&#39;: &#39;작다&#39;, &#39;발&#39;: &#39;크다&#39;}, {&#39;이름&#39;: &#39;꿀꿀&#39;, &#39;털&#39;: &#39;검은색&#39;, &#39;주둥이&#39;: &#39;작다&#39;, &#39;발&#39;: &#39;작다&#39;}, {&#39;이름&#39;: &#39;낑낑&#39;, &#39;털&#39;: &#39;흰색&#39;, &#39;주둥이&#39;: &#39;작다&#39;, &#39;발&#39;: &#39;크다&#39;}, ] # 범인: 주둥이가 작고, 발이 크고, 흰색 털을 가진 개 주둥이_용의자 = filter(lambda 개 : 개[&#39;주둥이&#39;] == &#39;작다&#39;, 용의자) 주둥이_발_용의자 = filter(lambda 개: 개[&#39;발&#39;] == &#39;크다&#39;, 주둥이_용의자) 주둥이_발_털_용의자 = filter(lambda 개: 개[&#39;털&#39;] == &#39;흰색&#39;, 주둥이_발_용의자) for 개 in 주둥이_발_털_용의자: print(개[&#39;이름&#39;]) 연습문제 7-12 def faulty_rate(diameters): # 정상: 지름 0.99mm 이상, 1.01mm 미만 working_diameters = list(filter(lambda diameter: 0.99 &lt;= diameter &lt; 1.01, diameters)) return (len(diameters) - len(working_diameters)) / len(diameters) diameters = [0.985, 0.992, 1.004, 0.995, 0.899, 1.001, 1.002, 1.003, 1.009, 0.998] print(faulty_rate(diameters)) # 람다식에서 not을 이용하면 더 간단하게 구현할 수 있다. # lambda diameter: not (0.99 &lt;= diameter &lt; 1.01) 연습문제 7-13 fruits = [&#39;배&#39;, &#39;사과&#39;, &#39;복숭아&#39;, &#39;블루베리&#39;] print(sorted(fruits, key=len, reverse=True)) 반복자와 생성기 반복자: 다음에 무엇을 출력할 차례인지를 기억하여 데이터를 순서대로 꺼낼 수 있도록 돕는 인터페이스이다. iter() 함수는 전달된 데이터의 반복자를 꺼내 반환한다. next() 함수는 반복자를 입력받아 그 반복자가 다음에 출력해야 할 요소를 반환한다. 코드 7-42 it = iter([1, 2, 3]) print(next(it)) print(next(it)) print(next(it)) print(next(it)) 정해둔 순서대로 값을 생성하는 함수를 정의하면, 이 함수를 이용해 값을 하나씩 꺼내는 반복자를 만들 수 있다. 이런 식으로 값을 생성해 내는 반복자를 생성기라고 한다. yield 문: return 문처럼 함수가 값을 반환하고 정지하도록 하는데, 그 함수를 나중에 다시 실행하면 정지했던 위치부터 다시 실행되도록 한다. yield 문을 포함한 함수는 일반적인 함수와 실행 방식이 다르다. 이 함수는 호출되어도 본문을 실행하지 않고 생성기를 반환할 뿐이며, 본문은 생성기가 next() 함수에 전달되었을 때 비로소 실행된다. 코드 7-44 def abc(): &quot;&quot;&quot;a, b, c를 출력하는 생성기를 반환한다.&quot;&quot;&quot; yield &#39;a&#39; yield &#39;b&#39; yield &#39;c&#39; abc_generator = abc() print(next(abc_generator)) print(next(abc_generator)) print(next(abc_generator)) print(next(abc_generator)) print(next(abc_generator)) 코드 7-45 def one_to_three(): &quot;&quot;&quot;1, 2, 3을 반환하는 생성기를 반환한다.&quot;&quot;&quot; yield 1 yield 2 yield 3 one_to_three_generator = one_to_three() print(next(one_to_three_generator)) print(next(one_to_three_generator)) print(next(one_to_three_generator)) 코드 7-46 def one_to_infinite(): &quot;&quot;&quot; 1부터 무한대 범위의 자연수를 순서대로 내는 생성기를 반환한다.&quot;&quot;&quot; n = 1 while True: yield n n += 1 one_to_infinite_generator = one_to_infinite() print(next(one_to_infinite_generator)) print(next(one_to_infinite_generator)) print(next(one_to_infinite_generator)) print(next(one_to_infinite_generator)) print(next(one_to_infinite_generator)) print(next(one_to_infinite_generator)) 생성기는 반복자이므로, 반복자와 마찬가지로 for 문을 순회하거나 리스트, 튜플로 변환할 수 있다. 코드 7-47 def countdown(start, end): &quot;&quot;&quot;start(포함)부터 end(비포함)까지 거꾸로 세는 생성기를 반환한다.&quot;&quot;&quot; n = start while end &lt; n: yield n n -= 1 print(list(countdown(10, 0))) print(tuple(countdown(100, 95))) 생성기 식은 원본 반복 가능 데이터를 가공하여 데이터를 생성한다. 리스트 조건제시법과 유사하다. 코드 7-48 print([e ** 3 for e in range(10)]) 코드 7-51 cube_generator = (e ** 3 for e in range(100000000)) print(next(cube_generator)) print(next(cube_generator)) print(next(cube_generator)) 연습문제 7-14 import random def infinite_random_number(start, end): while True: yield random.randint(start, end) infinite_random_number_generator = infinite_random_number(0, 63) print(next(infinite_random_number_generator)) print(next(infinite_random_number_generator)) print(next(infinite_random_number_generator)) 연습문제 7-15 def input_orders(n): &quot;&quot;&quot;n개의 음료를 주문받아 리스트로 반환한다.&quot;&quot;&quot; return (input() for _ in range(n)) # return [input() for _ in range(n)] for drink in input_orders(3): print(drink, &#39;만들어 주세요!&#39;) 8장 코드 8-1 coordinate_1 = {&#39;x&#39;: 5, &#39;y&#39;: 3} triangle_1 = { &#39;point_a&#39;: {&#39;x&#39;: 0, &#39;y&#39;: 0}, &#39;point_b&#39;: {&#39;x&#39;: 3, &#39;y&#39;: 0}, &#39;point_c&#39;: {&#39;x&#39;: 3, &#39;y&#39;: 4}, } rectangle_1 = { &#39;point_a&#39;: {&#39;x&#39;: 2, &#39;y&#39;: 2}, &#39;point_b&#39;: {&#39;x&#39;: 6, &#39;y&#39;: 2}, &#39;point_c&#39;: {&#39;x&#39;: 6, &#39;y&#39;: 6}, &#39;point_d&#39;: {&#39;x&#39;: 2, &#39;y&#39;: 6}, } 코드 8-3 import math def square(x): &quot;&quot;&quot;전달받은 수의 제곱을 반환한다.&quot;&quot;&quot; return x * x def distance(point_a, point_b): return math.sqrt(square(point_a[&#39;x&#39;] - point_b[&#39;x&#39;]) + square(point_a[&#39;y&#39;] - point_b[&#39;y&#39;])) def circumference_of_triangle(shape): &quot;&quot;&quot;삼각형 데이터를 전달받아 둘레를 구해 반환한다.&quot;&quot;&quot; a_to_b = distance(shape[&#39;point_a&#39;], shape[&#39;point_b&#39;]) b_to_c = distance(shape[&#39;point_b&#39;], shape[&#39;point_c&#39;]) c_to_a = distance(shape[&#39;point_c&#39;], shape[&#39;point_a&#39;]) return a_to_b + b_to_c + c_to_a def circumference_of_rectangle(shape): &quot;&quot;&quot;사각형 데이터를 전달받아 둘레를 구해 반환한다.&quot;&quot;&quot; a_to_b = distance(shape[&#39;point_a&#39;], shape[&#39;point_b&#39;]) b_to_c = distance(shape[&#39;point_b&#39;], shape[&#39;point_c&#39;]) c_to_d = distance(shape[&#39;point_c&#39;], shape[&#39;point_d&#39;]) d_to_a = distance(shape[&#39;point_d&#39;], shape[&#39;point_a&#39;]) return a_to_b + b_to_c + c_to_d + d_to_a coordinate_1 = {&#39;x&#39;: 5, &#39;y&#39;: 3} triangle_1 = { &#39;point_a&#39;: {&#39;x&#39;: 0, &#39;y&#39;: 0}, &#39;point_b&#39;: {&#39;x&#39;: 3, &#39;y&#39;: 0}, &#39;point_c&#39;: {&#39;x&#39;: 3, &#39;y&#39;: 4}, } rectangle_1 = { &#39;point_a&#39;: {&#39;x&#39;: 2, &#39;y&#39;: 2}, &#39;point_b&#39;: {&#39;x&#39;: 6, &#39;y&#39;: 2}, &#39;point_c&#39;: {&#39;x&#39;: 6, &#39;y&#39;: 6}, &#39;point_d&#39;: {&#39;x&#39;: 2, &#39;y&#39;: 6}, } print(circumference_of_triangle(triangle_1)) print(circumference_of_rectangle(rectangle_1))" />
+<meta property="og:description" content="연습문제 7-11 용의자 = [ {&#39;이름&#39;: &#39;멍멍&#39;, &#39;털&#39;: &#39;흰색&#39;, &#39;주둥이&#39;: &#39;크다&#39;, &#39;발&#39;: &#39;크다&#39;}, {&#39;이름&#39;: &#39;킁킁&#39;, &#39;털&#39;: &#39;검은색&#39;, &#39;주둥이&#39;: &#39;작다&#39;, &#39;발&#39;: &#39;크다&#39;}, {&#39;이름&#39;: &#39;왈왈&#39;, &#39;털&#39;: &#39;흰색&#39;, &#39;주둥이&#39;: &#39;작다&#39;, &#39;발&#39;: &#39;크다&#39;}, {&#39;이름&#39;: &#39;꿀꿀&#39;, &#39;털&#39;: &#39;검은색&#39;, &#39;주둥이&#39;: &#39;작다&#39;, &#39;발&#39;: &#39;작다&#39;}, {&#39;이름&#39;: &#39;낑낑&#39;, &#39;털&#39;: &#39;흰색&#39;, &#39;주둥이&#39;: &#39;작다&#39;, &#39;발&#39;: &#39;작다&#39;}, ] # 범인: 주둥이가 작고, 발이 크고, 흰색 털을 가진 개 유력_용의자 = [] for 개 in 용의자: if 개[&#39;털&#39;] == &#39;흰색&#39; and 개[&#39;발&#39;] == &#39;크다&#39; and 개[&#39;주둥이&#39;] == &#39;작다&#39;: 유력_용의자.append(개[&#39;이름&#39;]) #for 개 in 용의자: # 용의자.remove(개) print() print(유력_용의자) 연습문제 7-11 filter 함수 사용해서 작성하기 용의자 = [ {&#39;이름&#39;: &#39;멍멍&#39;, &#39;털&#39;: &#39;흰색&#39;, &#39;주둥이&#39;: &#39;크다&#39;, &#39;발&#39;: &#39;크다&#39;}, {&#39;이름&#39;: &#39;킁킁&#39;, &#39;털&#39;: &#39;검은색&#39;, &#39;주둥이&#39;: &#39;작다&#39;, &#39;발&#39;: &#39;크다&#39;}, {&#39;이름&#39;: &#39;왈왈&#39;, &#39;털&#39;: &#39;흰색&#39;, &#39;주둥이&#39;: &#39;작다&#39;, &#39;발&#39;: &#39;크다&#39;}, {&#39;이름&#39;: &#39;꿀꿀&#39;, &#39;털&#39;: &#39;검은색&#39;, &#39;주둥이&#39;: &#39;작다&#39;, &#39;발&#39;: &#39;작다&#39;}, {&#39;이름&#39;: &#39;낑낑&#39;, &#39;털&#39;: &#39;흰색&#39;, &#39;주둥이&#39;: &#39;작다&#39;, &#39;발&#39;: &#39;크다&#39;}, ] # 범인: 주둥이가 작고, 발이 크고, 흰색 털을 가진 개 주둥이_용의자 = filter(lambda 개 : 개[&#39;주둥이&#39;] == &#39;작다&#39;, 용의자) 주둥이_발_용의자 = filter(lambda 개: 개[&#39;발&#39;] == &#39;크다&#39;, 주둥이_용의자) 주둥이_발_털_용의자 = filter(lambda 개: 개[&#39;털&#39;] == &#39;흰색&#39;, 주둥이_발_용의자) for 개 in 주둥이_발_털_용의자: print(개[&#39;이름&#39;]) 연습문제 7-12 def faulty_rate(diameters): # 정상: 지름 0.99mm 이상, 1.01mm 미만 working_diameters = list(filter(lambda diameter: 0.99 &lt;= diameter &lt; 1.01, diameters)) return (len(diameters) - len(working_diameters)) / len(diameters) diameters = [0.985, 0.992, 1.004, 0.995, 0.899, 1.001, 1.002, 1.003, 1.009, 0.998] print(faulty_rate(diameters)) # 람다식에서 not을 이용하면 더 간단하게 구현할 수 있다. # lambda diameter: not (0.99 &lt;= diameter &lt; 1.01) 연습문제 7-13 fruits = [&#39;배&#39;, &#39;사과&#39;, &#39;복숭아&#39;, &#39;블루베리&#39;] print(sorted(fruits, key=len, reverse=True)) 반복자와 생성기 반복자: 다음에 무엇을 출력할 차례인지를 기억하여 데이터를 순서대로 꺼낼 수 있도록 돕는 인터페이스이다. iter() 함수는 전달된 데이터의 반복자를 꺼내 반환한다. next() 함수는 반복자를 입력받아 그 반복자가 다음에 출력해야 할 요소를 반환한다. 코드 7-42 it = iter([1, 2, 3]) print(next(it)) print(next(it)) print(next(it)) print(next(it)) 정해둔 순서대로 값을 생성하는 함수를 정의하면, 이 함수를 이용해 값을 하나씩 꺼내는 반복자를 만들 수 있다. 이런 식으로 값을 생성해 내는 반복자를 생성기라고 한다. yield 문: return 문처럼 함수가 값을 반환하고 정지하도록 하는데, 그 함수를 나중에 다시 실행하면 정지했던 위치부터 다시 실행되도록 한다. yield 문을 포함한 함수는 일반적인 함수와 실행 방식이 다르다. 이 함수는 호출되어도 본문을 실행하지 않고 생성기를 반환할 뿐이며, 본문은 생성기가 next() 함수에 전달되었을 때 비로소 실행된다. 코드 7-44 def abc(): &quot;&quot;&quot;a, b, c를 출력하는 생성기를 반환한다.&quot;&quot;&quot; yield &#39;a&#39; yield &#39;b&#39; yield &#39;c&#39; abc_generator = abc() print(next(abc_generator)) print(next(abc_generator)) print(next(abc_generator)) print(next(abc_generator)) print(next(abc_generator)) 코드 7-45 def one_to_three(): &quot;&quot;&quot;1, 2, 3을 반환하는 생성기를 반환한다.&quot;&quot;&quot; yield 1 yield 2 yield 3 one_to_three_generator = one_to_three() print(next(one_to_three_generator)) print(next(one_to_three_generator)) print(next(one_to_three_generator)) 코드 7-46 def one_to_infinite(): &quot;&quot;&quot; 1부터 무한대 범위의 자연수를 순서대로 내는 생성기를 반환한다.&quot;&quot;&quot; n = 1 while True: yield n n += 1 one_to_infinite_generator = one_to_infinite() print(next(one_to_infinite_generator)) print(next(one_to_infinite_generator)) print(next(one_to_infinite_generator)) print(next(one_to_infinite_generator)) print(next(one_to_infinite_generator)) print(next(one_to_infinite_generator)) 생성기는 반복자이므로, 반복자와 마찬가지로 for 문을 순회하거나 리스트, 튜플로 변환할 수 있다. 코드 7-47 def countdown(start, end): &quot;&quot;&quot;start(포함)부터 end(비포함)까지 거꾸로 세는 생성기를 반환한다.&quot;&quot;&quot; n = start while end &lt; n: yield n n -= 1 print(list(countdown(10, 0))) print(tuple(countdown(100, 95))) 생성기 식은 원본 반복 가능 데이터를 가공하여 데이터를 생성한다. 리스트 조건제시법과 유사하다. 코드 7-48 print([e ** 3 for e in range(10)]) 코드 7-51 cube_generator = (e ** 3 for e in range(100000000)) print(next(cube_generator)) print(next(cube_generator)) print(next(cube_generator)) 연습문제 7-14 import random def infinite_random_number(start, end): while True: yield random.randint(start, end) infinite_random_number_generator = infinite_random_number(0, 63) print(next(infinite_random_number_generator)) print(next(infinite_random_number_generator)) print(next(infinite_random_number_generator)) 연습문제 7-15 def input_orders(n): &quot;&quot;&quot;n개의 음료를 주문받아 리스트로 반환한다.&quot;&quot;&quot; return (input() for _ in range(n)) # return [input() for _ in range(n)] for drink in input_orders(3): print(drink, &#39;만들어 주세요!&#39;) 8장 코드 8-1 coordinate_1 = {&#39;x&#39;: 5, &#39;y&#39;: 3} triangle_1 = { &#39;point_a&#39;: {&#39;x&#39;: 0, &#39;y&#39;: 0}, &#39;point_b&#39;: {&#39;x&#39;: 3, &#39;y&#39;: 0}, &#39;point_c&#39;: {&#39;x&#39;: 3, &#39;y&#39;: 4}, } rectangle_1 = { &#39;point_a&#39;: {&#39;x&#39;: 2, &#39;y&#39;: 2}, &#39;point_b&#39;: {&#39;x&#39;: 6, &#39;y&#39;: 2}, &#39;point_c&#39;: {&#39;x&#39;: 6, &#39;y&#39;: 6}, &#39;point_d&#39;: {&#39;x&#39;: 2, &#39;y&#39;: 6}, } 코드 8-3 import math def square(x): &quot;&quot;&quot;전달받은 수의 제곱을 반환한다.&quot;&quot;&quot; return x * x def distance(point_a, point_b): return math.sqrt(square(point_a[&#39;x&#39;] - point_b[&#39;x&#39;]) + square(point_a[&#39;y&#39;] - point_b[&#39;y&#39;])) def circumference_of_triangle(shape): &quot;&quot;&quot;삼각형 데이터를 전달받아 둘레를 구해 반환한다.&quot;&quot;&quot; a_to_b = distance(shape[&#39;point_a&#39;], shape[&#39;point_b&#39;]) b_to_c = distance(shape[&#39;point_b&#39;], shape[&#39;point_c&#39;]) c_to_a = distance(shape[&#39;point_c&#39;], shape[&#39;point_a&#39;]) return a_to_b + b_to_c + c_to_a def circumference_of_rectangle(shape): &quot;&quot;&quot;사각형 데이터를 전달받아 둘레를 구해 반환한다.&quot;&quot;&quot; a_to_b = distance(shape[&#39;point_a&#39;], shape[&#39;point_b&#39;]) b_to_c = distance(shape[&#39;point_b&#39;], shape[&#39;point_c&#39;]) c_to_d = distance(shape[&#39;point_c&#39;], shape[&#39;point_d&#39;]) d_to_a = distance(shape[&#39;point_d&#39;], shape[&#39;point_a&#39;]) return a_to_b + b_to_c + c_to_d + d_to_a coordinate_1 = {&#39;x&#39;: 5, &#39;y&#39;: 3} triangle_1 = { &#39;point_a&#39;: {&#39;x&#39;: 0, &#39;y&#39;: 0}, &#39;point_b&#39;: {&#39;x&#39;: 3, &#39;y&#39;: 0}, &#39;point_c&#39;: {&#39;x&#39;: 3, &#39;y&#39;: 4}, } rectangle_1 = { &#39;point_a&#39;: {&#39;x&#39;: 2, &#39;y&#39;: 2}, &#39;point_b&#39;: {&#39;x&#39;: 6, &#39;y&#39;: 2}, &#39;point_c&#39;: {&#39;x&#39;: 6, &#39;y&#39;: 6}, &#39;point_d&#39;: {&#39;x&#39;: 2, &#39;y&#39;: 6}, } print(circumference_of_triangle(triangle_1)) print(circumference_of_rectangle(rectangle_1))" />
+<link rel="canonical" href="http://localhost:4000/2022-08-02/yeono-python-10" />
+<meta property="og:url" content="http://localhost:4000/2022-08-02/yeono-python-10" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-08-02T22:15:22+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="연오의 파이썬 공부 10" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-08-02T22:15:22+09:00","datePublished":"2022-08-02T22:15:22+09:00","description":"연습문제 7-11 용의자 = [ {&#39;이름&#39;: &#39;멍멍&#39;, &#39;털&#39;: &#39;흰색&#39;, &#39;주둥이&#39;: &#39;크다&#39;, &#39;발&#39;: &#39;크다&#39;}, {&#39;이름&#39;: &#39;킁킁&#39;, &#39;털&#39;: &#39;검은색&#39;, &#39;주둥이&#39;: &#39;작다&#39;, &#39;발&#39;: &#39;크다&#39;}, {&#39;이름&#39;: &#39;왈왈&#39;, &#39;털&#39;: &#39;흰색&#39;, &#39;주둥이&#39;: &#39;작다&#39;, &#39;발&#39;: &#39;크다&#39;}, {&#39;이름&#39;: &#39;꿀꿀&#39;, &#39;털&#39;: &#39;검은색&#39;, &#39;주둥이&#39;: &#39;작다&#39;, &#39;발&#39;: &#39;작다&#39;}, {&#39;이름&#39;: &#39;낑낑&#39;, &#39;털&#39;: &#39;흰색&#39;, &#39;주둥이&#39;: &#39;작다&#39;, &#39;발&#39;: &#39;작다&#39;}, ] # 범인: 주둥이가 작고, 발이 크고, 흰색 털을 가진 개 유력_용의자 = [] for 개 in 용의자: if 개[&#39;털&#39;] == &#39;흰색&#39; and 개[&#39;발&#39;] == &#39;크다&#39; and 개[&#39;주둥이&#39;] == &#39;작다&#39;: 유력_용의자.append(개[&#39;이름&#39;]) #for 개 in 용의자: # 용의자.remove(개) print() print(유력_용의자) 연습문제 7-11 filter 함수 사용해서 작성하기 용의자 = [ {&#39;이름&#39;: &#39;멍멍&#39;, &#39;털&#39;: &#39;흰색&#39;, &#39;주둥이&#39;: &#39;크다&#39;, &#39;발&#39;: &#39;크다&#39;}, {&#39;이름&#39;: &#39;킁킁&#39;, &#39;털&#39;: &#39;검은색&#39;, &#39;주둥이&#39;: &#39;작다&#39;, &#39;발&#39;: &#39;크다&#39;}, {&#39;이름&#39;: &#39;왈왈&#39;, &#39;털&#39;: &#39;흰색&#39;, &#39;주둥이&#39;: &#39;작다&#39;, &#39;발&#39;: &#39;크다&#39;}, {&#39;이름&#39;: &#39;꿀꿀&#39;, &#39;털&#39;: &#39;검은색&#39;, &#39;주둥이&#39;: &#39;작다&#39;, &#39;발&#39;: &#39;작다&#39;}, {&#39;이름&#39;: &#39;낑낑&#39;, &#39;털&#39;: &#39;흰색&#39;, &#39;주둥이&#39;: &#39;작다&#39;, &#39;발&#39;: &#39;크다&#39;}, ] # 범인: 주둥이가 작고, 발이 크고, 흰색 털을 가진 개 주둥이_용의자 = filter(lambda 개 : 개[&#39;주둥이&#39;] == &#39;작다&#39;, 용의자) 주둥이_발_용의자 = filter(lambda 개: 개[&#39;발&#39;] == &#39;크다&#39;, 주둥이_용의자) 주둥이_발_털_용의자 = filter(lambda 개: 개[&#39;털&#39;] == &#39;흰색&#39;, 주둥이_발_용의자) for 개 in 주둥이_발_털_용의자: print(개[&#39;이름&#39;]) 연습문제 7-12 def faulty_rate(diameters): # 정상: 지름 0.99mm 이상, 1.01mm 미만 working_diameters = list(filter(lambda diameter: 0.99 &lt;= diameter &lt; 1.01, diameters)) return (len(diameters) - len(working_diameters)) / len(diameters) diameters = [0.985, 0.992, 1.004, 0.995, 0.899, 1.001, 1.002, 1.003, 1.009, 0.998] print(faulty_rate(diameters)) # 람다식에서 not을 이용하면 더 간단하게 구현할 수 있다. # lambda diameter: not (0.99 &lt;= diameter &lt; 1.01) 연습문제 7-13 fruits = [&#39;배&#39;, &#39;사과&#39;, &#39;복숭아&#39;, &#39;블루베리&#39;] print(sorted(fruits, key=len, reverse=True)) 반복자와 생성기 반복자: 다음에 무엇을 출력할 차례인지를 기억하여 데이터를 순서대로 꺼낼 수 있도록 돕는 인터페이스이다. iter() 함수는 전달된 데이터의 반복자를 꺼내 반환한다. next() 함수는 반복자를 입력받아 그 반복자가 다음에 출력해야 할 요소를 반환한다. 코드 7-42 it = iter([1, 2, 3]) print(next(it)) print(next(it)) print(next(it)) print(next(it)) 정해둔 순서대로 값을 생성하는 함수를 정의하면, 이 함수를 이용해 값을 하나씩 꺼내는 반복자를 만들 수 있다. 이런 식으로 값을 생성해 내는 반복자를 생성기라고 한다. yield 문: return 문처럼 함수가 값을 반환하고 정지하도록 하는데, 그 함수를 나중에 다시 실행하면 정지했던 위치부터 다시 실행되도록 한다. yield 문을 포함한 함수는 일반적인 함수와 실행 방식이 다르다. 이 함수는 호출되어도 본문을 실행하지 않고 생성기를 반환할 뿐이며, 본문은 생성기가 next() 함수에 전달되었을 때 비로소 실행된다. 코드 7-44 def abc(): &quot;&quot;&quot;a, b, c를 출력하는 생성기를 반환한다.&quot;&quot;&quot; yield &#39;a&#39; yield &#39;b&#39; yield &#39;c&#39; abc_generator = abc() print(next(abc_generator)) print(next(abc_generator)) print(next(abc_generator)) print(next(abc_generator)) print(next(abc_generator)) 코드 7-45 def one_to_three(): &quot;&quot;&quot;1, 2, 3을 반환하는 생성기를 반환한다.&quot;&quot;&quot; yield 1 yield 2 yield 3 one_to_three_generator = one_to_three() print(next(one_to_three_generator)) print(next(one_to_three_generator)) print(next(one_to_three_generator)) 코드 7-46 def one_to_infinite(): &quot;&quot;&quot; 1부터 무한대 범위의 자연수를 순서대로 내는 생성기를 반환한다.&quot;&quot;&quot; n = 1 while True: yield n n += 1 one_to_infinite_generator = one_to_infinite() print(next(one_to_infinite_generator)) print(next(one_to_infinite_generator)) print(next(one_to_infinite_generator)) print(next(one_to_infinite_generator)) print(next(one_to_infinite_generator)) print(next(one_to_infinite_generator)) 생성기는 반복자이므로, 반복자와 마찬가지로 for 문을 순회하거나 리스트, 튜플로 변환할 수 있다. 코드 7-47 def countdown(start, end): &quot;&quot;&quot;start(포함)부터 end(비포함)까지 거꾸로 세는 생성기를 반환한다.&quot;&quot;&quot; n = start while end &lt; n: yield n n -= 1 print(list(countdown(10, 0))) print(tuple(countdown(100, 95))) 생성기 식은 원본 반복 가능 데이터를 가공하여 데이터를 생성한다. 리스트 조건제시법과 유사하다. 코드 7-48 print([e ** 3 for e in range(10)]) 코드 7-51 cube_generator = (e ** 3 for e in range(100000000)) print(next(cube_generator)) print(next(cube_generator)) print(next(cube_generator)) 연습문제 7-14 import random def infinite_random_number(start, end): while True: yield random.randint(start, end) infinite_random_number_generator = infinite_random_number(0, 63) print(next(infinite_random_number_generator)) print(next(infinite_random_number_generator)) print(next(infinite_random_number_generator)) 연습문제 7-15 def input_orders(n): &quot;&quot;&quot;n개의 음료를 주문받아 리스트로 반환한다.&quot;&quot;&quot; return (input() for _ in range(n)) # return [input() for _ in range(n)] for drink in input_orders(3): print(drink, &#39;만들어 주세요!&#39;) 8장 코드 8-1 coordinate_1 = {&#39;x&#39;: 5, &#39;y&#39;: 3} triangle_1 = { &#39;point_a&#39;: {&#39;x&#39;: 0, &#39;y&#39;: 0}, &#39;point_b&#39;: {&#39;x&#39;: 3, &#39;y&#39;: 0}, &#39;point_c&#39;: {&#39;x&#39;: 3, &#39;y&#39;: 4}, } rectangle_1 = { &#39;point_a&#39;: {&#39;x&#39;: 2, &#39;y&#39;: 2}, &#39;point_b&#39;: {&#39;x&#39;: 6, &#39;y&#39;: 2}, &#39;point_c&#39;: {&#39;x&#39;: 6, &#39;y&#39;: 6}, &#39;point_d&#39;: {&#39;x&#39;: 2, &#39;y&#39;: 6}, } 코드 8-3 import math def square(x): &quot;&quot;&quot;전달받은 수의 제곱을 반환한다.&quot;&quot;&quot; return x * x def distance(point_a, point_b): return math.sqrt(square(point_a[&#39;x&#39;] - point_b[&#39;x&#39;]) + square(point_a[&#39;y&#39;] - point_b[&#39;y&#39;])) def circumference_of_triangle(shape): &quot;&quot;&quot;삼각형 데이터를 전달받아 둘레를 구해 반환한다.&quot;&quot;&quot; a_to_b = distance(shape[&#39;point_a&#39;], shape[&#39;point_b&#39;]) b_to_c = distance(shape[&#39;point_b&#39;], shape[&#39;point_c&#39;]) c_to_a = distance(shape[&#39;point_c&#39;], shape[&#39;point_a&#39;]) return a_to_b + b_to_c + c_to_a def circumference_of_rectangle(shape): &quot;&quot;&quot;사각형 데이터를 전달받아 둘레를 구해 반환한다.&quot;&quot;&quot; a_to_b = distance(shape[&#39;point_a&#39;], shape[&#39;point_b&#39;]) b_to_c = distance(shape[&#39;point_b&#39;], shape[&#39;point_c&#39;]) c_to_d = distance(shape[&#39;point_c&#39;], shape[&#39;point_d&#39;]) d_to_a = distance(shape[&#39;point_d&#39;], shape[&#39;point_a&#39;]) return a_to_b + b_to_c + c_to_d + d_to_a coordinate_1 = {&#39;x&#39;: 5, &#39;y&#39;: 3} triangle_1 = { &#39;point_a&#39;: {&#39;x&#39;: 0, &#39;y&#39;: 0}, &#39;point_b&#39;: {&#39;x&#39;: 3, &#39;y&#39;: 0}, &#39;point_c&#39;: {&#39;x&#39;: 3, &#39;y&#39;: 4}, } rectangle_1 = { &#39;point_a&#39;: {&#39;x&#39;: 2, &#39;y&#39;: 2}, &#39;point_b&#39;: {&#39;x&#39;: 6, &#39;y&#39;: 2}, &#39;point_c&#39;: {&#39;x&#39;: 6, &#39;y&#39;: 6}, &#39;point_d&#39;: {&#39;x&#39;: 2, &#39;y&#39;: 6}, } print(circumference_of_triangle(triangle_1)) print(circumference_of_rectangle(rectangle_1))","headline":"연오의 파이썬 공부 10","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-08-02/yeono-python-10"},"url":"http://localhost:4000/2022-08-02/yeono-python-10"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Sunmi Moon
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2022-08-02 22:15:22 +0900">August 02, 2022</time>
+    
+  </div>
+
+  <h1 class="post-title">연오의 파이썬 공부 10</h1>
+  <div class="post-line"></div>
+
+  <p>연습문제 7-11</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">용의자</span> <span class="o">=</span> <span class="p">[</span>
+   <span class="p">{</span><span class="s">'이름'</span><span class="p">:</span> <span class="s">'멍멍'</span><span class="p">,</span> <span class="s">'털'</span><span class="p">:</span> <span class="s">'흰색'</span><span class="p">,</span> <span class="s">'주둥이'</span><span class="p">:</span> <span class="s">'크다'</span><span class="p">,</span> <span class="s">'발'</span><span class="p">:</span> <span class="s">'크다'</span><span class="p">},</span>
+   <span class="p">{</span><span class="s">'이름'</span><span class="p">:</span> <span class="s">'킁킁'</span><span class="p">,</span> <span class="s">'털'</span><span class="p">:</span> <span class="s">'검은색'</span><span class="p">,</span> <span class="s">'주둥이'</span><span class="p">:</span> <span class="s">'작다'</span><span class="p">,</span> <span class="s">'발'</span><span class="p">:</span> <span class="s">'크다'</span><span class="p">},</span>
+   <span class="p">{</span><span class="s">'이름'</span><span class="p">:</span> <span class="s">'왈왈'</span><span class="p">,</span> <span class="s">'털'</span><span class="p">:</span> <span class="s">'흰색'</span><span class="p">,</span> <span class="s">'주둥이'</span><span class="p">:</span> <span class="s">'작다'</span><span class="p">,</span> <span class="s">'발'</span><span class="p">:</span> <span class="s">'크다'</span><span class="p">},</span>
+   <span class="p">{</span><span class="s">'이름'</span><span class="p">:</span> <span class="s">'꿀꿀'</span><span class="p">,</span> <span class="s">'털'</span><span class="p">:</span> <span class="s">'검은색'</span><span class="p">,</span> <span class="s">'주둥이'</span><span class="p">:</span> <span class="s">'작다'</span><span class="p">,</span> <span class="s">'발'</span><span class="p">:</span> <span class="s">'작다'</span><span class="p">},</span>
+   <span class="p">{</span><span class="s">'이름'</span><span class="p">:</span> <span class="s">'낑낑'</span><span class="p">,</span> <span class="s">'털'</span><span class="p">:</span> <span class="s">'흰색'</span><span class="p">,</span> <span class="s">'주둥이'</span><span class="p">:</span> <span class="s">'작다'</span><span class="p">,</span> <span class="s">'발'</span><span class="p">:</span> <span class="s">'작다'</span><span class="p">},</span>
+<span class="p">]</span>
+
+<span class="c1"># 범인: 주둥이가 작고, 발이 크고, 흰색 털을 가진 개
+</span>
+<span class="n">유력_용의자</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">개</span> <span class="ow">in</span> <span class="n">용의자</span><span class="p">:</span>
+   <span class="k">if</span> <span class="n">개</span><span class="p">[</span><span class="s">'털'</span><span class="p">]</span> <span class="o">==</span> <span class="s">'흰색'</span> <span class="ow">and</span> <span class="n">개</span><span class="p">[</span><span class="s">'발'</span><span class="p">]</span> <span class="o">==</span> <span class="s">'크다'</span> <span class="ow">and</span> <span class="n">개</span><span class="p">[</span><span class="s">'주둥이'</span><span class="p">]</span> <span class="o">==</span> <span class="s">'작다'</span><span class="p">:</span>
+       <span class="n">유력_용의자</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">개</span><span class="p">[</span><span class="s">'이름'</span><span class="p">])</span>
+
+<span class="c1">#for 개 in 용의자:
+#    용의자.remove(개)
+</span>
+<span class="k">print</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">유력_용의자</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>연습문제 7-11 filter 함수 사용해서 작성하기</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">용의자</span> <span class="o">=</span> <span class="p">[</span>
+   <span class="p">{</span><span class="s">'이름'</span><span class="p">:</span> <span class="s">'멍멍'</span><span class="p">,</span> <span class="s">'털'</span><span class="p">:</span> <span class="s">'흰색'</span><span class="p">,</span> <span class="s">'주둥이'</span><span class="p">:</span> <span class="s">'크다'</span><span class="p">,</span> <span class="s">'발'</span><span class="p">:</span> <span class="s">'크다'</span><span class="p">},</span>
+   <span class="p">{</span><span class="s">'이름'</span><span class="p">:</span> <span class="s">'킁킁'</span><span class="p">,</span> <span class="s">'털'</span><span class="p">:</span> <span class="s">'검은색'</span><span class="p">,</span> <span class="s">'주둥이'</span><span class="p">:</span> <span class="s">'작다'</span><span class="p">,</span> <span class="s">'발'</span><span class="p">:</span> <span class="s">'크다'</span><span class="p">},</span>
+   <span class="p">{</span><span class="s">'이름'</span><span class="p">:</span> <span class="s">'왈왈'</span><span class="p">,</span> <span class="s">'털'</span><span class="p">:</span> <span class="s">'흰색'</span><span class="p">,</span> <span class="s">'주둥이'</span><span class="p">:</span> <span class="s">'작다'</span><span class="p">,</span> <span class="s">'발'</span><span class="p">:</span> <span class="s">'크다'</span><span class="p">},</span>
+   <span class="p">{</span><span class="s">'이름'</span><span class="p">:</span> <span class="s">'꿀꿀'</span><span class="p">,</span> <span class="s">'털'</span><span class="p">:</span> <span class="s">'검은색'</span><span class="p">,</span> <span class="s">'주둥이'</span><span class="p">:</span> <span class="s">'작다'</span><span class="p">,</span> <span class="s">'발'</span><span class="p">:</span> <span class="s">'작다'</span><span class="p">},</span>
+   <span class="p">{</span><span class="s">'이름'</span><span class="p">:</span> <span class="s">'낑낑'</span><span class="p">,</span> <span class="s">'털'</span><span class="p">:</span> <span class="s">'흰색'</span><span class="p">,</span> <span class="s">'주둥이'</span><span class="p">:</span> <span class="s">'작다'</span><span class="p">,</span> <span class="s">'발'</span><span class="p">:</span> <span class="s">'크다'</span><span class="p">},</span>
+<span class="p">]</span>
+
+<span class="c1"># 범인: 주둥이가 작고, 발이 크고, 흰색 털을 가진 개
+</span>
+<span class="n">주둥이_용의자</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">개</span> <span class="p">:</span> <span class="n">개</span><span class="p">[</span><span class="s">'주둥이'</span><span class="p">]</span> <span class="o">==</span> <span class="s">'작다'</span><span class="p">,</span> <span class="n">용의자</span><span class="p">)</span>
+<span class="n">주둥이_발_용의자</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">개</span><span class="p">:</span> <span class="n">개</span><span class="p">[</span><span class="s">'발'</span><span class="p">]</span> <span class="o">==</span> <span class="s">'크다'</span><span class="p">,</span> <span class="n">주둥이_용의자</span><span class="p">)</span>
+<span class="n">주둥이_발_털_용의자</span> <span class="o">=</span> <span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">개</span><span class="p">:</span> <span class="n">개</span><span class="p">[</span><span class="s">'털'</span><span class="p">]</span> <span class="o">==</span> <span class="s">'흰색'</span><span class="p">,</span> <span class="n">주둥이_발_용의자</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">개</span> <span class="ow">in</span> <span class="n">주둥이_발_털_용의자</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">개</span><span class="p">[</span><span class="s">'이름'</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>연습문제 7-12</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">faulty_rate</span><span class="p">(</span><span class="n">diameters</span><span class="p">):</span>
+   <span class="c1"># 정상: 지름 0.99mm 이상, 1.01mm 미만
+</span>
+   <span class="n">working_diameters</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">diameter</span><span class="p">:</span> <span class="mf">0.99</span> <span class="o">&lt;=</span> <span class="n">diameter</span> <span class="o">&lt;</span> <span class="mf">1.01</span><span class="p">,</span> <span class="n">diameters</span><span class="p">))</span>
+   <span class="k">return</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">diameters</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">working_diameters</span><span class="p">))</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">diameters</span><span class="p">)</span>
+
+
+<span class="n">diameters</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.985</span><span class="p">,</span> <span class="mf">0.992</span><span class="p">,</span> <span class="mf">1.004</span><span class="p">,</span> <span class="mf">0.995</span><span class="p">,</span> <span class="mf">0.899</span><span class="p">,</span> <span class="mf">1.001</span><span class="p">,</span> <span class="mf">1.002</span><span class="p">,</span> <span class="mf">1.003</span><span class="p">,</span> <span class="mf">1.009</span><span class="p">,</span> <span class="mf">0.998</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">faulty_rate</span><span class="p">(</span><span class="n">diameters</span><span class="p">))</span>
+
+<span class="c1"># 람다식에서 not을 이용하면 더 간단하게 구현할 수 있다.
+# lambda diameter: not (0.99 &lt;= diameter &lt; 1.01)
+</span></code></pre></div></div>
+
+<p>연습문제 7-13</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fruits</span> <span class="o">=</span> <span class="p">[</span><span class="s">'배'</span><span class="p">,</span> <span class="s">'사과'</span><span class="p">,</span> <span class="s">'복숭아'</span><span class="p">,</span> <span class="s">'블루베리'</span><span class="p">]</span>
+
+<span class="k">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">fruits</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="nb">len</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h4 id="반복자와-생성기">반복자와 생성기</h4>
+
+<p>반복자: 다음에 무엇을 출력할 차례인지를 기억하여 데이터를 순서대로 꺼낼 수 있도록 돕는 인터페이스이다.
+<code class="language-plaintext highlighter-rouge">iter()</code> 함수는 전달된 데이터의 반복자를 꺼내 반환한다.
+<code class="language-plaintext highlighter-rouge">next()</code> 함수는 반복자를 입력받아 그 반복자가 다음에 출력해야 할 요소를 반환한다.</p>
+
+<p>코드 7-42</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">it</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+
+<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">it</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">it</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">it</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">it</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>정해둔 순서대로 값을 생성하는 함수를 정의하면, 이 함수를 이용해 값을 하나씩 꺼내는 반복자를 만들 수 있다. 이런 식으로 값을 생성해 내는 반복자를 생성기라고 한다.</p>
+
+<p>yield 문: return 문처럼 함수가 값을 반환하고 정지하도록 하는데, 그 함수를 나중에 다시 실행하면 정지했던 위치부터 다시 실행되도록 한다.</p>
+
+<p>yield 문을 포함한 함수는 일반적인 함수와 실행 방식이 다르다. 이 함수는 호출되어도 본문을 실행하지 않고 생성기를 반환할 뿐이며, 본문은 생성기가 <code class="language-plaintext highlighter-rouge">next()</code> 함수에 전달되었을 때 비로소 실행된다.</p>
+
+<p>코드 7-44</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">abc</span><span class="p">():</span>
+   <span class="s">"""a, b, c를 출력하는 생성기를 반환한다."""</span>
+   <span class="k">yield</span> <span class="s">'a'</span>
+   <span class="k">yield</span> <span class="s">'b'</span>
+   <span class="k">yield</span> <span class="s">'c'</span>
+
+<span class="n">abc_generator</span> <span class="o">=</span> <span class="n">abc</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">abc_generator</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">abc_generator</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">abc_generator</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">abc_generator</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">abc_generator</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>코드 7-45</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">one_to_three</span><span class="p">():</span>
+   <span class="s">"""1, 2, 3을 반환하는 생성기를 반환한다."""</span>
+   <span class="k">yield</span> <span class="mi">1</span>
+   <span class="k">yield</span> <span class="mi">2</span>
+   <span class="k">yield</span> <span class="mi">3</span>
+
+<span class="n">one_to_three_generator</span> <span class="o">=</span> <span class="n">one_to_three</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">one_to_three_generator</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">one_to_three_generator</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">one_to_three_generator</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>코드 7-46</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">one_to_infinite</span><span class="p">():</span>
+   <span class="s">""" 1부터 무한대 범위의 자연수를 순서대로 내는 생성기를 반환한다."""</span>
+
+   <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span>
+   <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+       <span class="k">yield</span> <span class="n">n</span>
+       <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="n">one_to_infinite_generator</span> <span class="o">=</span> <span class="n">one_to_infinite</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">one_to_infinite_generator</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">one_to_infinite_generator</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">one_to_infinite_generator</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">one_to_infinite_generator</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">one_to_infinite_generator</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">one_to_infinite_generator</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>생성기는 반복자이므로, 반복자와 마찬가지로 for 문을 순회하거나 리스트, 튜플로 변환할 수 있다.</p>
+
+<p>코드 7-47</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">countdown</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+   <span class="s">"""start(포함)부터 end(비포함)까지 거꾸로 세는 생성기를 반환한다."""</span>
+   <span class="n">n</span> <span class="o">=</span> <span class="n">start</span>
+   <span class="k">while</span> <span class="n">end</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+       <span class="k">yield</span> <span class="n">n</span>
+       <span class="n">n</span> <span class="o">-=</span> <span class="mi">1</span>
+
+<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">countdown</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">countdown</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">95</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<p>생성기 식은 원본 반복 가능 데이터를 가공하여 데이터를 생성한다. 리스트 조건제시법과 유사하다.</p>
+
+<p>코드 7-48</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">([</span><span class="n">e</span> <span class="o">**</span> <span class="mi">3</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)])</span>
+</code></pre></div></div>
+
+<p>코드 7-51</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cube_generator</span> <span class="o">=</span> <span class="p">(</span><span class="n">e</span> <span class="o">**</span> <span class="mi">3</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100000000</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">cube_generator</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">cube_generator</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">cube_generator</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>연습문제 7-14</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">random</span>
+
+<span class="k">def</span> <span class="nf">infinite_random_number</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+
+   <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+       <span class="k">yield</span> <span class="n">random</span><span class="p">.</span><span class="n">randint</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span>
+
+
+<span class="n">infinite_random_number_generator</span> <span class="o">=</span> <span class="n">infinite_random_number</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">63</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">infinite_random_number_generator</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">infinite_random_number_generator</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">infinite_random_number_generator</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>연습문제 7-15</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">input_orders</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+   <span class="s">"""n개의 음료를 주문받아 리스트로 반환한다."""</span>
+   <span class="k">return</span> <span class="p">(</span><span class="nb">input</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>  <span class="c1"># return [input() for _ in range(n)]
+</span>
+
+<span class="k">for</span> <span class="n">drink</span> <span class="ow">in</span> <span class="n">input_orders</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">drink</span><span class="p">,</span> <span class="s">'만들어 주세요!'</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<h2 id="8장">8장</h2>
+
+<p>코드 8-1</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">coordinate_1</span> <span class="o">=</span> <span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+
+<span class="n">triangle_1</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="s">'point_a'</span><span class="p">:</span> <span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+   <span class="s">'point_b'</span><span class="p">:</span> <span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+   <span class="s">'point_c'</span><span class="p">:</span> <span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="mi">4</span><span class="p">},</span>
+<span class="p">}</span>
+
+<span class="n">rectangle_1</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="s">'point_a'</span><span class="p">:</span> <span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span>
+   <span class="s">'point_b'</span><span class="p">:</span> <span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span>
+   <span class="s">'point_c'</span><span class="p">:</span> <span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="mi">6</span><span class="p">},</span>
+   <span class="s">'point_d'</span><span class="p">:</span> <span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="mi">6</span><span class="p">},</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>코드 8-3</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">math</span>
+
+
+<span class="k">def</span> <span class="nf">square</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+   <span class="s">"""전달받은 수의 제곱을 반환한다."""</span>
+   <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+
+
+<span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="n">point_a</span><span class="p">,</span> <span class="n">point_b</span><span class="p">):</span>
+   <span class="k">return</span> <span class="n">math</span><span class="p">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">square</span><span class="p">(</span><span class="n">point_a</span><span class="p">[</span><span class="s">'x'</span><span class="p">]</span> <span class="o">-</span> <span class="n">point_b</span><span class="p">[</span><span class="s">'x'</span><span class="p">])</span> <span class="o">+</span> <span class="n">square</span><span class="p">(</span><span class="n">point_a</span><span class="p">[</span><span class="s">'y'</span><span class="p">]</span> <span class="o">-</span> <span class="n">point_b</span><span class="p">[</span><span class="s">'y'</span><span class="p">]))</span>
+
+
+<span class="k">def</span> <span class="nf">circumference_of_triangle</span><span class="p">(</span><span class="n">shape</span><span class="p">):</span>
+   <span class="s">"""삼각형 데이터를 전달받아 둘레를 구해 반환한다."""</span>
+   <span class="n">a_to_b</span> <span class="o">=</span> <span class="n">distance</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="s">'point_a'</span><span class="p">],</span> <span class="n">shape</span><span class="p">[</span><span class="s">'point_b'</span><span class="p">])</span>
+   <span class="n">b_to_c</span> <span class="o">=</span> <span class="n">distance</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="s">'point_b'</span><span class="p">],</span> <span class="n">shape</span><span class="p">[</span><span class="s">'point_c'</span><span class="p">])</span>
+   <span class="n">c_to_a</span> <span class="o">=</span> <span class="n">distance</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="s">'point_c'</span><span class="p">],</span> <span class="n">shape</span><span class="p">[</span><span class="s">'point_a'</span><span class="p">])</span>
+
+   <span class="k">return</span> <span class="n">a_to_b</span> <span class="o">+</span> <span class="n">b_to_c</span> <span class="o">+</span> <span class="n">c_to_a</span>
+
+
+<span class="k">def</span> <span class="nf">circumference_of_rectangle</span><span class="p">(</span><span class="n">shape</span><span class="p">):</span>
+   <span class="s">"""사각형 데이터를 전달받아 둘레를 구해 반환한다."""</span>
+   <span class="n">a_to_b</span> <span class="o">=</span> <span class="n">distance</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="s">'point_a'</span><span class="p">],</span> <span class="n">shape</span><span class="p">[</span><span class="s">'point_b'</span><span class="p">])</span>
+   <span class="n">b_to_c</span> <span class="o">=</span> <span class="n">distance</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="s">'point_b'</span><span class="p">],</span> <span class="n">shape</span><span class="p">[</span><span class="s">'point_c'</span><span class="p">])</span>
+   <span class="n">c_to_d</span> <span class="o">=</span> <span class="n">distance</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="s">'point_c'</span><span class="p">],</span> <span class="n">shape</span><span class="p">[</span><span class="s">'point_d'</span><span class="p">])</span>
+   <span class="n">d_to_a</span> <span class="o">=</span> <span class="n">distance</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="s">'point_d'</span><span class="p">],</span> <span class="n">shape</span><span class="p">[</span><span class="s">'point_a'</span><span class="p">])</span>
+
+   <span class="k">return</span> <span class="n">a_to_b</span> <span class="o">+</span> <span class="n">b_to_c</span> <span class="o">+</span> <span class="n">c_to_d</span> <span class="o">+</span> <span class="n">d_to_a</span>
+
+
+<span class="n">coordinate_1</span> <span class="o">=</span> <span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+
+<span class="n">triangle_1</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="s">'point_a'</span><span class="p">:</span> <span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+   <span class="s">'point_b'</span><span class="p">:</span> <span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+   <span class="s">'point_c'</span><span class="p">:</span> <span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="mi">4</span><span class="p">},</span>
+<span class="p">}</span>
+
+<span class="n">rectangle_1</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="s">'point_a'</span><span class="p">:</span> <span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span>
+   <span class="s">'point_b'</span><span class="p">:</span> <span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span>
+   <span class="s">'point_c'</span><span class="p">:</span> <span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="mi">6</span><span class="p">},</span>
+   <span class="s">'point_d'</span><span class="p">:</span> <span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="mi">6</span><span class="p">},</span>
+<span class="p">}</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">circumference_of_triangle</span><span class="p">(</span><span class="n">triangle_1</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">circumference_of_rectangle</span><span class="p">(</span><span class="n">rectangle_1</span><span class="p">))</span>
+</code></pre></div></div>
+
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/2022-08-03/yeono-python-11" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/2022-08-01/yeono-python-9" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-07-30 14:29:33 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TIL) Facebook Clone Coding(Next.js, Tailwind CSS, Responsive) | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="TIL) Facebook Clone Coding(Next.js, Tailwind CSS, Responsive)" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="(달성/목표) 뽀모도리 1일 3/3 1주 8 /40" />
+<meta property="og:description" content="(달성/목표) 뽀모도리 1일 3/3 1주 8 /40" />
+<link rel="canonical" href="http://localhost:4000/2022-11-01/TIL" />
+<meta property="og:url" content="http://localhost:4000/2022-11-01/TIL" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-11-01T12:18:07+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TIL) Facebook Clone Coding(Next.js, Tailwind CSS, Responsive)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-11-01T12:18:07+09:00","datePublished":"2022-11-01T12:18:07+09:00","description":"(달성/목표) 뽀모도리 1일 3/3 1주 8 /40","headline":"TIL) Facebook Clone Coding(Next.js, Tailwind CSS, Responsive)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-11-01/TIL"},"url":"http://localhost:4000/2022-11-01/TIL"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Sunmi Moon
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2022-11-01 12:18:07 +0900">November 01, 2022</time>
+    
+  </div>
+
+  <h1 class="post-title">TIL) Facebook Clone Coding(Next.js, Tailwind CSS, Responsive)</h1>
+  <div class="post-line"></div>
+
+  <table>
+  <thead>
+    <tr>
+      <th>(달성/목표)</th>
+      <th>뽀모도리</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1일</td>
+      <td>3/3</td>
+    </tr>
+    <tr>
+      <td>1주</td>
+      <td>8 /40</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="blob">Blob</h3>
+<p>Binary Large Object. 그림, 사운드, 영상 같은 멀티미디어 데이터를 다룰 때 사용한다.</p>
+
+<p>firebase가 많이 바뀌었고, 그래서 이미지를 업로드하는 과정에서 막혔다. 업로드를 어떻게 하는 것일까..?</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+  <span class="kd">const</span> <span class="nx">sendPost</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">inputRef</span><span class="p">.</span><span class="nx">current</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">docRef</span> <span class="o">=</span> <span class="nx">addDoc</span><span class="p">(</span><span class="nx">collection</span><span class="p">(</span><span class="nx">db</span><span class="p">,</span> <span class="dl">"</span><span class="s2">post</span><span class="dl">"</span><span class="p">),</span> <span class="p">{</span>
+        <span class="na">message</span><span class="p">:</span> <span class="nx">inputRef</span><span class="p">.</span><span class="nx">current</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span>
+        <span class="na">name</span><span class="p">:</span> <span class="nx">session</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+        <span class="na">email</span><span class="p">:</span> <span class="nx">session</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">email</span><span class="p">,</span>
+        <span class="na">image</span><span class="p">:</span> <span class="nx">session</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">image</span><span class="p">,</span>
+        <span class="na">timestamp</span><span class="p">:</span> <span class="nx">serverTimestamp</span><span class="p">(),</span>
+      <span class="p">}).</span><span class="nx">then</span><span class="p">((</span><span class="nx">docRef</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">imageToPost</span><span class="p">)</span> <span class="p">{</span>
+          <span class="kd">const</span> <span class="nx">storage</span> <span class="o">=</span> <span class="nx">getStorage</span><span class="p">(</span><span class="nx">app</span><span class="p">);</span>
+          <span class="kd">const</span> <span class="nx">storageRef</span> <span class="o">=</span> <span class="nx">ref</span><span class="p">(</span><span class="nx">storage</span><span class="p">,</span> <span class="s2">`post/</span><span class="p">${</span><span class="nx">doc</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+
+          <span class="nx">removeImage</span><span class="p">();</span>
+        <span class="p">}</span>
+      <span class="p">});</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Document written with ID: </span><span class="dl">"</span><span class="p">,</span> <span class="nx">docRef</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">"</span><span class="s2">Error adding document: </span><span class="dl">"</span><span class="p">,</span> <span class="nx">e</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="nx">inputRef</span><span class="p">.</span><span class="nx">current</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="dl">""</span><span class="p">;</span>
+  <span class="p">};</span>
+
+</code></pre></div></div>
+
+<hr />
+
+<p>화) 운동</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>복근</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>3/3</td>
+    </tr>
+  </tbody>
+</table>
+
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/2022-11-02/TIL" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/2022-10-31/TIL" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-07-30 14:29:33 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

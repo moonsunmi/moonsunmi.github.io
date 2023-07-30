@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TIL) CORS 에러와 Django에서 해결 | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="TIL) CORS 에러와 Django에서 해결" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="프론트에서 다음과 같은 CORS 에러가 발생했다." />
+<meta property="og:description" content="프론트에서 다음과 같은 CORS 에러가 발생했다." />
+<link rel="canonical" href="http://localhost:4000/2023-07-28/TIL" />
+<meta property="og:url" content="http://localhost:4000/2023-07-28/TIL" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-07-28T12:18:07+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TIL) CORS 에러와 Django에서 해결" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2023-07-28T12:18:07+09:00","datePublished":"2023-07-28T12:18:07+09:00","description":"프론트에서 다음과 같은 CORS 에러가 발생했다.","headline":"TIL) CORS 에러와 Django에서 해결","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2023-07-28/TIL"},"url":"http://localhost:4000/2023-07-28/TIL"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Sunmi Moon
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2023-07-28 12:18:07 +0900">July 28, 2023</time>
+    
+  </div>
+
+  <h1 class="post-title">TIL) CORS 에러와 Django에서 해결</h1>
+  <div class="post-line"></div>
+
+  <p>프론트에서 다음과 같은 CORS 에러가 발생했다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Access to XMLHttpRequest at 'https://...' from origin 'http://localhost:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+</code></pre></div></div>
+
+<p>여기서 CORS는 Cross-Origin Resource Sharing 교차 출처 리소스 공유 정책을 말한다.
+origin은 출처를 말하는데, protocol + host(사이트 도메인) + 포트번호
+즉, 나의 경우는 http://localhost:3000</p>
+
+<p>공유 정책에는 Same Origin 정책과 Cross Origin 	정책이 있고, 그 정책들은 HTTP 요청에 따라 다른 정책으로 지원한다.</p>
+
+<p>SOP는 동일 출처 정책으로, 동일한 출처에서만 리소스를 공유할 수 있다. 동일 출처가 아닌 경우 접근을 차단하는 정책. 다른 사이트에서 리소스를 가져오지 않으니 해커의 공격에 조금 더 안전하다.</p>
+
+<p>여기서 출처의 비교는 브라우저에서 한다. 그래서 네트워크 탭에서는 요청 정보가 제대로 보이는데, CORS 에러는 뜨게 된다.</p>
+
+<p>당연히 동일 출처의 리소스만 사용하는 것에는 한계가 있다. 그래서 SOP에서 예외 사항을 두었는데, 그중에 하나가 바로 CORS 교차 출처 리소스 공유 정책.
+SOP 정책을 위반하더라도 CORS 정책을 지키면 다른 출처의 리소스도 사용 가능하게 된다.</p>
+
+<p>클라이언트에서 서버에 요청 시, 요청 헤더에 origin 정보를 함께 보낸다. 그리고 서버에서 응답 시, 응답 헤더에 Access-Control-Allow-Origin 정보를 함께 보낸다.</p>
+
+<p>브라우저에서는 이 둘을 비교하여 접근을 차단할지 말지 정한다.</p>
+
+<p>Django에서는 Access-Controll-Allow-Origin을 Django-cors-headers를 사용해서 추가할 수 있다.</p>
+
+<p>setting을 다음과 같이 해 주면, 교차 출처 리소스를 무조건 가져올 수 있고,</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CORS_ORIGIN_ALLOW_ALL = False
+</code></pre></div></div>
+<p>다음과 같이 whitelist에 추가해 주면, 해당 출처만 허용된다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CORS_ORIGIN_WHITELIST = [
+    "http://localhost:3000",
+]
+</code></pre></div></div>
+
+
+</div>
+
+
+
+<div class="pagination">
+  
+  
+    <a href="/2023-07-24/TIL" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-07-30 14:29:33 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

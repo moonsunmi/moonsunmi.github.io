@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>w3school Javascript | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="w3school Javascript" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="(달성/목표) 뽀모도리 등 가슴 배 1일 5/4 5/5 5/5 3/3 1주 5/40      " />
+<meta property="og:description" content="(달성/목표) 뽀모도리 등 가슴 배 1일 5/4 5/5 5/5 3/3 1주 5/40      " />
+<link rel="canonical" href="http://localhost:4000/2022-10-03/w3school" />
+<meta property="og:url" content="http://localhost:4000/2022-10-03/w3school" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-10-03T12:18:07+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="w3school Javascript" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-10-03T12:18:07+09:00","datePublished":"2022-10-03T12:18:07+09:00","description":"(달성/목표) 뽀모도리 등 가슴 배 1일 5/4 5/5 5/5 3/3 1주 5/40      ","headline":"w3school Javascript","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-10-03/w3school"},"url":"http://localhost:4000/2022-10-03/w3school"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Sunmi Moon
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2022-10-03 12:18:07 +0900">October 03, 2022</time>
+    
+  </div>
+
+  <h1 class="post-title">w3school Javascript</h1>
+  <div class="post-line"></div>
+
+  <table>
+  <thead>
+    <tr>
+      <th>(달성/목표)</th>
+      <th>뽀모도리</th>
+      <th>등</th>
+      <th>가슴</th>
+      <th>배</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1일</td>
+      <td>5/4</td>
+      <td>5/5</td>
+      <td>5/5</td>
+      <td>3/3</td>
+    </tr>
+    <tr>
+      <td>1주</td>
+      <td>5/40</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="object-properties">Object Properties</h3>
+
+<p>프로퍼티는 자바스크립트 오브젝트와 관련 있는 값이다. 자바스크립트 오브젝트는 프로퍼티를 순서와 상관 없이 모아둔 것이다.</p>
+
+<h4 id="for-in-loop">for… in loop</h4>
+
+<p>다음의 for … in loop는 오브젝트 안에 있는 프로퍼티를 전부 돌면서 실행한다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">person</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">fname</span><span class="p">:</span> <span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">lname</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Doe</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">age</span><span class="p">:</span> <span class="mi">25</span>
+<span class="p">};</span>
+
+<span class="kd">let</span> <span class="nx">text</span> <span class="o">=</span> <span class="dl">""</span><span class="p">;</span>
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">x</span> <span class="k">in</span> <span class="nx">person</span><span class="p">){</span>
+  <span class="nx">text</span> <span class="o">+=</span> <span class="nx">person</span><span class="p">[</span><span class="nx">x</span><span class="p">];</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="프로퍼티-추가삭제">프로퍼티 추가/삭제</h4>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nx">person</span><span class="p">.</span><span class="nx">nationality</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">English</span><span class="dl">"</span><span class="p">;</span>  <span class="c1">// 존재하지 않는 프로퍼티를 이렇게 써 주면 추가가 된다.</span>
+  <span class="k">delete</span> <span class="nx">person</span><span class="p">.</span><span class="nx">nationality</span><span class="p">;</span> <span class="c1">// 삭제는 'delete'로.</span>
+</code></pre></div></div>
+
+<p>delete는 오브젝트의 삭제를 위해서 디자인된 것. 함수나 변수 등에 사용할 수는 없다.</p>
+
+<p>오브젝트 안에 오브젝트를 포함할 수 있다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">carOwner</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">name</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">,</span>
+  <span class="nx">age</span> <span class="o">=</span> <span class="mi">24</span><span class="p">,</span>
+  <span class="nx">cars</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">car1</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Ford</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">car2</span><span class="p">:</span> <span class="dl">"</span><span class="s2">BMW</span><span class="dl">"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">carOwner</span><span class="p">.</span><span class="nx">cars</span><span class="p">.</span><span class="nx">car1</span><span class="p">;</span> <span class="c1">// 이렇게 접근한다.</span>
+<span class="nx">carOwner</span><span class="p">[</span><span class="dl">"</span><span class="s2">cars</span><span class="dl">"</span><span class="p">][</span><span class="dl">"</span><span class="s2">car1</span><span class="dl">"</span><span class="p">];</span> <span class="c1">// 이렇게 접근한다.</span>
+</code></pre></div></div>
+
+<p>오브젝트들을 배열로 만들 수도 있고, 배열이 오브젝트가 될 수도 있다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">carOwner</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">name</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">,</span>
+  <span class="nx">age</span> <span class="o">=</span> <span class="mi">24</span><span class="p">,</span>
+  <span class="nx">cars</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Ford</span><span class="dl">"</span><span class="p">,</span> <span class="na">models</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Mustang</span><span class="dl">"</span><span class="p">]},</span>
+    <span class="p">{</span><span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">BMW</span><span class="dl">"</span><span class="p">,</span> <span class="na">models</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">X3</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">X5</span><span class="dl">"</span><span class="p">]}</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>값에 접근하려면 다음과 같이.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">carOwer</span><span class="p">.</span><span class="nx">cars</span><span class="p">){</span>
+  <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">j</span> <span class="k">in</span> <span class="nx">carOwer</span><span class="p">.</span><span class="nx">cars</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">models</span><span class="p">){</span>
+    <span class="nx">carOwer</span><span class="p">.</span><span class="nx">cars</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">models</span><span class="p">[</span><span class="nx">j</span><span class="p">];</span> <span class="c1">// 이렇게 접근한다.</span>
+  <span class="p">}</span> 
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">Object.values</code>를 이용하면 오브젝트 안에 있는 프로퍼티들을 배열로 만들 수 있다. <code class="language-plaintext highlighter-rouge">JSON.stringify</code>를 이용하면 프로퍼티들을 문자열로 만들 수 있다. <code class="language-plaintext highlighter-rouge">JSON.stringify</code>는 함수는 출력하지 않는다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">person</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">name</span><span class="p">:</span> <span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">age</span><span class="p">:</span> <span class="mi">25</span>
+<span class="p">}</span>
+<span class="kd">const</span> <span class="nx">myArray</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">values</span><span class="p">(</span><span class="nx">person</span><span class="p">);</span> <span class="c1">// "John,25" </span>
+<span class="kd">let</span> <span class="nx">myString</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">person</span><span class="p">);</span> <span class="c1">// {"name":"John","age":30,"city":"New York"}</span>
+</code></pre></div></div>
+
+<h3 id="자바스크립트-접근자">자바스크립트 접근자</h3>
+
+<p>Getter/Setter 이런 상황에서는 메서드를 쓰는 게 아니라 getter와 setter를 쓰자.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">person</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="p">...</span>
+  <span class="na">language</span><span class="p">:</span> <span class="dl">"</span><span class="s2">English</span><span class="dl">"</span><span class="p">,</span>
+  <span class="kd">get</span> <span class="nx">lang</span><span class="p">(){</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">language</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="kd">set</span> <span class="nx">lang</span><span class="p">(</span><span class="nx">lang</span><span class="p">){</span>
+    <span class="k">this</span><span class="p">.</span><span class="na">language</span><span class="p">:</span> <span class="nx">lang</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Getter/Setter 추가할 때 <code class="language-plaintext highlighter-rouge">Object.defineProperty()</code> 메서드를 사용한다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span><span class="na">counter</span> <span class="p">:</span> <span class="mi">0</span><span class="p">};</span>
+
+<span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="dl">"</span><span class="s2">reset</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">get</span> <span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="nx">counter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">});</span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="dl">"</span><span class="s2">increment</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">get</span> <span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="nx">counter</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">});</span>
+<span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="dl">"</span><span class="s2">add</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span>
+  <span class="na">set</span> <span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">num</span><span class="p">)</span> <span class="p">{</span> <span class="k">this</span><span class="p">.</span><span class="nx">counter</span> <span class="o">+=</span> <span class="nx">num</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<h3 id="오브젝트-생성자">오브젝트 생성자</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Person</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">age</span><span class="p">){</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="nx">age</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">changeName</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">name</span><span class="p">){</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>오브젝트 생성자에 프러퍼티를 추가할 수는 없다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Person</span><span class="p">.</span><span class="nx">nationality</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">English</span><span class="dl">"</span><span class="p">;</span> <span class="c1">// X 추가 안 됨.</span>
+</code></pre></div></div>
+
+<h3 id="프로토타입">프로토타입</h3>
+
+<p>모든 오브젝트는 프로토타입에서 프러퍼티와 메서드를 상속 받는다.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Date</code> 오브젝트는 <code class="language-plaintext highlighter-rouge">Date.prototype</code>에서 상속 받고,</li>
+  <li><code class="language-plaintext highlighter-rouge">Array</code> 오브젝트는 <code class="language-plaintext highlighter-rouge">Array.prototype</code>에서 상속 받는다.</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">Object.prototype</code>은 프로토타입의 가장 상위. 따라서 <code class="language-plaintext highlighter-rouge">Date</code> 오브젝트는 <code class="language-plaintext highlighter-rouge">Object.prototype</code>을 상속받는다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">Person</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">nationality</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">English</span><span class="dl">"</span><span class="p">;</span> <span class="c1">// 프로포탙입을 이용하면 오브젝트 생성자에 프로퍼티를 추가할 수 있다.</span>
+</code></pre></div></div>
+
+<h3 id="map">Map</h3>
+
+<h4 id="object-vs-map">Object vs. Map</h4>
+
+<ul>
+  <li>Object는 Iterable 객체(Symbol.iterator 속성에 특별한 함수가 있어서 for 문 등으로 루프를 돌 수 있다.), Map은 Iterable 객체가 아니다.</li>
+  <li>Object는 size 프러퍼티가 없는데, Map은 있다.</li>
+  <li>Object는 Key가 무조건 문자열이어야 하는데, Map은 어떤 타입이든 상관 없다.</li>
+  <li>Object는 Key가 정렬되어 있지 않은데, Map은 정렬되어 있다.</li>
+  <li>Object는 디폴트 키를 가지는데, Map은 가지지 않는다.</li>
+</ul>
+
+<p>그런데 Map의 원소를 추출할 때 쓰는 다음의 메서드는 iterable 오브젝트를 반환한다.</p>
+
+<ul>
+  <li>Map.forEach() : value, key</li>
+  <li>Map.entries() : <code class="language-plaintext highlighter-rouge">[key, value]</code></li>
+  <li>Map.keys(): key</li>
+  <li>Map.values(): value</li>
+</ul>
+
+<p>따라서 다음과 같이 for문으로 루프를 돈다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">text</span> <span class="o">=</span> <span class="dl">""</span><span class="p">;</span>
+<span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">x</span> <span class="k">of</span> <span class="nx">fruits</span><span class="p">.</span><span class="nx">entries</span><span class="p">())</span> <span class="p">{</span>
+  <span class="nx">text</span> <span class="o">+=</span> <span class="nx">x</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="함수">함수</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">myFunction</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">){</span>
+  <span class="nx">arguments</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="c1">// arguments의 개수</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="arrow-function">arrow function</h4>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// ES5</span>
+<span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">y</span><span class="p">,</span> <span class="nx">z</span><span class="p">){</span>
+  <span class="k">return</span> <span class="nx">y</span> <span class="o">*</span> <span class="nx">z</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="c1">// ES6</span>
+<span class="kd">const</span> <span class="nx">x</span> <span class="o">=</span> <span class="p">(</span><span class="nx">y</span><span class="p">,</span> <span class="nx">z</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">y</span> <span class="o">*</span> <span class="nx">z</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>return문만 있을 때 생략이 가능한 것이므로, 다음과 같이 쓰는 버릇을 들이는 게 좋다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">x</span> <span class="o">=</span> <span class="p">(</span><span class="nx">y</span><span class="p">,</span> <span class="nx">z</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="k">return</span> <span class="nx">y</span> <span class="o">*</span> <span class="nx">z</span><span class="p">;}</span>
+</code></pre></div></div>
+
+<h4 id="함수-파라미터">함수 파라미터</h4>
+
+<p>전달될 arguments가 몇 개가 될지 몰라 파라미터를 정해 둘 수 없다면, 다음과 같이 arguments 오브젝트 사용하기</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">x</span> <span class="o">=</span> <span class="nx">findMax</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">123</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">115</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">88</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">findMax</span><span class="p">(){</span>
+  <span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="o">-</span><span class="kc">Infinity</span><span class="p">;</span>
+  <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">arguments</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">arguments</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="nx">max</span><span class="p">){</span>
+      <span class="nx">max</span> <span class="o">=</span> <span class="nx">arguments</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">max</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>위 함수는 어느 오브젝트에도 속해 있지 않아 보이지만, 사실 글로벌 오브젝트가 존재한다. 이 함수는 자동으로 window 함수가 된다.</p>
+
+<h3 id="function-call">function call</h3>
+
+<p>call()을 이용하면, 다른 오브젝트에 있는 메서드를 이용할 수 있다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">person</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">fullName</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">city</span><span class="p">,</span> <span class="nx">country</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">firstName</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> </span><span class="dl">"</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">lastName</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">,</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">city</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">,</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">country</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">const</span> <span class="nx">person1</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">firstName</span><span class="p">:</span><span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">lastName</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Doe</span><span class="dl">"</span>
+<span class="p">}</span>
+<span class="kd">const</span> <span class="nx">person2</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">firstName</span><span class="p">:</span><span class="dl">"</span><span class="s2">Mary</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">lastName</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Doe</span><span class="dl">"</span>
+<span class="p">}</span>
+
+<span class="nx">person</span><span class="p">.</span><span class="nx">fullName</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">person1</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Oslo</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Norway</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// "John Doe ..."</span>
+<span class="nx">person</span><span class="p">.</span><span class="nx">fullName</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">person2</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Seoul</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Korea</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// "Mary Doe ..."</span>
+<span class="nx">person</span><span class="p">.</span><span class="nx">fullName</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">person2</span><span class="p">,</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Seoul</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Korea</span><span class="dl">"</span><span class="p">]);</span> <span class="c1">// "Mary Doe ..."</span>
+</code></pre></div></div>
+
+<p>apply() 메서드는 call() 메서드와 역할은 비슷한데, arguments를 배열로 전달한다는 차이가 있다.</p>
+
+<p>배열에서 최댓값을 찾을 때 apply() 메서드를 이용할 수 있다.</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="nx">아무거나</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]);</span> <span class="c1">// 아무거나: Math, " ", 0 등등... 오브젝트가 아니라서</span>
+</code></pre></div></div>
+
+<h3 id="function-bind">Function Bind</h3>
+
+<p>bind는 오브젝트의 메서드를 빌려온다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">person</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">firstName</span><span class="p">:</span><span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">lastName</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Doe</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">fullName</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">firstName</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> </span><span class="dl">"</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">lastName</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">member</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">firstName</span><span class="p">:</span><span class="dl">"</span><span class="s2">Hege</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">lastName</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Nilsen</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="nx">fullName</span> <span class="o">=</span> <span class="nx">person</span><span class="p">.</span><span class="nx">fullName</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">member</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>callback 함수: 어떤 이벤트가 일어나거나 어떤 시점에 도달했을 때 시스템이 호출하는 함수.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">person</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">firstName</span><span class="p">:</span><span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">lastName</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Doe</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">display</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">demo</span><span class="dl">"</span><span class="p">);</span>
+    <span class="nx">x</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">firstName</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> </span><span class="dl">"</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">lastName</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">person</span><span class="p">.</span><span class="nx">display</span><span class="p">();</span>  <span class="c1">// "John Doe"가 제대로 출력된다.</span>
+<span class="nx">setTimeout</span><span class="p">(</span><span class="nx">person</span><span class="p">.</span><span class="nx">display</span><span class="p">,</span> <span class="mi">3000</span><span class="p">);</span> <span class="c1">// 3초 뒤에 undefined가 출력된다.</span>
+</code></pre></div></div>
+
+<p>함수가 callback으로 호출되면, this는 값을 잃어 버리고 undefined가 된다. 이것을 해결해 주는 게 bind.</p>
+
+<p>다음과 같이 해 주면 문제가 해결된다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">display</span> <span class="o">=</span> <span class="nx">person</span><span class="p">.</span><span class="nx">display</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">person</span><span class="p">);</span>
+<span class="nx">setTimeout</span><span class="p">(</span><span class="nx">display</span><span class="p">,</span> <span class="mi">3000</span><span class="p">);</span>
+</code></pre></div></div>
+
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/2022-10-04/w3school" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/2022-10-02/10th-week" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-07-30 14:29:33 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

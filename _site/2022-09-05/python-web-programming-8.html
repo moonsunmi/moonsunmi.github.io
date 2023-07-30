@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>파이썬 웹 프로그래밍 공부 8 | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="파이썬 웹 프로그래밍 공부 8" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="프로젝트 첫 페이지 만들기" />
+<meta property="og:description" content="프로젝트 첫 페이지 만들기" />
+<link rel="canonical" href="http://localhost:4000/2022-09-05/python-web-programming-8" />
+<meta property="og:url" content="http://localhost:4000/2022-09-05/python-web-programming-8" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-09-05T22:21:52+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="파이썬 웹 프로그래밍 공부 8" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-09-05T22:21:52+09:00","datePublished":"2022-09-05T22:21:52+09:00","description":"프로젝트 첫 페이지 만들기","headline":"파이썬 웹 프로그래밍 공부 8","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-09-05/python-web-programming-8"},"url":"http://localhost:4000/2022-09-05/python-web-programming-8"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Sunmi Moon
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2022-09-05 22:21:52 +0900">September 05, 2022</time>
+    
+  </div>
+
+  <h1 class="post-title">파이썬 웹 프로그래밍 공부 8</h1>
+  <div class="post-line"></div>
+
+  <h2 id="프로젝트-첫-페이지-만들기">프로젝트 첫 페이지 만들기</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">django.views.generic.base</span> <span class="kn">import</span> <span class="n">TemplateView</span>
+<span class="kn">from</span> <span class="nn">django.apps</span> <span class="kn">import</span> <span class="n">apps</span>
+
+<span class="k">class</span> <span class="nc">HomeView</span><span class="p">(</span><span class="n">TemplateView</span><span class="p">):</span>
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s">'home.html'</span>
+
+    <span class="k">def</span> <span class="nf">get_context_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">context</span> <span class="o">=</span> <span class="nb">super</span><span class="p">().</span><span class="n">get_context_data</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="c1"># context['app_list'] = ['polls', 'books']
+</span>        <span class="n">dictVerbose</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">app</span> <span class="ow">in</span> <span class="n">apps</span><span class="p">.</span><span class="n">get_app_configs</span><span class="p">():</span>
+            <span class="k">if</span> <span class="s">'site-packages'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">app</span><span class="p">.</span><span class="n">path</span><span class="p">:</span>
+                <span class="n">dictVerbose</span><span class="p">[</span><span class="n">app</span><span class="p">.</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="n">app</span><span class="p">.</span><span class="n">verbose_name</span>
+        <span class="n">context</span><span class="p">[</span><span class="s">'verbose_dict'</span><span class="p">]</span> <span class="o">=</span> <span class="n">dictVerbose</span>
+        <span class="k">return</span> <span class="n">context</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">get_app_configs()</code> 메서드는 settings.py 파일의 <code class="language-plaintext highlighter-rouge">INSTALLED_APPS</code>에 등록된 각 앱의 설정 클래스를 담은 리스트를 반환한다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">if 'site-packages' not in app.path:</code></p>
+<ul>
+  <li>app: 각 앱의 설정 클래스.</li>
+  <li>app.path: 애플리케이션 물리적 경로(C:\RedBook\ch5\books)</li>
+  <li><code class="language-plaintext highlighter-rouge">if 'site-packages' not in</code>: ‘site-packages’ 문자열이 들어 있으면 외부 라이브러리앱이므로 이 앱을 제외한다.</li>
+</ul>
+
+<p>polls/views.py</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">django.views</span> <span class="kn">import</span> <span class="n">generic</span>
+
+
+<span class="k">class</span> <span class="nc">IndexView</span><span class="p">(</span><span class="n">generic</span><span class="p">.</span><span class="n">ListView</span><span class="p">):</span> <span class="c1"># def index(request):
+</span>    <span class="n">template_name</span> <span class="o">=</span> <span class="s">'polls/index.html'</span>
+    <span class="n">context_object_name</span> <span class="o">=</span> <span class="s">'latest_question_list'</span>
+
+    <span class="k">def</span> <span class="nf">get_queryset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+         <span class="k">return</span> <span class="n">Question</span><span class="p">.</span><span class="n">objects</span><span class="p">.</span><span class="nb">all</span><span class="p">().</span><span class="n">order_by</span><span class="p">(</span><span class="s">'-pub_date'</span><span class="p">)[:</span><span class="mi">5</span><span class="p">]</span>
+
+
+<span class="k">class</span> <span class="nc">DetailView</span><span class="p">(</span><span class="n">generic</span><span class="p">.</span><span class="n">DetailView</span><span class="p">):</span> <span class="c1">#def detail(request, question_id):
+</span>    <span class="n">model</span> <span class="o">=</span> <span class="n">Question</span>
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s">'polls/detail.html'</span>
+
+
+<span class="k">class</span> <span class="nc">ResultsView</span><span class="p">(</span><span class="n">generic</span><span class="p">.</span><span class="n">DetailView</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Question</span>
+    <span class="n">template_name</span> <span class="o">=</span> <span class="s">'polls/results.html'</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>테이블에 들어 있는 모든 레코드를 가져와 구성하는 경우에는 테이블명, 즉 모델 클래스명만 지정해 주면 된다.</p>
+  </li>
+  <li>
+    <p>DetailView를 상속받는 경우 특정 객체 하나를 컨텍스트 변수에 담아서 템플릿 시스템에 넘겨 주면 된다. 특정 객체를 테이블에서 Primary Key로 조회해서 가져오는 경우에는 테이블명, 즉 모델 클래스명만 지정해주면 됩니다.</p>
+  </li>
+</ul>
+
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/2022-09-06/python-web-programming-9" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/2022-09-04/python-web-programming-7" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-07-30 14:29:33 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

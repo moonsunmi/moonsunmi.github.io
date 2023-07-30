@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>파이썬 웹 프로그래밍 공부 실전편 3 | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="파이썬 웹 프로그래밍 공부 실전편 3" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="마이그레이션: 테이블 및 필드의 생성, 삭제, 변경 등과 같은 데이터베이스에 대한 변경 사항을 알려주는 정보" />
+<meta property="og:description" content="마이그레이션: 테이블 및 필드의 생성, 삭제, 변경 등과 같은 데이터베이스에 대한 변경 사항을 알려주는 정보" />
+<link rel="canonical" href="http://localhost:4000/2022-09-07/python-web-programming-practice-3" />
+<meta property="og:url" content="http://localhost:4000/2022-09-07/python-web-programming-practice-3" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-09-07T22:08:42+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="파이썬 웹 프로그래밍 공부 실전편 3" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-09-07T22:08:42+09:00","datePublished":"2022-09-07T22:08:42+09:00","description":"마이그레이션: 테이블 및 필드의 생성, 삭제, 변경 등과 같은 데이터베이스에 대한 변경 사항을 알려주는 정보","headline":"파이썬 웹 프로그래밍 공부 실전편 3","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-09-07/python-web-programming-practice-3"},"url":"http://localhost:4000/2022-09-07/python-web-programming-practice-3"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Sunmi Moon
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2022-09-07 22:08:42 +0900">September 07, 2022</time>
+    
+  </div>
+
+  <h1 class="post-title">파이썬 웹 프로그래밍 공부 실전편 3</h1>
+  <div class="post-line"></div>
+
+  <p>마이그레이션: 테이블 및 필드의 생성, 삭제, 변경 등과 같은 데이터베이스에 대한 변경 사항을 알려주는 정보</p>
+
+<p>URLconf
+프로젝트 URL과 앱들의 URL로 나누어 정의하는 걸 추천한다.</p>
+
+<p>프로젝트 템플릿 디렉터리는 TEMPLATES 설정의 DIRS 항목에 지정된 디렉터리다. base.html 등 전체 프로젝트의 룩앤필에 관련된 파일들을 모아두고, 각 앱에서 사용하는 템플릿 파일들은 앱 템플릿 디렉터리에 위치시킨다.</p>
+
+<p>독립된 가상 환경이 필요한 이유
+외부의 라이브러리들은 서로 의존성을 갖고 있는 경우가 많아 버전이 맞지 않을 경우 오작동을 일으키기도 한다. 별도의 개발 환경에 설치함으로써 다른 파이썬 프로그램에는 영향을 주지 않도록 하기 위한 것이다.</p>
+
+<h2 id="가상-환경-만들기">가상 환경 만들기</h2>
+
+<ol>
+  <li>venvs 디렉터리에서 python -m venv vDjBook 명령어로 만듦.</li>
+  <li>vDjbook 가상환경에서 django 설치</li>
+</ol>
+
+<p>Django 설치 시 다음과 같은 에러가 발생했다.</p>
+
+<p>note: This error originates from a subprocess, and is likely not a problem with pip.
+  ERROR: Failed building wheel for backports.zoneinfo
+Failed to build backports.zoneinfo
+ERROR: Could not build wheels for backports.zoneinfo, which is required to install pyproject.toml-based projects</p>
+
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/2022-09-09/python-web-programming-practice-4" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/2022-09-06/python-web-programming-9" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-07-30 14:29:33 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

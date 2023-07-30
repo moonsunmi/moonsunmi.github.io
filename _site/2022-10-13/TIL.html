@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>w3school React | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="w3school React" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="(달성/목표) 뽀모도리 등 가슴 배 1일 3/3 5/5 5/5 0/3 1주 16/40      " />
+<meta property="og:description" content="(달성/목표) 뽀모도리 등 가슴 배 1일 3/3 5/5 5/5 0/3 1주 16/40      " />
+<link rel="canonical" href="http://localhost:4000/2022-10-13/TIL" />
+<meta property="og:url" content="http://localhost:4000/2022-10-13/TIL" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-10-13T12:18:07+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="w3school React" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-10-13T12:18:07+09:00","datePublished":"2022-10-13T12:18:07+09:00","description":"(달성/목표) 뽀모도리 등 가슴 배 1일 3/3 5/5 5/5 0/3 1주 16/40      ","headline":"w3school React","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-10-13/TIL"},"url":"http://localhost:4000/2022-10-13/TIL"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Sunmi Moon
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2022-10-13 12:18:07 +0900">October 13, 2022</time>
+    
+  </div>
+
+  <h1 class="post-title">w3school React</h1>
+  <div class="post-line"></div>
+
+  <table>
+  <thead>
+    <tr>
+      <th>(달성/목표)</th>
+      <th>뽀모도리</th>
+      <th>등</th>
+      <th>가슴</th>
+      <th>배</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1일</td>
+      <td>3/3</td>
+      <td>5/5</td>
+      <td>5/5</td>
+      <td>0/3</td>
+    </tr>
+    <tr>
+      <td>1주</td>
+      <td>16/40</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="react-memo">React Memo</h3>
+
+<p><code class="language-plaintext highlighter-rouge">memo</code>는 props에 변화가 없다면 렌더링을 생략할 수 있게 해 준다.</p>
+
+<p>다음 예제에서 Todo 컴포넌트는 todo가 변하지도 않았는데, count가 클릭될 때마다 계속 렌더링된다. 이럴 때 todo에 memo를 감싸 주면 된다.</p>
+
+<p>index.js</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">ReactDom</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react-dom/client</span><span class="dl">"</span><span class="p">;</span> 
+<span class="k">import</span> <span class="nx">Todos</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./Todos</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">increment</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">setCount</span><span class="p">((</span><span class="nx">c</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">c</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">App</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">todos</span><span class="p">,</span> <span class="nx">setTodos</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">([</span><span class="dl">"</span><span class="s2">todo1</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">todo2</span><span class="dl">"</span><span class="p">]);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">count</span><span class="p">,</span> <span class="nx">setCount</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;&gt;</span>
+    <span class="o">&lt;</span><span class="nx">Todos</span> <span class="nx">todos</span><span class="o">=</span><span class="p">{</span><span class="nx">todos</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="nx">hr</span> <span class="o">/&gt;</span>
+    <span class="na">Count</span><span class="p">:</span> <span class="p">{</span><span class="nx">count</span><span class="p">}</span>
+    <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">increment</span><span class="p">}</span><span class="o">&gt;+&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">root</span> <span class="o">=</span> <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">createRoot</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">root</span><span class="dl">'</span><span class="p">));</span>
+<span class="nx">root</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">App</span> <span class="o">/&gt;</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Todos.js</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">Todos</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">todos</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;&gt;</span>
+    <span class="p">{</span><span class="nx">todos</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">todo</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="o">&lt;</span><span class="nx">p</span> <span class="nx">key</span><span class="o">=</span><span class="p">{</span><span class="nx">index</span><span class="p">}</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">todo</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/p&gt;</span><span class="err">;
+</span>    <span class="p">});}</span>
+    <span class="o">&lt;</span><span class="sr">/</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">memo</span><span class="p">(</span><span class="nx">Todos</span><span class="p">);</span> <span class="c1">// memo</span>
+</code></pre></div></div>
+
+<h3 id="css로-리액트-스타일링하기">CSS로 리액트 스타일링하기</h3>
+
+<h4 id="inline-styling">inline styling</h4>
+<p>JSX에서 <code class="language-plaintext highlighter-rouge">{}</code>는 자바스크립트를 나타내기 때문에, 스타일을 나타낼 때는 ``를 이용한다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">Header</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+  <span class="o">&lt;&gt;</span>
+    <span class="o">&lt;</span><span class="nx">h1</span> <span class="nx">style</span><span class="o">=&gt;</span><span class="nx">Hello</span><span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="sr">/</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Camelcase로 써야 한다. 예) <code class="language-plaintext highlighter-rouge">backgroundColor</code></p>
+
+<h4 id="css-스타일시트를-따로-만들기">CSS 스타일시트를 따로 만들기</h4>
+
+<p>App.css에 CSS 코드를 넣고, index.js에서 <code class="language-plaintext highlighter-rouge">import './App.css'</code>로 임포트해 온다.</p>
+
+<h4 id="css-모듈-이용하기">CSS 모듈 이용하기</h4>
+
+<p>my-style.domule.css 파일에 Car 컴포넌트용 CSS를 만들어 넣고, Car 컴포넌트에서 my-style.domule.css를 임포트한다.</p>
+
+<h3 id="sass-이용하기">Sass 이용하기</h3>
+
+<p>Sass는 CSS pre-processor이다. Sass 파일은 서버에서 실행되고, CSS를 전달한다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">npm i sass</code>로 설치한다.</p>
+
+<p>다음과 같이 my-sass.sass 파일을 만든다.</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">$</span><span class="nt">myColor</span><span class="o">:</span> <span class="nt">red</span><span class="o">;</span>
+
+<span class="nt">h1</span> <span class="p">{</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="err">$</span><span class="n">myColor</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>js 파일에서는 CSS하듯 임포트하면 된다.</p>
+
+<h3 id="react-hook">React Hook</h3>
+
+<p>훅의 세 가지 원칙</p>
+<ol>
+  <li>훅은 리액트 함수 컴포넌트 안에서만 호출된다.</li>
+  <li>훅은 컴포넌트의 top에서만 호출된다.</li>
+  <li>훅은 조건문이 될 수 없다.</li>
+</ol>
+
+<h3 id="usestate">useState</h3>
+
+<p>useState는 초기화 시 두 가지 값을 반환한다.</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="p">[</span><span class="nx">color</span><span class="p">,</span> <span class="nx">setColor</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="dl">""</span><span class="p">);</span>
+</code></pre></div></div>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">color</code>: 현재 state</li>
+  <li><code class="language-plaintext highlighter-rouge">setColor</code>: state를 업데이트할 때 쓰는 함수</li>
+</ul>
+
+<p>state를 업데이트할 때, <code class="language-plaintext highlighter-rouge">color="red"</code> 같은 식으로 할 수 없다. update 함수를 써야 한다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">onClick</span><span class="o">=</span> <span class="p">{()</span> <span class="o">=&gt;</span> <span class="nx">setColor</span><span class="p">(</span><span class="dl">"</span><span class="s2">blue</span><span class="dl">"</span><span class="p">);}</span>
+</code></pre></div></div>
+
+<p>useState는 원하는 만큼 쓸 수 있다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Car</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">brand</span><span class="p">,</span> <span class="nx">setBrand</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="dl">"</span><span class="s2">Ford</span><span class="dl">"</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">model</span><span class="p">,</span> <span class="nx">setModel</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="dl">"</span><span class="s2">Mustang</span><span class="dl">"</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">year</span><span class="p">,</span> <span class="nx">setYear</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="dl">"</span><span class="s2">1964</span><span class="dl">"</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">color</span><span class="p">,</span> <span class="nx">setColor</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="dl">"</span><span class="s2">red</span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>이 여러 개를 한 개의 object로 모아서 써도 된다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Car</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">car</span><span class="p">,</span> <span class="nx">setCar</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">({</span>
+    <span class="na">brand</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Ford</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">model</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Mustang</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">year</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1964</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">"</span><span class="s2">red</span><span class="dl">"</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>setCar로 오브젝트를 수정하면, 전부 업데이트된다. brand만 수정했는데도, model, year, color 같은 것들이 다 업데이트된다는 말. 원하는 것만 수정한다고 다음과 같이 쓰면, model, year, color 값이 다 없어진다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">setState</span><span class="p">({</span><span class="na">brand</span><span class="p">:</span> <span class="dl">"</span><span class="s2">BMW</span><span class="dl">"</span><span class="p">});</span> <span class="c1">// brand 빼고 다 없어짐.</span>
+</code></pre></div></div>
+
+<p>이럴 때 spread operation을 쓴다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">ReactDOM</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react-dom/client</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">Car</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">car</span><span class="p">,</span> <span class="nx">setCar</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">({</span>
+    <span class="na">brand</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Ford</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">model</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Mustang</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">year</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1964</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">color</span><span class="p">:</span> <span class="dl">"</span><span class="s2">red</span><span class="dl">"</span>
+  <span class="p">});</span>
+
+  <span class="kd">const</span> <span class="nx">updateColor</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setCar</span><span class="p">(</span><span class="nx">previousState</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="p">{...</span><span class="nx">previousState</span><span class="p">,</span> <span class="na">color</span><span class="p">:</span> <span class="dl">"</span><span class="s2">blue</span><span class="dl">"</span><span class="p">}</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;&gt;</span>
+      <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">My</span> <span class="nx">is</span> <span class="p">{</span><span class="nx">car</span><span class="p">.</span><span class="nx">color</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/h1</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">type</span><span class="o">=</span><span class="dl">"</span><span class="s2">button</span><span class="dl">"</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">updateColor</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">BLUE</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/</span><span class="err">&gt;
+</span>  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">root</span> <span class="o">=</span> <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">createRoot</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">root</span><span class="dl">'</span><span class="p">));</span>
+<span class="nx">root</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">Car</span> <span class="o">/&gt;</span><span class="p">);</span>
+</code></pre></div></div>
+
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/2022-10-14/TIL" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/2022-10-12/TIL" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-07-30 14:29:33 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

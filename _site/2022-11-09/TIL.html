@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TIL) POMO-WEEKLY 프로젝트 로그 만드는 중 | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="TIL) POMO-WEEKLY 프로젝트 로그 만드는 중" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="(달성/목표) 뽀모도리 1일 5 / 5 1주 10 /40" />
+<meta property="og:description" content="(달성/목표) 뽀모도리 1일 5 / 5 1주 10 /40" />
+<link rel="canonical" href="http://localhost:4000/2022-11-09/TIL" />
+<meta property="og:url" content="http://localhost:4000/2022-11-09/TIL" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-11-09T12:18:07+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TIL) POMO-WEEKLY 프로젝트 로그 만드는 중" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-11-09T12:18:07+09:00","datePublished":"2022-11-09T12:18:07+09:00","description":"(달성/목표) 뽀모도리 1일 5 / 5 1주 10 /40","headline":"TIL) POMO-WEEKLY 프로젝트 로그 만드는 중","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-11-09/TIL"},"url":"http://localhost:4000/2022-11-09/TIL"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Sunmi Moon
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2022-11-09 12:18:07 +0900">November 09, 2022</time>
+    
+  </div>
+
+  <h1 class="post-title">TIL) POMO-WEEKLY 프로젝트 로그 만드는 중</h1>
+  <div class="post-line"></div>
+
+  <table>
+  <thead>
+    <tr>
+      <th>(달성/목표)</th>
+      <th>뽀모도리</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1일</td>
+      <td>5 / 5</td>
+    </tr>
+    <tr>
+      <td>1주</td>
+      <td>10 /40</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="로그를-만들어-보자">로그를 만들어 보자</h3>
+
+<p>LOG를 기록하고 출력하기 위해서 logs를 useState로 만들었다. 지금 버전은 props를 계속 전달해 주고 있는데, 조만간 redux를 공부해서 데이터를 조금 더 체계적으로 관리해야 할 것 같다.</p>
+
+<p>로그를 남기는 순간은 Counter 컴포넌트 안에 있는 버튼을 누를 때기 때문에 Counter 컴포넌트의 버튼에서 log 데이터를 저장해 주는 코드를 추가했다.</p>
+
+<p>log는 id, start, end 값을 가지는 오브젝트이다. 하나의 로그는 시작 시간과 끝 시간을 가지는 덩어리로 간주했다.</p>
+
+<p>로그의 개수는 useRef로 다룬다.</p>
+
+<p>index.js</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="p">[</span><span class="nx">logs</span><span class="p">,</span> <span class="nx">setLogs</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">([{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">start</span><span class="p">:</span> <span class="nb">Date</span><span class="p">(),</span> <span class="na">end</span><span class="p">:</span> <span class="nb">Date</span><span class="p">()</span> <span class="p">}]);</span>
+<span class="kd">const</span> <span class="nx">nextLogId</span> <span class="o">=</span> <span class="nx">useRef</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Counter.js</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">getTimeRecord</span><span class="p">(</span><span class="nx">now</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="s2">`</span><span class="p">${</span><span class="nx">now</span><span class="p">.</span><span class="nx">getFullYear</span><span class="p">()}</span><span class="s2">년 </span><span class="p">${</span><span class="nx">now</span><span class="p">.</span><span class="nx">getMonth</span><span class="p">()}</span><span class="s2">월 </span><span class="p">${</span><span class="nx">now</span><span class="p">.</span><span class="nx">getDate</span><span class="p">()}</span><span class="s2">일 </span><span class="p">${</span><span class="nx">now</span><span class="p">.</span><span class="nx">getHours</span><span class="p">()}</span><span class="s2">시 </span><span class="p">${</span><span class="nx">now</span><span class="p">.</span><span class="nx">getMinutes</span><span class="p">()}</span><span class="s2">분 `</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kd">const</span> <span class="nx">Counter</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">minutes</span><span class="p">,</span> <span class="nx">seconds</span><span class="p">,</span> <span class="nx">nextLogId</span><span class="p">,</span> <span class="nx">logs</span><span class="p">,</span> <span class="nx">addLogs</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">initPomodori</span> <span class="o">=</span> <span class="nx">minutes</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">+</span> <span class="nx">seconds</span><span class="p">;</span>
+
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">countdownNumber</span><span class="p">,</span> <span class="nx">setCountdownNumber</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="nx">initPomodori</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">isCounting</span><span class="p">,</span> <span class="nx">setIsCounting</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+
+  <span class="kd">let</span> <span class="nx">startStopButton</span><span class="p">;</span>
+  <span class="kd">let</span> <span class="nx">now</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
+
+  <span class="kd">const</span> <span class="nx">startTimer</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// start는 로그 자체를 추가하고, end는 마지막 로그에 값만 추가하는 것이다.</span>
+    <span class="kd">let</span> <span class="nx">timeRecord</span> <span class="o">=</span> <span class="nx">getTimeRecord</span><span class="p">(</span><span class="nx">now</span><span class="p">);</span>
+    <span class="nx">addLogs</span><span class="p">([...</span><span class="nx">logs</span><span class="p">,</span> <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="nx">nextLogId</span><span class="p">.</span><span class="nx">current</span><span class="p">,</span> <span class="na">start</span><span class="p">:</span> <span class="nx">timeRecord</span><span class="p">,</span> <span class="na">end</span><span class="p">:</span> <span class="dl">""</span> <span class="p">}]);</span> <span class="c1">// end 넣을 필요가 있을까?</span>
+    <span class="nx">setIsCounting</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+    <span class="nx">nextLogId</span><span class="p">.</span><span class="nx">current</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">};</span>
+
+  <span class="kd">const</span> <span class="nx">stopTimer</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// start는 로그 자체를 추가하고, end는 마지막 로그에 값만 추가하는 것이다.</span>
+    <span class="kd">let</span> <span class="nx">lastLogId</span> <span class="o">=</span> <span class="nx">nextLogId</span><span class="p">.</span><span class="nx">current</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="kd">let</span> <span class="nx">timeRecord</span> <span class="o">=</span> <span class="nx">getTimeRecord</span><span class="p">(</span><span class="nx">now</span><span class="p">);</span>
+    <span class="nx">addLogs</span><span class="p">(</span>
+      <span class="nx">logs</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">log</span><span class="p">)</span> <span class="o">=&gt;</span>
+        <span class="nx">log</span><span class="p">.</span><span class="nx">id</span> <span class="o">==</span> <span class="nx">lastLogId</span> <span class="p">?</span> <span class="p">{</span> <span class="p">...</span><span class="nx">log</span><span class="p">,</span> <span class="na">end</span><span class="p">:</span> <span class="nx">timeRecord</span> <span class="p">}</span> <span class="p">:</span> <span class="nx">log</span>
+      <span class="p">)</span>
+    <span class="p">);</span>
+    <span class="nx">setIsCounting</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+  <span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="겪었던-오류">겪었던 오류</h3>
+
+<p>objects are not valid as a react child (found: [object date]). if you meant to render a collection of children, use an array instead.</p>
+
+<p>children의 컬렉션을 렌더링하고 싶다면 배열을 쓰라는 이야기. 찾아 보니 내가 Date() 오브젝트를 사용했었고, 그걸 그대로 출력하려고 했더니 문제가 생긴 거였다.</p>
+
+<hr />
+
+<p>수) 운동</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>종아리</th>
+      <th>앞벅지</th>
+      <th>이두</th>
+      <th>등</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>3/3</td>
+      <td>3/3</td>
+      <td>0/3</td>
+      <td>3/3</td>
+    </tr>
+  </tbody>
+</table>
+
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/2022-11-10/TIL" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/2022-11-07/TIL" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-07-30 14:29:33 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

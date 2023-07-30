@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TIL) 모던 리액트 웹 사이트의 todolist 만들기 클론 코딩 | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="TIL) 모던 리액트 웹 사이트의 todolist 만들기 클론 코딩" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="(달성/목표) 뽀모도리 1일 5 / 3 1주 12 /40" />
+<meta property="og:description" content="(달성/목표) 뽀모도리 1일 5 / 3 1주 12 /40" />
+<link rel="canonical" href="http://localhost:4000/2022-11-22/TIL" />
+<meta property="og:url" content="http://localhost:4000/2022-11-22/TIL" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-11-22T12:18:07+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TIL) 모던 리액트 웹 사이트의 todolist 만들기 클론 코딩" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-11-22T12:18:07+09:00","datePublished":"2022-11-22T12:18:07+09:00","description":"(달성/목표) 뽀모도리 1일 5 / 3 1주 12 /40","headline":"TIL) 모던 리액트 웹 사이트의 todolist 만들기 클론 코딩","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-11-22/TIL"},"url":"http://localhost:4000/2022-11-22/TIL"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Sunmi Moon
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2022-11-22 12:18:07 +0900">November 22, 2022</time>
+    
+  </div>
+
+  <h1 class="post-title">TIL) 모던 리액트 웹 사이트의 todolist 만들기 클론 코딩</h1>
+  <div class="post-line"></div>
+
+  <table>
+  <thead>
+    <tr>
+      <th>(달성/목표)</th>
+      <th>뽀모도리</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1일</td>
+      <td>5 / 3</td>
+    </tr>
+    <tr>
+      <td>1주</td>
+      <td>12 /40</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="리듀서-만들기">리듀서 만들기</h3>
+
+<p>todo 관리하는 리듀서 만들기</p>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="kd">function</span> <span class="nx">todoReducer</span><span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// action: type, id, todo</span>
+  <span class="k">switch</span> <span class="p">(</span><span class="nx">action</span><span class="p">.</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="dl">"</span><span class="s2">CREATE</span><span class="dl">"</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nx">state</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">action</span><span class="p">.</span><span class="nx">todo</span><span class="p">);</span>
+    <span class="k">case</span> <span class="dl">"</span><span class="s2">TOGGLE</span><span class="dl">"</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nx">state</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">todo</span><span class="p">)</span> <span class="o">=&gt;</span>
+        <span class="nx">todo</span><span class="p">.</span><span class="nx">id</span> <span class="o">===</span> <span class="nx">action</span><span class="p">.</span><span class="nx">id</span> <span class="p">?</span> <span class="p">{</span> <span class="p">...</span><span class="nx">todo</span><span class="p">,</span> <span class="na">done</span><span class="p">:</span> <span class="o">!</span><span class="nx">todo</span><span class="p">.</span><span class="nx">done</span> <span class="p">}</span> <span class="p">:</span> <span class="nx">todo</span>
+      <span class="p">);</span>
+    <span class="k">case</span> <span class="dl">"</span><span class="s2">REMOVE</span><span class="dl">"</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nx">state</span><span class="p">.</span><span class="nx">filter</span><span class="p">((</span><span class="nx">todo</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">todo</span><span class="p">.</span><span class="nx">id</span> <span class="o">!==</span> <span class="nx">action</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+    <span class="nl">default</span><span class="p">:</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">`Unhandled Action type: </span><span class="p">${</span><span class="nx">action</span><span class="p">.</span><span class="nx">type</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="kd">function</span> <span class="nx">TodoProvider</span><span class="p">({</span> <span class="nx">children</span> <span class="p">})</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">state</span><span class="p">,</span> <span class="nx">dispatch</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useReducer</span><span class="p">(</span><span class="nx">todoReducer</span><span class="p">,</span> <span class="nx">initialTodos</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="nx">children</span><span class="p">;</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<h3 id="context-만들기">context 만들기</h3>
+
+<p>리듀서로 관리하는 state와 dispatch를 다른 컨텍스트로 따로 관리한다. 이렇게 하면 불필요한 렌더링을 방지할 수도 있고(하나만 필요한 컴포넌트 같은 경우), 관리하기도 편하다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">createContext</span><span class="p">,</span> <span class="nx">useContext</span><span class="p">,</span> <span class="nx">useReducer</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">initialTodos</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">{</span>
+    <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="na">text</span><span class="p">:</span> <span class="dl">"</span><span class="s2">프로젝트 생성하기</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">done</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="na">id</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="na">text</span><span class="p">:</span> <span class="dl">"</span><span class="s2">컴포넌트 스타일링하기</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">done</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="na">id</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="na">text</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Context 만들기</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">done</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="na">id</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="na">text</span><span class="p">:</span> <span class="dl">"</span><span class="s2">기능 구현하기</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">done</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">];</span>
+
+<span class="kd">function</span> <span class="nx">todoReducer</span><span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// action: type, id, todo</span>
+  <span class="k">switch</span> <span class="p">(</span><span class="nx">action</span><span class="p">.</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="dl">"</span><span class="s2">CREATE</span><span class="dl">"</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nx">state</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">action</span><span class="p">.</span><span class="nx">todo</span><span class="p">);</span>
+    <span class="k">case</span> <span class="dl">"</span><span class="s2">TOGGLE</span><span class="dl">"</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nx">state</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">todo</span><span class="p">)</span> <span class="o">=&gt;</span>
+        <span class="nx">todo</span><span class="p">.</span><span class="nx">id</span> <span class="o">===</span> <span class="nx">action</span><span class="p">.</span><span class="nx">id</span> <span class="p">?</span> <span class="p">{</span> <span class="p">...</span><span class="nx">todo</span><span class="p">,</span> <span class="na">done</span><span class="p">:</span> <span class="o">!</span><span class="nx">todo</span><span class="p">.</span><span class="nx">done</span> <span class="p">}</span> <span class="p">:</span> <span class="nx">todo</span>
+      <span class="p">);</span>
+    <span class="k">case</span> <span class="dl">"</span><span class="s2">REMOVE</span><span class="dl">"</span><span class="p">:</span>
+      <span class="k">return</span> <span class="nx">state</span><span class="p">.</span><span class="nx">filter</span><span class="p">((</span><span class="nx">todo</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">todo</span><span class="p">.</span><span class="nx">id</span> <span class="o">!==</span> <span class="nx">action</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+    <span class="nl">default</span><span class="p">:</span>
+      <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">`Unhandled Action type: </span><span class="p">${</span><span class="nx">action</span><span class="p">.</span><span class="nx">type</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">TodoStateContext</span> <span class="o">=</span> <span class="nx">createContext</span><span class="p">();</span>
+<span class="kd">const</span> <span class="nx">TodoDispatchContext</span> <span class="o">=</span> <span class="nx">createContext</span><span class="p">();</span>
+
+<span class="k">export</span> <span class="kd">function</span> <span class="nx">TodoProvider</span><span class="p">({</span> <span class="nx">children</span> <span class="p">})</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">state</span><span class="p">,</span> <span class="nx">dispatch</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useReducer</span><span class="p">(</span><span class="nx">todoReducer</span><span class="p">,</span> <span class="nx">initialTodos</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">TodoStateContext</span><span class="p">.</span><span class="nc">Provider</span> <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="nx">state</span><span class="si">}</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">TodoDispatchContext</span><span class="p">.</span><span class="nc">Provider</span> <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="nx">dispatch</span><span class="si">}</span><span class="p">&gt;</span>
+        <span class="si">{</span><span class="nx">children</span><span class="si">}</span>
+      <span class="p">&lt;/</span><span class="nc">TodoDispatchContext</span><span class="p">.</span><span class="nc">Provider</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nc">TodoStateContext</span><span class="p">.</span><span class="nc">Provider</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="kd">function</span> <span class="nx">useTodoState</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">useContext</span><span class="p">(</span><span class="nx">TodoStateContext</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="kd">function</span> <span class="nx">useTodoDispatch</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">useContext</span><span class="p">(</span><span class="nx">TodoDispatchContext</span><span class="p">);</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<p>todoHead.js</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">TodoHead</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">todos</span> <span class="o">=</span> <span class="nx">useTodoState</span><span class="p">();</span>
+  <span class="kd">const</span> <span class="nx">undoneTasks</span> <span class="o">=</span> <span class="nx">todos</span><span class="p">.</span><span class="nx">filter</span><span class="p">((</span><span class="nx">todo</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="o">!</span><span class="nx">todo</span><span class="p">.</span><span class="nx">done</span><span class="p">);</span>
+
+  <span class="kd">const</span> <span class="nx">today</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
+  <span class="kd">const</span> <span class="nx">dateString</span> <span class="o">=</span> <span class="nx">today</span><span class="p">.</span><span class="nx">toLocaleDateString</span><span class="p">(</span><span class="dl">"</span><span class="s2">ko-kr</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">year</span><span class="p">:</span> <span class="dl">"</span><span class="s2">numeric</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">month</span><span class="p">:</span> <span class="dl">"</span><span class="s2">long</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">day</span><span class="p">:</span> <span class="dl">"</span><span class="s2">numeric</span><span class="dl">"</span><span class="p">,</span>
+  <span class="p">});</span>
+
+  <span class="kd">const</span> <span class="nx">dayName</span> <span class="o">=</span> <span class="nx">today</span><span class="p">.</span><span class="nx">toLocaleDateString</span><span class="p">(</span><span class="dl">"</span><span class="s2">ko-kr</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span> <span class="na">weekday</span><span class="p">:</span> <span class="dl">"</span><span class="s2">long</span><span class="dl">"</span> <span class="p">});</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">TodoHeadBlock</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">h1</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">dateString</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"day"</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">dayName</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"tasks-left"</span><span class="p">&gt;</span>할 일 <span class="si">{</span><span class="nx">undoneTasks</span><span class="p">.</span><span class="nx">length</span><span class="si">}</span>개 남음<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nc">TodoHeadBlock</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">TodoHead</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>TodoCreate.js</p>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">styled</span><span class="p">,</span> <span class="p">{</span> <span class="nx">css</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">styled-components</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">MdAdd</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react-icons/md</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">useNextId</span><span class="p">,</span> <span class="nx">useTodoDispatch</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./TodoContext</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">CircleButton</span> <span class="o">=</span> <span class="nx">styled</span><span class="p">.</span><span class="nx">button</span><span class="s2">`
+  background: #38d9a9;
+  &amp;:hover {
+    background: #63e6be;
+  }
+  &amp;:active {
+    background: #20c997;
+  }
+
+  z-index: 5;
+  cursor: pointer;
+  width: 80px;
+  height: 80px;
+  display: block;
+  align-items: center;
+  justify-content: center;
+  font-size: 60px;
+  position: absolute;
+  left: 50%;
+  bottom: 0px;
+  transform: translate(-50%, 50%);
+  color: white;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: 0.125s all ease-in;
+  </span><span class="p">${(</span><span class="nx">props</span><span class="p">)</span> <span class="o">=&gt;</span>
+    <span class="nx">props</span><span class="p">.</span><span class="nx">open</span> <span class="o">&amp;&amp;</span>
+    <span class="nx">css</span><span class="s2">`
+      background: #ff6b6b;
+      &amp;:hover {
+        background: #ff8787;
+      }
+      &amp;:active {
+        background: #fa5252;
+      }
+      transform: translate(-50%, 50%) rotate(45deg);
+    `</span><span class="p">}</span><span class="s2">
+`</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">InsertFormPositioner</span> <span class="o">=</span> <span class="nx">styled</span><span class="p">.</span><span class="nx">div</span><span class="s2">`
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+`</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">InsertForm</span> <span class="o">=</span> <span class="nx">styled</span><span class="p">.</span><span class="nx">form</span><span class="s2">`
+  background: #f8f9fa;
+  padding-left: 32px;
+  padding-top: 32px;
+  padding-right: 32px;
+  padding-bottom 72px;
+
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  border-top: 1px solid #e9ecef;
+`</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">Input</span> <span class="o">=</span> <span class="nx">styled</span><span class="p">.</span><span class="nx">input</span><span class="s2">`
+  padding: 12px;
+  border-radius: 4px;
+  border: 1px solid #dee2e6;
+  width: 100%;
+  outline: none;
+  font-size: 18px;
+  box-sizing: border-box;
+`</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">TodoCreate</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">open</span><span class="p">,</span> <span class="nx">setOpen</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">value</span><span class="p">,</span> <span class="nx">setValue</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="dl">""</span><span class="p">);</span>
+
+  <span class="kd">const</span> <span class="nx">dispatch</span> <span class="o">=</span> <span class="nx">useTodoDispatch</span><span class="p">();</span>
+  <span class="kd">const</span> <span class="nx">nextId</span> <span class="o">=</span> <span class="nx">useNextId</span><span class="p">();</span>
+  <span class="cm">/*
+    switch (action.type) {
+    case "CREATE":
+      return state.concat(action.todo);
+    case "TOGGLE":
+      return state.map((todo) =&gt;
+        todo.id === action.id ? { ...todo, done: !todo.done } : todo
+      );
+    case "REMOVE":
+      return state.filter((todo) =&gt; todo.id !== action.id);
+  */</span>
+
+  <span class="kd">const</span> <span class="nx">onToggle</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">setOpen</span><span class="p">(</span><span class="o">!</span><span class="nx">open</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">onChange</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">setValue</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">onSubmit</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+
+    <span class="nx">dispatch</span><span class="p">({</span>
+      <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">CREATE</span><span class="dl">"</span><span class="p">,</span>
+      <span class="na">todo</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">id</span><span class="p">:</span> <span class="nx">nextId</span><span class="p">,</span>
+        <span class="na">text</span><span class="p">:</span> <span class="nx">value</span><span class="p">,</span>
+        <span class="na">done</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="p">},</span>
+    <span class="p">});</span>
+    <span class="nx">setValue</span><span class="p">(</span><span class="dl">""</span><span class="p">);</span>
+    <span class="nx">setOpen</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+    <span class="nx">nextId</span><span class="p">.</span><span class="nx">current</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">};</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;&gt;</span>
+      <span class="si">{</span><span class="nx">open</span> <span class="o">&amp;&amp;</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nc">InsertFormPositioner</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nc">InsertForm</span> <span class="na">onSubmit</span><span class="p">=</span><span class="si">{</span><span class="nx">onSubmit</span><span class="si">}</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nc">Input</span>
+              <span class="na">autoFocus</span>
+              <span class="na">placeholder</span><span class="p">=</span><span class="s">"할 일을 입력 후, Enter 를 누르세요"</span>
+              <span class="na">onChange</span><span class="p">=</span><span class="si">{</span><span class="nx">onChange</span><span class="si">}</span>
+              <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="nx">value</span><span class="si">}</span>
+            <span class="p">/&gt;</span>
+          <span class="p">&lt;/</span><span class="nc">InsertForm</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nc">InsertFormPositioner</span><span class="p">&gt;</span>
+      <span class="p">)</span><span class="si">}</span>
+      <span class="p">&lt;</span><span class="nc">CircleButton</span> <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="nx">onToggle</span><span class="si">}</span> <span class="na">open</span><span class="p">=</span><span class="si">{</span><span class="nx">open</span><span class="si">}</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">MdAdd</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;/</span><span class="nc">CircleButton</span><span class="p">&gt;</span>
+    <span class="p">&lt;/&gt;</span>
+  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">React</span><span class="p">.</span><span class="nx">memo</span><span class="p">(</span><span class="nx">TodoCreate</span><span class="p">);</span>
+
+</code></pre></div></div>
+
+<hr />
+
+<p>화) 운동<br /></p>
+
+<ul>
+  <li>무릎 대고 팔굽혀 펴기 10회 * 5세트</li>
+  <li>슈퍼맨 10초 * 5세트</li>
+</ul>
+
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/2022-11-23/TIL" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/2022-11-21/TIL" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-07-30 14:29:33 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

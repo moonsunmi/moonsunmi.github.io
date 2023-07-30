@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>w3school CSS | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="w3school CSS" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="  뽀모도리 등운동 가슴운동 일간(달성/목표) 2/8 5/5 5/5 주간(달성/목표) 17/40    " />
+<meta property="og:description" content="  뽀모도리 등운동 가슴운동 일간(달성/목표) 2/8 5/5 5/5 주간(달성/목표) 17/40    " />
+<link rel="canonical" href="http://localhost:4000/2022-09-30/w3school" />
+<meta property="og:url" content="http://localhost:4000/2022-09-30/w3school" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-09-30T12:18:07+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="w3school CSS" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-09-30T12:18:07+09:00","datePublished":"2022-09-30T12:18:07+09:00","description":"  뽀모도리 등운동 가슴운동 일간(달성/목표) 2/8 5/5 5/5 주간(달성/목표) 17/40    ","headline":"w3school CSS","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-09-30/w3school"},"url":"http://localhost:4000/2022-09-30/w3school"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Sunmi Moon
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2022-09-30 12:18:07 +0900">September 30, 2022</time>
+    
+  </div>
+
+  <h1 class="post-title">w3school CSS</h1>
+  <div class="post-line"></div>
+
+  <table>
+  <thead>
+    <tr>
+      <th> </th>
+      <th>뽀모도리</th>
+      <th>등운동</th>
+      <th>가슴운동</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>일간(달성/목표)</td>
+      <td>2/8</td>
+      <td>5/5</td>
+      <td>5/5</td>
+    </tr>
+    <tr>
+      <td>주간(달성/목표)</td>
+      <td>17/40</td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="css-attribute-selector">CSS Attribute Selector</h3>
+
+<p>attribute를 선택해서 스타일을 지정할 수도 있다.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a[target] {
+  background-color: yellow;
+}
+...
+<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"http://www.disney.com"</span> <span class="na">target=</span><span class="s">"_blank"</span><span class="nt">&gt;</span>disney.com<span class="nt">&lt;/a&gt;</span>
+</code></pre></div></div>
+
+<p>attribute가 특정값을 가지는 것만도 선택할 수 있다.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a[target="_blank"] {
+  background-color: yellow;
+}
+</code></pre></div></div>
+
+<p>다음과 같이 물결 표시를 쓰면, ‘flower’가 포함된 게 다 선택된다.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[title~="flower"]
+</code></pre></div></div>
+
+<p>다음과 같이 된 것도 선택됨.(title=”flower”라면 다음의 것이 선택 안 됨.)</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>title="klematis flower"
+</code></pre></div></div>
+
+<p>다음과 같이 <code class="language-plaintext highlighter-rouge">|</code>을 이용하면 하이픈으로 구분되기 전까지의 단어로 구분하는 것도 가능하다.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[class|="top"] {
+  background: yellow;
+}
+...
+<span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"top-text"</span><span class="nt">&gt;</span>Hello world!<span class="nt">&lt;/p&gt;</span> <span class="c">&lt;!-- 선택됨 (하이픈 전까지의 단어가 top) --&gt;</span>
+<span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"topcontent"</span><span class="nt">&gt;</span>Are you learning CSS?<span class="nt">&lt;/p&gt;</span>  <span class="c">&lt;!-- 선택 안 됨 (하이픈 기준임) --&gt;</span>
+</code></pre></div></div>
+
+<p>단순히 어떤 단어로 시작하는 attribute값을 선택하고 싶다면 <code class="language-plaintext highlighter-rouge">^</code>를 이용한다.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[class^="top"] {
+  background: yellow;
+}
+...
+<span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"top-text"</span><span class="nt">&gt;</span>Hello world!<span class="nt">&lt;/p&gt;</span> <span class="c">&lt;!-- 선택됨 --&gt;</span>
+<span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"topcontent"</span><span class="nt">&gt;</span>Are you learning CSS?<span class="nt">&lt;/p&gt;</span>  <span class="c">&lt;!-- 선택 됨 --&gt;</span>
+</code></pre></div></div>
+
+<p>test로 ‘끝나는’ 단어 선택하고 싶다면 <code class="language-plaintext highlighter-rouge">$</code></p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[class$="test"] {
+  background: yellow;
+}
+...
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"my-test"</span><span class="nt">&gt;</span>The third div element.<span class="nt">&lt;/div&gt;</span> <span class="c">&lt;!-- 선택 됨 --&gt;</span>
+<span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"mytest"</span><span class="nt">&gt;</span>This is some text in a paragraph.<span class="nt">&lt;/p&gt;</span> <span class="c">&lt;!-- 선택 됨 --&gt;</span>
+</code></pre></div></div>
+
+<p>다른 조건 없이 포함하기만 하면 무조건 ‘*’</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[class*="te"] {
+  background: yellow;
+}
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"hitejava"</span><span class="nt">&gt;</span>The third div element.<span class="nt">&lt;/div&gt;</span> <span class="c">&lt;!-- 선택 됨 --&gt;</span>
+<span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"mytest"</span><span class="nt">&gt;</span>This is some text in a paragraph.<span class="nt">&lt;/p&gt;</span> <span class="c">&lt;!-- 선택 됨 --&gt;</span>
+</code></pre></div></div>
+
+<p>class나 ID 없는 폼필드를 스타일링할 때 유용합니다.</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>input[type=text] {
+}
+...
+  Firstname:<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">name=</span><span class="s">"Name"</span> <span class="na">value=</span><span class="s">"Peter"</span> <span class="na">size=</span><span class="s">"20"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/2022-10-01/reactjs.org" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/2022-09-29/w3school" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-07-30 14:29:33 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

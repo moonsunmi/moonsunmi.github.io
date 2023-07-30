@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TIL) Facebook Clone Coding(Next.js, Tailwind CSS, Responsive) | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="TIL) Facebook Clone Coding(Next.js, Tailwind CSS, Responsive)" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="(달성/목표) 뽀모도리 1일 6/8 1주 30 /40" />
+<meta property="og:description" content="(달성/목표) 뽀모도리 1일 6/8 1주 30 /40" />
+<link rel="canonical" href="http://localhost:4000/2022-10-29/TIL" />
+<meta property="og:url" content="http://localhost:4000/2022-10-29/TIL" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-10-29T12:18:07+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TIL) Facebook Clone Coding(Next.js, Tailwind CSS, Responsive)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-10-29T12:18:07+09:00","datePublished":"2022-10-29T12:18:07+09:00","description":"(달성/목표) 뽀모도리 1일 6/8 1주 30 /40","headline":"TIL) Facebook Clone Coding(Next.js, Tailwind CSS, Responsive)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-10-29/TIL"},"url":"http://localhost:4000/2022-10-29/TIL"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Sunmi Moon
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2022-10-29 12:18:07 +0900">October 29, 2022</time>
+    
+  </div>
+
+  <h1 class="post-title">TIL) Facebook Clone Coding(Next.js, Tailwind CSS, Responsive)</h1>
+  <div class="post-line"></div>
+
+  <table>
+  <thead>
+    <tr>
+      <th>(달성/목표)</th>
+      <th>뽀모도리</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1일</td>
+      <td>6/8</td>
+    </tr>
+    <tr>
+      <td>1주</td>
+      <td>30 /40</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>gird로 했을 때는, place-items-center로 해야 가운데 정렬이 된다.</p>
+
+<blockquote>
+  <p>오답 노트</p>
+
+  <p>status에는 authenticated, unauthenticated, loading 세 가지가 올 수 있다. 그런데 ‘authenticated’가 되었을 때 메인 화면을 로딩해야 하는데, unauthenticated일 때 Login 화면을 로딩했던 것이다.
+그래서 loading 중일 때 메인 화면을 띄우려고 했고, 아직 가져오지 못한 user 정보가 undefined되었던 것이다.</p>
+</blockquote>
+
+<p>Login.js</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">signIn</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">next-auth/react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Image</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">next/image</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">Login</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">grid place-items-center</span><span class="dl">"</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">Image</span>
+        <span class="nx">src</span><span class="o">=</span><span class="dl">"</span><span class="s2">https://cdn0.iconfinder.com/data/icons/social-messaging-ui-color-shapes-2-free/128/social-facebook-2019-circle-512.png</span><span class="dl">"</span>
+        <span class="nx">height</span><span class="o">=</span><span class="p">{</span><span class="mi">200</span><span class="p">}</span>
+        <span class="nx">width</span><span class="o">=</span><span class="p">{</span><span class="mi">200</span><span class="p">}</span>
+        <span class="nx">objectFit</span><span class="o">=</span><span class="dl">"</span><span class="s2">contain</span><span class="dl">"</span>
+      <span class="o">/&gt;</span>
+      <span class="o">&lt;</span><span class="nx">h1</span>
+        <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">signIn</span><span class="p">}</span>
+        <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">p-5 bg-blue-500 rounded-full text-white text-center cursor-pointer</span><span class="dl">"</span>
+      <span class="o">&gt;</span>
+        <span class="nx">Login</span> <span class="kd">with</span> <span class="nx">Facebook</span>
+      <span class="o">&lt;</span><span class="sr">/h1</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">Login</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Sidebar.js</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span>
+  <span class="nx">CheckIcon</span><span class="p">,</span>
+  <span class="nx">ComputerDesktopIcon</span><span class="p">,</span>
+  <span class="nx">ShoppingBagIcon</span><span class="p">,</span>
+  <span class="nx">UserGroupIcon</span><span class="p">,</span>
+<span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@heroicons/react/24/outline</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">CalendarIcon</span><span class="p">,</span> <span class="nx">ClockIcon</span><span class="p">,</span> <span class="nx">UsersIcon</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@heroicons/react/24/solid</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">SidebarRow</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./SidebarRow</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">Sidebar</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">session</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">p-2 mt-5 max-w-[600px] xl:min-w-[300px]</span><span class="dl">"</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">SidebarRow</span> <span class="nx">src</span><span class="o">=</span><span class="p">{</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">image</span><span class="p">}</span> <span class="nx">title</span><span class="o">=</span><span class="p">{</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="nx">SidebarRow</span> <span class="nx">Icon</span><span class="o">=</span><span class="p">{</span><span class="nx">UsersIcon</span><span class="p">}</span> <span class="nx">title</span><span class="o">=</span><span class="dl">"</span><span class="s2">Friends</span><span class="dl">"</span> <span class="o">/&gt;</span>
+      <span class="o">&lt;</span><span class="nx">SidebarRow</span> <span class="nx">Icon</span><span class="o">=</span><span class="p">{</span><span class="nx">UserGroupIcon</span><span class="p">}</span> <span class="nx">title</span><span class="o">=</span><span class="dl">"</span><span class="s2">Groups</span><span class="dl">"</span> <span class="o">/&gt;</span>
+      <span class="o">&lt;</span><span class="nx">SidebarRow</span> <span class="nx">Icon</span><span class="o">=</span><span class="p">{</span><span class="nx">ShoppingBagIcon</span><span class="p">}</span> <span class="nx">title</span><span class="o">=</span><span class="dl">"</span><span class="s2">Marketplace</span><span class="dl">"</span> <span class="o">/&gt;</span>
+      <span class="o">&lt;</span><span class="nx">SidebarRow</span> <span class="nx">Icon</span><span class="o">=</span><span class="p">{</span><span class="nx">ComputerDesktopIcon</span><span class="p">}</span> <span class="nx">title</span><span class="o">=</span><span class="dl">"</span><span class="s2">Watch</span><span class="dl">"</span> <span class="o">/&gt;</span>
+      <span class="o">&lt;</span><span class="nx">SidebarRow</span> <span class="nx">Icon</span><span class="o">=</span><span class="p">{</span><span class="nx">CalendarIcon</span><span class="p">}</span> <span class="nx">title</span><span class="o">=</span><span class="dl">"</span><span class="s2">Events</span><span class="dl">"</span> <span class="o">/&gt;</span>
+      <span class="o">&lt;</span><span class="nx">SidebarRow</span> <span class="nx">Icon</span><span class="o">=</span><span class="p">{</span><span class="nx">ClockIcon</span><span class="p">}</span> <span class="nx">title</span><span class="o">=</span><span class="dl">"</span><span class="s2">Memories</span><span class="dl">"</span> <span class="o">/&gt;</span>
+      <span class="o">&lt;</span><span class="nx">SidebarRow</span> <span class="nx">Icon</span><span class="o">=</span><span class="p">{</span><span class="nx">CheckIcon</span><span class="p">}</span> <span class="nx">title</span><span class="o">=</span><span class="dl">"</span><span class="s2">See More</span><span class="dl">"</span> <span class="o">/&gt;</span>
+    <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">Sidebar</span><span class="p">;</span>
+
+</code></pre></div></div>
+
+<p>SidebarRow.js</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Image</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">next/image</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">SidebarRow</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">Icon</span><span class="p">,</span> <span class="nx">title</span><span class="p">,</span> <span class="nx">src</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">flex items-center</span><span class="dl">"</span><span class="o">&gt;</span>
+      <span class="p">{</span><span class="nx">src</span> <span class="o">&amp;&amp;</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">Image</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">rounded-full</span><span class="dl">"</span> <span class="nx">src</span><span class="o">=</span><span class="p">{</span><span class="nx">src</span><span class="p">}</span> <span class="nx">width</span><span class="o">=</span><span class="p">{</span><span class="mi">30</span><span class="p">}</span> <span class="nx">height</span><span class="o">=</span><span class="p">{</span><span class="mi">30</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>      <span class="p">)}</span>
+      <span class="p">{</span><span class="nx">Icon</span> <span class="o">&amp;&amp;</span> <span class="o">&lt;</span><span class="nx">Icon</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">h-8 w-8 text-blue-500 cursor-pointer</span><span class="dl">"</span> <span class="o">/&gt;</span><span class="p">}</span>
+      <span class="o">&lt;</span><span class="nx">p</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">hidden sm:inline-flex font-medium</span><span class="dl">"</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">title</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/p</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">SidebarRow</span><span class="p">;</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>토) 운동</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>하체폼롤러</th>
+      <th>삼두</th>
+      <th>뒷벅지</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0/3</td>
+      <td>3/3</td>
+      <td>3/3</td>
+    </tr>
+  </tbody>
+</table>
+
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/2022-10-30/TIL" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/2022-10-28/TIL" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-07-30 14:29:33 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

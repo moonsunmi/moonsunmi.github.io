@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TIL) Hulu Clone Coding(Next.js, Tailwind CSS, Responsive) | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="TIL) Hulu Clone Coding(Next.js, Tailwind CSS, Responsive)" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="(달성/목표) 뽀모도리 1일 3/3 1주 8 /40" />
+<meta property="og:description" content="(달성/목표) 뽀모도리 1일 3/3 1주 8 /40" />
+<link rel="canonical" href="http://localhost:4000/2022-10-25/TIL" />
+<meta property="og:url" content="http://localhost:4000/2022-10-25/TIL" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-10-25T12:18:07+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TIL) Hulu Clone Coding(Next.js, Tailwind CSS, Responsive)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-10-25T12:18:07+09:00","datePublished":"2022-10-25T12:18:07+09:00","description":"(달성/목표) 뽀모도리 1일 3/3 1주 8 /40","headline":"TIL) Hulu Clone Coding(Next.js, Tailwind CSS, Responsive)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-10-25/TIL"},"url":"http://localhost:4000/2022-10-25/TIL"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Sunmi Moon
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2022-10-25 12:18:07 +0900">October 25, 2022</time>
+    
+  </div>
+
+  <h1 class="post-title">TIL) Hulu Clone Coding(Next.js, Tailwind CSS, Responsive)</h1>
+  <div class="post-line"></div>
+
+  <table>
+  <thead>
+    <tr>
+      <th>(달성/목표)</th>
+      <th>뽀모도리</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1일</td>
+      <td>3/3</td>
+    </tr>
+    <tr>
+      <td>1주</td>
+      <td>8 /40</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="thumbnail-component">Thumbnail component</h3>
+
+<p>Thumbnail.js</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">HandThumbUpIcon</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@heroicons/react/24/outline</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Image</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">next/image</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">Thumbnail</span><span class="p">({</span> <span class="nx">result</span> <span class="p">})</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">BASE_URL</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">https://image.tmdb.org/t/p/original</span><span class="dl">"</span><span class="p">;</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">p-2 group cursor-pointer transition duration-100 ease-in transform sm:hover:scale-105 hover:z-50</span><span class="dl">"</span><span class="o">&gt;</span>
+      <span class="p">{</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">.</span><span class="nx">backdrop_path</span><span class="p">,</span> <span class="nx">result</span><span class="p">.</span><span class="nx">poster_path</span><span class="p">)}</span>
+      <span class="o">&lt;</span><span class="nx">Image</span>
+        <span class="nx">layout</span><span class="o">=</span><span class="dl">"</span><span class="s2">responsive</span><span class="dl">"</span>
+        <span class="nx">src</span><span class="o">=</span><span class="p">{</span>
+          <span class="s2">`</span><span class="p">${</span><span class="nx">BASE_URL</span><span class="p">}${</span><span class="nx">result</span><span class="p">.</span><span class="nx">backdrop_path</span> <span class="o">||</span> <span class="nx">result</span><span class="p">.</span><span class="nx">poster_path</span><span class="p">}</span><span class="s2">`</span> <span class="o">||</span>
+          <span class="s2">`</span><span class="p">${</span><span class="nx">BASE_URL</span><span class="p">}${</span><span class="nx">result</span><span class="p">.</span><span class="nx">poster_path</span><span class="p">}</span><span class="s2">`</span>
+        <span class="p">}</span>
+        <span class="nx">height</span><span class="o">=</span><span class="p">{</span><span class="mi">1080</span><span class="p">}</span>
+        <span class="nx">width</span><span class="o">=</span><span class="p">{</span><span class="mi">1920</span><span class="p">}</span>
+      <span class="sr">/</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">p-2</span><span class="dl">"</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">p</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">truncate max-w-md</span><span class="dl">"</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">result</span><span class="p">.</span><span class="nx">overview</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/p</span><span class="err">&gt;
+</span>
+        <span class="o">&lt;</span><span class="nx">h2</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">mt-1 text-2xl text-white transition-all duration-100 ease-in-out group-hover:font-bold</span><span class="dl">"</span><span class="o">&gt;</span>
+          <span class="p">{</span><span class="nx">result</span><span class="p">.</span><span class="nx">title</span> <span class="o">||</span> <span class="nx">result</span><span class="p">.</span><span class="nx">original_name</span><span class="p">}</span>
+        <span class="o">&lt;</span><span class="sr">/h2</span><span class="err">&gt;
+</span>
+        <span class="o">&lt;</span><span class="nx">p</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">flex items-center opacity-0 group-hover:opacity-100 </span><span class="dl">"</span><span class="o">&gt;</span>
+          <span class="p">{</span><span class="nx">result</span><span class="p">.</span><span class="nx">media_type</span> <span class="o">&amp;&amp;</span> <span class="s2">`</span><span class="p">${</span><span class="nx">result</span><span class="p">.</span><span class="nx">media_type</span><span class="p">}</span><span class="s2"> *`</span><span class="p">}</span>
+          <span class="p">{</span><span class="dl">"</span><span class="s2">  </span><span class="dl">"</span><span class="p">}</span>
+          <span class="p">{</span><span class="nx">result</span><span class="p">.</span><span class="nx">release_date</span> <span class="o">||</span> <span class="nx">result</span><span class="p">.</span><span class="nx">first_air_date</span><span class="p">}</span> <span class="err">•</span> <span class="p">{</span><span class="dl">"</span><span class="s2">  </span><span class="dl">"</span><span class="p">}</span>
+          <span class="o">&lt;</span><span class="nx">HandThumbUpIcon</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">h-5 mx-2</span><span class="dl">"</span> <span class="o">/&gt;</span>
+          <span class="p">{</span><span class="nx">result</span><span class="p">.</span><span class="nx">vote_count</span><span class="p">}</span>
+        <span class="o">&lt;</span><span class="sr">/p</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">Thumbnail</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>map을 이용할 때마다 key를 사용해야 하는 걸 잊지 말자.</p>
+
+<p>next의 Image 컴포넌트에는 layout이라는 프러퍼티가 있다. layout 프러퍼티는 fill, fixed, intrinsic, responsive 옵션을 가진다.</p>
+
+<p>result 오브젝트에서 <code class="language-plaintext highlighter-rouge">poster_path</code>를 이용할 텐데, base url이 없는 형태다.(<code class="language-plaintext highlighter-rouge">"file_path": "/fCayJrkfRaCRCTh8GqN30f8oyQF.jpg"</code>로 나옴)
+TMDB에서 가져온 이미지 url은 세 가지(base ulr, size, file_path) 파트로 나뉘어져 있다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://image.tmdb.org/t/p/w500/8uO0gUM8aNqYLs1OsTBQiXu0fEv.jpg
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">truncate</code>: 긴 텍스트 결과물을 줄여서 보여준다.
+<code class="language-plaintext highlighter-rouge">mx</code>: margin x axis. (left, right margin 주는 것)</p>
+
+<h3 id="css-grid">CSS Grid</h3>
+
+<p>모바일용 1칸, 아이패드용 2칸, 브레이크 포인트 xl까지 만들 수 있다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">px-5 my-10 sm:grid md:grid-cols-2 xl:grid-cols-3 </span><span class="dl">"</span><span class="o">&gt;</span>
+</code></pre></div></div>
+
+<p>그러나 아주아주 넓은 화면에서 적용하기는 좋지 않다. 이때 커스텀 grid를 만들면 된다.
+3xl를 내가 만들어 본다.</p>
+
+<p>tailwind.config.js</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/** @type {import('tailwindcss').Config} */</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">content</span><span class="p">:</span> <span class="p">[</span>
+    <span class="dl">"</span><span class="s2">./pages/**/*.{js,ts,jsx,tsx}</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">./components/**/*.{js,ts,jsx,tsx}</span><span class="dl">"</span><span class="p">,</span>
+  <span class="p">],</span>
+  <span class="na">theme</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">extend</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">screen</span><span class="p">:</span> <span class="p">{</span>
+        <span class="dl">"</span><span class="s2">3xl</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2000px</span><span class="dl">"</span><span class="p">,</span>
+      <span class="p">},</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+  <span class="na">plugins</span><span class="p">:</span> <span class="p">[</span><span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">tailwind-scrollbar-hide</span><span class="dl">"</span><span class="p">)],</span>
+<span class="p">};</span>
+
+</code></pre></div></div>
+
+<p>theme 오브젝트 안의 extend 오브젝트 안에 다음을 추가한다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">screen</span><span class="p">:</span> <span class="p">{</span>
+  <span class="dl">"</span><span class="s2">3xl</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2000px</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">},</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>truncate: (아래나 위를 잘라서) 길이를 줄이다[짧게 하다]</p>
+
+<hr />
+
+<p>화) 운동</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>의자스쿼트</th>
+      <th>종아리운동</th>
+      <th>복근</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>3/3</td>
+      <td>3/3</td>
+      <td>3/3</td>
+    </tr>
+  </tbody>
+</table>
+
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/2022-10-26/TIL" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/2022-10-24/TIL" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-07-30 14:29:33 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

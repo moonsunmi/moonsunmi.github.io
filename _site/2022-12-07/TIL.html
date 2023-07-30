@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TIL) 모범 사례 react-trello-board 배워서 내 스타일 만들기 | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="TIL) 모범 사례 react-trello-board 배워서 내 스타일 만들기" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="(달성/목표) 뽀모도리 1일 4 / 5 1주 4 /40" />
+<meta property="og:description" content="(달성/목표) 뽀모도리 1일 4 / 5 1주 4 /40" />
+<link rel="canonical" href="http://localhost:4000/2022-12-07/TIL" />
+<meta property="og:url" content="http://localhost:4000/2022-12-07/TIL" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-12-07T12:18:07+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TIL) 모범 사례 react-trello-board 배워서 내 스타일 만들기" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-12-07T12:18:07+09:00","datePublished":"2022-12-07T12:18:07+09:00","description":"(달성/목표) 뽀모도리 1일 4 / 5 1주 4 /40","headline":"TIL) 모범 사례 react-trello-board 배워서 내 스타일 만들기","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-12-07/TIL"},"url":"http://localhost:4000/2022-12-07/TIL"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Sunmi Moon
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2022-12-07 12:18:07 +0900">December 07, 2022</time>
+    
+  </div>
+
+  <h1 class="post-title">TIL) 모범 사례 react-trello-board 배워서 내 스타일 만들기</h1>
+  <div class="post-line"></div>
+
+  <table>
+  <thead>
+    <tr>
+      <th>(달성/목표)</th>
+      <th>뽀모도리</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1일</td>
+      <td>4 / 5</td>
+    </tr>
+    <tr>
+      <td>1주</td>
+      <td>4 /40</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="모범-사례-배우기">모범 사례 배우기</h3>
+<p>모범으로 삼을 만하다는 ‘react-trello-board’ 프로젝트를 포크해 왔다. github으로 단순히 가져오기만 하면 실행이 되지 않는다. 파일을 복사해 온 것뿐이니…</p>
+
+<p>다음 명령어를 쓰면, 실행시킬 수 있다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">yarn add 'URL'</code></p>
+
+<p>스타일 폴더를 따로 두었고, 여기에서는 스타일만 지정했다. 컴포넌트가 달라지면 스타일 파일도 다르게 한 듯하다.(비슷한 걸 공유하는 건 예외. CardList, CardListHeader) input 엘리먼트는 여러 컴포넌트에서 쓰이고, 스타일링할 게 많아서인지 따로 두었다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>styles
+ㄴdevice.js: break 포인트와 기기별 최대 너비 지정해 둠.
+ㄴglobalStyles.js: 'style-component' CSS-in-JS 라이브러리가 제공하는 `createGlobalStyle`를 이용해 html, body 등의 스타일을 지정해 줌.
+ㄴtheme.js: theme 컬러 지정해 둠.
+ㄴBoard.styles.js: Board 컴포넌트용
+ㄴCard.styles.js: Card 컴포넌트용
+ㄴCardList.styles.js: CardList 컴포넌트용
+ㄴHeader.styles.js: Header 컴포넌트용
+ㄴInput.styles.js: input 엘리먼트를 위한 것
+</code></pre></div></div>
+
+<p>컴포넌트가 여러 요소를 감싸는 형태라면 컨테이너, 헤더, 래퍼 등으로 구분해서 스타일을 저장해 두었다. 예를 들어 CardList.styles.js에는 <code class="language-plaintext highlighter-rouge">CardListContainer</code>, <code class="language-plaintext highlighter-rouge">CardListHeader</code>, <code class="language-plaintext highlighter-rouge">CardListWrapper</code>가 들어 있다.</p>
+
+<h3 id="나도-따라-한다">나도 따라 한다</h3>
+
+<p>나는 컨테이너 형태의 디자인을 계속 사용할 것이기 때문에 Container.styles.js를 만들었다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">styled</span><span class="p">,</span> <span class="p">{</span> <span class="nx">css</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">styled-components</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">darken</span><span class="p">,</span> <span class="nx">lighten</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">polished</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">Container</span> <span class="o">=</span> <span class="nx">styled</span><span class="p">.</span><span class="nx">div</span><span class="s2">`
+  /* 공통 스타일 */
+  border-radius: 0.5rem;
+  padding: 1rem;
+  box-shadow: 0.2rem 0.3rem rgba(0, 0, 0, 0.02);
+  margin: 1rem;
+  /* 색상 */
+  </span><span class="p">${(</span><span class="nx">props</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">props</span><span class="p">.</span><span class="nx">color</span> <span class="p">?</span> <span class="nx">props</span><span class="p">.</span><span class="nx">theme</span><span class="p">[</span><span class="nx">props</span><span class="p">.</span><span class="nx">color</span><span class="p">]</span> <span class="p">:</span> <span class="nx">props</span><span class="p">.</span><span class="nx">theme</span><span class="p">.</span><span class="nx">primary</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nx">css</span><span class="s2">`
+      color: </span><span class="p">${</span><span class="nx">darken</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="nx">color</span><span class="p">)}</span><span class="s2">;
+      background: </span><span class="p">${</span><span class="nx">lighten</span><span class="p">(</span><span class="mf">0.15</span><span class="p">,</span> <span class="nx">color</span><span class="p">)}</span><span class="s2">;
+      border: 1px solid </span><span class="p">${</span><span class="nx">darken</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="nx">color</span><span class="p">)}</span><span class="s2">;
+    `</span><span class="p">;</span>
+  <span class="p">}}</span><span class="s2">
+`</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">ContainerTitle</span> <span class="o">=</span> <span class="nx">styled</span><span class="p">.</span><span class="nx">div</span><span class="s2">`
+  </span><span class="p">${(</span><span class="nx">props</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">props</span><span class="p">.</span><span class="nx">color</span> <span class="p">?</span> <span class="nx">props</span><span class="p">.</span><span class="nx">theme</span><span class="p">[</span><span class="nx">props</span><span class="p">.</span><span class="nx">color</span><span class="p">]</span> <span class="p">:</span> <span class="nx">props</span><span class="p">.</span><span class="nx">theme</span><span class="p">.</span><span class="nx">primary</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nx">css</span><span class="s2">`
+      font-size: 115%;
+      text-align: center;
+      color: </span><span class="p">${</span><span class="nx">darken</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="nx">color</span><span class="p">)}</span><span class="s2">;
+      background: </span><span class="p">${</span><span class="nx">lighten</span><span class="p">(</span><span class="mf">0.15</span><span class="p">,</span> <span class="nx">color</span><span class="p">)}</span><span class="s2">;
+      border-bottom: 1px solid </span><span class="p">${</span><span class="nx">darken</span><span class="p">(</span><span class="mf">0.3</span><span class="p">,</span> <span class="nx">color</span><span class="p">)}</span><span class="s2">;
+      margin-bottom: 1rem;
+    `</span><span class="p">;</span>
+  <span class="p">}}</span><span class="s2">
+`</span><span class="p">;</span>
+</code></pre></div></div>
+
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/2022-12-08/TIL" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/2022-11-29/TIL" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-07-30 14:29:33 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

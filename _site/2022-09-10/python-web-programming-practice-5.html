@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>파이썬 웹 프로그래밍 공부 실전편 5 | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="파이썬 웹 프로그래밍 공부 실전편 5" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="장고와 파이썬의 버전이 안 맞아서 오류가 났었다. 파이썬은 3.8.9 버전을 쓰고 있는데, 장고는 최신 버전을 깔려고 해서 호환이 안 되었던 것 같다. 호환을 확인하는 방법은 pypi.org에서 장고를 검색해 보면 된다. 다음과 같은 정보를 확인할 수 있다. Meta License: BSD License (BSD-3-Clause)" />
+<meta property="og:description" content="장고와 파이썬의 버전이 안 맞아서 오류가 났었다. 파이썬은 3.8.9 버전을 쓰고 있는데, 장고는 최신 버전을 깔려고 해서 호환이 안 되었던 것 같다. 호환을 확인하는 방법은 pypi.org에서 장고를 검색해 보면 된다. 다음과 같은 정보를 확인할 수 있다. Meta License: BSD License (BSD-3-Clause)" />
+<link rel="canonical" href="http://localhost:4000/2022-09-10/python-web-programming-practice-5" />
+<meta property="og:url" content="http://localhost:4000/2022-09-10/python-web-programming-practice-5" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-09-10T22:50:13+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="파이썬 웹 프로그래밍 공부 실전편 5" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-09-10T22:50:13+09:00","datePublished":"2022-09-10T22:50:13+09:00","description":"장고와 파이썬의 버전이 안 맞아서 오류가 났었다. 파이썬은 3.8.9 버전을 쓰고 있는데, 장고는 최신 버전을 깔려고 해서 호환이 안 되었던 것 같다. 호환을 확인하는 방법은 pypi.org에서 장고를 검색해 보면 된다. 다음과 같은 정보를 확인할 수 있다. Meta License: BSD License (BSD-3-Clause)","headline":"파이썬 웹 프로그래밍 공부 실전편 5","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-09-10/python-web-programming-practice-5"},"url":"http://localhost:4000/2022-09-10/python-web-programming-practice-5"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Sunmi Moon
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2022-09-10 22:50:13 +0900">September 10, 2022</time>
+    
+  </div>
+
+  <h1 class="post-title">파이썬 웹 프로그래밍 공부 실전편 5</h1>
+  <div class="post-line"></div>
+
+  <p>장고와 파이썬의 버전이 안 맞아서 오류가 났었다. 파이썬은 3.8.9 버전을 쓰고 있는데, 장고는 최신 버전을 깔려고 해서 호환이 안 되었던 것 같다. 호환을 확인하는 방법은 pypi.org에서 장고를 검색해 보면 된다. 다음과 같은 정보를 확인할 수 있다.</p>
+<pre>
+Meta
+License: BSD License (BSD-3-Clause)
+
+Author: Django Software Foundation
+
+Requires: Python &gt;=3.8
+</pre>
+
+<p>파이썬 3.8도 가능한 것처럼 표시되긴 했는데… 어쨌든 장고를 낮은 버전으로 깔았더니 문제가 해결되었다.</p>
+
+<h2 id="4장-프로젝트-첫-페이지-만들기">4장 프로젝트 첫 페이지 만들기</h2>
+
+<p>base.html</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"ko"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"UTF-8"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">X-UA-Compatible"</span> <span class="na">content=</span><span class="s">"IE=edge"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1"</span><span class="nt">&gt;</span>
+
+    <span class="nt">&lt;title&gt;</span>{% block title %}Django Web Programming{% endblock %}<span class="nt">&lt;/title&gt;</span>
+    <span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">"https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">integrity=</span><span class="s">"sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"</span> <span class="na">crossorigin=</span><span class="s">"anonymous"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+
+  {% block extra-style %}{% endblock %}
+
+<span class="nt">&lt;body</span> <span class="na">style=</span><span class="s">"padding-top:90px;"</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"navbar navbar-expand-lg navbar-dark bg-primary fixed-top"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container-fluid"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"navbar-brand mx-5 mb-0 font-weight-bol font-italic"</span><span class="nt">&gt;</span>Django - Python Web Programming<span class="nt">&lt;/span&gt;</span>
+    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"navbar-toggler"</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">data-bs-toggle=</span><span class="s">"collapse"</span> <span class="na">data-bs-target=</span><span class="s">"#navbarSupportedContent"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"navbar-toggler-icon"</span><span class="nt">&gt;&lt;/span&gt;</span>
+    <span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"collapse navbar-collapse"</span> <span class="na">id=</span><span class="s">"navbarSupportedContent"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"navbar-nav me-auto mb-2 mb-lg-0"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"nav-item mx-1 btn btn-primary"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"nav-link text-white"</span> <span class="na">aria-current=</span><span class="s">"page"</span> <span class="na">href=</span><span class="s">"{% url 'home' %}"</span><span class="nt">&gt;</span>Home<span class="nt">&lt;/a&gt;</span>
+        <span class="nt">&lt;/li&gt;</span>
+        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"nav-item mx-1 btn btn-primary"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"nav-link text-white"</span> <span class="na">href=</span><span class="s">"{% url 'bookmark:index' %}"</span><span class="nt">&gt;</span>Bookmark<span class="nt">&lt;/a&gt;</span>
+        <span class="nt">&lt;/li&gt;</span>
+        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"nav-item mx-1 btn btn-primary"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"nav-link text-white"</span> <span class="na">href=</span><span class="s">"{% url 'blog:index' %}"</span><span class="nt">&gt;</span>Blog<span class="nt">&lt;/a&gt;</span>
+        <span class="nt">&lt;/li&gt;</span>
+        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"nav-item mx-1 btn btn-primary"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"nav-link text-white"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Photo<span class="nt">&lt;/a&gt;</span>
+        <span class="nt">&lt;/li&gt;</span>
+        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"nav-item dropdown mx-1 btn btn-primary"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"nav-link dropdown-toggle text-white"</span> <span class="na">href=</span><span class="s">"#"</span> <span class="na">id=</span><span class="s">"navbarDropdown"</span> <span class="na">role=</span><span class="s">"button"</span> <span class="na">data-bs-toggle=</span><span class="s">"dropdown"</span><span class="nt">&gt;</span>Util<span class="nt">&lt;/a&gt;</span>
+          <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"dropdown-menu"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">class=</span><span class="s">"dropdown-item"</span> <span class="na">href=</span><span class="s">"{% url 'admin:index' %}"</span><span class="nt">&gt;</span>Admin<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+            <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">class=</span><span class="s">"dropdown-item"</span> <span class="na">href=</span><span class="s">"{% url 'blog:post_archive' %}"</span><span class="nt">&gt;</span>Archive<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+            <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">class=</span><span class="s">"dropdown-item"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>Search<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+          <span class="nt">&lt;/ul&gt;</span>
+        <span class="nt">&lt;/li&gt;</span>
+      <span class="nt">&lt;/ul&gt;</span>
+      <span class="nt">&lt;form</span> <span class="na">class=</span><span class="s">"form-inline my-2"</span> <span class="na">action=</span><span class="s">""</span> <span class="na">method=</span><span class="s">"post"</span><span class="nt">&gt;</span>
+        {% csrf_token %}
+        <span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">"form-control mr-sm-2"</span> <span class="na">type=</span><span class="s">"search"</span> <span class="na">placeholder=</span><span class="s">"global search"</span> <span class="na">name=</span><span class="s">"search_word"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;/form&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/nav&gt;</span>
+
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container"</span><span class="nt">&gt;</span>
+  {% block content %}{% endblock %}
+<span class="nt">&lt;/div&gt;</span>
+
+
+{% block footer %}{% endblock %}
+
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"</span> <span class="na">integrity=</span><span class="s">"sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"</span> <span class="na">crossorigin=</span><span class="s">"anonymous"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"</span> <span class="na">integrity=</span><span class="s">"sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB"</span> <span class="na">crossorigin=</span><span class="s">"anonymous"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"</span> <span class="na">integrity=</span><span class="s">"sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"</span> <span class="na">crossorigin=</span><span class="s">"anonymous"</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"https://kit.fontawesome.com/36c998c735.js"</span> <span class="na">crossorigin=</span><span class="s">"anonymous"</span><span class="nt">&gt;&lt;/script&gt;</span>
+
+{% block extra-script %}{% endblock %}
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<p>home.html</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}home.html{% endblock %}
+
+{% block extra-style %}
+<span class="nt">&lt;style </span><span class="na">type=</span><span class="s">"text/css"</span><span class="nt">&gt;</span>
+<span class="nc">.home-image</span><span class="p">{</span>
+  <span class="nl">background-image</span><span class="p">:</span> <span class="sx">url("{% static 'img/swimming-pool.jpg' %}")</span><span class="p">;</span>
+  <span class="nl">background-repeat</span><span class="p">:</span> <span class="nb">no-repeat</span><span class="p">;</span>
+  <span class="nl">background-position</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
+  <span class="nl">background-size</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+  <span class="nl">height</span><span class="p">:</span> <span class="m">500px</span><span class="p">;</span>
+  <span class="nl">border-top</span><span class="p">:</span> <span class="m">10px</span> <span class="nb">solid</span> <span class="m">#ccc</span><span class="p">;</span>
+  <span class="nl">border-bottom</span><span class="p">:</span> <span class="m">10px</span> <span class="nb">solid</span> <span class="m">#ccc</span><span class="p">;</span>
+  <span class="nl">padding</span><span class="p">:</span> <span class="m">20px</span> <span class="m">0</span> <span class="m">0</span> <span class="m">20px</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.title</span> <span class="p">{</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="m">#c80</span><span class="p">;</span>
+  <span class="nl">font-weight</span><span class="p">:</span> <span class="nb">bold</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.powered</span> <span class="p">{</span>
+  <span class="nl">position</span><span class="p">:</span> <span class="nb">relative</span><span class="p">;</span>
+  <span class="nl">top</span><span class="p">:</span> <span class="m">77%</span><span class="p">;</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="m">#cc0</span><span class="p">;</span>
+  <span class="nl">font-style</span><span class="p">:</span> <span class="nb">italic</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">&lt;/style&gt;</span>
+{% endblock extra-style %}
+
+
+{% block content %}
+
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"home-image"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h2</span> <span class="na">class=</span><span class="s">"title"</span><span class="nt">&gt;</span>Django - Python Web Programming<span class="nt">&lt;/h2&gt;</span>
+  <span class="nt">&lt;h4</span> <span class="na">class=</span><span class="s">"powered"</span><span class="nt">&gt;&lt;i</span> <span class="na">class=</span><span class="s">"fas fa-arrow-circle-right"</span><span class="nt">&gt;&lt;/i&gt;</span>powered by django and bootstrap.<span class="nt">&lt;/h4&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+
+<span class="nt">&lt;hr</span> <span class="na">style=</span><span class="s">"margin: 10px 0;"</span><span class="nt">&gt;</span>
+
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"row text-center"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-sm-6"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;h3&gt;</span>Bookmark App<span class="nt">&lt;/h3&gt;</span>
+    <span class="nt">&lt;p&gt;</span>Bookmark is a Uniform Resource Identifier (URI)
+      that is stored for later retrieval in any of various storage formats.
+      You can store your own bookmarks by Bookmark application.
+      It's also possible to update or delete your bookmarks.<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"col-sm-6"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;h3&gt;</span>Blog App<span class="nt">&lt;/h3&gt;</span>
+    <span class="nt">&lt;p&gt;</span>This application makes it possible to log daily events or write your own interests
+    such as hobbies, techniques, etc.
+    A typical blog combines text, digital images, and links to other blogs, web pages, and other media related to its topic.<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+{% endblock content %}
+
+
+{% block footer %}
+<span class="nt">&lt;footer</span> <span class="na">class=</span><span class="s">"fixed-bottom bg-info"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">align=</span><span class="s">"right"</span> <span class="na">class=</span><span class="s">"text-white font-italic mr-5"</span><span class="nt">&gt;</span>Copyright <span class="ni">&amp;copy;</span> 2022 Django site by moonsunmi<span class="nt">&lt;/div&gt;</span>
+<span class="nt">&lt;/footer&gt;</span>
+{% endblock footer %}
+</code></pre></div></div>
+
+<h2 id="5장-개선하기">5장 개선하기</h2>
+
+<p>base.html 템플릿을 상속 받아서 사용하게 만든다.</p>
+
+<p>post_all.html</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% extends 'base.html' %}
+
+{% block title %}post_all.html{% endblock %}
+
+{% block content %}
+
+{% for post in posts %}
+    <span class="nt">&lt;h3&gt;&lt;a</span> <span class="na">href=</span><span class="s">"{{ post.get_absolute_url }}"</span><span class="nt">&gt;</span>{{ post.title }}<span class="nt">&lt;/a&gt;&lt;/h3&gt;</span>
+    {{ post.modify_dt|date:"N d, Y" }}
+    <span class="nt">&lt;p&gt;</span>{{ post.description }}<span class="nt">&lt;/p&gt;</span>
+{% endfor %}
+
+<span class="nt">&lt;br&gt;</span>
+
+
+<span class="nt">&lt;div&gt;</span>
+    <span class="nt">&lt;span&gt;</span>
+    {% if page_obj.has_previous %}
+      <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"?page={{ page_obj.previous_page_number }}"</span><span class="nt">&gt;</span>PreviousPage<span class="nt">&lt;/a&gt;</span>
+    {% endif %}
+
+    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+
+    {% if page_obj.has_next %}
+      <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"?page={{ page_obj.next_page_number }}"</span><span class="nt">&gt;</span>NextPage<span class="nt">&lt;/a&gt;</span>
+    {% endif %}
+  <span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+
+{% endblock %}
+</code></pre></div></div>
+
+<h2 id="6장---tag-달기">6장 - Tag 달기</h2>
+
+<p>가장 많이 사용하는 django-taggit 패키지를 선택.
+django-taggit-templatetags2 패키지도 사용.</p>
+
+<p>models.py</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+<span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">reverse</span>
+<span class="kn">from</span> <span class="nn">taggit.managers</span> <span class="kn">import</span> <span class="n">TaggableManager</span>
+
+<span class="c1"># Create your models here.
+</span>
+
+<span class="k">class</span> <span class="nc">Post</span><span class="p">(</span><span class="n">models</span><span class="p">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">verbose_name</span><span class="o">=</span><span class="s">'TITLE'</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+    <span class="n">slug</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">SlugField</span><span class="p">(</span><span class="n">verbose_name</span><span class="o">=</span><span class="s">'SLUG'</span><span class="p">,</span> <span class="n">unique</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">allow_unicode</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s">'one word for title alias.'</span><span class="p">)</span>
+    <span class="n">description</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">verbose_name</span><span class="o">=</span><span class="s">'DESCRIPTION'</span><span class="p">,</span> <span class="n">max_length</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s">'simple description text'</span><span class="p">)</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">TextField</span><span class="p">(</span><span class="n">verbose_name</span><span class="o">=</span><span class="s">'CONTENT'</span><span class="p">)</span>
+    <span class="n">create_dt</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="n">verbose_name</span><span class="o">=</span><span class="s">'CREATE DATE'</span><span class="p">,</span> <span class="n">auto_now_add</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">modify_dt</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">DateTimeField</span><span class="p">(</span><span class="n">verbose_name</span><span class="o">=</span><span class="s">'MODIFY DATE'</span><span class="p">,</span> <span class="n">auto_now</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">tags</span> <span class="o">=</span> <span class="n">TaggableManager</span><span class="p">(</span><span class="n">blank</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">verbose_name</span> <span class="o">=</span> <span class="s">'post'</span>
+        <span class="n">verbose_name_plural</span> <span class="o">=</span> <span class="s">'posts'</span>
+        <span class="n">db_table</span> <span class="o">=</span> <span class="s">'blog_posts'</span>
+        <span class="n">ordering</span> <span class="o">=</span> <span class="p">(</span><span class="s">'-modify_dt'</span><span class="p">,)</span>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">title</span>
+
+    <span class="k">def</span> <span class="nf">get_absolute_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">reverse</span><span class="p">(</span><span class="s">'blog:post_detail'</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">slug</span><span class="p">,))</span>
+
+    <span class="k">def</span> <span class="nf">get_previous</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">get_previous_by_modify_dt</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">get_next</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">get_next_by_modify_dt</span><span class="p">()</span>
+
+
+
+</code></pre></div></div>
+
+<p>admin.py</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
+<span class="kn">from</span> <span class="nn">blog.models</span> <span class="kn">import</span> <span class="n">Post</span>
+<span class="c1"># Register your models here.
+</span>
+<span class="o">@</span><span class="n">admin</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">Post</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">PostAdmin</span><span class="p">(</span><span class="n">admin</span><span class="p">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+    <span class="n">list_display</span> <span class="o">=</span> <span class="p">(</span><span class="s">'id'</span><span class="p">,</span> <span class="s">'title'</span><span class="p">,</span> <span class="s">'modify_dt'</span><span class="p">,</span> <span class="s">'tag_list'</span><span class="p">)</span>
+    <span class="n">list_filter</span> <span class="o">=</span> <span class="p">(</span><span class="s">'modify_dt'</span><span class="p">,)</span>
+    <span class="n">search_fields</span> <span class="o">=</span> <span class="p">(</span><span class="s">'title'</span><span class="p">,</span> <span class="s">'content'</span><span class="p">)</span>
+    <span class="n">prepopulated_fields</span> <span class="o">=</span> <span class="p">{</span><span class="s">'slug'</span><span class="p">:</span> <span class="p">(</span><span class="s">'title'</span><span class="p">,)}</span>
+
+    <span class="k">def</span> <span class="nf">get_queryset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">().</span><span class="n">get_queryset</span><span class="p">(</span><span class="n">request</span><span class="p">).</span><span class="n">prefetch_related</span><span class="p">(</span><span class="s">'tags'</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">tag_list</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">u</span><span class="s">", "</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">o</span><span class="p">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">obj</span><span class="p">.</span><span class="n">tags</span><span class="p">.</span><span class="nb">all</span><span class="p">())</span>
+</code></pre></div></div>
+
+<p>N:N 관계에서 쿼리 횟수를 줄여 성능을 높이고자 할 때는 prefetch_related() 메서드를 사용한다.</p>
+
+<p>post_detail.html</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% extends 'base.html' %}
+
+{% block title %}post_detail.html{% endblock %}
+
+{% block content %}
+<span class="nt">&lt;h2&gt;</span>{{ object.title }}<span class="nt">&lt;/h2&gt;</span>
+<span class="nt">&lt;p&gt;</span>
+  {% if object.get_previous %}
+    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"{{ object.get_previous.get_absolute_url }}"</span> <span class="na">title=</span><span class="s">"View previous post"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"fas fa-arrow-circle-left"</span><span class="nt">&gt;&lt;/i&gt;</span> {{ object.get_previous }}
+    <span class="nt">&lt;/a&gt;</span>
+  {% endif %}
+
+    {% if object.get_next %}
+      | <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"{{ object.get_next.get_absolute_url }}"</span> <span class="na">title=</span><span class="s">"View next post"</span><span class="nt">&gt;</span>
+        {{ object.get_next }} <span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"fas fa-arrow-circle-right"</span><span class="nt">&gt;&lt;/i&gt;</span>
+      <span class="nt">&lt;/a&gt;</span>
+    {% endif %}
+<span class="nt">&lt;/p&gt;</span>
+
+<span class="nt">&lt;p&gt;</span>{{ object.modify_dt|date:"j F Y" }}<span class="nt">&lt;/p&gt;</span>
+<span class="nt">&lt;br&gt;</span>
+
+<span class="nt">&lt;div&gt;</span>
+  {{ object.content|linebreaks }}
+<span class="nt">&lt;/div&gt;</span>
+
+<span class="nt">&lt;br&gt;</span>
+
+<span class="nt">&lt;div&gt;</span>
+  <span class="nt">&lt;b&gt;</span>TAGS<span class="nt">&lt;/b&gt;&lt;i</span> <span class="na">class=</span><span class="s">"fa-solid fa-tag"</span><span class="nt">&gt;&lt;/i&gt;</span>
+  {% load taggit_templatetags2_tags %}
+  {% get_tags_for_object object as "tags" %}
+  {% for tag in tags %}
+  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"{% url 'blog:tagged_object_list' tag.name %}"</span><span class="nt">&gt;</span>{{ tag.name }}<span class="nt">&lt;/a&gt;</span>
+  {% endfor %}
+  <span class="ni">&amp;emsp;</span>
+  <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"{% url 'blog:tag_cloud' %}"</span><span class="nt">&gt;&lt;span</span> <span class="na">class=</span><span class="s">"btn btn-info btn-sm"</span><span class="nt">&gt;</span>TagCloud<span class="nt">&lt;/span&gt;&lt;/a&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+
+
+{% endblock %}
+</code></pre></div></div>
+
+<p>taggit_cloud.html</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% extends 'base.html' %}
+
+{% block title %}taggit_cloud.html{% endblock %}
+
+{% block extra-style %}
+<span class="nt">&lt;style </span><span class="na">type=</span><span class="s">"text/css"</span><span class="nt">&gt;</span>
+<span class="nc">.tag-cloud</span> <span class="p">{</span>
+  <span class="nl">width</span><span class="p">:</span> <span class="m">40%</span><span class="p">;</span>
+  <span class="nl">margin-left</span><span class="p">:</span> <span class="m">30px</span><span class="p">;</span>
+  <span class="nl">text-align</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
+  <span class="nl">padding</span><span class="p">:</span> <span class="m">5px</span><span class="p">;</span>
+  <span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="no">orange</span><span class="p">;</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="m">#ffc</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.tag-1</span> <span class="p">{</span> <span class="nl">font-size</span><span class="p">:</span> <span class="m">12px</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.tag-2</span> <span class="p">{</span> <span class="nl">font-size</span><span class="p">:</span> <span class="m">14px</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.tag-3</span> <span class="p">{</span> <span class="nl">font-size</span><span class="p">:</span> <span class="m">16px</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.tag-4</span> <span class="p">{</span> <span class="nl">font-size</span><span class="p">:</span> <span class="m">18px</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.tag-5</span> <span class="p">{</span> <span class="nl">font-size</span><span class="p">:</span> <span class="m">20px</span><span class="p">;</span> <span class="p">}</span>
+<span class="nc">.tag-6</span> <span class="p">{</span> <span class="nl">font-size</span><span class="p">:</span> <span class="m">24px</span><span class="p">;</span> <span class="p">}</span>
+<span class="nt">&lt;/style&gt;</span>
+
+{% endblock extra-style %}
+
+{% block content %}
+  <span class="nt">&lt;h1&gt;</span>Blog Tag Cloud<span class="nt">&lt;/h1&gt;</span>
+  <span class="nt">&lt;br&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"tag-cloud"</span><span class="nt">&gt;</span>
+    {% load taggit_templatetags2-tags %}
+    {% get_tagcloud as tags %}
+    {% for tag in tags %}
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"tag-{{tag.weight|floatformat:0}}"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"{% url 'blog:tagged_object_list' tag.name %}"</span><span class="nt">&gt;</span>{{ tag.name }}({{tag.num_times}})<span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;/span&gt;</span>
+    {% endfor %}
+  <span class="nt">&lt;/div&gt;</span>
+
+{% endblock %}
+
+</code></pre></div></div>
+
+<p>: tag.weight는 실수형인데, floatformat:0 템플릿 필터에 의해 반올림하면 정수형으로 변환된다.</p>
+
+<p>taggit_post_list.html</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% extends 'base.html' %}
+
+{% block title %}taggit_post_list.html{% endblock %}
+
+{% block content %}
+<span class="nt">&lt;h1&gt;</span>Post for tag - {{ tagname }}<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;br&gt;</span>
+
+{% for post in object_list %}
+    <span class="nt">&lt;h3&gt;&lt;a</span> <span class="na">href=</span><span class="s">"{{ post.get_absolute_url }}"</span><span class="nt">&gt;</span>{{ post.title }}<span class="nt">&lt;/a&gt;&lt;/h3&gt;</span>
+    {{ post.modify_dt|date:"N d, Y" }}
+    <span class="nt">&lt;p&gt;</span>{{ post.description }}<span class="nt">&lt;/p&gt;</span>
+{% endfor %}
+
+{% endblock content %}
+
+
+</code></pre></div></div>
+
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/2022-09-10/HTML5-CSS3-Bible-1" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/2022-09-09/python-web-programming-practice-4" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-07-30 14:29:33 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

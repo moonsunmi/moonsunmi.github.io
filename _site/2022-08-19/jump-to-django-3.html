@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>점프투 장고 공부 3 | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="점프투 장고 공부 3" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="admin.py from django.contrib import admin from .models import Question class QuestionAdmin(admin.ModelAdmin): search_fields = [&#39;subject&#39;] admin.site.register(Question, QuestionAdmin) render 함수는 파이썬 데이터를 템플릿에 적용하여 HTML로 반환하는 함수이다. 즉, 위에서 사용한 render 함수는 질문 목록으로 조회한 question_list 데이터를 pybo/question_list.html 파일에 적용하여 HTML을 생성한후 리턴한다. 템플릿 파일은 HTML 파일과 비슷하지만 파이썬 데이터를 읽어서 사용할수 있는 HTML 파일이다. 템플릿 위치 하나의 웹 사이트에서 여러 앱을 사용할 때 여러 앱의 화면을 구성하는 템플릿은 한 디렉터리에 모아 관리하는 편이 여러모로 좋다. 박응용 저자는 다음 구조를 선호한다. 모든 앱이 공통으로 사용할 템플릿 디렉터리 - projects/mysite/templates pybo 앱이 사용할 템플릿 디렉터리 - projects/mysite/templates/pybo common 앱이 사용할 템플릿 디렉터리 - projects/mysite/templates/common question_list.html {% if question_list %} &lt;ul&gt; {% for question in question_list %} &lt;li&gt;&lt;a href=&quot;pybo/{{ question.id }}&quot;&gt;{{ question.subject }}&lt;/a&gt;&lt;/li&gt; {% endfor %} &lt;/ul&gt; {% else %} &lt;p&gt;질문이 없습니다.&lt;/p&gt; {% endif %} 이렇게 없는 데이터를 요청할 경우 500 오류 페이지 보다는 “Not Found (404)” 페이지를 리턴하는 것이 바람직하다. Question.objects.get(id=question_id)를 get_object_or_404(Question, pk=question_id)로 바꾸었다. URL 링크의 구조가 자주 변경되는 경우를 대비해 URL에 대한 실제 링크 대신 링크의 주소가 1:1 매핑되어 있는 별칭을 사용 서로 다른 앱에서 동일한 URL 별칭을 사용하면 중복이 발생할 것이다. 이를 방지하려면 네임스페이스를 의미하는 app_name 변수를 지정해야한다. {% if question_list %} &lt;ul&gt; {% for question in question_list %} &lt;li&gt;&lt;a href=&quot;{% url &#39;pybo:detail&#39; question.id %}&quot;&gt;{{ question.subject }}&lt;/a&gt;&lt;/li&gt; {% endfor %} &lt;/ul&gt; {% else %} &lt;p&gt;질문이 없습니다.&lt;/p&gt; {% endif %} form 태그 바로 밑에 csrf_token 태그를 항상 위치시켜야 한다. POST 요청시 form 태그에 csrf_token이 없으면 장고는 오류를 낸다. &lt;link&gt; 태그의 rel 속성은 현재 문서와 외부 리소스 사이의 연관 관계를 명시합니다. rel 속성은 &lt;link&gt; 요소에 반드시 명시되어야 하는 필수 속성입니다. style.css textarea { width:100%; } input[type=submit] { margin-top:10px; } css가 안 먹는 에러가 발생했었는데, setting 파일에서 DIRS를 DIR로 써서 그랬음. ‘-s’, ‘점과 쉼표’ 같은 오타를 조심해야겠다. STATIC_URL = &#39;/static/&#39; STATICFILES_DIRS = [ BASE_DIR / &#39;static&#39;, ] base.html {% load static %} &lt;!doctype html&gt; &lt;html lang=&quot;ko&quot;&gt; &lt;head&gt; &lt;!-- Required meta tags --&gt; &lt;meta charset=&quot;utf-8&quot;&gt; &lt;meta name=&quot;viewport&quot; content=&quot;width=devide-width, initial-scale=1, shrink-to-fit=no&quot;&gt; &lt;!-- Bootstrap CSS --&gt; &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;{% static &#39;bootstrap.min.css&#39; %}&quot;&gt; &lt;!-- pybo CSS --&gt; &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;{% static &#39;style.css&#39; %}&quot;&gt; &lt;title&gt;Hello, Pybo!&lt;/title&gt; &lt;/head&gt; &lt;body&gt; &lt;!-- 기본 템플릿 안에 삽입될 내용 start! --&gt; {% block content %} {% endblock %} &lt;!-- 기본 템플릿 안에 삽입될 내용 end! --&gt; &lt;/body&gt; &lt;/html&gt; question_list.html {% extends &#39;base.html&#39; %} {% block content %} &lt;div class=&quot;container my3&quot;&gt; &lt;table class=&quot;table&quot;&gt; &lt;thead&gt; &lt;tr class=&quot;table-dark&quot;&gt; &lt;th&gt;번호&lt;/th&gt; &lt;th&gt;제목&lt;/th&gt; &lt;th&gt;작성 일시&lt;/th&gt; &lt;/tr&gt; &lt;/thead&gt; &lt;tbody&gt; {% if question_list %} {% for question in question_list %} &lt;tr&gt; &lt;td&gt;{{ forloop.counter }}&lt;/td&gt; &lt;td&gt; &lt;a href=&quot;{% url &#39;pybo:detail&#39; question.id %}&quot;&gt;{{ question.subject }}&lt;/a&gt; &lt;/td&gt; &lt;td&gt;{{ question.create_date }}&lt;/td&gt; &lt;/tr&gt; {% endfor %} {% else %} &lt;tr&gt; &lt;td colspan=&quot;3&quot;&gt;질문이 없습니다.&lt;/td&gt; &lt;/tr&gt; {% endif %} &lt;/tbody&gt; &lt;/table&gt; &lt;a href=&quot;{% url &#39;pybo:question_create&#39; %}&quot; class=&quot;btn btn-primary&quot;&gt;질문 등록하기&lt;/a&gt; &lt;/div&gt; {% endblock %} question_detail.html {% extends &#39;base.html&#39; %} {% block content %} &lt;div class=&quot;container my-3&quot;&gt; &lt;!--질문--&gt; &lt;h2 class=&quot;border-bottom py-2&quot;&gt;{{ question.subject }}&lt;/h2&gt; &lt;div class=&quot;card my-3&quot;&gt; &lt;div class=&quot;card-body&quot;&gt; &lt;div class=&quot;card-text&quot; style=&quot;white-space: pre-line&quot;&gt;{{ question.content }}&lt;/div&gt; &lt;div class=&quot;d-flex justify-content-end&quot;&gt; &lt;div class=&quot;badge bg-light text-dark p-2&quot;&gt; {{ question.create_date }} &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;!--답변--&gt; &lt;h5 class=&quot;border-bottom py-2&quot;&gt;{{ question.answer_set.count }}개의 답변이 있습니다.&lt;/h5&gt; {% for answer in question.answer_set.all %} &lt;div class=&quot;card my-3&quot;&gt; &lt;div class=&quot;card-body&quot;&gt; &lt;div class=&quot;card-text&quot; style=&quot;white-space: pre-line;&quot;&gt;{{ answer.content }}&lt;/div&gt; &lt;div class=&quot;d-flex justify-content-end&quot;&gt; &lt;div class=&quot;badge bg-light text-dark p-2&quot;&gt; {{ answer.create_date }} &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; {% endfor %} &lt;!-- 답변 등록 --&gt; &lt;form action=&quot;{% url &#39;pybo:answer_create&#39; question.id %}&quot; method=&quot;post&quot; class=&quot;my-3&quot;&gt; {% csrf_token %} &lt;div class=&quot;mb-3&quot;&gt; &lt;label for=&quot;content&quot; class=&quot;form-label&quot;&gt;답변 내용&lt;/label&gt; &lt;textarea name=&quot;content&quot; id=&quot;content&quot; class=&quot;form-control&quot; rows=&quot;10&quot;&gt;&lt;/textarea&gt; &lt;/div&gt; &lt;input type=&quot;submit&quot; value=&quot;답변등록&quot; class=&quot;btn btn-primary&quot;&gt; &lt;/form&gt; &lt;/div&gt; {% endblock %} base.html 템플릿을 상속하기 위해 {% extends ‘base.html’ %} {% block content %} 와 {% endblock %} 사이에 question_list.html에서만 쓰이는 내용을 작성 장고에서의 폼(form)? 폼은 쉽게 말해 페이지 요청시 전달되는 파라미터들을 쉽게 관리하기 위해 사용하는 클래스이다. 폼은 필수 파라미터의 값이 누락되지 않았는지, 파라미터의 형식은 적절한지 등을 검증할 목적으로 사용한다. 이 외에도 HTML을 자동으로 생성하거나 폼에 연결된 모델을 이용하여 데이터를 저장하는 기능도 있다. forms.py from django import forms from .models import Question class QuestionForm(forms.ModelForm): class Meta: model = Question fields = [&#39;subject&#39;, &#39;content&#39;] 장고의 폼은 일반 폼(forms.Form)과 모델 폼(forms.ModelForm)이 있는데 모델 폼은 모델(Model)과 연결된 폼으로 폼을 저장하면 연결된 모델의 데이터를 저장할수 있는 폼이다. question_form.html {% extends &#39;base.hmtl&#39; %} {% block content %} &lt;div class=&quot;container&quot;&gt; &lt;h5 class=&quot;my-3 border-bottom pb-2&quot;&gt;질문 등록&lt;/h5&gt; &lt;form method=&quot;post&quot;&gt; {% crsf_token %} {{ form.as_p }} &lt;button type=&quot;submit&quot; class=&quot;btn btn-primary&quot;&gt;저장하&lt;/button&gt; &lt;/form&gt; &lt;/div&gt; {% endblock %} ``의 form은 question_create 함수에서 전달한 QuestionForm의 객체이다. ``는 폼에 정의한 subject, content 속성에 해당하는 HTML 코드를 자동으로 생성한다. 보통 form 태그에는 항상 action 속성을 지정하여 submit 실행시 action에 정의된 URL로 폼을 전송해야 한다. form 태그에 action 속성을 지정하지 않으면 현재 페이지의 URL이 디폴트 action으로 설정된다. view.py … (중략) ... def question_create(request): if request.method == &#39;POST&#39;: # &#39;질문 등록&#39; 화면에서 [저장하기] 버튼을 누른 경우 -&gt; 질문 내용을 데이터베이스에 저장해야 함. form = QuestionForm(request.POST) # request.POST를 인수로 QuestionForm을 생성할 경우에는 # request.POST에 담긴 subject, content 값이 QuestionForm의 subject, content 속성에 자동으로 저장되어 객체가 생성된다. if form.is_valid(): question = form.save(commit=False) # 임시저장 question.create_date = timezone.now() question.save() return redirect(&#39;pybo:index&#39;) else: # &#39;질문 목록&#39; 화면에서 [질문 등록하기] 버튼을 누른 경우 form = QuestionForm() context = {&#39;form&#39;:form} return render(request, &#39;pybo/question_form.html&#39;, context) question_form.html {% extends &#39;base.html&#39; %} {% block content %} &lt;div class=&quot;container&quot;&gt; &lt;h5 class=&quot;my-3 border-bottom pb-2&quot;&gt;질문 등록&lt;/h5&gt; &lt;form method=&quot;post&quot;&gt; {% csrf_token %} &lt;!-- 오류 표시 start --&gt; {% if form.errors %} &lt;div class=&quot;alert alert-danger&quot; role = &quot;alert&quot;&gt; {% for field in form %} {% if form.errors %} &lt;div&gt; &lt;strong&gt;{{ field.label }}&lt;/strong&gt; {{ field.errors }} &lt;/div&gt; {% endif %} {% endfor %} &lt;/div&gt; {% endif %} &lt;!-- 오류 표시 end --&gt; &lt;div class=&quot;mb-3&quot;&gt; &lt;label for=&quot;subject&quot; class=&quot;form-label&quot;&gt;제목&lt;/label&gt; &lt;input type=&quot;text&quot; class=&quot;form-control&quot; name=&quot;subject&quot; id=&quot;subject&quot; value=&quot;{{ form.subject.value|default_if_none:&#39;&#39; }}&quot;&gt; &lt;/div&gt; &lt;div class=&quot;mb-3&quot;&gt; &lt;label for=&quot;content&quot; class=&quot;form-label&quot;&gt;내용&lt;/label&gt; &lt;textarea class=&quot;form-control&quot; name=&quot;content&quot; id=&quot;content&quot; rows=&quot;10&quot;&gt;{{ form.content.value|default_if_none:&#39;&#39; }}&lt;/textarea&gt; &lt;/div&gt; &lt;button type=&quot;submit&quot; class=&quot;btn btn-primary&quot;&gt;저장하기&lt;/button&gt; &lt;/form&gt; &lt;/div&gt; {% endblock %}" />
+<meta property="og:description" content="admin.py from django.contrib import admin from .models import Question class QuestionAdmin(admin.ModelAdmin): search_fields = [&#39;subject&#39;] admin.site.register(Question, QuestionAdmin) render 함수는 파이썬 데이터를 템플릿에 적용하여 HTML로 반환하는 함수이다. 즉, 위에서 사용한 render 함수는 질문 목록으로 조회한 question_list 데이터를 pybo/question_list.html 파일에 적용하여 HTML을 생성한후 리턴한다. 템플릿 파일은 HTML 파일과 비슷하지만 파이썬 데이터를 읽어서 사용할수 있는 HTML 파일이다. 템플릿 위치 하나의 웹 사이트에서 여러 앱을 사용할 때 여러 앱의 화면을 구성하는 템플릿은 한 디렉터리에 모아 관리하는 편이 여러모로 좋다. 박응용 저자는 다음 구조를 선호한다. 모든 앱이 공통으로 사용할 템플릿 디렉터리 - projects/mysite/templates pybo 앱이 사용할 템플릿 디렉터리 - projects/mysite/templates/pybo common 앱이 사용할 템플릿 디렉터리 - projects/mysite/templates/common question_list.html {% if question_list %} &lt;ul&gt; {% for question in question_list %} &lt;li&gt;&lt;a href=&quot;pybo/{{ question.id }}&quot;&gt;{{ question.subject }}&lt;/a&gt;&lt;/li&gt; {% endfor %} &lt;/ul&gt; {% else %} &lt;p&gt;질문이 없습니다.&lt;/p&gt; {% endif %} 이렇게 없는 데이터를 요청할 경우 500 오류 페이지 보다는 “Not Found (404)” 페이지를 리턴하는 것이 바람직하다. Question.objects.get(id=question_id)를 get_object_or_404(Question, pk=question_id)로 바꾸었다. URL 링크의 구조가 자주 변경되는 경우를 대비해 URL에 대한 실제 링크 대신 링크의 주소가 1:1 매핑되어 있는 별칭을 사용 서로 다른 앱에서 동일한 URL 별칭을 사용하면 중복이 발생할 것이다. 이를 방지하려면 네임스페이스를 의미하는 app_name 변수를 지정해야한다. {% if question_list %} &lt;ul&gt; {% for question in question_list %} &lt;li&gt;&lt;a href=&quot;{% url &#39;pybo:detail&#39; question.id %}&quot;&gt;{{ question.subject }}&lt;/a&gt;&lt;/li&gt; {% endfor %} &lt;/ul&gt; {% else %} &lt;p&gt;질문이 없습니다.&lt;/p&gt; {% endif %} form 태그 바로 밑에 csrf_token 태그를 항상 위치시켜야 한다. POST 요청시 form 태그에 csrf_token이 없으면 장고는 오류를 낸다. &lt;link&gt; 태그의 rel 속성은 현재 문서와 외부 리소스 사이의 연관 관계를 명시합니다. rel 속성은 &lt;link&gt; 요소에 반드시 명시되어야 하는 필수 속성입니다. style.css textarea { width:100%; } input[type=submit] { margin-top:10px; } css가 안 먹는 에러가 발생했었는데, setting 파일에서 DIRS를 DIR로 써서 그랬음. ‘-s’, ‘점과 쉼표’ 같은 오타를 조심해야겠다. STATIC_URL = &#39;/static/&#39; STATICFILES_DIRS = [ BASE_DIR / &#39;static&#39;, ] base.html {% load static %} &lt;!doctype html&gt; &lt;html lang=&quot;ko&quot;&gt; &lt;head&gt; &lt;!-- Required meta tags --&gt; &lt;meta charset=&quot;utf-8&quot;&gt; &lt;meta name=&quot;viewport&quot; content=&quot;width=devide-width, initial-scale=1, shrink-to-fit=no&quot;&gt; &lt;!-- Bootstrap CSS --&gt; &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;{% static &#39;bootstrap.min.css&#39; %}&quot;&gt; &lt;!-- pybo CSS --&gt; &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;{% static &#39;style.css&#39; %}&quot;&gt; &lt;title&gt;Hello, Pybo!&lt;/title&gt; &lt;/head&gt; &lt;body&gt; &lt;!-- 기본 템플릿 안에 삽입될 내용 start! --&gt; {% block content %} {% endblock %} &lt;!-- 기본 템플릿 안에 삽입될 내용 end! --&gt; &lt;/body&gt; &lt;/html&gt; question_list.html {% extends &#39;base.html&#39; %} {% block content %} &lt;div class=&quot;container my3&quot;&gt; &lt;table class=&quot;table&quot;&gt; &lt;thead&gt; &lt;tr class=&quot;table-dark&quot;&gt; &lt;th&gt;번호&lt;/th&gt; &lt;th&gt;제목&lt;/th&gt; &lt;th&gt;작성 일시&lt;/th&gt; &lt;/tr&gt; &lt;/thead&gt; &lt;tbody&gt; {% if question_list %} {% for question in question_list %} &lt;tr&gt; &lt;td&gt;{{ forloop.counter }}&lt;/td&gt; &lt;td&gt; &lt;a href=&quot;{% url &#39;pybo:detail&#39; question.id %}&quot;&gt;{{ question.subject }}&lt;/a&gt; &lt;/td&gt; &lt;td&gt;{{ question.create_date }}&lt;/td&gt; &lt;/tr&gt; {% endfor %} {% else %} &lt;tr&gt; &lt;td colspan=&quot;3&quot;&gt;질문이 없습니다.&lt;/td&gt; &lt;/tr&gt; {% endif %} &lt;/tbody&gt; &lt;/table&gt; &lt;a href=&quot;{% url &#39;pybo:question_create&#39; %}&quot; class=&quot;btn btn-primary&quot;&gt;질문 등록하기&lt;/a&gt; &lt;/div&gt; {% endblock %} question_detail.html {% extends &#39;base.html&#39; %} {% block content %} &lt;div class=&quot;container my-3&quot;&gt; &lt;!--질문--&gt; &lt;h2 class=&quot;border-bottom py-2&quot;&gt;{{ question.subject }}&lt;/h2&gt; &lt;div class=&quot;card my-3&quot;&gt; &lt;div class=&quot;card-body&quot;&gt; &lt;div class=&quot;card-text&quot; style=&quot;white-space: pre-line&quot;&gt;{{ question.content }}&lt;/div&gt; &lt;div class=&quot;d-flex justify-content-end&quot;&gt; &lt;div class=&quot;badge bg-light text-dark p-2&quot;&gt; {{ question.create_date }} &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;!--답변--&gt; &lt;h5 class=&quot;border-bottom py-2&quot;&gt;{{ question.answer_set.count }}개의 답변이 있습니다.&lt;/h5&gt; {% for answer in question.answer_set.all %} &lt;div class=&quot;card my-3&quot;&gt; &lt;div class=&quot;card-body&quot;&gt; &lt;div class=&quot;card-text&quot; style=&quot;white-space: pre-line;&quot;&gt;{{ answer.content }}&lt;/div&gt; &lt;div class=&quot;d-flex justify-content-end&quot;&gt; &lt;div class=&quot;badge bg-light text-dark p-2&quot;&gt; {{ answer.create_date }} &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; {% endfor %} &lt;!-- 답변 등록 --&gt; &lt;form action=&quot;{% url &#39;pybo:answer_create&#39; question.id %}&quot; method=&quot;post&quot; class=&quot;my-3&quot;&gt; {% csrf_token %} &lt;div class=&quot;mb-3&quot;&gt; &lt;label for=&quot;content&quot; class=&quot;form-label&quot;&gt;답변 내용&lt;/label&gt; &lt;textarea name=&quot;content&quot; id=&quot;content&quot; class=&quot;form-control&quot; rows=&quot;10&quot;&gt;&lt;/textarea&gt; &lt;/div&gt; &lt;input type=&quot;submit&quot; value=&quot;답변등록&quot; class=&quot;btn btn-primary&quot;&gt; &lt;/form&gt; &lt;/div&gt; {% endblock %} base.html 템플릿을 상속하기 위해 {% extends ‘base.html’ %} {% block content %} 와 {% endblock %} 사이에 question_list.html에서만 쓰이는 내용을 작성 장고에서의 폼(form)? 폼은 쉽게 말해 페이지 요청시 전달되는 파라미터들을 쉽게 관리하기 위해 사용하는 클래스이다. 폼은 필수 파라미터의 값이 누락되지 않았는지, 파라미터의 형식은 적절한지 등을 검증할 목적으로 사용한다. 이 외에도 HTML을 자동으로 생성하거나 폼에 연결된 모델을 이용하여 데이터를 저장하는 기능도 있다. forms.py from django import forms from .models import Question class QuestionForm(forms.ModelForm): class Meta: model = Question fields = [&#39;subject&#39;, &#39;content&#39;] 장고의 폼은 일반 폼(forms.Form)과 모델 폼(forms.ModelForm)이 있는데 모델 폼은 모델(Model)과 연결된 폼으로 폼을 저장하면 연결된 모델의 데이터를 저장할수 있는 폼이다. question_form.html {% extends &#39;base.hmtl&#39; %} {% block content %} &lt;div class=&quot;container&quot;&gt; &lt;h5 class=&quot;my-3 border-bottom pb-2&quot;&gt;질문 등록&lt;/h5&gt; &lt;form method=&quot;post&quot;&gt; {% crsf_token %} {{ form.as_p }} &lt;button type=&quot;submit&quot; class=&quot;btn btn-primary&quot;&gt;저장하&lt;/button&gt; &lt;/form&gt; &lt;/div&gt; {% endblock %} ``의 form은 question_create 함수에서 전달한 QuestionForm의 객체이다. ``는 폼에 정의한 subject, content 속성에 해당하는 HTML 코드를 자동으로 생성한다. 보통 form 태그에는 항상 action 속성을 지정하여 submit 실행시 action에 정의된 URL로 폼을 전송해야 한다. form 태그에 action 속성을 지정하지 않으면 현재 페이지의 URL이 디폴트 action으로 설정된다. view.py … (중략) ... def question_create(request): if request.method == &#39;POST&#39;: # &#39;질문 등록&#39; 화면에서 [저장하기] 버튼을 누른 경우 -&gt; 질문 내용을 데이터베이스에 저장해야 함. form = QuestionForm(request.POST) # request.POST를 인수로 QuestionForm을 생성할 경우에는 # request.POST에 담긴 subject, content 값이 QuestionForm의 subject, content 속성에 자동으로 저장되어 객체가 생성된다. if form.is_valid(): question = form.save(commit=False) # 임시저장 question.create_date = timezone.now() question.save() return redirect(&#39;pybo:index&#39;) else: # &#39;질문 목록&#39; 화면에서 [질문 등록하기] 버튼을 누른 경우 form = QuestionForm() context = {&#39;form&#39;:form} return render(request, &#39;pybo/question_form.html&#39;, context) question_form.html {% extends &#39;base.html&#39; %} {% block content %} &lt;div class=&quot;container&quot;&gt; &lt;h5 class=&quot;my-3 border-bottom pb-2&quot;&gt;질문 등록&lt;/h5&gt; &lt;form method=&quot;post&quot;&gt; {% csrf_token %} &lt;!-- 오류 표시 start --&gt; {% if form.errors %} &lt;div class=&quot;alert alert-danger&quot; role = &quot;alert&quot;&gt; {% for field in form %} {% if form.errors %} &lt;div&gt; &lt;strong&gt;{{ field.label }}&lt;/strong&gt; {{ field.errors }} &lt;/div&gt; {% endif %} {% endfor %} &lt;/div&gt; {% endif %} &lt;!-- 오류 표시 end --&gt; &lt;div class=&quot;mb-3&quot;&gt; &lt;label for=&quot;subject&quot; class=&quot;form-label&quot;&gt;제목&lt;/label&gt; &lt;input type=&quot;text&quot; class=&quot;form-control&quot; name=&quot;subject&quot; id=&quot;subject&quot; value=&quot;{{ form.subject.value|default_if_none:&#39;&#39; }}&quot;&gt; &lt;/div&gt; &lt;div class=&quot;mb-3&quot;&gt; &lt;label for=&quot;content&quot; class=&quot;form-label&quot;&gt;내용&lt;/label&gt; &lt;textarea class=&quot;form-control&quot; name=&quot;content&quot; id=&quot;content&quot; rows=&quot;10&quot;&gt;{{ form.content.value|default_if_none:&#39;&#39; }}&lt;/textarea&gt; &lt;/div&gt; &lt;button type=&quot;submit&quot; class=&quot;btn btn-primary&quot;&gt;저장하기&lt;/button&gt; &lt;/form&gt; &lt;/div&gt; {% endblock %}" />
+<link rel="canonical" href="http://localhost:4000/2022-08-19/jump-to-django-3" />
+<meta property="og:url" content="http://localhost:4000/2022-08-19/jump-to-django-3" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-08-19T22:26:44+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="점프투 장고 공부 3" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-08-19T22:26:44+09:00","datePublished":"2022-08-19T22:26:44+09:00","description":"admin.py from django.contrib import admin from .models import Question class QuestionAdmin(admin.ModelAdmin): search_fields = [&#39;subject&#39;] admin.site.register(Question, QuestionAdmin) render 함수는 파이썬 데이터를 템플릿에 적용하여 HTML로 반환하는 함수이다. 즉, 위에서 사용한 render 함수는 질문 목록으로 조회한 question_list 데이터를 pybo/question_list.html 파일에 적용하여 HTML을 생성한후 리턴한다. 템플릿 파일은 HTML 파일과 비슷하지만 파이썬 데이터를 읽어서 사용할수 있는 HTML 파일이다. 템플릿 위치 하나의 웹 사이트에서 여러 앱을 사용할 때 여러 앱의 화면을 구성하는 템플릿은 한 디렉터리에 모아 관리하는 편이 여러모로 좋다. 박응용 저자는 다음 구조를 선호한다. 모든 앱이 공통으로 사용할 템플릿 디렉터리 - projects/mysite/templates pybo 앱이 사용할 템플릿 디렉터리 - projects/mysite/templates/pybo common 앱이 사용할 템플릿 디렉터리 - projects/mysite/templates/common question_list.html {% if question_list %} &lt;ul&gt; {% for question in question_list %} &lt;li&gt;&lt;a href=&quot;pybo/{{ question.id }}&quot;&gt;{{ question.subject }}&lt;/a&gt;&lt;/li&gt; {% endfor %} &lt;/ul&gt; {% else %} &lt;p&gt;질문이 없습니다.&lt;/p&gt; {% endif %} 이렇게 없는 데이터를 요청할 경우 500 오류 페이지 보다는 “Not Found (404)” 페이지를 리턴하는 것이 바람직하다. Question.objects.get(id=question_id)를 get_object_or_404(Question, pk=question_id)로 바꾸었다. URL 링크의 구조가 자주 변경되는 경우를 대비해 URL에 대한 실제 링크 대신 링크의 주소가 1:1 매핑되어 있는 별칭을 사용 서로 다른 앱에서 동일한 URL 별칭을 사용하면 중복이 발생할 것이다. 이를 방지하려면 네임스페이스를 의미하는 app_name 변수를 지정해야한다. {% if question_list %} &lt;ul&gt; {% for question in question_list %} &lt;li&gt;&lt;a href=&quot;{% url &#39;pybo:detail&#39; question.id %}&quot;&gt;{{ question.subject }}&lt;/a&gt;&lt;/li&gt; {% endfor %} &lt;/ul&gt; {% else %} &lt;p&gt;질문이 없습니다.&lt;/p&gt; {% endif %} form 태그 바로 밑에 csrf_token 태그를 항상 위치시켜야 한다. POST 요청시 form 태그에 csrf_token이 없으면 장고는 오류를 낸다. &lt;link&gt; 태그의 rel 속성은 현재 문서와 외부 리소스 사이의 연관 관계를 명시합니다. rel 속성은 &lt;link&gt; 요소에 반드시 명시되어야 하는 필수 속성입니다. style.css textarea { width:100%; } input[type=submit] { margin-top:10px; } css가 안 먹는 에러가 발생했었는데, setting 파일에서 DIRS를 DIR로 써서 그랬음. ‘-s’, ‘점과 쉼표’ 같은 오타를 조심해야겠다. STATIC_URL = &#39;/static/&#39; STATICFILES_DIRS = [ BASE_DIR / &#39;static&#39;, ] base.html {% load static %} &lt;!doctype html&gt; &lt;html lang=&quot;ko&quot;&gt; &lt;head&gt; &lt;!-- Required meta tags --&gt; &lt;meta charset=&quot;utf-8&quot;&gt; &lt;meta name=&quot;viewport&quot; content=&quot;width=devide-width, initial-scale=1, shrink-to-fit=no&quot;&gt; &lt;!-- Bootstrap CSS --&gt; &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;{% static &#39;bootstrap.min.css&#39; %}&quot;&gt; &lt;!-- pybo CSS --&gt; &lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;{% static &#39;style.css&#39; %}&quot;&gt; &lt;title&gt;Hello, Pybo!&lt;/title&gt; &lt;/head&gt; &lt;body&gt; &lt;!-- 기본 템플릿 안에 삽입될 내용 start! --&gt; {% block content %} {% endblock %} &lt;!-- 기본 템플릿 안에 삽입될 내용 end! --&gt; &lt;/body&gt; &lt;/html&gt; question_list.html {% extends &#39;base.html&#39; %} {% block content %} &lt;div class=&quot;container my3&quot;&gt; &lt;table class=&quot;table&quot;&gt; &lt;thead&gt; &lt;tr class=&quot;table-dark&quot;&gt; &lt;th&gt;번호&lt;/th&gt; &lt;th&gt;제목&lt;/th&gt; &lt;th&gt;작성 일시&lt;/th&gt; &lt;/tr&gt; &lt;/thead&gt; &lt;tbody&gt; {% if question_list %} {% for question in question_list %} &lt;tr&gt; &lt;td&gt;{{ forloop.counter }}&lt;/td&gt; &lt;td&gt; &lt;a href=&quot;{% url &#39;pybo:detail&#39; question.id %}&quot;&gt;{{ question.subject }}&lt;/a&gt; &lt;/td&gt; &lt;td&gt;{{ question.create_date }}&lt;/td&gt; &lt;/tr&gt; {% endfor %} {% else %} &lt;tr&gt; &lt;td colspan=&quot;3&quot;&gt;질문이 없습니다.&lt;/td&gt; &lt;/tr&gt; {% endif %} &lt;/tbody&gt; &lt;/table&gt; &lt;a href=&quot;{% url &#39;pybo:question_create&#39; %}&quot; class=&quot;btn btn-primary&quot;&gt;질문 등록하기&lt;/a&gt; &lt;/div&gt; {% endblock %} question_detail.html {% extends &#39;base.html&#39; %} {% block content %} &lt;div class=&quot;container my-3&quot;&gt; &lt;!--질문--&gt; &lt;h2 class=&quot;border-bottom py-2&quot;&gt;{{ question.subject }}&lt;/h2&gt; &lt;div class=&quot;card my-3&quot;&gt; &lt;div class=&quot;card-body&quot;&gt; &lt;div class=&quot;card-text&quot; style=&quot;white-space: pre-line&quot;&gt;{{ question.content }}&lt;/div&gt; &lt;div class=&quot;d-flex justify-content-end&quot;&gt; &lt;div class=&quot;badge bg-light text-dark p-2&quot;&gt; {{ question.create_date }} &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;!--답변--&gt; &lt;h5 class=&quot;border-bottom py-2&quot;&gt;{{ question.answer_set.count }}개의 답변이 있습니다.&lt;/h5&gt; {% for answer in question.answer_set.all %} &lt;div class=&quot;card my-3&quot;&gt; &lt;div class=&quot;card-body&quot;&gt; &lt;div class=&quot;card-text&quot; style=&quot;white-space: pre-line;&quot;&gt;{{ answer.content }}&lt;/div&gt; &lt;div class=&quot;d-flex justify-content-end&quot;&gt; &lt;div class=&quot;badge bg-light text-dark p-2&quot;&gt; {{ answer.create_date }} &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; &lt;/div&gt; {% endfor %} &lt;!-- 답변 등록 --&gt; &lt;form action=&quot;{% url &#39;pybo:answer_create&#39; question.id %}&quot; method=&quot;post&quot; class=&quot;my-3&quot;&gt; {% csrf_token %} &lt;div class=&quot;mb-3&quot;&gt; &lt;label for=&quot;content&quot; class=&quot;form-label&quot;&gt;답변 내용&lt;/label&gt; &lt;textarea name=&quot;content&quot; id=&quot;content&quot; class=&quot;form-control&quot; rows=&quot;10&quot;&gt;&lt;/textarea&gt; &lt;/div&gt; &lt;input type=&quot;submit&quot; value=&quot;답변등록&quot; class=&quot;btn btn-primary&quot;&gt; &lt;/form&gt; &lt;/div&gt; {% endblock %} base.html 템플릿을 상속하기 위해 {% extends ‘base.html’ %} {% block content %} 와 {% endblock %} 사이에 question_list.html에서만 쓰이는 내용을 작성 장고에서의 폼(form)? 폼은 쉽게 말해 페이지 요청시 전달되는 파라미터들을 쉽게 관리하기 위해 사용하는 클래스이다. 폼은 필수 파라미터의 값이 누락되지 않았는지, 파라미터의 형식은 적절한지 등을 검증할 목적으로 사용한다. 이 외에도 HTML을 자동으로 생성하거나 폼에 연결된 모델을 이용하여 데이터를 저장하는 기능도 있다. forms.py from django import forms from .models import Question class QuestionForm(forms.ModelForm): class Meta: model = Question fields = [&#39;subject&#39;, &#39;content&#39;] 장고의 폼은 일반 폼(forms.Form)과 모델 폼(forms.ModelForm)이 있는데 모델 폼은 모델(Model)과 연결된 폼으로 폼을 저장하면 연결된 모델의 데이터를 저장할수 있는 폼이다. question_form.html {% extends &#39;base.hmtl&#39; %} {% block content %} &lt;div class=&quot;container&quot;&gt; &lt;h5 class=&quot;my-3 border-bottom pb-2&quot;&gt;질문 등록&lt;/h5&gt; &lt;form method=&quot;post&quot;&gt; {% crsf_token %} {{ form.as_p }} &lt;button type=&quot;submit&quot; class=&quot;btn btn-primary&quot;&gt;저장하&lt;/button&gt; &lt;/form&gt; &lt;/div&gt; {% endblock %} ``의 form은 question_create 함수에서 전달한 QuestionForm의 객체이다. ``는 폼에 정의한 subject, content 속성에 해당하는 HTML 코드를 자동으로 생성한다. 보통 form 태그에는 항상 action 속성을 지정하여 submit 실행시 action에 정의된 URL로 폼을 전송해야 한다. form 태그에 action 속성을 지정하지 않으면 현재 페이지의 URL이 디폴트 action으로 설정된다. view.py … (중략) ... def question_create(request): if request.method == &#39;POST&#39;: # &#39;질문 등록&#39; 화면에서 [저장하기] 버튼을 누른 경우 -&gt; 질문 내용을 데이터베이스에 저장해야 함. form = QuestionForm(request.POST) # request.POST를 인수로 QuestionForm을 생성할 경우에는 # request.POST에 담긴 subject, content 값이 QuestionForm의 subject, content 속성에 자동으로 저장되어 객체가 생성된다. if form.is_valid(): question = form.save(commit=False) # 임시저장 question.create_date = timezone.now() question.save() return redirect(&#39;pybo:index&#39;) else: # &#39;질문 목록&#39; 화면에서 [질문 등록하기] 버튼을 누른 경우 form = QuestionForm() context = {&#39;form&#39;:form} return render(request, &#39;pybo/question_form.html&#39;, context) question_form.html {% extends &#39;base.html&#39; %} {% block content %} &lt;div class=&quot;container&quot;&gt; &lt;h5 class=&quot;my-3 border-bottom pb-2&quot;&gt;질문 등록&lt;/h5&gt; &lt;form method=&quot;post&quot;&gt; {% csrf_token %} &lt;!-- 오류 표시 start --&gt; {% if form.errors %} &lt;div class=&quot;alert alert-danger&quot; role = &quot;alert&quot;&gt; {% for field in form %} {% if form.errors %} &lt;div&gt; &lt;strong&gt;{{ field.label }}&lt;/strong&gt; {{ field.errors }} &lt;/div&gt; {% endif %} {% endfor %} &lt;/div&gt; {% endif %} &lt;!-- 오류 표시 end --&gt; &lt;div class=&quot;mb-3&quot;&gt; &lt;label for=&quot;subject&quot; class=&quot;form-label&quot;&gt;제목&lt;/label&gt; &lt;input type=&quot;text&quot; class=&quot;form-control&quot; name=&quot;subject&quot; id=&quot;subject&quot; value=&quot;{{ form.subject.value|default_if_none:&#39;&#39; }}&quot;&gt; &lt;/div&gt; &lt;div class=&quot;mb-3&quot;&gt; &lt;label for=&quot;content&quot; class=&quot;form-label&quot;&gt;내용&lt;/label&gt; &lt;textarea class=&quot;form-control&quot; name=&quot;content&quot; id=&quot;content&quot; rows=&quot;10&quot;&gt;{{ form.content.value|default_if_none:&#39;&#39; }}&lt;/textarea&gt; &lt;/div&gt; &lt;button type=&quot;submit&quot; class=&quot;btn btn-primary&quot;&gt;저장하기&lt;/button&gt; &lt;/form&gt; &lt;/div&gt; {% endblock %}","headline":"점프투 장고 공부 3","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-08-19/jump-to-django-3"},"url":"http://localhost:4000/2022-08-19/jump-to-django-3"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Sunmi Moon
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2022-08-19 22:26:44 +0900">August 19, 2022</time>
+    
+  </div>
+
+  <h1 class="post-title">점프투 장고 공부 3</h1>
+  <div class="post-line"></div>
+
+  <p>admin.py</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
+<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">Question</span>
+
+<span class="k">class</span> <span class="nc">QuestionAdmin</span><span class="p">(</span><span class="n">admin</span><span class="p">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+   <span class="n">search_fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">'subject'</span><span class="p">]</span>
+
+
+<span class="n">admin</span><span class="p">.</span><span class="n">site</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">Question</span><span class="p">,</span> <span class="n">QuestionAdmin</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">render</code> 함수는 파이썬 데이터를 템플릿에 적용하여 HTML로 반환하는 함수이다. 즉, 위에서 사용한 <code class="language-plaintext highlighter-rouge">render</code> 함수는 질문 목록으로 조회한 <code class="language-plaintext highlighter-rouge">question_list</code> 데이터를 pybo/question_list.html 파일에 적용하여 HTML을 생성한후 리턴한다. 템플릿 파일은 HTML 파일과 비슷하지만 파이썬 데이터를 읽어서 사용할수 있는 HTML 파일이다.</p>
+
+<h3 id="템플릿-위치">템플릿 위치</h3>
+
+<p>하나의 웹 사이트에서 여러 앱을 사용할 때 여러 앱의 화면을 구성하는 템플릿은 한 디렉터리에 모아 관리하는 편이 여러모로 좋다.</p>
+
+<p>박응용 저자는 다음 구조를 선호한다.</p>
+<ul>
+  <li>모든 앱이 공통으로 사용할 템플릿 디렉터리 - projects/mysite/templates</li>
+  <li>pybo 앱이 사용할 템플릿 디렉터리 - projects/mysite/templates/pybo</li>
+  <li>common 앱이 사용할 템플릿 디렉터리 - projects/mysite/templates/common</li>
+</ul>
+
+<p>question_list.html</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% if question_list %}
+   <span class="nt">&lt;ul&gt;</span>
+   {% for question in question_list %}
+       <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"pybo/{{ question.id }}"</span><span class="nt">&gt;</span>{{ question.subject }}<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+   {% endfor %}
+   <span class="nt">&lt;/ul&gt;</span>
+{% else %}
+   <span class="nt">&lt;p&gt;</span>질문이 없습니다.<span class="nt">&lt;/p&gt;</span>
+{% endif %}
+</code></pre></div></div>
+
+<p>이렇게 없는 데이터를 요청할 경우 500 오류 페이지 보다는 “Not Found (404)” 페이지를 리턴하는 것이 바람직하다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">Question.objects.get(id=question_id)</code>를 <code class="language-plaintext highlighter-rouge">get_object_or_404(Question, pk=question_id)</code>로 바꾸었다.</p>
+
+<p>URL 링크의 구조가 자주 변경되는 경우를 대비해 URL에 대한 실제 링크 대신 링크의 주소가 1:1 매핑되어 있는 별칭을 사용</p>
+
+<p>서로 다른 앱에서 동일한 URL 별칭을 사용하면 중복이 발생할 것이다. 이를 방지하려면 네임스페이스를 의미하는 <code class="language-plaintext highlighter-rouge">app_name</code> 변수를 지정해야한다.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% if question_list %}
+   <span class="nt">&lt;ul&gt;</span>
+   {% for question in question_list %}
+       <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"{% url 'pybo:detail' question.id %}"</span><span class="nt">&gt;</span>{{ question.subject }}<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+   {% endfor %}
+   <span class="nt">&lt;/ul&gt;</span>
+{% else %}
+   <span class="nt">&lt;p&gt;</span>질문이 없습니다.<span class="nt">&lt;/p&gt;</span>
+{% endif %}
+</code></pre></div></div>
+
+<p>form 태그 바로 밑에 csrf_token 태그를 항상 위치시켜야 한다. POST 요청시 form 태그에 <code class="language-plaintext highlighter-rouge">csrf_token</code>이 없으면 장고는 오류를 낸다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">&lt;link&gt;</code> 태그의 <code class="language-plaintext highlighter-rouge">rel</code> 속성은 현재 문서와 외부 리소스 사이의 연관 관계를 명시합니다. <code class="language-plaintext highlighter-rouge">rel</code> 속성은 <code class="language-plaintext highlighter-rouge">&lt;link&gt;</code> 요소에 반드시 명시되어야 하는 필수 속성입니다.</p>
+
+<p>style.css</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>textarea {
+   width:100%;
+}
+
+input[type=submit] {
+   margin-top:10px;
+}
+</code></pre></div></div>
+
+<blockquote>
+  <p>css가 안 먹는 에러가 발생했었는데, setting 파일에서 DIRS를 DIR로 써서 그랬음. ‘-s’, ‘점과 쉼표’ 같은 오타를 조심해야겠다.</p>
+</blockquote>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
+</code></pre></div></div>
+
+<p>base.html</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% load static %}
+<span class="cp">&lt;!doctype html&gt;</span>
+<span class="nt">&lt;html</span> <span class="na">lang=</span><span class="s">"ko"</span><span class="nt">&gt;</span>
+<span class="nt">&lt;head&gt;</span>
+   <span class="c">&lt;!-- Required meta tags --&gt;</span>
+   <span class="nt">&lt;meta</span> <span class="na">charset=</span><span class="s">"utf-8"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=devide-width, initial-scale=1, shrink-to-fit=no"</span><span class="nt">&gt;</span>
+   <span class="c">&lt;!-- Bootstrap CSS --&gt;</span>
+   <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">href=</span><span class="s">"{% static 'bootstrap.min.css' %}"</span><span class="nt">&gt;</span>
+   <span class="c">&lt;!-- pybo CSS --&gt;</span>
+   <span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">href=</span><span class="s">"{% static 'style.css' %}"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;title&gt;</span>Hello, Pybo!<span class="nt">&lt;/title&gt;</span>
+<span class="nt">&lt;/head&gt;</span>
+<span class="nt">&lt;body&gt;</span>
+<span class="c">&lt;!-- 기본 템플릿 안에 삽입될 내용 start! --&gt;</span>
+{% block content %}
+{% endblock %}
+<span class="c">&lt;!-- 기본 템플릿 안에 삽입될 내용 end! --&gt;</span>
+<span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span>
+</code></pre></div></div>
+
+<p>question_list.html</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% extends 'base.html' %}
+{% block content %}
+
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container my3"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;table</span> <span class="na">class=</span><span class="s">"table"</span><span class="nt">&gt;</span>
+       <span class="nt">&lt;thead&gt;</span>
+           <span class="nt">&lt;tr</span> <span class="na">class=</span><span class="s">"table-dark"</span><span class="nt">&gt;</span>
+               <span class="nt">&lt;th&gt;</span>번호<span class="nt">&lt;/th&gt;</span>
+               <span class="nt">&lt;th&gt;</span>제목<span class="nt">&lt;/th&gt;</span>
+               <span class="nt">&lt;th&gt;</span>작성 일시<span class="nt">&lt;/th&gt;</span>
+           <span class="nt">&lt;/tr&gt;</span>
+       <span class="nt">&lt;/thead&gt;</span>
+       <span class="nt">&lt;tbody&gt;</span>
+       {% if question_list %}
+       {% for question in question_list %}
+           <span class="nt">&lt;tr&gt;</span>
+               <span class="nt">&lt;td&gt;</span>{{ forloop.counter }}<span class="nt">&lt;/td&gt;</span>
+               <span class="nt">&lt;td&gt;</span>
+                   <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"{% url 'pybo:detail' question.id %}"</span><span class="nt">&gt;</span>{{ question.subject }}<span class="nt">&lt;/a&gt;</span>
+               <span class="nt">&lt;/td&gt;</span>
+               <span class="nt">&lt;td&gt;</span>{{ question.create_date }}<span class="nt">&lt;/td&gt;</span>
+           <span class="nt">&lt;/tr&gt;</span>
+       {% endfor %}
+       {% else %}
+       <span class="nt">&lt;tr&gt;</span>
+           <span class="nt">&lt;td</span> <span class="na">colspan=</span><span class="s">"3"</span><span class="nt">&gt;</span>질문이 없습니다.<span class="nt">&lt;/td&gt;</span>
+       <span class="nt">&lt;/tr&gt;</span>
+       {% endif %}
+       <span class="nt">&lt;/tbody&gt;</span>
+   <span class="nt">&lt;/table&gt;</span>
+   <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"{% url 'pybo:question_create' %}"</span> <span class="na">class=</span><span class="s">"btn btn-primary"</span><span class="nt">&gt;</span>질문 등록하기<span class="nt">&lt;/a&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+{% endblock %}
+</code></pre></div></div>
+
+<p>question_detail.html</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% extends 'base.html' %}
+{% block content %}
+
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container my-3"</span><span class="nt">&gt;</span>
+   <span class="c">&lt;!--질문--&gt;</span>
+   <span class="nt">&lt;h2</span> <span class="na">class=</span><span class="s">"border-bottom py-2"</span><span class="nt">&gt;</span>{{ question.subject }}<span class="nt">&lt;/h2&gt;</span>
+   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card my-3"</span><span class="nt">&gt;</span>
+       <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-body"</span><span class="nt">&gt;</span>
+           <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-text"</span> <span class="na">style=</span><span class="s">"white-space: pre-line"</span><span class="nt">&gt;</span>{{ question.content }}<span class="nt">&lt;/div&gt;</span>
+           <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"d-flex justify-content-end"</span><span class="nt">&gt;</span>
+               <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"badge bg-light text-dark p-2"</span><span class="nt">&gt;</span>
+                   {{ question.create_date }}
+               <span class="nt">&lt;/div&gt;</span>
+           <span class="nt">&lt;/div&gt;</span>
+       <span class="nt">&lt;/div&gt;</span>
+   <span class="nt">&lt;/div&gt;</span>
+   <span class="c">&lt;!--답변--&gt;</span>
+   <span class="nt">&lt;h5</span> <span class="na">class=</span><span class="s">"border-bottom py-2"</span><span class="nt">&gt;</span>{{ question.answer_set.count }}개의 답변이 있습니다.<span class="nt">&lt;/h5&gt;</span>
+   {% for answer in question.answer_set.all %}
+   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card my-3"</span><span class="nt">&gt;</span>
+       <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-body"</span><span class="nt">&gt;</span>
+           <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"card-text"</span> <span class="na">style=</span><span class="s">"white-space: pre-line;"</span><span class="nt">&gt;</span>{{ answer.content }}<span class="nt">&lt;/div&gt;</span>
+           <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"d-flex justify-content-end"</span><span class="nt">&gt;</span>
+               <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"badge bg-light text-dark p-2"</span><span class="nt">&gt;</span>
+                   {{ answer.create_date }}
+               <span class="nt">&lt;/div&gt;</span>
+           <span class="nt">&lt;/div&gt;</span>
+       <span class="nt">&lt;/div&gt;</span>
+   <span class="nt">&lt;/div&gt;</span>
+   {% endfor %}
+   <span class="c">&lt;!-- 답변 등록 --&gt;</span>
+   <span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"{% url 'pybo:answer_create' question.id %}"</span> <span class="na">method=</span><span class="s">"post"</span> <span class="na">class=</span><span class="s">"my-3"</span><span class="nt">&gt;</span>
+       {% csrf_token %}
+       <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"mb-3"</span><span class="nt">&gt;</span>
+           <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"content"</span> <span class="na">class=</span><span class="s">"form-label"</span><span class="nt">&gt;</span>답변 내용<span class="nt">&lt;/label&gt;</span>
+           <span class="nt">&lt;textarea</span> <span class="na">name=</span><span class="s">"content"</span> <span class="na">id=</span><span class="s">"content"</span> <span class="na">class=</span><span class="s">"form-control"</span> <span class="na">rows=</span><span class="s">"10"</span><span class="nt">&gt;&lt;/textarea&gt;</span>
+       <span class="nt">&lt;/div&gt;</span>
+       <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="na">value=</span><span class="s">"답변등록"</span> <span class="na">class=</span><span class="s">"btn btn-primary"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;/form&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+{% endblock %}
+</code></pre></div></div>
+
+<p>base.html 템플릿을 상속하기 위해 {% extends ‘base.html’ %} 
+{% block content %} 와 {% endblock %} 사이에 question_list.html에서만 쓰이는 내용을 작성</p>
+
+<h4 id="장고에서의-폼form">장고에서의 폼(form)?</h4>
+<p>폼은 쉽게 말해 페이지 요청시 전달되는 파라미터들을 쉽게 관리하기 위해 사용하는 클래스이다.</p>
+
+<p>폼은 필수 파라미터의 값이 누락되지 않았는지, 파라미터의 형식은 적절한지 등을 검증할 목적으로 사용한다.</p>
+
+<p>이 외에도 HTML을 자동으로 생성하거나 폼에 연결된 모델을 이용하여 데이터를 저장하는 기능도 있다.</p>
+
+<p>forms.py</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">django</span> <span class="kn">import</span> <span class="n">forms</span>
+<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">Question</span>
+
+
+<span class="k">class</span> <span class="nc">QuestionForm</span><span class="p">(</span><span class="n">forms</span><span class="p">.</span><span class="n">ModelForm</span><span class="p">):</span>
+   <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+       <span class="n">model</span> <span class="o">=</span> <span class="n">Question</span>
+       <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="s">'subject'</span><span class="p">,</span> <span class="s">'content'</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>장고의 폼은 일반 폼(<code class="language-plaintext highlighter-rouge">forms.Form</code>)과 모델 폼(<code class="language-plaintext highlighter-rouge">forms.ModelForm</code>)이 있는데 모델 폼은 모델(<code class="language-plaintext highlighter-rouge">Model</code>)과 연결된 폼으로 폼을 저장하면 연결된 모델의 데이터를 저장할수 있는 폼이다.</p>
+
+<p>question_form.html</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% extends 'base.hmtl' %}
+{% block content %}
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container"</span><span class="nt">&gt;</span>
+ <span class="nt">&lt;h5</span> <span class="na">class=</span><span class="s">"my-3 border-bottom pb-2"</span><span class="nt">&gt;</span>질문 등록<span class="nt">&lt;/h5&gt;</span>
+ <span class="nt">&lt;form</span> <span class="na">method=</span><span class="s">"post"</span><span class="nt">&gt;</span>
+   {% crsf_token %}
+   {{ form.as_p }}
+   <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="na">class=</span><span class="s">"btn btn-primary"</span><span class="nt">&gt;</span>저장하<span class="nt">&lt;/button&gt;</span>
+ <span class="nt">&lt;/form&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+{% endblock %}
+</code></pre></div></div>
+
+<p>``의 <code class="language-plaintext highlighter-rouge">form</code>은 <code class="language-plaintext highlighter-rouge">question_create</code> 함수에서 전달한 <code class="language-plaintext highlighter-rouge">QuestionForm</code>의 객체이다.</p>
+
+<p>``는 폼에 정의한 <code class="language-plaintext highlighter-rouge">subject</code>, <code class="language-plaintext highlighter-rouge">content</code> 속성에 해당하는 HTML 코드를 자동으로 생성한다.</p>
+
+<p>보통 <code class="language-plaintext highlighter-rouge">form</code> 태그에는 항상 <code class="language-plaintext highlighter-rouge">action</code> 속성을 지정하여 <code class="language-plaintext highlighter-rouge">submit</code> 실행시 <code class="language-plaintext highlighter-rouge">action</code>에 정의된 <code class="language-plaintext highlighter-rouge">URL</code>로 폼을 전송해야 한다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">form</code> 태그에 <code class="language-plaintext highlighter-rouge">action</code> 속성을 지정하지 않으면 현재 페이지의 URL이 디폴트 <code class="language-plaintext highlighter-rouge">action</code>으로 설정된다.</p>
+
+<p>view.py</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="err">…</span> <span class="p">(</span><span class="n">중략</span><span class="p">)</span> <span class="p">...</span>
+<span class="k">def</span> <span class="nf">question_create</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+   <span class="k">if</span> <span class="n">request</span><span class="p">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">'POST'</span><span class="p">:</span>  <span class="c1"># '질문 등록' 화면에서 [저장하기] 버튼을 누른 경우 -&gt; 질문 내용을 데이터베이스에 저장해야 함.
+</span>       <span class="n">form</span> <span class="o">=</span> <span class="n">QuestionForm</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">POST</span><span class="p">)</span>
+       <span class="c1"># request.POST를 인수로 QuestionForm을 생성할 경우에는
+</span>       <span class="c1"># request.POST에 담긴 subject, content 값이 QuestionForm의 subject, content 속성에 자동으로 저장되어 객체가 생성된다.
+</span>       <span class="k">if</span> <span class="n">form</span><span class="p">.</span><span class="n">is_valid</span><span class="p">():</span>
+           <span class="n">question</span> <span class="o">=</span> <span class="n">form</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="n">commit</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>  <span class="c1"># 임시저장
+</span>           <span class="n">question</span><span class="p">.</span><span class="n">create_date</span> <span class="o">=</span> <span class="n">timezone</span><span class="p">.</span><span class="n">now</span><span class="p">()</span>
+           <span class="n">question</span><span class="p">.</span><span class="n">save</span><span class="p">()</span>
+           <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s">'pybo:index'</span><span class="p">)</span>
+   <span class="k">else</span><span class="p">:</span>  <span class="c1"># '질문 목록' 화면에서 [질문 등록하기] 버튼을 누른 경우
+</span>       <span class="n">form</span> <span class="o">=</span> <span class="n">QuestionForm</span><span class="p">()</span>
+   <span class="n">context</span> <span class="o">=</span> <span class="p">{</span><span class="s">'form'</span><span class="p">:</span><span class="n">form</span><span class="p">}</span>
+   <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s">'pybo/question_form.html'</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>question_form.html</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% extends 'base.html' %}
+{% block content %}
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container"</span><span class="nt">&gt;</span>
+ <span class="nt">&lt;h5</span> <span class="na">class=</span><span class="s">"my-3 border-bottom pb-2"</span><span class="nt">&gt;</span>질문 등록<span class="nt">&lt;/h5&gt;</span>
+ <span class="nt">&lt;form</span> <span class="na">method=</span><span class="s">"post"</span><span class="nt">&gt;</span>
+   {% csrf_token %}
+   <span class="c">&lt;!-- 오류 표시 start --&gt;</span>
+   {% if form.errors %}
+   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"alert alert-danger"</span> <span class="na">role = </span><span class="s">"alert"</span><span class="nt">&gt;</span>
+     {% for field in form %}
+     {% if form.errors %}
+     <span class="nt">&lt;div&gt;</span>
+       <span class="nt">&lt;strong&gt;</span>{{ field.label }}<span class="nt">&lt;/strong&gt;</span>
+       {{ field.errors }}
+     <span class="nt">&lt;/div&gt;</span>
+     {% endif %}
+     {% endfor %}
+   <span class="nt">&lt;/div&gt;</span>
+   {% endif %}
+   <span class="c">&lt;!-- 오류 표시 end --&gt;</span>
+   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"mb-3"</span><span class="nt">&gt;</span>
+     <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"subject"</span> <span class="na">class=</span><span class="s">"form-label"</span><span class="nt">&gt;</span>제목<span class="nt">&lt;/label&gt;</span>
+     <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">class=</span><span class="s">"form-control"</span> <span class="na">name=</span><span class="s">"subject"</span> <span class="na">id=</span><span class="s">"subject"</span> <span class="na">value=</span><span class="s">"{{ form.subject.value|default_if_none:'' }}"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;/div&gt;</span>
+   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"mb-3"</span><span class="nt">&gt;</span>
+     <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"content"</span> <span class="na">class=</span><span class="s">"form-label"</span><span class="nt">&gt;</span>내용<span class="nt">&lt;/label&gt;</span>
+     <span class="nt">&lt;textarea</span> <span class="na">class=</span><span class="s">"form-control"</span> <span class="na">name=</span><span class="s">"content"</span> <span class="na">id=</span><span class="s">"content"</span> <span class="na">rows=</span><span class="s">"10"</span><span class="nt">&gt;</span>{{ form.content.value|default_if_none:'' }}<span class="nt">&lt;/textarea&gt;</span>
+   <span class="nt">&lt;/div&gt;</span>
+   <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="na">class=</span><span class="s">"btn btn-primary"</span><span class="nt">&gt;</span>저장하기<span class="nt">&lt;/button&gt;</span>
+ <span class="nt">&lt;/form&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+{% endblock %}
+</code></pre></div></div>
+
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/2022-08-20/jump-to-django-4" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/2022-08-18/jump-to-django-2" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-07-30 14:29:33 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

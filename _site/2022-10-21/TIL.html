@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Likedin Clone Coding | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="Likedin Clone Coding" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="(달성/목표) 뽀모도리 등 가슴 배 1일 8/8 5/5 5/5 3/3 1주 26/40      " />
+<meta property="og:description" content="(달성/목표) 뽀모도리 등 가슴 배 1일 8/8 5/5 5/5 3/3 1주 26/40      " />
+<link rel="canonical" href="http://localhost:4000/2022-10-21/TIL" />
+<meta property="og:url" content="http://localhost:4000/2022-10-21/TIL" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-10-21T12:18:07+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Likedin Clone Coding" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-10-21T12:18:07+09:00","datePublished":"2022-10-21T12:18:07+09:00","description":"(달성/목표) 뽀모도리 등 가슴 배 1일 8/8 5/5 5/5 3/3 1주 26/40      ","headline":"Likedin Clone Coding","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-10-21/TIL"},"url":"http://localhost:4000/2022-10-21/TIL"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Sunmi Moon
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2022-10-21 12:18:07 +0900">October 21, 2022</time>
+    
+  </div>
+
+  <h1 class="post-title">Likedin Clone Coding</h1>
+  <div class="post-line"></div>
+
+  <table>
+  <thead>
+    <tr>
+      <th>(달성/목표)</th>
+      <th>뽀모도리</th>
+      <th>등</th>
+      <th>가슴</th>
+      <th>배</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1일</td>
+      <td>8/8</td>
+      <td>5/5</td>
+      <td>5/5</td>
+      <td>3/3</td>
+    </tr>
+    <tr>
+      <td>1주</td>
+      <td>26/40</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>HeaderOption.js</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">Avatar</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@mui/material</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">useSelector</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react-redux</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">selectUser</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./features/userSlice</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="dl">"</span><span class="s2">./HeaderOption.css</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">HeaderOption</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">avatar</span><span class="p">,</span> <span class="nx">Icon</span><span class="p">,</span> <span class="nx">title</span><span class="p">,</span> <span class="nx">onClick</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">useSelector</span><span class="p">(</span><span class="nx">selectUser</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">onClick</span><span class="p">}</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">headerOption</span><span class="dl">"</span><span class="o">&gt;</span>
+      <span class="p">{</span><span class="nx">Icon</span> <span class="o">&amp;&amp;</span> <span class="o">&lt;</span><span class="nx">Icon</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">headerOption__icon</span><span class="dl">"</span> <span class="o">/&gt;</span><span class="p">}</span>
+      <span class="p">{</span><span class="nx">avatar</span> <span class="o">&amp;&amp;</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">Avatar</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">headerOption__icon</span><span class="dl">"</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">user</span><span class="p">?.</span><span class="nx">email</span><span class="p">[</span><span class="mi">0</span><span class="p">]}</span><span class="o">&lt;</span><span class="sr">/Avatar</span><span class="err">&gt;
+</span>      <span class="p">)}</span>
+      <span class="o">&lt;</span><span class="nx">h3</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">headerOption__title</span><span class="dl">"</span><span class="o">&gt;</span> <span class="p">{</span><span class="nx">title</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/h3</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">HeaderOption</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">user?.photoUrl</code>: user가 없을 수 있기 때문에 optional chaining으로 연결한다.</p>
+
+<p>react-flip-move를 설치한다.</p>
+
+<p>` yarn add react-flip-move`</p>
+
+<p>완성했으면 firebase에 연결하자.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>firebase login
+firebase init
+</code></pre></div></div>
+
+<p>옵션은 다음과 같이 선택
+? Which Firebase features do you want to set up for this directory? Press Space to select features, then Enter to confirm your choices. <b>Hosting: Configure files for Firebase Hosting and (optionally) set up GitHub Action deploys</b><br />
+? Please select an option: <b>Use an existing project</b><br />
+? Select a default Firebase project for this directory: <b>linkedin-clone-yt-85c34 (linkedin-clone-y
+t)</b><br />
+? What do you want to use as your public directory? <b>build</b><br />
+? Configure as a single-page app (rewrite all urls to /index.html)? <b>Yes</b><br />
+? Set up automatic builds and deploys with GitHub? <b>No</b><br /></p>
+
+<p>빌드용으로…</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm run build
+</code></pre></div></div>
+
+<p>이제 배포!</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>firebase deploy
+</code></pre></div></div>
+
+<h2 id="생활코딩-리액트">생활코딩 리액트</h2>
+
+<p>리액트의 컴포넌트: 사용자가 정의한 태그를 컴포넌트라고 부른다.</p>
+
+<h3 id="설치">설치</h3>
+
+<p>그동안 계속 이용해 왔던 Create react app은 앱 이름이었음. npx를 이용해서 해당 앱을 설치한 것. npx는 node.js 기반으로 명령어 환경에서 앱을 쉽게 설치해 주는 소프트웨어이다. npx가 node.js 기반이라 node.js도 설치해야 한다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">npm install -g create-react-app</code></p>
+
+<p>g: global. 어디에서든 create react app을 실행할 수 있도록 하는 옵션이다.</p>
+
+<p>공식 문서에서는 npm이 아니라 npx로 하라고 되어 있다.</p>
+
+<blockquote>
+  <p>npm vs. npx
+npx는 creat-react-app이라는 프로그램을 임시로 설치해서 딱 한번만 실행시키고 지운다고 생각하면 된다. 공간 낭비가 없고 항상 최신 상태가 될 수 있다(할 때마다 다운로드 받으므로)</p>
+</blockquote>
+
+<h3 id="디렉터리-구조">디렉터리 구조</h3>
+
+<p>Create React App을 실행했을 때 나오는 화면은, pulbic/index.html 파일을 실행한 결과이다.</p>
+
+<p>컴포넌트들은 index.html 안의 <code class="language-plaintext highlighter-rouge">&lt;div id = "root"&gt; &lt;/div&gt;</code> 안에 들어가기로 약속되어 있다. 컴포넌트들은 src 디렉터리에 있는 파일에서.</p>
+
+<p>그중에서 특히 앱의 진입점 역할을 하는 파일이 index.js이다.</p>
+
+<h3 id="배포">배포</h3>
+
+<p>다음과 같이 간단한 예제를 만들어 성능을 살펴보자.</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="dl">"</span><span class="s2">./App.css</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">App</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">App</span><span class="dl">"</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">Test</span> <span class="nx">and</span> <span class="nx">Study</span><span class="o">&lt;</span><span class="sr">/h1</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">App</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>chrome의 inspector에서 network 탭을 눌러서 창을 띄운 후 ‘캐시 비우고 새로고침’을 누르면, 5MB의 리소스를 다운로드했다고 나온다.</p>
+
+<p>기능 대비 이렇게 많은 리소스를 다운로드한 이유는, 리액트가 개발의 편의성을 위해 여러 가지 기능을 추가해 놨기 때문이다. 이대로 배포할 수는 없다.</p>
+
+<p>사용자용(프로덕션 모드)의 애플리케이션을 만들려면 다음 명령어를 쓴다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm run build
+</code></pre></div></div>
+
+<p>그러면 build 디렉터리 안에 프로덕션 모드의 애플리케이션이 생성된다.</p>
+
+<p>결론적으로, 웹 서버의 Document Root에 build 디렉터리의 파일/폴더를 위치시켜야 한다. Document Root는 웹 서버가 HTML 문서를 찾는 최상위 디렉터리를 말한다.</p>
+
+<p>다음 명령어는 build 디렉터리를 Document Root로 지정해서(-s) 웹 서버를 실행한다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">npx serve -s build</code></p>
+
+<h3 id="props-vs-state">props vs. state</h3>
+
+<p>props는 사용자가 컴포넌트를 사용하는 입장에서 중요한 것이고, state는 props 값에 따른 내부 구현에 필요한 데이터다. props는 컴포넌트 사용자에게 중요한 정보로, 사용자가 컴포넌트를 조작할 때 필요하다. 하지만 state는 내부적으로 사용되므로 사용자가 알 필요도 없고 알아서도 안 된다. 외부에서 알아야 하는 것을 공개하고, 알 필요가 없는 건 철저히 숨겨야 한다.</p>
+
+<p>그리고 props는 읽기 전용이고, state는 setState를 이용해서 값을 수정할 수 있다. (Redux를 쓰지 않는다는 전제하에) 상위 컴포넌트가 하위 컴포넌트로 값을 전달할 때는 props를 통해 전달하고, 하위 컴포넌트가 상위 컴포넌트의 값을 바꾸고 싶다면 이벤트를 사용한다. props는 읽기 전용이라 변경할 수 없다.</p>
+
+<blockquote>
+  <p>Redux: 데이터를 각 컴포넌트에 분산해서 저장하는 게 아니라 하나의 데이터 저장소를 두고, 그 저장소 안에 있는 값이 바뀌면 모든 컴포넌트의 값도 알아서 바뀌게 하는 기술</p>
+</blockquote>
+
+<h4 id="setstate">setState</h4>
+
+<p>state 값을 직접 변경하면 안 되고, setState를 이용해야 값이 변했다는 걸 리액트가 알 수 있다. 리액트가 알아야 화면에 바뀐 정보가 업데이트된다. setState가 호출되면 값을 바꾸는 것 외에 내부적으로 더 많은 일들이 일어난다.</p>
+
+<h3 id="이벤트">이벤트</h3>
+
+<p>리액트에서는 이벤트 함수가 호출될 때 첫 번째 매개변수의 값으로 event라는 객체를 주입하기로 약속되어 있다.</p>
+
+<p>(원하는 곳까지만 코드를 실행시키고 싶다면 <code class="language-plaintext highlighter-rouge">debugger;</code>를 입력함.)</p>
+
+<p>a 태그는 이벤트를 걸면, 기본적으로 refresh를 한다. 그래서 이 동작을 막기 위해서 <code class="language-plaintext highlighter-rouge">e.preventDefault</code>를 하는 것이다.(그래서 default를 막는다는 표현을 쓴 건가 보다.)</p>
+
+<p>이벤트 객체 내에 굉장히 중요한 속성이 하나 있다. target이라는 속성이다. e.target은 이벤트를 발생한 엘리먼트를 가리킨다.</p>
+
+<p>다음과 같이 이벤트가 발생했을 때, 실행되는 함수를 이벤트 핸들러라고 부른다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>onClick = {... 함수 ... }
+</code></pre></div></div>
+
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/2022-10-22/TIL" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/2022-10-20/TIL" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-07-30 14:29:33 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

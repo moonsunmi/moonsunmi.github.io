@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>파이썬 웹 프로그래밍 공부 4 &amp; 3장까지의 리뷰 | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="파이썬 웹 프로그래밍 공부 4 &amp; 3장까지의 리뷰" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="View, Template 코딩 뷰와 템플릿은 서로 영향을 미치기 때문에 보통 같이 작업한다. 템플릿 먼저 하길 추천. 템플릿(index.html) {% if latest_question_list %} &lt;ul&gt; {% for question in latest_question_list %} &lt;li&gt;&lt;a href=&quot;/polls/{{ question.id}}/&quot;&gt;{{ question.question_text }}&lt;/a&gt;&lt;/li&gt; {% endfor %} &lt;/ul&gt; {% else %} &lt;p&gt;No polls are available!&lt;/p&gt; {% endif %} 뷰(views.py) from django.shortcuts import render from polls.models import Question def index(request): latest_question_list = Question.objects.all().order_by(&#39;-pub_date&#39;)[:5] context = {&#39;latest_question_list&#39;, latest_question_list} return render(request, &#39;polls/index.html&#39;, context) render() 함수는 템플릿 파일인 polls/index.html에 context 변수를 적용해 사용자에게 보여줄 최종 HTML 텍스트를 만들고, 이를 담아서 HttpResponse 객체를 반환한다. context는 사전 형태로. detail.html {% raw %} &lt;h1&gt;{{question.question_text}}&lt;/h1&gt; {% if error_message %}&lt;p&gt;&lt;strong&gt;{{ error_message }}&lt;/strong&gt;&lt;/p&gt; {% endif %} &lt;form action=&quot;{% url &#39;polls:vote&#39; question.id %}&quot; method=&quot;post&quot;&gt; {% csrf_token %} {% for choice in question.choice_set.all %} &lt;input type=&quot;radio&quot; name=&quot;choice&quot; id=&quot;choice{{ forloop.counter }}&quot; value=&quot;{{ choice.id }}&quot; /&gt; &lt;label for=&quot;choice{{ forloop.counter }}&quot;&gt;{{ choice.choice_text }}&lt;/label&gt;&lt;br /&gt; {% endfor %} &lt;input type=&quot;submit&quot; value=&quot;Vote&quot; /&gt; &lt;/form&gt; polls:vote: URLconf에서 정의한 URL 패턴 이름 서버 측의 데이터를 변경하는 경우 폼은 POST 방식으로.. csrf_token: CSRF 공격을 방지하기 위한 기능. 폼 처리할 때 해야 함. input id와 submit for 속성이 같아야 서로 바인딩된다. &lt;input&gt; 태그의 name과 value 속성값이 request.Post 사전에 key, value로 사용된다. Question과 Choice 테이블의 관계는 1:N. 이 관계에서 xxx_set 속성을 디폴트로 제공한다. detail() 뷰 함수에서 정의해야 할 context가 무엇이 있는지 detail.html에서 찾아본다. question.id, question.text … 전부 question만 있으면 됨..! def detail(request, question_id): question = get_object_or_404(Question, pk=question_id) return render(request, &#39;polls/detail.html&#39;, {&#39;question&#39; : question}) 리다이렉트: 넘겨받은 URL을 웹 브라우저가 열려고 하면, 다른 문서의 URL이 열린다. request.POST: 제출된 폼의 데이터를 담고 있는 객체, 파이썬 사전처럼 키로 그 값을 구할 수 있다. Post 방식의 폼 데이터를 처리하는 경우, 결과를 보여줄 수 있는 페이지로 이동시키기 위해 리다이렉트 객체를 리턴하는 것이 일반적이다. reverse(): /polls/3/results/ —-(뷰 함수 매핑)---&gt; views.results() views.results() —(reverse(‘polls:results’, args=3,) URL 추출) —&gt; polls/3/results/ results() 뷰 함수의 호출과 연계된 URL은 votes() 뷰 함수의 리다이렉트 결과로 받습니다. results.hml &lt;h1&gt; {{ question.question_text }} &lt;/h1&gt; &lt;ul&gt; {% for choice in question.choice_set.all %} &lt;li&gt;{{ choice.choice_text }} - {{ choice.votes }} vote{{ choice.votes|pluralize }}&lt;/li&gt; {% endfor %} &lt;/ul&gt; &lt;a href=&quot;{% url &#39;polls.detail&#39; question.id %}&quot;&gt;Vote again?&lt;/a&gt; result() def results(request, question_id): question = get_object_or_404(Question, pk=question_id) return render(request, &#39;polls/results.html&#39;, {&#39;question&#39;: question}) 1~3장 공부 리뷰 1~2장은 너무 어렵다. 지금 내가 실습하고 있는 코드가 어떤 일을 하고 있는 건지, 그게 어떤 결과에 영향을 미치는지(그래서 결과물에서 어떤 점을 확인해야 하는지) 등이 안 나와 있어서 감이 안 잡혔다. 코드와 용어에 익숙해진다는 생각으로 책을 읽고 실습해 나갔다. 이 코드가 어떤 일을 하고 있고, 결과가 어떤 걸 보여준다는 건지 독자들이 다 알고 있다는 전제하에 진행되는 것 같다. 스트레스 많이 받고, 너무 포기하고 싶어짐. 내가 도대체 뭘 하고 있는 걸까? 방식 하나씩 다 따라 해 보는 거라서 그런지, 결과물과 매칭도 잘 안 되고… 이거 계속 한다고 머리에 뭐가 남는 건 있을까? 3장부터는 좀 쉬워진다. 2장의 위치가 뒤에 있었으면 이해가 좀 더 잘 되었을 거 같다. 여튼 좀 어려운 것 같아서, 를 먼저 보기로 했다. 공부를 다 끝난 후에 나머지 장을 볼 예정이다.(배포 전까지) 프레임워크를 처음 써 보는데, 편리함과 장점이 참 많다." />
+<meta property="og:description" content="View, Template 코딩 뷰와 템플릿은 서로 영향을 미치기 때문에 보통 같이 작업한다. 템플릿 먼저 하길 추천. 템플릿(index.html) {% if latest_question_list %} &lt;ul&gt; {% for question in latest_question_list %} &lt;li&gt;&lt;a href=&quot;/polls/{{ question.id}}/&quot;&gt;{{ question.question_text }}&lt;/a&gt;&lt;/li&gt; {% endfor %} &lt;/ul&gt; {% else %} &lt;p&gt;No polls are available!&lt;/p&gt; {% endif %} 뷰(views.py) from django.shortcuts import render from polls.models import Question def index(request): latest_question_list = Question.objects.all().order_by(&#39;-pub_date&#39;)[:5] context = {&#39;latest_question_list&#39;, latest_question_list} return render(request, &#39;polls/index.html&#39;, context) render() 함수는 템플릿 파일인 polls/index.html에 context 변수를 적용해 사용자에게 보여줄 최종 HTML 텍스트를 만들고, 이를 담아서 HttpResponse 객체를 반환한다. context는 사전 형태로. detail.html {% raw %} &lt;h1&gt;{{question.question_text}}&lt;/h1&gt; {% if error_message %}&lt;p&gt;&lt;strong&gt;{{ error_message }}&lt;/strong&gt;&lt;/p&gt; {% endif %} &lt;form action=&quot;{% url &#39;polls:vote&#39; question.id %}&quot; method=&quot;post&quot;&gt; {% csrf_token %} {% for choice in question.choice_set.all %} &lt;input type=&quot;radio&quot; name=&quot;choice&quot; id=&quot;choice{{ forloop.counter }}&quot; value=&quot;{{ choice.id }}&quot; /&gt; &lt;label for=&quot;choice{{ forloop.counter }}&quot;&gt;{{ choice.choice_text }}&lt;/label&gt;&lt;br /&gt; {% endfor %} &lt;input type=&quot;submit&quot; value=&quot;Vote&quot; /&gt; &lt;/form&gt; polls:vote: URLconf에서 정의한 URL 패턴 이름 서버 측의 데이터를 변경하는 경우 폼은 POST 방식으로.. csrf_token: CSRF 공격을 방지하기 위한 기능. 폼 처리할 때 해야 함. input id와 submit for 속성이 같아야 서로 바인딩된다. &lt;input&gt; 태그의 name과 value 속성값이 request.Post 사전에 key, value로 사용된다. Question과 Choice 테이블의 관계는 1:N. 이 관계에서 xxx_set 속성을 디폴트로 제공한다. detail() 뷰 함수에서 정의해야 할 context가 무엇이 있는지 detail.html에서 찾아본다. question.id, question.text … 전부 question만 있으면 됨..! def detail(request, question_id): question = get_object_or_404(Question, pk=question_id) return render(request, &#39;polls/detail.html&#39;, {&#39;question&#39; : question}) 리다이렉트: 넘겨받은 URL을 웹 브라우저가 열려고 하면, 다른 문서의 URL이 열린다. request.POST: 제출된 폼의 데이터를 담고 있는 객체, 파이썬 사전처럼 키로 그 값을 구할 수 있다. Post 방식의 폼 데이터를 처리하는 경우, 결과를 보여줄 수 있는 페이지로 이동시키기 위해 리다이렉트 객체를 리턴하는 것이 일반적이다. reverse(): /polls/3/results/ —-(뷰 함수 매핑)---&gt; views.results() views.results() —(reverse(‘polls:results’, args=3,) URL 추출) —&gt; polls/3/results/ results() 뷰 함수의 호출과 연계된 URL은 votes() 뷰 함수의 리다이렉트 결과로 받습니다. results.hml &lt;h1&gt; {{ question.question_text }} &lt;/h1&gt; &lt;ul&gt; {% for choice in question.choice_set.all %} &lt;li&gt;{{ choice.choice_text }} - {{ choice.votes }} vote{{ choice.votes|pluralize }}&lt;/li&gt; {% endfor %} &lt;/ul&gt; &lt;a href=&quot;{% url &#39;polls.detail&#39; question.id %}&quot;&gt;Vote again?&lt;/a&gt; result() def results(request, question_id): question = get_object_or_404(Question, pk=question_id) return render(request, &#39;polls/results.html&#39;, {&#39;question&#39;: question}) 1~3장 공부 리뷰 1~2장은 너무 어렵다. 지금 내가 실습하고 있는 코드가 어떤 일을 하고 있는 건지, 그게 어떤 결과에 영향을 미치는지(그래서 결과물에서 어떤 점을 확인해야 하는지) 등이 안 나와 있어서 감이 안 잡혔다. 코드와 용어에 익숙해진다는 생각으로 책을 읽고 실습해 나갔다. 이 코드가 어떤 일을 하고 있고, 결과가 어떤 걸 보여준다는 건지 독자들이 다 알고 있다는 전제하에 진행되는 것 같다. 스트레스 많이 받고, 너무 포기하고 싶어짐. 내가 도대체 뭘 하고 있는 걸까? 방식 하나씩 다 따라 해 보는 거라서 그런지, 결과물과 매칭도 잘 안 되고… 이거 계속 한다고 머리에 뭐가 남는 건 있을까? 3장부터는 좀 쉬워진다. 2장의 위치가 뒤에 있었으면 이해가 좀 더 잘 되었을 거 같다. 여튼 좀 어려운 것 같아서, 를 먼저 보기로 했다. 공부를 다 끝난 후에 나머지 장을 볼 예정이다.(배포 전까지) 프레임워크를 처음 써 보는데, 편리함과 장점이 참 많다." />
+<link rel="canonical" href="http://localhost:4000/2022-08-16/python-web-programming-4" />
+<meta property="og:url" content="http://localhost:4000/2022-08-16/python-web-programming-4" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-08-16T22:08:52+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="파이썬 웹 프로그래밍 공부 4 &amp; 3장까지의 리뷰" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-08-16T22:08:52+09:00","datePublished":"2022-08-16T22:08:52+09:00","description":"View, Template 코딩 뷰와 템플릿은 서로 영향을 미치기 때문에 보통 같이 작업한다. 템플릿 먼저 하길 추천. 템플릿(index.html) {% if latest_question_list %} &lt;ul&gt; {% for question in latest_question_list %} &lt;li&gt;&lt;a href=&quot;/polls/{{ question.id}}/&quot;&gt;{{ question.question_text }}&lt;/a&gt;&lt;/li&gt; {% endfor %} &lt;/ul&gt; {% else %} &lt;p&gt;No polls are available!&lt;/p&gt; {% endif %} 뷰(views.py) from django.shortcuts import render from polls.models import Question def index(request): latest_question_list = Question.objects.all().order_by(&#39;-pub_date&#39;)[:5] context = {&#39;latest_question_list&#39;, latest_question_list} return render(request, &#39;polls/index.html&#39;, context) render() 함수는 템플릿 파일인 polls/index.html에 context 변수를 적용해 사용자에게 보여줄 최종 HTML 텍스트를 만들고, 이를 담아서 HttpResponse 객체를 반환한다. context는 사전 형태로. detail.html {% raw %} &lt;h1&gt;{{question.question_text}}&lt;/h1&gt; {% if error_message %}&lt;p&gt;&lt;strong&gt;{{ error_message }}&lt;/strong&gt;&lt;/p&gt; {% endif %} &lt;form action=&quot;{% url &#39;polls:vote&#39; question.id %}&quot; method=&quot;post&quot;&gt; {% csrf_token %} {% for choice in question.choice_set.all %} &lt;input type=&quot;radio&quot; name=&quot;choice&quot; id=&quot;choice{{ forloop.counter }}&quot; value=&quot;{{ choice.id }}&quot; /&gt; &lt;label for=&quot;choice{{ forloop.counter }}&quot;&gt;{{ choice.choice_text }}&lt;/label&gt;&lt;br /&gt; {% endfor %} &lt;input type=&quot;submit&quot; value=&quot;Vote&quot; /&gt; &lt;/form&gt; polls:vote: URLconf에서 정의한 URL 패턴 이름 서버 측의 데이터를 변경하는 경우 폼은 POST 방식으로.. csrf_token: CSRF 공격을 방지하기 위한 기능. 폼 처리할 때 해야 함. input id와 submit for 속성이 같아야 서로 바인딩된다. &lt;input&gt; 태그의 name과 value 속성값이 request.Post 사전에 key, value로 사용된다. Question과 Choice 테이블의 관계는 1:N. 이 관계에서 xxx_set 속성을 디폴트로 제공한다. detail() 뷰 함수에서 정의해야 할 context가 무엇이 있는지 detail.html에서 찾아본다. question.id, question.text … 전부 question만 있으면 됨..! def detail(request, question_id): question = get_object_or_404(Question, pk=question_id) return render(request, &#39;polls/detail.html&#39;, {&#39;question&#39; : question}) 리다이렉트: 넘겨받은 URL을 웹 브라우저가 열려고 하면, 다른 문서의 URL이 열린다. request.POST: 제출된 폼의 데이터를 담고 있는 객체, 파이썬 사전처럼 키로 그 값을 구할 수 있다. Post 방식의 폼 데이터를 처리하는 경우, 결과를 보여줄 수 있는 페이지로 이동시키기 위해 리다이렉트 객체를 리턴하는 것이 일반적이다. reverse(): /polls/3/results/ —-(뷰 함수 매핑)---&gt; views.results() views.results() —(reverse(‘polls:results’, args=3,) URL 추출) —&gt; polls/3/results/ results() 뷰 함수의 호출과 연계된 URL은 votes() 뷰 함수의 리다이렉트 결과로 받습니다. results.hml &lt;h1&gt; {{ question.question_text }} &lt;/h1&gt; &lt;ul&gt; {% for choice in question.choice_set.all %} &lt;li&gt;{{ choice.choice_text }} - {{ choice.votes }} vote{{ choice.votes|pluralize }}&lt;/li&gt; {% endfor %} &lt;/ul&gt; &lt;a href=&quot;{% url &#39;polls.detail&#39; question.id %}&quot;&gt;Vote again?&lt;/a&gt; result() def results(request, question_id): question = get_object_or_404(Question, pk=question_id) return render(request, &#39;polls/results.html&#39;, {&#39;question&#39;: question}) 1~3장 공부 리뷰 1~2장은 너무 어렵다. 지금 내가 실습하고 있는 코드가 어떤 일을 하고 있는 건지, 그게 어떤 결과에 영향을 미치는지(그래서 결과물에서 어떤 점을 확인해야 하는지) 등이 안 나와 있어서 감이 안 잡혔다. 코드와 용어에 익숙해진다는 생각으로 책을 읽고 실습해 나갔다. 이 코드가 어떤 일을 하고 있고, 결과가 어떤 걸 보여준다는 건지 독자들이 다 알고 있다는 전제하에 진행되는 것 같다. 스트레스 많이 받고, 너무 포기하고 싶어짐. 내가 도대체 뭘 하고 있는 걸까? 방식 하나씩 다 따라 해 보는 거라서 그런지, 결과물과 매칭도 잘 안 되고… 이거 계속 한다고 머리에 뭐가 남는 건 있을까? 3장부터는 좀 쉬워진다. 2장의 위치가 뒤에 있었으면 이해가 좀 더 잘 되었을 거 같다. 여튼 좀 어려운 것 같아서, 를 먼저 보기로 했다. 공부를 다 끝난 후에 나머지 장을 볼 예정이다.(배포 전까지) 프레임워크를 처음 써 보는데, 편리함과 장점이 참 많다.","headline":"파이썬 웹 프로그래밍 공부 4 &amp; 3장까지의 리뷰","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-08-16/python-web-programming-4"},"url":"http://localhost:4000/2022-08-16/python-web-programming-4"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Sunmi Moon
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2022-08-16 22:08:52 +0900">August 16, 2022</time>
+    
+  </div>
+
+  <h1 class="post-title">파이썬 웹 프로그래밍 공부 4 & 3장까지의 리뷰</h1>
+  <div class="post-line"></div>
+
+  <h4 id="view-template-코딩">View, Template 코딩</h4>
+
+<p>뷰와 템플릿은 서로 영향을 미치기 때문에 보통 같이 작업한다. 템플릿 먼저 하길 추천.</p>
+
+<p>템플릿(index.html)</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% if latest_question_list %}
+   <span class="nt">&lt;ul&gt;</span>
+       {% for question in latest_question_list %}
+       <span class="nt">&lt;li&gt;&lt;a</span> <span class="na">href=</span><span class="s">"/polls/{{ question.id}}/"</span><span class="nt">&gt;</span>{{ question.question_text }}<span class="nt">&lt;/a&gt;&lt;/li&gt;</span>
+       {% endfor %}
+   <span class="nt">&lt;/ul&gt;</span>
+{% else %}
+   <span class="nt">&lt;p&gt;</span>No polls are available!<span class="nt">&lt;/p&gt;</span>
+{% endif %}
+</code></pre></div></div>
+
+<p>뷰(views.py)</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span>
+<span class="kn">from</span> <span class="nn">polls.models</span> <span class="kn">import</span> <span class="n">Question</span>
+
+<span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+
+   <span class="n">latest_question_list</span> <span class="o">=</span> <span class="n">Question</span><span class="p">.</span><span class="n">objects</span><span class="p">.</span><span class="nb">all</span><span class="p">().</span><span class="n">order_by</span><span class="p">(</span><span class="s">'-pub_date'</span><span class="p">)[:</span><span class="mi">5</span><span class="p">]</span>
+   <span class="n">context</span> <span class="o">=</span> <span class="p">{</span><span class="s">'latest_question_list'</span><span class="p">,</span> <span class="n">latest_question_list</span><span class="p">}</span>
+   <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s">'polls/index.html'</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">render()</code> 함수는 템플릿 파일인 polls/index.html에 <code class="language-plaintext highlighter-rouge">context</code> 변수를 적용해 사용자에게 보여줄 최종 HTML 텍스트를 만들고, 이를 담아서 <code class="language-plaintext highlighter-rouge">HttpResponse</code> 객체를 반환한다.
+<code class="language-plaintext highlighter-rouge">context</code>는 사전 형태로.</p>
+
+<p>detail.html
+{% raw %}</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;h1&gt;</span>{{question.question_text}}<span class="nt">&lt;/h1&gt;</span>
+
+{% if error_message %}<span class="nt">&lt;p&gt;&lt;strong&gt;</span>{{ error_message }}<span class="nt">&lt;/strong&gt;&lt;/p&gt;</span> {% endif %}
+
+<span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"{% url 'polls:vote' question.id %}"</span> <span class="na">method=</span><span class="s">"post"</span><span class="nt">&gt;</span>
+ {% csrf_token %}
+ {% for choice in question.choice_set.all %}
+   <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"radio"</span> <span class="na">name=</span><span class="s">"choice"</span> <span class="na">id=</span><span class="s">"choice{{ forloop.counter }}"</span> <span class="na">value=</span><span class="s">"{{ choice.id }}"</span> <span class="nt">/&gt;</span>
+   <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"choice{{ forloop.counter }}"</span><span class="nt">&gt;</span>{{ choice.choice_text }}<span class="nt">&lt;/label&gt;&lt;br</span> <span class="nt">/&gt;</span>
+ {% endfor %}
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="na">value=</span><span class="s">"Vote"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">polls:vote</code>: URLconf에서 정의한 URL 패턴 이름</p>
+
+<p>서버 측의 데이터를 변경하는 경우 폼은 POST 방식으로..</p>
+
+<p><code class="language-plaintext highlighter-rouge">csrf_token</code>: CSRF 공격을 방지하기 위한 기능. 폼 처리할 때 해야 함.</p>
+
+<p>input id와 submit for 속성이 같아야 서로 바인딩된다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">&lt;input&gt;</code> 태그의 <code class="language-plaintext highlighter-rouge">name</code>과 <code class="language-plaintext highlighter-rouge">value</code> 속성값이 <code class="language-plaintext highlighter-rouge">request.Post</code> 사전에 <code class="language-plaintext highlighter-rouge">key</code>, <code class="language-plaintext highlighter-rouge">value</code>로 사용된다.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Question</code>과 <code class="language-plaintext highlighter-rouge">Choice</code> 테이블의 관계는 1:N. 이 관계에서 <code class="language-plaintext highlighter-rouge">xxx_set</code> 속성을 디폴트로 제공한다.</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">detail()</code> 뷰 함수에서 정의해야 할 <code class="language-plaintext highlighter-rouge">context</code>가 무엇이 있는지 detail.html에서 찾아본다. question.id, question.text … 전부 question만 있으면 됨..!</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">def</span> <span class="nf">detail</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">question_id</span><span class="p">):</span>
+   <span class="n">question</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">Question</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="n">question_id</span><span class="p">)</span>
+   <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s">'polls/detail.html'</span><span class="p">,</span> <span class="p">{</span><span class="s">'question'</span> <span class="p">:</span> <span class="n">question</span><span class="p">})</span>
+</code></pre></div></div>
+
+<ul>
+  <li>
+    <p>리다이렉트: 넘겨받은 URL을 웹 브라우저가 열려고 하면, 다른 문서의 URL이 열린다.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">request.POST</code>: 제출된 폼의 데이터를 담고 있는 객체, 파이썬 사전처럼 키로 그 값을 구할 수 있다.</p>
+  </li>
+  <li>
+    <p>Post 방식의 폼 데이터를 처리하는 경우, 결과를 보여줄 수 있는 페이지로 이동시키기 위해 리다이렉트 객체를 리턴하는 것이 일반적이다.</p>
+  </li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">
+reverse(): 
+/polls/3/results/   —-(뷰 함수 매핑)---&gt;    views.results()
+views.results()   —(reverse(‘polls:results’, args=3,) URL 추출)    —&gt; polls/3/results/
+</code></p>
+
+<p><code class="language-plaintext highlighter-rouge">results()</code> 뷰 함수의 호출과 연계된 URL은 <code class="language-plaintext highlighter-rouge">votes()</code> 뷰 함수의 리다이렉트 결과로 받습니다.</p>
+
+<p>results.hml</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;h1&gt;</span> {{ question.question_text }} <span class="nt">&lt;/h1&gt;</span>
+
+<span class="nt">&lt;ul&gt;</span>
+ {% for choice in question.choice_set.all %}
+ <span class="nt">&lt;li&gt;</span>{{ choice.choice_text }} - {{ choice.votes }} vote{{ choice.votes|pluralize }}<span class="nt">&lt;/li&gt;</span>
+ {% endfor %}
+<span class="nt">&lt;/ul&gt;</span>
+
+<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"{% url 'polls.detail' question.id %}"</span><span class="nt">&gt;</span>Vote again?<span class="nt">&lt;/a&gt;</span>
+</code></pre></div></div>
+
+<p>result()</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>def results(request, question_id):
+   question = get_object_or_404(Question, pk=question_id)
+   return render(request, 'polls/results.html', {'question': question})
+</code></pre></div></div>
+
+<h2 id="-13장-공부-리뷰"><파이썬 웹="" 프로그래밍=""> 1~3장 공부 리뷰</파이썬></h2>
+
+<p>1~2장은 너무 어렵다.</p>
+
+<p>지금 내가 실습하고 있는 코드가 어떤 일을 하고 있는 건지, 그게 어떤 결과에 영향을 미치는지(그래서 결과물에서 어떤 점을 확인해야 하는지) 등이 안 나와 있어서 감이 안 잡혔다. 코드와 용어에 익숙해진다는 생각으로 책을 읽고 실습해 나갔다.</p>
+
+<p>이 코드가 어떤 일을 하고 있고, 결과가 어떤 걸 보여준다는 건지 독자들이 다 알고 있다는 전제하에 진행되는 것 같다. 스트레스 많이 받고, 너무 포기하고 싶어짐.</p>
+
+<p>내가 도대체 뭘 하고 있는 걸까? 방식 하나씩 다 따라 해 보는 거라서 그런지, 결과물과 매칭도 잘 안 되고… 이거 계속 한다고 머리에 뭐가 남는 건 있을까?</p>
+
+<p>3장부터는 좀 쉬워진다. 2장의 위치가 뒤에 있었으면 이해가 좀 더 잘 되었을 거 같다.
+여튼 좀 어려운 것 같아서, <점프투 장고="">를 먼저 보기로 했다. <점프투 장고=""> 공부를 다 끝난 후에 나머지 장을 볼 예정이다.(배포 전까지)</점프투></점프투></p>
+
+<p>프레임워크를 처음 써 보는데, 편리함과 장점이 참 많다.</p>
+
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/2022-08-17/jump-to-django-1" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/2022-08-15/python-web-programming-3" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-07-30 14:29:33 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

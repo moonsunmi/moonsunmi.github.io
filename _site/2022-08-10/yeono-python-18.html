@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>연오의 파이썬 공부 18 | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="연오의 파이썬 공부 18" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="코드 12-29 import urllib.request TOKEN = &#39;1178934754:AAGUR5T93yTA7ncs_r3m0b_Hxw8h_8fb4y0&#39; def request(url): &quot;&quot;&quot;지정한 url의 웹 문서를 요청하여, 본문을 반환한다.&quot;&quot;&quot; response = urllib.request.urlopen(url) byte_data = response.read() text_data = byte_data.decode() return text_data def build_url(method, query): &quot;&quot;&quot;텔레그램 챗봇 웹 API에 요청을 보내기 위한 URL을 만들어 반환한다.&quot;&quot;&quot; return f&#39;http://api.telegram.org/bot{TOKEN}/{method}?{query}&#39; import json from pprint import pprint def request_to_chatbot_api(method, query): &quot;&quot;&quot;메서드와 질의조건을 전달받아 텔레그램 챗봇 웹 API에 요청을 보내고 응답 결과를 사전 객체로 해석해 반환한다.&quot;&quot;&quot; url = build_url(method, query) response = request(url) return json.loads(response) response = request_to_chatbot_api(&#39;getUpdates&#39;, &#39;offset=0&#39;) pprint(response) 코드 12-31 import urllib.request TOKEN = &#39;1178934754:AAGUR5T93yTA7ncs_r3m0b_Hxw8h_8fb4y0&#39; def request(url): &quot;&quot;&quot;지정한 url의 웹 문서를 요청하여, 본문을 반환한다.&quot;&quot;&quot; response = urllib.request.urlopen(url) byte_data = response.read() text_data = byte_data.decode() return text_data def build_url(method, query): &quot;&quot;&quot;텔레그램 챗봇 웹 API에 요청을 보내기 위한 URL을 만들어 반환한다.&quot;&quot;&quot; return f&#39;http://api.telegram.org/bot{TOKEN}/{method}?{query}&#39; import json from pprint import pprint def request_to_chatbot_api(method, query): &quot;&quot;&quot;메서드와 질의조건을 전달받아 텔레그램 챗봇 웹 API에 요청을 보내고 응답 결과를 사전 객체로 해석해 반환한다.&quot;&quot;&quot; url = build_url(method, query) response = request(url) return json.loads(response) response = request_to_chatbot_api(&#39;getUpdates&#39;, &#39;offset=0&#39;) #pprint(response) def simplify_message(response): result = response[&#39;result&#39;] if not result: return None, [] last_update_id = max(item[&#39;update_id&#39;] for item in result) messages = [item[&#39;message&#39;] for item in result] simplified_messages = [ {&#39;from_id&#39;: message[&#39;message_id&#39;], &#39;text&#39;: message[&#39;text&#39;]} for message in messages ] return last_update_id, simplified_messages print(simplify_message(response)) 코드 12-33 import urllib.request import json TOKEN = &#39;1178934754:AAGUR5T93yTA7ncs_r3m0b_Hxw8h_8fb4y0&#39; def request(url): &quot;&quot;&quot;지정한 url의 웹 문서를 요청하여, 본문을 반환한다.&quot;&quot;&quot; response = urllib.request.urlopen(url) byte_data = response.read() text_data = byte_data.decode() return text_data def build_url(method, query): &quot;&quot;&quot;텔레그램 챗봇 웹 API에 요청을 보내기 위한 URL을 만들어 반환한다.&quot;&quot;&quot; return f&#39;http://api.telegram.org/bot{TOKEN}/{method}?{query}&#39; def request_to_chatbot_api(method, query): &quot;&quot;&quot;메서드와 질의조건을 전달받아 텔레그램 챗봇 웹 API에 요청을 보내고 응답 결과를 사전 객체로 해석해 반환한다.&quot;&quot;&quot; url = build_url(method, query) response = request(url) return json.loads(response) def simplify_message(response): result = response[&#39;result&#39;] if not result: return None, [] last_update_id = max(item[&#39;update_id&#39;] for item in result) messages = [item[&#39;message&#39;] for item in result] simplified_messages = [ {&#39;from_id&#39;: message[&#39;message_id&#39;], &#39;text&#39;: message[&#39;text&#39;]} for message in messages ] return last_update_id, simplified_messages def get_updates(update_id): &quot;&quot;&quot;챗봇 API로 update_id 이후에 수신한 메시지를 조회하여 반환한다.&quot;&quot;&quot; query = f&#39;offset={update_id}&#39; response = request_to_chatbot_api(method=&#39;getUpdates&#39;, query=query) return simplify_message(response) response = request_to_chatbot_api(&#39;getUpdates&#39;, &#39;offset=0&#39;) last_update_id, simplified_message = simplify_message(response) print(simplified_message) print(get_updates(32)) 코드 12-36 import urllib.request import json TOKEN = &#39;1178934754:AAGUR5T93yTA7ncs_r3m0b_Hxw8h_8fb4y0&#39; def request(url): &quot;&quot;&quot;지정한 url의 웹 문서를 요청하여, 본문을 반환한다.&quot;&quot;&quot; response = urllib.request.urlopen(url) byte_data = response.read() text_data = byte_data.decode() return text_data def build_url(method, query): &quot;&quot;&quot;텔레그램 챗봇 웹 API에 요청을 보내기 위한 URL을 만들어 반환한다.&quot;&quot;&quot; return f&#39;http://api.telegram.org/bot{TOKEN}/{method}?{query}&#39; def request_to_chatbot_api(method, query): &quot;&quot;&quot;메서드와 질의조건을 전달받아 텔레그램 챗봇 웹 API에 요청을 보내고 응답 결과를 사전 객체로 해석해 반환한다.&quot;&quot;&quot; url = build_url(method, query) response = request(url) return json.loads(response) def simplify_message(response): result = response[&#39;result&#39;] if not result: return None, [] last_update_id = max(item[&#39;update_id&#39;] for item in result) messages = [item[&#39;message&#39;] for item in result] simplified_messages = [ {&#39;from_id&#39;: message[&#39;message_id&#39;], &#39;text&#39;: message[&#39;text&#39;]} for message in messages ] return last_update_id, simplified_messages def get_updates(update_id): &quot;&quot;&quot;챗봇 API로 update_id 이후에 수신한 메시지를 조회하여 반환한다.&quot;&quot;&quot; query = f&#39;offset={update_id}&#39; response = request_to_chatbot_api(method=&#39;getUpdates&#39;, query=query) return simplify_message(response) response = request_to_chatbot_api(&#39;getUpdates&#39;, &#39;offset=0&#39;) last_update_id, simplified_message = simplify_message(response) print(simplified_message) print(get_updates(32)) text = urllib.parse.quote(&#39;안녕~~&#39;) request_to_chatbot_api(&#39;sendMessage&#39;, f&#39;chat_id=219819940&amp;text={text}&#39;) 코드 12-41 import urllib.request import time import urllib.parse import json TOKEN = &#39;1178934754:AAGUR5T93yTA7ncs_r3m0b_Hxw8h_8fb4y0&#39; def request(url): &quot;&quot;&quot;지정한 url의 웹 문서를 요청하여, 본문을 반환한다.&quot;&quot;&quot; response = urllib.request.urlopen(url) byte_data = response.read() text_data = byte_data.decode() return text_data def build_url(method, query): &quot;&quot;&quot;텔레그램 챗봇 웹 API에 요청을 보내기 위한 URL을 만들어 반환한다.&quot;&quot;&quot; return f&#39;http://api.telegram.org/bot{TOKEN}/{method}?{query}&#39; def request_to_chatbot_api(method, query): &quot;&quot;&quot;메서드와 질의조건을 전달받아 텔레그램 챗봇 웹 API에 요청을 보내고 응답 결과를 사전 객체로 해석해 반환한다.&quot;&quot;&quot; url = build_url(method, query) response = request(url) return json.loads(response) def simplify_message(response): result = response[&#39;result&#39;] if not result: return None, [] last_update_id = max(item[&#39;update_id&#39;] for item in result) messages = [item[&#39;message&#39;] for item in result] simplified_messages = [ {&#39;from_id&#39;: message[&#39;message_id&#39;], &#39;text&#39;: message[&#39;text&#39;]} for message in messages ] return last_update_id, simplified_messages def get_updates(update_id): &quot;&quot;&quot;챗봇 API로 update_id 이후에 수신한 메시지를 조회하여 반환한다.&quot;&quot;&quot; query = f&#39;offset={update_id}&#39; response = request_to_chatbot_api(method=&#39;getUpdates&#39;, query=query) return simplify_message(response) def send_message(chat_id, text): &quot;&quot;&quot;챗봇 API로 메시지를 chat_id 사용자에게 text 메시지를 발신한다.&quot;&quot;&quot; text = urllib.parse.quote(text) query = f&#39;chat_id={chat_id}&amp;text={text}&#39; response = request_to_chatbot_api(method=&#39;sendMessage&#39;, query=query) return response def check_messages_and_response(next_update_id): &quot;&quot;&quot;챗봇으로 메시지를 확인하고, 적절히 응답한다.&quot;&quot;&quot; last_update_id, received_messages = get_updates(next_update_id) for message in received_messages: chat_id = message[&#39;from_id&#39;] text = message[&#39;text&#39;] send_text = text + &#39;라고 말씀하셨군요~&#39; send_message(chat_id, send_text) return last_update_id if __name__ == &#39;__main__&#39;: next_update_id = 0 while True: last_update_id = check_messages_and_response(next_update_id) if last_update_id: next_update_id = last_update_id + 1 time.sleep(5) response = request_to_chatbot_api(&#39;getUpdates&#39;, &#39;offset=0&#39;) send_message(219819940, &#39;안뇽&#39;)" />
+<meta property="og:description" content="코드 12-29 import urllib.request TOKEN = &#39;1178934754:AAGUR5T93yTA7ncs_r3m0b_Hxw8h_8fb4y0&#39; def request(url): &quot;&quot;&quot;지정한 url의 웹 문서를 요청하여, 본문을 반환한다.&quot;&quot;&quot; response = urllib.request.urlopen(url) byte_data = response.read() text_data = byte_data.decode() return text_data def build_url(method, query): &quot;&quot;&quot;텔레그램 챗봇 웹 API에 요청을 보내기 위한 URL을 만들어 반환한다.&quot;&quot;&quot; return f&#39;http://api.telegram.org/bot{TOKEN}/{method}?{query}&#39; import json from pprint import pprint def request_to_chatbot_api(method, query): &quot;&quot;&quot;메서드와 질의조건을 전달받아 텔레그램 챗봇 웹 API에 요청을 보내고 응답 결과를 사전 객체로 해석해 반환한다.&quot;&quot;&quot; url = build_url(method, query) response = request(url) return json.loads(response) response = request_to_chatbot_api(&#39;getUpdates&#39;, &#39;offset=0&#39;) pprint(response) 코드 12-31 import urllib.request TOKEN = &#39;1178934754:AAGUR5T93yTA7ncs_r3m0b_Hxw8h_8fb4y0&#39; def request(url): &quot;&quot;&quot;지정한 url의 웹 문서를 요청하여, 본문을 반환한다.&quot;&quot;&quot; response = urllib.request.urlopen(url) byte_data = response.read() text_data = byte_data.decode() return text_data def build_url(method, query): &quot;&quot;&quot;텔레그램 챗봇 웹 API에 요청을 보내기 위한 URL을 만들어 반환한다.&quot;&quot;&quot; return f&#39;http://api.telegram.org/bot{TOKEN}/{method}?{query}&#39; import json from pprint import pprint def request_to_chatbot_api(method, query): &quot;&quot;&quot;메서드와 질의조건을 전달받아 텔레그램 챗봇 웹 API에 요청을 보내고 응답 결과를 사전 객체로 해석해 반환한다.&quot;&quot;&quot; url = build_url(method, query) response = request(url) return json.loads(response) response = request_to_chatbot_api(&#39;getUpdates&#39;, &#39;offset=0&#39;) #pprint(response) def simplify_message(response): result = response[&#39;result&#39;] if not result: return None, [] last_update_id = max(item[&#39;update_id&#39;] for item in result) messages = [item[&#39;message&#39;] for item in result] simplified_messages = [ {&#39;from_id&#39;: message[&#39;message_id&#39;], &#39;text&#39;: message[&#39;text&#39;]} for message in messages ] return last_update_id, simplified_messages print(simplify_message(response)) 코드 12-33 import urllib.request import json TOKEN = &#39;1178934754:AAGUR5T93yTA7ncs_r3m0b_Hxw8h_8fb4y0&#39; def request(url): &quot;&quot;&quot;지정한 url의 웹 문서를 요청하여, 본문을 반환한다.&quot;&quot;&quot; response = urllib.request.urlopen(url) byte_data = response.read() text_data = byte_data.decode() return text_data def build_url(method, query): &quot;&quot;&quot;텔레그램 챗봇 웹 API에 요청을 보내기 위한 URL을 만들어 반환한다.&quot;&quot;&quot; return f&#39;http://api.telegram.org/bot{TOKEN}/{method}?{query}&#39; def request_to_chatbot_api(method, query): &quot;&quot;&quot;메서드와 질의조건을 전달받아 텔레그램 챗봇 웹 API에 요청을 보내고 응답 결과를 사전 객체로 해석해 반환한다.&quot;&quot;&quot; url = build_url(method, query) response = request(url) return json.loads(response) def simplify_message(response): result = response[&#39;result&#39;] if not result: return None, [] last_update_id = max(item[&#39;update_id&#39;] for item in result) messages = [item[&#39;message&#39;] for item in result] simplified_messages = [ {&#39;from_id&#39;: message[&#39;message_id&#39;], &#39;text&#39;: message[&#39;text&#39;]} for message in messages ] return last_update_id, simplified_messages def get_updates(update_id): &quot;&quot;&quot;챗봇 API로 update_id 이후에 수신한 메시지를 조회하여 반환한다.&quot;&quot;&quot; query = f&#39;offset={update_id}&#39; response = request_to_chatbot_api(method=&#39;getUpdates&#39;, query=query) return simplify_message(response) response = request_to_chatbot_api(&#39;getUpdates&#39;, &#39;offset=0&#39;) last_update_id, simplified_message = simplify_message(response) print(simplified_message) print(get_updates(32)) 코드 12-36 import urllib.request import json TOKEN = &#39;1178934754:AAGUR5T93yTA7ncs_r3m0b_Hxw8h_8fb4y0&#39; def request(url): &quot;&quot;&quot;지정한 url의 웹 문서를 요청하여, 본문을 반환한다.&quot;&quot;&quot; response = urllib.request.urlopen(url) byte_data = response.read() text_data = byte_data.decode() return text_data def build_url(method, query): &quot;&quot;&quot;텔레그램 챗봇 웹 API에 요청을 보내기 위한 URL을 만들어 반환한다.&quot;&quot;&quot; return f&#39;http://api.telegram.org/bot{TOKEN}/{method}?{query}&#39; def request_to_chatbot_api(method, query): &quot;&quot;&quot;메서드와 질의조건을 전달받아 텔레그램 챗봇 웹 API에 요청을 보내고 응답 결과를 사전 객체로 해석해 반환한다.&quot;&quot;&quot; url = build_url(method, query) response = request(url) return json.loads(response) def simplify_message(response): result = response[&#39;result&#39;] if not result: return None, [] last_update_id = max(item[&#39;update_id&#39;] for item in result) messages = [item[&#39;message&#39;] for item in result] simplified_messages = [ {&#39;from_id&#39;: message[&#39;message_id&#39;], &#39;text&#39;: message[&#39;text&#39;]} for message in messages ] return last_update_id, simplified_messages def get_updates(update_id): &quot;&quot;&quot;챗봇 API로 update_id 이후에 수신한 메시지를 조회하여 반환한다.&quot;&quot;&quot; query = f&#39;offset={update_id}&#39; response = request_to_chatbot_api(method=&#39;getUpdates&#39;, query=query) return simplify_message(response) response = request_to_chatbot_api(&#39;getUpdates&#39;, &#39;offset=0&#39;) last_update_id, simplified_message = simplify_message(response) print(simplified_message) print(get_updates(32)) text = urllib.parse.quote(&#39;안녕~~&#39;) request_to_chatbot_api(&#39;sendMessage&#39;, f&#39;chat_id=219819940&amp;text={text}&#39;) 코드 12-41 import urllib.request import time import urllib.parse import json TOKEN = &#39;1178934754:AAGUR5T93yTA7ncs_r3m0b_Hxw8h_8fb4y0&#39; def request(url): &quot;&quot;&quot;지정한 url의 웹 문서를 요청하여, 본문을 반환한다.&quot;&quot;&quot; response = urllib.request.urlopen(url) byte_data = response.read() text_data = byte_data.decode() return text_data def build_url(method, query): &quot;&quot;&quot;텔레그램 챗봇 웹 API에 요청을 보내기 위한 URL을 만들어 반환한다.&quot;&quot;&quot; return f&#39;http://api.telegram.org/bot{TOKEN}/{method}?{query}&#39; def request_to_chatbot_api(method, query): &quot;&quot;&quot;메서드와 질의조건을 전달받아 텔레그램 챗봇 웹 API에 요청을 보내고 응답 결과를 사전 객체로 해석해 반환한다.&quot;&quot;&quot; url = build_url(method, query) response = request(url) return json.loads(response) def simplify_message(response): result = response[&#39;result&#39;] if not result: return None, [] last_update_id = max(item[&#39;update_id&#39;] for item in result) messages = [item[&#39;message&#39;] for item in result] simplified_messages = [ {&#39;from_id&#39;: message[&#39;message_id&#39;], &#39;text&#39;: message[&#39;text&#39;]} for message in messages ] return last_update_id, simplified_messages def get_updates(update_id): &quot;&quot;&quot;챗봇 API로 update_id 이후에 수신한 메시지를 조회하여 반환한다.&quot;&quot;&quot; query = f&#39;offset={update_id}&#39; response = request_to_chatbot_api(method=&#39;getUpdates&#39;, query=query) return simplify_message(response) def send_message(chat_id, text): &quot;&quot;&quot;챗봇 API로 메시지를 chat_id 사용자에게 text 메시지를 발신한다.&quot;&quot;&quot; text = urllib.parse.quote(text) query = f&#39;chat_id={chat_id}&amp;text={text}&#39; response = request_to_chatbot_api(method=&#39;sendMessage&#39;, query=query) return response def check_messages_and_response(next_update_id): &quot;&quot;&quot;챗봇으로 메시지를 확인하고, 적절히 응답한다.&quot;&quot;&quot; last_update_id, received_messages = get_updates(next_update_id) for message in received_messages: chat_id = message[&#39;from_id&#39;] text = message[&#39;text&#39;] send_text = text + &#39;라고 말씀하셨군요~&#39; send_message(chat_id, send_text) return last_update_id if __name__ == &#39;__main__&#39;: next_update_id = 0 while True: last_update_id = check_messages_and_response(next_update_id) if last_update_id: next_update_id = last_update_id + 1 time.sleep(5) response = request_to_chatbot_api(&#39;getUpdates&#39;, &#39;offset=0&#39;) send_message(219819940, &#39;안뇽&#39;)" />
+<link rel="canonical" href="http://localhost:4000/2022-08-10/yeono-python-18" />
+<meta property="og:url" content="http://localhost:4000/2022-08-10/yeono-python-18" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-08-10T18:18:22+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="연오의 파이썬 공부 18" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-08-10T18:18:22+09:00","datePublished":"2022-08-10T18:18:22+09:00","description":"코드 12-29 import urllib.request TOKEN = &#39;1178934754:AAGUR5T93yTA7ncs_r3m0b_Hxw8h_8fb4y0&#39; def request(url): &quot;&quot;&quot;지정한 url의 웹 문서를 요청하여, 본문을 반환한다.&quot;&quot;&quot; response = urllib.request.urlopen(url) byte_data = response.read() text_data = byte_data.decode() return text_data def build_url(method, query): &quot;&quot;&quot;텔레그램 챗봇 웹 API에 요청을 보내기 위한 URL을 만들어 반환한다.&quot;&quot;&quot; return f&#39;http://api.telegram.org/bot{TOKEN}/{method}?{query}&#39; import json from pprint import pprint def request_to_chatbot_api(method, query): &quot;&quot;&quot;메서드와 질의조건을 전달받아 텔레그램 챗봇 웹 API에 요청을 보내고 응답 결과를 사전 객체로 해석해 반환한다.&quot;&quot;&quot; url = build_url(method, query) response = request(url) return json.loads(response) response = request_to_chatbot_api(&#39;getUpdates&#39;, &#39;offset=0&#39;) pprint(response) 코드 12-31 import urllib.request TOKEN = &#39;1178934754:AAGUR5T93yTA7ncs_r3m0b_Hxw8h_8fb4y0&#39; def request(url): &quot;&quot;&quot;지정한 url의 웹 문서를 요청하여, 본문을 반환한다.&quot;&quot;&quot; response = urllib.request.urlopen(url) byte_data = response.read() text_data = byte_data.decode() return text_data def build_url(method, query): &quot;&quot;&quot;텔레그램 챗봇 웹 API에 요청을 보내기 위한 URL을 만들어 반환한다.&quot;&quot;&quot; return f&#39;http://api.telegram.org/bot{TOKEN}/{method}?{query}&#39; import json from pprint import pprint def request_to_chatbot_api(method, query): &quot;&quot;&quot;메서드와 질의조건을 전달받아 텔레그램 챗봇 웹 API에 요청을 보내고 응답 결과를 사전 객체로 해석해 반환한다.&quot;&quot;&quot; url = build_url(method, query) response = request(url) return json.loads(response) response = request_to_chatbot_api(&#39;getUpdates&#39;, &#39;offset=0&#39;) #pprint(response) def simplify_message(response): result = response[&#39;result&#39;] if not result: return None, [] last_update_id = max(item[&#39;update_id&#39;] for item in result) messages = [item[&#39;message&#39;] for item in result] simplified_messages = [ {&#39;from_id&#39;: message[&#39;message_id&#39;], &#39;text&#39;: message[&#39;text&#39;]} for message in messages ] return last_update_id, simplified_messages print(simplify_message(response)) 코드 12-33 import urllib.request import json TOKEN = &#39;1178934754:AAGUR5T93yTA7ncs_r3m0b_Hxw8h_8fb4y0&#39; def request(url): &quot;&quot;&quot;지정한 url의 웹 문서를 요청하여, 본문을 반환한다.&quot;&quot;&quot; response = urllib.request.urlopen(url) byte_data = response.read() text_data = byte_data.decode() return text_data def build_url(method, query): &quot;&quot;&quot;텔레그램 챗봇 웹 API에 요청을 보내기 위한 URL을 만들어 반환한다.&quot;&quot;&quot; return f&#39;http://api.telegram.org/bot{TOKEN}/{method}?{query}&#39; def request_to_chatbot_api(method, query): &quot;&quot;&quot;메서드와 질의조건을 전달받아 텔레그램 챗봇 웹 API에 요청을 보내고 응답 결과를 사전 객체로 해석해 반환한다.&quot;&quot;&quot; url = build_url(method, query) response = request(url) return json.loads(response) def simplify_message(response): result = response[&#39;result&#39;] if not result: return None, [] last_update_id = max(item[&#39;update_id&#39;] for item in result) messages = [item[&#39;message&#39;] for item in result] simplified_messages = [ {&#39;from_id&#39;: message[&#39;message_id&#39;], &#39;text&#39;: message[&#39;text&#39;]} for message in messages ] return last_update_id, simplified_messages def get_updates(update_id): &quot;&quot;&quot;챗봇 API로 update_id 이후에 수신한 메시지를 조회하여 반환한다.&quot;&quot;&quot; query = f&#39;offset={update_id}&#39; response = request_to_chatbot_api(method=&#39;getUpdates&#39;, query=query) return simplify_message(response) response = request_to_chatbot_api(&#39;getUpdates&#39;, &#39;offset=0&#39;) last_update_id, simplified_message = simplify_message(response) print(simplified_message) print(get_updates(32)) 코드 12-36 import urllib.request import json TOKEN = &#39;1178934754:AAGUR5T93yTA7ncs_r3m0b_Hxw8h_8fb4y0&#39; def request(url): &quot;&quot;&quot;지정한 url의 웹 문서를 요청하여, 본문을 반환한다.&quot;&quot;&quot; response = urllib.request.urlopen(url) byte_data = response.read() text_data = byte_data.decode() return text_data def build_url(method, query): &quot;&quot;&quot;텔레그램 챗봇 웹 API에 요청을 보내기 위한 URL을 만들어 반환한다.&quot;&quot;&quot; return f&#39;http://api.telegram.org/bot{TOKEN}/{method}?{query}&#39; def request_to_chatbot_api(method, query): &quot;&quot;&quot;메서드와 질의조건을 전달받아 텔레그램 챗봇 웹 API에 요청을 보내고 응답 결과를 사전 객체로 해석해 반환한다.&quot;&quot;&quot; url = build_url(method, query) response = request(url) return json.loads(response) def simplify_message(response): result = response[&#39;result&#39;] if not result: return None, [] last_update_id = max(item[&#39;update_id&#39;] for item in result) messages = [item[&#39;message&#39;] for item in result] simplified_messages = [ {&#39;from_id&#39;: message[&#39;message_id&#39;], &#39;text&#39;: message[&#39;text&#39;]} for message in messages ] return last_update_id, simplified_messages def get_updates(update_id): &quot;&quot;&quot;챗봇 API로 update_id 이후에 수신한 메시지를 조회하여 반환한다.&quot;&quot;&quot; query = f&#39;offset={update_id}&#39; response = request_to_chatbot_api(method=&#39;getUpdates&#39;, query=query) return simplify_message(response) response = request_to_chatbot_api(&#39;getUpdates&#39;, &#39;offset=0&#39;) last_update_id, simplified_message = simplify_message(response) print(simplified_message) print(get_updates(32)) text = urllib.parse.quote(&#39;안녕~~&#39;) request_to_chatbot_api(&#39;sendMessage&#39;, f&#39;chat_id=219819940&amp;text={text}&#39;) 코드 12-41 import urllib.request import time import urllib.parse import json TOKEN = &#39;1178934754:AAGUR5T93yTA7ncs_r3m0b_Hxw8h_8fb4y0&#39; def request(url): &quot;&quot;&quot;지정한 url의 웹 문서를 요청하여, 본문을 반환한다.&quot;&quot;&quot; response = urllib.request.urlopen(url) byte_data = response.read() text_data = byte_data.decode() return text_data def build_url(method, query): &quot;&quot;&quot;텔레그램 챗봇 웹 API에 요청을 보내기 위한 URL을 만들어 반환한다.&quot;&quot;&quot; return f&#39;http://api.telegram.org/bot{TOKEN}/{method}?{query}&#39; def request_to_chatbot_api(method, query): &quot;&quot;&quot;메서드와 질의조건을 전달받아 텔레그램 챗봇 웹 API에 요청을 보내고 응답 결과를 사전 객체로 해석해 반환한다.&quot;&quot;&quot; url = build_url(method, query) response = request(url) return json.loads(response) def simplify_message(response): result = response[&#39;result&#39;] if not result: return None, [] last_update_id = max(item[&#39;update_id&#39;] for item in result) messages = [item[&#39;message&#39;] for item in result] simplified_messages = [ {&#39;from_id&#39;: message[&#39;message_id&#39;], &#39;text&#39;: message[&#39;text&#39;]} for message in messages ] return last_update_id, simplified_messages def get_updates(update_id): &quot;&quot;&quot;챗봇 API로 update_id 이후에 수신한 메시지를 조회하여 반환한다.&quot;&quot;&quot; query = f&#39;offset={update_id}&#39; response = request_to_chatbot_api(method=&#39;getUpdates&#39;, query=query) return simplify_message(response) def send_message(chat_id, text): &quot;&quot;&quot;챗봇 API로 메시지를 chat_id 사용자에게 text 메시지를 발신한다.&quot;&quot;&quot; text = urllib.parse.quote(text) query = f&#39;chat_id={chat_id}&amp;text={text}&#39; response = request_to_chatbot_api(method=&#39;sendMessage&#39;, query=query) return response def check_messages_and_response(next_update_id): &quot;&quot;&quot;챗봇으로 메시지를 확인하고, 적절히 응답한다.&quot;&quot;&quot; last_update_id, received_messages = get_updates(next_update_id) for message in received_messages: chat_id = message[&#39;from_id&#39;] text = message[&#39;text&#39;] send_text = text + &#39;라고 말씀하셨군요~&#39; send_message(chat_id, send_text) return last_update_id if __name__ == &#39;__main__&#39;: next_update_id = 0 while True: last_update_id = check_messages_and_response(next_update_id) if last_update_id: next_update_id = last_update_id + 1 time.sleep(5) response = request_to_chatbot_api(&#39;getUpdates&#39;, &#39;offset=0&#39;) send_message(219819940, &#39;안뇽&#39;)","headline":"연오의 파이썬 공부 18","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-08-10/yeono-python-18"},"url":"http://localhost:4000/2022-08-10/yeono-python-18"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Sunmi Moon
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2022-08-10 18:18:22 +0900">August 10, 2022</time>
+    
+  </div>
+
+  <h1 class="post-title">연오의 파이썬 공부 18</h1>
+  <div class="post-line"></div>
+
+  <p>코드 12-29</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">urllib.request</span>
+
+<span class="n">TOKEN</span> <span class="o">=</span> <span class="s">'1178934754:AAGUR5T93yTA7ncs_r3m0b_Hxw8h_8fb4y0'</span>
+
+<span class="k">def</span> <span class="nf">request</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+   <span class="s">"""지정한 url의 웹 문서를 요청하여, 본문을 반환한다."""</span>
+   <span class="n">response</span> <span class="o">=</span> <span class="n">urllib</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+   <span class="n">byte_data</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+   <span class="n">text_data</span> <span class="o">=</span> <span class="n">byte_data</span><span class="p">.</span><span class="n">decode</span><span class="p">()</span>
+   <span class="k">return</span> <span class="n">text_data</span>
+
+
+<span class="k">def</span> <span class="nf">build_url</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span>
+   <span class="s">"""텔레그램 챗봇 웹 API에 요청을 보내기 위한 URL을 만들어 반환한다."""</span>
+   <span class="k">return</span> <span class="sa">f</span><span class="s">'http://api.telegram.org/bot</span><span class="si">{</span><span class="n">TOKEN</span><span class="si">}</span><span class="s">/</span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s">?</span><span class="si">{</span><span class="n">query</span><span class="si">}</span><span class="s">'</span>
+
+
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="k">def</span> <span class="nf">request_to_chatbot_api</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span>
+   <span class="s">"""메서드와 질의조건을 전달받아 텔레그램 챗봇 웹 API에 요청을 보내고 응답 결과를 사전 객체로 해석해 반환한다."""</span>
+   <span class="n">url</span> <span class="o">=</span> <span class="n">build_url</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">query</span><span class="p">)</span>
+   <span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+   <span class="k">return</span> <span class="n">json</span><span class="p">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">request_to_chatbot_api</span><span class="p">(</span><span class="s">'getUpdates'</span><span class="p">,</span> <span class="s">'offset=0'</span><span class="p">)</span>
+<span class="n">pprint</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>코드 12-31</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">urllib.request</span>
+
+<span class="n">TOKEN</span> <span class="o">=</span> <span class="s">'1178934754:AAGUR5T93yTA7ncs_r3m0b_Hxw8h_8fb4y0'</span>
+
+<span class="k">def</span> <span class="nf">request</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+   <span class="s">"""지정한 url의 웹 문서를 요청하여, 본문을 반환한다."""</span>
+   <span class="n">response</span> <span class="o">=</span> <span class="n">urllib</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+   <span class="n">byte_data</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+   <span class="n">text_data</span> <span class="o">=</span> <span class="n">byte_data</span><span class="p">.</span><span class="n">decode</span><span class="p">()</span>
+   <span class="k">return</span> <span class="n">text_data</span>
+
+
+<span class="k">def</span> <span class="nf">build_url</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span>
+   <span class="s">"""텔레그램 챗봇 웹 API에 요청을 보내기 위한 URL을 만들어 반환한다."""</span>
+   <span class="k">return</span> <span class="sa">f</span><span class="s">'http://api.telegram.org/bot</span><span class="si">{</span><span class="n">TOKEN</span><span class="si">}</span><span class="s">/</span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s">?</span><span class="si">{</span><span class="n">query</span><span class="si">}</span><span class="s">'</span>
+
+
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="k">def</span> <span class="nf">request_to_chatbot_api</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span>
+   <span class="s">"""메서드와 질의조건을 전달받아 텔레그램 챗봇 웹 API에 요청을 보내고 응답 결과를 사전 객체로 해석해 반환한다."""</span>
+   <span class="n">url</span> <span class="o">=</span> <span class="n">build_url</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">query</span><span class="p">)</span>
+   <span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+   <span class="k">return</span> <span class="n">json</span><span class="p">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">request_to_chatbot_api</span><span class="p">(</span><span class="s">'getUpdates'</span><span class="p">,</span> <span class="s">'offset=0'</span><span class="p">)</span>
+<span class="c1">#pprint(response)
+</span>
+
+<span class="k">def</span> <span class="nf">simplify_message</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
+
+   <span class="n">result</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s">'result'</span><span class="p">]</span>
+
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="p">:</span>
+       <span class="k">return</span> <span class="bp">None</span><span class="p">,</span> <span class="p">[]</span>
+
+   <span class="n">last_update_id</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s">'update_id'</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">result</span><span class="p">)</span>
+   <span class="n">messages</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="s">'message'</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">result</span><span class="p">]</span>
+   <span class="n">simplified_messages</span> <span class="o">=</span> <span class="p">[</span>
+       <span class="p">{</span><span class="s">'from_id'</span><span class="p">:</span> <span class="n">message</span><span class="p">[</span><span class="s">'message_id'</span><span class="p">],</span>
+       <span class="s">'text'</span><span class="p">:</span> <span class="n">message</span><span class="p">[</span><span class="s">'text'</span><span class="p">]}</span> <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">messages</span>
+   <span class="p">]</span>
+
+   <span class="k">return</span> <span class="n">last_update_id</span><span class="p">,</span> <span class="n">simplified_messages</span>
+
+
+<span class="k">print</span><span class="p">(</span><span class="n">simplify_message</span><span class="p">(</span><span class="n">response</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>코드 12-33</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">urllib.request</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">TOKEN</span> <span class="o">=</span> <span class="s">'1178934754:AAGUR5T93yTA7ncs_r3m0b_Hxw8h_8fb4y0'</span>
+
+<span class="k">def</span> <span class="nf">request</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+   <span class="s">"""지정한 url의 웹 문서를 요청하여, 본문을 반환한다."""</span>
+   <span class="n">response</span> <span class="o">=</span> <span class="n">urllib</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+   <span class="n">byte_data</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+   <span class="n">text_data</span> <span class="o">=</span> <span class="n">byte_data</span><span class="p">.</span><span class="n">decode</span><span class="p">()</span>
+   <span class="k">return</span> <span class="n">text_data</span>
+
+
+<span class="k">def</span> <span class="nf">build_url</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span>
+   <span class="s">"""텔레그램 챗봇 웹 API에 요청을 보내기 위한 URL을 만들어 반환한다."""</span>
+   <span class="k">return</span> <span class="sa">f</span><span class="s">'http://api.telegram.org/bot</span><span class="si">{</span><span class="n">TOKEN</span><span class="si">}</span><span class="s">/</span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s">?</span><span class="si">{</span><span class="n">query</span><span class="si">}</span><span class="s">'</span>
+
+
+<span class="k">def</span> <span class="nf">request_to_chatbot_api</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span>
+   <span class="s">"""메서드와 질의조건을 전달받아 텔레그램 챗봇 웹 API에 요청을 보내고 응답 결과를 사전 객체로 해석해 반환한다."""</span>
+   <span class="n">url</span> <span class="o">=</span> <span class="n">build_url</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">query</span><span class="p">)</span>
+   <span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+   <span class="k">return</span> <span class="n">json</span><span class="p">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">simplify_message</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
+
+   <span class="n">result</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s">'result'</span><span class="p">]</span>
+
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="p">:</span>
+       <span class="k">return</span> <span class="bp">None</span><span class="p">,</span> <span class="p">[]</span>
+
+   <span class="n">last_update_id</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s">'update_id'</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">result</span><span class="p">)</span>
+   <span class="n">messages</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="s">'message'</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">result</span><span class="p">]</span>
+   <span class="n">simplified_messages</span> <span class="o">=</span> <span class="p">[</span>
+       <span class="p">{</span><span class="s">'from_id'</span><span class="p">:</span> <span class="n">message</span><span class="p">[</span><span class="s">'message_id'</span><span class="p">],</span>
+       <span class="s">'text'</span><span class="p">:</span> <span class="n">message</span><span class="p">[</span><span class="s">'text'</span><span class="p">]}</span> <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">messages</span>
+   <span class="p">]</span>
+
+   <span class="k">return</span> <span class="n">last_update_id</span><span class="p">,</span> <span class="n">simplified_messages</span>
+
+
+<span class="k">def</span> <span class="nf">get_updates</span><span class="p">(</span><span class="n">update_id</span><span class="p">):</span>
+   <span class="s">"""챗봇 API로 update_id 이후에 수신한 메시지를 조회하여 반환한다."""</span>
+   <span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s">'offset=</span><span class="si">{</span><span class="n">update_id</span><span class="si">}</span><span class="s">'</span>
+   <span class="n">response</span> <span class="o">=</span> <span class="n">request_to_chatbot_api</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s">'getUpdates'</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">)</span>
+   <span class="k">return</span> <span class="n">simplify_message</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">request_to_chatbot_api</span><span class="p">(</span><span class="s">'getUpdates'</span><span class="p">,</span> <span class="s">'offset=0'</span><span class="p">)</span>
+<span class="n">last_update_id</span><span class="p">,</span> <span class="n">simplified_message</span> <span class="o">=</span> <span class="n">simplify_message</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">simplified_message</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">get_updates</span><span class="p">(</span><span class="mi">32</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>코드 12-36</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">urllib.request</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">TOKEN</span> <span class="o">=</span> <span class="s">'1178934754:AAGUR5T93yTA7ncs_r3m0b_Hxw8h_8fb4y0'</span>
+
+<span class="k">def</span> <span class="nf">request</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+   <span class="s">"""지정한 url의 웹 문서를 요청하여, 본문을 반환한다."""</span>
+   <span class="n">response</span> <span class="o">=</span> <span class="n">urllib</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+   <span class="n">byte_data</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+   <span class="n">text_data</span> <span class="o">=</span> <span class="n">byte_data</span><span class="p">.</span><span class="n">decode</span><span class="p">()</span>
+   <span class="k">return</span> <span class="n">text_data</span>
+
+
+<span class="k">def</span> <span class="nf">build_url</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span>
+   <span class="s">"""텔레그램 챗봇 웹 API에 요청을 보내기 위한 URL을 만들어 반환한다."""</span>
+   <span class="k">return</span> <span class="sa">f</span><span class="s">'http://api.telegram.org/bot</span><span class="si">{</span><span class="n">TOKEN</span><span class="si">}</span><span class="s">/</span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s">?</span><span class="si">{</span><span class="n">query</span><span class="si">}</span><span class="s">'</span>
+
+
+<span class="k">def</span> <span class="nf">request_to_chatbot_api</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span>
+   <span class="s">"""메서드와 질의조건을 전달받아 텔레그램 챗봇 웹 API에 요청을 보내고 응답 결과를 사전 객체로 해석해 반환한다."""</span>
+   <span class="n">url</span> <span class="o">=</span> <span class="n">build_url</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">query</span><span class="p">)</span>
+   <span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+   <span class="k">return</span> <span class="n">json</span><span class="p">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">simplify_message</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
+
+   <span class="n">result</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s">'result'</span><span class="p">]</span>
+
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="p">:</span>
+       <span class="k">return</span> <span class="bp">None</span><span class="p">,</span> <span class="p">[]</span>
+
+   <span class="n">last_update_id</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s">'update_id'</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">result</span><span class="p">)</span>
+   <span class="n">messages</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="s">'message'</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">result</span><span class="p">]</span>
+   <span class="n">simplified_messages</span> <span class="o">=</span> <span class="p">[</span>
+       <span class="p">{</span><span class="s">'from_id'</span><span class="p">:</span> <span class="n">message</span><span class="p">[</span><span class="s">'message_id'</span><span class="p">],</span>
+       <span class="s">'text'</span><span class="p">:</span> <span class="n">message</span><span class="p">[</span><span class="s">'text'</span><span class="p">]}</span> <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">messages</span>
+   <span class="p">]</span>
+
+   <span class="k">return</span> <span class="n">last_update_id</span><span class="p">,</span> <span class="n">simplified_messages</span>
+
+
+<span class="k">def</span> <span class="nf">get_updates</span><span class="p">(</span><span class="n">update_id</span><span class="p">):</span>
+   <span class="s">"""챗봇 API로 update_id 이후에 수신한 메시지를 조회하여 반환한다."""</span>
+   <span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s">'offset=</span><span class="si">{</span><span class="n">update_id</span><span class="si">}</span><span class="s">'</span>
+   <span class="n">response</span> <span class="o">=</span> <span class="n">request_to_chatbot_api</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s">'getUpdates'</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">)</span>
+   <span class="k">return</span> <span class="n">simplify_message</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">request_to_chatbot_api</span><span class="p">(</span><span class="s">'getUpdates'</span><span class="p">,</span> <span class="s">'offset=0'</span><span class="p">)</span>
+<span class="n">last_update_id</span><span class="p">,</span> <span class="n">simplified_message</span> <span class="o">=</span> <span class="n">simplify_message</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">simplified_message</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">get_updates</span><span class="p">(</span><span class="mi">32</span><span class="p">))</span>
+<span class="n">text</span> <span class="o">=</span> <span class="n">urllib</span><span class="p">.</span><span class="n">parse</span><span class="p">.</span><span class="n">quote</span><span class="p">(</span><span class="s">'안녕~~'</span><span class="p">)</span>
+<span class="n">request_to_chatbot_api</span><span class="p">(</span><span class="s">'sendMessage'</span><span class="p">,</span> <span class="sa">f</span><span class="s">'chat_id=219819940&amp;text=</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>코드 12-41</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">urllib.request</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">urllib.parse</span>
+<span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">TOKEN</span> <span class="o">=</span> <span class="s">'1178934754:AAGUR5T93yTA7ncs_r3m0b_Hxw8h_8fb4y0'</span>
+
+
+<span class="k">def</span> <span class="nf">request</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
+   <span class="s">"""지정한 url의 웹 문서를 요청하여, 본문을 반환한다."""</span>
+   <span class="n">response</span> <span class="o">=</span> <span class="n">urllib</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+   <span class="n">byte_data</span> <span class="o">=</span> <span class="n">response</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+   <span class="n">text_data</span> <span class="o">=</span> <span class="n">byte_data</span><span class="p">.</span><span class="n">decode</span><span class="p">()</span>
+   <span class="k">return</span> <span class="n">text_data</span>
+
+
+<span class="k">def</span> <span class="nf">build_url</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span>
+   <span class="s">"""텔레그램 챗봇 웹 API에 요청을 보내기 위한 URL을 만들어 반환한다."""</span>
+   <span class="k">return</span> <span class="sa">f</span><span class="s">'http://api.telegram.org/bot</span><span class="si">{</span><span class="n">TOKEN</span><span class="si">}</span><span class="s">/</span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s">?</span><span class="si">{</span><span class="n">query</span><span class="si">}</span><span class="s">'</span>
+
+
+<span class="k">def</span> <span class="nf">request_to_chatbot_api</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">query</span><span class="p">):</span>
+   <span class="s">"""메서드와 질의조건을 전달받아 텔레그램 챗봇 웹 API에 요청을 보내고 응답 결과를 사전 객체로 해석해 반환한다."""</span>
+   <span class="n">url</span> <span class="o">=</span> <span class="n">build_url</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">query</span><span class="p">)</span>
+   <span class="n">response</span> <span class="o">=</span> <span class="n">request</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+   <span class="k">return</span> <span class="n">json</span><span class="p">.</span><span class="n">loads</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">simplify_message</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
+
+   <span class="n">result</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s">'result'</span><span class="p">]</span>
+
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="p">:</span>
+       <span class="k">return</span> <span class="bp">None</span><span class="p">,</span> <span class="p">[]</span>
+
+   <span class="n">last_update_id</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">item</span><span class="p">[</span><span class="s">'update_id'</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">result</span><span class="p">)</span>
+   <span class="n">messages</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="s">'message'</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">result</span><span class="p">]</span>
+   <span class="n">simplified_messages</span> <span class="o">=</span> <span class="p">[</span>
+       <span class="p">{</span><span class="s">'from_id'</span><span class="p">:</span> <span class="n">message</span><span class="p">[</span><span class="s">'message_id'</span><span class="p">],</span>
+       <span class="s">'text'</span><span class="p">:</span> <span class="n">message</span><span class="p">[</span><span class="s">'text'</span><span class="p">]}</span> <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">messages</span>
+   <span class="p">]</span>
+
+   <span class="k">return</span> <span class="n">last_update_id</span><span class="p">,</span> <span class="n">simplified_messages</span>
+
+
+<span class="k">def</span> <span class="nf">get_updates</span><span class="p">(</span><span class="n">update_id</span><span class="p">):</span>
+   <span class="s">"""챗봇 API로 update_id 이후에 수신한 메시지를 조회하여 반환한다."""</span>
+   <span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s">'offset=</span><span class="si">{</span><span class="n">update_id</span><span class="si">}</span><span class="s">'</span>
+   <span class="n">response</span> <span class="o">=</span> <span class="n">request_to_chatbot_api</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s">'getUpdates'</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">)</span>
+   <span class="k">return</span> <span class="n">simplify_message</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">send_message</span><span class="p">(</span><span class="n">chat_id</span><span class="p">,</span> <span class="n">text</span><span class="p">):</span>
+   <span class="s">"""챗봇 API로 메시지를 chat_id 사용자에게 text 메시지를 발신한다."""</span>
+   <span class="n">text</span> <span class="o">=</span> <span class="n">urllib</span><span class="p">.</span><span class="n">parse</span><span class="p">.</span><span class="n">quote</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+   <span class="n">query</span> <span class="o">=</span> <span class="sa">f</span><span class="s">'chat_id=</span><span class="si">{</span><span class="n">chat_id</span><span class="si">}</span><span class="s">&amp;text=</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s">'</span>
+   <span class="n">response</span> <span class="o">=</span> <span class="n">request_to_chatbot_api</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s">'sendMessage'</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="n">query</span><span class="p">)</span>
+   <span class="k">return</span> <span class="n">response</span>
+
+
+<span class="k">def</span> <span class="nf">check_messages_and_response</span><span class="p">(</span><span class="n">next_update_id</span><span class="p">):</span>
+   <span class="s">"""챗봇으로 메시지를 확인하고, 적절히 응답한다."""</span>
+   <span class="n">last_update_id</span><span class="p">,</span> <span class="n">received_messages</span> <span class="o">=</span> <span class="n">get_updates</span><span class="p">(</span><span class="n">next_update_id</span><span class="p">)</span>
+   <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">received_messages</span><span class="p">:</span>
+       <span class="n">chat_id</span> <span class="o">=</span> <span class="n">message</span><span class="p">[</span><span class="s">'from_id'</span><span class="p">]</span>
+       <span class="n">text</span> <span class="o">=</span> <span class="n">message</span><span class="p">[</span><span class="s">'text'</span><span class="p">]</span>
+       <span class="n">send_text</span> <span class="o">=</span> <span class="n">text</span> <span class="o">+</span> <span class="s">'라고 말씀하셨군요~'</span>
+       <span class="n">send_message</span><span class="p">(</span><span class="n">chat_id</span><span class="p">,</span> <span class="n">send_text</span><span class="p">)</span>
+   <span class="k">return</span> <span class="n">last_update_id</span>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">'__main__'</span><span class="p">:</span>
+   <span class="n">next_update_id</span> <span class="o">=</span> <span class="mi">0</span>
+   <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+       <span class="n">last_update_id</span> <span class="o">=</span> <span class="n">check_messages_and_response</span><span class="p">(</span><span class="n">next_update_id</span><span class="p">)</span>
+       <span class="k">if</span> <span class="n">last_update_id</span><span class="p">:</span>
+           <span class="n">next_update_id</span> <span class="o">=</span> <span class="n">last_update_id</span> <span class="o">+</span> <span class="mi">1</span>
+       <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">request_to_chatbot_api</span><span class="p">(</span><span class="s">'getUpdates'</span><span class="p">,</span> <span class="s">'offset=0'</span><span class="p">)</span>
+<span class="n">send_message</span><span class="p">(</span><span class="mi">219819940</span><span class="p">,</span> <span class="s">'안뇽'</span><span class="p">)</span>
+</code></pre></div></div>
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/2022-08-10/yeono-python-review" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/2022-08-09/yeono-python-17" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-07-30 14:29:33 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

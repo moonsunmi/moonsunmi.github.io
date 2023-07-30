@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TIL) 내 코드 복습&amp;리뉴얼 중 | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="TIL) 내 코드 복습&amp;리뉴얼 중" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="(달성/목표) 뽀모도리 1일 4 / 5 1주 4 /40" />
+<meta property="og:description" content="(달성/목표) 뽀모도리 1일 4 / 5 1주 4 /40" />
+<link rel="canonical" href="http://localhost:4000/2022-12-12/TIL" />
+<meta property="og:url" content="http://localhost:4000/2022-12-12/TIL" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-12-12T12:18:07+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TIL) 내 코드 복습&amp;리뉴얼 중" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-12-12T12:18:07+09:00","datePublished":"2022-12-12T12:18:07+09:00","description":"(달성/목표) 뽀모도리 1일 4 / 5 1주 4 /40","headline":"TIL) 내 코드 복습&amp;리뉴얼 중","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-12-12/TIL"},"url":"http://localhost:4000/2022-12-12/TIL"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Sunmi Moon
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2022-12-12 12:18:07 +0900">December 12, 2022</time>
+    
+  </div>
+
+  <h1 class="post-title">TIL) 내 코드 복습&리뉴얼 중</h1>
+  <div class="post-line"></div>
+
+  <table>
+  <thead>
+    <tr>
+      <th>(달성/목표)</th>
+      <th>뽀모도리</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1일</td>
+      <td>4 / 5</td>
+    </tr>
+    <tr>
+      <td>1주</td>
+      <td>4 /40</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="font-awsome-icon이-표시되지-않는-현상-수정">font awsome icon이 표시되지 않는 현상 수정</h3>
+
+<p>다음과 같이 임포트하고, 원하는 아이콘을 누르면 나오는 코드(<code class="language-plaintext highlighter-rouge">&lt;FontAwesomeIcon icon="fa-solid fa-bars" /&gt;</code>)를 적었더니 아이콘이 나타나지 않았다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">FontAwesomeIcon</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@fortawesome/react-fontawesome</span><span class="dl">"</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>다음과 같이 free-solid-svg-icons에서 아이콘마다 임포트를 한 후 값을 넣어 줘야 하더라.</p>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">FontAwesomeIcon</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@fortawesome/react-fontawesome</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">faArrowRight</span><span class="p">,</span> <span class="nx">faArrowLeft</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@fortawesome/free-solid-svg-icons</span><span class="dl">"</span><span class="p">;</span>
+<span class="p">...</span>
+          <span class="o">&lt;</span><span class="nx">FontAwesomeIcon</span> <span class="nx">icon</span><span class="o">=</span><span class="p">{</span><span class="nx">faArrowLeft</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">FontAwesomeIcon</span> <span class="nx">icon</span><span class="o">=</span><span class="p">{</span><span class="nx">faArrowRight</span><span class="p">}</span> <span class="sr">/&gt;         </span><span class="err"> 
+</span></code></pre></div></div>
+
+<h3 id="context와-커스텀-훅-한-파일에-합치기">context와 커스텀 훅 한 파일에 합치기</h3>
+
+<p>컨텍스트 따로, 커스텀 훅 따로 파일을 분리해 놨는데… 한꺼번에 넣어 두는 게 좋을 것 같다.</p>
+
+<ol>
+  <li>훅 안에 컨텍스트 코드 넣기</li>
+  <li>컨텍스트를 접근하는 코드가 있다면 위치 바꿔 주기</li>
+</ol>
+
+<h3 id="nextid도-컨텍스트-사용하여-커스텀훅으로-만들기">nextId도 컨텍스트 사용하여 커스텀훅으로 만들기</h3>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">createContext</span><span class="p">,</span> <span class="nx">useRef</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">nextLogIdContext</span> <span class="o">=</span> <span class="nx">createContext</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">NextLogIdContextProvider</span> <span class="o">=</span> <span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">nextLogId</span> <span class="o">=</span> <span class="nx">useRef</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">nextLogIdContext</span><span class="p">.</span><span class="nc">Provider</span> <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="nx">nextLogId</span><span class="si">}</span><span class="p">&gt;</span>
+      <span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">children</span><span class="si">}</span>
+    <span class="p">&lt;/</span><span class="nt">nextLogIdContext</span><span class="p">.</span><span class="nc">Provider</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">NextLogIdContextProvider</span><span class="p">;</span>
+</code></pre></div></div>
+
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/2023-02-15/TIL" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/2022-12-11/20th-week" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-07-30 14:29:33 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

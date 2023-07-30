@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>장고 걸스 공부 3 &amp; 리뷰 | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="장고 걸스 공부 3 &amp; 리뷰" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="css는 HTML과 같은 마크업 언어로서, 웹 사이트의 외관을 꾸미기 위해 사용되는 언어이다. 부트스트랩으로 유명한 HTML과 css로 예쁘게 꾸밀 수 있다. 정적 파일: 사용자 요청에 따라 바뀌는 게 아님. css와 이미지 파일임. css 파일에서는 HTML에 있는 각 요소의 스타일을 정의할 수 있다. 태그, 클래스, ID로 식별한다. css는 클래스 개념을 가지고 있다. {% %}: 장고 템플릿 태그 장고 튜토리얼 리뷰 기간: 22/08/11 ~ 22/08/13 (3일) 공부방법: 튜토리얼을 읽으며 하라는 대로 실습했다. 느낀점 웹 프로그래밍은 처음이고, 프레임워크를 사용(? 프레임워크를 사용한다는 표현이 맞나?)한 것도 처음이라 적응이 잘 안 됐다. 낯설고 알아야 할 게 많아서 그렇지 내용 자체는 어렵지 않은 거 같다. 얼마나 익숙해지느냐의 문제일듯… 설명이 정확하진 않아 좀 답답하게 느껴지기도 했지만, 웹 프로그래밍을 본격적으로 공부하기 전에 어떤 식으로 돌아가는지 맛보기용으로 해보기 좋은 것 같다. 웹 프로그래밍을 공부할 때 앞으로 내가 어떤 걸 만들게 될 거고, 어떤 방식으로 흘러가게 될 건지는 가늠할 수 있었다. 튜토리얼 안 해 보고 바로 공부했다면 좀 힘들었을듯… 배시 셸, git, sqlite 등을 어떤 식으로 활용하게 될 건지에 대한 감도 얻은듯. 여러 문제가 있었는데, 끝까지 진행했다. 마지막에 제대로 된 결과물을 얻지 못해서 좀 아쉽지만, 우선 다음 단계로 go. 공부하고 나서 다시 보면, 달라 보이겠지…" />
+<meta property="og:description" content="css는 HTML과 같은 마크업 언어로서, 웹 사이트의 외관을 꾸미기 위해 사용되는 언어이다. 부트스트랩으로 유명한 HTML과 css로 예쁘게 꾸밀 수 있다. 정적 파일: 사용자 요청에 따라 바뀌는 게 아님. css와 이미지 파일임. css 파일에서는 HTML에 있는 각 요소의 스타일을 정의할 수 있다. 태그, 클래스, ID로 식별한다. css는 클래스 개념을 가지고 있다. {% %}: 장고 템플릿 태그 장고 튜토리얼 리뷰 기간: 22/08/11 ~ 22/08/13 (3일) 공부방법: 튜토리얼을 읽으며 하라는 대로 실습했다. 느낀점 웹 프로그래밍은 처음이고, 프레임워크를 사용(? 프레임워크를 사용한다는 표현이 맞나?)한 것도 처음이라 적응이 잘 안 됐다. 낯설고 알아야 할 게 많아서 그렇지 내용 자체는 어렵지 않은 거 같다. 얼마나 익숙해지느냐의 문제일듯… 설명이 정확하진 않아 좀 답답하게 느껴지기도 했지만, 웹 프로그래밍을 본격적으로 공부하기 전에 어떤 식으로 돌아가는지 맛보기용으로 해보기 좋은 것 같다. 웹 프로그래밍을 공부할 때 앞으로 내가 어떤 걸 만들게 될 거고, 어떤 방식으로 흘러가게 될 건지는 가늠할 수 있었다. 튜토리얼 안 해 보고 바로 공부했다면 좀 힘들었을듯… 배시 셸, git, sqlite 등을 어떤 식으로 활용하게 될 건지에 대한 감도 얻은듯. 여러 문제가 있었는데, 끝까지 진행했다. 마지막에 제대로 된 결과물을 얻지 못해서 좀 아쉽지만, 우선 다음 단계로 go. 공부하고 나서 다시 보면, 달라 보이겠지…" />
+<link rel="canonical" href="http://localhost:4000/2022-08-13/django-girls-3" />
+<meta property="og:url" content="http://localhost:4000/2022-08-13/django-girls-3" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-08-13T14:22:15+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="장고 걸스 공부 3 &amp; 리뷰" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-08-13T14:22:15+09:00","datePublished":"2022-08-13T14:22:15+09:00","description":"css는 HTML과 같은 마크업 언어로서, 웹 사이트의 외관을 꾸미기 위해 사용되는 언어이다. 부트스트랩으로 유명한 HTML과 css로 예쁘게 꾸밀 수 있다. 정적 파일: 사용자 요청에 따라 바뀌는 게 아님. css와 이미지 파일임. css 파일에서는 HTML에 있는 각 요소의 스타일을 정의할 수 있다. 태그, 클래스, ID로 식별한다. css는 클래스 개념을 가지고 있다. {% %}: 장고 템플릿 태그 장고 튜토리얼 리뷰 기간: 22/08/11 ~ 22/08/13 (3일) 공부방법: 튜토리얼을 읽으며 하라는 대로 실습했다. 느낀점 웹 프로그래밍은 처음이고, 프레임워크를 사용(? 프레임워크를 사용한다는 표현이 맞나?)한 것도 처음이라 적응이 잘 안 됐다. 낯설고 알아야 할 게 많아서 그렇지 내용 자체는 어렵지 않은 거 같다. 얼마나 익숙해지느냐의 문제일듯… 설명이 정확하진 않아 좀 답답하게 느껴지기도 했지만, 웹 프로그래밍을 본격적으로 공부하기 전에 어떤 식으로 돌아가는지 맛보기용으로 해보기 좋은 것 같다. 웹 프로그래밍을 공부할 때 앞으로 내가 어떤 걸 만들게 될 거고, 어떤 방식으로 흘러가게 될 건지는 가늠할 수 있었다. 튜토리얼 안 해 보고 바로 공부했다면 좀 힘들었을듯… 배시 셸, git, sqlite 등을 어떤 식으로 활용하게 될 건지에 대한 감도 얻은듯. 여러 문제가 있었는데, 끝까지 진행했다. 마지막에 제대로 된 결과물을 얻지 못해서 좀 아쉽지만, 우선 다음 단계로 go. 공부하고 나서 다시 보면, 달라 보이겠지…","headline":"장고 걸스 공부 3 &amp; 리뷰","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-08-13/django-girls-3"},"url":"http://localhost:4000/2022-08-13/django-girls-3"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Sunmi Moon
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2022-08-13 14:22:15 +0900">August 13, 2022</time>
+    
+  </div>
+
+  <h1 class="post-title">장고 걸스 공부 3 & 리뷰</h1>
+  <div class="post-line"></div>
+
+  <ul>
+  <li>
+    <p>css는 HTML과 같은 마크업 언어로서, 웹 사이트의 외관을 꾸미기 위해 사용되는 언어이다.</p>
+  </li>
+  <li>
+    <p>부트스트랩으로 유명한 HTML과 css로 예쁘게 꾸밀 수 있다.</p>
+  </li>
+  <li>정적 파일: 사용자 요청에 따라 바뀌는 게 아님. css와 이미지 파일임.</li>
+  <li>css 파일에서는 HTML에 있는 각 요소의 스타일을 정의할 수 있다. 태그, 클래스, ID로 식별한다. css는 클래스 개념을 가지고 있다.</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">{% %}</code>: 장고 템플릿 태그</p>
+
+<h2 id="장고-튜토리얼-리뷰">장고 튜토리얼 리뷰</h2>
+
+<ul>
+  <li>
+    <p>기간: 22/08/11 ~ 22/08/13 (3일)</p>
+  </li>
+  <li>
+    <p>공부방법: 튜토리얼을 읽으며 하라는 대로 실습했다.</p>
+  </li>
+</ul>
+
+<h4 id="느낀점">느낀점</h4>
+
+<p>웹 프로그래밍은 처음이고, 프레임워크를 사용(? 프레임워크를 사용한다는 표현이 맞나?)한 것도 처음이라 적응이 잘 안 됐다. 낯설고 알아야 할 게 많아서 그렇지 내용 자체는 어렵지 않은 거 같다. 얼마나 익숙해지느냐의 문제일듯…</p>
+
+<p>설명이 정확하진 않아 좀 답답하게 느껴지기도 했지만, 웹 프로그래밍을 본격적으로 공부하기 전에 어떤 식으로 돌아가는지 맛보기용으로 해보기 좋은 것 같다. 웹 프로그래밍을 공부할 때 앞으로 내가 어떤 걸 만들게 될 거고, 어떤 방식으로 흘러가게 될 건지는 가늠할 수 있었다. 튜토리얼 안 해 보고 바로 공부했다면 좀 힘들었을듯…</p>
+
+<p>배시 셸, git, sqlite 등을 어떤 식으로 활용하게 될 건지에 대한 감도 얻은듯. 여러 문제가 있었는데, 끝까지 진행했다. 마지막에 제대로 된 결과물을 얻지 못해서 좀 아쉽지만, 우선 다음 단계로 go.</p>
+
+<파이썬 웹="" 프로그래밍=""> 공부하고 나서 다시 보면, 달라 보이겠지…
+</파이썬>
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/2022-08-13/python-web-programming-1" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/2022-08-12/django-girls-2" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-07-30 14:29:33 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

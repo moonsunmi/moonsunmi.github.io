@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>연오의 파이썬 공부 14 | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="연오의 파이썬 공부 14" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="로그: 프로그램을 실행하는 도중에 화면, 파일, 데이터 베이스 등의 장소에 하는 중간 기록 단위테스트: 프로그램의 구성요소를 테스트하는 것을 단위 테스트 예외적인 데이터를 빠트리지 않고 테스트하는 게 중요하다. 주의 문자열을 입력받는 함수는 빈 문자열, 매우 긴 문자열, 외국어, 특수문자, 홀수 또는 짝수 길이의 문자열 정수를 입력받는 함수는 0, 음수, 매우 작거나 매우 큰 수, 0부터 세는가, 1부터 세는가 테스트 주도 개발 함수를 작성하기 전에 테스트를 먼저 작성하는 방법. 함수의 입력값과 출력값의 사례를 미리 만들어 두는 것. 코드 9-16 def frequency(s, c): &quot;&quot;&quot;문자열 s와 문자 c를 입력받아, c가 s에 등장하는 빈도를 구한다. 테스트: * &#39;banana&#39;, &#39;a&#39; =&gt; 0.5 * &#39;code&#39;, &#39;c&#39; =&gt; 0.25 * &#39;파이썬&#39;, &#39;프&#39; =&gt; 0 * &#39;파이썬&#39;, &#39;파이&#39; =&gt; None * &#39;&#39;, &#39;a&#39; =&gt; 0 &quot;&quot;&quot; if len(c) != 1: return None if len(s) == 0: return 0 count = s.count(c) return count / len(s) def test_frequency(): &quot;&quot;&quot;frequency() 함수 테스트&quot;&quot;&quot; if not (frequency(&#39;banana&#39;, &#39;a&#39;) == 0.5): return False if not(frequency(&#39;code&#39;, &#39;c&#39;) == 0.25): return False if not(frequency(&#39;파이썬&#39;,&#39;프&#39;) == 0): return False if not(frequency(&#39;파이썬&#39;, &#39;파이&#39;) == None): return False if not (frequency(&#39;&#39;, &#39;a&#39;) == 0): return False return True print(test_frequency()) 연습문제 9-1 def median(data): &quot;&quot;&quot;데이터의 중앙값을 반환한다.&quot;&quot;&quot; sorted_data =sorted(data) median_value = sorted_data[int(len(sorted_data) / 2)] return median_value print(median([10, 9, 4, 1, 5, 7])) # list 인덱스가 실수형이 되었기 때문에 오류가 났었다.(지금은 수정) 연습문제 9-2 def 삼육구(n): &quot;&quot;&quot;n에 숫자 &#39;3&#39;, &#39;6&#39;, &#39;9&#39; 중 하나 이상이 있을 경우 &#39;짝&#39;을, 그렇지 않으면 n에 대응하는 숫자를 반환한다.&quot;&quot;&quot; characters = str(n) found_3 = characters.find(&#39;3&#39;) != -1 found_6 = characters.find(&#39;6&#39;) != -1 found_9 = characters.find(&#39;9&#39;) != -1 if found_3 or found_6 or found_9: return &#39;짝&#39; else: return str(n) def test_삼육구(): if not 삼육구(0) == &#39;0&#39;: return False if not 삼육구(8) == &#39;8&#39;: return False if not 삼육구(3) == &#39;짝&#39;: return False if not 삼육구(6) == &#39;짝&#39;: return False if not 삼육구(9) == &#39;짝&#39;: return False if not 삼육구(120) == &#39;120&#39;: return False if not 삼육구(300) == &#39;짝&#39;: return False if not 삼육구(66669333) == &#39;짝&#39;: return False if not 삼육구(2481112) == &#39;2481112&#39;: return False if not 삼육구(-10) == &#39;-10&#39;: return False if not 삼육구(-9) == &#39;짝&#39;: return False return True print(test_삼육구()) 연습문제 9-3 수를 0으로 나누려고 할 때 발생하는 오류. if 문 등을 이용해서 나눗수가 0이 될 경우 예외 처리를 해 준다. 코드 9-20 while True: print(&#39;0이 아닌 정수를 입력해 주세요:&#39;, end=&#39; &#39;) user_string = input() if not user_string.isnumeric(): print(user_string, &#39;은 정수가 아닙니다.&#39;) continue user_number = int(user_string) if user_number == 0: print(&#39;0으로 나눌 수 없습니다.&#39;) continue break print( 1 / user_number) if 문을 이용한 예외처리 단점 예외를 나타내는 값(오류 코드)과 정상 값을 구별하기가 어렵다. 함수를 연달아 호출할 때, 예외를 함수 밖으로 전달하기가 불편하다. 예외 상황인지 항상 미리 검사해야 한다. 예외를 나타내는 값을 정해 둔 것을 오류 코드(error code)라 한다. 오류 코드는 함수마다 제각각 정의하게 될 가능성이 높다. 파이썬은 허락을 구한 뒤 일하기보다는, 일을 먼저 하고 문제가 생기면 용서를 구하는 방법을 권장한다. 코드 9-24 try: print(&#39;0이 아닌 정수를 입력해 주세요:&#39;, end=&#39; &#39;) user_number = int(input()) print(1 / user_number) except ZeroDivisionError: print(&#39;0으로 나눌 수 없습니다.&#39;) except ValueError: print(&#39;입력한 값은 정수가 아닙니다.&#39;) 코드 9-25 while True: try: print(&#39;0이 아닌 정수를 입력해 주세요:&#39;, end=&#39; &#39;) user_number = int(input()) print(1 / user_number) break except ZeroDivisionError: print(&#39;0으로 나눌 수 없습니다.&#39;) except ValueError: print(&#39;입력한 값은 정수가 아닙니다.&#39;) try 문의 else절을 쓰는 이유는 예외처리의 대상이 되는 코드와 이어서 수행될 코드를 명시적으로 구별하기 위해서다. 311p 중간 ~ 312p 중간까지 실습 아직 x 코드 9-27 try문을 사용하면 안쪽에서 발생한 오류를 바깥에서 처리할 수 있다. 연습문제 9-4 try: print(&#39;첫 번째 수를 입력하시오: &#39;, end=&#39;&#39;) number1 = int(input()) print(&#39;두 번째 수를 입력하시오: &#39;, end=&#39;&#39;) number2 = int(input()) add = number1 + number2 subtract = number1 - number2 multiply = number1 * number2 print(number1, &#39;+&#39;, number2, &#39;=&#39;, add) print(number1, &#39;-&#39;, number2, &#39;=&#39;, subtract) print(number1, &#39;*&#39;, number2, &#39;=&#39;, multiply) divide = number1 / number2 except ZeroDivisionError: print(number1, &#39;/&#39;, number2, &#39;=&#39;, None) else: print(number1, &#39;/&#39;, number2, &#39;=&#39;, divide) 연습문제 9-4 upgrade try: print(&#39;첫 번째 수를 입력하시오: &#39;, end=&#39;&#39;) number1 = int(input()) print(&#39;두 번째 수를 입력하시오: &#39;, end=&#39;&#39;) number2 = int(input()) add = number1 + number2 subtract = number1 - number2 multiply = number1 * number2 divide = number1 / number2 except ZeroDivisionError: divide = None print(number1, &#39;+&#39;, number2, &#39;=&#39;, add) print(number1, &#39;-&#39;, number2, &#39;=&#39;, subtract) print(number1, &#39;*&#39;, number2, &#39;=&#39;, multiply) print(number1, &#39;/&#39;, number2, &#39;=&#39;, divide) 파이썬에는 다양한 오류 상황이 예외 클래스로 범주화되어 있다. 예외가 발생하면 예외 상황에 대한 정보를 담은 예외 인스턴스가 만들어진다. 새로운 예외의 종류를 직접 정의하거나 예외 객체를 직접 생성할 수도 있다. 코드 9-32 def get(index_or_key, collection): &quot;&quot;&quot;컬렉션(collection)에서 인덱스 또는 키(index_or_key)에 해당하는 값을 반환한다. 데이터 집합에 해당하는 인덱스 또는 키가 존재하지 않는 경우 None을 반환한다.&quot;&quot;&quot; try: value = collection[index_or_key] except (IndexError, KeyError): return None else: return value print(get(3, (1, 2, 3))) 코드 9-33 def get(index_or_key, collection): &quot;&quot;&quot;컬렉션(collection)에서 인덱스 또는 키(index_or_key)에 해당하는 값을 반환한다. 데이터 집합에 해당하는 인덱스 또는 키가 존재하지 않는 경우 None을 반환한다.&quot;&quot;&quot; try: value = collection[index_or_key] except LookupError: return None else: return value print(get(3, (1, 2, 3))) as를 이용하면 except 절 안에서 예외 객체에 담긴 오류 정보를 이용할 수 있다. 파이썬에 기본으로 정의되어 있는 예외는 인터프리터가 적절한 상황에서 자동으로 발생 하지만 오류 상황을 직접 정의하여 예외를 발생시켜야 할 때는 raise 문 or assert 문 이용 코드 9-41 class DoorException(Exception): &quot;&quot;&quot;문 관련 예외&quot;&quot;&quot; pass class DoorOpenedException(DoorException): &quot;&quot;&quot;문 열림 예외&quot;&quot;&quot; pass class DoorClosedException(DoorException): &quot;&quot;&quot;문 닫힘 예외&quot;&quot;&quot; pass class Door: &quot;&quot;&quot;문을 나타내는 클래스&quot;&quot;&quot; def __init__(self): self._is_opened = True def open(self): if self._is_opened: raise DoorOpenedException(&#39;문이 이미 열려 있음&#39;) else: print(&#39;문을 엽니다.&#39;) self._is_opened = True def close(self): if not self._is_opened: raise DoorClosedException(&#39;문이 이미 닫혀 있음&#39;) else: print(&#39;문을 닫습니다.&#39;) self._is_opened = False door = Door() door.close() door.open() door.open() raise 문은 오류가 이미 발생한 상황에서 예외를 일으키기 위한 명령. 따라서 무조건 예외를 일으킴 assert 문은 상태를 검증하기 위한 명령. 지정한 검증식을 계산하여 결과가 거짓일 때만 AssertionError 예외를 발생시킨다. 코드 9-44 class DoorException(Exception): &quot;&quot;&quot;문 관련 예외&quot;&quot;&quot; pass class DoorOpenedException(DoorException): &quot;&quot;&quot;문 열림 예외&quot;&quot;&quot; pass class DoorClosedException(DoorException): &quot;&quot;&quot;문 닫힘 예외&quot;&quot;&quot; pass class Door: &quot;&quot;&quot;문을 나타내는 클래스&quot;&quot;&quot; def __init__(self): self._is_opened = True def open(self): assert not self._is_opened print(&#39;문을 엽니다.&#39;) self._is_opened = True def close(self): assert self._is_opened print(&#39;문을 닫습니다.&#39;) self._is_opened = False door = Door() door.close() door.open() door.open() 연습문제 9-5 class AccountException(Exception): &quot;&quot;&quot;은행 계좌 관련 예외&quot;&quot;&quot; pass class AccountBalanceException(AccountException): &quot;&quot;&quot;계좌 잔고 예외&quot;&quot;&quot; pass class FrozenAccountException(AccountException): &quot;&quot;&quot;동결 계좌 예외&quot;&quot;&quot; pass class InvalidTransactionException(AccountException): &quot;&quot;&quot;잘못된 입출금 예외&quot;&quot;&quot; pass 연습문제 9-6 class AccountException(Exception): &quot;&quot;&quot;은행 계좌 관련 예외&quot;&quot;&quot; pass class AccountBalanceException(AccountException): &quot;&quot;&quot;계좌 잔고 예외&quot;&quot;&quot; pass class FrozenAccountException(AccountException): &quot;&quot;&quot;동결 계좌 예외&quot;&quot;&quot; pass class InvalidTransactionException(AccountException): &quot;&quot;&quot;잘못된 입출금 예외&quot;&quot;&quot; pass class Account(): &quot;&quot;&quot;은행 계좌&quot;&quot;&quot; def __init__(self, balance, is_frozen): &quot;&quot;&quot;인스턴스를 초기화한다.&quot;&quot;&quot; self.balance = balance # 계좌 잔액 self.is_frozen = is_frozen # 계좌 동결 여부 def check(self): &quot;&quot;&quot;계좌의 잔고를 조회한다.&quot;&quot;&quot; print(&#39;계좌 잔액은&#39;, self.balance, &#39;원입니다.&#39;) def deposit(self, amount): &quot;&quot;&quot;계좌에 amount만큼의 금액을 입금한다.&quot;&quot;&quot; if self.is_frozen: raise FrozenAccountException if not amount &gt; 0: raise InvalidTransactionException(&#39;0 이하의 액수는 입금할 수 없습니다.&#39;) self.balance += amount def withdraw(self, amount): &quot;&quot;&quot;계좌에서 amount만큼의 금액을 인출한다.&quot;&quot;&quot; if self.is_frozen: raise FrozenAccountException if not amount &gt; 0: raise InvalidTransactionException(&#39;0 이하의 액수는 인출할 수 없습니다.&#39;) if self.balance &lt; amount: raise AccountBalanceException(&#39;잔액이 부족합니다.&#39;) else: self.balance -= amount account_1 = Account(1000, False) try: account_1.deposit(1000) except Exception as error: print(error) try: account_1.withdraw(-1000) except Exception as error: print(error) try: account_1.check() except Exception as error: print(error) 연습문제 9-7 class AccountException(Exception): &quot;&quot;&quot;은행 계좌 관련 예외&quot;&quot;&quot; pass class AccountBalanceException(AccountException): &quot;&quot;&quot;계좌 잔고 예외&quot;&quot;&quot; pass class FrozenAccountException(AccountException): &quot;&quot;&quot;동결 계좌 예외&quot;&quot;&quot; pass class InvalidTransactionException(AccountException): &quot;&quot;&quot;잘못된 입출금 예외&quot;&quot;&quot; pass class Account(): &quot;&quot;&quot;은행 계좌&quot;&quot;&quot; def __init__(self, balance, is_frozen): &quot;&quot;&quot;인스턴스를 초기화한다.&quot;&quot;&quot; self.balance = balance # 계좌 잔액 self.is_frozen = is_frozen # 계좌 동결 여부 def check(self): &quot;&quot;&quot;계좌의 잔고를 조회한다.&quot;&quot;&quot; print(&#39;계좌 잔액은&#39;, self.balance, &#39;원입니다.&#39;) def deposit(self, amount): &quot;&quot;&quot;계좌에 amount만큼의 금액을 입금한다.&quot;&quot;&quot; assert amount &gt; 0, &#39;거래 금액이 잘못되었습니다.&#39; self.balance += amount def withdraw(self, amount): &quot;&quot;&quot;계좌에서 amount만큼의 금액을 인출한다.&quot;&quot;&quot; assert not self.is_frozen, &#39;계좌가 동결되었습니다.&#39; assert amount &gt; 0, &#39;거래 금액이 잘못되었습니다.&#39; assert self.balance &gt;= amount, &#39;잔액이 부족합니다.&#39; self.balance -= amount account_1 = Account(1000, False) try: account_1.deposit(1000) except Exception as error: print(error) try: account_1.withdraw(-1000) except Exception as error: print(error) try: account_1.check() except Exception as error: print(error) 디스크, 네트워크, 프린터 등의 시스템 자원은 직접 신경 써서 반납해야 한다. 코드 9-45 total = 0 file = open(&#39;prices.txt&#39;) for line in file: total += int(line) print(total) file.close() 코드 9-46 try: total = 0 file = open(&#39;prices.txt&#39;) for line in file: total += int(line) except ValueError: print(&#39;숫자가 아닌 텍스트가 있습니다.&#39;) else: print(total) file.close() finally 절: 예외 발생 여부와 관계 없이 항상 마지막에 실행된다. 코드 9-47 try: total = 0 file = open(&#39;prices.txt&#39;) for line in file: total += int(line) except ValueError: print(&#39;숫자가 아닌 텍스트가 있습니다.&#39;) else: print(total) finally: file.close() with 문: 뒷정리를 자동으로 처리하는 문법 코드 9-48 with open(&#39;prices.txt&#39;) as file: try: total = 0 file = open(&#39;prices.txt&#39;) for line in file: total += int(line) except ValueError: print(&#39;숫자가 아닌 텍스트가 있습니다.&#39;) else: print(total) with 문은 객체의 종류에 관계없이 알아서 준비와 뒷정리를 해 준다. 준비를 위해 __enter__() 메서드를 호출, 뒷정리를 위해 __exit()__ 메서드를 알아서 호출한다. 코드 9-49 class NetworkConnection: &quot;&quot;&quot;네트워크 연결을 나타내는 클래스&quot;&quot;&quot; def __init__(self, url): &quot;&quot;&quot;인스턴스를 초기화한다.&quot;&quot;&quot; self.url = url self.is_connected = False def connect(self): &quot;&quot;&quot;네트워크에 연결한다.&quot;&quot;&quot; print(&#39;네트워크에 연결합니다.&#39;) self.is_connected = True def disconnect(self): &quot;&quot;&quot;네트워크 연결을 중단한다.&quot;&quot;&quot; print(&#39;네트워크 연결을 중단합니다.&#39;) self.is_connected = False def read(self): &quot;&quot;&quot;네트워크에서 데이터를 읽어 들인다.&quot;&quot;&quot; return &#39;네트워크에서 읽어 들인 데이터&#39; def __enter__(self): &quot;&quot;&quot;객체 사용을 준비한다.&quot;&quot;&quot; self.connect() return self def __exit__(self, exc_type, exc_value, traceback): &quot;&quot;&quot;객체 사용을 마치고 뒷정리한다.&quot;&quot;&quot; self.disconnect() with NetworkConnection(&#39;https://bakyeono.net&#39;) as connection: print(connection.read()) 10장 모듈(module)은 프로그램을 구성하는 기능 중에서 독립적으로 구별할 수 있는 것을 모아 분리해 둔 것이다. 프로그램 실행의 시작점이 되는 모듈을 최상위(top-level) 모듈이라 한다. __name__ 전역 변수는 모듈이 최상위로 실행된 경우에는 __main__이 되고, 하위 모듈로 실행된 경우에는 그 모듈의 이름이 된다. 파이썬의 패키지(package)는 여러 개의 모듈·패키지를 묶은 것이다. 코드 10-16, 코드 10-17 실습 아직 하지 못함. 각 패키지 디렉터리마다 있는 __init__.py 파일의 역할: 파이썬이 디렉터리를 패키지로 인식하도록 한다. model/init.py —------------------------- from . import character 현재 패키지인 model을 기준으로 character 패키지를 상대경로로 임포트하라는 뜻이다. 11장 라이브러리(library)란 다른 프로그램의 구성요소로 사용하기 위해 미리 만들어 둔 프로그램 조각이다. 즉, 자주 사용하는 기능을 모듈·패키지로 만들어 둔 것이다. 연습문제 11-1 import math def floor_division(dividen, divisor): return math.floor(dividen / divisor) def test_floor_division(): if not floor_division(3, 2) == 1: # x.5 return False if not floor_division(3, 3) == 1: # x.5 미만 return False if not floor_division(5, 3) == 1: # x.5 초과 (무한 소수) return False if not floor_division(12, 3) == 4: # x.0 return False return True print(test_floor_division()) # 모범답안처럼 assert 문을 사용했으면 더 간단하게 했을 텐데! 코드 11-17 print(&#39;{0[0]}년 {0[1]}월 {0[2]}일 {1[0]}시 {1[1]}분&#39;.format([2020, 6, 20], [3, 30])) 코드 11-18 print(&#39;{0[h]}시 {0[m]}분 {0[s]}초&#39;.format({&#39;h&#39;: 16, &#39;m&#39;: 30, &#39;s&#39;: 0})) 코드 11-20 countries = [ {&#39;name&#39;: &#39;China&#39;, &#39;population&#39;: 1403500365}, {&#39;name&#39;: &#39;Japan&#39;, &#39;population&#39;: 126056362}, {&#39;name&#39;: &#39;South Korea&#39;, &#39;population&#39;: 51736224}, {&#39;name&#39;: &#39;Pitcairn Islands&#39;, &#39;population&#39;: 56}, ] form = &#39;나라: {0} | 인구: {1}&#39; for country in countries: print(form.format(country[&#39;name&#39;], country[&#39;population&#39;])) 코드 11-21 countries = [ {&#39;name&#39;: &#39;China&#39;, &#39;population&#39;: 1403500365}, {&#39;name&#39;: &#39;Japan&#39;, &#39;population&#39;: 126056362}, {&#39;name&#39;: &#39;South Korea&#39;, &#39;population&#39;: 51736224}, {&#39;name&#39;: &#39;Pitcairn Islands&#39;, &#39;population&#39;: 56}, ] form = &#39;나라: {0:16} | 인구: {1:10}&#39; for country in countries: print(form.format(country[&#39;name&#39;], country[&#39;population&#39;])) 문자열은 왼쪽, 수는 오른쪽 정렬이 디폴트 코드 11-22 countries = [ {&#39;name&#39;: &#39;China&#39;, &#39;population&#39;: 1403500365}, {&#39;name&#39;: &#39;Japan&#39;, &#39;population&#39;: 126056362}, {&#39;name&#39;: &#39;South Korea&#39;, &#39;population&#39;: 51736224}, {&#39;name&#39;: &#39;Pitcairn Islands&#39;, &#39;population&#39;: 56}, ] form = &#39;나라: {0:16} | 인구: {1:010}&#39; for country in countries: print(form.format(country[&#39;name&#39;], country[&#39;population&#39;])) 코드 11-23 countries = [ {&#39;name&#39;: &#39;China&#39;, &#39;population&#39;: 1403500365}, {&#39;name&#39;: &#39;Japan&#39;, &#39;population&#39;: 126056362}, {&#39;name&#39;: &#39;South Korea&#39;, &#39;population&#39;: 51736224}, {&#39;name&#39;: &#39;Pitcairn Islands&#39;, &#39;population&#39;: 56}, ] form = &#39;나라: {0:&gt;16} | 인구: {1:&lt;10}&#39; for country in countries: print(form.format(country[&#39;name&#39;], country[&#39;population&#39;])) 코드 11-25 physics, chemistry, biology = 80, 90, 70 print(f&#39;물리학: {physics}, 화학: {chemistry}, 생물학: {biology}&#39;) 코드 11-26 for i in range(2, 10): for j in range(1, 10): print(f&#39;{i} ** {j} = {i ** j:10}&#39;) 텍스트의 패턴을 나타내는 텍스트를 정규식(regular expression)이라 한다. 코드 11-27 import re print(re.search(&#39;파이썬&#39;, &#39;파이썬&#39;)) print(re.search(&#39;파이썬&#39;, &#39;즐거운 파이썬&#39;)) print(re.search(&#39;파이썬&#39;, &#39;파이프&#39;)) 코드 11-28 import re match = re.search(&#39;파이썬&#39;, &#39;파이썬 프로그래밍&#39;) if match: print(&#39;문자열에 패턴과 매치하는 텍스트가 존재함:&#39;, match.group()) else: print(&#39;문자열에 패턴과 매치하는 텍스트가 존재하지 않음&#39;) 코드 11-29 import re print(re.sub(&#39;파이썬&#39;, &#39;리스프&#39;, &#39;즐거운 파이썬 프로그래밍&#39;)) print(re.sub(&#39; &#39;, &#39;*&#39;, &#39;즐거운 파이썬 프로그래밍&#39;)) 코드 11-31 import re sample = &#39;1789Pthon박연오fog&#39; pattern = r&#39;[가-힣]{2,4}&#39; match = re.search(pattern, sample) print(match.group()) 코드 11-32 import re sample = &#39;이름: 박연오, 연락처: 010-1234-5678, 주소: 부산 어딘가&#39; pattern = r&#39;01\d-\d{3,4}-\d{4}&#39; match = re.search(pattern, sample) print(match.group()) 연습문제 11-2 import re def hangul_only(string): pattern = r&#39;[^가-힣]+&#39; only_hangul_match = re.split(pattern, string) result = &#39;&#39; for hangul_word in only_hangul_match: result += hangul_word return result print(hangul_only(&#39;I like 파이썬 programming.&#39;)) print(hangul_only(&#39;a1가b2나c3다d4라e5마f6바g7사&#39;)) 연습문제 11-2 모범답안처럼 업그레이드 import re def hangul_only(string): pattern = r&#39;[^가-힣]+&#39; only_hangul = re.sub(pattern, &#39;&#39;, string) return only_hangul def test_hangul_only(): assert hangul_only(&#39;&#39;) == &#39;&#39; assert hangul_only(&#39;안녕&#39;) == &#39;안녕&#39; assert hangul_only(&#39;123&#39;) == &#39;&#39; assert hangul_only(&#39;안녕 00 나의 vv 친구&#39;) test_hangul_only() print(hangul_only(&#39;I like 파이썬 programming.&#39;)) print(hangul_only(&#39;a1가b2나c3다d4라e5마f6바g7사&#39;))" />
+<meta property="og:description" content="로그: 프로그램을 실행하는 도중에 화면, 파일, 데이터 베이스 등의 장소에 하는 중간 기록 단위테스트: 프로그램의 구성요소를 테스트하는 것을 단위 테스트 예외적인 데이터를 빠트리지 않고 테스트하는 게 중요하다. 주의 문자열을 입력받는 함수는 빈 문자열, 매우 긴 문자열, 외국어, 특수문자, 홀수 또는 짝수 길이의 문자열 정수를 입력받는 함수는 0, 음수, 매우 작거나 매우 큰 수, 0부터 세는가, 1부터 세는가 테스트 주도 개발 함수를 작성하기 전에 테스트를 먼저 작성하는 방법. 함수의 입력값과 출력값의 사례를 미리 만들어 두는 것. 코드 9-16 def frequency(s, c): &quot;&quot;&quot;문자열 s와 문자 c를 입력받아, c가 s에 등장하는 빈도를 구한다. 테스트: * &#39;banana&#39;, &#39;a&#39; =&gt; 0.5 * &#39;code&#39;, &#39;c&#39; =&gt; 0.25 * &#39;파이썬&#39;, &#39;프&#39; =&gt; 0 * &#39;파이썬&#39;, &#39;파이&#39; =&gt; None * &#39;&#39;, &#39;a&#39; =&gt; 0 &quot;&quot;&quot; if len(c) != 1: return None if len(s) == 0: return 0 count = s.count(c) return count / len(s) def test_frequency(): &quot;&quot;&quot;frequency() 함수 테스트&quot;&quot;&quot; if not (frequency(&#39;banana&#39;, &#39;a&#39;) == 0.5): return False if not(frequency(&#39;code&#39;, &#39;c&#39;) == 0.25): return False if not(frequency(&#39;파이썬&#39;,&#39;프&#39;) == 0): return False if not(frequency(&#39;파이썬&#39;, &#39;파이&#39;) == None): return False if not (frequency(&#39;&#39;, &#39;a&#39;) == 0): return False return True print(test_frequency()) 연습문제 9-1 def median(data): &quot;&quot;&quot;데이터의 중앙값을 반환한다.&quot;&quot;&quot; sorted_data =sorted(data) median_value = sorted_data[int(len(sorted_data) / 2)] return median_value print(median([10, 9, 4, 1, 5, 7])) # list 인덱스가 실수형이 되었기 때문에 오류가 났었다.(지금은 수정) 연습문제 9-2 def 삼육구(n): &quot;&quot;&quot;n에 숫자 &#39;3&#39;, &#39;6&#39;, &#39;9&#39; 중 하나 이상이 있을 경우 &#39;짝&#39;을, 그렇지 않으면 n에 대응하는 숫자를 반환한다.&quot;&quot;&quot; characters = str(n) found_3 = characters.find(&#39;3&#39;) != -1 found_6 = characters.find(&#39;6&#39;) != -1 found_9 = characters.find(&#39;9&#39;) != -1 if found_3 or found_6 or found_9: return &#39;짝&#39; else: return str(n) def test_삼육구(): if not 삼육구(0) == &#39;0&#39;: return False if not 삼육구(8) == &#39;8&#39;: return False if not 삼육구(3) == &#39;짝&#39;: return False if not 삼육구(6) == &#39;짝&#39;: return False if not 삼육구(9) == &#39;짝&#39;: return False if not 삼육구(120) == &#39;120&#39;: return False if not 삼육구(300) == &#39;짝&#39;: return False if not 삼육구(66669333) == &#39;짝&#39;: return False if not 삼육구(2481112) == &#39;2481112&#39;: return False if not 삼육구(-10) == &#39;-10&#39;: return False if not 삼육구(-9) == &#39;짝&#39;: return False return True print(test_삼육구()) 연습문제 9-3 수를 0으로 나누려고 할 때 발생하는 오류. if 문 등을 이용해서 나눗수가 0이 될 경우 예외 처리를 해 준다. 코드 9-20 while True: print(&#39;0이 아닌 정수를 입력해 주세요:&#39;, end=&#39; &#39;) user_string = input() if not user_string.isnumeric(): print(user_string, &#39;은 정수가 아닙니다.&#39;) continue user_number = int(user_string) if user_number == 0: print(&#39;0으로 나눌 수 없습니다.&#39;) continue break print( 1 / user_number) if 문을 이용한 예외처리 단점 예외를 나타내는 값(오류 코드)과 정상 값을 구별하기가 어렵다. 함수를 연달아 호출할 때, 예외를 함수 밖으로 전달하기가 불편하다. 예외 상황인지 항상 미리 검사해야 한다. 예외를 나타내는 값을 정해 둔 것을 오류 코드(error code)라 한다. 오류 코드는 함수마다 제각각 정의하게 될 가능성이 높다. 파이썬은 허락을 구한 뒤 일하기보다는, 일을 먼저 하고 문제가 생기면 용서를 구하는 방법을 권장한다. 코드 9-24 try: print(&#39;0이 아닌 정수를 입력해 주세요:&#39;, end=&#39; &#39;) user_number = int(input()) print(1 / user_number) except ZeroDivisionError: print(&#39;0으로 나눌 수 없습니다.&#39;) except ValueError: print(&#39;입력한 값은 정수가 아닙니다.&#39;) 코드 9-25 while True: try: print(&#39;0이 아닌 정수를 입력해 주세요:&#39;, end=&#39; &#39;) user_number = int(input()) print(1 / user_number) break except ZeroDivisionError: print(&#39;0으로 나눌 수 없습니다.&#39;) except ValueError: print(&#39;입력한 값은 정수가 아닙니다.&#39;) try 문의 else절을 쓰는 이유는 예외처리의 대상이 되는 코드와 이어서 수행될 코드를 명시적으로 구별하기 위해서다. 311p 중간 ~ 312p 중간까지 실습 아직 x 코드 9-27 try문을 사용하면 안쪽에서 발생한 오류를 바깥에서 처리할 수 있다. 연습문제 9-4 try: print(&#39;첫 번째 수를 입력하시오: &#39;, end=&#39;&#39;) number1 = int(input()) print(&#39;두 번째 수를 입력하시오: &#39;, end=&#39;&#39;) number2 = int(input()) add = number1 + number2 subtract = number1 - number2 multiply = number1 * number2 print(number1, &#39;+&#39;, number2, &#39;=&#39;, add) print(number1, &#39;-&#39;, number2, &#39;=&#39;, subtract) print(number1, &#39;*&#39;, number2, &#39;=&#39;, multiply) divide = number1 / number2 except ZeroDivisionError: print(number1, &#39;/&#39;, number2, &#39;=&#39;, None) else: print(number1, &#39;/&#39;, number2, &#39;=&#39;, divide) 연습문제 9-4 upgrade try: print(&#39;첫 번째 수를 입력하시오: &#39;, end=&#39;&#39;) number1 = int(input()) print(&#39;두 번째 수를 입력하시오: &#39;, end=&#39;&#39;) number2 = int(input()) add = number1 + number2 subtract = number1 - number2 multiply = number1 * number2 divide = number1 / number2 except ZeroDivisionError: divide = None print(number1, &#39;+&#39;, number2, &#39;=&#39;, add) print(number1, &#39;-&#39;, number2, &#39;=&#39;, subtract) print(number1, &#39;*&#39;, number2, &#39;=&#39;, multiply) print(number1, &#39;/&#39;, number2, &#39;=&#39;, divide) 파이썬에는 다양한 오류 상황이 예외 클래스로 범주화되어 있다. 예외가 발생하면 예외 상황에 대한 정보를 담은 예외 인스턴스가 만들어진다. 새로운 예외의 종류를 직접 정의하거나 예외 객체를 직접 생성할 수도 있다. 코드 9-32 def get(index_or_key, collection): &quot;&quot;&quot;컬렉션(collection)에서 인덱스 또는 키(index_or_key)에 해당하는 값을 반환한다. 데이터 집합에 해당하는 인덱스 또는 키가 존재하지 않는 경우 None을 반환한다.&quot;&quot;&quot; try: value = collection[index_or_key] except (IndexError, KeyError): return None else: return value print(get(3, (1, 2, 3))) 코드 9-33 def get(index_or_key, collection): &quot;&quot;&quot;컬렉션(collection)에서 인덱스 또는 키(index_or_key)에 해당하는 값을 반환한다. 데이터 집합에 해당하는 인덱스 또는 키가 존재하지 않는 경우 None을 반환한다.&quot;&quot;&quot; try: value = collection[index_or_key] except LookupError: return None else: return value print(get(3, (1, 2, 3))) as를 이용하면 except 절 안에서 예외 객체에 담긴 오류 정보를 이용할 수 있다. 파이썬에 기본으로 정의되어 있는 예외는 인터프리터가 적절한 상황에서 자동으로 발생 하지만 오류 상황을 직접 정의하여 예외를 발생시켜야 할 때는 raise 문 or assert 문 이용 코드 9-41 class DoorException(Exception): &quot;&quot;&quot;문 관련 예외&quot;&quot;&quot; pass class DoorOpenedException(DoorException): &quot;&quot;&quot;문 열림 예외&quot;&quot;&quot; pass class DoorClosedException(DoorException): &quot;&quot;&quot;문 닫힘 예외&quot;&quot;&quot; pass class Door: &quot;&quot;&quot;문을 나타내는 클래스&quot;&quot;&quot; def __init__(self): self._is_opened = True def open(self): if self._is_opened: raise DoorOpenedException(&#39;문이 이미 열려 있음&#39;) else: print(&#39;문을 엽니다.&#39;) self._is_opened = True def close(self): if not self._is_opened: raise DoorClosedException(&#39;문이 이미 닫혀 있음&#39;) else: print(&#39;문을 닫습니다.&#39;) self._is_opened = False door = Door() door.close() door.open() door.open() raise 문은 오류가 이미 발생한 상황에서 예외를 일으키기 위한 명령. 따라서 무조건 예외를 일으킴 assert 문은 상태를 검증하기 위한 명령. 지정한 검증식을 계산하여 결과가 거짓일 때만 AssertionError 예외를 발생시킨다. 코드 9-44 class DoorException(Exception): &quot;&quot;&quot;문 관련 예외&quot;&quot;&quot; pass class DoorOpenedException(DoorException): &quot;&quot;&quot;문 열림 예외&quot;&quot;&quot; pass class DoorClosedException(DoorException): &quot;&quot;&quot;문 닫힘 예외&quot;&quot;&quot; pass class Door: &quot;&quot;&quot;문을 나타내는 클래스&quot;&quot;&quot; def __init__(self): self._is_opened = True def open(self): assert not self._is_opened print(&#39;문을 엽니다.&#39;) self._is_opened = True def close(self): assert self._is_opened print(&#39;문을 닫습니다.&#39;) self._is_opened = False door = Door() door.close() door.open() door.open() 연습문제 9-5 class AccountException(Exception): &quot;&quot;&quot;은행 계좌 관련 예외&quot;&quot;&quot; pass class AccountBalanceException(AccountException): &quot;&quot;&quot;계좌 잔고 예외&quot;&quot;&quot; pass class FrozenAccountException(AccountException): &quot;&quot;&quot;동결 계좌 예외&quot;&quot;&quot; pass class InvalidTransactionException(AccountException): &quot;&quot;&quot;잘못된 입출금 예외&quot;&quot;&quot; pass 연습문제 9-6 class AccountException(Exception): &quot;&quot;&quot;은행 계좌 관련 예외&quot;&quot;&quot; pass class AccountBalanceException(AccountException): &quot;&quot;&quot;계좌 잔고 예외&quot;&quot;&quot; pass class FrozenAccountException(AccountException): &quot;&quot;&quot;동결 계좌 예외&quot;&quot;&quot; pass class InvalidTransactionException(AccountException): &quot;&quot;&quot;잘못된 입출금 예외&quot;&quot;&quot; pass class Account(): &quot;&quot;&quot;은행 계좌&quot;&quot;&quot; def __init__(self, balance, is_frozen): &quot;&quot;&quot;인스턴스를 초기화한다.&quot;&quot;&quot; self.balance = balance # 계좌 잔액 self.is_frozen = is_frozen # 계좌 동결 여부 def check(self): &quot;&quot;&quot;계좌의 잔고를 조회한다.&quot;&quot;&quot; print(&#39;계좌 잔액은&#39;, self.balance, &#39;원입니다.&#39;) def deposit(self, amount): &quot;&quot;&quot;계좌에 amount만큼의 금액을 입금한다.&quot;&quot;&quot; if self.is_frozen: raise FrozenAccountException if not amount &gt; 0: raise InvalidTransactionException(&#39;0 이하의 액수는 입금할 수 없습니다.&#39;) self.balance += amount def withdraw(self, amount): &quot;&quot;&quot;계좌에서 amount만큼의 금액을 인출한다.&quot;&quot;&quot; if self.is_frozen: raise FrozenAccountException if not amount &gt; 0: raise InvalidTransactionException(&#39;0 이하의 액수는 인출할 수 없습니다.&#39;) if self.balance &lt; amount: raise AccountBalanceException(&#39;잔액이 부족합니다.&#39;) else: self.balance -= amount account_1 = Account(1000, False) try: account_1.deposit(1000) except Exception as error: print(error) try: account_1.withdraw(-1000) except Exception as error: print(error) try: account_1.check() except Exception as error: print(error) 연습문제 9-7 class AccountException(Exception): &quot;&quot;&quot;은행 계좌 관련 예외&quot;&quot;&quot; pass class AccountBalanceException(AccountException): &quot;&quot;&quot;계좌 잔고 예외&quot;&quot;&quot; pass class FrozenAccountException(AccountException): &quot;&quot;&quot;동결 계좌 예외&quot;&quot;&quot; pass class InvalidTransactionException(AccountException): &quot;&quot;&quot;잘못된 입출금 예외&quot;&quot;&quot; pass class Account(): &quot;&quot;&quot;은행 계좌&quot;&quot;&quot; def __init__(self, balance, is_frozen): &quot;&quot;&quot;인스턴스를 초기화한다.&quot;&quot;&quot; self.balance = balance # 계좌 잔액 self.is_frozen = is_frozen # 계좌 동결 여부 def check(self): &quot;&quot;&quot;계좌의 잔고를 조회한다.&quot;&quot;&quot; print(&#39;계좌 잔액은&#39;, self.balance, &#39;원입니다.&#39;) def deposit(self, amount): &quot;&quot;&quot;계좌에 amount만큼의 금액을 입금한다.&quot;&quot;&quot; assert amount &gt; 0, &#39;거래 금액이 잘못되었습니다.&#39; self.balance += amount def withdraw(self, amount): &quot;&quot;&quot;계좌에서 amount만큼의 금액을 인출한다.&quot;&quot;&quot; assert not self.is_frozen, &#39;계좌가 동결되었습니다.&#39; assert amount &gt; 0, &#39;거래 금액이 잘못되었습니다.&#39; assert self.balance &gt;= amount, &#39;잔액이 부족합니다.&#39; self.balance -= amount account_1 = Account(1000, False) try: account_1.deposit(1000) except Exception as error: print(error) try: account_1.withdraw(-1000) except Exception as error: print(error) try: account_1.check() except Exception as error: print(error) 디스크, 네트워크, 프린터 등의 시스템 자원은 직접 신경 써서 반납해야 한다. 코드 9-45 total = 0 file = open(&#39;prices.txt&#39;) for line in file: total += int(line) print(total) file.close() 코드 9-46 try: total = 0 file = open(&#39;prices.txt&#39;) for line in file: total += int(line) except ValueError: print(&#39;숫자가 아닌 텍스트가 있습니다.&#39;) else: print(total) file.close() finally 절: 예외 발생 여부와 관계 없이 항상 마지막에 실행된다. 코드 9-47 try: total = 0 file = open(&#39;prices.txt&#39;) for line in file: total += int(line) except ValueError: print(&#39;숫자가 아닌 텍스트가 있습니다.&#39;) else: print(total) finally: file.close() with 문: 뒷정리를 자동으로 처리하는 문법 코드 9-48 with open(&#39;prices.txt&#39;) as file: try: total = 0 file = open(&#39;prices.txt&#39;) for line in file: total += int(line) except ValueError: print(&#39;숫자가 아닌 텍스트가 있습니다.&#39;) else: print(total) with 문은 객체의 종류에 관계없이 알아서 준비와 뒷정리를 해 준다. 준비를 위해 __enter__() 메서드를 호출, 뒷정리를 위해 __exit()__ 메서드를 알아서 호출한다. 코드 9-49 class NetworkConnection: &quot;&quot;&quot;네트워크 연결을 나타내는 클래스&quot;&quot;&quot; def __init__(self, url): &quot;&quot;&quot;인스턴스를 초기화한다.&quot;&quot;&quot; self.url = url self.is_connected = False def connect(self): &quot;&quot;&quot;네트워크에 연결한다.&quot;&quot;&quot; print(&#39;네트워크에 연결합니다.&#39;) self.is_connected = True def disconnect(self): &quot;&quot;&quot;네트워크 연결을 중단한다.&quot;&quot;&quot; print(&#39;네트워크 연결을 중단합니다.&#39;) self.is_connected = False def read(self): &quot;&quot;&quot;네트워크에서 데이터를 읽어 들인다.&quot;&quot;&quot; return &#39;네트워크에서 읽어 들인 데이터&#39; def __enter__(self): &quot;&quot;&quot;객체 사용을 준비한다.&quot;&quot;&quot; self.connect() return self def __exit__(self, exc_type, exc_value, traceback): &quot;&quot;&quot;객체 사용을 마치고 뒷정리한다.&quot;&quot;&quot; self.disconnect() with NetworkConnection(&#39;https://bakyeono.net&#39;) as connection: print(connection.read()) 10장 모듈(module)은 프로그램을 구성하는 기능 중에서 독립적으로 구별할 수 있는 것을 모아 분리해 둔 것이다. 프로그램 실행의 시작점이 되는 모듈을 최상위(top-level) 모듈이라 한다. __name__ 전역 변수는 모듈이 최상위로 실행된 경우에는 __main__이 되고, 하위 모듈로 실행된 경우에는 그 모듈의 이름이 된다. 파이썬의 패키지(package)는 여러 개의 모듈·패키지를 묶은 것이다. 코드 10-16, 코드 10-17 실습 아직 하지 못함. 각 패키지 디렉터리마다 있는 __init__.py 파일의 역할: 파이썬이 디렉터리를 패키지로 인식하도록 한다. model/init.py —------------------------- from . import character 현재 패키지인 model을 기준으로 character 패키지를 상대경로로 임포트하라는 뜻이다. 11장 라이브러리(library)란 다른 프로그램의 구성요소로 사용하기 위해 미리 만들어 둔 프로그램 조각이다. 즉, 자주 사용하는 기능을 모듈·패키지로 만들어 둔 것이다. 연습문제 11-1 import math def floor_division(dividen, divisor): return math.floor(dividen / divisor) def test_floor_division(): if not floor_division(3, 2) == 1: # x.5 return False if not floor_division(3, 3) == 1: # x.5 미만 return False if not floor_division(5, 3) == 1: # x.5 초과 (무한 소수) return False if not floor_division(12, 3) == 4: # x.0 return False return True print(test_floor_division()) # 모범답안처럼 assert 문을 사용했으면 더 간단하게 했을 텐데! 코드 11-17 print(&#39;{0[0]}년 {0[1]}월 {0[2]}일 {1[0]}시 {1[1]}분&#39;.format([2020, 6, 20], [3, 30])) 코드 11-18 print(&#39;{0[h]}시 {0[m]}분 {0[s]}초&#39;.format({&#39;h&#39;: 16, &#39;m&#39;: 30, &#39;s&#39;: 0})) 코드 11-20 countries = [ {&#39;name&#39;: &#39;China&#39;, &#39;population&#39;: 1403500365}, {&#39;name&#39;: &#39;Japan&#39;, &#39;population&#39;: 126056362}, {&#39;name&#39;: &#39;South Korea&#39;, &#39;population&#39;: 51736224}, {&#39;name&#39;: &#39;Pitcairn Islands&#39;, &#39;population&#39;: 56}, ] form = &#39;나라: {0} | 인구: {1}&#39; for country in countries: print(form.format(country[&#39;name&#39;], country[&#39;population&#39;])) 코드 11-21 countries = [ {&#39;name&#39;: &#39;China&#39;, &#39;population&#39;: 1403500365}, {&#39;name&#39;: &#39;Japan&#39;, &#39;population&#39;: 126056362}, {&#39;name&#39;: &#39;South Korea&#39;, &#39;population&#39;: 51736224}, {&#39;name&#39;: &#39;Pitcairn Islands&#39;, &#39;population&#39;: 56}, ] form = &#39;나라: {0:16} | 인구: {1:10}&#39; for country in countries: print(form.format(country[&#39;name&#39;], country[&#39;population&#39;])) 문자열은 왼쪽, 수는 오른쪽 정렬이 디폴트 코드 11-22 countries = [ {&#39;name&#39;: &#39;China&#39;, &#39;population&#39;: 1403500365}, {&#39;name&#39;: &#39;Japan&#39;, &#39;population&#39;: 126056362}, {&#39;name&#39;: &#39;South Korea&#39;, &#39;population&#39;: 51736224}, {&#39;name&#39;: &#39;Pitcairn Islands&#39;, &#39;population&#39;: 56}, ] form = &#39;나라: {0:16} | 인구: {1:010}&#39; for country in countries: print(form.format(country[&#39;name&#39;], country[&#39;population&#39;])) 코드 11-23 countries = [ {&#39;name&#39;: &#39;China&#39;, &#39;population&#39;: 1403500365}, {&#39;name&#39;: &#39;Japan&#39;, &#39;population&#39;: 126056362}, {&#39;name&#39;: &#39;South Korea&#39;, &#39;population&#39;: 51736224}, {&#39;name&#39;: &#39;Pitcairn Islands&#39;, &#39;population&#39;: 56}, ] form = &#39;나라: {0:&gt;16} | 인구: {1:&lt;10}&#39; for country in countries: print(form.format(country[&#39;name&#39;], country[&#39;population&#39;])) 코드 11-25 physics, chemistry, biology = 80, 90, 70 print(f&#39;물리학: {physics}, 화학: {chemistry}, 생물학: {biology}&#39;) 코드 11-26 for i in range(2, 10): for j in range(1, 10): print(f&#39;{i} ** {j} = {i ** j:10}&#39;) 텍스트의 패턴을 나타내는 텍스트를 정규식(regular expression)이라 한다. 코드 11-27 import re print(re.search(&#39;파이썬&#39;, &#39;파이썬&#39;)) print(re.search(&#39;파이썬&#39;, &#39;즐거운 파이썬&#39;)) print(re.search(&#39;파이썬&#39;, &#39;파이프&#39;)) 코드 11-28 import re match = re.search(&#39;파이썬&#39;, &#39;파이썬 프로그래밍&#39;) if match: print(&#39;문자열에 패턴과 매치하는 텍스트가 존재함:&#39;, match.group()) else: print(&#39;문자열에 패턴과 매치하는 텍스트가 존재하지 않음&#39;) 코드 11-29 import re print(re.sub(&#39;파이썬&#39;, &#39;리스프&#39;, &#39;즐거운 파이썬 프로그래밍&#39;)) print(re.sub(&#39; &#39;, &#39;*&#39;, &#39;즐거운 파이썬 프로그래밍&#39;)) 코드 11-31 import re sample = &#39;1789Pthon박연오fog&#39; pattern = r&#39;[가-힣]{2,4}&#39; match = re.search(pattern, sample) print(match.group()) 코드 11-32 import re sample = &#39;이름: 박연오, 연락처: 010-1234-5678, 주소: 부산 어딘가&#39; pattern = r&#39;01\d-\d{3,4}-\d{4}&#39; match = re.search(pattern, sample) print(match.group()) 연습문제 11-2 import re def hangul_only(string): pattern = r&#39;[^가-힣]+&#39; only_hangul_match = re.split(pattern, string) result = &#39;&#39; for hangul_word in only_hangul_match: result += hangul_word return result print(hangul_only(&#39;I like 파이썬 programming.&#39;)) print(hangul_only(&#39;a1가b2나c3다d4라e5마f6바g7사&#39;)) 연습문제 11-2 모범답안처럼 업그레이드 import re def hangul_only(string): pattern = r&#39;[^가-힣]+&#39; only_hangul = re.sub(pattern, &#39;&#39;, string) return only_hangul def test_hangul_only(): assert hangul_only(&#39;&#39;) == &#39;&#39; assert hangul_only(&#39;안녕&#39;) == &#39;안녕&#39; assert hangul_only(&#39;123&#39;) == &#39;&#39; assert hangul_only(&#39;안녕 00 나의 vv 친구&#39;) test_hangul_only() print(hangul_only(&#39;I like 파이썬 programming.&#39;)) print(hangul_only(&#39;a1가b2나c3다d4라e5마f6바g7사&#39;))" />
+<link rel="canonical" href="http://localhost:4000/2022-08-06/yeono-python-14" />
+<meta property="og:url" content="http://localhost:4000/2022-08-06/yeono-python-14" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-08-06T22:21:11+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="연오의 파이썬 공부 14" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-08-06T22:21:11+09:00","datePublished":"2022-08-06T22:21:11+09:00","description":"로그: 프로그램을 실행하는 도중에 화면, 파일, 데이터 베이스 등의 장소에 하는 중간 기록 단위테스트: 프로그램의 구성요소를 테스트하는 것을 단위 테스트 예외적인 데이터를 빠트리지 않고 테스트하는 게 중요하다. 주의 문자열을 입력받는 함수는 빈 문자열, 매우 긴 문자열, 외국어, 특수문자, 홀수 또는 짝수 길이의 문자열 정수를 입력받는 함수는 0, 음수, 매우 작거나 매우 큰 수, 0부터 세는가, 1부터 세는가 테스트 주도 개발 함수를 작성하기 전에 테스트를 먼저 작성하는 방법. 함수의 입력값과 출력값의 사례를 미리 만들어 두는 것. 코드 9-16 def frequency(s, c): &quot;&quot;&quot;문자열 s와 문자 c를 입력받아, c가 s에 등장하는 빈도를 구한다. 테스트: * &#39;banana&#39;, &#39;a&#39; =&gt; 0.5 * &#39;code&#39;, &#39;c&#39; =&gt; 0.25 * &#39;파이썬&#39;, &#39;프&#39; =&gt; 0 * &#39;파이썬&#39;, &#39;파이&#39; =&gt; None * &#39;&#39;, &#39;a&#39; =&gt; 0 &quot;&quot;&quot; if len(c) != 1: return None if len(s) == 0: return 0 count = s.count(c) return count / len(s) def test_frequency(): &quot;&quot;&quot;frequency() 함수 테스트&quot;&quot;&quot; if not (frequency(&#39;banana&#39;, &#39;a&#39;) == 0.5): return False if not(frequency(&#39;code&#39;, &#39;c&#39;) == 0.25): return False if not(frequency(&#39;파이썬&#39;,&#39;프&#39;) == 0): return False if not(frequency(&#39;파이썬&#39;, &#39;파이&#39;) == None): return False if not (frequency(&#39;&#39;, &#39;a&#39;) == 0): return False return True print(test_frequency()) 연습문제 9-1 def median(data): &quot;&quot;&quot;데이터의 중앙값을 반환한다.&quot;&quot;&quot; sorted_data =sorted(data) median_value = sorted_data[int(len(sorted_data) / 2)] return median_value print(median([10, 9, 4, 1, 5, 7])) # list 인덱스가 실수형이 되었기 때문에 오류가 났었다.(지금은 수정) 연습문제 9-2 def 삼육구(n): &quot;&quot;&quot;n에 숫자 &#39;3&#39;, &#39;6&#39;, &#39;9&#39; 중 하나 이상이 있을 경우 &#39;짝&#39;을, 그렇지 않으면 n에 대응하는 숫자를 반환한다.&quot;&quot;&quot; characters = str(n) found_3 = characters.find(&#39;3&#39;) != -1 found_6 = characters.find(&#39;6&#39;) != -1 found_9 = characters.find(&#39;9&#39;) != -1 if found_3 or found_6 or found_9: return &#39;짝&#39; else: return str(n) def test_삼육구(): if not 삼육구(0) == &#39;0&#39;: return False if not 삼육구(8) == &#39;8&#39;: return False if not 삼육구(3) == &#39;짝&#39;: return False if not 삼육구(6) == &#39;짝&#39;: return False if not 삼육구(9) == &#39;짝&#39;: return False if not 삼육구(120) == &#39;120&#39;: return False if not 삼육구(300) == &#39;짝&#39;: return False if not 삼육구(66669333) == &#39;짝&#39;: return False if not 삼육구(2481112) == &#39;2481112&#39;: return False if not 삼육구(-10) == &#39;-10&#39;: return False if not 삼육구(-9) == &#39;짝&#39;: return False return True print(test_삼육구()) 연습문제 9-3 수를 0으로 나누려고 할 때 발생하는 오류. if 문 등을 이용해서 나눗수가 0이 될 경우 예외 처리를 해 준다. 코드 9-20 while True: print(&#39;0이 아닌 정수를 입력해 주세요:&#39;, end=&#39; &#39;) user_string = input() if not user_string.isnumeric(): print(user_string, &#39;은 정수가 아닙니다.&#39;) continue user_number = int(user_string) if user_number == 0: print(&#39;0으로 나눌 수 없습니다.&#39;) continue break print( 1 / user_number) if 문을 이용한 예외처리 단점 예외를 나타내는 값(오류 코드)과 정상 값을 구별하기가 어렵다. 함수를 연달아 호출할 때, 예외를 함수 밖으로 전달하기가 불편하다. 예외 상황인지 항상 미리 검사해야 한다. 예외를 나타내는 값을 정해 둔 것을 오류 코드(error code)라 한다. 오류 코드는 함수마다 제각각 정의하게 될 가능성이 높다. 파이썬은 허락을 구한 뒤 일하기보다는, 일을 먼저 하고 문제가 생기면 용서를 구하는 방법을 권장한다. 코드 9-24 try: print(&#39;0이 아닌 정수를 입력해 주세요:&#39;, end=&#39; &#39;) user_number = int(input()) print(1 / user_number) except ZeroDivisionError: print(&#39;0으로 나눌 수 없습니다.&#39;) except ValueError: print(&#39;입력한 값은 정수가 아닙니다.&#39;) 코드 9-25 while True: try: print(&#39;0이 아닌 정수를 입력해 주세요:&#39;, end=&#39; &#39;) user_number = int(input()) print(1 / user_number) break except ZeroDivisionError: print(&#39;0으로 나눌 수 없습니다.&#39;) except ValueError: print(&#39;입력한 값은 정수가 아닙니다.&#39;) try 문의 else절을 쓰는 이유는 예외처리의 대상이 되는 코드와 이어서 수행될 코드를 명시적으로 구별하기 위해서다. 311p 중간 ~ 312p 중간까지 실습 아직 x 코드 9-27 try문을 사용하면 안쪽에서 발생한 오류를 바깥에서 처리할 수 있다. 연습문제 9-4 try: print(&#39;첫 번째 수를 입력하시오: &#39;, end=&#39;&#39;) number1 = int(input()) print(&#39;두 번째 수를 입력하시오: &#39;, end=&#39;&#39;) number2 = int(input()) add = number1 + number2 subtract = number1 - number2 multiply = number1 * number2 print(number1, &#39;+&#39;, number2, &#39;=&#39;, add) print(number1, &#39;-&#39;, number2, &#39;=&#39;, subtract) print(number1, &#39;*&#39;, number2, &#39;=&#39;, multiply) divide = number1 / number2 except ZeroDivisionError: print(number1, &#39;/&#39;, number2, &#39;=&#39;, None) else: print(number1, &#39;/&#39;, number2, &#39;=&#39;, divide) 연습문제 9-4 upgrade try: print(&#39;첫 번째 수를 입력하시오: &#39;, end=&#39;&#39;) number1 = int(input()) print(&#39;두 번째 수를 입력하시오: &#39;, end=&#39;&#39;) number2 = int(input()) add = number1 + number2 subtract = number1 - number2 multiply = number1 * number2 divide = number1 / number2 except ZeroDivisionError: divide = None print(number1, &#39;+&#39;, number2, &#39;=&#39;, add) print(number1, &#39;-&#39;, number2, &#39;=&#39;, subtract) print(number1, &#39;*&#39;, number2, &#39;=&#39;, multiply) print(number1, &#39;/&#39;, number2, &#39;=&#39;, divide) 파이썬에는 다양한 오류 상황이 예외 클래스로 범주화되어 있다. 예외가 발생하면 예외 상황에 대한 정보를 담은 예외 인스턴스가 만들어진다. 새로운 예외의 종류를 직접 정의하거나 예외 객체를 직접 생성할 수도 있다. 코드 9-32 def get(index_or_key, collection): &quot;&quot;&quot;컬렉션(collection)에서 인덱스 또는 키(index_or_key)에 해당하는 값을 반환한다. 데이터 집합에 해당하는 인덱스 또는 키가 존재하지 않는 경우 None을 반환한다.&quot;&quot;&quot; try: value = collection[index_or_key] except (IndexError, KeyError): return None else: return value print(get(3, (1, 2, 3))) 코드 9-33 def get(index_or_key, collection): &quot;&quot;&quot;컬렉션(collection)에서 인덱스 또는 키(index_or_key)에 해당하는 값을 반환한다. 데이터 집합에 해당하는 인덱스 또는 키가 존재하지 않는 경우 None을 반환한다.&quot;&quot;&quot; try: value = collection[index_or_key] except LookupError: return None else: return value print(get(3, (1, 2, 3))) as를 이용하면 except 절 안에서 예외 객체에 담긴 오류 정보를 이용할 수 있다. 파이썬에 기본으로 정의되어 있는 예외는 인터프리터가 적절한 상황에서 자동으로 발생 하지만 오류 상황을 직접 정의하여 예외를 발생시켜야 할 때는 raise 문 or assert 문 이용 코드 9-41 class DoorException(Exception): &quot;&quot;&quot;문 관련 예외&quot;&quot;&quot; pass class DoorOpenedException(DoorException): &quot;&quot;&quot;문 열림 예외&quot;&quot;&quot; pass class DoorClosedException(DoorException): &quot;&quot;&quot;문 닫힘 예외&quot;&quot;&quot; pass class Door: &quot;&quot;&quot;문을 나타내는 클래스&quot;&quot;&quot; def __init__(self): self._is_opened = True def open(self): if self._is_opened: raise DoorOpenedException(&#39;문이 이미 열려 있음&#39;) else: print(&#39;문을 엽니다.&#39;) self._is_opened = True def close(self): if not self._is_opened: raise DoorClosedException(&#39;문이 이미 닫혀 있음&#39;) else: print(&#39;문을 닫습니다.&#39;) self._is_opened = False door = Door() door.close() door.open() door.open() raise 문은 오류가 이미 발생한 상황에서 예외를 일으키기 위한 명령. 따라서 무조건 예외를 일으킴 assert 문은 상태를 검증하기 위한 명령. 지정한 검증식을 계산하여 결과가 거짓일 때만 AssertionError 예외를 발생시킨다. 코드 9-44 class DoorException(Exception): &quot;&quot;&quot;문 관련 예외&quot;&quot;&quot; pass class DoorOpenedException(DoorException): &quot;&quot;&quot;문 열림 예외&quot;&quot;&quot; pass class DoorClosedException(DoorException): &quot;&quot;&quot;문 닫힘 예외&quot;&quot;&quot; pass class Door: &quot;&quot;&quot;문을 나타내는 클래스&quot;&quot;&quot; def __init__(self): self._is_opened = True def open(self): assert not self._is_opened print(&#39;문을 엽니다.&#39;) self._is_opened = True def close(self): assert self._is_opened print(&#39;문을 닫습니다.&#39;) self._is_opened = False door = Door() door.close() door.open() door.open() 연습문제 9-5 class AccountException(Exception): &quot;&quot;&quot;은행 계좌 관련 예외&quot;&quot;&quot; pass class AccountBalanceException(AccountException): &quot;&quot;&quot;계좌 잔고 예외&quot;&quot;&quot; pass class FrozenAccountException(AccountException): &quot;&quot;&quot;동결 계좌 예외&quot;&quot;&quot; pass class InvalidTransactionException(AccountException): &quot;&quot;&quot;잘못된 입출금 예외&quot;&quot;&quot; pass 연습문제 9-6 class AccountException(Exception): &quot;&quot;&quot;은행 계좌 관련 예외&quot;&quot;&quot; pass class AccountBalanceException(AccountException): &quot;&quot;&quot;계좌 잔고 예외&quot;&quot;&quot; pass class FrozenAccountException(AccountException): &quot;&quot;&quot;동결 계좌 예외&quot;&quot;&quot; pass class InvalidTransactionException(AccountException): &quot;&quot;&quot;잘못된 입출금 예외&quot;&quot;&quot; pass class Account(): &quot;&quot;&quot;은행 계좌&quot;&quot;&quot; def __init__(self, balance, is_frozen): &quot;&quot;&quot;인스턴스를 초기화한다.&quot;&quot;&quot; self.balance = balance # 계좌 잔액 self.is_frozen = is_frozen # 계좌 동결 여부 def check(self): &quot;&quot;&quot;계좌의 잔고를 조회한다.&quot;&quot;&quot; print(&#39;계좌 잔액은&#39;, self.balance, &#39;원입니다.&#39;) def deposit(self, amount): &quot;&quot;&quot;계좌에 amount만큼의 금액을 입금한다.&quot;&quot;&quot; if self.is_frozen: raise FrozenAccountException if not amount &gt; 0: raise InvalidTransactionException(&#39;0 이하의 액수는 입금할 수 없습니다.&#39;) self.balance += amount def withdraw(self, amount): &quot;&quot;&quot;계좌에서 amount만큼의 금액을 인출한다.&quot;&quot;&quot; if self.is_frozen: raise FrozenAccountException if not amount &gt; 0: raise InvalidTransactionException(&#39;0 이하의 액수는 인출할 수 없습니다.&#39;) if self.balance &lt; amount: raise AccountBalanceException(&#39;잔액이 부족합니다.&#39;) else: self.balance -= amount account_1 = Account(1000, False) try: account_1.deposit(1000) except Exception as error: print(error) try: account_1.withdraw(-1000) except Exception as error: print(error) try: account_1.check() except Exception as error: print(error) 연습문제 9-7 class AccountException(Exception): &quot;&quot;&quot;은행 계좌 관련 예외&quot;&quot;&quot; pass class AccountBalanceException(AccountException): &quot;&quot;&quot;계좌 잔고 예외&quot;&quot;&quot; pass class FrozenAccountException(AccountException): &quot;&quot;&quot;동결 계좌 예외&quot;&quot;&quot; pass class InvalidTransactionException(AccountException): &quot;&quot;&quot;잘못된 입출금 예외&quot;&quot;&quot; pass class Account(): &quot;&quot;&quot;은행 계좌&quot;&quot;&quot; def __init__(self, balance, is_frozen): &quot;&quot;&quot;인스턴스를 초기화한다.&quot;&quot;&quot; self.balance = balance # 계좌 잔액 self.is_frozen = is_frozen # 계좌 동결 여부 def check(self): &quot;&quot;&quot;계좌의 잔고를 조회한다.&quot;&quot;&quot; print(&#39;계좌 잔액은&#39;, self.balance, &#39;원입니다.&#39;) def deposit(self, amount): &quot;&quot;&quot;계좌에 amount만큼의 금액을 입금한다.&quot;&quot;&quot; assert amount &gt; 0, &#39;거래 금액이 잘못되었습니다.&#39; self.balance += amount def withdraw(self, amount): &quot;&quot;&quot;계좌에서 amount만큼의 금액을 인출한다.&quot;&quot;&quot; assert not self.is_frozen, &#39;계좌가 동결되었습니다.&#39; assert amount &gt; 0, &#39;거래 금액이 잘못되었습니다.&#39; assert self.balance &gt;= amount, &#39;잔액이 부족합니다.&#39; self.balance -= amount account_1 = Account(1000, False) try: account_1.deposit(1000) except Exception as error: print(error) try: account_1.withdraw(-1000) except Exception as error: print(error) try: account_1.check() except Exception as error: print(error) 디스크, 네트워크, 프린터 등의 시스템 자원은 직접 신경 써서 반납해야 한다. 코드 9-45 total = 0 file = open(&#39;prices.txt&#39;) for line in file: total += int(line) print(total) file.close() 코드 9-46 try: total = 0 file = open(&#39;prices.txt&#39;) for line in file: total += int(line) except ValueError: print(&#39;숫자가 아닌 텍스트가 있습니다.&#39;) else: print(total) file.close() finally 절: 예외 발생 여부와 관계 없이 항상 마지막에 실행된다. 코드 9-47 try: total = 0 file = open(&#39;prices.txt&#39;) for line in file: total += int(line) except ValueError: print(&#39;숫자가 아닌 텍스트가 있습니다.&#39;) else: print(total) finally: file.close() with 문: 뒷정리를 자동으로 처리하는 문법 코드 9-48 with open(&#39;prices.txt&#39;) as file: try: total = 0 file = open(&#39;prices.txt&#39;) for line in file: total += int(line) except ValueError: print(&#39;숫자가 아닌 텍스트가 있습니다.&#39;) else: print(total) with 문은 객체의 종류에 관계없이 알아서 준비와 뒷정리를 해 준다. 준비를 위해 __enter__() 메서드를 호출, 뒷정리를 위해 __exit()__ 메서드를 알아서 호출한다. 코드 9-49 class NetworkConnection: &quot;&quot;&quot;네트워크 연결을 나타내는 클래스&quot;&quot;&quot; def __init__(self, url): &quot;&quot;&quot;인스턴스를 초기화한다.&quot;&quot;&quot; self.url = url self.is_connected = False def connect(self): &quot;&quot;&quot;네트워크에 연결한다.&quot;&quot;&quot; print(&#39;네트워크에 연결합니다.&#39;) self.is_connected = True def disconnect(self): &quot;&quot;&quot;네트워크 연결을 중단한다.&quot;&quot;&quot; print(&#39;네트워크 연결을 중단합니다.&#39;) self.is_connected = False def read(self): &quot;&quot;&quot;네트워크에서 데이터를 읽어 들인다.&quot;&quot;&quot; return &#39;네트워크에서 읽어 들인 데이터&#39; def __enter__(self): &quot;&quot;&quot;객체 사용을 준비한다.&quot;&quot;&quot; self.connect() return self def __exit__(self, exc_type, exc_value, traceback): &quot;&quot;&quot;객체 사용을 마치고 뒷정리한다.&quot;&quot;&quot; self.disconnect() with NetworkConnection(&#39;https://bakyeono.net&#39;) as connection: print(connection.read()) 10장 모듈(module)은 프로그램을 구성하는 기능 중에서 독립적으로 구별할 수 있는 것을 모아 분리해 둔 것이다. 프로그램 실행의 시작점이 되는 모듈을 최상위(top-level) 모듈이라 한다. __name__ 전역 변수는 모듈이 최상위로 실행된 경우에는 __main__이 되고, 하위 모듈로 실행된 경우에는 그 모듈의 이름이 된다. 파이썬의 패키지(package)는 여러 개의 모듈·패키지를 묶은 것이다. 코드 10-16, 코드 10-17 실습 아직 하지 못함. 각 패키지 디렉터리마다 있는 __init__.py 파일의 역할: 파이썬이 디렉터리를 패키지로 인식하도록 한다. model/init.py —------------------------- from . import character 현재 패키지인 model을 기준으로 character 패키지를 상대경로로 임포트하라는 뜻이다. 11장 라이브러리(library)란 다른 프로그램의 구성요소로 사용하기 위해 미리 만들어 둔 프로그램 조각이다. 즉, 자주 사용하는 기능을 모듈·패키지로 만들어 둔 것이다. 연습문제 11-1 import math def floor_division(dividen, divisor): return math.floor(dividen / divisor) def test_floor_division(): if not floor_division(3, 2) == 1: # x.5 return False if not floor_division(3, 3) == 1: # x.5 미만 return False if not floor_division(5, 3) == 1: # x.5 초과 (무한 소수) return False if not floor_division(12, 3) == 4: # x.0 return False return True print(test_floor_division()) # 모범답안처럼 assert 문을 사용했으면 더 간단하게 했을 텐데! 코드 11-17 print(&#39;{0[0]}년 {0[1]}월 {0[2]}일 {1[0]}시 {1[1]}분&#39;.format([2020, 6, 20], [3, 30])) 코드 11-18 print(&#39;{0[h]}시 {0[m]}분 {0[s]}초&#39;.format({&#39;h&#39;: 16, &#39;m&#39;: 30, &#39;s&#39;: 0})) 코드 11-20 countries = [ {&#39;name&#39;: &#39;China&#39;, &#39;population&#39;: 1403500365}, {&#39;name&#39;: &#39;Japan&#39;, &#39;population&#39;: 126056362}, {&#39;name&#39;: &#39;South Korea&#39;, &#39;population&#39;: 51736224}, {&#39;name&#39;: &#39;Pitcairn Islands&#39;, &#39;population&#39;: 56}, ] form = &#39;나라: {0} | 인구: {1}&#39; for country in countries: print(form.format(country[&#39;name&#39;], country[&#39;population&#39;])) 코드 11-21 countries = [ {&#39;name&#39;: &#39;China&#39;, &#39;population&#39;: 1403500365}, {&#39;name&#39;: &#39;Japan&#39;, &#39;population&#39;: 126056362}, {&#39;name&#39;: &#39;South Korea&#39;, &#39;population&#39;: 51736224}, {&#39;name&#39;: &#39;Pitcairn Islands&#39;, &#39;population&#39;: 56}, ] form = &#39;나라: {0:16} | 인구: {1:10}&#39; for country in countries: print(form.format(country[&#39;name&#39;], country[&#39;population&#39;])) 문자열은 왼쪽, 수는 오른쪽 정렬이 디폴트 코드 11-22 countries = [ {&#39;name&#39;: &#39;China&#39;, &#39;population&#39;: 1403500365}, {&#39;name&#39;: &#39;Japan&#39;, &#39;population&#39;: 126056362}, {&#39;name&#39;: &#39;South Korea&#39;, &#39;population&#39;: 51736224}, {&#39;name&#39;: &#39;Pitcairn Islands&#39;, &#39;population&#39;: 56}, ] form = &#39;나라: {0:16} | 인구: {1:010}&#39; for country in countries: print(form.format(country[&#39;name&#39;], country[&#39;population&#39;])) 코드 11-23 countries = [ {&#39;name&#39;: &#39;China&#39;, &#39;population&#39;: 1403500365}, {&#39;name&#39;: &#39;Japan&#39;, &#39;population&#39;: 126056362}, {&#39;name&#39;: &#39;South Korea&#39;, &#39;population&#39;: 51736224}, {&#39;name&#39;: &#39;Pitcairn Islands&#39;, &#39;population&#39;: 56}, ] form = &#39;나라: {0:&gt;16} | 인구: {1:&lt;10}&#39; for country in countries: print(form.format(country[&#39;name&#39;], country[&#39;population&#39;])) 코드 11-25 physics, chemistry, biology = 80, 90, 70 print(f&#39;물리학: {physics}, 화학: {chemistry}, 생물학: {biology}&#39;) 코드 11-26 for i in range(2, 10): for j in range(1, 10): print(f&#39;{i} ** {j} = {i ** j:10}&#39;) 텍스트의 패턴을 나타내는 텍스트를 정규식(regular expression)이라 한다. 코드 11-27 import re print(re.search(&#39;파이썬&#39;, &#39;파이썬&#39;)) print(re.search(&#39;파이썬&#39;, &#39;즐거운 파이썬&#39;)) print(re.search(&#39;파이썬&#39;, &#39;파이프&#39;)) 코드 11-28 import re match = re.search(&#39;파이썬&#39;, &#39;파이썬 프로그래밍&#39;) if match: print(&#39;문자열에 패턴과 매치하는 텍스트가 존재함:&#39;, match.group()) else: print(&#39;문자열에 패턴과 매치하는 텍스트가 존재하지 않음&#39;) 코드 11-29 import re print(re.sub(&#39;파이썬&#39;, &#39;리스프&#39;, &#39;즐거운 파이썬 프로그래밍&#39;)) print(re.sub(&#39; &#39;, &#39;*&#39;, &#39;즐거운 파이썬 프로그래밍&#39;)) 코드 11-31 import re sample = &#39;1789Pthon박연오fog&#39; pattern = r&#39;[가-힣]{2,4}&#39; match = re.search(pattern, sample) print(match.group()) 코드 11-32 import re sample = &#39;이름: 박연오, 연락처: 010-1234-5678, 주소: 부산 어딘가&#39; pattern = r&#39;01\\d-\\d{3,4}-\\d{4}&#39; match = re.search(pattern, sample) print(match.group()) 연습문제 11-2 import re def hangul_only(string): pattern = r&#39;[^가-힣]+&#39; only_hangul_match = re.split(pattern, string) result = &#39;&#39; for hangul_word in only_hangul_match: result += hangul_word return result print(hangul_only(&#39;I like 파이썬 programming.&#39;)) print(hangul_only(&#39;a1가b2나c3다d4라e5마f6바g7사&#39;)) 연습문제 11-2 모범답안처럼 업그레이드 import re def hangul_only(string): pattern = r&#39;[^가-힣]+&#39; only_hangul = re.sub(pattern, &#39;&#39;, string) return only_hangul def test_hangul_only(): assert hangul_only(&#39;&#39;) == &#39;&#39; assert hangul_only(&#39;안녕&#39;) == &#39;안녕&#39; assert hangul_only(&#39;123&#39;) == &#39;&#39; assert hangul_only(&#39;안녕 00 나의 vv 친구&#39;) test_hangul_only() print(hangul_only(&#39;I like 파이썬 programming.&#39;)) print(hangul_only(&#39;a1가b2나c3다d4라e5마f6바g7사&#39;))","headline":"연오의 파이썬 공부 14","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-08-06/yeono-python-14"},"url":"http://localhost:4000/2022-08-06/yeono-python-14"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Sunmi Moon
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2022-08-06 22:21:11 +0900">August 06, 2022</time>
+    
+  </div>
+
+  <h1 class="post-title">연오의 파이썬 공부 14</h1>
+  <div class="post-line"></div>
+
+  <ul>
+  <li>
+    <p>로그: 프로그램을 실행하는 도중에 화면, 파일, 데이터 베이스 등의 장소에 하는 중간 기록</p>
+  </li>
+  <li>
+    <p>단위테스트: 프로그램의 구성요소를 테스트하는 것을 단위 테스트</p>
+  </li>
+</ul>
+
+<p>예외적인 데이터를 빠트리지 않고 테스트하는 게 중요하다.</p>
+<blockquote>
+  <p>주의<br />
+문자열을 입력받는 함수는 빈 문자열, 매우 긴 문자열, 외국어, 특수문자, 홀수 또는 짝수 길이의 문자열
+정수를 입력받는 함수는 0, 음수, 매우 작거나 매우 큰 수, 0부터 세는가, 1부터 세는가</p>
+</blockquote>
+
+<h4 id="테스트-주도-개발">테스트 주도 개발</h4>
+<p>함수를 작성하기 전에 테스트를 먼저 작성하는 방법. 함수의 입력값과 출력값의 사례를 미리 만들어 두는 것.</p>
+
+<p>코드 9-16</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">frequency</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+   <span class="s">"""문자열 s와 문자 c를 입력받아, c가 s에 등장하는 빈도를 구한다.
+   테스트:
+   * 'banana', 'a' =&gt; 0.5
+   * 'code', 'c' =&gt; 0.25
+   * '파이썬', '프' =&gt; 0
+   * '파이썬', '파이' =&gt; None
+   * '', 'a' =&gt; 0
+   """</span>
+   <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+       <span class="k">return</span> <span class="bp">None</span>
+
+   <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+       <span class="k">return</span> <span class="mi">0</span>
+
+   <span class="n">count</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">count</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+   <span class="k">return</span> <span class="n">count</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">test_frequency</span><span class="p">():</span>
+   <span class="s">"""frequency() 함수 테스트"""</span>
+   <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">frequency</span><span class="p">(</span><span class="s">'banana'</span><span class="p">,</span> <span class="s">'a'</span><span class="p">)</span> <span class="o">==</span> <span class="mf">0.5</span><span class="p">):</span>
+       <span class="k">return</span> <span class="bp">False</span>
+
+   <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">frequency</span><span class="p">(</span><span class="s">'code'</span><span class="p">,</span> <span class="s">'c'</span><span class="p">)</span> <span class="o">==</span> <span class="mf">0.25</span><span class="p">):</span>
+       <span class="k">return</span> <span class="bp">False</span>
+
+   <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">frequency</span><span class="p">(</span><span class="s">'파이썬'</span><span class="p">,</span><span class="s">'프'</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+       <span class="k">return</span> <span class="bp">False</span>
+
+   <span class="k">if</span> <span class="ow">not</span><span class="p">(</span><span class="n">frequency</span><span class="p">(</span><span class="s">'파이썬'</span><span class="p">,</span> <span class="s">'파이'</span><span class="p">)</span> <span class="o">==</span> <span class="bp">None</span><span class="p">):</span>
+       <span class="k">return</span> <span class="bp">False</span>
+
+   <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">frequency</span><span class="p">(</span><span class="s">''</span><span class="p">,</span> <span class="s">'a'</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+       <span class="k">return</span> <span class="bp">False</span>
+
+   <span class="k">return</span> <span class="bp">True</span>
+
+
+<span class="k">print</span><span class="p">(</span><span class="n">test_frequency</span><span class="p">())</span>
+</code></pre></div></div>
+
+<p>연습문제 9-1</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">median</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+   <span class="s">"""데이터의 중앙값을 반환한다."""</span>
+   <span class="n">sorted_data</span> <span class="o">=</span><span class="nb">sorted</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+   <span class="n">median_value</span> <span class="o">=</span> <span class="n">sorted_data</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sorted_data</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)]</span>
+   <span class="k">return</span> <span class="n">median_value</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">median</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">]))</span>
+
+<span class="c1"># list 인덱스가 실수형이 되었기 때문에 오류가 났었다.(지금은 수정)
+</span></code></pre></div></div>
+
+<p>연습문제 9-2</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">삼육구</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+   <span class="s">"""n에 숫자 '3', '6', '9' 중 하나 이상이 있을 경우 '짝'을,
+   그렇지 않으면 n에 대응하는 숫자를 반환한다."""</span>
+   <span class="n">characters</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+   <span class="n">found_3</span> <span class="o">=</span> <span class="n">characters</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">'3'</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span>
+   <span class="n">found_6</span> <span class="o">=</span> <span class="n">characters</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">'6'</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span>
+   <span class="n">found_9</span> <span class="o">=</span> <span class="n">characters</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="s">'9'</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span>
+   <span class="k">if</span> <span class="n">found_3</span> <span class="ow">or</span> <span class="n">found_6</span> <span class="ow">or</span> <span class="n">found_9</span><span class="p">:</span>
+       <span class="k">return</span> <span class="s">'짝'</span>
+   <span class="k">else</span><span class="p">:</span>
+       <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">test_삼육구</span><span class="p">():</span>
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">삼육구</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="s">'0'</span><span class="p">:</span>
+       <span class="k">return</span> <span class="bp">False</span>
+
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">삼육구</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span> <span class="o">==</span> <span class="s">'8'</span><span class="p">:</span>
+       <span class="k">return</span> <span class="bp">False</span>
+
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">삼육구</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="s">'짝'</span><span class="p">:</span>
+       <span class="k">return</span> <span class="bp">False</span>
+
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">삼육구</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="o">==</span> <span class="s">'짝'</span><span class="p">:</span>
+       <span class="k">return</span> <span class="bp">False</span>
+
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">삼육구</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span> <span class="o">==</span> <span class="s">'짝'</span><span class="p">:</span>
+       <span class="k">return</span> <span class="bp">False</span>
+
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">삼육구</span><span class="p">(</span><span class="mi">120</span><span class="p">)</span> <span class="o">==</span> <span class="s">'120'</span><span class="p">:</span>
+       <span class="k">return</span> <span class="bp">False</span>
+
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">삼육구</span><span class="p">(</span><span class="mi">300</span><span class="p">)</span> <span class="o">==</span> <span class="s">'짝'</span><span class="p">:</span>
+       <span class="k">return</span> <span class="bp">False</span>
+
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">삼육구</span><span class="p">(</span><span class="mi">66669333</span><span class="p">)</span> <span class="o">==</span> <span class="s">'짝'</span><span class="p">:</span>
+       <span class="k">return</span> <span class="bp">False</span>
+
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">삼육구</span><span class="p">(</span><span class="mi">2481112</span><span class="p">)</span> <span class="o">==</span> <span class="s">'2481112'</span><span class="p">:</span>
+       <span class="k">return</span> <span class="bp">False</span>
+
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">삼육구</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">)</span> <span class="o">==</span> <span class="s">'-10'</span><span class="p">:</span>
+       <span class="k">return</span> <span class="bp">False</span>
+
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">삼육구</span><span class="p">(</span><span class="o">-</span><span class="mi">9</span><span class="p">)</span> <span class="o">==</span> <span class="s">'짝'</span><span class="p">:</span>
+       <span class="k">return</span> <span class="bp">False</span>
+
+   <span class="k">return</span> <span class="bp">True</span>
+
+
+<span class="k">print</span><span class="p">(</span><span class="n">test_삼육구</span><span class="p">())</span>
+</code></pre></div></div>
+
+<p>연습문제 9-3</p>
+
+<p>수를 0으로 나누려고 할 때 발생하는 오류.
+if 문 등을 이용해서 나눗수가 0이 될 경우 예외 처리를 해 준다.</p>
+
+<p>코드 9-20</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="s">'0이 아닌 정수를 입력해 주세요:'</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">' '</span><span class="p">)</span>
+   <span class="n">user_string</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
+
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">user_string</span><span class="p">.</span><span class="n">isnumeric</span><span class="p">():</span>
+       <span class="k">print</span><span class="p">(</span><span class="n">user_string</span><span class="p">,</span> <span class="s">'은 정수가 아닙니다.'</span><span class="p">)</span>
+       <span class="k">continue</span>
+
+   <span class="n">user_number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">user_string</span><span class="p">)</span>
+
+   <span class="k">if</span> <span class="n">user_number</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+       <span class="k">print</span><span class="p">(</span><span class="s">'0으로 나눌 수 없습니다.'</span><span class="p">)</span>
+       <span class="k">continue</span>
+
+   <span class="k">break</span>
+
+<span class="k">print</span><span class="p">(</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">user_number</span><span class="p">)</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>if 문을 이용한 예외처리 단점</p>
+  <ol>
+    <li>예외를 나타내는 값(오류 코드)과 정상 값을 구별하기가 어렵다.</li>
+    <li>함수를 연달아 호출할 때, 예외를 함수 밖으로 전달하기가 불편하다.</li>
+    <li>예외 상황인지 항상 미리 검사해야 한다.</li>
+  </ol>
+</blockquote>
+
+<p>예외를 나타내는 값을 정해 둔 것을 오류 코드(error code)라 한다. 오류 코드는 함수마다 제각각 정의하게 될 가능성이 높다.</p>
+
+<p>파이썬은 허락을 구한 뒤 일하기보다는, 일을 먼저 하고 문제가 생기면 용서를 구하는 방법을 권장한다.</p>
+
+<p>코드 9-24</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">try</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="s">'0이 아닌 정수를 입력해 주세요:'</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">' '</span><span class="p">)</span>
+   <span class="n">user_number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+   <span class="k">print</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">user_number</span><span class="p">)</span>
+
+<span class="k">except</span> <span class="nb">ZeroDivisionError</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="s">'0으로 나눌 수 없습니다.'</span><span class="p">)</span>
+
+<span class="k">except</span> <span class="nb">ValueError</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="s">'입력한 값은 정수가 아닙니다.'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>코드 9-25</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+   <span class="k">try</span><span class="p">:</span>
+       <span class="k">print</span><span class="p">(</span><span class="s">'0이 아닌 정수를 입력해 주세요:'</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">' '</span><span class="p">)</span>
+       <span class="n">user_number</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+       <span class="k">print</span><span class="p">(</span><span class="mi">1</span> <span class="o">/</span> <span class="n">user_number</span><span class="p">)</span>
+       <span class="k">break</span>
+   <span class="k">except</span> <span class="nb">ZeroDivisionError</span><span class="p">:</span>
+       <span class="k">print</span><span class="p">(</span><span class="s">'0으로 나눌 수 없습니다.'</span><span class="p">)</span>
+
+   <span class="k">except</span> <span class="nb">ValueError</span><span class="p">:</span>
+       <span class="k">print</span><span class="p">(</span><span class="s">'입력한 값은 정수가 아닙니다.'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>try 문의 else절을 쓰는 이유는 예외처리의 대상이 되는 코드와 이어서 수행될 코드를 명시적으로 구별하기 위해서다.</p>
+
+<ul>
+  <li>311p 중간 ~ 312p 중간까지 실습 아직 x</li>
+</ul>
+
+<p>코드 9-27</p>
+
+<p>try문을 사용하면 안쪽에서 발생한 오류를 바깥에서 처리할 수 있다.</p>
+
+<p>연습문제 9-4</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">try</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="s">'첫 번째 수를 입력하시오: '</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">''</span><span class="p">)</span>
+   <span class="n">number1</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+   <span class="k">print</span><span class="p">(</span><span class="s">'두 번째 수를 입력하시오: '</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">''</span><span class="p">)</span>
+   <span class="n">number2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+   <span class="n">add</span> <span class="o">=</span> <span class="n">number1</span> <span class="o">+</span> <span class="n">number2</span>
+   <span class="n">subtract</span> <span class="o">=</span> <span class="n">number1</span> <span class="o">-</span> <span class="n">number2</span>
+   <span class="n">multiply</span> <span class="o">=</span> <span class="n">number1</span> <span class="o">*</span> <span class="n">number2</span>
+
+   <span class="k">print</span><span class="p">(</span><span class="n">number1</span><span class="p">,</span> <span class="s">'+'</span><span class="p">,</span> <span class="n">number2</span><span class="p">,</span> <span class="s">'='</span><span class="p">,</span> <span class="n">add</span><span class="p">)</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">number1</span><span class="p">,</span> <span class="s">'-'</span><span class="p">,</span> <span class="n">number2</span><span class="p">,</span> <span class="s">'='</span><span class="p">,</span> <span class="n">subtract</span><span class="p">)</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">number1</span><span class="p">,</span> <span class="s">'*'</span><span class="p">,</span> <span class="n">number2</span><span class="p">,</span> <span class="s">'='</span><span class="p">,</span> <span class="n">multiply</span><span class="p">)</span>
+
+   <span class="n">divide</span> <span class="o">=</span> <span class="n">number1</span> <span class="o">/</span> <span class="n">number2</span>
+
+<span class="k">except</span> <span class="nb">ZeroDivisionError</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">number1</span><span class="p">,</span> <span class="s">'/'</span><span class="p">,</span> <span class="n">number2</span><span class="p">,</span> <span class="s">'='</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+
+<span class="k">else</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">number1</span><span class="p">,</span> <span class="s">'/'</span><span class="p">,</span> <span class="n">number2</span><span class="p">,</span> <span class="s">'='</span><span class="p">,</span> <span class="n">divide</span><span class="p">)</span>
+
+
+<span class="n">연습문제</span> <span class="mi">9</span><span class="o">-</span><span class="mi">4</span> <span class="n">upgrade</span>
+
+<span class="k">try</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="s">'첫 번째 수를 입력하시오: '</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">''</span><span class="p">)</span>
+   <span class="n">number1</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+   <span class="k">print</span><span class="p">(</span><span class="s">'두 번째 수를 입력하시오: '</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">''</span><span class="p">)</span>
+   <span class="n">number2</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+   <span class="n">add</span> <span class="o">=</span> <span class="n">number1</span> <span class="o">+</span> <span class="n">number2</span>
+   <span class="n">subtract</span> <span class="o">=</span> <span class="n">number1</span> <span class="o">-</span> <span class="n">number2</span>
+   <span class="n">multiply</span> <span class="o">=</span> <span class="n">number1</span> <span class="o">*</span> <span class="n">number2</span>
+   <span class="n">divide</span> <span class="o">=</span> <span class="n">number1</span> <span class="o">/</span> <span class="n">number2</span>
+
+<span class="k">except</span> <span class="nb">ZeroDivisionError</span><span class="p">:</span>
+   <span class="n">divide</span> <span class="o">=</span> <span class="bp">None</span>
+
+   <span class="k">print</span><span class="p">(</span><span class="n">number1</span><span class="p">,</span> <span class="s">'+'</span><span class="p">,</span> <span class="n">number2</span><span class="p">,</span> <span class="s">'='</span><span class="p">,</span> <span class="n">add</span><span class="p">)</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">number1</span><span class="p">,</span> <span class="s">'-'</span><span class="p">,</span> <span class="n">number2</span><span class="p">,</span> <span class="s">'='</span><span class="p">,</span> <span class="n">subtract</span><span class="p">)</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">number1</span><span class="p">,</span> <span class="s">'*'</span><span class="p">,</span> <span class="n">number2</span><span class="p">,</span> <span class="s">'='</span><span class="p">,</span> <span class="n">multiply</span><span class="p">)</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">number1</span><span class="p">,</span> <span class="s">'/'</span><span class="p">,</span> <span class="n">number2</span><span class="p">,</span> <span class="s">'='</span><span class="p">,</span> <span class="n">divide</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<p>파이썬에는 다양한 오류 상황이 예외 클래스로 범주화되어 있다. 예외가 발생하면 예외 상황에 대한 정보를 담은 예외 인스턴스가 만들어진다. 새로운 예외의 종류를 직접 정의하거나 예외 객체를 직접 생성할 수도 있다.</p>
+
+<p>코드 9-32</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="n">index_or_key</span><span class="p">,</span> <span class="n">collection</span><span class="p">):</span>
+   <span class="s">"""컬렉션(collection)에서 인덱스 또는 키(index_or_key)에 해당하는 값을 반환한다.
+   데이터 집합에 해당하는 인덱스 또는 키가 존재하지 않는 경우 None을 반환한다."""</span>
+
+   <span class="k">try</span><span class="p">:</span>
+       <span class="n">value</span> <span class="o">=</span> <span class="n">collection</span><span class="p">[</span><span class="n">index_or_key</span><span class="p">]</span>
+   <span class="k">except</span> <span class="p">(</span><span class="nb">IndexError</span><span class="p">,</span> <span class="nb">KeyError</span><span class="p">):</span>
+       <span class="k">return</span> <span class="bp">None</span>
+   <span class="k">else</span><span class="p">:</span>
+       <span class="k">return</span> <span class="n">value</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">get</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<p>코드 9-33</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="n">index_or_key</span><span class="p">,</span> <span class="n">collection</span><span class="p">):</span>
+   <span class="s">"""컬렉션(collection)에서 인덱스 또는 키(index_or_key)에 해당하는 값을 반환한다.
+   데이터 집합에 해당하는 인덱스 또는 키가 존재하지 않는 경우 None을 반환한다."""</span>
+
+   <span class="k">try</span><span class="p">:</span>
+       <span class="n">value</span> <span class="o">=</span> <span class="n">collection</span><span class="p">[</span><span class="n">index_or_key</span><span class="p">]</span>
+   <span class="k">except</span> <span class="nb">LookupError</span><span class="p">:</span>
+       <span class="k">return</span> <span class="bp">None</span>
+   <span class="k">else</span><span class="p">:</span>
+       <span class="k">return</span> <span class="n">value</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">get</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<p>as를 이용하면 except 절 안에서 예외 객체에 담긴 오류 정보를 이용할 수 있다.</p>
+
+<p>파이썬에 기본으로 정의되어 있는 예외는 인터프리터가 적절한 상황에서 자동으로 발생
+하지만 오류 상황을 직접 정의하여 예외를 발생시켜야 할 때는 raise 문 or assert 문 이용</p>
+
+<p>코드 9-41</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">DoorException</span><span class="p">(</span><span class="nb">Exception</span><span class="p">):</span>
+   <span class="s">"""문 관련 예외"""</span>
+   <span class="k">pass</span>
+<span class="k">class</span> <span class="nc">DoorOpenedException</span><span class="p">(</span><span class="n">DoorException</span><span class="p">):</span>
+   <span class="s">"""문 열림 예외"""</span>
+   <span class="k">pass</span>
+<span class="k">class</span> <span class="nc">DoorClosedException</span><span class="p">(</span><span class="n">DoorException</span><span class="p">):</span>
+   <span class="s">"""문 닫힘 예외"""</span>
+   <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">Door</span><span class="p">:</span>
+   <span class="s">"""문을 나타내는 클래스"""</span>
+   <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="bp">self</span><span class="p">.</span><span class="n">_is_opened</span> <span class="o">=</span> <span class="bp">True</span>
+
+   <span class="k">def</span> <span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">_is_opened</span><span class="p">:</span>
+           <span class="k">raise</span> <span class="n">DoorOpenedException</span><span class="p">(</span><span class="s">'문이 이미 열려 있음'</span><span class="p">)</span>
+       <span class="k">else</span><span class="p">:</span>
+           <span class="k">print</span><span class="p">(</span><span class="s">'문을 엽니다.'</span><span class="p">)</span>
+           <span class="bp">self</span><span class="p">.</span><span class="n">_is_opened</span> <span class="o">=</span> <span class="bp">True</span>
+
+   <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="p">.</span><span class="n">_is_opened</span><span class="p">:</span>
+           <span class="k">raise</span> <span class="n">DoorClosedException</span><span class="p">(</span><span class="s">'문이 이미 닫혀 있음'</span><span class="p">)</span>
+       <span class="k">else</span><span class="p">:</span>
+           <span class="k">print</span><span class="p">(</span><span class="s">'문을 닫습니다.'</span><span class="p">)</span>
+           <span class="bp">self</span><span class="p">.</span><span class="n">_is_opened</span> <span class="o">=</span> <span class="bp">False</span>
+
+<span class="n">door</span> <span class="o">=</span> <span class="n">Door</span><span class="p">()</span>
+<span class="n">door</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">door</span><span class="p">.</span><span class="nb">open</span><span class="p">()</span>
+<span class="n">door</span><span class="p">.</span><span class="nb">open</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>raise 문은 오류가 이미 발생한 상황에서 예외를 일으키기 위한 명령. 따라서 무조건 예외를 일으킴
+assert 문은 상태를 검증하기 위한 명령. 지정한 검증식을 계산하여 결과가 거짓일 때만 AssertionError 예외를 발생시킨다.</p>
+
+<p>코드 9-44</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">DoorException</span><span class="p">(</span><span class="nb">Exception</span><span class="p">):</span>
+   <span class="s">"""문 관련 예외"""</span>
+   <span class="k">pass</span>
+<span class="k">class</span> <span class="nc">DoorOpenedException</span><span class="p">(</span><span class="n">DoorException</span><span class="p">):</span>
+   <span class="s">"""문 열림 예외"""</span>
+   <span class="k">pass</span>
+<span class="k">class</span> <span class="nc">DoorClosedException</span><span class="p">(</span><span class="n">DoorException</span><span class="p">):</span>
+   <span class="s">"""문 닫힘 예외"""</span>
+   <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">Door</span><span class="p">:</span>
+   <span class="s">"""문을 나타내는 클래스"""</span>
+   <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="bp">self</span><span class="p">.</span><span class="n">_is_opened</span> <span class="o">=</span> <span class="bp">True</span>
+
+   <span class="k">def</span> <span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="k">assert</span> <span class="ow">not</span> <span class="bp">self</span><span class="p">.</span><span class="n">_is_opened</span>
+
+       <span class="k">print</span><span class="p">(</span><span class="s">'문을 엽니다.'</span><span class="p">)</span>
+       <span class="bp">self</span><span class="p">.</span><span class="n">_is_opened</span> <span class="o">=</span> <span class="bp">True</span>
+
+   <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="k">assert</span> <span class="bp">self</span><span class="p">.</span><span class="n">_is_opened</span>
+
+       <span class="k">print</span><span class="p">(</span><span class="s">'문을 닫습니다.'</span><span class="p">)</span>
+       <span class="bp">self</span><span class="p">.</span><span class="n">_is_opened</span> <span class="o">=</span> <span class="bp">False</span>
+
+<span class="n">door</span> <span class="o">=</span> <span class="n">Door</span><span class="p">()</span>
+<span class="n">door</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+<span class="n">door</span><span class="p">.</span><span class="nb">open</span><span class="p">()</span>
+<span class="n">door</span><span class="p">.</span><span class="nb">open</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>연습문제 9-5</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">AccountException</span><span class="p">(</span><span class="nb">Exception</span><span class="p">):</span>
+   <span class="s">"""은행 계좌 관련 예외"""</span>
+   <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">AccountBalanceException</span><span class="p">(</span><span class="n">AccountException</span><span class="p">):</span>
+   <span class="s">"""계좌 잔고 예외"""</span>
+   <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">FrozenAccountException</span><span class="p">(</span><span class="n">AccountException</span><span class="p">):</span>
+   <span class="s">"""동결 계좌 예외"""</span>
+   <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">InvalidTransactionException</span><span class="p">(</span><span class="n">AccountException</span><span class="p">):</span>
+   <span class="s">"""잘못된 입출금 예외"""</span>
+   <span class="k">pass</span>
+</code></pre></div></div>
+
+<p>연습문제 9-6</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">AccountException</span><span class="p">(</span><span class="nb">Exception</span><span class="p">):</span>
+   <span class="s">"""은행 계좌 관련 예외"""</span>
+   <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">AccountBalanceException</span><span class="p">(</span><span class="n">AccountException</span><span class="p">):</span>
+   <span class="s">"""계좌 잔고 예외"""</span>
+   <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">FrozenAccountException</span><span class="p">(</span><span class="n">AccountException</span><span class="p">):</span>
+   <span class="s">"""동결 계좌 예외"""</span>
+   <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">InvalidTransactionException</span><span class="p">(</span><span class="n">AccountException</span><span class="p">):</span>
+   <span class="s">"""잘못된 입출금 예외"""</span>
+   <span class="k">pass</span>
+
+
+<span class="k">class</span> <span class="nc">Account</span><span class="p">():</span>
+   <span class="s">"""은행 계좌"""</span>
+
+   <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">balance</span><span class="p">,</span> <span class="n">is_frozen</span><span class="p">):</span>
+       <span class="s">"""인스턴스를 초기화한다."""</span>
+       <span class="bp">self</span><span class="p">.</span><span class="n">balance</span> <span class="o">=</span> <span class="n">balance</span>  <span class="c1"># 계좌 잔액
+</span>       <span class="bp">self</span><span class="p">.</span><span class="n">is_frozen</span> <span class="o">=</span> <span class="n">is_frozen</span>  <span class="c1"># 계좌 동결 여부
+</span>
+   <span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="s">"""계좌의 잔고를 조회한다."""</span>
+
+       <span class="k">print</span><span class="p">(</span><span class="s">'계좌 잔액은'</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">balance</span><span class="p">,</span> <span class="s">'원입니다.'</span><span class="p">)</span>
+
+   <span class="k">def</span> <span class="nf">deposit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+       <span class="s">"""계좌에 amount만큼의 금액을 입금한다."""</span>
+
+       <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">is_frozen</span><span class="p">:</span>
+           <span class="k">raise</span> <span class="n">FrozenAccountException</span>
+
+       <span class="k">if</span> <span class="ow">not</span> <span class="n">amount</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+           <span class="k">raise</span> <span class="n">InvalidTransactionException</span><span class="p">(</span><span class="s">'0 이하의 액수는 입금할 수 없습니다.'</span><span class="p">)</span>
+
+       <span class="bp">self</span><span class="p">.</span><span class="n">balance</span> <span class="o">+=</span> <span class="n">amount</span>
+
+   <span class="k">def</span> <span class="nf">withdraw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+       <span class="s">"""계좌에서 amount만큼의 금액을 인출한다."""</span>
+       <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">is_frozen</span><span class="p">:</span>
+           <span class="k">raise</span> <span class="n">FrozenAccountException</span>
+
+       <span class="k">if</span> <span class="ow">not</span> <span class="n">amount</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+           <span class="k">raise</span> <span class="n">InvalidTransactionException</span><span class="p">(</span><span class="s">'0 이하의 액수는 인출할 수 없습니다.'</span><span class="p">)</span>
+
+       <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">balance</span> <span class="o">&lt;</span> <span class="n">amount</span><span class="p">:</span>
+           <span class="k">raise</span> <span class="n">AccountBalanceException</span><span class="p">(</span><span class="s">'잔액이 부족합니다.'</span><span class="p">)</span>
+       <span class="k">else</span><span class="p">:</span>
+           <span class="bp">self</span><span class="p">.</span><span class="n">balance</span> <span class="o">-=</span> <span class="n">amount</span>
+
+
+<span class="n">account_1</span> <span class="o">=</span> <span class="n">Account</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+   <span class="n">account_1</span><span class="p">.</span><span class="n">deposit</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+   <span class="n">account_1</span><span class="p">.</span><span class="n">withdraw</span><span class="p">(</span><span class="o">-</span><span class="mi">1000</span><span class="p">)</span>
+<span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+   <span class="n">account_1</span><span class="p">.</span><span class="n">check</span><span class="p">()</span>
+<span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>연습문제 9-7</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">AccountException</span><span class="p">(</span><span class="nb">Exception</span><span class="p">):</span>
+   <span class="s">"""은행 계좌 관련 예외"""</span>
+   <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">AccountBalanceException</span><span class="p">(</span><span class="n">AccountException</span><span class="p">):</span>
+   <span class="s">"""계좌 잔고 예외"""</span>
+   <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">FrozenAccountException</span><span class="p">(</span><span class="n">AccountException</span><span class="p">):</span>
+   <span class="s">"""동결 계좌 예외"""</span>
+   <span class="k">pass</span>
+
+<span class="k">class</span> <span class="nc">InvalidTransactionException</span><span class="p">(</span><span class="n">AccountException</span><span class="p">):</span>
+   <span class="s">"""잘못된 입출금 예외"""</span>
+   <span class="k">pass</span>
+
+
+<span class="k">class</span> <span class="nc">Account</span><span class="p">():</span>
+   <span class="s">"""은행 계좌"""</span>
+
+   <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">balance</span><span class="p">,</span> <span class="n">is_frozen</span><span class="p">):</span>
+       <span class="s">"""인스턴스를 초기화한다."""</span>
+       <span class="bp">self</span><span class="p">.</span><span class="n">balance</span> <span class="o">=</span> <span class="n">balance</span>  <span class="c1"># 계좌 잔액
+</span>       <span class="bp">self</span><span class="p">.</span><span class="n">is_frozen</span> <span class="o">=</span> <span class="n">is_frozen</span>  <span class="c1"># 계좌 동결 여부
+</span>
+   <span class="k">def</span> <span class="nf">check</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="s">"""계좌의 잔고를 조회한다."""</span>
+
+       <span class="k">print</span><span class="p">(</span><span class="s">'계좌 잔액은'</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">balance</span><span class="p">,</span> <span class="s">'원입니다.'</span><span class="p">)</span>
+
+   <span class="k">def</span> <span class="nf">deposit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+       <span class="s">"""계좌에 amount만큼의 금액을 입금한다."""</span>
+
+       <span class="k">assert</span> <span class="n">amount</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s">'거래 금액이 잘못되었습니다.'</span>
+
+       <span class="bp">self</span><span class="p">.</span><span class="n">balance</span> <span class="o">+=</span> <span class="n">amount</span>
+
+   <span class="k">def</span> <span class="nf">withdraw</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">amount</span><span class="p">):</span>
+       <span class="s">"""계좌에서 amount만큼의 금액을 인출한다."""</span>
+       <span class="k">assert</span> <span class="ow">not</span> <span class="bp">self</span><span class="p">.</span><span class="n">is_frozen</span><span class="p">,</span> <span class="s">'계좌가 동결되었습니다.'</span>
+       <span class="k">assert</span> <span class="n">amount</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s">'거래 금액이 잘못되었습니다.'</span>
+       <span class="k">assert</span> <span class="bp">self</span><span class="p">.</span><span class="n">balance</span> <span class="o">&gt;=</span> <span class="n">amount</span><span class="p">,</span> <span class="s">'잔액이 부족합니다.'</span>
+
+       <span class="bp">self</span><span class="p">.</span><span class="n">balance</span> <span class="o">-=</span> <span class="n">amount</span>
+
+
+<span class="n">account_1</span> <span class="o">=</span> <span class="n">Account</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+   <span class="n">account_1</span><span class="p">.</span><span class="n">deposit</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+   <span class="n">account_1</span><span class="p">.</span><span class="n">withdraw</span><span class="p">(</span><span class="o">-</span><span class="mi">1000</span><span class="p">)</span>
+<span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+   <span class="n">account_1</span><span class="p">.</span><span class="n">check</span><span class="p">()</span>
+<span class="k">except</span> <span class="nb">Exception</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">error</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>디스크, 네트워크, 프린터 등의 시스템 자원은 직접 신경 써서 반납해야 한다.</p>
+
+<p>코드 9-45</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'prices.txt'</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">file</span><span class="p">:</span>
+   <span class="n">total</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
+<span class="nb">file</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>코드 9-46</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">try</span><span class="p">:</span>
+   <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+   <span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'prices.txt'</span><span class="p">)</span>
+   <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">file</span><span class="p">:</span>
+       <span class="n">total</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+<span class="k">except</span> <span class="nb">ValueError</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="s">'숫자가 아닌 텍스트가 있습니다.'</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
+   <span class="nb">file</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>finally 절: 예외 발생 여부와 관계 없이 항상 마지막에 실행된다.</p>
+
+<p>코드 9-47</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">try</span><span class="p">:</span>
+   <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+   <span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'prices.txt'</span><span class="p">)</span>
+   <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">file</span><span class="p">:</span>
+       <span class="n">total</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+<span class="k">except</span> <span class="nb">ValueError</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="s">'숫자가 아닌 텍스트가 있습니다.'</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
+<span class="k">finally</span><span class="p">:</span>
+   <span class="nb">file</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>with 문: 뒷정리를 자동으로 처리하는 문법</p>
+
+<p>코드 9-48</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'prices.txt'</span><span class="p">)</span> <span class="k">as</span> <span class="nb">file</span><span class="p">:</span>
+   <span class="k">try</span><span class="p">:</span>
+       <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+       <span class="nb">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'prices.txt'</span><span class="p">)</span>
+       <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">file</span><span class="p">:</span>
+           <span class="n">total</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+   <span class="k">except</span> <span class="nb">ValueError</span><span class="p">:</span>
+       <span class="k">print</span><span class="p">(</span><span class="s">'숫자가 아닌 텍스트가 있습니다.'</span><span class="p">)</span>
+   <span class="k">else</span><span class="p">:</span>
+       <span class="k">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>with 문은 객체의 종류에 관계없이 알아서 준비와 뒷정리를 해 준다.
+준비를 위해 <code class="language-plaintext highlighter-rouge">__enter__()</code> 메서드를 호출, 뒷정리를 위해 <code class="language-plaintext highlighter-rouge">__exit()__</code> 메서드를 알아서 호출한다.</p>
+
+<p>코드 9-49</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">NetworkConnection</span><span class="p">:</span>
+   <span class="s">"""네트워크 연결을 나타내는 클래스"""</span>
+
+   <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">):</span>
+       <span class="s">"""인스턴스를 초기화한다."""</span>
+
+       <span class="bp">self</span><span class="p">.</span><span class="n">url</span> <span class="o">=</span> <span class="n">url</span>
+       <span class="bp">self</span><span class="p">.</span><span class="n">is_connected</span> <span class="o">=</span> <span class="bp">False</span>
+
+   <span class="k">def</span> <span class="nf">connect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="s">"""네트워크에 연결한다."""</span>
+
+       <span class="k">print</span><span class="p">(</span><span class="s">'네트워크에 연결합니다.'</span><span class="p">)</span>
+       <span class="bp">self</span><span class="p">.</span><span class="n">is_connected</span> <span class="o">=</span> <span class="bp">True</span>
+
+   <span class="k">def</span> <span class="nf">disconnect</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="s">"""네트워크 연결을 중단한다."""</span>
+
+       <span class="k">print</span><span class="p">(</span><span class="s">'네트워크 연결을 중단합니다.'</span><span class="p">)</span>
+       <span class="bp">self</span><span class="p">.</span><span class="n">is_connected</span> <span class="o">=</span> <span class="bp">False</span>
+
+   <span class="k">def</span> <span class="nf">read</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="s">"""네트워크에서 데이터를 읽어 들인다."""</span>
+
+       <span class="k">return</span> <span class="s">'네트워크에서 읽어 들인 데이터'</span>
+
+   <span class="k">def</span> <span class="nf">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="s">"""객체 사용을 준비한다."""</span>
+
+       <span class="bp">self</span><span class="p">.</span><span class="n">connect</span><span class="p">()</span>
+       <span class="k">return</span> <span class="bp">self</span>
+
+   <span class="k">def</span> <span class="nf">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_value</span><span class="p">,</span> <span class="n">traceback</span><span class="p">):</span>
+       <span class="s">"""객체 사용을 마치고 뒷정리한다."""</span>
+
+       <span class="bp">self</span><span class="p">.</span><span class="n">disconnect</span><span class="p">()</span>
+
+
+<span class="k">with</span> <span class="n">NetworkConnection</span><span class="p">(</span><span class="s">'https://bakyeono.net'</span><span class="p">)</span> <span class="k">as</span> <span class="n">connection</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">connection</span><span class="p">.</span><span class="n">read</span><span class="p">())</span>
+</code></pre></div></div>
+
+<h2 id="10장">10장</h2>
+
+<p>모듈(module)은 프로그램을 구성하는 기능 중에서 독립적으로 구별할 수 있는 것을 모아 분리해 둔 것이다.</p>
+
+<p>프로그램 실행의 시작점이 되는 모듈을 최상위(top-level) 모듈이라 한다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">__name__</code> 전역 변수는 모듈이 최상위로 실행된 경우에는 <code class="language-plaintext highlighter-rouge">__main__</code>이 되고, 하위 모듈로 실행된 경우에는 그 모듈의 이름이 된다.</p>
+
+<p>파이썬의 패키지(package)는 여러 개의 모듈·패키지를 묶은 것이다.</p>
+
+<ul>
+  <li>코드 10-16, 코드 10-17 실습 아직 하지 못함.</li>
+</ul>
+
+<p>각 패키지 디렉터리마다 있는 <code class="language-plaintext highlighter-rouge">__init__.py</code> 파일의 역할: 파이썬이 디렉터리를 패키지로 인식하도록 한다.</p>
+
+<p>model/<strong>init</strong>.py</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">—</span><span class="o">-------------------------</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">character</span>
+</code></pre></div></div>
+
+<p>현재 패키지인 <code class="language-plaintext highlighter-rouge">model</code>을 기준으로 character 패키지를 상대경로로 임포트하라는 뜻이다.</p>
+
+<h2 id="11장">11장</h2>
+
+<p>라이브러리(library)란 다른 프로그램의 구성요소로 사용하기 위해 미리 만들어 둔 프로그램 조각이다. 즉, 자주 사용하는 기능을 모듈·패키지로 만들어 둔 것이다.</p>
+
+<p>연습문제 11-1</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">math</span>
+
+
+<span class="k">def</span> <span class="nf">floor_division</span><span class="p">(</span><span class="n">dividen</span><span class="p">,</span> <span class="n">divisor</span><span class="p">):</span>
+   <span class="k">return</span> <span class="n">math</span><span class="p">.</span><span class="n">floor</span><span class="p">(</span><span class="n">dividen</span> <span class="o">/</span> <span class="n">divisor</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">test_floor_division</span><span class="p">():</span>
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">floor_division</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span> <span class="c1"># x.5
+</span>       <span class="k">return</span> <span class="bp">False</span>
+
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">floor_division</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># x.5 미만
+</span>       <span class="k">return</span> <span class="bp">False</span>
+
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">floor_division</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>  <span class="c1"># x.5 초과 (무한 소수)
+</span>       <span class="k">return</span> <span class="bp">False</span>
+
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">floor_division</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>  <span class="c1"># x.0
+</span>       <span class="k">return</span> <span class="bp">False</span>
+
+   <span class="k">return</span> <span class="bp">True</span>
+
+
+<span class="k">print</span><span class="p">(</span><span class="n">test_floor_division</span><span class="p">())</span>
+
+<span class="c1"># 모범답안처럼 assert 문을 사용했으면 더 간단하게 했을 텐데!
+</span></code></pre></div></div>
+
+<p>코드 11-17</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">'{0[0]}년 {0[1]}월 {0[2]}일 {1[0]}시 {1[1]}분'</span><span class="p">.</span><span class="nb">format</span><span class="p">([</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">30</span><span class="p">]))</span>
+</code></pre></div></div>
+
+<p>코드 11-18</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">'{0[h]}시 {0[m]}분 {0[s]}초'</span><span class="p">.</span><span class="nb">format</span><span class="p">({</span><span class="s">'h'</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span> <span class="s">'m'</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="s">'s'</span><span class="p">:</span> <span class="mi">0</span><span class="p">}))</span>
+</code></pre></div></div>
+
+<p>코드 11-20</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">countries</span> <span class="o">=</span> <span class="p">[</span>
+   <span class="p">{</span><span class="s">'name'</span><span class="p">:</span> <span class="s">'China'</span><span class="p">,</span> <span class="s">'population'</span><span class="p">:</span> <span class="mi">1403500365</span><span class="p">},</span>
+   <span class="p">{</span><span class="s">'name'</span><span class="p">:</span> <span class="s">'Japan'</span><span class="p">,</span> <span class="s">'population'</span><span class="p">:</span> <span class="mi">126056362</span><span class="p">},</span>
+   <span class="p">{</span><span class="s">'name'</span><span class="p">:</span> <span class="s">'South Korea'</span><span class="p">,</span> <span class="s">'population'</span><span class="p">:</span> <span class="mi">51736224</span><span class="p">},</span>
+   <span class="p">{</span><span class="s">'name'</span><span class="p">:</span> <span class="s">'Pitcairn Islands'</span><span class="p">,</span> <span class="s">'population'</span><span class="p">:</span> <span class="mi">56</span><span class="p">},</span>
+<span class="p">]</span>
+<span class="n">form</span> <span class="o">=</span> <span class="s">'나라: {0} | 인구: {1}'</span>
+<span class="k">for</span> <span class="n">country</span> <span class="ow">in</span> <span class="n">countries</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">form</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">country</span><span class="p">[</span><span class="s">'name'</span><span class="p">],</span> <span class="n">country</span><span class="p">[</span><span class="s">'population'</span><span class="p">]))</span>
+</code></pre></div></div>
+
+<p>코드 11-21</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">countries</span> <span class="o">=</span> <span class="p">[</span>
+   <span class="p">{</span><span class="s">'name'</span><span class="p">:</span> <span class="s">'China'</span><span class="p">,</span> <span class="s">'population'</span><span class="p">:</span> <span class="mi">1403500365</span><span class="p">},</span>
+   <span class="p">{</span><span class="s">'name'</span><span class="p">:</span> <span class="s">'Japan'</span><span class="p">,</span> <span class="s">'population'</span><span class="p">:</span> <span class="mi">126056362</span><span class="p">},</span>
+   <span class="p">{</span><span class="s">'name'</span><span class="p">:</span> <span class="s">'South Korea'</span><span class="p">,</span> <span class="s">'population'</span><span class="p">:</span> <span class="mi">51736224</span><span class="p">},</span>
+   <span class="p">{</span><span class="s">'name'</span><span class="p">:</span> <span class="s">'Pitcairn Islands'</span><span class="p">,</span> <span class="s">'population'</span><span class="p">:</span> <span class="mi">56</span><span class="p">},</span>
+<span class="p">]</span>
+<span class="n">form</span> <span class="o">=</span> <span class="s">'나라: {0:16} | 인구: {1:10}'</span>
+<span class="k">for</span> <span class="n">country</span> <span class="ow">in</span> <span class="n">countries</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">form</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">country</span><span class="p">[</span><span class="s">'name'</span><span class="p">],</span> <span class="n">country</span><span class="p">[</span><span class="s">'population'</span><span class="p">]))</span>
+</code></pre></div></div>
+
+<p>문자열은 왼쪽, 수는 오른쪽 정렬이 디폴트</p>
+
+<p>코드 11-22</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">countries</span> <span class="o">=</span> <span class="p">[</span>
+   <span class="p">{</span><span class="s">'name'</span><span class="p">:</span> <span class="s">'China'</span><span class="p">,</span> <span class="s">'population'</span><span class="p">:</span> <span class="mi">1403500365</span><span class="p">},</span>
+   <span class="p">{</span><span class="s">'name'</span><span class="p">:</span> <span class="s">'Japan'</span><span class="p">,</span> <span class="s">'population'</span><span class="p">:</span> <span class="mi">126056362</span><span class="p">},</span>
+   <span class="p">{</span><span class="s">'name'</span><span class="p">:</span> <span class="s">'South Korea'</span><span class="p">,</span> <span class="s">'population'</span><span class="p">:</span> <span class="mi">51736224</span><span class="p">},</span>
+   <span class="p">{</span><span class="s">'name'</span><span class="p">:</span> <span class="s">'Pitcairn Islands'</span><span class="p">,</span> <span class="s">'population'</span><span class="p">:</span> <span class="mi">56</span><span class="p">},</span>
+<span class="p">]</span>
+<span class="n">form</span> <span class="o">=</span> <span class="s">'나라: {0:16} | 인구: {1:010}'</span>
+<span class="k">for</span> <span class="n">country</span> <span class="ow">in</span> <span class="n">countries</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">form</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">country</span><span class="p">[</span><span class="s">'name'</span><span class="p">],</span> <span class="n">country</span><span class="p">[</span><span class="s">'population'</span><span class="p">]))</span>
+</code></pre></div></div>
+
+<p>코드 11-23</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">countries</span> <span class="o">=</span> <span class="p">[</span>
+   <span class="p">{</span><span class="s">'name'</span><span class="p">:</span> <span class="s">'China'</span><span class="p">,</span> <span class="s">'population'</span><span class="p">:</span> <span class="mi">1403500365</span><span class="p">},</span>
+   <span class="p">{</span><span class="s">'name'</span><span class="p">:</span> <span class="s">'Japan'</span><span class="p">,</span> <span class="s">'population'</span><span class="p">:</span> <span class="mi">126056362</span><span class="p">},</span>
+   <span class="p">{</span><span class="s">'name'</span><span class="p">:</span> <span class="s">'South Korea'</span><span class="p">,</span> <span class="s">'population'</span><span class="p">:</span> <span class="mi">51736224</span><span class="p">},</span>
+   <span class="p">{</span><span class="s">'name'</span><span class="p">:</span> <span class="s">'Pitcairn Islands'</span><span class="p">,</span> <span class="s">'population'</span><span class="p">:</span> <span class="mi">56</span><span class="p">},</span>
+<span class="p">]</span>
+<span class="n">form</span> <span class="o">=</span> <span class="s">'나라: {0:&gt;16} | 인구: {1:&lt;10}'</span>
+<span class="k">for</span> <span class="n">country</span> <span class="ow">in</span> <span class="n">countries</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">form</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">country</span><span class="p">[</span><span class="s">'name'</span><span class="p">],</span> <span class="n">country</span><span class="p">[</span><span class="s">'population'</span><span class="p">]))</span>
+</code></pre></div></div>
+
+<p>코드 11-25</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">physics</span><span class="p">,</span> <span class="n">chemistry</span><span class="p">,</span> <span class="n">biology</span> <span class="o">=</span> <span class="mi">80</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">70</span>
+<span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'물리학: </span><span class="si">{</span><span class="n">physics</span><span class="si">}</span><span class="s">, 화학: </span><span class="si">{</span><span class="n">chemistry</span><span class="si">}</span><span class="s">, 생물학: </span><span class="si">{</span><span class="n">biology</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>코드 11-26</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+   <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+       <span class="k">print</span><span class="p">(</span><span class="sa">f</span><span class="s">'</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s"> ** </span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s"> = </span><span class="si">{</span><span class="n">i</span> <span class="o">**</span> <span class="n">j</span><span class="si">:</span><span class="mi">10</span><span class="si">}</span><span class="s">'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>텍스트의 패턴을 나타내는 텍스트를 정규식(regular expression)이라 한다.</p>
+
+<p>코드 11-27</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">re</span>
+<span class="k">print</span><span class="p">(</span><span class="n">re</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="s">'파이썬'</span><span class="p">,</span> <span class="s">'파이썬'</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">re</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="s">'파이썬'</span><span class="p">,</span> <span class="s">'즐거운 파이썬'</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">re</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="s">'파이썬'</span><span class="p">,</span> <span class="s">'파이프'</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>코드 11-28</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">re</span>
+<span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="s">'파이썬'</span><span class="p">,</span> <span class="s">'파이썬 프로그래밍'</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">match</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="s">'문자열에 패턴과 매치하는 텍스트가 존재함:'</span><span class="p">,</span> <span class="n">match</span><span class="p">.</span><span class="n">group</span><span class="p">())</span>
+<span class="k">else</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="s">'문자열에 패턴과 매치하는 텍스트가 존재하지 않음'</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<p>코드 11-29</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">re</span>
+<span class="k">print</span><span class="p">(</span><span class="n">re</span><span class="p">.</span><span class="n">sub</span><span class="p">(</span><span class="s">'파이썬'</span><span class="p">,</span> <span class="s">'리스프'</span><span class="p">,</span> <span class="s">'즐거운 파이썬 프로그래밍'</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">re</span><span class="p">.</span><span class="n">sub</span><span class="p">(</span><span class="s">' '</span><span class="p">,</span> <span class="s">'*'</span><span class="p">,</span> <span class="s">'즐거운 파이썬 프로그래밍'</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>코드 11-31</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">re</span>
+<span class="n">sample</span> <span class="o">=</span> <span class="s">'1789Pthon박연오fog'</span>
+<span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s">'[가-힣]{2,4}'</span>
+<span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">sample</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">match</span><span class="p">.</span><span class="n">group</span><span class="p">())</span>
+</code></pre></div></div>
+
+<p>코드 11-32</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">re</span>
+<span class="n">sample</span> <span class="o">=</span> <span class="s">'이름: 박연오, 연락처: 010-1234-5678, 주소: 부산 어딘가'</span>
+<span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s">'01\d-\d{3,4}-\d{4}'</span>
+<span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="n">search</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">sample</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">match</span><span class="p">.</span><span class="n">group</span><span class="p">())</span>
+</code></pre></div></div>
+
+<p>연습문제 11-2</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">re</span>
+
+
+<span class="k">def</span> <span class="nf">hangul_only</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
+   <span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s">'[^가-힣]+'</span>
+   <span class="n">only_hangul_match</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>
+
+   <span class="n">result</span> <span class="o">=</span> <span class="s">''</span>
+   <span class="k">for</span> <span class="n">hangul_word</span> <span class="ow">in</span> <span class="n">only_hangul_match</span><span class="p">:</span>
+       <span class="n">result</span> <span class="o">+=</span> <span class="n">hangul_word</span>
+   <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="k">print</span><span class="p">(</span><span class="n">hangul_only</span><span class="p">(</span><span class="s">'I like 파이썬 programming.'</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">hangul_only</span><span class="p">(</span><span class="s">'a1가b2나c3다d4라e5마f6바g7사'</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>연습문제 11-2 모범답안처럼 업그레이드</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">re</span>
+
+
+<span class="k">def</span> <span class="nf">hangul_only</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
+   <span class="n">pattern</span> <span class="o">=</span> <span class="sa">r</span><span class="s">'[^가-힣]+'</span>
+   <span class="n">only_hangul</span> <span class="o">=</span> <span class="n">re</span><span class="p">.</span><span class="n">sub</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="s">''</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>
+
+   <span class="k">return</span> <span class="n">only_hangul</span>
+
+
+<span class="k">def</span> <span class="nf">test_hangul_only</span><span class="p">():</span>
+   <span class="k">assert</span> <span class="n">hangul_only</span><span class="p">(</span><span class="s">''</span><span class="p">)</span> <span class="o">==</span> <span class="s">''</span>
+   <span class="k">assert</span> <span class="n">hangul_only</span><span class="p">(</span><span class="s">'안녕'</span><span class="p">)</span> <span class="o">==</span> <span class="s">'안녕'</span>
+   <span class="k">assert</span> <span class="n">hangul_only</span><span class="p">(</span><span class="s">'123'</span><span class="p">)</span> <span class="o">==</span> <span class="s">''</span>
+   <span class="k">assert</span> <span class="n">hangul_only</span><span class="p">(</span><span class="s">'안녕 00 나의 vv 친구'</span><span class="p">)</span>
+
+
+<span class="n">test_hangul_only</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">hangul_only</span><span class="p">(</span><span class="s">'I like 파이썬 programming.'</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">hangul_only</span><span class="p">(</span><span class="s">'a1가b2나c3다d4라e5마f6바g7사'</span><span class="p">))</span>
+</code></pre></div></div>
+
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/2022-08-07/yeono-python-15" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/2022-08-05/yeono-python-13" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-07-30 14:29:33 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>연오의 파이썬 공부 11 | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="연오의 파이썬 공부 11" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="코드 8-4 coordinate_2 = (3, 5) triangle_2 = ((0, 0), (0, 3), (4, 3)) rectangle_2 = { &#39;point&#39;: (2, 2), &#39;width&#39;: 4, &#39;height&#39;: 4, } 코드 8-5 # 오류가 발생하는 예제 import math coordinate_2 = (3, 5) triangle_2 = ((0, 0), (0, 3), (4, 3)) rectangle_2 = { &#39;point&#39;: (2, 2), &#39;width&#39;: 4, &#39;height&#39;: 4, } def square(x): &quot;&quot;&quot;전달받은 수의 제곱을 반환한다.&quot;&quot;&quot; return x * x def distance(point_a, point_b): return math.sqrt(square(point_a[&#39;x&#39;] - point_b[&#39;x&#39;]) + square(point_a[&#39;y&#39;] - point_b[&#39;y&#39;])) def circumference_of_triangle(shape): &quot;&quot;&quot;삼각형 데이터를 전달받아 둘레를 구해 반환한다.&quot;&quot;&quot; a_to_b = distance(shape[&#39;point_a&#39;], shape[&#39;point_b&#39;]) b_to_c = distance(shape[&#39;point_b&#39;], shape[&#39;point_c&#39;]) c_to_a = distance(shape[&#39;point_c&#39;], shape[&#39;point_a&#39;]) return a_to_b + b_to_c + c_to_a print(circumference_of_triangle(triangle_2)) 동일한 범주에 속하는 데이터의 유형을 정의하고 그 구조를 동일하게 구성해야 한다. 코드 8-6 # 유형: &#39;좌표&#39;는 다음 키를 가지는 사전이다. # * &#39;x&#39;: x축의 위치 (정수) # * &#39;y&#39;: y축의 위치 (정수) coordinate_1 = {&#39;x&#39;: 5, &#39;y&#39;: 3} # 유형: &#39;삼각형&#39;은 다음 키를 가지는 사전이다. # * &#39;point_a&#39;: 첫 번째 점의 위치(좌표) # * &#39;point_b&#39;: 두 번째 점의 위치(좌표) # * &#39;point_c&#39;: 세 번째 점의 위치(좌표) triangle_1 = { &#39;point_a&#39;: {&#39;x&#39;: 0, &#39;y&#39;: 0}, &#39;point_b&#39;: {&#39;x&#39;: 3, &#39;y&#39;: 0}, &#39;point_c&#39;: {&#39;x&#39;: 3, &#39;y&#39;: 4}, } # 유형: &#39;사각형&#39;은 다음 키를 가지는 사전이다. # * &#39;point_a&#39;: 첫 번째 점의 위치(좌표) # * &#39;point_b&#39;: 두 번째 점의 위치(좌표) # * &#39;point_c&#39;: 세 번째 점의 위치(좌표) # * &#39;point_d&#39;: 첫 번째 점의 위치(좌표) rectangle_1 = { &#39;point_a&#39;: {&#39;x&#39;: 2, &#39;y&#39;: 2}, &#39;point_b&#39;: {&#39;x&#39;: 6, &#39;y&#39;: 2}, &#39;point_c&#39;: {&#39;x&#39;: 6, &#39;y&#39;: 6}, &#39;point_d&#39;: {&#39;x&#39;: 2, &#39;y&#39;: 6}, } import math def square(x): &quot;&quot;&quot;전달받은 수의 제곱을 반환한다.&quot;&quot;&quot; return x * x def distance(point_a, point_b): return math.sqrt(square(point_a[&#39;x&#39;] - point_b[&#39;x&#39;]) + square(point_a[&#39;y&#39;] - point_b[&#39;y&#39;])) def circumference_of_triangle(shape): &quot;&quot;&quot;삼각형 데이터를 전달받아 둘레를 구해 반환한다.&quot;&quot;&quot; a_to_b = distance(shape[&#39;point_a&#39;], shape[&#39;point_b&#39;]) b_to_c = distance(shape[&#39;point_b&#39;], shape[&#39;point_c&#39;]) c_to_a = distance(shape[&#39;point_c&#39;], shape[&#39;point_a&#39;]) return a_to_b + b_to_c + c_to_a def circumference_of_rectangle(shape): &quot;&quot;&quot;사각형 데이터를 전달받아 둘레를 구해 반환한다.&quot;&quot;&quot; a_to_b = distance(shape[&#39;point_a&#39;], shape[&#39;point_b&#39;]) b_to_c = distance(shape[&#39;point_b&#39;], shape[&#39;point_c&#39;]) c_to_d = distance(shape[&#39;point_c&#39;], shape[&#39;point_d&#39;]) d_to_a = distance(shape[&#39;point_d&#39;], shape[&#39;point_a&#39;]) return a_to_b + b_to_c + c_to_d + d_to_a print(circumference_of_triangle(triangle_1)) print(circumference_of_rectangle(rectangle_1)) 코드 8-9 import math def square(x): &quot;&quot;&quot;전달받은 수의 제곱을 반환한다.&quot;&quot;&quot; return x * x def distance(point_a, point_b): return math.sqrt(square(point_a[&#39;x&#39;] - point_b[&#39;x&#39;]) + square(point_a[&#39;y&#39;] - point_b[&#39;y&#39;])) def circumference(shape): &quot;&quot;&quot;도형 데이터를 전달받아 둘레를 구해 반환한다.&quot;&quot;&quot; if type(shape) == &#39;삼각형&#39;: a_to_b = distance(shape[&#39;point_a&#39;], shape[&#39;point_b&#39;]) b_to_c = distance(shape[&#39;point_b&#39;], shape[&#39;point_c&#39;]) c_to_a = distance(shape[&#39;point_c&#39;], shape[&#39;point_a&#39;]) return a_to_b + b_to_c + c_to_a elif type(shape) == &#39;사각형&#39;: a_to_b = distance(shape[&#39;point_a&#39;], shape[&#39;point_b&#39;]) b_to_c = distance(shape[&#39;point_b&#39;], shape[&#39;point_c&#39;]) c_to_d = distance(shape[&#39;point_c&#39;], shape[&#39;point_d&#39;]) d_to_a = distance(shape[&#39;point_d&#39;], shape[&#39;point_a&#39;]) return a_to_b + b_to_c + c_to_d + d_to_a else: return None triangle_1 = { &#39;point_a&#39;: {&#39;x&#39;: 0, &#39;y&#39;: 0}, &#39;point_b&#39;: {&#39;x&#39;: 3, &#39;y&#39;: 0}, &#39;point_c&#39;: {&#39;x&#39;: 3, &#39;y&#39;: 4}, } rectangle_1 = { &#39;point_a&#39;: {&#39;x&#39;: 2, &#39;y&#39;: 2}, &#39;point_b&#39;: {&#39;x&#39;: 6, &#39;y&#39;: 2}, &#39;point_c&#39;: {&#39;x&#39;: 6, &#39;y&#39;: 6}, &#39;point_d&#39;: {&#39;x&#39;: 2, &#39;y&#39;: 6}, } print(circumference(triangle_1)) print(circumference(rectangle_1)) print(type(triangle_1)) print(type(rectangle_1)) 코드 8-11 import math def square(x): &quot;&quot;&quot;전달받은 수의 제곱을 반환한다.&quot;&quot;&quot; return x * x def distance(point_a, point_b): return math.sqrt(square(point_a[&#39;x&#39;] - point_b[&#39;x&#39;]) + square(point_a[&#39;y&#39;] - point_b[&#39;y&#39;])) def circumference(shape): &quot;&quot;&quot;도형 데이터를 전달받아 둘레를 구해 반환한다.&quot;&quot;&quot; if shape[&#39;type&#39;] == &#39;삼각형&#39;: a_to_b = distance(shape[&#39;point_a&#39;], shape[&#39;point_b&#39;]) b_to_c = distance(shape[&#39;point_b&#39;], shape[&#39;point_c&#39;]) c_to_a = distance(shape[&#39;point_c&#39;], shape[&#39;point_a&#39;]) return a_to_b + b_to_c + c_to_a elif shape[&#39;type&#39;] == &#39;사각형&#39;: a_to_b = distance(shape[&#39;point_a&#39;], shape[&#39;point_b&#39;]) b_to_c = distance(shape[&#39;point_b&#39;], shape[&#39;point_c&#39;]) c_to_d = distance(shape[&#39;point_c&#39;], shape[&#39;point_d&#39;]) d_to_a = distance(shape[&#39;point_d&#39;], shape[&#39;point_a&#39;]) return a_to_b + b_to_c + c_to_d + d_to_a else: return None triangle_3 = { &#39;type&#39;: &#39;삼각형&#39;, &#39;point_a&#39;: {&#39;x&#39;: 0, &#39;y&#39;: 0}, &#39;point_b&#39;: {&#39;x&#39;: 3, &#39;y&#39;: 0}, &#39;point_c&#39;: {&#39;x&#39;: 3, &#39;y&#39;: 4}, } rectangle_3 = { &#39;type&#39;: &#39;사각형&#39;, &#39;point_a&#39;: {&#39;x&#39;: 2, &#39;y&#39;: 2}, &#39;point_b&#39;: {&#39;x&#39;: 6, &#39;y&#39;: 2}, &#39;point_c&#39;: {&#39;x&#39;: 6, &#39;y&#39;: 6}, &#39;point_d&#39;: {&#39;x&#39;: 2, &#39;y&#39;: 6}, } print(circumference(triangle_3)) print(circumference(rectangle_3)) 개선할 점: 데이터 유형을 type() 함수로 식별할 수 있도록 데이터 유형마다 그에 맞는 함수를 별도로 정의하되, 그 함수가 그 데이터 유형에서만 실행될 수 있도록 강제하자 연습문제 8-1 # 체스말 데이터 유형 정의하기 # &#39;x&#39;: x축의 위치 # &#39;y&#39;: y축의 위치 # &#39;color&#39;: 체스말의 색깔 # &#39;role&#39;: 체스말의 역할 체스말1 = {&#39;x&#39;: &#39;A&#39;, &#39;y&#39;: &#39;8&#39;, &#39;color&#39;: &#39;black&#39;, &#39;role&#39;: &#39;룩&#39;} 체스말2 = {&#39;x&#39;: &#39;E&#39;, &#39;y&#39;: &#39;1&#39;, &#39;color&#39;: &#39;white&#39;, &#39;role&#39;: &#39;킹&#39;} # 바둑돌 데이터 유형 정의하기 # &#39;x&#39;: x축의 위치 # &#39;y&#39;: y축의 위치 # &#39;order&#39;: 바둑돌이 놓인 수 # &#39;color&#39;: 바둑돌의 색깔 바둑돌1 = {&#39;x&#39;: 8, &#39;y&#39;: 14, &#39;order&#39;: 83, &#39;color&#39;: &#39;흑&#39;} 바둑돌2 = {&#39;x&#39;: 12, &#39;y&#39;: 3, &#39;order&#39;: 84, &#39;color&#39;: &#39;백&#39;} 연습문제 8-2 # 체스말 데이터 유형 정의하기 # &#39;x&#39;: x축의 위치 # &#39;y&#39;: y축의 위치 # &#39;color&#39;: 체스말의 색깔 # &#39;role&#39;: 체스말의 역할 체스말1 = {&#39;type&#39;: &#39;체스말&#39;, &#39;x&#39;: &#39;A&#39;, &#39;y&#39;: &#39;8&#39;, &#39;color&#39;: &#39;black&#39;, &#39;role&#39;: &#39;룩&#39;} 체스말2 = {&#39;type&#39;: &#39;체스말&#39;, &#39;x&#39;: &#39;E&#39;, &#39;y&#39;: &#39;1&#39;, &#39;color&#39;: &#39;white&#39;, &#39;role&#39;: &#39;킹&#39;} # 바둑돌 데이터 유형 정의하기 # &#39;x&#39;: x축의 위치 # &#39;y&#39;: y축의 위치 # &#39;order&#39;: 바둑돌이 놓인 수 # &#39;color&#39;: 바둑돌의 색깔 바둑돌1 = {&#39;type&#39;: &#39;바둑돌&#39;, &#39;x&#39;: 8, &#39;y&#39;: 14, &#39;order&#39;: 83, &#39;color&#39;: &#39;흑&#39;} 바둑돌2 = {&#39;type&#39;: &#39;바둑돌&#39;, &#39;x&#39;: 12, &#39;y&#39;: 3, &#39;order&#39;: 84, &#39;color&#39;: &#39;백&#39;} def print_piece(piece): &quot;&quot;&quot;말을 전달받아 종류에 따라 다른 형태로 위치를 출력한다.&quot;&quot;&quot; if piece[&#39;type&#39;] == &#39;체스말&#39;: print(piece[&#39;color&#39;] + &#39; 룩이 &#39; + piece[&#39;x&#39;] + piece[&#39;y&#39;] + &#39;위치에 놓여 있어요.&#39;) elif piece[&#39;type&#39;] == &#39;바둑돌&#39;: print(&#39;제 &#39;, piece[&#39;order&#39;], &#39; 수: &#39;, piece[&#39;color&#39;], &#39;을 (&#39;, piece[&#39;x&#39;], &#39;, &#39;, piece[&#39;y&#39;], &#39;) 위치에 두었습니다.&#39;, sep=&#39;&#39;) print_piece(체스말1) print_piece(바둑돌2) 클래스와 객체 type() 함수가 반환하는 데이터는 type이라는 데이터 유형. 데이터 유형을 나타내기 위한 데이터가 존재한다. 이 데이터가 바로 클래스이다. 0,1,2,3의 데이터 유형이 정수인 것처럼, int, float, str의 데이터 유형은 클래스이다. 컴퓨터에서 정보는 메모리 위에 올린 후 처리한다. 메모리 위에 올려둔 정보를 의미 있는 덩어리로 묶어 두기 위한 단위가 필요하다. 파이썬에서는 객체 단위로 메모리 위의 정보를 관리한다. 객체에는 값, 유형, 정체성이라는 세 특성이 있다. 값은 메모리에 기록된 내용이다. 유형은 데이터의 종류로, 유형에 따라 그 값을 어떻게 읽고 다루어야 할지가 결정된다. 정체성은 각각의 객체를 식별하기 위한 고유번호로, 객체가 메모리 속에서 위치한 주소 값이기도 하다. 동일한 객체를 다른 변수에 대입하면, 두 변수가 같은 객체를 가리킨다. year = 1789 same_year = year id(year) == id(same_year) =&gt; True 객체가 어떤 클래스에 속할 때, 그 객체를 해당 클래스의 인스턴스라 한다. 1,2,3은 모두 int 클래스의 인스턴스다. 검사하려는 객체와 클래스가 정해져 있을 때, isinstance() 함수로 객체가 그 클래스에 속하는지 검사할 수 있다. 한 객체는 동시에 여러 클래스의 인스턴스일 수 있다. 파이썬의 모든 데이터는 객체이고, 모든 객체는 어떤 유형에 속한다. 즉, 파이썬의 모든 데이터는 인스턴스이다. 파이썬에서 데이터를 생성하는 것은 곧 인스턴스를 생성하는 것이다. 인스턴스 만들기1: 그대로 평가하기. 리터럴 인스턴스 만들기2: 식을 평가하기. 인스턴스 만들기3: 인스턴스화하기. 클래스 이름에 괄호를 붙여서 수행. ex) int(1789.0) 정수 인스턴스 만들기 연습문제 8-3 a. 아니다. 값이 같을 뿐 객체가 같으려면 정체성이 같아야 한다. b. 아니다. 유형이 같을 뿐. c. 맞다. d. 아니다. 같은 객체를 가리켜야 함. 연습문제 8-4 () {} print(type({range(10)})) int(input()) str(1789) bool([]) 클래스 정의하기 코드 8-22 class Cake: &quot;&quot;&quot;케이크를 나타내는 클래스&quot;&quot;&quot; coat = &#39;생크림&#39; cake_1 = Cake() cake_2 = Cake() print(Cake) print(type(cake_1)) print(isinstance(cake_2, Cake)) 속성은 일반적인 변수와 같은데, 클래스와 인스턴스 속에 정의되는 것이 특징이다. 클래스의 속성은 클래스 객체뿐 아니라 그 클래스의 모든 인스턴스가 공유한다. 코드 8-23 class Cake: &quot;&quot;&quot;케이크를 나타내는 클래스&quot;&quot;&quot; coat = &#39;생크림&#39; cake_1 = Cake() cake_2 = Cake() print(Cake.coat) print(cake_1.coat) print(cake_2.coat) 코드 8-24 ​​class Cake: &quot;&quot;&quot;케이크를 나타내는 클래스&quot;&quot;&quot; coat = &#39;생크림&#39; cake_1 = Cake() cake_2 = Cake() Cake.coat = &#39;초콜릿&#39; Cake.price = 4000 print(Cake.coat) print(Cake.price) print(cake_1.coat) print(cake_1.price) cake_3 = Cake() print(cake_3.coat) print(cake_3.price) 일반적으로 클래스의 속성은 class 문에서 확정하고, 나중에는 수정하지 않는 게 좋다. 자주 변경되어야 하는 속성이 있다면, 그 속성은 클래스가 아니라 인스턴스 속에 정의되어야 할 가능성이 높다. 코드 8-25 class Cake: &quot;&quot;&quot;케이크를 나타내는 클래스&quot;&quot;&quot; coat = &#39;생크림&#39; cake_1 = Cake() cake_2 = Cake() cake_1.topping = &#39;블루베리&#39; print(cake_1.topping) print(Cake.topping) print(cake_2.topping) 코드 8-26 class Cake: &quot;&quot;&quot;케이크를 나타내는 클래스&quot;&quot;&quot; coat = &#39;생크림&#39; cake_1 = Cake() cake_2 = Cake() print(cake_1.coat) cake_1.coat = &#39;아이스크림&#39; print(cake_1.coat) print(Cake.coat) print(cake_2.coat) 이름공간은 프로그래밍 언어에서 이름이 가리키는 대상을 제한하는 범위이다. dir() 함수는 파이썬의 기본 데이터 유형이나 다른 사람이 정의한 클래스에 어떤 속성이 있는지 확인할 수 있게 해준다. 코드 8-27 class Cake: &quot;&quot;&quot;케이크를 나타내는 클래스&quot;&quot;&quot; coat = &#39;생크림&#39; cake_1 = Cake() cake_2 = Cake() import pprint pprint.pprint(dir(Cake)) 클래스나 인스턴스에 속한 함수는 그 데이터 종류를 위한 전용. 이 함수를 메서드라 한다. 대부분의 메서드는 클래스 공용 속성으로 정의한다. 데이터 유형을 다루는 방법은 데이터 유형에 따라 정하기 때문이다. 코드 8-29 class Cake: &quot;&quot;&quot;케이크를 나타낸는 클래스&quot;&quot;&quot; coat = &#39;생크림&#39; def describe(): &quot;&quot;&quot;이 케이크에 관한 정보를 화면에 출력한다.&quot;&quot;&quot; print(&#39;이 케이크는&#39;, Cake.coat, &#39;으로 덮여 있다.&#39;) Cake.describe() 코드 8-30 class Cake: &quot;&quot;&quot;케이크를 나타낸는 클래스&quot;&quot;&quot; coat = &#39;생크림&#39; def describe(): &quot;&quot;&quot;이 케이크에 관한 정보를 화면에 출력한다.&quot;&quot;&quot; print(&#39;이 케이크는&#39;, Cake.coat, &#39;으로 덮여 있다.&#39;) cake_1 =Cake() cake_1.coat = &#39;초콜릿&#39; cake_1.describe() 파이썬에서는 클래스를 기준으로 할 때와 인스턴스를 기준으로 할 때 메서드 호출 방식이 다르다. 인스턴스를 기준으로 메서드를 호출하면 암묵적으로 메서드 호출의 기준이 되는 인스턴스가 첫 번째 인자로 메서드에 전달된다." />
+<meta property="og:description" content="코드 8-4 coordinate_2 = (3, 5) triangle_2 = ((0, 0), (0, 3), (4, 3)) rectangle_2 = { &#39;point&#39;: (2, 2), &#39;width&#39;: 4, &#39;height&#39;: 4, } 코드 8-5 # 오류가 발생하는 예제 import math coordinate_2 = (3, 5) triangle_2 = ((0, 0), (0, 3), (4, 3)) rectangle_2 = { &#39;point&#39;: (2, 2), &#39;width&#39;: 4, &#39;height&#39;: 4, } def square(x): &quot;&quot;&quot;전달받은 수의 제곱을 반환한다.&quot;&quot;&quot; return x * x def distance(point_a, point_b): return math.sqrt(square(point_a[&#39;x&#39;] - point_b[&#39;x&#39;]) + square(point_a[&#39;y&#39;] - point_b[&#39;y&#39;])) def circumference_of_triangle(shape): &quot;&quot;&quot;삼각형 데이터를 전달받아 둘레를 구해 반환한다.&quot;&quot;&quot; a_to_b = distance(shape[&#39;point_a&#39;], shape[&#39;point_b&#39;]) b_to_c = distance(shape[&#39;point_b&#39;], shape[&#39;point_c&#39;]) c_to_a = distance(shape[&#39;point_c&#39;], shape[&#39;point_a&#39;]) return a_to_b + b_to_c + c_to_a print(circumference_of_triangle(triangle_2)) 동일한 범주에 속하는 데이터의 유형을 정의하고 그 구조를 동일하게 구성해야 한다. 코드 8-6 # 유형: &#39;좌표&#39;는 다음 키를 가지는 사전이다. # * &#39;x&#39;: x축의 위치 (정수) # * &#39;y&#39;: y축의 위치 (정수) coordinate_1 = {&#39;x&#39;: 5, &#39;y&#39;: 3} # 유형: &#39;삼각형&#39;은 다음 키를 가지는 사전이다. # * &#39;point_a&#39;: 첫 번째 점의 위치(좌표) # * &#39;point_b&#39;: 두 번째 점의 위치(좌표) # * &#39;point_c&#39;: 세 번째 점의 위치(좌표) triangle_1 = { &#39;point_a&#39;: {&#39;x&#39;: 0, &#39;y&#39;: 0}, &#39;point_b&#39;: {&#39;x&#39;: 3, &#39;y&#39;: 0}, &#39;point_c&#39;: {&#39;x&#39;: 3, &#39;y&#39;: 4}, } # 유형: &#39;사각형&#39;은 다음 키를 가지는 사전이다. # * &#39;point_a&#39;: 첫 번째 점의 위치(좌표) # * &#39;point_b&#39;: 두 번째 점의 위치(좌표) # * &#39;point_c&#39;: 세 번째 점의 위치(좌표) # * &#39;point_d&#39;: 첫 번째 점의 위치(좌표) rectangle_1 = { &#39;point_a&#39;: {&#39;x&#39;: 2, &#39;y&#39;: 2}, &#39;point_b&#39;: {&#39;x&#39;: 6, &#39;y&#39;: 2}, &#39;point_c&#39;: {&#39;x&#39;: 6, &#39;y&#39;: 6}, &#39;point_d&#39;: {&#39;x&#39;: 2, &#39;y&#39;: 6}, } import math def square(x): &quot;&quot;&quot;전달받은 수의 제곱을 반환한다.&quot;&quot;&quot; return x * x def distance(point_a, point_b): return math.sqrt(square(point_a[&#39;x&#39;] - point_b[&#39;x&#39;]) + square(point_a[&#39;y&#39;] - point_b[&#39;y&#39;])) def circumference_of_triangle(shape): &quot;&quot;&quot;삼각형 데이터를 전달받아 둘레를 구해 반환한다.&quot;&quot;&quot; a_to_b = distance(shape[&#39;point_a&#39;], shape[&#39;point_b&#39;]) b_to_c = distance(shape[&#39;point_b&#39;], shape[&#39;point_c&#39;]) c_to_a = distance(shape[&#39;point_c&#39;], shape[&#39;point_a&#39;]) return a_to_b + b_to_c + c_to_a def circumference_of_rectangle(shape): &quot;&quot;&quot;사각형 데이터를 전달받아 둘레를 구해 반환한다.&quot;&quot;&quot; a_to_b = distance(shape[&#39;point_a&#39;], shape[&#39;point_b&#39;]) b_to_c = distance(shape[&#39;point_b&#39;], shape[&#39;point_c&#39;]) c_to_d = distance(shape[&#39;point_c&#39;], shape[&#39;point_d&#39;]) d_to_a = distance(shape[&#39;point_d&#39;], shape[&#39;point_a&#39;]) return a_to_b + b_to_c + c_to_d + d_to_a print(circumference_of_triangle(triangle_1)) print(circumference_of_rectangle(rectangle_1)) 코드 8-9 import math def square(x): &quot;&quot;&quot;전달받은 수의 제곱을 반환한다.&quot;&quot;&quot; return x * x def distance(point_a, point_b): return math.sqrt(square(point_a[&#39;x&#39;] - point_b[&#39;x&#39;]) + square(point_a[&#39;y&#39;] - point_b[&#39;y&#39;])) def circumference(shape): &quot;&quot;&quot;도형 데이터를 전달받아 둘레를 구해 반환한다.&quot;&quot;&quot; if type(shape) == &#39;삼각형&#39;: a_to_b = distance(shape[&#39;point_a&#39;], shape[&#39;point_b&#39;]) b_to_c = distance(shape[&#39;point_b&#39;], shape[&#39;point_c&#39;]) c_to_a = distance(shape[&#39;point_c&#39;], shape[&#39;point_a&#39;]) return a_to_b + b_to_c + c_to_a elif type(shape) == &#39;사각형&#39;: a_to_b = distance(shape[&#39;point_a&#39;], shape[&#39;point_b&#39;]) b_to_c = distance(shape[&#39;point_b&#39;], shape[&#39;point_c&#39;]) c_to_d = distance(shape[&#39;point_c&#39;], shape[&#39;point_d&#39;]) d_to_a = distance(shape[&#39;point_d&#39;], shape[&#39;point_a&#39;]) return a_to_b + b_to_c + c_to_d + d_to_a else: return None triangle_1 = { &#39;point_a&#39;: {&#39;x&#39;: 0, &#39;y&#39;: 0}, &#39;point_b&#39;: {&#39;x&#39;: 3, &#39;y&#39;: 0}, &#39;point_c&#39;: {&#39;x&#39;: 3, &#39;y&#39;: 4}, } rectangle_1 = { &#39;point_a&#39;: {&#39;x&#39;: 2, &#39;y&#39;: 2}, &#39;point_b&#39;: {&#39;x&#39;: 6, &#39;y&#39;: 2}, &#39;point_c&#39;: {&#39;x&#39;: 6, &#39;y&#39;: 6}, &#39;point_d&#39;: {&#39;x&#39;: 2, &#39;y&#39;: 6}, } print(circumference(triangle_1)) print(circumference(rectangle_1)) print(type(triangle_1)) print(type(rectangle_1)) 코드 8-11 import math def square(x): &quot;&quot;&quot;전달받은 수의 제곱을 반환한다.&quot;&quot;&quot; return x * x def distance(point_a, point_b): return math.sqrt(square(point_a[&#39;x&#39;] - point_b[&#39;x&#39;]) + square(point_a[&#39;y&#39;] - point_b[&#39;y&#39;])) def circumference(shape): &quot;&quot;&quot;도형 데이터를 전달받아 둘레를 구해 반환한다.&quot;&quot;&quot; if shape[&#39;type&#39;] == &#39;삼각형&#39;: a_to_b = distance(shape[&#39;point_a&#39;], shape[&#39;point_b&#39;]) b_to_c = distance(shape[&#39;point_b&#39;], shape[&#39;point_c&#39;]) c_to_a = distance(shape[&#39;point_c&#39;], shape[&#39;point_a&#39;]) return a_to_b + b_to_c + c_to_a elif shape[&#39;type&#39;] == &#39;사각형&#39;: a_to_b = distance(shape[&#39;point_a&#39;], shape[&#39;point_b&#39;]) b_to_c = distance(shape[&#39;point_b&#39;], shape[&#39;point_c&#39;]) c_to_d = distance(shape[&#39;point_c&#39;], shape[&#39;point_d&#39;]) d_to_a = distance(shape[&#39;point_d&#39;], shape[&#39;point_a&#39;]) return a_to_b + b_to_c + c_to_d + d_to_a else: return None triangle_3 = { &#39;type&#39;: &#39;삼각형&#39;, &#39;point_a&#39;: {&#39;x&#39;: 0, &#39;y&#39;: 0}, &#39;point_b&#39;: {&#39;x&#39;: 3, &#39;y&#39;: 0}, &#39;point_c&#39;: {&#39;x&#39;: 3, &#39;y&#39;: 4}, } rectangle_3 = { &#39;type&#39;: &#39;사각형&#39;, &#39;point_a&#39;: {&#39;x&#39;: 2, &#39;y&#39;: 2}, &#39;point_b&#39;: {&#39;x&#39;: 6, &#39;y&#39;: 2}, &#39;point_c&#39;: {&#39;x&#39;: 6, &#39;y&#39;: 6}, &#39;point_d&#39;: {&#39;x&#39;: 2, &#39;y&#39;: 6}, } print(circumference(triangle_3)) print(circumference(rectangle_3)) 개선할 점: 데이터 유형을 type() 함수로 식별할 수 있도록 데이터 유형마다 그에 맞는 함수를 별도로 정의하되, 그 함수가 그 데이터 유형에서만 실행될 수 있도록 강제하자 연습문제 8-1 # 체스말 데이터 유형 정의하기 # &#39;x&#39;: x축의 위치 # &#39;y&#39;: y축의 위치 # &#39;color&#39;: 체스말의 색깔 # &#39;role&#39;: 체스말의 역할 체스말1 = {&#39;x&#39;: &#39;A&#39;, &#39;y&#39;: &#39;8&#39;, &#39;color&#39;: &#39;black&#39;, &#39;role&#39;: &#39;룩&#39;} 체스말2 = {&#39;x&#39;: &#39;E&#39;, &#39;y&#39;: &#39;1&#39;, &#39;color&#39;: &#39;white&#39;, &#39;role&#39;: &#39;킹&#39;} # 바둑돌 데이터 유형 정의하기 # &#39;x&#39;: x축의 위치 # &#39;y&#39;: y축의 위치 # &#39;order&#39;: 바둑돌이 놓인 수 # &#39;color&#39;: 바둑돌의 색깔 바둑돌1 = {&#39;x&#39;: 8, &#39;y&#39;: 14, &#39;order&#39;: 83, &#39;color&#39;: &#39;흑&#39;} 바둑돌2 = {&#39;x&#39;: 12, &#39;y&#39;: 3, &#39;order&#39;: 84, &#39;color&#39;: &#39;백&#39;} 연습문제 8-2 # 체스말 데이터 유형 정의하기 # &#39;x&#39;: x축의 위치 # &#39;y&#39;: y축의 위치 # &#39;color&#39;: 체스말의 색깔 # &#39;role&#39;: 체스말의 역할 체스말1 = {&#39;type&#39;: &#39;체스말&#39;, &#39;x&#39;: &#39;A&#39;, &#39;y&#39;: &#39;8&#39;, &#39;color&#39;: &#39;black&#39;, &#39;role&#39;: &#39;룩&#39;} 체스말2 = {&#39;type&#39;: &#39;체스말&#39;, &#39;x&#39;: &#39;E&#39;, &#39;y&#39;: &#39;1&#39;, &#39;color&#39;: &#39;white&#39;, &#39;role&#39;: &#39;킹&#39;} # 바둑돌 데이터 유형 정의하기 # &#39;x&#39;: x축의 위치 # &#39;y&#39;: y축의 위치 # &#39;order&#39;: 바둑돌이 놓인 수 # &#39;color&#39;: 바둑돌의 색깔 바둑돌1 = {&#39;type&#39;: &#39;바둑돌&#39;, &#39;x&#39;: 8, &#39;y&#39;: 14, &#39;order&#39;: 83, &#39;color&#39;: &#39;흑&#39;} 바둑돌2 = {&#39;type&#39;: &#39;바둑돌&#39;, &#39;x&#39;: 12, &#39;y&#39;: 3, &#39;order&#39;: 84, &#39;color&#39;: &#39;백&#39;} def print_piece(piece): &quot;&quot;&quot;말을 전달받아 종류에 따라 다른 형태로 위치를 출력한다.&quot;&quot;&quot; if piece[&#39;type&#39;] == &#39;체스말&#39;: print(piece[&#39;color&#39;] + &#39; 룩이 &#39; + piece[&#39;x&#39;] + piece[&#39;y&#39;] + &#39;위치에 놓여 있어요.&#39;) elif piece[&#39;type&#39;] == &#39;바둑돌&#39;: print(&#39;제 &#39;, piece[&#39;order&#39;], &#39; 수: &#39;, piece[&#39;color&#39;], &#39;을 (&#39;, piece[&#39;x&#39;], &#39;, &#39;, piece[&#39;y&#39;], &#39;) 위치에 두었습니다.&#39;, sep=&#39;&#39;) print_piece(체스말1) print_piece(바둑돌2) 클래스와 객체 type() 함수가 반환하는 데이터는 type이라는 데이터 유형. 데이터 유형을 나타내기 위한 데이터가 존재한다. 이 데이터가 바로 클래스이다. 0,1,2,3의 데이터 유형이 정수인 것처럼, int, float, str의 데이터 유형은 클래스이다. 컴퓨터에서 정보는 메모리 위에 올린 후 처리한다. 메모리 위에 올려둔 정보를 의미 있는 덩어리로 묶어 두기 위한 단위가 필요하다. 파이썬에서는 객체 단위로 메모리 위의 정보를 관리한다. 객체에는 값, 유형, 정체성이라는 세 특성이 있다. 값은 메모리에 기록된 내용이다. 유형은 데이터의 종류로, 유형에 따라 그 값을 어떻게 읽고 다루어야 할지가 결정된다. 정체성은 각각의 객체를 식별하기 위한 고유번호로, 객체가 메모리 속에서 위치한 주소 값이기도 하다. 동일한 객체를 다른 변수에 대입하면, 두 변수가 같은 객체를 가리킨다. year = 1789 same_year = year id(year) == id(same_year) =&gt; True 객체가 어떤 클래스에 속할 때, 그 객체를 해당 클래스의 인스턴스라 한다. 1,2,3은 모두 int 클래스의 인스턴스다. 검사하려는 객체와 클래스가 정해져 있을 때, isinstance() 함수로 객체가 그 클래스에 속하는지 검사할 수 있다. 한 객체는 동시에 여러 클래스의 인스턴스일 수 있다. 파이썬의 모든 데이터는 객체이고, 모든 객체는 어떤 유형에 속한다. 즉, 파이썬의 모든 데이터는 인스턴스이다. 파이썬에서 데이터를 생성하는 것은 곧 인스턴스를 생성하는 것이다. 인스턴스 만들기1: 그대로 평가하기. 리터럴 인스턴스 만들기2: 식을 평가하기. 인스턴스 만들기3: 인스턴스화하기. 클래스 이름에 괄호를 붙여서 수행. ex) int(1789.0) 정수 인스턴스 만들기 연습문제 8-3 a. 아니다. 값이 같을 뿐 객체가 같으려면 정체성이 같아야 한다. b. 아니다. 유형이 같을 뿐. c. 맞다. d. 아니다. 같은 객체를 가리켜야 함. 연습문제 8-4 () {} print(type({range(10)})) int(input()) str(1789) bool([]) 클래스 정의하기 코드 8-22 class Cake: &quot;&quot;&quot;케이크를 나타내는 클래스&quot;&quot;&quot; coat = &#39;생크림&#39; cake_1 = Cake() cake_2 = Cake() print(Cake) print(type(cake_1)) print(isinstance(cake_2, Cake)) 속성은 일반적인 변수와 같은데, 클래스와 인스턴스 속에 정의되는 것이 특징이다. 클래스의 속성은 클래스 객체뿐 아니라 그 클래스의 모든 인스턴스가 공유한다. 코드 8-23 class Cake: &quot;&quot;&quot;케이크를 나타내는 클래스&quot;&quot;&quot; coat = &#39;생크림&#39; cake_1 = Cake() cake_2 = Cake() print(Cake.coat) print(cake_1.coat) print(cake_2.coat) 코드 8-24 ​​class Cake: &quot;&quot;&quot;케이크를 나타내는 클래스&quot;&quot;&quot; coat = &#39;생크림&#39; cake_1 = Cake() cake_2 = Cake() Cake.coat = &#39;초콜릿&#39; Cake.price = 4000 print(Cake.coat) print(Cake.price) print(cake_1.coat) print(cake_1.price) cake_3 = Cake() print(cake_3.coat) print(cake_3.price) 일반적으로 클래스의 속성은 class 문에서 확정하고, 나중에는 수정하지 않는 게 좋다. 자주 변경되어야 하는 속성이 있다면, 그 속성은 클래스가 아니라 인스턴스 속에 정의되어야 할 가능성이 높다. 코드 8-25 class Cake: &quot;&quot;&quot;케이크를 나타내는 클래스&quot;&quot;&quot; coat = &#39;생크림&#39; cake_1 = Cake() cake_2 = Cake() cake_1.topping = &#39;블루베리&#39; print(cake_1.topping) print(Cake.topping) print(cake_2.topping) 코드 8-26 class Cake: &quot;&quot;&quot;케이크를 나타내는 클래스&quot;&quot;&quot; coat = &#39;생크림&#39; cake_1 = Cake() cake_2 = Cake() print(cake_1.coat) cake_1.coat = &#39;아이스크림&#39; print(cake_1.coat) print(Cake.coat) print(cake_2.coat) 이름공간은 프로그래밍 언어에서 이름이 가리키는 대상을 제한하는 범위이다. dir() 함수는 파이썬의 기본 데이터 유형이나 다른 사람이 정의한 클래스에 어떤 속성이 있는지 확인할 수 있게 해준다. 코드 8-27 class Cake: &quot;&quot;&quot;케이크를 나타내는 클래스&quot;&quot;&quot; coat = &#39;생크림&#39; cake_1 = Cake() cake_2 = Cake() import pprint pprint.pprint(dir(Cake)) 클래스나 인스턴스에 속한 함수는 그 데이터 종류를 위한 전용. 이 함수를 메서드라 한다. 대부분의 메서드는 클래스 공용 속성으로 정의한다. 데이터 유형을 다루는 방법은 데이터 유형에 따라 정하기 때문이다. 코드 8-29 class Cake: &quot;&quot;&quot;케이크를 나타낸는 클래스&quot;&quot;&quot; coat = &#39;생크림&#39; def describe(): &quot;&quot;&quot;이 케이크에 관한 정보를 화면에 출력한다.&quot;&quot;&quot; print(&#39;이 케이크는&#39;, Cake.coat, &#39;으로 덮여 있다.&#39;) Cake.describe() 코드 8-30 class Cake: &quot;&quot;&quot;케이크를 나타낸는 클래스&quot;&quot;&quot; coat = &#39;생크림&#39; def describe(): &quot;&quot;&quot;이 케이크에 관한 정보를 화면에 출력한다.&quot;&quot;&quot; print(&#39;이 케이크는&#39;, Cake.coat, &#39;으로 덮여 있다.&#39;) cake_1 =Cake() cake_1.coat = &#39;초콜릿&#39; cake_1.describe() 파이썬에서는 클래스를 기준으로 할 때와 인스턴스를 기준으로 할 때 메서드 호출 방식이 다르다. 인스턴스를 기준으로 메서드를 호출하면 암묵적으로 메서드 호출의 기준이 되는 인스턴스가 첫 번째 인자로 메서드에 전달된다." />
+<link rel="canonical" href="http://localhost:4000/2022-08-03/yeono-python-11" />
+<meta property="og:url" content="http://localhost:4000/2022-08-03/yeono-python-11" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-08-03T22:17:42+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="연오의 파이썬 공부 11" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-08-03T22:17:42+09:00","datePublished":"2022-08-03T22:17:42+09:00","description":"코드 8-4 coordinate_2 = (3, 5) triangle_2 = ((0, 0), (0, 3), (4, 3)) rectangle_2 = { &#39;point&#39;: (2, 2), &#39;width&#39;: 4, &#39;height&#39;: 4, } 코드 8-5 # 오류가 발생하는 예제 import math coordinate_2 = (3, 5) triangle_2 = ((0, 0), (0, 3), (4, 3)) rectangle_2 = { &#39;point&#39;: (2, 2), &#39;width&#39;: 4, &#39;height&#39;: 4, } def square(x): &quot;&quot;&quot;전달받은 수의 제곱을 반환한다.&quot;&quot;&quot; return x * x def distance(point_a, point_b): return math.sqrt(square(point_a[&#39;x&#39;] - point_b[&#39;x&#39;]) + square(point_a[&#39;y&#39;] - point_b[&#39;y&#39;])) def circumference_of_triangle(shape): &quot;&quot;&quot;삼각형 데이터를 전달받아 둘레를 구해 반환한다.&quot;&quot;&quot; a_to_b = distance(shape[&#39;point_a&#39;], shape[&#39;point_b&#39;]) b_to_c = distance(shape[&#39;point_b&#39;], shape[&#39;point_c&#39;]) c_to_a = distance(shape[&#39;point_c&#39;], shape[&#39;point_a&#39;]) return a_to_b + b_to_c + c_to_a print(circumference_of_triangle(triangle_2)) 동일한 범주에 속하는 데이터의 유형을 정의하고 그 구조를 동일하게 구성해야 한다. 코드 8-6 # 유형: &#39;좌표&#39;는 다음 키를 가지는 사전이다. # * &#39;x&#39;: x축의 위치 (정수) # * &#39;y&#39;: y축의 위치 (정수) coordinate_1 = {&#39;x&#39;: 5, &#39;y&#39;: 3} # 유형: &#39;삼각형&#39;은 다음 키를 가지는 사전이다. # * &#39;point_a&#39;: 첫 번째 점의 위치(좌표) # * &#39;point_b&#39;: 두 번째 점의 위치(좌표) # * &#39;point_c&#39;: 세 번째 점의 위치(좌표) triangle_1 = { &#39;point_a&#39;: {&#39;x&#39;: 0, &#39;y&#39;: 0}, &#39;point_b&#39;: {&#39;x&#39;: 3, &#39;y&#39;: 0}, &#39;point_c&#39;: {&#39;x&#39;: 3, &#39;y&#39;: 4}, } # 유형: &#39;사각형&#39;은 다음 키를 가지는 사전이다. # * &#39;point_a&#39;: 첫 번째 점의 위치(좌표) # * &#39;point_b&#39;: 두 번째 점의 위치(좌표) # * &#39;point_c&#39;: 세 번째 점의 위치(좌표) # * &#39;point_d&#39;: 첫 번째 점의 위치(좌표) rectangle_1 = { &#39;point_a&#39;: {&#39;x&#39;: 2, &#39;y&#39;: 2}, &#39;point_b&#39;: {&#39;x&#39;: 6, &#39;y&#39;: 2}, &#39;point_c&#39;: {&#39;x&#39;: 6, &#39;y&#39;: 6}, &#39;point_d&#39;: {&#39;x&#39;: 2, &#39;y&#39;: 6}, } import math def square(x): &quot;&quot;&quot;전달받은 수의 제곱을 반환한다.&quot;&quot;&quot; return x * x def distance(point_a, point_b): return math.sqrt(square(point_a[&#39;x&#39;] - point_b[&#39;x&#39;]) + square(point_a[&#39;y&#39;] - point_b[&#39;y&#39;])) def circumference_of_triangle(shape): &quot;&quot;&quot;삼각형 데이터를 전달받아 둘레를 구해 반환한다.&quot;&quot;&quot; a_to_b = distance(shape[&#39;point_a&#39;], shape[&#39;point_b&#39;]) b_to_c = distance(shape[&#39;point_b&#39;], shape[&#39;point_c&#39;]) c_to_a = distance(shape[&#39;point_c&#39;], shape[&#39;point_a&#39;]) return a_to_b + b_to_c + c_to_a def circumference_of_rectangle(shape): &quot;&quot;&quot;사각형 데이터를 전달받아 둘레를 구해 반환한다.&quot;&quot;&quot; a_to_b = distance(shape[&#39;point_a&#39;], shape[&#39;point_b&#39;]) b_to_c = distance(shape[&#39;point_b&#39;], shape[&#39;point_c&#39;]) c_to_d = distance(shape[&#39;point_c&#39;], shape[&#39;point_d&#39;]) d_to_a = distance(shape[&#39;point_d&#39;], shape[&#39;point_a&#39;]) return a_to_b + b_to_c + c_to_d + d_to_a print(circumference_of_triangle(triangle_1)) print(circumference_of_rectangle(rectangle_1)) 코드 8-9 import math def square(x): &quot;&quot;&quot;전달받은 수의 제곱을 반환한다.&quot;&quot;&quot; return x * x def distance(point_a, point_b): return math.sqrt(square(point_a[&#39;x&#39;] - point_b[&#39;x&#39;]) + square(point_a[&#39;y&#39;] - point_b[&#39;y&#39;])) def circumference(shape): &quot;&quot;&quot;도형 데이터를 전달받아 둘레를 구해 반환한다.&quot;&quot;&quot; if type(shape) == &#39;삼각형&#39;: a_to_b = distance(shape[&#39;point_a&#39;], shape[&#39;point_b&#39;]) b_to_c = distance(shape[&#39;point_b&#39;], shape[&#39;point_c&#39;]) c_to_a = distance(shape[&#39;point_c&#39;], shape[&#39;point_a&#39;]) return a_to_b + b_to_c + c_to_a elif type(shape) == &#39;사각형&#39;: a_to_b = distance(shape[&#39;point_a&#39;], shape[&#39;point_b&#39;]) b_to_c = distance(shape[&#39;point_b&#39;], shape[&#39;point_c&#39;]) c_to_d = distance(shape[&#39;point_c&#39;], shape[&#39;point_d&#39;]) d_to_a = distance(shape[&#39;point_d&#39;], shape[&#39;point_a&#39;]) return a_to_b + b_to_c + c_to_d + d_to_a else: return None triangle_1 = { &#39;point_a&#39;: {&#39;x&#39;: 0, &#39;y&#39;: 0}, &#39;point_b&#39;: {&#39;x&#39;: 3, &#39;y&#39;: 0}, &#39;point_c&#39;: {&#39;x&#39;: 3, &#39;y&#39;: 4}, } rectangle_1 = { &#39;point_a&#39;: {&#39;x&#39;: 2, &#39;y&#39;: 2}, &#39;point_b&#39;: {&#39;x&#39;: 6, &#39;y&#39;: 2}, &#39;point_c&#39;: {&#39;x&#39;: 6, &#39;y&#39;: 6}, &#39;point_d&#39;: {&#39;x&#39;: 2, &#39;y&#39;: 6}, } print(circumference(triangle_1)) print(circumference(rectangle_1)) print(type(triangle_1)) print(type(rectangle_1)) 코드 8-11 import math def square(x): &quot;&quot;&quot;전달받은 수의 제곱을 반환한다.&quot;&quot;&quot; return x * x def distance(point_a, point_b): return math.sqrt(square(point_a[&#39;x&#39;] - point_b[&#39;x&#39;]) + square(point_a[&#39;y&#39;] - point_b[&#39;y&#39;])) def circumference(shape): &quot;&quot;&quot;도형 데이터를 전달받아 둘레를 구해 반환한다.&quot;&quot;&quot; if shape[&#39;type&#39;] == &#39;삼각형&#39;: a_to_b = distance(shape[&#39;point_a&#39;], shape[&#39;point_b&#39;]) b_to_c = distance(shape[&#39;point_b&#39;], shape[&#39;point_c&#39;]) c_to_a = distance(shape[&#39;point_c&#39;], shape[&#39;point_a&#39;]) return a_to_b + b_to_c + c_to_a elif shape[&#39;type&#39;] == &#39;사각형&#39;: a_to_b = distance(shape[&#39;point_a&#39;], shape[&#39;point_b&#39;]) b_to_c = distance(shape[&#39;point_b&#39;], shape[&#39;point_c&#39;]) c_to_d = distance(shape[&#39;point_c&#39;], shape[&#39;point_d&#39;]) d_to_a = distance(shape[&#39;point_d&#39;], shape[&#39;point_a&#39;]) return a_to_b + b_to_c + c_to_d + d_to_a else: return None triangle_3 = { &#39;type&#39;: &#39;삼각형&#39;, &#39;point_a&#39;: {&#39;x&#39;: 0, &#39;y&#39;: 0}, &#39;point_b&#39;: {&#39;x&#39;: 3, &#39;y&#39;: 0}, &#39;point_c&#39;: {&#39;x&#39;: 3, &#39;y&#39;: 4}, } rectangle_3 = { &#39;type&#39;: &#39;사각형&#39;, &#39;point_a&#39;: {&#39;x&#39;: 2, &#39;y&#39;: 2}, &#39;point_b&#39;: {&#39;x&#39;: 6, &#39;y&#39;: 2}, &#39;point_c&#39;: {&#39;x&#39;: 6, &#39;y&#39;: 6}, &#39;point_d&#39;: {&#39;x&#39;: 2, &#39;y&#39;: 6}, } print(circumference(triangle_3)) print(circumference(rectangle_3)) 개선할 점: 데이터 유형을 type() 함수로 식별할 수 있도록 데이터 유형마다 그에 맞는 함수를 별도로 정의하되, 그 함수가 그 데이터 유형에서만 실행될 수 있도록 강제하자 연습문제 8-1 # 체스말 데이터 유형 정의하기 # &#39;x&#39;: x축의 위치 # &#39;y&#39;: y축의 위치 # &#39;color&#39;: 체스말의 색깔 # &#39;role&#39;: 체스말의 역할 체스말1 = {&#39;x&#39;: &#39;A&#39;, &#39;y&#39;: &#39;8&#39;, &#39;color&#39;: &#39;black&#39;, &#39;role&#39;: &#39;룩&#39;} 체스말2 = {&#39;x&#39;: &#39;E&#39;, &#39;y&#39;: &#39;1&#39;, &#39;color&#39;: &#39;white&#39;, &#39;role&#39;: &#39;킹&#39;} # 바둑돌 데이터 유형 정의하기 # &#39;x&#39;: x축의 위치 # &#39;y&#39;: y축의 위치 # &#39;order&#39;: 바둑돌이 놓인 수 # &#39;color&#39;: 바둑돌의 색깔 바둑돌1 = {&#39;x&#39;: 8, &#39;y&#39;: 14, &#39;order&#39;: 83, &#39;color&#39;: &#39;흑&#39;} 바둑돌2 = {&#39;x&#39;: 12, &#39;y&#39;: 3, &#39;order&#39;: 84, &#39;color&#39;: &#39;백&#39;} 연습문제 8-2 # 체스말 데이터 유형 정의하기 # &#39;x&#39;: x축의 위치 # &#39;y&#39;: y축의 위치 # &#39;color&#39;: 체스말의 색깔 # &#39;role&#39;: 체스말의 역할 체스말1 = {&#39;type&#39;: &#39;체스말&#39;, &#39;x&#39;: &#39;A&#39;, &#39;y&#39;: &#39;8&#39;, &#39;color&#39;: &#39;black&#39;, &#39;role&#39;: &#39;룩&#39;} 체스말2 = {&#39;type&#39;: &#39;체스말&#39;, &#39;x&#39;: &#39;E&#39;, &#39;y&#39;: &#39;1&#39;, &#39;color&#39;: &#39;white&#39;, &#39;role&#39;: &#39;킹&#39;} # 바둑돌 데이터 유형 정의하기 # &#39;x&#39;: x축의 위치 # &#39;y&#39;: y축의 위치 # &#39;order&#39;: 바둑돌이 놓인 수 # &#39;color&#39;: 바둑돌의 색깔 바둑돌1 = {&#39;type&#39;: &#39;바둑돌&#39;, &#39;x&#39;: 8, &#39;y&#39;: 14, &#39;order&#39;: 83, &#39;color&#39;: &#39;흑&#39;} 바둑돌2 = {&#39;type&#39;: &#39;바둑돌&#39;, &#39;x&#39;: 12, &#39;y&#39;: 3, &#39;order&#39;: 84, &#39;color&#39;: &#39;백&#39;} def print_piece(piece): &quot;&quot;&quot;말을 전달받아 종류에 따라 다른 형태로 위치를 출력한다.&quot;&quot;&quot; if piece[&#39;type&#39;] == &#39;체스말&#39;: print(piece[&#39;color&#39;] + &#39; 룩이 &#39; + piece[&#39;x&#39;] + piece[&#39;y&#39;] + &#39;위치에 놓여 있어요.&#39;) elif piece[&#39;type&#39;] == &#39;바둑돌&#39;: print(&#39;제 &#39;, piece[&#39;order&#39;], &#39; 수: &#39;, piece[&#39;color&#39;], &#39;을 (&#39;, piece[&#39;x&#39;], &#39;, &#39;, piece[&#39;y&#39;], &#39;) 위치에 두었습니다.&#39;, sep=&#39;&#39;) print_piece(체스말1) print_piece(바둑돌2) 클래스와 객체 type() 함수가 반환하는 데이터는 type이라는 데이터 유형. 데이터 유형을 나타내기 위한 데이터가 존재한다. 이 데이터가 바로 클래스이다. 0,1,2,3의 데이터 유형이 정수인 것처럼, int, float, str의 데이터 유형은 클래스이다. 컴퓨터에서 정보는 메모리 위에 올린 후 처리한다. 메모리 위에 올려둔 정보를 의미 있는 덩어리로 묶어 두기 위한 단위가 필요하다. 파이썬에서는 객체 단위로 메모리 위의 정보를 관리한다. 객체에는 값, 유형, 정체성이라는 세 특성이 있다. 값은 메모리에 기록된 내용이다. 유형은 데이터의 종류로, 유형에 따라 그 값을 어떻게 읽고 다루어야 할지가 결정된다. 정체성은 각각의 객체를 식별하기 위한 고유번호로, 객체가 메모리 속에서 위치한 주소 값이기도 하다. 동일한 객체를 다른 변수에 대입하면, 두 변수가 같은 객체를 가리킨다. year = 1789 same_year = year id(year) == id(same_year) =&gt; True 객체가 어떤 클래스에 속할 때, 그 객체를 해당 클래스의 인스턴스라 한다. 1,2,3은 모두 int 클래스의 인스턴스다. 검사하려는 객체와 클래스가 정해져 있을 때, isinstance() 함수로 객체가 그 클래스에 속하는지 검사할 수 있다. 한 객체는 동시에 여러 클래스의 인스턴스일 수 있다. 파이썬의 모든 데이터는 객체이고, 모든 객체는 어떤 유형에 속한다. 즉, 파이썬의 모든 데이터는 인스턴스이다. 파이썬에서 데이터를 생성하는 것은 곧 인스턴스를 생성하는 것이다. 인스턴스 만들기1: 그대로 평가하기. 리터럴 인스턴스 만들기2: 식을 평가하기. 인스턴스 만들기3: 인스턴스화하기. 클래스 이름에 괄호를 붙여서 수행. ex) int(1789.0) 정수 인스턴스 만들기 연습문제 8-3 a. 아니다. 값이 같을 뿐 객체가 같으려면 정체성이 같아야 한다. b. 아니다. 유형이 같을 뿐. c. 맞다. d. 아니다. 같은 객체를 가리켜야 함. 연습문제 8-4 () {} print(type({range(10)})) int(input()) str(1789) bool([]) 클래스 정의하기 코드 8-22 class Cake: &quot;&quot;&quot;케이크를 나타내는 클래스&quot;&quot;&quot; coat = &#39;생크림&#39; cake_1 = Cake() cake_2 = Cake() print(Cake) print(type(cake_1)) print(isinstance(cake_2, Cake)) 속성은 일반적인 변수와 같은데, 클래스와 인스턴스 속에 정의되는 것이 특징이다. 클래스의 속성은 클래스 객체뿐 아니라 그 클래스의 모든 인스턴스가 공유한다. 코드 8-23 class Cake: &quot;&quot;&quot;케이크를 나타내는 클래스&quot;&quot;&quot; coat = &#39;생크림&#39; cake_1 = Cake() cake_2 = Cake() print(Cake.coat) print(cake_1.coat) print(cake_2.coat) 코드 8-24 ​​class Cake: &quot;&quot;&quot;케이크를 나타내는 클래스&quot;&quot;&quot; coat = &#39;생크림&#39; cake_1 = Cake() cake_2 = Cake() Cake.coat = &#39;초콜릿&#39; Cake.price = 4000 print(Cake.coat) print(Cake.price) print(cake_1.coat) print(cake_1.price) cake_3 = Cake() print(cake_3.coat) print(cake_3.price) 일반적으로 클래스의 속성은 class 문에서 확정하고, 나중에는 수정하지 않는 게 좋다. 자주 변경되어야 하는 속성이 있다면, 그 속성은 클래스가 아니라 인스턴스 속에 정의되어야 할 가능성이 높다. 코드 8-25 class Cake: &quot;&quot;&quot;케이크를 나타내는 클래스&quot;&quot;&quot; coat = &#39;생크림&#39; cake_1 = Cake() cake_2 = Cake() cake_1.topping = &#39;블루베리&#39; print(cake_1.topping) print(Cake.topping) print(cake_2.topping) 코드 8-26 class Cake: &quot;&quot;&quot;케이크를 나타내는 클래스&quot;&quot;&quot; coat = &#39;생크림&#39; cake_1 = Cake() cake_2 = Cake() print(cake_1.coat) cake_1.coat = &#39;아이스크림&#39; print(cake_1.coat) print(Cake.coat) print(cake_2.coat) 이름공간은 프로그래밍 언어에서 이름이 가리키는 대상을 제한하는 범위이다. dir() 함수는 파이썬의 기본 데이터 유형이나 다른 사람이 정의한 클래스에 어떤 속성이 있는지 확인할 수 있게 해준다. 코드 8-27 class Cake: &quot;&quot;&quot;케이크를 나타내는 클래스&quot;&quot;&quot; coat = &#39;생크림&#39; cake_1 = Cake() cake_2 = Cake() import pprint pprint.pprint(dir(Cake)) 클래스나 인스턴스에 속한 함수는 그 데이터 종류를 위한 전용. 이 함수를 메서드라 한다. 대부분의 메서드는 클래스 공용 속성으로 정의한다. 데이터 유형을 다루는 방법은 데이터 유형에 따라 정하기 때문이다. 코드 8-29 class Cake: &quot;&quot;&quot;케이크를 나타낸는 클래스&quot;&quot;&quot; coat = &#39;생크림&#39; def describe(): &quot;&quot;&quot;이 케이크에 관한 정보를 화면에 출력한다.&quot;&quot;&quot; print(&#39;이 케이크는&#39;, Cake.coat, &#39;으로 덮여 있다.&#39;) Cake.describe() 코드 8-30 class Cake: &quot;&quot;&quot;케이크를 나타낸는 클래스&quot;&quot;&quot; coat = &#39;생크림&#39; def describe(): &quot;&quot;&quot;이 케이크에 관한 정보를 화면에 출력한다.&quot;&quot;&quot; print(&#39;이 케이크는&#39;, Cake.coat, &#39;으로 덮여 있다.&#39;) cake_1 =Cake() cake_1.coat = &#39;초콜릿&#39; cake_1.describe() 파이썬에서는 클래스를 기준으로 할 때와 인스턴스를 기준으로 할 때 메서드 호출 방식이 다르다. 인스턴스를 기준으로 메서드를 호출하면 암묵적으로 메서드 호출의 기준이 되는 인스턴스가 첫 번째 인자로 메서드에 전달된다.","headline":"연오의 파이썬 공부 11","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-08-03/yeono-python-11"},"url":"http://localhost:4000/2022-08-03/yeono-python-11"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Sunmi Moon
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2022-08-03 22:17:42 +0900">August 03, 2022</time>
+    
+  </div>
+
+  <h1 class="post-title">연오의 파이썬 공부 11</h1>
+  <div class="post-line"></div>
+
+  <p>코드 8-4</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">coordinate_2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">triangle_2</span> <span class="o">=</span> <span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">rectangle_2</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="s">'point'</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+   <span class="s">'width'</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+   <span class="s">'height'</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>코드 8-5</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 오류가 발생하는 예제
+</span><span class="kn">import</span> <span class="nn">math</span>
+
+<span class="n">coordinate_2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">triangle_2</span> <span class="o">=</span> <span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">rectangle_2</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="s">'point'</span><span class="p">:</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+   <span class="s">'width'</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+   <span class="s">'height'</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+<span class="p">}</span>
+
+
+<span class="k">def</span> <span class="nf">square</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+   <span class="s">"""전달받은 수의 제곱을 반환한다."""</span>
+   <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+
+
+<span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="n">point_a</span><span class="p">,</span> <span class="n">point_b</span><span class="p">):</span>
+   <span class="k">return</span> <span class="n">math</span><span class="p">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">square</span><span class="p">(</span><span class="n">point_a</span><span class="p">[</span><span class="s">'x'</span><span class="p">]</span> <span class="o">-</span> <span class="n">point_b</span><span class="p">[</span><span class="s">'x'</span><span class="p">])</span> <span class="o">+</span> <span class="n">square</span><span class="p">(</span><span class="n">point_a</span><span class="p">[</span><span class="s">'y'</span><span class="p">]</span> <span class="o">-</span> <span class="n">point_b</span><span class="p">[</span><span class="s">'y'</span><span class="p">]))</span>
+
+
+<span class="k">def</span> <span class="nf">circumference_of_triangle</span><span class="p">(</span><span class="n">shape</span><span class="p">):</span>
+   <span class="s">"""삼각형 데이터를 전달받아 둘레를 구해 반환한다."""</span>
+   <span class="n">a_to_b</span> <span class="o">=</span> <span class="n">distance</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="s">'point_a'</span><span class="p">],</span> <span class="n">shape</span><span class="p">[</span><span class="s">'point_b'</span><span class="p">])</span>
+   <span class="n">b_to_c</span> <span class="o">=</span> <span class="n">distance</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="s">'point_b'</span><span class="p">],</span> <span class="n">shape</span><span class="p">[</span><span class="s">'point_c'</span><span class="p">])</span>
+   <span class="n">c_to_a</span> <span class="o">=</span> <span class="n">distance</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="s">'point_c'</span><span class="p">],</span> <span class="n">shape</span><span class="p">[</span><span class="s">'point_a'</span><span class="p">])</span>
+
+   <span class="k">return</span> <span class="n">a_to_b</span> <span class="o">+</span> <span class="n">b_to_c</span> <span class="o">+</span> <span class="n">c_to_a</span>
+
+
+<span class="k">print</span><span class="p">(</span><span class="n">circumference_of_triangle</span><span class="p">(</span><span class="n">triangle_2</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>동일한 범주에 속하는 데이터의 유형을 정의하고 그 구조를 동일하게 구성해야 한다.</p>
+
+<p>코드 8-6</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 유형: '좌표'는 다음 키를 가지는 사전이다.
+#   * 'x': x축의 위치 (정수)
+#   * 'y': y축의 위치 (정수)
+</span><span class="n">coordinate_1</span> <span class="o">=</span> <span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+
+<span class="c1"># 유형: '삼각형'은 다음 키를 가지는 사전이다.
+#   * 'point_a': 첫 번째 점의 위치(좌표)
+#   * 'point_b': 두 번째 점의 위치(좌표)
+#   * 'point_c': 세 번째 점의 위치(좌표)
+</span><span class="n">triangle_1</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="s">'point_a'</span><span class="p">:</span> <span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+   <span class="s">'point_b'</span><span class="p">:</span> <span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+   <span class="s">'point_c'</span><span class="p">:</span> <span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="mi">4</span><span class="p">},</span>
+<span class="p">}</span>
+
+
+<span class="c1"># 유형: '사각형'은 다음 키를 가지는 사전이다.
+#   * 'point_a': 첫 번째 점의 위치(좌표)
+#   * 'point_b': 두 번째 점의 위치(좌표)
+#   * 'point_c': 세 번째 점의 위치(좌표)
+#   * 'point_d': 첫 번째 점의 위치(좌표)
+</span><span class="n">rectangle_1</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="s">'point_a'</span><span class="p">:</span> <span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span>
+   <span class="s">'point_b'</span><span class="p">:</span> <span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span>
+   <span class="s">'point_c'</span><span class="p">:</span> <span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="mi">6</span><span class="p">},</span>
+   <span class="s">'point_d'</span><span class="p">:</span> <span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="mi">6</span><span class="p">},</span>
+<span class="p">}</span>
+
+<span class="kn">import</span> <span class="nn">math</span>
+
+
+<span class="k">def</span> <span class="nf">square</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+   <span class="s">"""전달받은 수의 제곱을 반환한다."""</span>
+   <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+
+
+<span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="n">point_a</span><span class="p">,</span> <span class="n">point_b</span><span class="p">):</span>
+   <span class="k">return</span> <span class="n">math</span><span class="p">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">square</span><span class="p">(</span><span class="n">point_a</span><span class="p">[</span><span class="s">'x'</span><span class="p">]</span> <span class="o">-</span> <span class="n">point_b</span><span class="p">[</span><span class="s">'x'</span><span class="p">])</span> <span class="o">+</span> <span class="n">square</span><span class="p">(</span><span class="n">point_a</span><span class="p">[</span><span class="s">'y'</span><span class="p">]</span> <span class="o">-</span> <span class="n">point_b</span><span class="p">[</span><span class="s">'y'</span><span class="p">]))</span>
+
+
+<span class="k">def</span> <span class="nf">circumference_of_triangle</span><span class="p">(</span><span class="n">shape</span><span class="p">):</span>
+   <span class="s">"""삼각형 데이터를 전달받아 둘레를 구해 반환한다."""</span>
+   <span class="n">a_to_b</span> <span class="o">=</span> <span class="n">distance</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="s">'point_a'</span><span class="p">],</span> <span class="n">shape</span><span class="p">[</span><span class="s">'point_b'</span><span class="p">])</span>
+   <span class="n">b_to_c</span> <span class="o">=</span> <span class="n">distance</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="s">'point_b'</span><span class="p">],</span> <span class="n">shape</span><span class="p">[</span><span class="s">'point_c'</span><span class="p">])</span>
+   <span class="n">c_to_a</span> <span class="o">=</span> <span class="n">distance</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="s">'point_c'</span><span class="p">],</span> <span class="n">shape</span><span class="p">[</span><span class="s">'point_a'</span><span class="p">])</span>
+
+   <span class="k">return</span> <span class="n">a_to_b</span> <span class="o">+</span> <span class="n">b_to_c</span> <span class="o">+</span> <span class="n">c_to_a</span>
+
+
+<span class="k">def</span> <span class="nf">circumference_of_rectangle</span><span class="p">(</span><span class="n">shape</span><span class="p">):</span>
+   <span class="s">"""사각형 데이터를 전달받아 둘레를 구해 반환한다."""</span>
+   <span class="n">a_to_b</span> <span class="o">=</span> <span class="n">distance</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="s">'point_a'</span><span class="p">],</span> <span class="n">shape</span><span class="p">[</span><span class="s">'point_b'</span><span class="p">])</span>
+   <span class="n">b_to_c</span> <span class="o">=</span> <span class="n">distance</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="s">'point_b'</span><span class="p">],</span> <span class="n">shape</span><span class="p">[</span><span class="s">'point_c'</span><span class="p">])</span>
+   <span class="n">c_to_d</span> <span class="o">=</span> <span class="n">distance</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="s">'point_c'</span><span class="p">],</span> <span class="n">shape</span><span class="p">[</span><span class="s">'point_d'</span><span class="p">])</span>
+   <span class="n">d_to_a</span> <span class="o">=</span> <span class="n">distance</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="s">'point_d'</span><span class="p">],</span> <span class="n">shape</span><span class="p">[</span><span class="s">'point_a'</span><span class="p">])</span>
+
+   <span class="k">return</span> <span class="n">a_to_b</span> <span class="o">+</span> <span class="n">b_to_c</span> <span class="o">+</span> <span class="n">c_to_d</span> <span class="o">+</span> <span class="n">d_to_a</span>
+
+
+<span class="k">print</span><span class="p">(</span><span class="n">circumference_of_triangle</span><span class="p">(</span><span class="n">triangle_1</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">circumference_of_rectangle</span><span class="p">(</span><span class="n">rectangle_1</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>코드 8-9</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">math</span>
+
+
+<span class="k">def</span> <span class="nf">square</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+   <span class="s">"""전달받은 수의 제곱을 반환한다."""</span>
+   <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+
+
+<span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="n">point_a</span><span class="p">,</span> <span class="n">point_b</span><span class="p">):</span>
+   <span class="k">return</span> <span class="n">math</span><span class="p">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">square</span><span class="p">(</span><span class="n">point_a</span><span class="p">[</span><span class="s">'x'</span><span class="p">]</span> <span class="o">-</span> <span class="n">point_b</span><span class="p">[</span><span class="s">'x'</span><span class="p">])</span> <span class="o">+</span> <span class="n">square</span><span class="p">(</span><span class="n">point_a</span><span class="p">[</span><span class="s">'y'</span><span class="p">]</span> <span class="o">-</span> <span class="n">point_b</span><span class="p">[</span><span class="s">'y'</span><span class="p">]))</span>
+
+
+<span class="k">def</span> <span class="nf">circumference</span><span class="p">(</span><span class="n">shape</span><span class="p">):</span>
+   <span class="s">"""도형 데이터를 전달받아 둘레를 구해 반환한다."""</span>
+
+   <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="s">'삼각형'</span><span class="p">:</span>
+       <span class="n">a_to_b</span> <span class="o">=</span> <span class="n">distance</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="s">'point_a'</span><span class="p">],</span> <span class="n">shape</span><span class="p">[</span><span class="s">'point_b'</span><span class="p">])</span>
+       <span class="n">b_to_c</span> <span class="o">=</span> <span class="n">distance</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="s">'point_b'</span><span class="p">],</span> <span class="n">shape</span><span class="p">[</span><span class="s">'point_c'</span><span class="p">])</span>
+       <span class="n">c_to_a</span> <span class="o">=</span> <span class="n">distance</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="s">'point_c'</span><span class="p">],</span> <span class="n">shape</span><span class="p">[</span><span class="s">'point_a'</span><span class="p">])</span>
+       <span class="k">return</span> <span class="n">a_to_b</span> <span class="o">+</span> <span class="n">b_to_c</span> <span class="o">+</span> <span class="n">c_to_a</span>
+
+   <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span> <span class="o">==</span> <span class="s">'사각형'</span><span class="p">:</span>
+       <span class="n">a_to_b</span> <span class="o">=</span> <span class="n">distance</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="s">'point_a'</span><span class="p">],</span> <span class="n">shape</span><span class="p">[</span><span class="s">'point_b'</span><span class="p">])</span>
+       <span class="n">b_to_c</span> <span class="o">=</span> <span class="n">distance</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="s">'point_b'</span><span class="p">],</span> <span class="n">shape</span><span class="p">[</span><span class="s">'point_c'</span><span class="p">])</span>
+       <span class="n">c_to_d</span> <span class="o">=</span> <span class="n">distance</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="s">'point_c'</span><span class="p">],</span> <span class="n">shape</span><span class="p">[</span><span class="s">'point_d'</span><span class="p">])</span>
+       <span class="n">d_to_a</span> <span class="o">=</span> <span class="n">distance</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="s">'point_d'</span><span class="p">],</span> <span class="n">shape</span><span class="p">[</span><span class="s">'point_a'</span><span class="p">])</span>
+       <span class="k">return</span> <span class="n">a_to_b</span> <span class="o">+</span> <span class="n">b_to_c</span> <span class="o">+</span> <span class="n">c_to_d</span> <span class="o">+</span> <span class="n">d_to_a</span>
+
+   <span class="k">else</span><span class="p">:</span>
+       <span class="k">return</span> <span class="bp">None</span>
+
+
+
+<span class="n">triangle_1</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="s">'point_a'</span><span class="p">:</span> <span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+   <span class="s">'point_b'</span><span class="p">:</span> <span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+   <span class="s">'point_c'</span><span class="p">:</span> <span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="mi">4</span><span class="p">},</span>
+<span class="p">}</span>
+
+<span class="n">rectangle_1</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="s">'point_a'</span><span class="p">:</span> <span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span>
+   <span class="s">'point_b'</span><span class="p">:</span> <span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span>
+   <span class="s">'point_c'</span><span class="p">:</span> <span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="mi">6</span><span class="p">},</span>
+   <span class="s">'point_d'</span><span class="p">:</span> <span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="mi">6</span><span class="p">},</span>
+<span class="p">}</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">circumference</span><span class="p">(</span><span class="n">triangle_1</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">circumference</span><span class="p">(</span><span class="n">rectangle_1</span><span class="p">))</span>
+
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">triangle_1</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">rectangle_1</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>코드 8-11</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">math</span>
+
+
+<span class="k">def</span> <span class="nf">square</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+   <span class="s">"""전달받은 수의 제곱을 반환한다."""</span>
+   <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
+
+
+<span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="n">point_a</span><span class="p">,</span> <span class="n">point_b</span><span class="p">):</span>
+   <span class="k">return</span> <span class="n">math</span><span class="p">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">square</span><span class="p">(</span><span class="n">point_a</span><span class="p">[</span><span class="s">'x'</span><span class="p">]</span> <span class="o">-</span> <span class="n">point_b</span><span class="p">[</span><span class="s">'x'</span><span class="p">])</span> <span class="o">+</span> <span class="n">square</span><span class="p">(</span><span class="n">point_a</span><span class="p">[</span><span class="s">'y'</span><span class="p">]</span> <span class="o">-</span> <span class="n">point_b</span><span class="p">[</span><span class="s">'y'</span><span class="p">]))</span>
+
+
+<span class="k">def</span> <span class="nf">circumference</span><span class="p">(</span><span class="n">shape</span><span class="p">):</span>
+   <span class="s">"""도형 데이터를 전달받아 둘레를 구해 반환한다."""</span>
+
+   <span class="k">if</span> <span class="n">shape</span><span class="p">[</span><span class="s">'type'</span><span class="p">]</span> <span class="o">==</span> <span class="s">'삼각형'</span><span class="p">:</span>
+       <span class="n">a_to_b</span> <span class="o">=</span> <span class="n">distance</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="s">'point_a'</span><span class="p">],</span> <span class="n">shape</span><span class="p">[</span><span class="s">'point_b'</span><span class="p">])</span>
+       <span class="n">b_to_c</span> <span class="o">=</span> <span class="n">distance</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="s">'point_b'</span><span class="p">],</span> <span class="n">shape</span><span class="p">[</span><span class="s">'point_c'</span><span class="p">])</span>
+       <span class="n">c_to_a</span> <span class="o">=</span> <span class="n">distance</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="s">'point_c'</span><span class="p">],</span> <span class="n">shape</span><span class="p">[</span><span class="s">'point_a'</span><span class="p">])</span>
+       <span class="k">return</span> <span class="n">a_to_b</span> <span class="o">+</span> <span class="n">b_to_c</span> <span class="o">+</span> <span class="n">c_to_a</span>
+
+   <span class="k">elif</span> <span class="n">shape</span><span class="p">[</span><span class="s">'type'</span><span class="p">]</span> <span class="o">==</span> <span class="s">'사각형'</span><span class="p">:</span>
+       <span class="n">a_to_b</span> <span class="o">=</span> <span class="n">distance</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="s">'point_a'</span><span class="p">],</span> <span class="n">shape</span><span class="p">[</span><span class="s">'point_b'</span><span class="p">])</span>
+       <span class="n">b_to_c</span> <span class="o">=</span> <span class="n">distance</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="s">'point_b'</span><span class="p">],</span> <span class="n">shape</span><span class="p">[</span><span class="s">'point_c'</span><span class="p">])</span>
+       <span class="n">c_to_d</span> <span class="o">=</span> <span class="n">distance</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="s">'point_c'</span><span class="p">],</span> <span class="n">shape</span><span class="p">[</span><span class="s">'point_d'</span><span class="p">])</span>
+       <span class="n">d_to_a</span> <span class="o">=</span> <span class="n">distance</span><span class="p">(</span><span class="n">shape</span><span class="p">[</span><span class="s">'point_d'</span><span class="p">],</span> <span class="n">shape</span><span class="p">[</span><span class="s">'point_a'</span><span class="p">])</span>
+       <span class="k">return</span> <span class="n">a_to_b</span> <span class="o">+</span> <span class="n">b_to_c</span> <span class="o">+</span> <span class="n">c_to_d</span> <span class="o">+</span> <span class="n">d_to_a</span>
+
+   <span class="k">else</span><span class="p">:</span>
+       <span class="k">return</span> <span class="bp">None</span>
+
+
+<span class="n">triangle_3</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="s">'type'</span><span class="p">:</span> <span class="s">'삼각형'</span><span class="p">,</span>
+   <span class="s">'point_a'</span><span class="p">:</span> <span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+   <span class="s">'point_b'</span><span class="p">:</span> <span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+   <span class="s">'point_c'</span><span class="p">:</span> <span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="mi">4</span><span class="p">},</span>
+<span class="p">}</span>
+<span class="n">rectangle_3</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="s">'type'</span><span class="p">:</span> <span class="s">'사각형'</span><span class="p">,</span>
+   <span class="s">'point_a'</span><span class="p">:</span> <span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span>
+   <span class="s">'point_b'</span><span class="p">:</span> <span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span>
+   <span class="s">'point_c'</span><span class="p">:</span> <span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="mi">6</span><span class="p">},</span>
+   <span class="s">'point_d'</span><span class="p">:</span> <span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="mi">6</span><span class="p">},</span>
+<span class="p">}</span>
+
+
+<span class="k">print</span><span class="p">(</span><span class="n">circumference</span><span class="p">(</span><span class="n">triangle_3</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">circumference</span><span class="p">(</span><span class="n">rectangle_3</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>개선할 점:
+데이터 유형을 <code class="language-plaintext highlighter-rouge">type()</code> 함수로 식별할 수 있도록
+데이터 유형마다 그에 맞는 함수를 별도로 정의하되, 그 함수가 그 데이터 유형에서만 실행될 수 있도록 강제하자</p>
+
+<p>연습문제 8-1</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 체스말 데이터 유형 정의하기
+#   'x': x축의 위치
+#   'y': y축의 위치
+#   'color': 체스말의 색깔
+#   'role': 체스말의 역할
+</span>
+<span class="n">체스말1</span> <span class="o">=</span> <span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="s">'A'</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="s">'8'</span><span class="p">,</span> <span class="s">'color'</span><span class="p">:</span> <span class="s">'black'</span><span class="p">,</span> <span class="s">'role'</span><span class="p">:</span> <span class="s">'룩'</span><span class="p">}</span>
+<span class="n">체스말2</span> <span class="o">=</span> <span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="s">'E'</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="s">'1'</span><span class="p">,</span> <span class="s">'color'</span><span class="p">:</span> <span class="s">'white'</span><span class="p">,</span> <span class="s">'role'</span><span class="p">:</span> <span class="s">'킹'</span><span class="p">}</span>
+
+
+<span class="c1"># 바둑돌 데이터 유형 정의하기
+#   'x': x축의 위치
+#   'y': y축의 위치
+#   'order': 바둑돌이 놓인 수
+#   'color': 바둑돌의 색깔
+</span>
+<span class="n">바둑돌1</span> <span class="o">=</span> <span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span> <span class="s">'order'</span><span class="p">:</span> <span class="mi">83</span><span class="p">,</span> <span class="s">'color'</span><span class="p">:</span> <span class="s">'흑'</span><span class="p">}</span>
+<span class="n">바둑돌2</span> <span class="o">=</span> <span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s">'order'</span><span class="p">:</span> <span class="mi">84</span><span class="p">,</span> <span class="s">'color'</span><span class="p">:</span> <span class="s">'백'</span><span class="p">}</span>
+</code></pre></div></div>
+
+<p>연습문제 8-2</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 체스말 데이터 유형 정의하기
+#   'x': x축의 위치
+#   'y': y축의 위치
+#   'color': 체스말의 색깔
+#   'role': 체스말의 역할
+</span>
+<span class="n">체스말1</span> <span class="o">=</span> <span class="p">{</span><span class="s">'type'</span><span class="p">:</span> <span class="s">'체스말'</span><span class="p">,</span> <span class="s">'x'</span><span class="p">:</span> <span class="s">'A'</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="s">'8'</span><span class="p">,</span> <span class="s">'color'</span><span class="p">:</span> <span class="s">'black'</span><span class="p">,</span> <span class="s">'role'</span><span class="p">:</span> <span class="s">'룩'</span><span class="p">}</span>
+<span class="n">체스말2</span> <span class="o">=</span> <span class="p">{</span><span class="s">'type'</span><span class="p">:</span> <span class="s">'체스말'</span><span class="p">,</span> <span class="s">'x'</span><span class="p">:</span> <span class="s">'E'</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="s">'1'</span><span class="p">,</span> <span class="s">'color'</span><span class="p">:</span> <span class="s">'white'</span><span class="p">,</span> <span class="s">'role'</span><span class="p">:</span> <span class="s">'킹'</span><span class="p">}</span>
+
+
+<span class="c1"># 바둑돌 데이터 유형 정의하기
+#   'x': x축의 위치
+#   'y': y축의 위치
+#   'order': 바둑돌이 놓인 수
+#   'color': 바둑돌의 색깔
+</span>
+<span class="n">바둑돌1</span> <span class="o">=</span> <span class="p">{</span><span class="s">'type'</span><span class="p">:</span> <span class="s">'바둑돌'</span><span class="p">,</span> <span class="s">'x'</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="mi">14</span><span class="p">,</span> <span class="s">'order'</span><span class="p">:</span> <span class="mi">83</span><span class="p">,</span> <span class="s">'color'</span><span class="p">:</span> <span class="s">'흑'</span><span class="p">}</span>
+<span class="n">바둑돌2</span> <span class="o">=</span> <span class="p">{</span><span class="s">'type'</span><span class="p">:</span> <span class="s">'바둑돌'</span><span class="p">,</span> <span class="s">'x'</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s">'order'</span><span class="p">:</span> <span class="mi">84</span><span class="p">,</span> <span class="s">'color'</span><span class="p">:</span> <span class="s">'백'</span><span class="p">}</span>
+
+
+<span class="k">def</span> <span class="nf">print_piece</span><span class="p">(</span><span class="n">piece</span><span class="p">):</span>
+   <span class="s">"""말을 전달받아 종류에 따라 다른 형태로 위치를 출력한다."""</span>
+
+   <span class="k">if</span> <span class="n">piece</span><span class="p">[</span><span class="s">'type'</span><span class="p">]</span> <span class="o">==</span> <span class="s">'체스말'</span><span class="p">:</span>
+       <span class="k">print</span><span class="p">(</span><span class="n">piece</span><span class="p">[</span><span class="s">'color'</span><span class="p">]</span> <span class="o">+</span> <span class="s">' 룩이 '</span> <span class="o">+</span> <span class="n">piece</span><span class="p">[</span><span class="s">'x'</span><span class="p">]</span> <span class="o">+</span> <span class="n">piece</span><span class="p">[</span><span class="s">'y'</span><span class="p">]</span> <span class="o">+</span> <span class="s">'위치에 놓여 있어요.'</span><span class="p">)</span>
+   <span class="k">elif</span> <span class="n">piece</span><span class="p">[</span><span class="s">'type'</span><span class="p">]</span> <span class="o">==</span> <span class="s">'바둑돌'</span><span class="p">:</span>
+       <span class="k">print</span><span class="p">(</span><span class="s">'제 '</span><span class="p">,</span> <span class="n">piece</span><span class="p">[</span><span class="s">'order'</span><span class="p">],</span> <span class="s">' 수: '</span><span class="p">,</span> <span class="n">piece</span><span class="p">[</span><span class="s">'color'</span><span class="p">],</span> <span class="s">'을 ('</span><span class="p">,</span>
+             <span class="n">piece</span><span class="p">[</span><span class="s">'x'</span><span class="p">],</span> <span class="s">', '</span><span class="p">,</span> <span class="n">piece</span><span class="p">[</span><span class="s">'y'</span><span class="p">],</span> <span class="s">') 위치에 두었습니다.'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">''</span><span class="p">)</span>
+
+
+<span class="n">print_piece</span><span class="p">(</span><span class="n">체스말1</span><span class="p">)</span>
+<span class="n">print_piece</span><span class="p">(</span><span class="n">바둑돌2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="클래스와-객체">클래스와 객체</h3>
+
+<p><code class="language-plaintext highlighter-rouge">type()</code> 함수가 반환하는 데이터는 type이라는 데이터 유형. 데이터 유형을 나타내기 위한 데이터가 존재한다. 이 데이터가 바로 클래스이다. 0,1,2,3의 데이터 유형이 정수인 것처럼, int, float, str의 데이터 유형은 클래스이다.</p>
+
+<p>컴퓨터에서 정보는 메모리 위에 올린 후 처리한다. 메모리 위에 올려둔 정보를 의미 있는 덩어리로 묶어 두기 위한 단위가 필요하다. 파이썬에서는 객체 단위로 메모리 위의 정보를 관리한다.</p>
+
+<p>객체에는 값, 유형, 정체성이라는 세 특성이 있다. 
+값은 메모리에 기록된 내용이다.
+유형은 데이터의 종류로, 유형에 따라 그 값을 어떻게 읽고 다루어야 할지가 결정된다. 
+정체성은 각각의 객체를 식별하기 위한 고유번호로, 객체가 메모리 속에서 위치한 주소 값이기도 하다.</p>
+
+<p>동일한 객체를 다른 변수에 대입하면, 두 변수가 같은 객체를 가리킨다.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">year</span> <span class="o">=</span> <span class="mi">1789</span>
+<span class="n">same_year</span> <span class="o">=</span> <span class="n">year</span>
+<span class="nb">id</span><span class="p">(</span><span class="n">year</span><span class="p">)</span> <span class="o">==</span> <span class="nb">id</span><span class="p">(</span><span class="n">same_year</span><span class="p">)</span>  <span class="o">=&gt;</span> <span class="bp">True</span>
+</code></pre></div></div>
+
+<p>객체가 어떤 클래스에 속할 때, 그  객체를 해당 클래스의 인스턴스라 한다. 1,2,3은 모두 int 클래스의 인스턴스다.</p>
+
+<p>검사하려는 객체와 클래스가 정해져 있을 때, <code class="language-plaintext highlighter-rouge">isinstance()</code> 함수로 객체가 그 클래스에 속하는지 검사할 수 있다. 한 객체는 동시에 여러 클래스의 인스턴스일 수 있다.</p>
+
+<p>파이썬의 모든 데이터는 객체이고, 모든 객체는 어떤 유형에 속한다. 즉, 파이썬의 모든 데이터는 인스턴스이다. 파이썬에서 데이터를 생성하는 것은 곧 인스턴스를 생성하는 것이다.</p>
+
+<p>인스턴스 만들기1: 그대로 평가하기. 리터럴
+인스턴스 만들기2: 식을 평가하기.
+인스턴스 만들기3: 인스턴스화하기. 클래스 이름에 괄호를 붙여서 수행. ex) <code class="language-plaintext highlighter-rouge">int(1789.0)</code> 정수 인스턴스 만들기</p>
+
+<p>연습문제 8-3</p>
+
+<p>a. 아니다. 값이 같을 뿐 객체가 같으려면 정체성이 같아야 한다.
+b. 아니다. 유형이 같을 뿐. 
+c. 맞다.
+d. 아니다. 같은 객체를 가리켜야 함.</p>
+
+<p>연습문제 8-4</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">()</span>
+<span class="p">{}</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">({</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)}))</span>
+<span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+<span class="nb">str</span><span class="p">(</span><span class="mi">1789</span><span class="p">)</span>
+<span class="nb">bool</span><span class="p">([])</span>
+</code></pre></div></div>
+
+<p>클래스 정의하기</p>
+
+<p>코드 8-22</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Cake</span><span class="p">:</span>
+   <span class="s">"""케이크를 나타내는 클래스"""</span>
+
+   <span class="n">coat</span> <span class="o">=</span> <span class="s">'생크림'</span>
+
+<span class="n">cake_1</span> <span class="o">=</span> <span class="n">Cake</span><span class="p">()</span>
+<span class="n">cake_2</span> <span class="o">=</span> <span class="n">Cake</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">Cake</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">cake_1</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">cake_2</span><span class="p">,</span> <span class="n">Cake</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>속성은 일반적인 변수와 같은데, 클래스와 인스턴스 속에 정의되는 것이 특징이다.
+클래스의 속성은 클래스 객체뿐 아니라 그 클래스의 모든 인스턴스가 공유한다.</p>
+
+<p>코드 8-23</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Cake</span><span class="p">:</span>
+   <span class="s">"""케이크를 나타내는 클래스"""</span>
+
+   <span class="n">coat</span> <span class="o">=</span> <span class="s">'생크림'</span>
+
+<span class="n">cake_1</span> <span class="o">=</span> <span class="n">Cake</span><span class="p">()</span>
+<span class="n">cake_2</span> <span class="o">=</span> <span class="n">Cake</span><span class="p">()</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">Cake</span><span class="p">.</span><span class="n">coat</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">cake_1</span><span class="p">.</span><span class="n">coat</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">cake_2</span><span class="p">.</span><span class="n">coat</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>코드 8-24</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">​​</span><span class="k">class</span> <span class="nc">Cake</span><span class="p">:</span>
+   <span class="s">"""케이크를 나타내는 클래스"""</span>
+
+   <span class="n">coat</span> <span class="o">=</span> <span class="s">'생크림'</span>
+
+<span class="n">cake_1</span> <span class="o">=</span> <span class="n">Cake</span><span class="p">()</span>
+<span class="n">cake_2</span> <span class="o">=</span> <span class="n">Cake</span><span class="p">()</span>
+
+
+<span class="n">Cake</span><span class="p">.</span><span class="n">coat</span> <span class="o">=</span> <span class="s">'초콜릿'</span>
+<span class="n">Cake</span><span class="p">.</span><span class="n">price</span> <span class="o">=</span> <span class="mi">4000</span>
+<span class="k">print</span><span class="p">(</span><span class="n">Cake</span><span class="p">.</span><span class="n">coat</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">Cake</span><span class="p">.</span><span class="n">price</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">cake_1</span><span class="p">.</span><span class="n">coat</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">cake_1</span><span class="p">.</span><span class="n">price</span><span class="p">)</span>
+
+<span class="n">cake_3</span> <span class="o">=</span> <span class="n">Cake</span><span class="p">()</span>
+<span class="k">print</span><span class="p">(</span><span class="n">cake_3</span><span class="p">.</span><span class="n">coat</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">cake_3</span><span class="p">.</span><span class="n">price</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>일반적으로 클래스의 속성은 class 문에서 확정하고, 나중에는 수정하지 않는 게 좋다. 자주 변경되어야 하는 속성이 있다면, 그 속성은 클래스가 아니라 인스턴스 속에 정의되어야 할 가능성이 높다.</p>
+
+<p>코드 8-25</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Cake</span><span class="p">:</span>
+   <span class="s">"""케이크를 나타내는 클래스"""</span>
+
+   <span class="n">coat</span> <span class="o">=</span> <span class="s">'생크림'</span>
+
+<span class="n">cake_1</span> <span class="o">=</span> <span class="n">Cake</span><span class="p">()</span>
+<span class="n">cake_2</span> <span class="o">=</span> <span class="n">Cake</span><span class="p">()</span>
+
+<span class="n">cake_1</span><span class="p">.</span><span class="n">topping</span> <span class="o">=</span> <span class="s">'블루베리'</span>
+<span class="k">print</span><span class="p">(</span><span class="n">cake_1</span><span class="p">.</span><span class="n">topping</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">Cake</span><span class="p">.</span><span class="n">topping</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">cake_2</span><span class="p">.</span><span class="n">topping</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>코드 8-26</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Cake</span><span class="p">:</span>
+   <span class="s">"""케이크를 나타내는 클래스"""</span>
+
+   <span class="n">coat</span> <span class="o">=</span> <span class="s">'생크림'</span>
+
+<span class="n">cake_1</span> <span class="o">=</span> <span class="n">Cake</span><span class="p">()</span>
+<span class="n">cake_2</span> <span class="o">=</span> <span class="n">Cake</span><span class="p">()</span>
+
+
+<span class="k">print</span><span class="p">(</span><span class="n">cake_1</span><span class="p">.</span><span class="n">coat</span><span class="p">)</span>
+<span class="n">cake_1</span><span class="p">.</span><span class="n">coat</span> <span class="o">=</span> <span class="s">'아이스크림'</span>
+<span class="k">print</span><span class="p">(</span><span class="n">cake_1</span><span class="p">.</span><span class="n">coat</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">Cake</span><span class="p">.</span><span class="n">coat</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">cake_2</span><span class="p">.</span><span class="n">coat</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>이름공간은 프로그래밍 언어에서 이름이 가리키는 대상을 제한하는 범위이다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">dir()</code> 함수는 파이썬의 기본 데이터 유형이나 다른 사람이 정의한 클래스에 어떤 속성이 있는지 확인할 수 있게 해준다.</p>
+
+<p>코드 8-27</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Cake</span><span class="p">:</span>
+   <span class="s">"""케이크를 나타내는 클래스"""</span>
+
+   <span class="n">coat</span> <span class="o">=</span> <span class="s">'생크림'</span>
+
+<span class="n">cake_1</span> <span class="o">=</span> <span class="n">Cake</span><span class="p">()</span>
+<span class="n">cake_2</span> <span class="o">=</span> <span class="n">Cake</span><span class="p">()</span>
+
+
+<span class="kn">import</span> <span class="nn">pprint</span>
+<span class="n">pprint</span><span class="p">.</span><span class="n">pprint</span><span class="p">(</span><span class="nb">dir</span><span class="p">(</span><span class="n">Cake</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>클래스나 인스턴스에 속한 함수는 그 데이터 종류를 위한 전용. 이 함수를 메서드라 한다.
+대부분의 메서드는 클래스 공용 속성으로 정의한다. 데이터 유형을 다루는 방법은 데이터 유형에 따라 정하기 때문이다.</p>
+
+<p>코드 8-29</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Cake</span><span class="p">:</span>
+   <span class="s">"""케이크를 나타낸는 클래스"""</span>
+   <span class="n">coat</span> <span class="o">=</span> <span class="s">'생크림'</span>
+
+   <span class="k">def</span> <span class="nf">describe</span><span class="p">():</span>
+       <span class="s">"""이 케이크에 관한 정보를 화면에 출력한다."""</span>
+       <span class="k">print</span><span class="p">(</span><span class="s">'이 케이크는'</span><span class="p">,</span> <span class="n">Cake</span><span class="p">.</span><span class="n">coat</span><span class="p">,</span> <span class="s">'으로 덮여 있다.'</span><span class="p">)</span>
+
+<span class="n">Cake</span><span class="p">.</span><span class="n">describe</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>코드 8-30</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Cake</span><span class="p">:</span>
+   <span class="s">"""케이크를 나타낸는 클래스"""</span>
+   <span class="n">coat</span> <span class="o">=</span> <span class="s">'생크림'</span>
+
+   <span class="k">def</span> <span class="nf">describe</span><span class="p">():</span>
+       <span class="s">"""이 케이크에 관한 정보를 화면에 출력한다."""</span>
+       <span class="k">print</span><span class="p">(</span><span class="s">'이 케이크는'</span><span class="p">,</span> <span class="n">Cake</span><span class="p">.</span><span class="n">coat</span><span class="p">,</span> <span class="s">'으로 덮여 있다.'</span><span class="p">)</span>
+
+
+<span class="n">cake_1</span> <span class="o">=</span><span class="n">Cake</span><span class="p">()</span>
+<span class="n">cake_1</span><span class="p">.</span><span class="n">coat</span> <span class="o">=</span> <span class="s">'초콜릿'</span>
+<span class="n">cake_1</span><span class="p">.</span><span class="n">describe</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>파이썬에서는 클래스를 기준으로 할 때와 인스턴스를 기준으로 할 때 메서드 호출 방식이 다르다. 인스턴스를 기준으로 메서드를 호출하면 암묵적으로 메서드 호출의 기준이 되는 인스턴스가 첫 번째 인자로 메서드에 전달된다.</p>
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/2022-08-04/yeono-python-12" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/2022-08-02/yeono-python-10" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-07-30 14:29:33 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

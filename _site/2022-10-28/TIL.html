@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TIL) Facebook Clone Coding(Next.js, Tailwind CSS, Responsive) | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="TIL) Facebook Clone Coding(Next.js, Tailwind CSS, Responsive)" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="(달성/목표) 뽀모도리 1일 8/8 1주 24 /40" />
+<meta property="og:description" content="(달성/목표) 뽀모도리 1일 8/8 1주 24 /40" />
+<link rel="canonical" href="http://localhost:4000/2022-10-28/TIL" />
+<meta property="og:url" content="http://localhost:4000/2022-10-28/TIL" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-10-28T12:18:07+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TIL) Facebook Clone Coding(Next.js, Tailwind CSS, Responsive)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-10-28T12:18:07+09:00","datePublished":"2022-10-28T12:18:07+09:00","description":"(달성/목표) 뽀모도리 1일 8/8 1주 24 /40","headline":"TIL) Facebook Clone Coding(Next.js, Tailwind CSS, Responsive)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-10-28/TIL"},"url":"http://localhost:4000/2022-10-28/TIL"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Sunmi Moon
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2022-10-28 12:18:07 +0900">October 28, 2022</time>
+    
+  </div>
+
+  <h1 class="post-title">TIL) Facebook Clone Coding(Next.js, Tailwind CSS, Responsive)</h1>
+  <div class="post-line"></div>
+
+  <table>
+  <thead>
+    <tr>
+      <th>(달성/목표)</th>
+      <th>뽀모도리</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1일</td>
+      <td>8/8</td>
+    </tr>
+    <tr>
+      <td>1주</td>
+      <td>24 /40</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Header.js</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">Header</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">sticky top-0 z-50 bg-white flex items-center p-2 lg:p-5 shadow-md</span><span class="dl">"</span><span class="o">&gt;</span>
+</code></pre></div></div>
+<p>Header에 z값을 주어서 다른 컴포넌트 밑에 배치되는 일이 없도록 한다.
+bg-white를 해서 투명이 아니라 하얀 배경으로..</p>
+
+<p>현재 위치를 아이콘으로 표시해 준다.(active로..)</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">Icon</span>
+<span class="nx">className</span><span class="o">=</span><span class="p">{</span><span class="s2">`h-5 text-gray-500 text-center sm:h-7 mx-auto group-hover:text-blue-500 </span><span class="p">${</span>
+  <span class="nx">active</span> <span class="o">&amp;&amp;</span> <span class="dl">"</span><span class="s2">text-blue-500</span><span class="dl">"</span>
+<span class="p">}</span><span class="s2">`</span>
+</code></pre></div></div>
+
+<p>globals.css에서 커스텀 유틸리티 클래스를 만들 수 있다. 나만의 스타일을 적용하기가 쉬워진다.</p>
+
+<p>globals.css</p>
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">@layer</span> <span class="n">components</span> <span class="p">{</span>
+  <span class="nc">.icon</span> <span class="p">{</span>
+    <span class="err">@apply</span> <span class="err">hidden</span> <span class="py">lg</span><span class="p">:</span><span class="n">inline-flex</span> <span class="n">p-2</span> <span class="n">h-10</span> <span class="n">w-10</span> <span class="n">bg-gray-200</span> <span class="n">rounded-full</span> <span class="n">text-gray-700</span> <span class="n">cursor-pointer</span> <span class="n">hover</span><span class="p">:</span><span class="n">bg-gray-50</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<h3 id="nextauthjs">nextAuth.js</h3>
+
+<p>Authentication for next.js</p>
+
+<p>추가하는 방법은 nextAuth 홈페이지에 나온다.</p>
+
+<p>https://next-auth.js.org/configuration/providers/oauth#built-in-providers</p>
+
+<p>[…nextauth].js</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">NextAuth</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">next-auth/next</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">FacebookProvider</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">next-auth/providers/facebook</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">NextAuth</span><span class="p">({</span>
+  <span class="na">providers</span><span class="p">:</span> <span class="p">[</span>
+    <span class="nx">FacebookProvider</span><span class="p">({</span>
+      <span class="na">clientId</span><span class="p">:</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">FACEBOOK_CLIENT_ID</span><span class="p">,</span>
+      <span class="na">clientSecret</span><span class="p">:</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">FACEBOOK_CLIENT_SECRET</span><span class="p">,</span>
+    <span class="p">}),</span>
+  <span class="p">],</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>이제 여기에 나오는 <code class="language-plaintext highlighter-rouge">clientId</code>와 <code class="language-plaintext highlighter-rouge">clientSecret</code>을 알아야 한다.</p>
+
+<p>https://developers.facebook.com/에서 개발자용 앱을 만든다. ‘소비자용’
+기본 설정에 나와 있는 정보에서 앱 ID와 시크릿 코드를 얻을 수 있다.</p>
+
+<p>.env.local 파일을 만들어서 정보를 적어준다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FACEBOOK_CLIENT_ID=...
+FACEBOOK_CLIENT_SECRET=...
+NEXTAUTH_URL=http://localhost:3000
+</code></pre></div></div>
+
+<hr />
+
+<p>금) 운동</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>이두</th>
+      <th>등</th>
+      <th>가슴</th>
+      <th>어깨</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>3/3</td>
+      <td>3/3</td>
+      <td>3/3</td>
+      <td>3/3</td>
+    </tr>
+  </tbody>
+</table>
+
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/2022-10-29/TIL" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/2022-10-27/TIL" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-07-30 14:29:33 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

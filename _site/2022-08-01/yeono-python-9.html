@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>연오의 파이썬 공부 9 | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="연오의 파이썬 공부 9" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="연습문제 7-1 weather_of_9_1 = [ {&#39;경기&#39;, &#39;맑음&#39;, 27.2, 0.4, 0.1}, {&#39;강원&#39;, &#39;맑음&#39;, 23.6, 0.6, 0.1}, {&#39;충청&#39;, &#39;맑음&#39;, 24.4, 0.35, 0.1}, {&#39;경상&#39;, &#39;맑음&#39;, 26, 0.55, 0.1}, {&#39;전라&#39;, &#39;맑음&#39;, 27, 0.4, 0}, {&#39;제주&#39;, &#39;구름 조금&#39;, 26.4, 0.45, 0.1}, ] 연습문제 7-2 weather_of_9_1 = [ {&#39;지역&#39;: &#39;경기&#39;, &#39;날씨&#39;: &#39;맑음&#39;, &#39;기온&#39;: 27.2, &#39;습도&#39;: 0.4, &#39;강수 확률&#39;: 0.1}, {&#39;지역&#39;: &#39;강원&#39;, &#39;날씨&#39;: &#39;맑음&#39;, &#39;기온&#39;: 23.6, &#39;습도&#39;: 0.6, &#39;강수 확률&#39;: 0.1}, {&#39;지역&#39;: &#39;충청&#39;, &#39;날씨&#39;: &#39;맑음&#39;, &#39;기온&#39;: 24.4, &#39;습도&#39;: 0.35, &#39;강수 확률&#39;: 0.1}, {&#39;지역&#39;: &#39;경상&#39;, &#39;날씨&#39;: &#39;맑음&#39;, &#39;기온&#39;: 26, &#39;습도&#39;: 0.55, &#39;강수 확률&#39;: 0.1}, {&#39;지역&#39;: &#39;전라&#39;, &#39;날씨&#39;: &#39;맑음&#39;, &#39;기온&#39;: 27, &#39;습도&#39;: 0.4, &#39;강수 확률&#39;: 0}, {&#39;지역&#39;: &#39;제주&#39;, &#39;날씨&#39;: &#39;구름 조금&#39;, &#39;기온&#39;: 26.4, &#39;습도&#39;: 0.45, &#39;강수 확률&#39;: 0.1}, ] 연습문제 7-3 import pprint weather_of_9_1 = [ {&#39;지역&#39;: &#39;경기&#39;, &#39;날씨&#39;: &#39;맑음&#39;, &#39;기온&#39;: 27.2, &#39;습도&#39;: 0.4, &#39;강수 확률&#39;: 0.1}, {&#39;지역&#39;: &#39;강원&#39;, &#39;날씨&#39;: &#39;맑음&#39;, &#39;기온&#39;: 23.6, &#39;습도&#39;: 0.6, &#39;강수 확률&#39;: 0.1}, {&#39;지역&#39;: &#39;충청&#39;, &#39;날씨&#39;: &#39;맑음&#39;, &#39;기온&#39;: 24.4, &#39;습도&#39;: 0.35, &#39;강수 확률&#39;: 0.1}, {&#39;지역&#39;: &#39;경상&#39;, &#39;날씨&#39;: &#39;맑음&#39;, &#39;기온&#39;: 26, &#39;습도&#39;: 0.55, &#39;강수 확률&#39;: 0.1}, {&#39;지역&#39;: &#39;전라&#39;, &#39;날씨&#39;: &#39;맑음&#39;, &#39;기온&#39;: 27, &#39;습도&#39;: 0.4, &#39;강수 확률&#39;: 0}, {&#39;지역&#39;: &#39;제주&#39;, &#39;날씨&#39;: &#39;구름 조금&#39;, &#39;기온&#39;: 26.4, &#39;습도&#39;: 0.45, &#39;강수 확률&#39;: 0.1}, ] pprint.pprint(weather_of_9_1) pprint.pprint() 함수의 출력 스타일은 한 행에 전부 출력하되, 한 행에 전부 출력할 수 없을 때만 요소들을 개행하여 출력하는 방식이다. 시퀀스 for 문으로 순회했다. 문자열도 시퀀스이기 때문에 순회가 가능하다. 집합도 순회가 가능하나 어떤 순서로 원소가 대입될지는 알 수 없다. for 문에 매핑을 그냥 입력하면 키를 순회한다. 코드 7-12 drinks = { &#39;아메리카노&#39;: 2500, &#39;카페라테&#39;: 3000, &#39;딸기 주스&#39;: 3500, } for k in drinks: print(k) print(drinks[k]) 사전의 키-값 쌍의 시퀀스를 구하는 item() 메서드 코드 7-13 drinks = { &#39;아메리카노&#39;: 2500, &#39;카페라테&#39;: 3000, &#39;딸기 주스&#39;: 3500, } for k, v in drinks.items(): print(k) print(v) 코드 7-16 board = [ [[&#39;black&#39;, &#39;룩&#39;], None, None, None, None, None, None, None], [None, None, None, [&#39;black&#39;, &#39;킹&#39;], None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, [&#39;white&#39;, &#39;비숍&#39;], None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, [&#39;white&#39;, &#39;킹&#39;], None, None, None], ] for row in board: for piece in row: if piece: print(&#39;I&#39;, end=&#39; &#39;) else: print(&#39;.&#39;, end = &#39; &#39;) print() 코드 7-16 체스말에 색깔만 구별한 코드 board = [ [[&#39;black&#39;, &#39;룩&#39;], None, None, None, None, None, None, None], [None, None, None, [&#39;black&#39;, &#39;킹&#39;], None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, [&#39;white&#39;, &#39;비숍&#39;], None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, [&#39;white&#39;, &#39;킹&#39;], None, None, None], ] for row in board: for piece in row: if piece: if piece[0] == &#39;black&#39;: print(&#39;▲&#39;, end=&#39; &#39;) else: print(&#39;△&#39;, end=&#39; &#39;) else: print(&#39;.&#39;, end=&#39; &#39;) print() 여러 컬렉션을 나란히 순회하고 싶다면, zip 함수 이용하기 코드 7-18 seasons = [&#39;봄&#39;, &#39;여름&#39;, &#39;가을&#39;, &#39;겨울&#39;] mountains = [&#39;금강산&#39;, &#39;봉래산&#39;, &#39;풍악산&#39;, &#39;개골산&#39;] for season in seasons: for mountain in mountains: print(season + &#39;에는 &#39; + mountain) 코드 7-20 seasons = [&#39;봄&#39;, &#39;여름&#39;, &#39;가을&#39;, &#39;겨울&#39;] mountains = [&#39;금강산&#39;, &#39;봉래산&#39;, &#39;풍악산&#39;, &#39;개골산&#39;] for season, mountain in zip(seasons, mountains): print(season + &#39;에는 &#39; + mountain) 연습문제 7-4 happiness = { &#39;호주&#39;: 7.95, &#39;노르웨이&#39;: 7.9, &#39;미국&#39;: 7.85, &#39;일본&#39;: 6.2, &#39;한국&#39;: 5.75, } for country, happy in happiness.items(): print(country + &#39; 사람들은 &#39; + str(happy) + &#39;만큼 행복합니다.&#39;) # 모범 답안에서는 print할 때 각 요소를 쉼표로 넣고, sep=&#39;&#39;로 했음. 연습문제 7-5 천간 = [&#39;갑&#39;, &#39;을&#39;, &#39;병&#39;, &#39;정&#39;, &#39;무&#39;, &#39;기&#39;, &#39;경&#39;, &#39;신&#39;, &#39;임&#39;, &#39;계&#39;] 지지 = [&#39;자&#39;, &#39;축&#39;, &#39;인&#39;, &#39;묘&#39;, &#39;진&#39;, &#39;사&#39;, &#39;오&#39;, &#39;미&#39;, &#39;신&#39;, &#39;유&#39;, &#39;술&#39;, &#39;해&#39;] for a_천간 in 천간: for a_지지 in 지지: print(a_천간 + a_지지 + &#39; &#39;, end=&#39;&#39;) # 모범 답안: print(간, 지, sep=&#39;&#39;, end=&#39; &#39;) print() 연습문제 7-6 def plus_elements(seq1, seq2): &quot;&quot;&quot;두 개의 시퀀스를 전달받은 후 각 요소를 순서대로 합한 리스트를 반환한다. ex) (1 , 2, 3) [4, 5, 6] =&gt; [5, 7, 9] &quot;&quot;&quot; result_list = [] for number1, number2 in zip(seq1, seq2): result_list.append(number1 + number2) return result_list print(plus_elements((1, 2, 3), [4, 5, 6])) 컬렉션에 많은 정보가 답겨 있어도 가공해야 새로운 지식도 이끌어 낼 수 있다. 새 리스트를 만들어 요소 수정해 넣기 코드 7-22 prices = [2500, 3000, 1800, 3500, 2000, 3000, 2500, 2000] new_price = [] for price in prices: new_price.append(price + 50) print(new_price) 리스트 조건제시법이란, 각 요소를 구하는 조건을 제시하여 컬렉션을 정의하는 방법이다. [2, 4, 6, 8, 10]의 리스트 표현 방법 원소나열법: [2, 4, 6, 8, 10] 레인지: 2 이상 11 미만의 2씩 증가하는 수의 리스트 조건제시법: [1, 2, 3, 4, 5]의 각 요소에 2를 곱한 리스트 조건제시법은 기존에 정의된 컬렉션이 있어야 한다. 코드 7-23 [e * 2 for e in [1, 2, 3, 4, 5]] [2, 4, 6, 8, 10] 코드 7-24 prices = [2500, 3000, 1800, 3500, 2000, 3000, 2500, 2000] print([price + 50 for price in prices]) 리스트 조건제시법과 유사한 기능을 하는 함수 map() 리스트 조건제시법은 파이썬 문법에 정의된 ‘식’이고, map은 일반적인 ‘함수’이다. 코드 7-25 prices = [2500, 3000, 1800, 3500, 2000, 3000, 2500, 2000] def plus50(n): return n + 50 print(list(map(plus50, prices))) 코드 7- 26 prices = [2500, 3000, 1800, 3500, 2000, 3000, 2500, 2000] print(list(map(lambda a: a + 50, prices))) 코드 7-27 prices = [2500, 3000, 1800, 3500, 2000, 3000, 2500, 2000] total_price = 0 num_items = 0 for price in prices: total_price += price num_items += 1 print(total_price / num_items) 코드 7-28 prices = [2500, 3000, 1800, 3500, 2000, 3000, 2500, 2000] most_expensive = 0 for price in prices: if most_expensive &lt; price: most_expensive = price print(most_expensive) 컬렉션이 요소를 원하는 조건에 따라 선별하는 방법 코드 7-29 prices = [2500, 3000, 1800, 3500, 2000, 3000, 2500, 2000] filtered_prices = [] for price in prices: if price &lt;= 2000: filtered_prices.append(price) print(filtered_prices) 코드 7-30 prices = [2500, 3000, 1800, 3500, 2000, 3000, 2500, 2000] print([price for price in prices]) print([price for price in prices if price &lt;= 2000]) 코드 7-31 prices = [2500, 3000, 1800, 3500, 2000, 3000, 2500, 2000] print(list(filter(lambda price: price &lt;= 2000, prices))) 기준을 정해 요소 정렬하기 거품정렬 진화과정… 코드 7-32 coll = [2, 1] if coll[0] &gt; coll[1]: coll[0], coll[1] = coll[1], coll[0] print(coll) 코드 7-33 coll = [10, 5, 1] if coll[0] &gt; coll[1]: coll[0], coll[1] = coll[1], coll[0] print(coll) if coll[1] &gt; coll[2]: coll[1], coll[2] = coll[2], coll[1] print(coll) 코드 7-34 coll = [10, 5, 1, 9, 7, 3] for i in range(len(coll) - 1): if coll[i] &gt; coll[ i + 1]: coll[i], coll[i + 1] = coll[i + 1], coll[i] print(coll) 코드 7-35 coll = [10, 5, 1, 9, 7, 3] for _ in coll: for i in range(len(coll) - 1): if coll[i] &gt; coll[i + 1]: coll[i], coll[i + 1] = coll[i + 1], coll[i] print(coll) sorted() 함수 사용하기 코드 7-36 print(sorted([10, 5, 1, 9, 7, 3])) 코드 7-37 coll = [10, 5, 1, 9, 7, 3] print(sorted(coll)) print(coll) coll = sorted(coll) print(coll) 코드 7-38 print(sorted([&#39;월&#39;, &#39;화&#39;, &#39;수&#39;, &#39;목&#39;, &#39;금&#39;])) sorted() 함수가 반환하는 결과는 리스트이다. 코드 7-39 print(sorted([5, 4, 3, 2, 1])) print(sorted(&#39;안녕하세요&#39;)) print(sorted({&#39;사자&#39;, &#39;박쥐&#39;, &#39;늑대&#39;, &#39;곰&#39;})) 내림차순 정렬 코드 7-40 print(sorted([3, 5, 1, 2, 4])) print(sorted([3, 5, 1, 2, 4], reverse=True)) key 매개변수로 각 요소를 가공한 뒤 정렬하기 코드 7-41 import pprint print(sorted([3, -5, 1, -2, -4], key=abs)) items = [ {&#39;name&#39;: &#39;아메리카노&#39;, &#39;price&#39;: 2000}, {&#39;name&#39;: &#39;카페라테&#39;, &#39;price&#39;: 2500}, {&#39;name&#39;: &#39;카푸치노&#39;, &#39;price&#39;: 2400}, ] sorted_items = sorted(items, key=lambda item: item[&#39;price&#39;]) pprint.pprint(sorted_items) 연습문제 7-7(이 리스트를 1번, 레인지 방식, 2번. 조건제시법 방식 이렇게 두 가지 다 보이란 문제인 줄 착각함… 레인지만으론 도저히 만들 수 없을 거 같아서 연습문제 해답 봄..) number_list = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] comprehension_list = [n * n for n in number_list] print(comprehension_list) 연습문제 7-7 모범답안 방식으로 수정 comprehension_list = [n * n for n in range(10)] 연습문제 7-8 def comprehension_list(n): return n * n print(list(map(comprehension_list, range(10)))) 연습문제 7-9 def length(seq): &quot;&quot;&quot;시퀀스(seq)를 하나 입력 받아 요소의 개수를 반환한다.&quot;&quot;&quot; number = 0 for _ in seq: number += 1 return number print(length([1, 2, 3, 4])) 연습문제 7-10 def longest(*args): &quot;&quot;&quot;여러 개의 시퀀스를 입력받아, 그중 가장 많은 요소를 가진 시퀀스를 반환한다.&quot;&quot;&quot; longest_list = [] for a_list in args: if len(longest_list) &lt; len(a_list): longest_list = a_list return longest_list print(longest([1, 2, 3], (4, 5), [], &#39;abcdefg&#39;, range(5))) print(longest(&#39;파이썬&#39;, &#39;프로그래밍&#39;)) print(longest(range(10), range(100), range(50))) # 모범 답안의 다른 예시 # def longest(*sequences): # return max(*sequences, key=len)" />
+<meta property="og:description" content="연습문제 7-1 weather_of_9_1 = [ {&#39;경기&#39;, &#39;맑음&#39;, 27.2, 0.4, 0.1}, {&#39;강원&#39;, &#39;맑음&#39;, 23.6, 0.6, 0.1}, {&#39;충청&#39;, &#39;맑음&#39;, 24.4, 0.35, 0.1}, {&#39;경상&#39;, &#39;맑음&#39;, 26, 0.55, 0.1}, {&#39;전라&#39;, &#39;맑음&#39;, 27, 0.4, 0}, {&#39;제주&#39;, &#39;구름 조금&#39;, 26.4, 0.45, 0.1}, ] 연습문제 7-2 weather_of_9_1 = [ {&#39;지역&#39;: &#39;경기&#39;, &#39;날씨&#39;: &#39;맑음&#39;, &#39;기온&#39;: 27.2, &#39;습도&#39;: 0.4, &#39;강수 확률&#39;: 0.1}, {&#39;지역&#39;: &#39;강원&#39;, &#39;날씨&#39;: &#39;맑음&#39;, &#39;기온&#39;: 23.6, &#39;습도&#39;: 0.6, &#39;강수 확률&#39;: 0.1}, {&#39;지역&#39;: &#39;충청&#39;, &#39;날씨&#39;: &#39;맑음&#39;, &#39;기온&#39;: 24.4, &#39;습도&#39;: 0.35, &#39;강수 확률&#39;: 0.1}, {&#39;지역&#39;: &#39;경상&#39;, &#39;날씨&#39;: &#39;맑음&#39;, &#39;기온&#39;: 26, &#39;습도&#39;: 0.55, &#39;강수 확률&#39;: 0.1}, {&#39;지역&#39;: &#39;전라&#39;, &#39;날씨&#39;: &#39;맑음&#39;, &#39;기온&#39;: 27, &#39;습도&#39;: 0.4, &#39;강수 확률&#39;: 0}, {&#39;지역&#39;: &#39;제주&#39;, &#39;날씨&#39;: &#39;구름 조금&#39;, &#39;기온&#39;: 26.4, &#39;습도&#39;: 0.45, &#39;강수 확률&#39;: 0.1}, ] 연습문제 7-3 import pprint weather_of_9_1 = [ {&#39;지역&#39;: &#39;경기&#39;, &#39;날씨&#39;: &#39;맑음&#39;, &#39;기온&#39;: 27.2, &#39;습도&#39;: 0.4, &#39;강수 확률&#39;: 0.1}, {&#39;지역&#39;: &#39;강원&#39;, &#39;날씨&#39;: &#39;맑음&#39;, &#39;기온&#39;: 23.6, &#39;습도&#39;: 0.6, &#39;강수 확률&#39;: 0.1}, {&#39;지역&#39;: &#39;충청&#39;, &#39;날씨&#39;: &#39;맑음&#39;, &#39;기온&#39;: 24.4, &#39;습도&#39;: 0.35, &#39;강수 확률&#39;: 0.1}, {&#39;지역&#39;: &#39;경상&#39;, &#39;날씨&#39;: &#39;맑음&#39;, &#39;기온&#39;: 26, &#39;습도&#39;: 0.55, &#39;강수 확률&#39;: 0.1}, {&#39;지역&#39;: &#39;전라&#39;, &#39;날씨&#39;: &#39;맑음&#39;, &#39;기온&#39;: 27, &#39;습도&#39;: 0.4, &#39;강수 확률&#39;: 0}, {&#39;지역&#39;: &#39;제주&#39;, &#39;날씨&#39;: &#39;구름 조금&#39;, &#39;기온&#39;: 26.4, &#39;습도&#39;: 0.45, &#39;강수 확률&#39;: 0.1}, ] pprint.pprint(weather_of_9_1) pprint.pprint() 함수의 출력 스타일은 한 행에 전부 출력하되, 한 행에 전부 출력할 수 없을 때만 요소들을 개행하여 출력하는 방식이다. 시퀀스 for 문으로 순회했다. 문자열도 시퀀스이기 때문에 순회가 가능하다. 집합도 순회가 가능하나 어떤 순서로 원소가 대입될지는 알 수 없다. for 문에 매핑을 그냥 입력하면 키를 순회한다. 코드 7-12 drinks = { &#39;아메리카노&#39;: 2500, &#39;카페라테&#39;: 3000, &#39;딸기 주스&#39;: 3500, } for k in drinks: print(k) print(drinks[k]) 사전의 키-값 쌍의 시퀀스를 구하는 item() 메서드 코드 7-13 drinks = { &#39;아메리카노&#39;: 2500, &#39;카페라테&#39;: 3000, &#39;딸기 주스&#39;: 3500, } for k, v in drinks.items(): print(k) print(v) 코드 7-16 board = [ [[&#39;black&#39;, &#39;룩&#39;], None, None, None, None, None, None, None], [None, None, None, [&#39;black&#39;, &#39;킹&#39;], None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, [&#39;white&#39;, &#39;비숍&#39;], None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, [&#39;white&#39;, &#39;킹&#39;], None, None, None], ] for row in board: for piece in row: if piece: print(&#39;I&#39;, end=&#39; &#39;) else: print(&#39;.&#39;, end = &#39; &#39;) print() 코드 7-16 체스말에 색깔만 구별한 코드 board = [ [[&#39;black&#39;, &#39;룩&#39;], None, None, None, None, None, None, None], [None, None, None, [&#39;black&#39;, &#39;킹&#39;], None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, [&#39;white&#39;, &#39;비숍&#39;], None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, [&#39;white&#39;, &#39;킹&#39;], None, None, None], ] for row in board: for piece in row: if piece: if piece[0] == &#39;black&#39;: print(&#39;▲&#39;, end=&#39; &#39;) else: print(&#39;△&#39;, end=&#39; &#39;) else: print(&#39;.&#39;, end=&#39; &#39;) print() 여러 컬렉션을 나란히 순회하고 싶다면, zip 함수 이용하기 코드 7-18 seasons = [&#39;봄&#39;, &#39;여름&#39;, &#39;가을&#39;, &#39;겨울&#39;] mountains = [&#39;금강산&#39;, &#39;봉래산&#39;, &#39;풍악산&#39;, &#39;개골산&#39;] for season in seasons: for mountain in mountains: print(season + &#39;에는 &#39; + mountain) 코드 7-20 seasons = [&#39;봄&#39;, &#39;여름&#39;, &#39;가을&#39;, &#39;겨울&#39;] mountains = [&#39;금강산&#39;, &#39;봉래산&#39;, &#39;풍악산&#39;, &#39;개골산&#39;] for season, mountain in zip(seasons, mountains): print(season + &#39;에는 &#39; + mountain) 연습문제 7-4 happiness = { &#39;호주&#39;: 7.95, &#39;노르웨이&#39;: 7.9, &#39;미국&#39;: 7.85, &#39;일본&#39;: 6.2, &#39;한국&#39;: 5.75, } for country, happy in happiness.items(): print(country + &#39; 사람들은 &#39; + str(happy) + &#39;만큼 행복합니다.&#39;) # 모범 답안에서는 print할 때 각 요소를 쉼표로 넣고, sep=&#39;&#39;로 했음. 연습문제 7-5 천간 = [&#39;갑&#39;, &#39;을&#39;, &#39;병&#39;, &#39;정&#39;, &#39;무&#39;, &#39;기&#39;, &#39;경&#39;, &#39;신&#39;, &#39;임&#39;, &#39;계&#39;] 지지 = [&#39;자&#39;, &#39;축&#39;, &#39;인&#39;, &#39;묘&#39;, &#39;진&#39;, &#39;사&#39;, &#39;오&#39;, &#39;미&#39;, &#39;신&#39;, &#39;유&#39;, &#39;술&#39;, &#39;해&#39;] for a_천간 in 천간: for a_지지 in 지지: print(a_천간 + a_지지 + &#39; &#39;, end=&#39;&#39;) # 모범 답안: print(간, 지, sep=&#39;&#39;, end=&#39; &#39;) print() 연습문제 7-6 def plus_elements(seq1, seq2): &quot;&quot;&quot;두 개의 시퀀스를 전달받은 후 각 요소를 순서대로 합한 리스트를 반환한다. ex) (1 , 2, 3) [4, 5, 6] =&gt; [5, 7, 9] &quot;&quot;&quot; result_list = [] for number1, number2 in zip(seq1, seq2): result_list.append(number1 + number2) return result_list print(plus_elements((1, 2, 3), [4, 5, 6])) 컬렉션에 많은 정보가 답겨 있어도 가공해야 새로운 지식도 이끌어 낼 수 있다. 새 리스트를 만들어 요소 수정해 넣기 코드 7-22 prices = [2500, 3000, 1800, 3500, 2000, 3000, 2500, 2000] new_price = [] for price in prices: new_price.append(price + 50) print(new_price) 리스트 조건제시법이란, 각 요소를 구하는 조건을 제시하여 컬렉션을 정의하는 방법이다. [2, 4, 6, 8, 10]의 리스트 표현 방법 원소나열법: [2, 4, 6, 8, 10] 레인지: 2 이상 11 미만의 2씩 증가하는 수의 리스트 조건제시법: [1, 2, 3, 4, 5]의 각 요소에 2를 곱한 리스트 조건제시법은 기존에 정의된 컬렉션이 있어야 한다. 코드 7-23 [e * 2 for e in [1, 2, 3, 4, 5]] [2, 4, 6, 8, 10] 코드 7-24 prices = [2500, 3000, 1800, 3500, 2000, 3000, 2500, 2000] print([price + 50 for price in prices]) 리스트 조건제시법과 유사한 기능을 하는 함수 map() 리스트 조건제시법은 파이썬 문법에 정의된 ‘식’이고, map은 일반적인 ‘함수’이다. 코드 7-25 prices = [2500, 3000, 1800, 3500, 2000, 3000, 2500, 2000] def plus50(n): return n + 50 print(list(map(plus50, prices))) 코드 7- 26 prices = [2500, 3000, 1800, 3500, 2000, 3000, 2500, 2000] print(list(map(lambda a: a + 50, prices))) 코드 7-27 prices = [2500, 3000, 1800, 3500, 2000, 3000, 2500, 2000] total_price = 0 num_items = 0 for price in prices: total_price += price num_items += 1 print(total_price / num_items) 코드 7-28 prices = [2500, 3000, 1800, 3500, 2000, 3000, 2500, 2000] most_expensive = 0 for price in prices: if most_expensive &lt; price: most_expensive = price print(most_expensive) 컬렉션이 요소를 원하는 조건에 따라 선별하는 방법 코드 7-29 prices = [2500, 3000, 1800, 3500, 2000, 3000, 2500, 2000] filtered_prices = [] for price in prices: if price &lt;= 2000: filtered_prices.append(price) print(filtered_prices) 코드 7-30 prices = [2500, 3000, 1800, 3500, 2000, 3000, 2500, 2000] print([price for price in prices]) print([price for price in prices if price &lt;= 2000]) 코드 7-31 prices = [2500, 3000, 1800, 3500, 2000, 3000, 2500, 2000] print(list(filter(lambda price: price &lt;= 2000, prices))) 기준을 정해 요소 정렬하기 거품정렬 진화과정… 코드 7-32 coll = [2, 1] if coll[0] &gt; coll[1]: coll[0], coll[1] = coll[1], coll[0] print(coll) 코드 7-33 coll = [10, 5, 1] if coll[0] &gt; coll[1]: coll[0], coll[1] = coll[1], coll[0] print(coll) if coll[1] &gt; coll[2]: coll[1], coll[2] = coll[2], coll[1] print(coll) 코드 7-34 coll = [10, 5, 1, 9, 7, 3] for i in range(len(coll) - 1): if coll[i] &gt; coll[ i + 1]: coll[i], coll[i + 1] = coll[i + 1], coll[i] print(coll) 코드 7-35 coll = [10, 5, 1, 9, 7, 3] for _ in coll: for i in range(len(coll) - 1): if coll[i] &gt; coll[i + 1]: coll[i], coll[i + 1] = coll[i + 1], coll[i] print(coll) sorted() 함수 사용하기 코드 7-36 print(sorted([10, 5, 1, 9, 7, 3])) 코드 7-37 coll = [10, 5, 1, 9, 7, 3] print(sorted(coll)) print(coll) coll = sorted(coll) print(coll) 코드 7-38 print(sorted([&#39;월&#39;, &#39;화&#39;, &#39;수&#39;, &#39;목&#39;, &#39;금&#39;])) sorted() 함수가 반환하는 결과는 리스트이다. 코드 7-39 print(sorted([5, 4, 3, 2, 1])) print(sorted(&#39;안녕하세요&#39;)) print(sorted({&#39;사자&#39;, &#39;박쥐&#39;, &#39;늑대&#39;, &#39;곰&#39;})) 내림차순 정렬 코드 7-40 print(sorted([3, 5, 1, 2, 4])) print(sorted([3, 5, 1, 2, 4], reverse=True)) key 매개변수로 각 요소를 가공한 뒤 정렬하기 코드 7-41 import pprint print(sorted([3, -5, 1, -2, -4], key=abs)) items = [ {&#39;name&#39;: &#39;아메리카노&#39;, &#39;price&#39;: 2000}, {&#39;name&#39;: &#39;카페라테&#39;, &#39;price&#39;: 2500}, {&#39;name&#39;: &#39;카푸치노&#39;, &#39;price&#39;: 2400}, ] sorted_items = sorted(items, key=lambda item: item[&#39;price&#39;]) pprint.pprint(sorted_items) 연습문제 7-7(이 리스트를 1번, 레인지 방식, 2번. 조건제시법 방식 이렇게 두 가지 다 보이란 문제인 줄 착각함… 레인지만으론 도저히 만들 수 없을 거 같아서 연습문제 해답 봄..) number_list = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] comprehension_list = [n * n for n in number_list] print(comprehension_list) 연습문제 7-7 모범답안 방식으로 수정 comprehension_list = [n * n for n in range(10)] 연습문제 7-8 def comprehension_list(n): return n * n print(list(map(comprehension_list, range(10)))) 연습문제 7-9 def length(seq): &quot;&quot;&quot;시퀀스(seq)를 하나 입력 받아 요소의 개수를 반환한다.&quot;&quot;&quot; number = 0 for _ in seq: number += 1 return number print(length([1, 2, 3, 4])) 연습문제 7-10 def longest(*args): &quot;&quot;&quot;여러 개의 시퀀스를 입력받아, 그중 가장 많은 요소를 가진 시퀀스를 반환한다.&quot;&quot;&quot; longest_list = [] for a_list in args: if len(longest_list) &lt; len(a_list): longest_list = a_list return longest_list print(longest([1, 2, 3], (4, 5), [], &#39;abcdefg&#39;, range(5))) print(longest(&#39;파이썬&#39;, &#39;프로그래밍&#39;)) print(longest(range(10), range(100), range(50))) # 모범 답안의 다른 예시 # def longest(*sequences): # return max(*sequences, key=len)" />
+<link rel="canonical" href="http://localhost:4000/2022-08-01/yeono-python-9" />
+<meta property="og:url" content="http://localhost:4000/2022-08-01/yeono-python-9" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-08-01T22:35:12+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="연오의 파이썬 공부 9" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-08-01T22:35:12+09:00","datePublished":"2022-08-01T22:35:12+09:00","description":"연습문제 7-1 weather_of_9_1 = [ {&#39;경기&#39;, &#39;맑음&#39;, 27.2, 0.4, 0.1}, {&#39;강원&#39;, &#39;맑음&#39;, 23.6, 0.6, 0.1}, {&#39;충청&#39;, &#39;맑음&#39;, 24.4, 0.35, 0.1}, {&#39;경상&#39;, &#39;맑음&#39;, 26, 0.55, 0.1}, {&#39;전라&#39;, &#39;맑음&#39;, 27, 0.4, 0}, {&#39;제주&#39;, &#39;구름 조금&#39;, 26.4, 0.45, 0.1}, ] 연습문제 7-2 weather_of_9_1 = [ {&#39;지역&#39;: &#39;경기&#39;, &#39;날씨&#39;: &#39;맑음&#39;, &#39;기온&#39;: 27.2, &#39;습도&#39;: 0.4, &#39;강수 확률&#39;: 0.1}, {&#39;지역&#39;: &#39;강원&#39;, &#39;날씨&#39;: &#39;맑음&#39;, &#39;기온&#39;: 23.6, &#39;습도&#39;: 0.6, &#39;강수 확률&#39;: 0.1}, {&#39;지역&#39;: &#39;충청&#39;, &#39;날씨&#39;: &#39;맑음&#39;, &#39;기온&#39;: 24.4, &#39;습도&#39;: 0.35, &#39;강수 확률&#39;: 0.1}, {&#39;지역&#39;: &#39;경상&#39;, &#39;날씨&#39;: &#39;맑음&#39;, &#39;기온&#39;: 26, &#39;습도&#39;: 0.55, &#39;강수 확률&#39;: 0.1}, {&#39;지역&#39;: &#39;전라&#39;, &#39;날씨&#39;: &#39;맑음&#39;, &#39;기온&#39;: 27, &#39;습도&#39;: 0.4, &#39;강수 확률&#39;: 0}, {&#39;지역&#39;: &#39;제주&#39;, &#39;날씨&#39;: &#39;구름 조금&#39;, &#39;기온&#39;: 26.4, &#39;습도&#39;: 0.45, &#39;강수 확률&#39;: 0.1}, ] 연습문제 7-3 import pprint weather_of_9_1 = [ {&#39;지역&#39;: &#39;경기&#39;, &#39;날씨&#39;: &#39;맑음&#39;, &#39;기온&#39;: 27.2, &#39;습도&#39;: 0.4, &#39;강수 확률&#39;: 0.1}, {&#39;지역&#39;: &#39;강원&#39;, &#39;날씨&#39;: &#39;맑음&#39;, &#39;기온&#39;: 23.6, &#39;습도&#39;: 0.6, &#39;강수 확률&#39;: 0.1}, {&#39;지역&#39;: &#39;충청&#39;, &#39;날씨&#39;: &#39;맑음&#39;, &#39;기온&#39;: 24.4, &#39;습도&#39;: 0.35, &#39;강수 확률&#39;: 0.1}, {&#39;지역&#39;: &#39;경상&#39;, &#39;날씨&#39;: &#39;맑음&#39;, &#39;기온&#39;: 26, &#39;습도&#39;: 0.55, &#39;강수 확률&#39;: 0.1}, {&#39;지역&#39;: &#39;전라&#39;, &#39;날씨&#39;: &#39;맑음&#39;, &#39;기온&#39;: 27, &#39;습도&#39;: 0.4, &#39;강수 확률&#39;: 0}, {&#39;지역&#39;: &#39;제주&#39;, &#39;날씨&#39;: &#39;구름 조금&#39;, &#39;기온&#39;: 26.4, &#39;습도&#39;: 0.45, &#39;강수 확률&#39;: 0.1}, ] pprint.pprint(weather_of_9_1) pprint.pprint() 함수의 출력 스타일은 한 행에 전부 출력하되, 한 행에 전부 출력할 수 없을 때만 요소들을 개행하여 출력하는 방식이다. 시퀀스 for 문으로 순회했다. 문자열도 시퀀스이기 때문에 순회가 가능하다. 집합도 순회가 가능하나 어떤 순서로 원소가 대입될지는 알 수 없다. for 문에 매핑을 그냥 입력하면 키를 순회한다. 코드 7-12 drinks = { &#39;아메리카노&#39;: 2500, &#39;카페라테&#39;: 3000, &#39;딸기 주스&#39;: 3500, } for k in drinks: print(k) print(drinks[k]) 사전의 키-값 쌍의 시퀀스를 구하는 item() 메서드 코드 7-13 drinks = { &#39;아메리카노&#39;: 2500, &#39;카페라테&#39;: 3000, &#39;딸기 주스&#39;: 3500, } for k, v in drinks.items(): print(k) print(v) 코드 7-16 board = [ [[&#39;black&#39;, &#39;룩&#39;], None, None, None, None, None, None, None], [None, None, None, [&#39;black&#39;, &#39;킹&#39;], None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, [&#39;white&#39;, &#39;비숍&#39;], None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, [&#39;white&#39;, &#39;킹&#39;], None, None, None], ] for row in board: for piece in row: if piece: print(&#39;I&#39;, end=&#39; &#39;) else: print(&#39;.&#39;, end = &#39; &#39;) print() 코드 7-16 체스말에 색깔만 구별한 코드 board = [ [[&#39;black&#39;, &#39;룩&#39;], None, None, None, None, None, None, None], [None, None, None, [&#39;black&#39;, &#39;킹&#39;], None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, [&#39;white&#39;, &#39;비숍&#39;], None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, None, None, None, None], [None, None, None, None, [&#39;white&#39;, &#39;킹&#39;], None, None, None], ] for row in board: for piece in row: if piece: if piece[0] == &#39;black&#39;: print(&#39;▲&#39;, end=&#39; &#39;) else: print(&#39;△&#39;, end=&#39; &#39;) else: print(&#39;.&#39;, end=&#39; &#39;) print() 여러 컬렉션을 나란히 순회하고 싶다면, zip 함수 이용하기 코드 7-18 seasons = [&#39;봄&#39;, &#39;여름&#39;, &#39;가을&#39;, &#39;겨울&#39;] mountains = [&#39;금강산&#39;, &#39;봉래산&#39;, &#39;풍악산&#39;, &#39;개골산&#39;] for season in seasons: for mountain in mountains: print(season + &#39;에는 &#39; + mountain) 코드 7-20 seasons = [&#39;봄&#39;, &#39;여름&#39;, &#39;가을&#39;, &#39;겨울&#39;] mountains = [&#39;금강산&#39;, &#39;봉래산&#39;, &#39;풍악산&#39;, &#39;개골산&#39;] for season, mountain in zip(seasons, mountains): print(season + &#39;에는 &#39; + mountain) 연습문제 7-4 happiness = { &#39;호주&#39;: 7.95, &#39;노르웨이&#39;: 7.9, &#39;미국&#39;: 7.85, &#39;일본&#39;: 6.2, &#39;한국&#39;: 5.75, } for country, happy in happiness.items(): print(country + &#39; 사람들은 &#39; + str(happy) + &#39;만큼 행복합니다.&#39;) # 모범 답안에서는 print할 때 각 요소를 쉼표로 넣고, sep=&#39;&#39;로 했음. 연습문제 7-5 천간 = [&#39;갑&#39;, &#39;을&#39;, &#39;병&#39;, &#39;정&#39;, &#39;무&#39;, &#39;기&#39;, &#39;경&#39;, &#39;신&#39;, &#39;임&#39;, &#39;계&#39;] 지지 = [&#39;자&#39;, &#39;축&#39;, &#39;인&#39;, &#39;묘&#39;, &#39;진&#39;, &#39;사&#39;, &#39;오&#39;, &#39;미&#39;, &#39;신&#39;, &#39;유&#39;, &#39;술&#39;, &#39;해&#39;] for a_천간 in 천간: for a_지지 in 지지: print(a_천간 + a_지지 + &#39; &#39;, end=&#39;&#39;) # 모범 답안: print(간, 지, sep=&#39;&#39;, end=&#39; &#39;) print() 연습문제 7-6 def plus_elements(seq1, seq2): &quot;&quot;&quot;두 개의 시퀀스를 전달받은 후 각 요소를 순서대로 합한 리스트를 반환한다. ex) (1 , 2, 3) [4, 5, 6] =&gt; [5, 7, 9] &quot;&quot;&quot; result_list = [] for number1, number2 in zip(seq1, seq2): result_list.append(number1 + number2) return result_list print(plus_elements((1, 2, 3), [4, 5, 6])) 컬렉션에 많은 정보가 답겨 있어도 가공해야 새로운 지식도 이끌어 낼 수 있다. 새 리스트를 만들어 요소 수정해 넣기 코드 7-22 prices = [2500, 3000, 1800, 3500, 2000, 3000, 2500, 2000] new_price = [] for price in prices: new_price.append(price + 50) print(new_price) 리스트 조건제시법이란, 각 요소를 구하는 조건을 제시하여 컬렉션을 정의하는 방법이다. [2, 4, 6, 8, 10]의 리스트 표현 방법 원소나열법: [2, 4, 6, 8, 10] 레인지: 2 이상 11 미만의 2씩 증가하는 수의 리스트 조건제시법: [1, 2, 3, 4, 5]의 각 요소에 2를 곱한 리스트 조건제시법은 기존에 정의된 컬렉션이 있어야 한다. 코드 7-23 [e * 2 for e in [1, 2, 3, 4, 5]] [2, 4, 6, 8, 10] 코드 7-24 prices = [2500, 3000, 1800, 3500, 2000, 3000, 2500, 2000] print([price + 50 for price in prices]) 리스트 조건제시법과 유사한 기능을 하는 함수 map() 리스트 조건제시법은 파이썬 문법에 정의된 ‘식’이고, map은 일반적인 ‘함수’이다. 코드 7-25 prices = [2500, 3000, 1800, 3500, 2000, 3000, 2500, 2000] def plus50(n): return n + 50 print(list(map(plus50, prices))) 코드 7- 26 prices = [2500, 3000, 1800, 3500, 2000, 3000, 2500, 2000] print(list(map(lambda a: a + 50, prices))) 코드 7-27 prices = [2500, 3000, 1800, 3500, 2000, 3000, 2500, 2000] total_price = 0 num_items = 0 for price in prices: total_price += price num_items += 1 print(total_price / num_items) 코드 7-28 prices = [2500, 3000, 1800, 3500, 2000, 3000, 2500, 2000] most_expensive = 0 for price in prices: if most_expensive &lt; price: most_expensive = price print(most_expensive) 컬렉션이 요소를 원하는 조건에 따라 선별하는 방법 코드 7-29 prices = [2500, 3000, 1800, 3500, 2000, 3000, 2500, 2000] filtered_prices = [] for price in prices: if price &lt;= 2000: filtered_prices.append(price) print(filtered_prices) 코드 7-30 prices = [2500, 3000, 1800, 3500, 2000, 3000, 2500, 2000] print([price for price in prices]) print([price for price in prices if price &lt;= 2000]) 코드 7-31 prices = [2500, 3000, 1800, 3500, 2000, 3000, 2500, 2000] print(list(filter(lambda price: price &lt;= 2000, prices))) 기준을 정해 요소 정렬하기 거품정렬 진화과정… 코드 7-32 coll = [2, 1] if coll[0] &gt; coll[1]: coll[0], coll[1] = coll[1], coll[0] print(coll) 코드 7-33 coll = [10, 5, 1] if coll[0] &gt; coll[1]: coll[0], coll[1] = coll[1], coll[0] print(coll) if coll[1] &gt; coll[2]: coll[1], coll[2] = coll[2], coll[1] print(coll) 코드 7-34 coll = [10, 5, 1, 9, 7, 3] for i in range(len(coll) - 1): if coll[i] &gt; coll[ i + 1]: coll[i], coll[i + 1] = coll[i + 1], coll[i] print(coll) 코드 7-35 coll = [10, 5, 1, 9, 7, 3] for _ in coll: for i in range(len(coll) - 1): if coll[i] &gt; coll[i + 1]: coll[i], coll[i + 1] = coll[i + 1], coll[i] print(coll) sorted() 함수 사용하기 코드 7-36 print(sorted([10, 5, 1, 9, 7, 3])) 코드 7-37 coll = [10, 5, 1, 9, 7, 3] print(sorted(coll)) print(coll) coll = sorted(coll) print(coll) 코드 7-38 print(sorted([&#39;월&#39;, &#39;화&#39;, &#39;수&#39;, &#39;목&#39;, &#39;금&#39;])) sorted() 함수가 반환하는 결과는 리스트이다. 코드 7-39 print(sorted([5, 4, 3, 2, 1])) print(sorted(&#39;안녕하세요&#39;)) print(sorted({&#39;사자&#39;, &#39;박쥐&#39;, &#39;늑대&#39;, &#39;곰&#39;})) 내림차순 정렬 코드 7-40 print(sorted([3, 5, 1, 2, 4])) print(sorted([3, 5, 1, 2, 4], reverse=True)) key 매개변수로 각 요소를 가공한 뒤 정렬하기 코드 7-41 import pprint print(sorted([3, -5, 1, -2, -4], key=abs)) items = [ {&#39;name&#39;: &#39;아메리카노&#39;, &#39;price&#39;: 2000}, {&#39;name&#39;: &#39;카페라테&#39;, &#39;price&#39;: 2500}, {&#39;name&#39;: &#39;카푸치노&#39;, &#39;price&#39;: 2400}, ] sorted_items = sorted(items, key=lambda item: item[&#39;price&#39;]) pprint.pprint(sorted_items) 연습문제 7-7(이 리스트를 1번, 레인지 방식, 2번. 조건제시법 방식 이렇게 두 가지 다 보이란 문제인 줄 착각함… 레인지만으론 도저히 만들 수 없을 거 같아서 연습문제 해답 봄..) number_list = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] comprehension_list = [n * n for n in number_list] print(comprehension_list) 연습문제 7-7 모범답안 방식으로 수정 comprehension_list = [n * n for n in range(10)] 연습문제 7-8 def comprehension_list(n): return n * n print(list(map(comprehension_list, range(10)))) 연습문제 7-9 def length(seq): &quot;&quot;&quot;시퀀스(seq)를 하나 입력 받아 요소의 개수를 반환한다.&quot;&quot;&quot; number = 0 for _ in seq: number += 1 return number print(length([1, 2, 3, 4])) 연습문제 7-10 def longest(*args): &quot;&quot;&quot;여러 개의 시퀀스를 입력받아, 그중 가장 많은 요소를 가진 시퀀스를 반환한다.&quot;&quot;&quot; longest_list = [] for a_list in args: if len(longest_list) &lt; len(a_list): longest_list = a_list return longest_list print(longest([1, 2, 3], (4, 5), [], &#39;abcdefg&#39;, range(5))) print(longest(&#39;파이썬&#39;, &#39;프로그래밍&#39;)) print(longest(range(10), range(100), range(50))) # 모범 답안의 다른 예시 # def longest(*sequences): # return max(*sequences, key=len)","headline":"연오의 파이썬 공부 9","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-08-01/yeono-python-9"},"url":"http://localhost:4000/2022-08-01/yeono-python-9"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Sunmi Moon
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2022-08-01 22:35:12 +0900">August 01, 2022</time>
+    
+  </div>
+
+  <h1 class="post-title">연오의 파이썬 공부 9</h1>
+  <div class="post-line"></div>
+
+  <p>연습문제 7-1</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">weather_of_9_1</span> <span class="o">=</span> <span class="p">[</span>
+   <span class="p">{</span><span class="s">'경기'</span><span class="p">,</span> <span class="s">'맑음'</span><span class="p">,</span> <span class="mf">27.2</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">},</span>
+   <span class="p">{</span><span class="s">'강원'</span><span class="p">,</span> <span class="s">'맑음'</span><span class="p">,</span> <span class="mf">23.6</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">},</span>
+   <span class="p">{</span><span class="s">'충청'</span><span class="p">,</span> <span class="s">'맑음'</span><span class="p">,</span> <span class="mf">24.4</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">},</span>
+   <span class="p">{</span><span class="s">'경상'</span><span class="p">,</span> <span class="s">'맑음'</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mf">0.55</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">},</span>
+   <span class="p">{</span><span class="s">'전라'</span><span class="p">,</span> <span class="s">'맑음'</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">,</span> <span class="mi">0</span><span class="p">},</span>
+   <span class="p">{</span><span class="s">'제주'</span><span class="p">,</span> <span class="s">'구름 조금'</span><span class="p">,</span> <span class="mf">26.4</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">},</span>
+<span class="p">]</span>
+</code></pre></div></div>
+
+<p>연습문제 7-2</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">weather_of_9_1</span> <span class="o">=</span> <span class="p">[</span>
+   <span class="p">{</span><span class="s">'지역'</span><span class="p">:</span> <span class="s">'경기'</span><span class="p">,</span> <span class="s">'날씨'</span><span class="p">:</span> <span class="s">'맑음'</span><span class="p">,</span> <span class="s">'기온'</span><span class="p">:</span> <span class="mf">27.2</span><span class="p">,</span> <span class="s">'습도'</span><span class="p">:</span> <span class="mf">0.4</span><span class="p">,</span> <span class="s">'강수 확률'</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">},</span>
+   <span class="p">{</span><span class="s">'지역'</span><span class="p">:</span> <span class="s">'강원'</span><span class="p">,</span> <span class="s">'날씨'</span><span class="p">:</span> <span class="s">'맑음'</span><span class="p">,</span> <span class="s">'기온'</span><span class="p">:</span> <span class="mf">23.6</span><span class="p">,</span> <span class="s">'습도'</span><span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span> <span class="s">'강수 확률'</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">},</span>
+   <span class="p">{</span><span class="s">'지역'</span><span class="p">:</span> <span class="s">'충청'</span><span class="p">,</span> <span class="s">'날씨'</span><span class="p">:</span> <span class="s">'맑음'</span><span class="p">,</span> <span class="s">'기온'</span><span class="p">:</span> <span class="mf">24.4</span><span class="p">,</span> <span class="s">'습도'</span><span class="p">:</span> <span class="mf">0.35</span><span class="p">,</span> <span class="s">'강수 확률'</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">},</span>
+   <span class="p">{</span><span class="s">'지역'</span><span class="p">:</span> <span class="s">'경상'</span><span class="p">,</span> <span class="s">'날씨'</span><span class="p">:</span> <span class="s">'맑음'</span><span class="p">,</span> <span class="s">'기온'</span><span class="p">:</span> <span class="mi">26</span><span class="p">,</span> <span class="s">'습도'</span><span class="p">:</span> <span class="mf">0.55</span><span class="p">,</span> <span class="s">'강수 확률'</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">},</span>
+   <span class="p">{</span><span class="s">'지역'</span><span class="p">:</span> <span class="s">'전라'</span><span class="p">,</span> <span class="s">'날씨'</span><span class="p">:</span> <span class="s">'맑음'</span><span class="p">,</span> <span class="s">'기온'</span><span class="p">:</span> <span class="mi">27</span><span class="p">,</span> <span class="s">'습도'</span><span class="p">:</span> <span class="mf">0.4</span><span class="p">,</span> <span class="s">'강수 확률'</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+   <span class="p">{</span><span class="s">'지역'</span><span class="p">:</span> <span class="s">'제주'</span><span class="p">,</span> <span class="s">'날씨'</span><span class="p">:</span> <span class="s">'구름 조금'</span><span class="p">,</span> <span class="s">'기온'</span><span class="p">:</span> <span class="mf">26.4</span><span class="p">,</span> <span class="s">'습도'</span><span class="p">:</span> <span class="mf">0.45</span><span class="p">,</span> <span class="s">'강수 확률'</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">},</span>
+<span class="p">]</span>
+</code></pre></div></div>
+
+<p>연습문제 7-3</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pprint</span>
+
+<span class="n">weather_of_9_1</span> <span class="o">=</span> <span class="p">[</span>
+   <span class="p">{</span><span class="s">'지역'</span><span class="p">:</span> <span class="s">'경기'</span><span class="p">,</span> <span class="s">'날씨'</span><span class="p">:</span> <span class="s">'맑음'</span><span class="p">,</span> <span class="s">'기온'</span><span class="p">:</span> <span class="mf">27.2</span><span class="p">,</span> <span class="s">'습도'</span><span class="p">:</span> <span class="mf">0.4</span><span class="p">,</span> <span class="s">'강수 확률'</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">},</span>
+   <span class="p">{</span><span class="s">'지역'</span><span class="p">:</span> <span class="s">'강원'</span><span class="p">,</span> <span class="s">'날씨'</span><span class="p">:</span> <span class="s">'맑음'</span><span class="p">,</span> <span class="s">'기온'</span><span class="p">:</span> <span class="mf">23.6</span><span class="p">,</span> <span class="s">'습도'</span><span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span> <span class="s">'강수 확률'</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">},</span>
+   <span class="p">{</span><span class="s">'지역'</span><span class="p">:</span> <span class="s">'충청'</span><span class="p">,</span> <span class="s">'날씨'</span><span class="p">:</span> <span class="s">'맑음'</span><span class="p">,</span> <span class="s">'기온'</span><span class="p">:</span> <span class="mf">24.4</span><span class="p">,</span> <span class="s">'습도'</span><span class="p">:</span> <span class="mf">0.35</span><span class="p">,</span> <span class="s">'강수 확률'</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">},</span>
+   <span class="p">{</span><span class="s">'지역'</span><span class="p">:</span> <span class="s">'경상'</span><span class="p">,</span> <span class="s">'날씨'</span><span class="p">:</span> <span class="s">'맑음'</span><span class="p">,</span> <span class="s">'기온'</span><span class="p">:</span> <span class="mi">26</span><span class="p">,</span> <span class="s">'습도'</span><span class="p">:</span> <span class="mf">0.55</span><span class="p">,</span> <span class="s">'강수 확률'</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">},</span>
+   <span class="p">{</span><span class="s">'지역'</span><span class="p">:</span> <span class="s">'전라'</span><span class="p">,</span> <span class="s">'날씨'</span><span class="p">:</span> <span class="s">'맑음'</span><span class="p">,</span> <span class="s">'기온'</span><span class="p">:</span> <span class="mi">27</span><span class="p">,</span> <span class="s">'습도'</span><span class="p">:</span> <span class="mf">0.4</span><span class="p">,</span> <span class="s">'강수 확률'</span><span class="p">:</span> <span class="mi">0</span><span class="p">},</span>
+   <span class="p">{</span><span class="s">'지역'</span><span class="p">:</span> <span class="s">'제주'</span><span class="p">,</span> <span class="s">'날씨'</span><span class="p">:</span> <span class="s">'구름 조금'</span><span class="p">,</span> <span class="s">'기온'</span><span class="p">:</span> <span class="mf">26.4</span><span class="p">,</span> <span class="s">'습도'</span><span class="p">:</span> <span class="mf">0.45</span><span class="p">,</span> <span class="s">'강수 확률'</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">},</span>
+<span class="p">]</span>
+
+<span class="n">pprint</span><span class="p">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">weather_of_9_1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">pprint.pprint()</code> 함수의 출력 스타일은 한 행에 전부 출력하되, 한 행에 전부 출력할 수 없을 때만 요소들을 개행하여 출력하는 방식이다.</p>
+
+<p>시퀀스 for 문으로 순회했다. 문자열도 시퀀스이기 때문에 순회가 가능하다.</p>
+
+<p>집합도 순회가 가능하나 어떤 순서로 원소가 대입될지는 알 수 없다.</p>
+
+<p>for 문에 매핑을 그냥 입력하면 키를 순회한다.</p>
+
+<p>코드 7-12</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">drinks</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="s">'아메리카노'</span><span class="p">:</span> <span class="mi">2500</span><span class="p">,</span>
+   <span class="s">'카페라테'</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span>
+   <span class="s">'딸기 주스'</span><span class="p">:</span> <span class="mi">3500</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">drinks</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">drinks</span><span class="p">[</span><span class="n">k</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>사전의 키-값 쌍의 시퀀스를 구하는 <code class="language-plaintext highlighter-rouge">item()</code> 메서드</p>
+
+<p>코드 7-13</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">drinks</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="s">'아메리카노'</span><span class="p">:</span> <span class="mi">2500</span><span class="p">,</span>
+   <span class="s">'카페라테'</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span>
+   <span class="s">'딸기 주스'</span><span class="p">:</span> <span class="mi">3500</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">drinks</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>코드 7-16</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">board</span> <span class="o">=</span> <span class="p">[</span>
+   <span class="p">[[</span><span class="s">'black'</span><span class="p">,</span> <span class="s">'룩'</span><span class="p">],</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">],</span>
+   <span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="p">[</span><span class="s">'black'</span><span class="p">,</span> <span class="s">'킹'</span><span class="p">],</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">],</span>
+   <span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">],</span>
+   <span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">],</span>
+   <span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="p">[</span><span class="s">'white'</span><span class="p">,</span> <span class="s">'비숍'</span><span class="p">],</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">],</span>
+   <span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">],</span>
+   <span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">],</span>
+   <span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="p">[</span><span class="s">'white'</span><span class="p">,</span> <span class="s">'킹'</span><span class="p">],</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">],</span>
+<span class="p">]</span>
+
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">board</span><span class="p">:</span>
+   <span class="k">for</span> <span class="n">piece</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
+       <span class="k">if</span> <span class="n">piece</span><span class="p">:</span>
+           <span class="k">print</span><span class="p">(</span><span class="s">'I'</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">' '</span><span class="p">)</span>
+       <span class="k">else</span><span class="p">:</span>
+           <span class="k">print</span><span class="p">(</span><span class="s">'.'</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="s">' '</span><span class="p">)</span>
+   <span class="k">print</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>코드 7-16 체스말에 색깔만 구별한 코드</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">board</span> <span class="o">=</span> <span class="p">[</span>
+   <span class="p">[[</span><span class="s">'black'</span><span class="p">,</span> <span class="s">'룩'</span><span class="p">],</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">],</span>
+   <span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="p">[</span><span class="s">'black'</span><span class="p">,</span> <span class="s">'킹'</span><span class="p">],</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">],</span>
+   <span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">],</span>
+   <span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">],</span>
+   <span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="p">[</span><span class="s">'white'</span><span class="p">,</span> <span class="s">'비숍'</span><span class="p">],</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">],</span>
+   <span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">],</span>
+   <span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">],</span>
+   <span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="p">[</span><span class="s">'white'</span><span class="p">,</span> <span class="s">'킹'</span><span class="p">],</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">],</span>
+<span class="p">]</span>
+
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">board</span><span class="p">:</span>
+   <span class="k">for</span> <span class="n">piece</span> <span class="ow">in</span> <span class="n">row</span><span class="p">:</span>
+       <span class="k">if</span> <span class="n">piece</span><span class="p">:</span>
+           <span class="k">if</span> <span class="n">piece</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s">'black'</span><span class="p">:</span>
+               <span class="k">print</span><span class="p">(</span><span class="s">'▲'</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">' '</span><span class="p">)</span>
+           <span class="k">else</span><span class="p">:</span>
+               <span class="k">print</span><span class="p">(</span><span class="s">'△'</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">' '</span><span class="p">)</span>
+       <span class="k">else</span><span class="p">:</span>
+           <span class="k">print</span><span class="p">(</span><span class="s">'.'</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">' '</span><span class="p">)</span>
+   <span class="k">print</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>여러 컬렉션을 나란히 순회하고 싶다면, zip 함수 이용하기</p>
+
+<p>코드 7-18</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">seasons</span> <span class="o">=</span> <span class="p">[</span><span class="s">'봄'</span><span class="p">,</span> <span class="s">'여름'</span><span class="p">,</span> <span class="s">'가을'</span><span class="p">,</span> <span class="s">'겨울'</span><span class="p">]</span>
+<span class="n">mountains</span> <span class="o">=</span> <span class="p">[</span><span class="s">'금강산'</span><span class="p">,</span> <span class="s">'봉래산'</span><span class="p">,</span> <span class="s">'풍악산'</span><span class="p">,</span> <span class="s">'개골산'</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">season</span> <span class="ow">in</span> <span class="n">seasons</span><span class="p">:</span>
+   <span class="k">for</span> <span class="n">mountain</span> <span class="ow">in</span> <span class="n">mountains</span><span class="p">:</span>
+       <span class="k">print</span><span class="p">(</span><span class="n">season</span> <span class="o">+</span> <span class="s">'에는 '</span> <span class="o">+</span> <span class="n">mountain</span><span class="p">)</span>
+
+      
+<span class="n">코드</span> <span class="mi">7</span><span class="o">-</span><span class="mi">20</span>
+<span class="n">seasons</span> <span class="o">=</span> <span class="p">[</span><span class="s">'봄'</span><span class="p">,</span> <span class="s">'여름'</span><span class="p">,</span> <span class="s">'가을'</span><span class="p">,</span> <span class="s">'겨울'</span><span class="p">]</span>
+<span class="n">mountains</span> <span class="o">=</span> <span class="p">[</span><span class="s">'금강산'</span><span class="p">,</span> <span class="s">'봉래산'</span><span class="p">,</span> <span class="s">'풍악산'</span><span class="p">,</span> <span class="s">'개골산'</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">season</span><span class="p">,</span> <span class="n">mountain</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">seasons</span><span class="p">,</span> <span class="n">mountains</span><span class="p">):</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">season</span> <span class="o">+</span> <span class="s">'에는 '</span> <span class="o">+</span> <span class="n">mountain</span><span class="p">)</span>
+  
+</code></pre></div></div>
+
+<p>연습문제 7-4</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">happiness</span> <span class="o">=</span> <span class="p">{</span>
+   <span class="s">'호주'</span><span class="p">:</span> <span class="mf">7.95</span><span class="p">,</span>
+   <span class="s">'노르웨이'</span><span class="p">:</span> <span class="mf">7.9</span><span class="p">,</span>
+   <span class="s">'미국'</span><span class="p">:</span> <span class="mf">7.85</span><span class="p">,</span>
+   <span class="s">'일본'</span><span class="p">:</span> <span class="mf">6.2</span><span class="p">,</span>
+   <span class="s">'한국'</span><span class="p">:</span> <span class="mf">5.75</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="k">for</span> <span class="n">country</span><span class="p">,</span> <span class="n">happy</span> <span class="ow">in</span> <span class="n">happiness</span><span class="p">.</span><span class="n">items</span><span class="p">():</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">country</span> <span class="o">+</span> <span class="s">' 사람들은 '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">happy</span><span class="p">)</span> <span class="o">+</span> <span class="s">'만큼 행복합니다.'</span><span class="p">)</span>
+<span class="c1"># 모범 답안에서는 print할 때 각 요소를 쉼표로 넣고, sep=''로 했음.
+</span></code></pre></div></div>
+
+<p>연습문제 7-5</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">천간</span> <span class="o">=</span> <span class="p">[</span><span class="s">'갑'</span><span class="p">,</span> <span class="s">'을'</span><span class="p">,</span> <span class="s">'병'</span><span class="p">,</span> <span class="s">'정'</span><span class="p">,</span> <span class="s">'무'</span><span class="p">,</span> <span class="s">'기'</span><span class="p">,</span> <span class="s">'경'</span><span class="p">,</span> <span class="s">'신'</span><span class="p">,</span> <span class="s">'임'</span><span class="p">,</span> <span class="s">'계'</span><span class="p">]</span>
+<span class="n">지지</span> <span class="o">=</span> <span class="p">[</span><span class="s">'자'</span><span class="p">,</span> <span class="s">'축'</span><span class="p">,</span> <span class="s">'인'</span><span class="p">,</span> <span class="s">'묘'</span><span class="p">,</span> <span class="s">'진'</span><span class="p">,</span> <span class="s">'사'</span><span class="p">,</span> <span class="s">'오'</span><span class="p">,</span> <span class="s">'미'</span><span class="p">,</span> <span class="s">'신'</span><span class="p">,</span> <span class="s">'유'</span><span class="p">,</span> <span class="s">'술'</span><span class="p">,</span> <span class="s">'해'</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">a_천간</span> <span class="ow">in</span> <span class="n">천간</span><span class="p">:</span>
+   <span class="k">for</span> <span class="n">a_지지</span> <span class="ow">in</span> <span class="n">지지</span><span class="p">:</span>
+       <span class="k">print</span><span class="p">(</span><span class="n">a_천간</span> <span class="o">+</span> <span class="n">a_지지</span> <span class="o">+</span> <span class="s">' '</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">''</span><span class="p">)</span> <span class="c1"># 모범 답안: print(간, 지, sep='', end=' ')
+</span>   <span class="k">print</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>연습문제 7-6</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">plus_elements</span><span class="p">(</span><span class="n">seq1</span><span class="p">,</span> <span class="n">seq2</span><span class="p">):</span>
+   <span class="s">"""두 개의 시퀀스를 전달받은 후 각 요소를 순서대로 합한 리스트를 반환한다.
+   ex) (1 , 2, 3) [4, 5, 6]   =&gt;    [5, 7, 9] """</span>
+
+   <span class="n">result_list</span> <span class="o">=</span> <span class="p">[]</span>
+   <span class="k">for</span> <span class="n">number1</span><span class="p">,</span> <span class="n">number2</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">seq1</span><span class="p">,</span> <span class="n">seq2</span><span class="p">):</span>
+       <span class="n">result_list</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">number1</span> <span class="o">+</span> <span class="n">number2</span><span class="p">)</span>
+
+   <span class="k">return</span> <span class="n">result_list</span>
+
+
+<span class="k">print</span><span class="p">(</span><span class="n">plus_elements</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]))</span>
+</code></pre></div></div>
+
+<p>컬렉션에 많은 정보가 답겨 있어도 가공해야 새로운 지식도 이끌어 낼 수 있다.</p>
+
+<p>새 리스트를 만들어 요소 수정해 넣기</p>
+
+<p>코드 7-22</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">prices</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2500</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">1800</span><span class="p">,</span> <span class="mi">3500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">2500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">]</span>
+<span class="n">new_price</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">price</span> <span class="ow">in</span> <span class="n">prices</span><span class="p">:</span>
+   <span class="n">new_price</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">price</span> <span class="o">+</span> <span class="mi">50</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">new_price</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>리스트 조건제시법이란, 각 요소를 구하는 조건을 제시하여 컬렉션을 정의하는 방법이다.</p>
+
+<p>[2, 4, 6, 8, 10]의 리스트 표현 방법</p>
+
+<ul>
+  <li>원소나열법: [2, 4, 6, 8, 10]</li>
+  <li>레인지: 2 이상 11 미만의 2씩 증가하는 수의 리스트</li>
+  <li>조건제시법: [1, 2, 3, 4, 5]의 각 요소에 2를 곱한 리스트</li>
+</ul>
+
+<p>조건제시법은 기존에 정의된 컬렉션이 있어야 한다.</p>
+
+<p>코드 7-23</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">e</span> <span class="o">*</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]]</span>
+<span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>코드 7-24</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">prices</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2500</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">1800</span><span class="p">,</span> <span class="mi">3500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">2500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">]</span>
+<span class="k">print</span><span class="p">([</span><span class="n">price</span> <span class="o">+</span> <span class="mi">50</span> <span class="k">for</span> <span class="n">price</span> <span class="ow">in</span> <span class="n">prices</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>리스트 조건제시법과 유사한 기능을 하는 함수 <code class="language-plaintext highlighter-rouge">map()</code></p>
+
+<p>리스트 조건제시법은 파이썬 문법에 정의된 ‘식’이고, map은 일반적인 ‘함수’이다.</p>
+
+<p>코드 7-25</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">prices</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2500</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">1800</span><span class="p">,</span> <span class="mi">3500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">2500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">]</span>
+<span class="k">def</span> <span class="nf">plus50</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+   <span class="k">return</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">50</span>
+
+<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">plus50</span><span class="p">,</span> <span class="n">prices</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<p>코드 7- 26</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">prices</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2500</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">1800</span><span class="p">,</span> <span class="mi">3500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">2500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">50</span><span class="p">,</span> <span class="n">prices</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<p>코드 7-27</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">prices</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2500</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">1800</span><span class="p">,</span> <span class="mi">3500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">2500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">]</span>
+<span class="n">total_price</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">num_items</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">price</span> <span class="ow">in</span> <span class="n">prices</span><span class="p">:</span>
+   <span class="n">total_price</span> <span class="o">+=</span> <span class="n">price</span>
+   <span class="n">num_items</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">total_price</span> <span class="o">/</span> <span class="n">num_items</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>코드 7-28</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">prices</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2500</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">1800</span><span class="p">,</span> <span class="mi">3500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">2500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">]</span>
+<span class="n">most_expensive</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">price</span> <span class="ow">in</span> <span class="n">prices</span><span class="p">:</span>
+   <span class="k">if</span> <span class="n">most_expensive</span> <span class="o">&lt;</span> <span class="n">price</span><span class="p">:</span>
+       <span class="n">most_expensive</span> <span class="o">=</span> <span class="n">price</span>
+      
+<span class="k">print</span><span class="p">(</span><span class="n">most_expensive</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>컬렉션이 요소를 원하는 조건에 따라 선별하는 방법</p>
+
+<p>코드 7-29</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">prices</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2500</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">1800</span><span class="p">,</span> <span class="mi">3500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">2500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">]</span>
+<span class="n">filtered_prices</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">price</span> <span class="ow">in</span> <span class="n">prices</span><span class="p">:</span>
+   <span class="k">if</span> <span class="n">price</span> <span class="o">&lt;=</span> <span class="mi">2000</span><span class="p">:</span>
+       <span class="n">filtered_prices</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">price</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">filtered_prices</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>코드 7-30</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">prices</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2500</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">1800</span><span class="p">,</span> <span class="mi">3500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">2500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">]</span>
+<span class="k">print</span><span class="p">([</span><span class="n">price</span> <span class="k">for</span> <span class="n">price</span> <span class="ow">in</span> <span class="n">prices</span><span class="p">])</span>
+<span class="k">print</span><span class="p">([</span><span class="n">price</span> <span class="k">for</span> <span class="n">price</span> <span class="ow">in</span> <span class="n">prices</span> <span class="k">if</span> <span class="n">price</span> <span class="o">&lt;=</span> <span class="mi">2000</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>코드 7-31</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">prices</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2500</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">1800</span><span class="p">,</span> <span class="mi">3500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">2500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">price</span><span class="p">:</span> <span class="n">price</span> <span class="o">&lt;=</span> <span class="mi">2000</span><span class="p">,</span> <span class="n">prices</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<p>기준을 정해 요소 정렬하기</p>
+
+<p>거품정렬 진화과정…</p>
+
+<p>코드 7-32</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">coll</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="k">if</span> <span class="n">coll</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">coll</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+   <span class="n">coll</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">coll</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">coll</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">coll</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">coll</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>코드 7-33</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">coll</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+
+<span class="k">if</span> <span class="n">coll</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">coll</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+   <span class="n">coll</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">coll</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">coll</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">coll</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">coll</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">coll</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">coll</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
+   <span class="n">coll</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">coll</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">coll</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">coll</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">coll</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>코드 7-34</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">coll</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">coll</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+   <span class="k">if</span> <span class="n">coll</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">coll</span><span class="p">[</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]:</span>
+       <span class="n">coll</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">coll</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">coll</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">coll</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">coll</span><span class="p">)</span>
+
+
+
+<span class="n">코드</span> <span class="mi">7</span><span class="o">-</span><span class="mi">35</span>
+<span class="n">coll</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">coll</span><span class="p">:</span>
+   <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">coll</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+       <span class="k">if</span> <span class="n">coll</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">coll</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]:</span>
+           <span class="n">coll</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">coll</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">coll</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">],</span> <span class="n">coll</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">coll</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">sorted()</code> 함수 사용하기</p>
+
+<p>코드 7-36</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>
+</code></pre></div></div>
+
+<p>코드 7-37</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">coll</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">coll</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">coll</span><span class="p">)</span>
+
+<span class="n">coll</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">coll</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">coll</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>코드 7-38</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">([</span><span class="s">'월'</span><span class="p">,</span> <span class="s">'화'</span><span class="p">,</span> <span class="s">'수'</span><span class="p">,</span> <span class="s">'목'</span><span class="p">,</span> <span class="s">'금'</span><span class="p">]))</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">sorted()</code> 함수가 반환하는 결과는 리스트이다.</p>
+
+<p>코드 7-39</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="s">'안녕하세요'</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">({</span><span class="s">'사자'</span><span class="p">,</span> <span class="s">'박쥐'</span><span class="p">,</span> <span class="s">'늑대'</span><span class="p">,</span> <span class="s">'곰'</span><span class="p">}))</span>
+</code></pre></div></div>
+
+<p>내림차순 정렬
+코드 7-40</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">]))</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>key 매개변수로 각 요소를 가공한 뒤 정렬하기</p>
+
+<p>코드 7-41</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pprint</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">],</span> <span class="n">key</span><span class="o">=</span><span class="nb">abs</span><span class="p">))</span>
+
+<span class="n">items</span> <span class="o">=</span> <span class="p">[</span>
+   <span class="p">{</span><span class="s">'name'</span><span class="p">:</span> <span class="s">'아메리카노'</span><span class="p">,</span> <span class="s">'price'</span><span class="p">:</span> <span class="mi">2000</span><span class="p">},</span>
+   <span class="p">{</span><span class="s">'name'</span><span class="p">:</span> <span class="s">'카페라테'</span><span class="p">,</span> <span class="s">'price'</span><span class="p">:</span> <span class="mi">2500</span><span class="p">},</span>
+   <span class="p">{</span><span class="s">'name'</span><span class="p">:</span> <span class="s">'카푸치노'</span><span class="p">,</span> <span class="s">'price'</span><span class="p">:</span> <span class="mi">2400</span><span class="p">},</span>
+<span class="p">]</span>
+<span class="n">sorted_items</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">items</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">item</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="s">'price'</span><span class="p">])</span>
+<span class="n">pprint</span><span class="p">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">sorted_items</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>연습문제 7-7(이 리스트를 1번, 레인지 방식, 2번. 조건제시법 방식 이렇게 두 가지 다 보이란 문제인 줄 착각함… 레인지만으론 도저히 만들 수 없을 거 같아서 연습문제 해답 봄..)</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">number_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+<span class="n">comprehension_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span> <span class="o">*</span> <span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">number_list</span><span class="p">]</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">comprehension_list</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>연습문제 7-7 모범답안 방식으로 수정</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">comprehension_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span> <span class="o">*</span> <span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
+</code></pre></div></div>
+
+<p>연습문제 7-8</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">comprehension_list</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+   <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">n</span>
+
+<span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">comprehension_list</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">))))</span>
+</code></pre></div></div>
+
+<p>연습문제 7-9</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">length</span><span class="p">(</span><span class="n">seq</span><span class="p">):</span>
+   <span class="s">"""시퀀스(seq)를 하나 입력 받아 요소의 개수를 반환한다."""</span>
+
+   <span class="n">number</span> <span class="o">=</span> <span class="mi">0</span>
+   <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">seq</span><span class="p">:</span>
+       <span class="n">number</span> <span class="o">+=</span> <span class="mi">1</span>
+
+   <span class="k">return</span> <span class="n">number</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">length</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]))</span>
+</code></pre></div></div>
+
+<p>연습문제 7-10</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">longest</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+   <span class="s">"""여러 개의 시퀀스를 입력받아, 그중 가장 많은 요소를 가진 시퀀스를 반환한다."""</span>
+
+   <span class="n">longest_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+   <span class="k">for</span> <span class="n">a_list</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+       <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">longest_list</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">a_list</span><span class="p">):</span>
+           <span class="n">longest_list</span> <span class="o">=</span> <span class="n">a_list</span>
+   <span class="k">return</span> <span class="n">longest_list</span>
+
+
+<span class="k">print</span><span class="p">(</span><span class="n">longest</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="p">[],</span> <span class="s">'abcdefg'</span><span class="p">,</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">)))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">longest</span><span class="p">(</span><span class="s">'파이썬'</span><span class="p">,</span> <span class="s">'프로그래밍'</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">longest</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">)))</span>
+
+<span class="c1"># 모범 답안의 다른 예시
+# def longest(*sequences):
+#     return max(*sequences, key=len)
+</span></code></pre></div></div>
+
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/2022-08-02/yeono-python-10" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/2022-07-31/yeono-python-8" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-07-30 14:29:33 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

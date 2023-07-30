@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>점프 투 장고 공부 10 | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="점프 투 장고 공부 10" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="질문 수정" />
+<meta property="og:description" content="질문 수정" />
+<link rel="canonical" href="http://localhost:4000/2022-08-27/jump-to-django-10" />
+<meta property="og:url" content="http://localhost:4000/2022-08-27/jump-to-django-10" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-08-27T22:00:55+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="점프 투 장고 공부 10" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-08-27T22:00:55+09:00","datePublished":"2022-08-27T22:00:55+09:00","description":"질문 수정","headline":"점프 투 장고 공부 10","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-08-27/jump-to-django-10"},"url":"http://localhost:4000/2022-08-27/jump-to-django-10"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Sunmi Moon
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2022-08-27 22:00:55 +0900">August 27, 2022</time>
+    
+  </div>
+
+  <h1 class="post-title">점프 투 장고 공부 10</h1>
+  <div class="post-line"></div>
+
+  <h4 id="질문-수정">질문 수정</h4>
+
+<p>views.py</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="o">@</span><span class="n">login_required</span><span class="p">(</span><span class="n">login_url</span><span class="o">=</span><span class="s">'common:login'</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">question_modify</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">question_id</span><span class="p">):</span>
+    <span class="n">question</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">Question</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="n">question_id</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">request</span><span class="p">.</span><span class="n">user</span> <span class="o">!=</span> <span class="n">question</span><span class="p">.</span><span class="n">author</span><span class="p">:</span>
+        <span class="n">messages</span><span class="p">.</span><span class="n">error</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s">'수정권한이 없습니다.'</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s">'pybo:detail'</span><span class="p">,</span> <span class="n">question_id</span><span class="o">=</span><span class="n">question</span><span class="p">.</span><span class="nb">id</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">request</span><span class="p">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">'POST'</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">QuestionForm</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">POST</span><span class="p">,</span> <span class="n">instance</span><span class="o">=</span><span class="n">question</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">form</span><span class="p">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="n">question</span> <span class="o">=</span> <span class="n">form</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="n">commit</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+            <span class="n">question</span><span class="p">.</span><span class="n">modify_date</span> <span class="o">=</span> <span class="n">timezone</span><span class="p">.</span><span class="n">now</span><span class="p">()</span>
+            <span class="n">question</span><span class="p">.</span><span class="n">save</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s">'pybo:detail'</span><span class="p">,</span> <span class="n">question_id</span><span class="o">=</span><span class="n">question</span><span class="p">.</span><span class="nb">id</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">QuestionForm</span><span class="p">(</span><span class="n">instance</span><span class="o">=</span><span class="n">question</span><span class="p">)</span>
+    <span class="n">context</span> <span class="o">=</span> <span class="p">{</span><span class="s">'form'</span><span class="p">:</span> <span class="n">form</span><span class="p">}</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s">'pybo/question_form.html'</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h4 id="질문-삭제">질문 삭제</h4>
+
+<p>views.py</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="o">@</span><span class="n">login_required</span><span class="p">(</span><span class="n">login_url</span><span class="o">=</span><span class="s">'common:login'</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">question_delete</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">question_id</span><span class="p">):</span>
+    <span class="n">question</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">Question</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="n">question_id</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">request</span><span class="p">.</span><span class="n">user</span> <span class="o">!=</span> <span class="n">question</span><span class="p">.</span><span class="n">author</span><span class="p">:</span>
+        <span class="n">messages</span><span class="p">.</span><span class="n">error</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s">'수정 권한이 없습니다.'</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s">'pybo:detail'</span><span class="p">,</span> <span class="n">question_id</span><span class="o">=</span><span class="n">question</span><span class="p">.</span><span class="nb">id</span><span class="p">)</span>
+    <span class="n">question</span><span class="p">.</span><span class="n">delete</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s">'pybo:index'</span><span class="p">)</span>
+
+
+</code></pre></div></div>
+
+<p>question_detail.html</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% block script %}
+<span class="nt">&lt;script </span><span class="na">type=</span><span class="s">"text/javascript"</span><span class="nt">&gt;</span>
+<span class="kd">const</span> <span class="nx">delete_elements</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByClassName</span><span class="p">(</span><span class="dl">"</span><span class="s2">delete</span><span class="dl">"</span><span class="p">);</span>
+<span class="nb">Array</span><span class="p">.</span><span class="k">from</span><span class="p">(</span><span class="nx">delete_elements</span><span class="p">).</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">element</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">element</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">click</span><span class="dl">'</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="nx">confirm</span><span class="p">(</span><span class="dl">"</span><span class="s2">정말로 삭제하시겠습니까?</span><span class="dl">"</span><span class="p">))</span> <span class="p">{</span>
+            <span class="nx">location</span><span class="p">.</span><span class="nx">href</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">dataset</span><span class="p">.</span><span class="nx">uri</span><span class="p">;</span>
+        <span class="p">};</span>
+    <span class="p">});</span>
+<span class="p">});</span>
+<span class="nt">&lt;/script&gt;</span>
+{% endblock %}
+
+</code></pre></div></div>
+
+<p>javascript는 <code class="language-plaintext highlighter-rouge">&lt;/body&gt;</code> 바로 위에 넣어 주는 걸 추천.</p>
+
+<h4 id="답변-수정">답변 수정</h4>
+
+<p>답변 수정의 form은 새로 만들어 주어야 한다.</p>
+
+<p>answer_form.html</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% extends 'base.html' %}
+{% block content %}
+<span class="c">&lt;!-- 답변 수정 시작 --&gt;</span>
+<span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container my-3"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;form</span> <span class="na">method=</span><span class="s">"post"</span><span class="nt">&gt;</span>
+        {% csrf_token %}
+        {% include "form_errors.html" %}
+        <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"mb-3"</span><span class="nt">&gt;</span>
+            <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"content"</span> <span class="na">class=</span><span class="s">"form-label"</span><span class="nt">&gt;</span>답변내용<span class="nt">&lt;/label&gt;</span>
+            <span class="nt">&lt;textarea</span> <span class="na">class=</span><span class="s">"form-control"</span> <span class="na">name=</span><span class="s">"content"</span> <span class="na">id=</span><span class="s">"content"</span> <span class="na">rows=</span><span class="s">"10"</span><span class="nt">&gt;</span>
+                {{ form.content.value|default_if_none:'' }}
+            <span class="nt">&lt;/textarea&gt;</span>
+        <span class="nt">&lt;/div&gt;</span>
+        <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="na">class=</span><span class="s">"btn btn-primary"</span><span class="nt">&gt;</span>저장하기<span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;/form&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+<span class="c">&lt;!-- 답변 수정 끝 --&gt;</span>
+
+{% endblock %}
+</code></pre></div></div>
+
+<p>답변을 수정하거나 삭제할 경우에도, detail 화면으로 넘어간다. 그런데 여기에서 detail 화면은 질문을 기준으로 보여주는 것이기 때문에 detail 화면으로 넘어갈 때, <code class="language-plaintext highlighter-rouge">question_id</code> 값을 넘겨 주어야 한다.
+<code class="language-plaintext highlighter-rouge">answer</code> 객체를 이용해 <code class="language-plaintext highlighter-rouge">question_id</code> 값을 구하는 방법: <code class="language-plaintext highlighter-rouge">answer.question.id</code></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="o">@</span><span class="n">login_required</span><span class="p">(</span><span class="n">login_url</span><span class="o">=</span><span class="s">'common:login'</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">answer_modify</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">answer_id</span><span class="p">):</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">Answer</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="n">answer_id</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">request</span><span class="p">.</span><span class="n">user</span> <span class="o">!=</span> <span class="n">answer</span><span class="p">.</span><span class="n">author</span><span class="p">:</span>
+        <span class="n">messages</span><span class="p">.</span><span class="n">error</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s">'수정 권한이 없습니다.'</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s">'pybo:detail'</span><span class="p">,</span> <span class="n">question_id</span><span class="o">=</span><span class="n">answer</span><span class="p">.</span><span class="n">question</span><span class="p">.</span><span class="nb">id</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">request</span><span class="p">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">'POST'</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">AnswerForm</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">POST</span><span class="p">,</span> <span class="n">instance</span><span class="o">=</span><span class="n">answer</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">form</span><span class="p">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="n">answer</span> <span class="o">=</span> <span class="n">form</span><span class="p">.</span><span class="n">save</span><span class="p">(</span><span class="n">commit</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+            <span class="n">answer</span><span class="p">.</span><span class="n">modify_date</span> <span class="o">=</span> <span class="n">timezone</span><span class="p">.</span><span class="n">now</span><span class="p">()</span>
+            <span class="n">answer</span><span class="p">.</span><span class="n">save</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s">'pybo:detail'</span><span class="p">,</span> <span class="n">question_id</span><span class="o">=</span><span class="n">answer</span><span class="p">.</span><span class="n">question</span><span class="p">.</span><span class="nb">id</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">form</span> <span class="o">=</span> <span class="n">AnswerForm</span><span class="p">(</span><span class="n">instance</span><span class="o">=</span><span class="n">answer</span><span class="p">)</span>
+    <span class="n">context</span> <span class="o">=</span> <span class="p">{</span><span class="s">'answer'</span><span class="p">:</span> <span class="n">answer</span><span class="p">,</span> <span class="s">'form'</span><span class="p">:</span> <span class="n">form</span><span class="p">}</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s">'pybo/answer_form.html'</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<h4 id="답변-삭제">답변 삭제</h4>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">@</span><span class="n">login_required</span><span class="p">(</span><span class="n">login_url</span><span class="o">=</span><span class="s">'common/login'</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">answer_delete</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">answer_id</span><span class="p">):</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">Answer</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="n">answer_id</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">request</span><span class="p">.</span><span class="n">user</span> <span class="o">!=</span> <span class="n">answer</span><span class="p">.</span><span class="n">author</span><span class="p">:</span>
+        <span class="n">messages</span><span class="p">.</span><span class="n">error</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s">'권한이 없습니다.'</span><span class="p">)</span>
+
+    <span class="n">answer</span><span class="p">.</span><span class="n">delete</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s">'pybo:detail'</span><span class="p">,</span> <span class="n">question_id</span><span class="o">=</span><span class="n">answer</span><span class="p">.</span><span class="n">question</span><span class="p">.</span><span class="nb">id</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="viewspy-파일-분리">views.py 파일 분리</h3>
+
+<p>views 파일의 내용이 너무 많아져서, 분리가 필요하다.</p>
+
+<blockquote>
+  <p>control+alt+o: 안 쓰는 import 자동 삭제</p>
+</blockquote>
+
+<ol>
+  <li>views.py만 여러 파일로 구분</li>
+</ol>
+
+<p>views 디렉터리를 만들고 그 안에 views 파이를 세 개 만들었다.
+기능별로, base_views.py, question_views.py, answer_views.py로 나누었다.</p>
+
+<p>디렉터리 한 단계 내려 갔기 때문에 <code class="language-plaintext highlighter-rouge">from .model</code> 등으로 된 것은 <code class="language-plaintext highlighter-rouge">from ..model</code>으로 변경</p>
+
+<ol>
+  <li>1번 방법 개선하기</li>
+</ol>
+
+<p>pybo/urls.py</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">path</span>
+<span class="kn">from</span> <span class="nn">.views</span> <span class="kn">import</span> <span class="n">base_views</span><span class="p">,</span> <span class="n">question_views</span><span class="p">,</span> <span class="n">answer_views</span>
+
+<span class="n">app_name</span> <span class="o">=</span> <span class="s">'pybo'</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="c1"># base_views.py
+</span>    <span class="n">path</span><span class="p">(</span><span class="s">''</span><span class="p">,</span> <span class="n">base_views</span><span class="p">.</span><span class="n">index</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">'index'</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s">'&lt;int:question_id&gt;/'</span><span class="p">,</span> <span class="n">base_views</span><span class="p">.</span><span class="n">detail</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">'detail'</span><span class="p">),</span>
+
+    <span class="c1"># answer_views.py
+</span>    <span class="n">path</span><span class="p">(</span><span class="s">'answer/create/&lt;int:question_id&gt;/'</span><span class="p">,</span> <span class="n">answer_views</span><span class="p">.</span><span class="n">answer_create</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">'answer_create'</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s">'answer/modify/&lt;int:answer_id&gt;/'</span><span class="p">,</span> <span class="n">answer_views</span><span class="p">.</span><span class="n">answer_modify</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">'answer_modify'</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s">'answer/delete/&lt;int:answer_id&gt;/'</span><span class="p">,</span> <span class="n">answer_views</span><span class="p">.</span><span class="n">answer_delete</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">'answer_delete'</span><span class="p">),</span>
+
+    <span class="c1"># question_views.py
+</span>    <span class="n">path</span><span class="p">(</span><span class="s">'question/create/'</span><span class="p">,</span> <span class="n">question_views</span><span class="p">.</span><span class="n">question_create</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">'question_create'</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s">'question/modify/&lt;int:question_id&gt;/'</span><span class="p">,</span> <span class="n">question_views</span><span class="p">.</span><span class="n">question_modify</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">'question_modify'</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s">'question/delete/&lt;int:question_id&gt;/'</span><span class="p">,</span> <span class="n">question_views</span><span class="p">.</span><span class="n">question_delete</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">'question_delete'</span><span class="p">),</span>
+<span class="p">]</span>
+</code></pre></div></div>
+
+<p>config/urls.py</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
+<span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">path</span><span class="p">,</span> <span class="n">include</span>
+<span class="kn">from</span> <span class="nn">pybo.views</span> <span class="kn">import</span> <span class="n">base_views</span>
+
+<span class="n">urlpatterns</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">path</span><span class="p">(</span><span class="s">'admin/'</span><span class="p">,</span> <span class="n">admin</span><span class="p">.</span><span class="n">site</span><span class="p">.</span><span class="n">urls</span><span class="p">),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s">'pybo/'</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s">'pybo.urls'</span><span class="p">)),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s">'common/'</span><span class="p">,</span> <span class="n">include</span><span class="p">(</span><span class="s">'common.urls'</span><span class="p">)),</span>
+    <span class="n">path</span><span class="p">(</span><span class="s">''</span><span class="p">,</span> <span class="n">base_views</span><span class="p">.</span><span class="n">index</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">'index'</span><span class="p">)</span>
+<span class="p">]</span>
+</code></pre></div></div>
+
+<h2 id="3-11-추천">3-11 추천</h2>
+
+<p>한 질문에 여러 사람이 추천 가능.
+한 사람이 여러 질문에 추천 가능.
+다대다 관계에서는 <code class="language-plaintext highlighter-rouge">ManyToManyField</code>. ForeignKey처럼 동작.</p>
+
+<h3 id="질문-추천">질문 추천</h3>
+
+<p>특정 사용자가 작성한 질문을 얻기 위해서는 <code class="language-plaintext highlighter-rouge">some_user.author_question.all()</code>
+특정 사용자가 추천한 질문을 얻기 위해서는 <code class="language-plaintext highlighter-rouge">some_user.voter_question.all()</code></p>
+
+<p>question_detail.html</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"javascript:void(0)"</span> <span class="na">data-uri=</span><span class="s">"{% url 'pybo:question_vote' question.id  %}"</span>
+   <span class="na">class=</span><span class="s">"recommend btn btn-sm btn-outline-secondary"</span><span class="nt">&gt;</span> 추천
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"badge rounded-pill bg-success"</span><span class="nt">&gt;</span>{{question.voter.count}}<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;/a&gt;</span>
+... (중략) ...
+const recommend_elements = document.getElementsByClassName("recommend");
+Array.from(recommend_elements).forEach(function(element) {
+    element.addEventListener('click', function() {
+        if(confirm("정말로 추천하시겠습니까?")) {
+            location.href = this.dataset.uri;
+        };
+    });
+});
+
+</code></pre></div></div>
+
+<p>동일한 사용자가 동일한 질문을 여러 번 추천하더라도 추천수가 증가하지는 않는다. <code class="language-plaintext highlighter-rouge">ManyToManyField</code> 내부에서 자체적으로 처리된다.</p>
+
+<h3 id="답변-추천">답변 추천</h3>
+
+<p>question_detail.html</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"javascript:void(0)"</span> <span class="na">data-uri=</span><span class="s">"{% url 'pybo:answer_vote' answer.id %}"</span> <span class="na">class=</span><span class="s">"recommend btn btn-sm btn-outline-secondary"</span><span class="nt">&gt;</span>추천
+    <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"badge rounded-pill bg-success"</span><span class="nt">&gt;</span>{{ answer.voter.count }}<span class="nt">&lt;/span&gt;</span>
+<span class="nt">&lt;/a&gt;</span>
+</code></pre></div></div>
+
+<p>javascript는 질문 추천의 것을 쓸 수 있으므로 작성할 필요가 없다.</p>
+
+<p>answer_views.py</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="o">@</span><span class="n">login_required</span><span class="p">(</span><span class="n">login_url</span><span class="o">=</span><span class="s">'common/login'</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">answer_vote</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">answer_id</span><span class="p">):</span>
+    <span class="n">answer</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">Answer</span><span class="p">,</span> <span class="n">pk</span><span class="o">=</span><span class="n">answer_id</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">request</span><span class="p">.</span><span class="n">user</span> <span class="o">==</span> <span class="n">answer</span><span class="p">.</span><span class="n">author</span><span class="p">:</span>
+        <span class="n">messages</span><span class="p">.</span><span class="n">error</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s">'자신의 댓글을 추천할 수 없습니다.'</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">answer</span><span class="p">.</span><span class="n">voter</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">user</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s">'pybo:detail'</span><span class="p">,</span> <span class="n">question_id</span><span class="o">=</span><span class="n">answer</span><span class="p">.</span><span class="n">question</span><span class="p">.</span><span class="nb">id</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/2022-08-28/jump-to-django-11" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/2022-08-25/jump-to-django-9" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-07-30 14:29:33 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

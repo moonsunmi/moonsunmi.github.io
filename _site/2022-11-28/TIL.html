@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TIL) 재정비, styled-components | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="TIL) 재정비, styled-components" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="(달성/목표) 뽀모도리 1일 3 / 5 1주 3 /40" />
+<meta property="og:description" content="(달성/목표) 뽀모도리 1일 3 / 5 1주 3 /40" />
+<link rel="canonical" href="http://localhost:4000/2022-11-28/TIL" />
+<meta property="og:url" content="http://localhost:4000/2022-11-28/TIL" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-11-28T12:18:07+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TIL) 재정비, styled-components" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-11-28T12:18:07+09:00","datePublished":"2022-11-28T12:18:07+09:00","description":"(달성/목표) 뽀모도리 1일 3 / 5 1주 3 /40","headline":"TIL) 재정비, styled-components","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-11-28/TIL"},"url":"http://localhost:4000/2022-11-28/TIL"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Sunmi Moon
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2022-11-28 12:18:07 +0900">November 28, 2022</time>
+    
+  </div>
+
+  <h1 class="post-title">TIL) 재정비, styled-components</h1>
+  <div class="post-line"></div>
+
+  <table>
+  <thead>
+    <tr>
+      <th>(달성/목표)</th>
+      <th>뽀모도리</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1일</td>
+      <td>3 / 5</td>
+    </tr>
+    <tr>
+      <td>1주</td>
+      <td>3 /40</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Button.js</p>
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">styled</span><span class="p">,</span> <span class="p">{</span> <span class="nx">css</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">styled-components</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">darken</span><span class="p">,</span> <span class="nx">lighten</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">polished</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">colorStyles</span> <span class="o">=</span> <span class="nx">css</span><span class="s2">`
+  </span><span class="p">${({</span> <span class="nx">theme</span><span class="p">,</span> <span class="nx">color</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">selected</span> <span class="o">=</span> <span class="nx">theme</span><span class="p">.</span><span class="nx">palette</span><span class="p">[</span><span class="nx">color</span><span class="p">];</span>
+    <span class="k">return</span> <span class="nx">css</span><span class="s2">`
+      background: </span><span class="p">${</span><span class="nx">selected</span><span class="p">}</span><span class="s2">;
+      &amp;:hover {
+        background: </span><span class="p">${</span><span class="nx">lighten</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="nx">selected</span><span class="p">)}</span><span class="s2">;
+      }
+      &amp;:active {
+        background: </span><span class="p">${</span><span class="nx">darken</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="nx">selected</span><span class="p">)}</span><span class="s2">;
+      }
+      </span><span class="p">${(</span><span class="nx">props</span><span class="p">)</span> <span class="o">=&gt;</span>
+        <span class="nx">props</span><span class="p">.</span><span class="nx">outline</span> <span class="o">&amp;&amp;</span>
+        <span class="nx">css</span><span class="s2">`
+          color: </span><span class="p">${</span><span class="nx">selected</span><span class="p">}</span><span class="s2">;
+          background: none;
+          border: 1px solid </span><span class="p">${</span><span class="nx">selected</span><span class="p">}</span><span class="s2">;
+          &amp;:hover {
+            background: </span><span class="p">${</span><span class="nx">selected</span><span class="p">}</span><span class="s2">;
+            color: white;
+          }
+        `</span><span class="p">}</span><span class="s2">
+    `</span><span class="p">;</span>
+  <span class="p">}}</span><span class="s2">
+`</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">sizes</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">large</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">height</span><span class="p">:</span> <span class="dl">"</span><span class="s2">3rem</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1.25rem</span><span class="dl">"</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">medium</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">height</span><span class="p">:</span> <span class="dl">"</span><span class="s2">2.25rem</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1rem</span><span class="dl">"</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">small</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">height</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1.75rem</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">fontSize</span><span class="p">:</span> <span class="dl">"</span><span class="s2">0.875rem</span><span class="dl">"</span><span class="p">,</span>
+  <span class="p">},</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">sizeStyles</span> <span class="o">=</span> <span class="nx">css</span><span class="s2">`
+  </span><span class="p">${({</span> <span class="nx">size</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="nx">css</span><span class="s2">`
+    height: </span><span class="p">${</span><span class="nx">sizes</span><span class="p">[</span><span class="nx">size</span><span class="p">].</span><span class="nx">height</span><span class="p">}</span><span class="s2">;
+    font-size: </span><span class="p">${</span><span class="nx">sizes</span><span class="p">[</span><span class="nx">size</span><span class="p">].</span><span class="nx">fontSize</span><span class="p">}</span><span class="s2">;
+  `</span><span class="p">}</span><span class="s2">
+`</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">fullWidthStyle</span> <span class="o">=</span> <span class="nx">css</span><span class="s2">`
+  </span><span class="p">${(</span><span class="nx">props</span><span class="p">)</span> <span class="o">=&gt;</span>
+    <span class="nx">props</span><span class="p">.</span><span class="nx">fullWidth</span> <span class="o">&amp;&amp;</span>
+    <span class="nx">css</span><span class="s2">`
+      width: 100%;
+      justify-content: center;
+      &amp; + &amp; {
+        margin-left: 0;
+      }
+    `</span><span class="p">}</span><span class="s2">
+`</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">StyledButton</span> <span class="o">=</span> <span class="nx">styled</span><span class="p">.</span><span class="nx">button</span><span class="s2">`
+  /* 공통 스타일 */
+  display: inline-flex;
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  /* 크기 */
+  </span><span class="p">${</span><span class="nx">sizeStyles</span><span class="p">}</span><span class="s2">
+
+  /* 색상 */
+  </span><span class="p">${</span><span class="nx">colorStyles</span><span class="p">}</span><span class="s2">
+
+  /* 기타 */
+  &amp; + &amp; {
+    margin-left: 1rem;
+  }
+
+  </span><span class="p">${</span><span class="nx">fullWidthStyle</span><span class="p">}</span><span class="s2">
+`</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">Button</span><span class="p">({</span> <span class="nx">children</span><span class="p">,</span> <span class="nx">color</span><span class="p">,</span> <span class="nx">size</span><span class="p">,</span> <span class="nx">outline</span><span class="p">,</span> <span class="nx">fullWidth</span><span class="p">,</span> <span class="p">...</span><span class="nx">rest</span> <span class="p">})</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">StyledButton</span>
+      <span class="na">color</span><span class="p">=</span><span class="si">{</span><span class="nx">color</span><span class="si">}</span>
+      <span class="na">size</span><span class="p">=</span><span class="si">{</span><span class="nx">size</span><span class="si">}</span>
+      <span class="na">outline</span><span class="p">=</span><span class="si">{</span><span class="nx">outline</span><span class="si">}</span>
+      <span class="na">fullWidth</span><span class="p">=</span><span class="si">{</span><span class="nx">fullWidth</span><span class="si">}</span>
+      <span class="si">{</span><span class="p">...</span><span class="nx">rest</span><span class="si">}</span>
+    <span class="p">&gt;</span>
+      <span class="si">{</span><span class="nx">children</span><span class="si">}</span>
+    <span class="p">&lt;/</span><span class="nc">StyledButton</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">Button</span><span class="p">.</span><span class="nx">defaultProps</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">color</span><span class="p">:</span> <span class="dl">"</span><span class="s2">blue</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">size</span><span class="p">:</span> <span class="dl">"</span><span class="s2">medium</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">Button</span><span class="p">;</span>
+
+</code></pre></div></div>
+
+<p>Dialog.js</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">styled</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">styled-components</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Button</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./Button</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">DarkBackground</span> <span class="o">=</span> <span class="nx">styled</span><span class="p">.</span><span class="nx">div</span><span class="s2">`
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.8);
+`</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">DialogBlock</span> <span class="o">=</span> <span class="nx">styled</span><span class="p">.</span><span class="nx">div</span><span class="s2">`
+  width: 320px;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 2px;
+  h3 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  p {
+    font-size: 1.125rem;
+  }
+`</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">ButtonGroup</span> <span class="o">=</span> <span class="nx">styled</span><span class="p">.</span><span class="nx">div</span><span class="s2">`
+  margin-top: 3rem;
+  display: flex;
+  justify-content: flex-end;
+`</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">Dialog</span><span class="p">({</span> <span class="nx">title</span><span class="p">,</span> <span class="nx">children</span><span class="p">,</span> <span class="nx">confirmText</span><span class="p">,</span> <span class="nx">cancelText</span> <span class="p">})</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">DarkBackground</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">DialogBlock</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">h3</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">title</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">h3</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">children</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">ButtonGroup</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nc">Button</span> <span class="na">color</span><span class="p">=</span><span class="s">"gray"</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">cancelText</span><span class="si">}</span><span class="p">&lt;/</span><span class="nc">Button</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nc">Button</span> <span class="na">color</span><span class="p">=</span><span class="s">"pink"</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">confirmText</span><span class="si">}</span><span class="p">&lt;/</span><span class="nc">Button</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nc">ButtonGroup</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nc">DialogBlock</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nc">DarkBackground</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">Dialog</span><span class="p">.</span><span class="nx">defaultProps</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">confirmText</span><span class="p">:</span> <span class="dl">"</span><span class="s2">확인</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">cancelText</span><span class="p">:</span> <span class="dl">"</span><span class="s2">취소</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">Dialog</span><span class="p">;</span>
+
+</code></pre></div></div>
+
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/2022-11-29/TIL" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/2022-11-27/18th-week" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-07-30 14:29:33 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

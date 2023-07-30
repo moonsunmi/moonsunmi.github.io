@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TIL) 리액트를 다루는 기술(의존성 배열, useState의 배치 처리) | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="TIL) 리액트를 다루는 기술(의존성 배열, useState의 배치 처리)" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="(달성/목표) 뽀모도리 1일 14 / 8 1주 40 /40" />
+<meta property="og:description" content="(달성/목표) 뽀모도리 1일 14 / 8 1주 40 /40" />
+<link rel="canonical" href="http://localhost:4000/2022-11-13/TIL" />
+<meta property="og:url" content="http://localhost:4000/2022-11-13/TIL" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-11-13T12:18:07+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TIL) 리액트를 다루는 기술(의존성 배열, useState의 배치 처리)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-11-13T12:18:07+09:00","datePublished":"2022-11-13T12:18:07+09:00","description":"(달성/목표) 뽀모도리 1일 14 / 8 1주 40 /40","headline":"TIL) 리액트를 다루는 기술(의존성 배열, useState의 배치 처리)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-11-13/TIL"},"url":"http://localhost:4000/2022-11-13/TIL"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Sunmi Moon
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2022-11-13 12:18:07 +0900">November 13, 2022</time>
+    
+  </div>
+
+  <h1 class="post-title">TIL) 리액트를 다루는 기술(의존성 배열, useState의 배치 처리)</h1>
+  <div class="post-line"></div>
+
+  <table>
+  <thead>
+    <tr>
+      <th>(달성/목표)</th>
+      <th>뽀모도리</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1일</td>
+      <td>14 / 8</td>
+    </tr>
+    <tr>
+      <td>1주</td>
+      <td>40 /40</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="의존성-배열에-어떤-값을-넣어야-하는가">의존성 배열에 어떤 값을 넣어야 하는가?</h3>
+
+<p>의존성 배열이라는 게 감이 잘 안와서 서로 다른 article을 몇 개 읽어 보았다.
+https://devtrium.com/posts/dependency-arrays</p>
+
+<p>의존성 배열은 훅 개념, 나아가 함수형 컴포넌트와 밀접한 연관이 있다.</p>
+
+<p>의존성 배열은 훅을 trigger하는 값을 정해준 것이다. 이때 trigger는 훅의 종류에 따라 다르다. <code class="language-plaintext highlighter-rouge">useEffect</code> callback 함수를 의미하고, <code class="language-plaintext highlighter-rouge">useCallback</code>은 함수의 변화를 의미하고.</p>
+
+<p>의존성 배열에 넣어야 할 것의 기준. ‘밖에서 정의된 변수가 훅 안에서 쓰였다면 추가해 준다.’</p>
+
+<p>그런데 값이 변하지 않는다면 추가해 줄 필요가 없다. 다음은 내 뽀모도로 프로젝트의 <code class="language-plaintext highlighter-rouge">Couter</code> 컴포넌트.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">Counter</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">minutes</span><span class="p">,</span> <span class="nx">seconds</span><span class="p">,</span> <span class="nx">isCounting</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">initPomodori</span> <span class="o">=</span> <span class="nx">minutes</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">+</span> <span class="nx">seconds</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">countdownNumber</span><span class="p">,</span> <span class="nx">setCountdownNumber</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="nx">initPomodori</span><span class="p">);</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">isCounting</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">interval</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">countdownNumber</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+          <span class="c1">// countdown 끝</span>
+          <span class="nx">setCountdownNumber</span><span class="p">(</span><span class="nx">initPomodori</span><span class="p">);</span>
+          <span class="nx">setIsCounting</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+          <span class="nx">clearInterval</span><span class="p">(</span><span class="nx">interval</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="nx">setCountdownNumber</span><span class="p">(</span><span class="nx">countdownNumber</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+      <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">clearInterval</span><span class="p">(</span><span class="nx">interval</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">countdownNumber</span><span class="p">,</span> <span class="nx">isCounting</span><span class="p">]);</span>
+</code></pre></div></div>
+
+<p>밖에서 정의되었지만, hook 안에서 쓰인 변수는 세 개다. <code class="language-plaintext highlighter-rouge">countdownNumber</code>, <code class="language-plaintext highlighter-rouge">isCouting</code>, <code class="language-plaintext highlighter-rouge">initPomodori</code>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">initPomodori</code>는 한 뽀모도리 당 몇 분을 세팅해둘지를 정하는 것이라서, 한번 정해지면 타이머 기능과 상관 없이 불변이다. 따라서 추가해 줄 필요가 없다.</p>
+
+<p>또한 다음과 같은 경우에도 의존성 배열에 추가해 줄 필요가 없다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useEffect</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">ExampleComponent</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">counter</span><span class="p">,</span> <span class="nx">setCounter</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setCounter</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+
+  <span class="k">return</span> <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">Counter</span> <span class="na">is</span><span class="p">:</span> <span class="p">{</span><span class="nx">counter</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/p&gt;</span><span class="err">;
+</span><span class="p">};</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">couter</code>가 밖에서 선언된 것이기는 하지만, useState는 최적화를 해둔 상태이다. setCounter를 사용한다는 건, 이미 얘가 변할 때만 렌더링한다는 뜻이기 때문에 굳이 의존성 배열에 추가해 줄 필요가 없다.</p>
+
+<h3 id="커스텀-훅-만들기">커스텀 훅 만들기</h3>
+
+<p>input에서 자주 사용되는 기능을 커스텀 훅으로 만들었다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useCallback</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">useInputs</span><span class="p">(</span><span class="nx">initialForm</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">form</span><span class="p">,</span> <span class="nx">setForm</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="nx">initialForm</span><span class="p">);</span>
+  <span class="c1">// change</span>
+  <span class="kd">const</span> <span class="nx">onChange</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(</span><span class="nx">e</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">{</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">value</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">;</span>
+    <span class="nx">setForm</span><span class="p">(</span><span class="nx">form</span> <span class="o">=&gt;</span> <span class="p">({</span> <span class="p">...</span><span class="nx">form</span><span class="p">,</span> <span class="p">[</span><span class="nx">name</span><span class="p">]:</span> <span class="nx">value</span> <span class="p">}));</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+  <span class="kd">const</span> <span class="nx">reset</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">setForm</span><span class="p">(</span><span class="nx">initialForm</span><span class="p">),</span> <span class="p">[</span><span class="nx">initialForm</span><span class="p">]);</span>
+  <span class="k">return</span> <span class="p">[</span><span class="nx">form</span><span class="p">,</span> <span class="nx">onChange</span><span class="p">,</span> <span class="nx">reset</span><span class="p">];</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">useInputs</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>주의) 다음과 같이 useInputs 커스텀 훅에서 받아오는 건 Props이 아니다.(이걸로 헤맸음..)</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">useInputs</span><span class="p">(</span><span class="nx">initialForm</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="usestate는-가능하다면-상탯값-변경을-배치로-처리한다">useState는 가능하다면 상탯값 변경을 배치로 처리한다</h3>
+
+<p>setForm은 다음과 같이 작성하는데, 내 직관과는 맞지 않았다.</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">setForm</span><span class="p">(</span><span class="nx">form</span> <span class="o">=&gt;</span> <span class="p">({</span> <span class="p">...</span><span class="nx">form</span><span class="p">,</span> <span class="p">[</span><span class="nx">name</span><span class="p">]:</span> <span class="nx">value</span> <span class="p">}));</span>
+</code></pre></div></div>
+
+<p>나라면 다음과 같이 작성했을 텐데, 그러면 이전에 입력한 값이 자꾸 초기화되었다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">setForm</span><span class="p">({</span> <span class="p">...</span><span class="nx">form</span><span class="p">,</span> <span class="p">[</span><span class="nx">name</span><span class="p">]:</span> <span class="nx">value</span> <span class="p">});</span>
+</code></pre></div></div>
+
+<p>웹 사이트에도 비슷한 궁금증을 가진 독자들이 질문을 달아 두었는데, 이유를 살펴보니 다음과 같다.</p>
+
+<p>useState는 상태값을 업데이트할 때 모든 변경 사항에 즉각적으로 매번 업데이트하는 게 아니라 일괄적으로(batch) 업데이트하거나 미룰 수도 있다. 성능을 위해서 그렇게 하는 것인데…</p>
+
+<p>그러다 보니 현재 입력하고 있는 값을 제외하고는 갱신하지 않은 채로 호출한다.</p>
+
+<h4 id="그래서-어떻게-하나">그래서 어떻게 하나?</h4>
+
+<p>그렇기 때문에 이전 상태값이 업데이트될 상태값에 영향을 미치는 경우, 이전 상태값을 명시해주는 것을 권장한다.</p>
+
+<p>리액트 공식 홈페이지를 보면 다음과 같이 되어 있다.</p>
+
+<p>https://ko.reactjs.org/docs/hooks-reference.html#functional-updates</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Counter</span><span class="p">({</span><span class="nx">initialCount</span><span class="p">})</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">count</span><span class="p">,</span> <span class="nx">setCount</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="nx">initialCount</span><span class="p">);</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;&gt;</span>
+      <span class="nx">Count</span><span class="p">:</span> <span class="p">{</span><span class="nx">count</span><span class="p">}</span>
+      <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="nx">setCount</span><span class="p">(</span><span class="nx">initialCount</span><span class="p">)}</span><span class="o">&gt;</span><span class="nx">Reset</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="nx">setCount</span><span class="p">(</span><span class="nx">prevCount</span> <span class="o">=&gt;</span> <span class="nx">prevCount</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)}</span><span class="o">&gt;-&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="nx">setCount</span><span class="p">(</span><span class="nx">prevCount</span> <span class="o">=&gt;</span> <span class="nx">prevCount</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)}</span><span class="o">&gt;+&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<ul>
+  <li>reset은 현재 상태값이 어떠냐에 상관 없으므로, <code class="language-plaintext highlighter-rouge">setCount(initialCount)</code>로 원하는 값만 입력해 준다.</li>
+  <li>그런데 값을 감소시키거나 증가시켜야 하는 경우에는 이전 상태값을 기준으로 현재 값을 변경하기에, 이전 상태값을 적어 준다.</li>
+</ul>
+
+<h4 id="pomo-weekly-프로젝트에도-적용하기">pomo-weekly 프로젝트에도 적용하기</h4>
+
+<p>내 프로젝트에 문제는 없지만, 권장 사항을 따르기 위해서 다음과 같이 setCountdownNumber에서 이전 값을 명시해 주었다.</p>
+
+<p>이전</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">setCountdownNumber</span><span class="p">(</span><span class="nx">countdownNumber</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>수정</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">setCountdownNumber</span><span class="p">((</span><span class="nx">prevCount</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">prevCount</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>bool 값은 다음과 같이 수정해 주었다. 지금보니 이전의 코드는 영 별로였던 것 같다.</p>
+
+<p>이전</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">setIsCounting</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>수정</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">setIsCounting</span><span class="p">((</span><span class="nx">prevState</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="o">!</span><span class="nx">prevState</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="context-api">Context API</h3>
+
+<p>onRemove, onChange처럼 자식 컴포넌트에게 전달해 줘야 하는 함수들이 있다. 중간에서 하는 일도 별로 없이 이런 걸 전달만 해주는 컴포넌트들도 있다. 이것을 해결하기 위해서 Context API를 사용한다.</p>
+
+<blockquote>
+  <p>redux vs. Context API</p>
+
+  <p>내 프로젝트에 Redux를 사용하려고 했는데, 작은 프로젝트에서는 Context API로도 충분하다고(오히려 이쪽이 낫다고) 한다. 아직 Context API 사용도 익숙하지 않은 상태니 이번 프로젝트는 Redux를 사용하지 않기로 했다.</p>
+</blockquote>
+
+<p>Context API를 사용하면, 프로젝트 안에서 전역으로 사용할 수 있다.</p>
+
+<p>먼저 Context 객체를 만들어 줘야 한다. <code class="language-plaintext highlighter-rouge">React.createContext</code> 함수로 만들 수 있는데, 이 함수의 구조는 다음과 같다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">React</span><span class="p">.</span><span class="nx">createContext</span><span class="p">(</span><span class="nx">defaultValue</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="nx">Provider</span><span class="p">,</span> <span class="nx">Consumer</span><span class="p">}</span>
+</code></pre></div></div>
+
+<h4 id="context를-사용하기-전에-고려할-것">Context를 사용하기 전에 고려할 것</h4>
+<p>context를 사용하면, 컴포넌트를 재사용하기 어려워지므로 꼭 필요할 때만 써야 한다고 한다(https://ko.reactjs.org/docs/context.html#before-you-use-context).</p>
+
+<p>여러 레벨에 걸쳐 props 넘기는 걸 대체하는 데에는 context보다 컴포넌트 합성이 더 간단한 해결책이 될 수도 있다.</p>
+
+<!-- <실전 리액트 프로그래밍>에 나오는 3.4절 공부 중...-->
+
+<h4 id="pomo-weekly에-적용하기">pomo-weekly에 적용하기</h4>
+
+<p>내 프로젝트 pomo-weekly에서 logs, isCounting, nextLogId를 Context API로 만들어 주었다.</p>
+
+<hr />
+
+<p>일) 운동<br />
+토요일에 일일헬스 1시간을 하여 오늘은 운동을 하지 않고 휴식을 취했다.</p>
+
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/2022-11-13/16th-week" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/2022-11-12/TIL" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-07-30 14:29:33 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

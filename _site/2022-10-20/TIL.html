@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Likedin Clone Coding | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="Likedin Clone Coding" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="(달성/목표) 뽀모도리 등 가슴 배 1일 3/3 5/5 5/5 3/3 1주 18/40      " />
+<meta property="og:description" content="(달성/목표) 뽀모도리 등 가슴 배 1일 3/3 5/5 5/5 3/3 1주 18/40      " />
+<link rel="canonical" href="http://localhost:4000/2022-10-20/TIL" />
+<meta property="og:url" content="http://localhost:4000/2022-10-20/TIL" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-10-20T12:18:07+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Likedin Clone Coding" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-10-20T12:18:07+09:00","datePublished":"2022-10-20T12:18:07+09:00","description":"(달성/목표) 뽀모도리 등 가슴 배 1일 3/3 5/5 5/5 3/3 1주 18/40      ","headline":"Likedin Clone Coding","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-10-20/TIL"},"url":"http://localhost:4000/2022-10-20/TIL"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Sunmi Moon
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2022-10-20 12:18:07 +0900">October 20, 2022</time>
+    
+  </div>
+
+  <h1 class="post-title">Likedin Clone Coding</h1>
+  <div class="post-line"></div>
+
+  <table>
+  <thead>
+    <tr>
+      <th>(달성/목표)</th>
+      <th>뽀모도리</th>
+      <th>등</th>
+      <th>가슴</th>
+      <th>배</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1일</td>
+      <td>3/3</td>
+      <td>5/5</td>
+      <td>5/5</td>
+      <td>3/3</td>
+    </tr>
+    <tr>
+      <td>1주</td>
+      <td>18/40</td>
+      <td> </td>
+      <td> </td>
+      <td> </td>
+    </tr>
+  </tbody>
+</table>
+
+<p>App.js</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useEffect</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Header</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./Header</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Sidebar</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./Sidebar</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Feed</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./Feed</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="dl">"</span><span class="s2">./App.css</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">login</span><span class="p">,</span> <span class="nx">logout</span><span class="p">,</span> <span class="nx">selectUser</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./features/userSlice</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Login</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./Login</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">useDispatch</span><span class="p">,</span> <span class="nx">useSelector</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react-redux</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">auth</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./firebase</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">App</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">useSelector</span><span class="p">(</span><span class="nx">selectUser</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">dispatch</span> <span class="o">=</span> <span class="nx">useDispatch</span><span class="p">();</span>
+
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">auth</span><span class="p">.</span><span class="nx">onAuthStateChanged</span><span class="p">((</span><span class="nx">userAuth</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">userAuth</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// user is logged in</span>
+        <span class="nx">dispatch</span><span class="p">(</span>
+          <span class="nx">login</span><span class="p">({</span>
+            <span class="na">email</span><span class="p">:</span> <span class="nx">userAuth</span><span class="p">.</span><span class="nx">email</span><span class="p">,</span>
+            <span class="na">uid</span><span class="p">:</span> <span class="nx">userAuth</span><span class="p">.</span><span class="nx">uid</span><span class="p">,</span>
+            <span class="na">displayName</span><span class="p">:</span> <span class="nx">userAuth</span><span class="p">.</span><span class="nx">displayName</span><span class="p">,</span>
+            <span class="na">photoUrl</span><span class="p">:</span> <span class="nx">userAuth</span><span class="p">.</span><span class="nx">photoURL</span><span class="p">,</span>
+          <span class="p">})</span>
+        <span class="p">);</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="c1">// user is logged out</span>
+        <span class="nx">dispatch</span><span class="p">(</span><span class="nx">logout</span><span class="p">());</span>
+      <span class="p">}</span>
+    <span class="p">});</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">app</span><span class="dl">"</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">Header</span> <span class="o">/&gt;</span>
+      <span class="p">{</span><span class="o">!</span><span class="nx">user</span> <span class="p">?</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">Login</span> <span class="o">/&gt;</span>
+      <span class="p">)</span> <span class="p">:</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">app__body</span><span class="dl">"</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Sidebar</span> <span class="o">/&gt;</span>
+          <span class="o">&lt;</span><span class="nx">Feed</span> <span class="o">/&gt;</span>
+          <span class="p">{</span><span class="cm">/* Sidebar */</span><span class="p">}</span>
+          <span class="p">{</span><span class="cm">/* feed */</span><span class="p">}</span>
+          <span class="p">{</span><span class="cm">/* widgets */</span><span class="p">}</span>
+        <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>      <span class="p">)}</span>
+      <span class="p">;</span>
+    <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">App</span><span class="p">;</span>
+
+</code></pre></div></div>
+
+<p>Header.js</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">SearchIcon</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@mui/icons-material/Search</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">HomeIcon</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@mui/icons-material/Home</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">GroupIcon</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@mui/icons-material/Group</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">WorkIcon</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@mui/icons-material/Work</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">TextsmsIcon</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@mui/icons-material/Textsms</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">NotificationsIcon</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@mui/icons-material/Notifications</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">AccountCircleIcon</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@mui/icons-material/AccountCircle</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="dl">"</span><span class="s2">./Header.css</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">HeaderOption</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./HeaderOption</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">useDispatch</span><span class="p">,</span> <span class="nx">useSelector</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react-redux</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">auth</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./firebase</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">logout</span><span class="p">,</span> <span class="nx">selectUser</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./features/userSlice</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">Header</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">useSelector</span><span class="p">(</span><span class="nx">selectUser</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">dispatch</span> <span class="o">=</span> <span class="nx">useDispatch</span><span class="p">();</span>
+
+  <span class="kd">const</span> <span class="nx">logoutOfApp</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">dispatch</span><span class="p">(</span><span class="nx">logout</span><span class="p">());</span>
+    <span class="nx">auth</span><span class="p">.</span><span class="nx">signOut</span><span class="p">();</span>
+  <span class="p">};</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">header</span><span class="dl">"</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">header__left</span><span class="dl">"</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">img</span>
+          <span class="nx">src</span><span class="o">=</span><span class="dl">"</span><span class="s2">https://drive.google.com/uc?export=view&amp;id=14Ut_BLcjdgZnDZ-2o9ZelmSMkUfGYGa3</span><span class="dl">"</span>
+          <span class="nx">alt</span><span class="o">=</span><span class="dl">""</span>
+        <span class="o">/&gt;</span>
+
+        <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">header__search</span><span class="dl">"</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">SearchIcon</span> <span class="o">/&gt;</span>
+          <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="dl">"</span><span class="s2">text</span><span class="dl">"</span> <span class="nx">placeholder</span><span class="o">=</span><span class="dl">"</span><span class="s2">Search</span><span class="dl">"</span> <span class="o">/&gt;</span>
+        <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">header__right</span><span class="dl">"</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">HeaderOption</span> <span class="nx">Icon</span><span class="o">=</span><span class="p">{</span><span class="nx">HomeIcon</span><span class="p">}</span> <span class="nx">title</span><span class="o">=</span><span class="dl">"</span><span class="s2">Home</span><span class="dl">"</span> <span class="o">/&gt;</span>
+        <span class="o">&lt;</span><span class="nx">HeaderOption</span> <span class="nx">Icon</span><span class="o">=</span><span class="p">{</span><span class="nx">GroupIcon</span><span class="p">}</span> <span class="nx">title</span><span class="o">=</span><span class="dl">"</span><span class="s2">My Network</span><span class="dl">"</span> <span class="o">/&gt;</span>
+        <span class="o">&lt;</span><span class="nx">HeaderOption</span> <span class="nx">Icon</span><span class="o">=</span><span class="p">{</span><span class="nx">WorkIcon</span><span class="p">}</span> <span class="nx">title</span><span class="o">=</span><span class="dl">"</span><span class="s2">Job</span><span class="dl">"</span> <span class="o">/&gt;</span>
+        <span class="o">&lt;</span><span class="nx">HeaderOption</span> <span class="nx">Icon</span><span class="o">=</span><span class="p">{</span><span class="nx">TextsmsIcon</span><span class="p">}</span> <span class="nx">title</span><span class="o">=</span><span class="dl">"</span><span class="s2">Chat</span><span class="dl">"</span> <span class="o">/&gt;</span>
+        <span class="o">&lt;</span><span class="nx">HeaderOption</span> <span class="nx">Icon</span><span class="o">=</span><span class="p">{</span><span class="nx">NotificationsIcon</span><span class="p">}</span> <span class="nx">title</span><span class="o">=</span><span class="dl">"</span><span class="s2">Notifications</span><span class="dl">"</span> <span class="o">/&gt;</span>
+        <span class="o">&lt;</span><span class="nx">HeaderOption</span>
+          <span class="nx">avatar</span><span class="o">=</span><span class="p">{</span><span class="nx">user</span><span class="p">.</span><span class="nx">photoUrl</span><span class="p">}</span>
+          <span class="nx">Icon</span><span class="o">=</span><span class="p">{</span><span class="nx">AccountCircleIcon</span><span class="p">}</span>
+          <span class="nx">title</span><span class="o">=</span><span class="dl">"</span><span class="s2">me</span><span class="dl">"</span>
+          <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">logoutOfApp</span><span class="p">}</span>
+        <span class="sr">/</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">Header</span><span class="p">;</span>
+
+</code></pre></div></div>
+
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/2022-10-21/TIL" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/2022-10-19/TIL" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-07-30 14:29:33 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

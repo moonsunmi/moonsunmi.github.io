@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>연오의 파이썬 공부 8 | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="연오의 파이썬 공부 8" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="days = { 1: lambda(year): 31, 2: lambda(year) 29 if is_leap_year(year) else 28, 3: lambda(year) 31, … } days = { 1: 31, ‘2_on_leap_year’: 29, 2: 28, } days[1](2020) days[2](2020) 연습문제 6-3 def is_leap_year(this_year): &quot;&quot;&quot;연도(this_year)를 입력받아 그해가 윤년이면 True를 아니면 False를 반환한다.&quot;&quot;&quot; if this_year % 4 == 0: if this_year % 100 == 0: if this_year % 400 == 0: return True else: return False else: return True else: return False def days_in_month(year, month): &quot;&quot;&quot;연도(year)와 월(month)을 입력받아, 그달이 며칠까지 있는지 반환한다.&quot;&quot;&quot; number_of_days_per_month = {1: 31, 3: 31, 4: 30, 5: 31, 6: 30, 7: 31, 8: 31, 9: 30, 10: 31, 11: 30, 12: 31} if is_leap_year(year): number_of_days_feb = 29 else: number_of_days_feb = 28 number_of_days_per_month.update({2: number_of_days_feb}) return number_of_days_per_month.get(month) print(days_in_month(2022, 2)) print(days_in_month(2000, 10)) print(days_in_month(1996, 2)) print(days_in_month(1998, 1)) 연습문제 6-3 모범 답안 방식대로 업데이트 def is_leap_year(this_year): &quot;&quot;&quot;연도(this_year)를 입력받아 그해가 윤년이면 True를 아니면 False를 반환한다.&quot;&quot;&quot; if this_year % 4 == 0: if this_year % 100 == 0: if this_year % 400 == 0: return True else: return False else: return True else: return False def days_in_month(year, month): &quot;&quot;&quot;연도(year)와 월(month)을 입력받아, 그달이 며칠까지 있는지 반환한다.&quot;&quot;&quot; month_have_31_days = {1, 3, 5, 7, 8, 10, 12} month_have_30_days = {4, 6, 9, 11} month_have_28_or_29_days = {2} if month in month_have_31_days: return 31 elif month in month_have_30_days: return 30 else: if is_leap_year(year): return 29 else: return 28 print(&#39;2020년 2월의 날의 수:&#39;, days_in_month(2020, 2)) print(&#39;2021년 2월의 날의 수:&#39;, days_in_month(2021, 2)) print(&#39;2021년 5월의 날의 수:&#39;, days_in_month(2020, 5)) print(&#39;2021년 9월의 날의 수:&#39;, days_in_month(2020, 11)) # 모범 답안 방식대로 수정한 버전 연습문제 6-4 &quot;&quot;&quot; 키와 몸무게를 입력 받아 비만 정도를 알려준다. 비만도 측정하는 방법: 1. 체질량 지수 = w(체중) / {t(키) * t(키)} 2. 체질량 지수를 이용한 비만 정도 계산법 체질량 지수 &lt; 18.5 → 저체중 18.5 &lt;= 체질량 지수 &lt; 23 → 정상 23 &lt;= 체질량 지수 &lt; 25 → 과체중 체질량 지수 &gt;= 25 → 비만 &quot;&quot;&quot; def calculate_BMI(t, w): return w / (t * t) def degree_of_obesity(BMI): if BMI &lt; 18.5: print(&#39;저체중입니다.&#39;) elif BMI &lt; 23: print(&#39;정상입니다.&#39;) elif BMI &lt; 25: print(&#39;과체중입니다.&#39;) else: print(&#39;비만입니다.&#39;) print(&#39;키를 입력하세요(m): &#39;, end=&#39;&#39;) t = float(input()) print(&#39;몸무게를 입력하세요(kg): &#39;, end=&#39;&#39;) w = float(input()) degree_of_obesity(calculate_BMI(t, w)) 연습문제 6-5 def absolute_number(number): &quot;&quot;&quot;수(number)의 절댓값을 구한다. 조건부 식을 활용해서 작성되었음.&quot;&quot;&quot; number = number * -1 if number &lt; 0 else number return number print(absolute_number(-2)) print(absolute_number(3)) print(absolute_number(0)) 반복이란 같은 작업을 여러 번 실행하는 것 while 문은 지정한 조건이 유지되는 동안 코드를 계속 반복하는 명령이다. 코드 6-18 rainbow = [&#39;Red&#39;, &#39;Orange&#39;, &#39;Yellow&#39;, &#39;Green&#39;, &#39;Blue&#39;, &#39;Indigo&#39;, &#39;Violet&#39;] index = 0 while index &lt; len(rainbow): print(rainbow[index]) index += 1 코드 6-19 text = &quot;아무 메시지나 입력하세요. 그만하려면 &#39;그만&#39;을 입력하세요.&quot; while text != &#39;그만&#39;: print(&#39;컴퓨터: &#39; + text) text = input() for 문도 반복 실행하는 명령어. while 문이 여러 목적에 활용할 수 있는 범용적인 반복 기능이라면, for 문은 순차적 처리와 컬렉션 순회에 특화된 반복 기능이다. for 문을 이용하면 반복 횟수를 관리하는 데 신경을 쓰지 않고 간단히 컬렉션을 순회할 수 있다. 코드 6-21 rainbow = [&#39;Red&#39;, &#39;Orange&#39;, &#39;Yellow&#39;, &#39;Green&#39;, &#39;Blue&#39;, &#39;Indigo&#39;, &#39;Violet&#39;] for color in rainbow: print(color) 코드 6-22 def my_sum(numbers): &quot;&quot;&quot;numbers의 모든 요소의 합을 반환한다.&quot;&quot;&quot; total = 0 for n in numbers: total += n return total print(my_sum([1, 2, 3, 4, 5])) 코드 6-23 total = 0 for n in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]: if n % 2 == 0: total += n print(total) 1부터 1천만까지의 모든 자연수 같은 걸 range로 쉽게 구할 수 있다. 코드 6-24 total = 0 for n in range(1, 10_000_001): if n % 2 == 0: total += n print(total) 짝수의 합 구하는 것 range로 깔끔하게 코드 6-25 total = 0 for n in range(2, 10_000_0001, 2): total += n print(total) 컬렉션의 각 요소가 무엇인지는 의미가 없으면, 요소를 대입받을 변수의 이름을 _로 지정. 코드 6-26 print(&#39;몇 번 반복하시겠습니까?&#39;) n = int(input()) for _ in range(n): print(&#39;안녕&#39;) for 문은 컬렉션을 순서대로 순회할 때 편리하게 사용할 수 있다. while 문을 사용하면 반복 과정을 제어하는 코드를 직접 작성해야 해 불편하다. continue 문과 break 문으로 실행 흐름을 중지할 수 있다. continue 문: 이번 주기의 실행을 중지 break 문: 반복 전체를 중지 코드 6-27 for i in range(4): print(&#39;현재 반복 주기:&#39;, i) continue print(&#39;다음 반복 주기:&#39;, i + 1) 코드 6-28 for i in range(4): print(&#39;현재 반복 주기:&#39;, i) break print(&#39;다음 반복 주기:&#39;, i + 1) break와 continue의 차이를 보여주는 넘 좋은 예제 코드 6-29 total = 0 while True: print(&#39;더할 수를 입력하세요: &#39;, end=&#39;&#39;) user_input = input() if user_input == &#39;그만&#39;: break if not user_input.isnumeric(): print(&#39;잘못된 입력입니다.&#39;) continue total += int(user_input) print(&#39;합계:&#39;, total) print(&#39;프로그램을 종료합니다.&#39;) while else절 코드 6-30 i = 0 while(i&lt;3): print(i, &#39; 번째 실행&#39;) i += 1 else: print(&#39;반복완료&#39;) 코드 6-31 i = 0 while(i &lt; 100): print(i, &#39;번째 실행&#39;) i += 1 if (i &gt; 2): print(&#39;반복 중지&#39;) break else: print(&#39;반복 완료&#39;) 코드 6-32 for i in range(3): print(i, &#39;번째 실행&#39;) else: print(&#39;반복 완료&#39;) while 문의 else 절은 조건이 거짓일 때 실행, for 문의 else 절은 정상 종료된 직후 실행. 단순히 반복이 끝난 후에 코드를 실행해야 한다면 그냥 다음 행에 코드를 입력하면 된다. else 절의 가치는 반복이 정상적으로 종료되었는지 아니면 임의로 중지되었는지를 구분하는 데 있다. 코드 6-33 def 첫_짝수_찾기(numbers): &quot;&quot;&quot;numbers에서 첫 번째 짝수를 찾아 화면에 출력한다.&quot;&quot;&quot; for n in numbers: if n % 2 == 0: print(n, &#39;이 첫 짝수입니다.&#39;) break else: print(&#39;짝수가 없습니다.&#39;) 첫_짝수_찾기([1, 3, 5, 33, 47, 55]) 첫_짝수_찾기([7, 5, 6, 72, 19, 81]) 코드 6-34 for i in range(2, 10): for j in range(1, 10): print(i * j, end= &#39; &#39;) print() 연습문제 6-6 &quot;&quot;&quot;100 이상, 10,000 미만인 자연수 중에서 5의 배수를 모두 합하면 얼마인지 계산하라.&quot;&quot;&quot; n = 100 result = 0 while(n &lt; 10_000): result += n n += 5 print(result) 연습문제 6-7 &quot;&quot;&quot; 100 이상, 10,000 미만인 자연수 중에서 5의 배수를 모두 합하면 얼마인지 계산하라. for, range version &quot;&quot;&quot; result = 0 for n in range(100, 10_000, 5): result += n print(result) 연습문제 6-8 def max_in_list(numbers): &quot;&quot;&quot;&quot; 리스트 하나를 매개변수로 전달받아, 리스트에서 가장 큰 요소를 반환한다.&quot;&quot;&quot; max_value = float(&#39;-inf&#39;) for number in numbers: if number &gt; max_value: max_value = number return max_value print(max_in_list([1, 2, 3])) print(max_in_list([666, 33, -30, 222])) 연습문제 6-9 def is_prime(number): &quot;&quot;&quot;어떤 수(number)를 입력 받아 그 수가 소수인지를 반환한다. (소수면 True, 아니면 False)&quot;&quot;&quot; if number == 1: return False for i in range(2, number): if number % i == 0: return False return True sum = 0 for i in range(1, 100): if is_prime(i): sum += i print(sum) 단축 평가란 계산을 진행하는 도중에 결과가 이미 확정되었다면 나머지 계산 과정을 생략하는 것이다. 코드 6-37 def 홀짝(n): &quot;&quot;&quot;n이 홀수인지 짝수인지를 화면에 출력한다.&quot;&quot;&quot; (n % 2 == 0) and print(n, &#39;은 짝수입니다.&#39;) (n % 2 == 0) or print(n, &#39;은 홀수입니다.&#39;) 홀짝(13) 홀짝(10) 재귀란 함수가 자신을 직접 또는 간접적으로 호출하는 것을 말한다. while 문이나 for 문 없이도 반복 작업을 수행할 수 있다. 코드 6-38 def 자연수(n, m): &quot;&quot;&quot;수 n을 출력하고, 1 더한 수가 m보다 작으면 그 수도 출력한다.&quot;&quot;&quot; print(n) if n + 1 &lt; m: 자연수(n + 1, m) 자연수(4, 8) 코드 6-39 def n번째_피보나치_수(n): &quot;&quot;&quot;n번째 피보나치 수를 반환한다.&quot;&quot;&quot; if n == 1: return 1 elif n == 2: return 1 else: return n번째_피보나치_수(n-1) + n번째_피보나치_수(n-2) for n in range(1, 12): print(n번째_피보나치_수(n), end = &#39; &#39;) 재귀로 작성한 코드는 동일한 작업을 수행하는 while 문으로 수정할 수 있다. 7장 컬렉션마다 담을 수 있는 데이터의 종류가 다르다. 그런데 리스트와 사전은 그 속에 담는 데이터의 유형을 가리지 않는다. 데이터를 어떻게 구조화하는가에 따라 데이터를 사용하는 방법과 프로그램을 작성하는 방법도 달라진다. 데이터를 좀 더 쉽게 알아보고 싶다면 pprint() 함수를 사용한다. pprint() 함수를 이용하면 컬렉션의 요소를 적절히 개행하고 들여쓰기하여 보기 좋게 출력된다." />
+<meta property="og:description" content="days = { 1: lambda(year): 31, 2: lambda(year) 29 if is_leap_year(year) else 28, 3: lambda(year) 31, … } days = { 1: 31, ‘2_on_leap_year’: 29, 2: 28, } days[1](2020) days[2](2020) 연습문제 6-3 def is_leap_year(this_year): &quot;&quot;&quot;연도(this_year)를 입력받아 그해가 윤년이면 True를 아니면 False를 반환한다.&quot;&quot;&quot; if this_year % 4 == 0: if this_year % 100 == 0: if this_year % 400 == 0: return True else: return False else: return True else: return False def days_in_month(year, month): &quot;&quot;&quot;연도(year)와 월(month)을 입력받아, 그달이 며칠까지 있는지 반환한다.&quot;&quot;&quot; number_of_days_per_month = {1: 31, 3: 31, 4: 30, 5: 31, 6: 30, 7: 31, 8: 31, 9: 30, 10: 31, 11: 30, 12: 31} if is_leap_year(year): number_of_days_feb = 29 else: number_of_days_feb = 28 number_of_days_per_month.update({2: number_of_days_feb}) return number_of_days_per_month.get(month) print(days_in_month(2022, 2)) print(days_in_month(2000, 10)) print(days_in_month(1996, 2)) print(days_in_month(1998, 1)) 연습문제 6-3 모범 답안 방식대로 업데이트 def is_leap_year(this_year): &quot;&quot;&quot;연도(this_year)를 입력받아 그해가 윤년이면 True를 아니면 False를 반환한다.&quot;&quot;&quot; if this_year % 4 == 0: if this_year % 100 == 0: if this_year % 400 == 0: return True else: return False else: return True else: return False def days_in_month(year, month): &quot;&quot;&quot;연도(year)와 월(month)을 입력받아, 그달이 며칠까지 있는지 반환한다.&quot;&quot;&quot; month_have_31_days = {1, 3, 5, 7, 8, 10, 12} month_have_30_days = {4, 6, 9, 11} month_have_28_or_29_days = {2} if month in month_have_31_days: return 31 elif month in month_have_30_days: return 30 else: if is_leap_year(year): return 29 else: return 28 print(&#39;2020년 2월의 날의 수:&#39;, days_in_month(2020, 2)) print(&#39;2021년 2월의 날의 수:&#39;, days_in_month(2021, 2)) print(&#39;2021년 5월의 날의 수:&#39;, days_in_month(2020, 5)) print(&#39;2021년 9월의 날의 수:&#39;, days_in_month(2020, 11)) # 모범 답안 방식대로 수정한 버전 연습문제 6-4 &quot;&quot;&quot; 키와 몸무게를 입력 받아 비만 정도를 알려준다. 비만도 측정하는 방법: 1. 체질량 지수 = w(체중) / {t(키) * t(키)} 2. 체질량 지수를 이용한 비만 정도 계산법 체질량 지수 &lt; 18.5 → 저체중 18.5 &lt;= 체질량 지수 &lt; 23 → 정상 23 &lt;= 체질량 지수 &lt; 25 → 과체중 체질량 지수 &gt;= 25 → 비만 &quot;&quot;&quot; def calculate_BMI(t, w): return w / (t * t) def degree_of_obesity(BMI): if BMI &lt; 18.5: print(&#39;저체중입니다.&#39;) elif BMI &lt; 23: print(&#39;정상입니다.&#39;) elif BMI &lt; 25: print(&#39;과체중입니다.&#39;) else: print(&#39;비만입니다.&#39;) print(&#39;키를 입력하세요(m): &#39;, end=&#39;&#39;) t = float(input()) print(&#39;몸무게를 입력하세요(kg): &#39;, end=&#39;&#39;) w = float(input()) degree_of_obesity(calculate_BMI(t, w)) 연습문제 6-5 def absolute_number(number): &quot;&quot;&quot;수(number)의 절댓값을 구한다. 조건부 식을 활용해서 작성되었음.&quot;&quot;&quot; number = number * -1 if number &lt; 0 else number return number print(absolute_number(-2)) print(absolute_number(3)) print(absolute_number(0)) 반복이란 같은 작업을 여러 번 실행하는 것 while 문은 지정한 조건이 유지되는 동안 코드를 계속 반복하는 명령이다. 코드 6-18 rainbow = [&#39;Red&#39;, &#39;Orange&#39;, &#39;Yellow&#39;, &#39;Green&#39;, &#39;Blue&#39;, &#39;Indigo&#39;, &#39;Violet&#39;] index = 0 while index &lt; len(rainbow): print(rainbow[index]) index += 1 코드 6-19 text = &quot;아무 메시지나 입력하세요. 그만하려면 &#39;그만&#39;을 입력하세요.&quot; while text != &#39;그만&#39;: print(&#39;컴퓨터: &#39; + text) text = input() for 문도 반복 실행하는 명령어. while 문이 여러 목적에 활용할 수 있는 범용적인 반복 기능이라면, for 문은 순차적 처리와 컬렉션 순회에 특화된 반복 기능이다. for 문을 이용하면 반복 횟수를 관리하는 데 신경을 쓰지 않고 간단히 컬렉션을 순회할 수 있다. 코드 6-21 rainbow = [&#39;Red&#39;, &#39;Orange&#39;, &#39;Yellow&#39;, &#39;Green&#39;, &#39;Blue&#39;, &#39;Indigo&#39;, &#39;Violet&#39;] for color in rainbow: print(color) 코드 6-22 def my_sum(numbers): &quot;&quot;&quot;numbers의 모든 요소의 합을 반환한다.&quot;&quot;&quot; total = 0 for n in numbers: total += n return total print(my_sum([1, 2, 3, 4, 5])) 코드 6-23 total = 0 for n in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]: if n % 2 == 0: total += n print(total) 1부터 1천만까지의 모든 자연수 같은 걸 range로 쉽게 구할 수 있다. 코드 6-24 total = 0 for n in range(1, 10_000_001): if n % 2 == 0: total += n print(total) 짝수의 합 구하는 것 range로 깔끔하게 코드 6-25 total = 0 for n in range(2, 10_000_0001, 2): total += n print(total) 컬렉션의 각 요소가 무엇인지는 의미가 없으면, 요소를 대입받을 변수의 이름을 _로 지정. 코드 6-26 print(&#39;몇 번 반복하시겠습니까?&#39;) n = int(input()) for _ in range(n): print(&#39;안녕&#39;) for 문은 컬렉션을 순서대로 순회할 때 편리하게 사용할 수 있다. while 문을 사용하면 반복 과정을 제어하는 코드를 직접 작성해야 해 불편하다. continue 문과 break 문으로 실행 흐름을 중지할 수 있다. continue 문: 이번 주기의 실행을 중지 break 문: 반복 전체를 중지 코드 6-27 for i in range(4): print(&#39;현재 반복 주기:&#39;, i) continue print(&#39;다음 반복 주기:&#39;, i + 1) 코드 6-28 for i in range(4): print(&#39;현재 반복 주기:&#39;, i) break print(&#39;다음 반복 주기:&#39;, i + 1) break와 continue의 차이를 보여주는 넘 좋은 예제 코드 6-29 total = 0 while True: print(&#39;더할 수를 입력하세요: &#39;, end=&#39;&#39;) user_input = input() if user_input == &#39;그만&#39;: break if not user_input.isnumeric(): print(&#39;잘못된 입력입니다.&#39;) continue total += int(user_input) print(&#39;합계:&#39;, total) print(&#39;프로그램을 종료합니다.&#39;) while else절 코드 6-30 i = 0 while(i&lt;3): print(i, &#39; 번째 실행&#39;) i += 1 else: print(&#39;반복완료&#39;) 코드 6-31 i = 0 while(i &lt; 100): print(i, &#39;번째 실행&#39;) i += 1 if (i &gt; 2): print(&#39;반복 중지&#39;) break else: print(&#39;반복 완료&#39;) 코드 6-32 for i in range(3): print(i, &#39;번째 실행&#39;) else: print(&#39;반복 완료&#39;) while 문의 else 절은 조건이 거짓일 때 실행, for 문의 else 절은 정상 종료된 직후 실행. 단순히 반복이 끝난 후에 코드를 실행해야 한다면 그냥 다음 행에 코드를 입력하면 된다. else 절의 가치는 반복이 정상적으로 종료되었는지 아니면 임의로 중지되었는지를 구분하는 데 있다. 코드 6-33 def 첫_짝수_찾기(numbers): &quot;&quot;&quot;numbers에서 첫 번째 짝수를 찾아 화면에 출력한다.&quot;&quot;&quot; for n in numbers: if n % 2 == 0: print(n, &#39;이 첫 짝수입니다.&#39;) break else: print(&#39;짝수가 없습니다.&#39;) 첫_짝수_찾기([1, 3, 5, 33, 47, 55]) 첫_짝수_찾기([7, 5, 6, 72, 19, 81]) 코드 6-34 for i in range(2, 10): for j in range(1, 10): print(i * j, end= &#39; &#39;) print() 연습문제 6-6 &quot;&quot;&quot;100 이상, 10,000 미만인 자연수 중에서 5의 배수를 모두 합하면 얼마인지 계산하라.&quot;&quot;&quot; n = 100 result = 0 while(n &lt; 10_000): result += n n += 5 print(result) 연습문제 6-7 &quot;&quot;&quot; 100 이상, 10,000 미만인 자연수 중에서 5의 배수를 모두 합하면 얼마인지 계산하라. for, range version &quot;&quot;&quot; result = 0 for n in range(100, 10_000, 5): result += n print(result) 연습문제 6-8 def max_in_list(numbers): &quot;&quot;&quot;&quot; 리스트 하나를 매개변수로 전달받아, 리스트에서 가장 큰 요소를 반환한다.&quot;&quot;&quot; max_value = float(&#39;-inf&#39;) for number in numbers: if number &gt; max_value: max_value = number return max_value print(max_in_list([1, 2, 3])) print(max_in_list([666, 33, -30, 222])) 연습문제 6-9 def is_prime(number): &quot;&quot;&quot;어떤 수(number)를 입력 받아 그 수가 소수인지를 반환한다. (소수면 True, 아니면 False)&quot;&quot;&quot; if number == 1: return False for i in range(2, number): if number % i == 0: return False return True sum = 0 for i in range(1, 100): if is_prime(i): sum += i print(sum) 단축 평가란 계산을 진행하는 도중에 결과가 이미 확정되었다면 나머지 계산 과정을 생략하는 것이다. 코드 6-37 def 홀짝(n): &quot;&quot;&quot;n이 홀수인지 짝수인지를 화면에 출력한다.&quot;&quot;&quot; (n % 2 == 0) and print(n, &#39;은 짝수입니다.&#39;) (n % 2 == 0) or print(n, &#39;은 홀수입니다.&#39;) 홀짝(13) 홀짝(10) 재귀란 함수가 자신을 직접 또는 간접적으로 호출하는 것을 말한다. while 문이나 for 문 없이도 반복 작업을 수행할 수 있다. 코드 6-38 def 자연수(n, m): &quot;&quot;&quot;수 n을 출력하고, 1 더한 수가 m보다 작으면 그 수도 출력한다.&quot;&quot;&quot; print(n) if n + 1 &lt; m: 자연수(n + 1, m) 자연수(4, 8) 코드 6-39 def n번째_피보나치_수(n): &quot;&quot;&quot;n번째 피보나치 수를 반환한다.&quot;&quot;&quot; if n == 1: return 1 elif n == 2: return 1 else: return n번째_피보나치_수(n-1) + n번째_피보나치_수(n-2) for n in range(1, 12): print(n번째_피보나치_수(n), end = &#39; &#39;) 재귀로 작성한 코드는 동일한 작업을 수행하는 while 문으로 수정할 수 있다. 7장 컬렉션마다 담을 수 있는 데이터의 종류가 다르다. 그런데 리스트와 사전은 그 속에 담는 데이터의 유형을 가리지 않는다. 데이터를 어떻게 구조화하는가에 따라 데이터를 사용하는 방법과 프로그램을 작성하는 방법도 달라진다. 데이터를 좀 더 쉽게 알아보고 싶다면 pprint() 함수를 사용한다. pprint() 함수를 이용하면 컬렉션의 요소를 적절히 개행하고 들여쓰기하여 보기 좋게 출력된다." />
+<link rel="canonical" href="http://localhost:4000/2022-07-31/yeono-python-8" />
+<meta property="og:url" content="http://localhost:4000/2022-07-31/yeono-python-8" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-07-31T22:23:42+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="연오의 파이썬 공부 8" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-07-31T22:23:42+09:00","datePublished":"2022-07-31T22:23:42+09:00","description":"days = { 1: lambda(year): 31, 2: lambda(year) 29 if is_leap_year(year) else 28, 3: lambda(year) 31, … } days = { 1: 31, ‘2_on_leap_year’: 29, 2: 28, } days[1](2020) days[2](2020) 연습문제 6-3 def is_leap_year(this_year): &quot;&quot;&quot;연도(this_year)를 입력받아 그해가 윤년이면 True를 아니면 False를 반환한다.&quot;&quot;&quot; if this_year % 4 == 0: if this_year % 100 == 0: if this_year % 400 == 0: return True else: return False else: return True else: return False def days_in_month(year, month): &quot;&quot;&quot;연도(year)와 월(month)을 입력받아, 그달이 며칠까지 있는지 반환한다.&quot;&quot;&quot; number_of_days_per_month = {1: 31, 3: 31, 4: 30, 5: 31, 6: 30, 7: 31, 8: 31, 9: 30, 10: 31, 11: 30, 12: 31} if is_leap_year(year): number_of_days_feb = 29 else: number_of_days_feb = 28 number_of_days_per_month.update({2: number_of_days_feb}) return number_of_days_per_month.get(month) print(days_in_month(2022, 2)) print(days_in_month(2000, 10)) print(days_in_month(1996, 2)) print(days_in_month(1998, 1)) 연습문제 6-3 모범 답안 방식대로 업데이트 def is_leap_year(this_year): &quot;&quot;&quot;연도(this_year)를 입력받아 그해가 윤년이면 True를 아니면 False를 반환한다.&quot;&quot;&quot; if this_year % 4 == 0: if this_year % 100 == 0: if this_year % 400 == 0: return True else: return False else: return True else: return False def days_in_month(year, month): &quot;&quot;&quot;연도(year)와 월(month)을 입력받아, 그달이 며칠까지 있는지 반환한다.&quot;&quot;&quot; month_have_31_days = {1, 3, 5, 7, 8, 10, 12} month_have_30_days = {4, 6, 9, 11} month_have_28_or_29_days = {2} if month in month_have_31_days: return 31 elif month in month_have_30_days: return 30 else: if is_leap_year(year): return 29 else: return 28 print(&#39;2020년 2월의 날의 수:&#39;, days_in_month(2020, 2)) print(&#39;2021년 2월의 날의 수:&#39;, days_in_month(2021, 2)) print(&#39;2021년 5월의 날의 수:&#39;, days_in_month(2020, 5)) print(&#39;2021년 9월의 날의 수:&#39;, days_in_month(2020, 11)) # 모범 답안 방식대로 수정한 버전 연습문제 6-4 &quot;&quot;&quot; 키와 몸무게를 입력 받아 비만 정도를 알려준다. 비만도 측정하는 방법: 1. 체질량 지수 = w(체중) / {t(키) * t(키)} 2. 체질량 지수를 이용한 비만 정도 계산법 체질량 지수 &lt; 18.5 → 저체중 18.5 &lt;= 체질량 지수 &lt; 23 → 정상 23 &lt;= 체질량 지수 &lt; 25 → 과체중 체질량 지수 &gt;= 25 → 비만 &quot;&quot;&quot; def calculate_BMI(t, w): return w / (t * t) def degree_of_obesity(BMI): if BMI &lt; 18.5: print(&#39;저체중입니다.&#39;) elif BMI &lt; 23: print(&#39;정상입니다.&#39;) elif BMI &lt; 25: print(&#39;과체중입니다.&#39;) else: print(&#39;비만입니다.&#39;) print(&#39;키를 입력하세요(m): &#39;, end=&#39;&#39;) t = float(input()) print(&#39;몸무게를 입력하세요(kg): &#39;, end=&#39;&#39;) w = float(input()) degree_of_obesity(calculate_BMI(t, w)) 연습문제 6-5 def absolute_number(number): &quot;&quot;&quot;수(number)의 절댓값을 구한다. 조건부 식을 활용해서 작성되었음.&quot;&quot;&quot; number = number * -1 if number &lt; 0 else number return number print(absolute_number(-2)) print(absolute_number(3)) print(absolute_number(0)) 반복이란 같은 작업을 여러 번 실행하는 것 while 문은 지정한 조건이 유지되는 동안 코드를 계속 반복하는 명령이다. 코드 6-18 rainbow = [&#39;Red&#39;, &#39;Orange&#39;, &#39;Yellow&#39;, &#39;Green&#39;, &#39;Blue&#39;, &#39;Indigo&#39;, &#39;Violet&#39;] index = 0 while index &lt; len(rainbow): print(rainbow[index]) index += 1 코드 6-19 text = &quot;아무 메시지나 입력하세요. 그만하려면 &#39;그만&#39;을 입력하세요.&quot; while text != &#39;그만&#39;: print(&#39;컴퓨터: &#39; + text) text = input() for 문도 반복 실행하는 명령어. while 문이 여러 목적에 활용할 수 있는 범용적인 반복 기능이라면, for 문은 순차적 처리와 컬렉션 순회에 특화된 반복 기능이다. for 문을 이용하면 반복 횟수를 관리하는 데 신경을 쓰지 않고 간단히 컬렉션을 순회할 수 있다. 코드 6-21 rainbow = [&#39;Red&#39;, &#39;Orange&#39;, &#39;Yellow&#39;, &#39;Green&#39;, &#39;Blue&#39;, &#39;Indigo&#39;, &#39;Violet&#39;] for color in rainbow: print(color) 코드 6-22 def my_sum(numbers): &quot;&quot;&quot;numbers의 모든 요소의 합을 반환한다.&quot;&quot;&quot; total = 0 for n in numbers: total += n return total print(my_sum([1, 2, 3, 4, 5])) 코드 6-23 total = 0 for n in [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]: if n % 2 == 0: total += n print(total) 1부터 1천만까지의 모든 자연수 같은 걸 range로 쉽게 구할 수 있다. 코드 6-24 total = 0 for n in range(1, 10_000_001): if n % 2 == 0: total += n print(total) 짝수의 합 구하는 것 range로 깔끔하게 코드 6-25 total = 0 for n in range(2, 10_000_0001, 2): total += n print(total) 컬렉션의 각 요소가 무엇인지는 의미가 없으면, 요소를 대입받을 변수의 이름을 _로 지정. 코드 6-26 print(&#39;몇 번 반복하시겠습니까?&#39;) n = int(input()) for _ in range(n): print(&#39;안녕&#39;) for 문은 컬렉션을 순서대로 순회할 때 편리하게 사용할 수 있다. while 문을 사용하면 반복 과정을 제어하는 코드를 직접 작성해야 해 불편하다. continue 문과 break 문으로 실행 흐름을 중지할 수 있다. continue 문: 이번 주기의 실행을 중지 break 문: 반복 전체를 중지 코드 6-27 for i in range(4): print(&#39;현재 반복 주기:&#39;, i) continue print(&#39;다음 반복 주기:&#39;, i + 1) 코드 6-28 for i in range(4): print(&#39;현재 반복 주기:&#39;, i) break print(&#39;다음 반복 주기:&#39;, i + 1) break와 continue의 차이를 보여주는 넘 좋은 예제 코드 6-29 total = 0 while True: print(&#39;더할 수를 입력하세요: &#39;, end=&#39;&#39;) user_input = input() if user_input == &#39;그만&#39;: break if not user_input.isnumeric(): print(&#39;잘못된 입력입니다.&#39;) continue total += int(user_input) print(&#39;합계:&#39;, total) print(&#39;프로그램을 종료합니다.&#39;) while else절 코드 6-30 i = 0 while(i&lt;3): print(i, &#39; 번째 실행&#39;) i += 1 else: print(&#39;반복완료&#39;) 코드 6-31 i = 0 while(i &lt; 100): print(i, &#39;번째 실행&#39;) i += 1 if (i &gt; 2): print(&#39;반복 중지&#39;) break else: print(&#39;반복 완료&#39;) 코드 6-32 for i in range(3): print(i, &#39;번째 실행&#39;) else: print(&#39;반복 완료&#39;) while 문의 else 절은 조건이 거짓일 때 실행, for 문의 else 절은 정상 종료된 직후 실행. 단순히 반복이 끝난 후에 코드를 실행해야 한다면 그냥 다음 행에 코드를 입력하면 된다. else 절의 가치는 반복이 정상적으로 종료되었는지 아니면 임의로 중지되었는지를 구분하는 데 있다. 코드 6-33 def 첫_짝수_찾기(numbers): &quot;&quot;&quot;numbers에서 첫 번째 짝수를 찾아 화면에 출력한다.&quot;&quot;&quot; for n in numbers: if n % 2 == 0: print(n, &#39;이 첫 짝수입니다.&#39;) break else: print(&#39;짝수가 없습니다.&#39;) 첫_짝수_찾기([1, 3, 5, 33, 47, 55]) 첫_짝수_찾기([7, 5, 6, 72, 19, 81]) 코드 6-34 for i in range(2, 10): for j in range(1, 10): print(i * j, end= &#39; &#39;) print() 연습문제 6-6 &quot;&quot;&quot;100 이상, 10,000 미만인 자연수 중에서 5의 배수를 모두 합하면 얼마인지 계산하라.&quot;&quot;&quot; n = 100 result = 0 while(n &lt; 10_000): result += n n += 5 print(result) 연습문제 6-7 &quot;&quot;&quot; 100 이상, 10,000 미만인 자연수 중에서 5의 배수를 모두 합하면 얼마인지 계산하라. for, range version &quot;&quot;&quot; result = 0 for n in range(100, 10_000, 5): result += n print(result) 연습문제 6-8 def max_in_list(numbers): &quot;&quot;&quot;&quot; 리스트 하나를 매개변수로 전달받아, 리스트에서 가장 큰 요소를 반환한다.&quot;&quot;&quot; max_value = float(&#39;-inf&#39;) for number in numbers: if number &gt; max_value: max_value = number return max_value print(max_in_list([1, 2, 3])) print(max_in_list([666, 33, -30, 222])) 연습문제 6-9 def is_prime(number): &quot;&quot;&quot;어떤 수(number)를 입력 받아 그 수가 소수인지를 반환한다. (소수면 True, 아니면 False)&quot;&quot;&quot; if number == 1: return False for i in range(2, number): if number % i == 0: return False return True sum = 0 for i in range(1, 100): if is_prime(i): sum += i print(sum) 단축 평가란 계산을 진행하는 도중에 결과가 이미 확정되었다면 나머지 계산 과정을 생략하는 것이다. 코드 6-37 def 홀짝(n): &quot;&quot;&quot;n이 홀수인지 짝수인지를 화면에 출력한다.&quot;&quot;&quot; (n % 2 == 0) and print(n, &#39;은 짝수입니다.&#39;) (n % 2 == 0) or print(n, &#39;은 홀수입니다.&#39;) 홀짝(13) 홀짝(10) 재귀란 함수가 자신을 직접 또는 간접적으로 호출하는 것을 말한다. while 문이나 for 문 없이도 반복 작업을 수행할 수 있다. 코드 6-38 def 자연수(n, m): &quot;&quot;&quot;수 n을 출력하고, 1 더한 수가 m보다 작으면 그 수도 출력한다.&quot;&quot;&quot; print(n) if n + 1 &lt; m: 자연수(n + 1, m) 자연수(4, 8) 코드 6-39 def n번째_피보나치_수(n): &quot;&quot;&quot;n번째 피보나치 수를 반환한다.&quot;&quot;&quot; if n == 1: return 1 elif n == 2: return 1 else: return n번째_피보나치_수(n-1) + n번째_피보나치_수(n-2) for n in range(1, 12): print(n번째_피보나치_수(n), end = &#39; &#39;) 재귀로 작성한 코드는 동일한 작업을 수행하는 while 문으로 수정할 수 있다. 7장 컬렉션마다 담을 수 있는 데이터의 종류가 다르다. 그런데 리스트와 사전은 그 속에 담는 데이터의 유형을 가리지 않는다. 데이터를 어떻게 구조화하는가에 따라 데이터를 사용하는 방법과 프로그램을 작성하는 방법도 달라진다. 데이터를 좀 더 쉽게 알아보고 싶다면 pprint() 함수를 사용한다. pprint() 함수를 이용하면 컬렉션의 요소를 적절히 개행하고 들여쓰기하여 보기 좋게 출력된다.","headline":"연오의 파이썬 공부 8","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-07-31/yeono-python-8"},"url":"http://localhost:4000/2022-07-31/yeono-python-8"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main>
+      <div class="post">
+  <div class="post-info">
+    <span>Written by</span>
+    
+        Sunmi Moon
+    
+
+    
+      <br>
+      <span>on&nbsp;</span><time datetime="2022-07-31 22:23:42 +0900">July 31, 2022</time>
+    
+  </div>
+
+  <h1 class="post-title">연오의 파이썬 공부 8</h1>
+  <div class="post-line"></div>
+
+  <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">days</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mi">1</span><span class="p">:</span> <span class="k">lambda</span><span class="p">(</span><span class="n">year</span><span class="p">):</span> <span class="mi">31</span><span class="p">,</span>
+    <span class="mi">2</span><span class="p">:</span> <span class="k">lambda</span><span class="p">(</span><span class="n">year</span><span class="p">)</span> <span class="mi">29</span> <span class="k">if</span> <span class="n">is_leap_year</span><span class="p">(</span><span class="n">year</span><span class="p">)</span> <span class="k">else</span> <span class="mi">28</span><span class="p">,</span>
+    <span class="mi">3</span><span class="p">:</span> <span class="k">lambda</span><span class="p">(</span><span class="n">year</span><span class="p">)</span> <span class="mi">31</span><span class="p">,</span> <span class="err">…</span>
+<span class="p">}</span>
+
+<span class="n">days</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="mi">1</span><span class="p">:</span> <span class="mi">31</span><span class="p">,</span>
+    <span class="err">‘</span><span class="mi">2</span><span class="n">_on_leap_year</span><span class="err">’</span><span class="p">:</span> <span class="mi">29</span><span class="p">,</span>
+    <span class="mi">2</span><span class="p">:</span> <span class="mi">28</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">days</span><span class="p">[</span><span class="mi">1</span><span class="p">](</span><span class="mi">2020</span><span class="p">)</span>
+<span class="n">days</span><span class="p">[</span><span class="mi">2</span><span class="p">](</span><span class="mi">2020</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>연습문제 6-3</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">is_leap_year</span><span class="p">(</span><span class="n">this_year</span><span class="p">):</span>
+   <span class="s">"""연도(this_year)를 입력받아 그해가 윤년이면 True를 아니면 False를 반환한다."""</span>
+
+   <span class="k">if</span> <span class="n">this_year</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+       <span class="k">if</span> <span class="n">this_year</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+           <span class="k">if</span> <span class="n">this_year</span> <span class="o">%</span> <span class="mi">400</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+               <span class="k">return</span> <span class="bp">True</span>
+           <span class="k">else</span><span class="p">:</span>
+               <span class="k">return</span> <span class="bp">False</span>
+       <span class="k">else</span><span class="p">:</span>
+           <span class="k">return</span> <span class="bp">True</span>
+   <span class="k">else</span><span class="p">:</span>
+       <span class="k">return</span> <span class="bp">False</span>
+
+
+<span class="k">def</span> <span class="nf">days_in_month</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">):</span>
+   <span class="s">"""연도(year)와 월(month)을 입력받아, 그달이 며칠까지 있는지 반환한다."""</span>
+
+   <span class="n">number_of_days_per_month</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">5</span><span class="p">:</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">6</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">7</span><span class="p">:</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">8</span><span class="p">:</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">9</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">10</span><span class="p">:</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">11</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">12</span><span class="p">:</span> <span class="mi">31</span><span class="p">}</span>
+   <span class="k">if</span> <span class="n">is_leap_year</span><span class="p">(</span><span class="n">year</span><span class="p">):</span>
+       <span class="n">number_of_days_feb</span> <span class="o">=</span> <span class="mi">29</span>
+   <span class="k">else</span><span class="p">:</span>
+       <span class="n">number_of_days_feb</span> <span class="o">=</span> <span class="mi">28</span>
+   <span class="n">number_of_days_per_month</span><span class="p">.</span><span class="n">update</span><span class="p">({</span><span class="mi">2</span><span class="p">:</span> <span class="n">number_of_days_feb</span><span class="p">})</span>
+
+   <span class="k">return</span> <span class="n">number_of_days_per_month</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">month</span><span class="p">)</span>
+
+
+<span class="k">print</span><span class="p">(</span><span class="n">days_in_month</span><span class="p">(</span><span class="mi">2022</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">days_in_month</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">days_in_month</span><span class="p">(</span><span class="mi">1996</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">days_in_month</span><span class="p">(</span><span class="mi">1998</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>연습문제 6-3 모범 답안 방식대로 업데이트</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">is_leap_year</span><span class="p">(</span><span class="n">this_year</span><span class="p">):</span>
+   <span class="s">"""연도(this_year)를 입력받아 그해가 윤년이면 True를 아니면 False를 반환한다."""</span>
+
+   <span class="k">if</span> <span class="n">this_year</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+       <span class="k">if</span> <span class="n">this_year</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+           <span class="k">if</span> <span class="n">this_year</span> <span class="o">%</span> <span class="mi">400</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+               <span class="k">return</span> <span class="bp">True</span>
+           <span class="k">else</span><span class="p">:</span>
+               <span class="k">return</span> <span class="bp">False</span>
+       <span class="k">else</span><span class="p">:</span>
+           <span class="k">return</span> <span class="bp">True</span>
+   <span class="k">else</span><span class="p">:</span>
+       <span class="k">return</span> <span class="bp">False</span>
+
+
+<span class="k">def</span> <span class="nf">days_in_month</span><span class="p">(</span><span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">):</span>
+   <span class="s">"""연도(year)와 월(month)을 입력받아, 그달이 며칠까지 있는지 반환한다."""</span>
+
+   <span class="n">month_have_31_days</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">12</span><span class="p">}</span>
+   <span class="n">month_have_30_days</span> <span class="o">=</span> <span class="p">{</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">11</span><span class="p">}</span>
+   <span class="n">month_have_28_or_29_days</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2</span><span class="p">}</span>
+
+
+   <span class="k">if</span> <span class="n">month</span> <span class="ow">in</span> <span class="n">month_have_31_days</span><span class="p">:</span>
+       <span class="k">return</span> <span class="mi">31</span>
+   <span class="k">elif</span> <span class="n">month</span> <span class="ow">in</span> <span class="n">month_have_30_days</span><span class="p">:</span>
+       <span class="k">return</span> <span class="mi">30</span>
+   <span class="k">else</span><span class="p">:</span>
+      <span class="k">if</span> <span class="n">is_leap_year</span><span class="p">(</span><span class="n">year</span><span class="p">):</span>
+          <span class="k">return</span> <span class="mi">29</span>
+      <span class="k">else</span><span class="p">:</span>
+          <span class="k">return</span> <span class="mi">28</span>
+
+
+<span class="k">print</span><span class="p">(</span><span class="s">'2020년 2월의 날의 수:'</span><span class="p">,</span> <span class="n">days_in_month</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'2021년 2월의 날의 수:'</span><span class="p">,</span> <span class="n">days_in_month</span><span class="p">(</span><span class="mi">2021</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'2021년 5월의 날의 수:'</span><span class="p">,</span> <span class="n">days_in_month</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'2021년 9월의 날의 수:'</span><span class="p">,</span> <span class="n">days_in_month</span><span class="p">(</span><span class="mi">2020</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span>
+
+
+<span class="c1"># 모범 답안 방식대로 수정한 버전
+</span></code></pre></div></div>
+
+<p>연습문제 6-4</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">"""
+키와 몸무게를 입력 받아 비만 정도를 알려준다.
+
+비만도 측정하는 방법:
+1. 체질량 지수 = w(체중) / {t(키) * t(키)}
+2. 체질량 지수를 이용한 비만 정도 계산법
+   체질량 지수 &lt; 18.5   → 저체중
+   18.5 &lt;= 체질량 지수 &lt; 23    → 정상
+   23 &lt;= 체질량 지수 &lt; 25   → 과체중
+   체질량 지수 &gt;= 25     → 비만
+"""</span>
+
+
+<span class="k">def</span> <span class="nf">calculate_BMI</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">w</span><span class="p">):</span>
+   <span class="k">return</span> <span class="n">w</span> <span class="o">/</span> <span class="p">(</span><span class="n">t</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">degree_of_obesity</span><span class="p">(</span><span class="n">BMI</span><span class="p">):</span>
+   <span class="k">if</span> <span class="n">BMI</span> <span class="o">&lt;</span> <span class="mf">18.5</span><span class="p">:</span>
+       <span class="k">print</span><span class="p">(</span><span class="s">'저체중입니다.'</span><span class="p">)</span>
+   <span class="k">elif</span> <span class="n">BMI</span> <span class="o">&lt;</span> <span class="mi">23</span><span class="p">:</span>
+       <span class="k">print</span><span class="p">(</span><span class="s">'정상입니다.'</span><span class="p">)</span>
+   <span class="k">elif</span> <span class="n">BMI</span> <span class="o">&lt;</span> <span class="mi">25</span><span class="p">:</span>
+       <span class="k">print</span><span class="p">(</span><span class="s">'과체중입니다.'</span><span class="p">)</span>
+   <span class="k">else</span><span class="p">:</span>
+       <span class="k">print</span><span class="p">(</span><span class="s">'비만입니다.'</span><span class="p">)</span>
+
+
+<span class="k">print</span><span class="p">(</span><span class="s">'키를 입력하세요(m): '</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">''</span><span class="p">)</span>
+<span class="n">t</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'몸무게를 입력하세요(kg): '</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">''</span><span class="p">)</span>
+<span class="n">w</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+
+<span class="n">degree_of_obesity</span><span class="p">(</span><span class="n">calculate_BMI</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">w</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>연습문제 6-5</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">absolute_number</span><span class="p">(</span><span class="n">number</span><span class="p">):</span>
+   <span class="s">"""수(number)의 절댓값을 구한다. 조건부 식을 활용해서 작성되었음."""</span>
+
+   <span class="n">number</span> <span class="o">=</span> <span class="n">number</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span> <span class="k">if</span> <span class="n">number</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">number</span>
+
+   <span class="k">return</span> <span class="n">number</span>
+
+
+<span class="k">print</span><span class="p">(</span><span class="n">absolute_number</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">absolute_number</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">absolute_number</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+
+</code></pre></div></div>
+
+<p>반복이란 같은 작업을 여러 번 실행하는 것</p>
+
+<p>while 문은 지정한 조건이 유지되는 동안 코드를 계속 반복하는 명령이다.</p>
+
+<p>코드 6-18</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rainbow</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Red'</span><span class="p">,</span> <span class="s">'Orange'</span><span class="p">,</span> <span class="s">'Yellow'</span><span class="p">,</span> <span class="s">'Green'</span><span class="p">,</span> <span class="s">'Blue'</span><span class="p">,</span> <span class="s">'Indigo'</span><span class="p">,</span> <span class="s">'Violet'</span><span class="p">]</span>
+<span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">while</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">rainbow</span><span class="p">):</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">rainbow</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+   <span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+</code></pre></div></div>
+
+<p>코드 6-19</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">text</span> <span class="o">=</span> <span class="s">"아무 메시지나 입력하세요. 그만하려면 '그만'을 입력하세요."</span>
+<span class="k">while</span> <span class="n">text</span> <span class="o">!=</span> <span class="s">'그만'</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="s">'컴퓨터: '</span> <span class="o">+</span> <span class="n">text</span><span class="p">)</span>
+   <span class="n">text</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
+
+
+<span class="k">for</span> <span class="n">문도</span> <span class="n">반복</span> <span class="n">실행하는</span> <span class="n">명령어</span><span class="p">.</span>
+
+<span class="k">while</span> <span class="n">문이</span> <span class="n">여러</span> <span class="n">목적에</span> <span class="n">활용할</span> <span class="n">수</span> <span class="n">있는</span> <span class="n">범용적인</span> <span class="n">반복</span> <span class="n">기능이라면</span><span class="p">,</span> <span class="k">for</span> <span class="n">문은</span> <span class="n">순차적</span> <span class="n">처리와</span> <span class="n">컬렉션</span> <span class="n">순회에</span> <span class="n">특화된</span> <span class="n">반복</span> <span class="n">기능이다</span><span class="p">.</span> <span class="k">for</span> <span class="n">문을</span> <span class="n">이용하면</span> <span class="n">반복</span> <span class="n">횟수를</span> <span class="n">관리하는</span> <span class="n">데</span> <span class="n">신경을</span> <span class="n">쓰지</span> <span class="n">않고</span> <span class="n">간단히</span> <span class="n">컬렉션을</span> <span class="n">순회할</span> <span class="n">수</span> <span class="n">있다</span><span class="p">.</span>
+
+
+<span class="n">코드</span> <span class="mi">6</span><span class="o">-</span><span class="mi">21</span>
+
+<span class="n">rainbow</span> <span class="o">=</span> <span class="p">[</span><span class="s">'Red'</span><span class="p">,</span> <span class="s">'Orange'</span><span class="p">,</span> <span class="s">'Yellow'</span><span class="p">,</span> <span class="s">'Green'</span><span class="p">,</span> <span class="s">'Blue'</span><span class="p">,</span> <span class="s">'Indigo'</span><span class="p">,</span> <span class="s">'Violet'</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">color</span> <span class="ow">in</span> <span class="n">rainbow</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>코드 6-22</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">my_sum</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
+   <span class="s">"""numbers의 모든 요소의 합을 반환한다."""</span>
+
+   <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+   <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">:</span>
+       <span class="n">total</span> <span class="o">+=</span> <span class="n">n</span>
+   <span class="k">return</span> <span class="n">total</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">my_sum</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]))</span>
+</code></pre></div></div>
+
+<p>코드 6-23</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">]:</span>
+   <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+       <span class="n">total</span> <span class="o">+=</span> <span class="n">n</span>
+      
+<span class="k">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>1부터 1천만까지의 모든 자연수 같은 걸 range로 쉽게 구할 수 있다.</p>
+
+<p>코드 6-24</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10_000_001</span><span class="p">):</span>
+   <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+       <span class="n">total</span> <span class="o">+=</span> <span class="n">n</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>짝수의 합 구하는 것 range로 깔끔하게
+코드 6-25</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10_000_0001</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+   <span class="n">total</span> <span class="o">+=</span> <span class="n">n</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>컬렉션의 각 요소가 무엇인지는 의미가 없으면, 요소를 대입받을 변수의 이름을 _로 지정.
+코드 6-26</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">'몇 번 반복하시겠습니까?'</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">())</span>
+
+<span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+   <span class="k">print</span><span class="p">(</span><span class="s">'안녕'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>for 문은 컬렉션을 순서대로 순회할 때 편리하게 사용할 수 있다. while 문을 사용하면 반복 과정을 제어하는 코드를 직접 작성해야 해 불편하다.</p>
+
+<ul>
+  <li>continue 문과 break 문으로 실행 흐름을 중지할 수 있다.</li>
+  <li>continue 문: 이번 주기의 실행을 중지</li>
+  <li>break 문: 반복 전체를 중지</li>
+</ul>
+
+<p>코드 6-27</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+   <span class="k">print</span><span class="p">(</span><span class="s">'현재 반복 주기:'</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+   <span class="k">continue</span>
+   <span class="k">print</span><span class="p">(</span><span class="s">'다음 반복 주기:'</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>코드 6-28</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+   <span class="k">print</span><span class="p">(</span><span class="s">'현재 반복 주기:'</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+   <span class="k">break</span>
+   <span class="k">print</span><span class="p">(</span><span class="s">'다음 반복 주기:'</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>break와 continue의 차이를 보여주는 넘 좋은 예제
+코드 6-29</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="s">'더할 수를 입력하세요: '</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">''</span><span class="p">)</span>
+   <span class="n">user_input</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
+
+   <span class="k">if</span> <span class="n">user_input</span> <span class="o">==</span> <span class="s">'그만'</span><span class="p">:</span>
+       <span class="k">break</span>
+
+   <span class="k">if</span> <span class="ow">not</span> <span class="n">user_input</span><span class="p">.</span><span class="n">isnumeric</span><span class="p">():</span>
+       <span class="k">print</span><span class="p">(</span><span class="s">'잘못된 입력입니다.'</span><span class="p">)</span>
+       <span class="k">continue</span>
+
+   <span class="n">total</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">user_input</span><span class="p">)</span>
+   <span class="k">print</span><span class="p">(</span><span class="s">'합계:'</span><span class="p">,</span> <span class="n">total</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s">'프로그램을 종료합니다.'</span><span class="p">)</span>
+
+
+<span class="k">while</span> <span class="n">else절</span>
+
+<span class="n">코드</span> <span class="mi">6</span><span class="o">-</span><span class="mi">30</span>
+<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span><span class="p">(</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">3</span><span class="p">):</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="s">' 번째 실행'</span><span class="p">)</span>
+   <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+<span class="k">else</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="s">'반복완료'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>코드 6-31</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">):</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="s">'번째 실행'</span><span class="p">)</span>
+   <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+   <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">):</span>
+       <span class="k">print</span><span class="p">(</span><span class="s">'반복 중지'</span><span class="p">)</span>
+       <span class="k">break</span>
+<span class="k">else</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="s">'반복 완료'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>코드 6-32</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="s">'번째 실행'</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+   <span class="k">print</span><span class="p">(</span><span class="s">'반복 완료'</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<p>while 문의 else 절은 조건이 거짓일 때 실행, for 문의 else 절은 정상 종료된 직후 실행.
+단순히 반복이 끝난 후에 코드를 실행해야 한다면 그냥 다음 행에 코드를 입력하면 된다. else 절의 가치는 반복이 정상적으로 종료되었는지 아니면 임의로 중지되었는지를 구분하는 데 있다.</p>
+
+<p>코드 6-33</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">첫_짝수_찾기</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
+   <span class="s">"""numbers에서 첫 번째 짝수를 찾아 화면에 출력한다."""</span>
+   <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">:</span>
+       <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+           <span class="k">print</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="s">'이 첫 짝수입니다.'</span><span class="p">)</span>
+           <span class="k">break</span>
+   <span class="k">else</span><span class="p">:</span>
+       <span class="k">print</span><span class="p">(</span><span class="s">'짝수가 없습니다.'</span><span class="p">)</span>
+
+<span class="n">첫_짝수_찾기</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">55</span><span class="p">])</span>
+<span class="n">첫_짝수_찾기</span><span class="p">([</span><span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">72</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">81</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>코드 6-34</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+   <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+       <span class="k">print</span><span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="n">j</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span> <span class="s">' '</span><span class="p">)</span>
+   <span class="k">print</span><span class="p">()</span>
+</code></pre></div></div>
+
+<p>연습문제 6-6</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">"""100 이상, 10,000 미만인 자연수 중에서 5의 배수를 모두 합하면 얼마인지 계산하라."""</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">while</span><span class="p">(</span><span class="n">n</span> <span class="o">&lt;</span> <span class="mi">10_000</span><span class="p">):</span>
+   <span class="n">result</span> <span class="o">+=</span> <span class="n">n</span>
+   <span class="n">n</span> <span class="o">+=</span> <span class="mi">5</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>연습문제 6-7</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s">"""
+100 이상, 10,000 미만인 자연수 중에서 5의 배수를 모두 합하면 얼마인지 계산하라.
+for, range version
+"""</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">10_000</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
+   <span class="n">result</span> <span class="o">+=</span> <span class="n">n</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>연습문제 6-8</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">max_in_list</span><span class="p">(</span><span class="n">numbers</span><span class="p">):</span>
+   <span class="s">"""" 리스트 하나를 매개변수로 전달받아, 리스트에서 가장 큰 요소를 반환한다."""</span>
+
+   <span class="n">max_value</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s">'-inf'</span><span class="p">)</span>
+
+   <span class="k">for</span> <span class="n">number</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">:</span>
+       <span class="k">if</span> <span class="n">number</span> <span class="o">&gt;</span> <span class="n">max_value</span><span class="p">:</span>
+           <span class="n">max_value</span> <span class="o">=</span> <span class="n">number</span>
+
+   <span class="k">return</span> <span class="n">max_value</span>
+
+
+<span class="k">print</span><span class="p">(</span><span class="n">max_in_list</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">max_in_list</span><span class="p">([</span><span class="mi">666</span><span class="p">,</span> <span class="mi">33</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">222</span><span class="p">]))</span>
+</code></pre></div></div>
+
+<p>연습문제 6-9</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">is_prime</span><span class="p">(</span><span class="n">number</span><span class="p">):</span>
+   <span class="s">"""어떤 수(number)를 입력 받아 그 수가 소수인지를 반환한다. (소수면 True, 아니면 False)"""</span>
+
+   <span class="k">if</span> <span class="n">number</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+       <span class="k">return</span> <span class="bp">False</span>
+
+   <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">number</span><span class="p">):</span>
+       <span class="k">if</span> <span class="n">number</span> <span class="o">%</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+           <span class="k">return</span> <span class="bp">False</span>
+
+   <span class="k">return</span> <span class="bp">True</span>
+
+
+<span class="nb">sum</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">):</span>
+   <span class="k">if</span> <span class="n">is_prime</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+       <span class="nb">sum</span> <span class="o">+=</span> <span class="n">i</span>
+
+<span class="k">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<p>단축 평가란 계산을 진행하는 도중에 결과가 이미 확정되었다면 나머지 계산 과정을 생략하는 것이다.</p>
+
+<p>코드 6-37</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">홀짝</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+   <span class="s">"""n이 홀수인지 짝수인지를 화면에 출력한다."""</span>
+   <span class="p">(</span><span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="k">print</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="s">'은 짝수입니다.'</span><span class="p">)</span>
+   <span class="p">(</span><span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="k">print</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="s">'은 홀수입니다.'</span><span class="p">)</span>
+
+<span class="n">홀짝</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span>
+<span class="n">홀짝</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>재귀란 함수가 자신을 직접 또는 간접적으로 호출하는 것을 말한다. while 문이나 for 문 없이도 반복 작업을 수행할 수 있다.</p>
+
+<p>코드 6-38</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">자연수</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">):</span>
+   <span class="s">"""수 n을 출력하고, 1 더한 수가 m보다 작으면 그 수도 출력한다."""</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+   <span class="k">if</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">:</span>
+       <span class="n">자연수</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+
+<span class="n">자연수</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>코드 6-39</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">n번째_피보나치_수</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+   <span class="s">"""n번째 피보나치 수를 반환한다."""</span>
+
+   <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+       <span class="k">return</span> <span class="mi">1</span>
+   <span class="k">elif</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+       <span class="k">return</span> <span class="mi">1</span>
+   <span class="k">else</span><span class="p">:</span>
+       <span class="k">return</span> <span class="n">n번째_피보나치_수</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">n번째_피보나치_수</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">12</span><span class="p">):</span>
+   <span class="k">print</span><span class="p">(</span><span class="n">n번째_피보나치_수</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">end</span> <span class="o">=</span> <span class="s">' '</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>재귀로 작성한 코드는 동일한 작업을 수행하는 while 문으로 수정할 수 있다.</p>
+
+<h2 id="7장">7장</h2>
+
+<p>컬렉션마다 담을 수 있는 데이터의 종류가 다르다. 그런데 리스트와 사전은 그 속에 담는 데이터의 유형을 가리지 않는다.</p>
+
+<p>데이터를 어떻게 구조화하는가에 따라 데이터를 사용하는 방법과 프로그램을 작성하는 방법도 달라진다.</p>
+
+<p>데이터를 좀 더 쉽게 알아보고 싶다면 <code class="language-plaintext highlighter-rouge">pprint()</code> 함수를 사용한다. <code class="language-plaintext highlighter-rouge">pprint()</code> 함수를 이용하면 컬렉션의 요소를 적절히 개행하고 들여쓰기하여 보기 좋게 출력된다.</p>
+
+
+</div>
+
+
+
+<div class="pagination">
+  
+    <a href="/2022-08-01/yeono-python-9" class="left arrow">&#8592;</a>
+  
+  
+    <a href="/2022-07-30/yeono-python-7" class="right arrow">&#8594;</a>
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+    </main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-07-30 14:29:33 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>
