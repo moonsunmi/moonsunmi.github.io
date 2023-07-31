@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Page 2 of 32 for Home | 주경야독학) 개발공부로그</title>
+<title>Page 2 of 16 for Home | 주경야독학) 개발공부로그</title>
 <meta name="generator" content="Jekyll v4.3.2" />
 <meta property="og:title" content="Home" />
 <meta name="author" content="Sunmi Moon" />
@@ -376,16 +376,16 @@
   
 
   
-    <a href="/2023-05-18/TIL" class="catalogue-item">
+    <a href="/2023-03-30/TIL" class="catalogue-item">
   <div>
     
-    <time datetime="2023-05-18 12:18:07 +0900" class="catalogue-time">May 18, 2023</time>
-    <h1 class="catalogue-title">TIL) swagger 타입 수동으로 지정해 주기 - django</h1>
+    <time datetime="2023-03-30 12:18:07 +0900" class="catalogue-time">March 30, 2023</time>
+    <h1 class="catalogue-title">TIL) 문자열 Enum</h1>
     <div class="catalogue-line"></div>
 
     <p>
       
-        swagger 타입을 수동으로 지정하기 swagger가 response의 타입을 잘못 이해하고 있다면, @swagger_auto_schema로 지정해 줄 수 있다. REST framework를 사용한다면 보통 serializer를 사용하므로 이게 좋은 옵션이 될 것 같다. @swagger_serializer_method(serializer_or_field=ReferralCountSerializer) @action(detail=False, methods=['get'],...
+        문자열 Enum Enum은 고유한 상숫값에 연결된 기호 이름(멤버)의 집합이다. String의 Enum을 사용하고 싶다면 다음과 같은 장치를 사용하더라. from enum import Enum, auto class StrEnum(str, Enum): def _generate_next_value_(name, start, count, last_values):...
       
     </p>
 
@@ -393,27 +393,16 @@
 </a>
 
   
-    <a href="/2023-05-16/TIL" class="catalogue-item">
+    <a href="/2023-03-21/TIL" class="catalogue-item">
   <div>
     
-    <time datetime="2023-05-16 12:18:07 +0900" class="catalogue-time">May 16, 2023</time>
-    <h1 class="catalogue-title">TIL) react-copy-to-clipboard에서 CopyToClipboard가 인식되지 않을 때</h1>
+    <time datetime="2023-03-21 12:18:07 +0900" class="catalogue-time">March 21, 2023</time>
+    <h1 class="catalogue-title">TIL) git checkout, django related_name</h1>
     <div class="catalogue-line"></div>
 
     <p>
       
-        텍스트를 복사해 주는 기능을 만들기 위해서 react-copy-to-clipboard를 설치했다.
-
-yarn add react-copy-to-clipboard
-
-
-그런데 이 패키지만 추가했더니, CopyToClipboard가 불러와지지 않았다. (임포트해지지 않음)
-
-타입스크립트를 사용하므로 다음도 실행해 주었더니 작동한다.
-
-yarn add @types/react-copy-to-clipboard
-
-
+        Git) checkout checkout으로 현재 기준으로 커밋의 앞뒤를 왔다갔다 할 수 있다. 그런데 이때 상태를 저장해 두기 위해 깃은 임의의 브랜치를 만들게 된다. 한 번이라도 커밋의 뒤에 가 본 적이 있다면,...
       
     </p>
 
@@ -421,16 +410,16 @@ yarn add @types/react-copy-to-clipboard
 </a>
 
   
-    <a href="/2023-05-14/TIL" class="catalogue-item">
+    <a href="/2023-03-04/TIL" class="catalogue-item">
   <div>
     
-    <time datetime="2023-05-14 12:18:07 +0900" class="catalogue-time">May 14, 2023</time>
-    <h1 class="catalogue-title">TIL) serializer fields 넣어줄 때 유의점</h1>
+    <time datetime="2023-03-04 12:18:07 +0900" class="catalogue-time">March 04, 2023</time>
+    <h1 class="catalogue-title">TIL) select_related, prefetch_related</h1>
     <div class="catalogue-line"></div>
 
     <p>
       
-        모델의 정의와 밀접한 관련이 있는 serializer를 만들 게 될 경우가 많다. 모델에서 만든 필드를 전부 serializer로 만들고 싶다면 다음과 같이 fields = ‘__all__’을 지정해 주면 된다. class AccountSerializer(serializers.ModelSerializer): class Meta:...
+        쿼리 수 줄이기 어떤 정보가 필요할지 미리 알고 있다면, 데이터베이스를 여러 번 히팅할 게 아니라 한번에 불러오는 게 좋다. 다음과 같은 경우는 데이터 베이스를 두 번 히팅한다. e = Entry.objects.get(id=5)...
       
     </p>
 
@@ -438,16 +427,16 @@ yarn add @types/react-copy-to-clipboard
 </a>
 
   
-    <a href="/2023-04-10/TIL" class="catalogue-item">
+    <a href="/2023-02-28/TIL" class="catalogue-item">
   <div>
     
-    <time datetime="2023-04-10 12:18:07 +0900" class="catalogue-time">April 10, 2023</time>
-    <h1 class="catalogue-title">TIL) postgresql permission denied for schema public</h1>
+    <time datetime="2023-02-28 12:18:07 +0900" class="catalogue-time">February 28, 2023</time>
+    <h1 class="catalogue-title">TIL) <파이썬웹프로그래밍:실전편>을 DRF로 실습하기 - taggit 이용</h1>
     <div class="catalogue-line"></div>
 
     <p>
       
-        postgresql의 user를 바꾸게 되었는데, 다음과 같은 에러가 발생했다. django.db.migrations.exceptions.MigrationSchemaMissing: Unable to create the django_migrations table (permission denied for schema public LINE 1: CREATE TABLE "django_migrations" ("id" bigserial NOT NULL PR......
+        Tags Search field에 추가하기 태그를 적용하기 위해 django-taggit을 이용하였다. 모델에서는 TaggableMnager로 지정한다. class Post(models.Model): title = models.CharField('TITLE', max_length=100) slug = models.SlugField('SLUG', unique=True, allow_unicode=True, help_text='one word for title alias.') description =...
       
     </p>
 
@@ -455,16 +444,101 @@ yarn add @types/react-copy-to-clipboard
 </a>
 
   
-    <a href="/2023-04-05/TIL" class="catalogue-item">
+    <a href="/2023-02-27/TIL" class="catalogue-item">
   <div>
     
-    <time datetime="2023-04-05 12:18:07 +0900" class="catalogue-time">April 05, 2023</time>
-    <h1 class="catalogue-title">TIL) 네트워크의 기초</h1>
+    <time datetime="2023-02-27 12:18:07 +0900" class="catalogue-time">February 27, 2023</time>
+    <h1 class="catalogue-title">TIL) <파이썬웹프로그래밍:실전편>을 DRF로 실습하기</h1>
     <div class="catalogue-line"></div>
 
     <p>
       
-        네트워크 네트워크란 노드와 링크가 연결되어 있거나 연결되어 있지 않은 집합체를 의미한다. 컴퓨터들을 연결한 걸 네트워크라고 할 수 있다. 데이터를 주고받는 시스템 전체를 일컫는 용어로 쓰이기도 한다. 라우터 라우터는 자신에게 물려...
+        model에서 정의한 메서드값은 어떻게 가져오나? 책에서 블로그 앱을 만드는데, Post 모델은 다음과 같다. class Post(models.Model): title = models.CharField('TITLE', max_length=100) slug = models.SlugField('SLUG', unique=True, allow_unicode=True, help_text='one word for title alias.') description...
+      
+    </p>
+
+  </div>
+</a>
+
+  
+    <a href="/2023-02-15/TIL" class="catalogue-item">
+  <div>
+    
+    <time datetime="2023-02-15 12:18:07 +0900" class="catalogue-time">February 15, 2023</time>
+    <h1 class="catalogue-title">TIL) DRF - 다양한 뷰</h1>
+    <div class="catalogue-line"></div>
+
+    <p>
+      
+        함수 기반 뷰 함수 기반 뷰(Function Based View, FBV) + 데코레이터 @api_view(['GET', 'POST']) def booksAPI(request): if request.method == 'GET': books = Book.objects.all() serializer = BookSerializer(books, many=True) return Response(serializer.data, status=status.HTTP_200_OK) elif...
+      
+    </p>
+
+  </div>
+</a>
+
+  
+    <a href="/2022-12-12/TIL" class="catalogue-item">
+  <div>
+    
+    <time datetime="2022-12-12 12:18:07 +0900" class="catalogue-time">December 12, 2022</time>
+    <h1 class="catalogue-title">TIL) 내 코드 복습&리뉴얼 중</h1>
+    <div class="catalogue-line"></div>
+
+    <p>
+      
+        (달성/목표) 뽀모도리 1일 4 / 5 1주 4 /40 font awsome icon이 표시되지 않는 현상 수정 다음과 같이 임포트하고, 원하는 아이콘을 누르면 나오는 코드(&lt;FontAwesomeIcon icon="fa-solid fa-bars" /&gt;)를 적었더니 아이콘이 나타나지...
+      
+    </p>
+
+  </div>
+</a>
+
+  
+    <a href="/2022-12-11/20th-week" class="catalogue-item">
+  <div>
+    
+    <time datetime="2022-12-11 12:34:31 +0900" class="catalogue-time">December 11, 2022</time>
+    <h1 class="catalogue-title">주경야독학) 20주차 - 다시 힘을 내자</h1>
+    <div class="catalogue-line"></div>
+
+    <p>
+      
+        뽀모도로 목표와 달성 개수 달성/목표 12/5(월) 12/6(화) 12/7(수) 12/8(목) 12/9(금) 12/10(토) 12/11(일) 합계 뽀모 0/5 0/3 4/5 2/3 3/8 10/8 9/8 28/40 일로 스트레스를 많이 받았더니 정신적인 에너지가 고갈되었던 것...
+      
+    </p>
+
+  </div>
+</a>
+
+  
+    <a href="/2022-12-11/TIL" class="catalogue-item">
+  <div>
+    
+    <time datetime="2022-12-11 12:18:07 +0900" class="catalogue-time">December 11, 2022</time>
+    <h1 class="catalogue-title">TIL) 내 코드 복습&리뉴얼 중</h1>
+    <div class="catalogue-line"></div>
+
+    <p>
+      
+        (달성/목표) 뽀모도리 1일 9 / 8 1주 28 /40 Context 조금 더 낫게 만들기 Context에는 Provider라는 컴포넌트가 들어 있다. 컴포넌트 간에 공유하고자 하는 값을 value Prop로 설정하면 된다. Context마다 파일을...
+      
+    </p>
+
+  </div>
+</a>
+
+  
+    <a href="/2022-12-10/TIL" class="catalogue-item">
+  <div>
+    
+    <time datetime="2022-12-10 12:18:07 +0900" class="catalogue-time">December 10, 2022</time>
+    <h1 class="catalogue-title">TIL) 뻘짓 되돌리기..</h1>
+    <div class="catalogue-line"></div>
+
+    <p>
+      
+        (달성/목표) 뽀모도리 1일 10 / 8 1주 19 /40 trello에서의 버튼 처리 IconButton 컴포넌트 안에, IconButton과 IconButton.ButtonContainer를 만들어 두었다. IconButton 컴포넌트는 iconType을 props로 받아서 타입에 맞는 아이콘을 보여준다. 여백을 조정하기...
       
     </p>
 
@@ -476,20 +550,100 @@ yarn add @types/react-copy-to-clipboard
 
 <div class="pagination">
   
-    <a href="/" class="left arrow">&#8592;</a>
+  <a href="/" class="left arrow">&#8592;</a>
+
+
+
   
-  
-    <a href="/page3" class="right arrow">&#8594;</a>
+    <a href="/
+             " class="page-number">1</a>
   
 
-  <span>2</span>
+  
+    <span class="current-page">2</span>
+  
+
+  
+    <a href="/page3/
+             " class="page-number">3</a>
+  
+
+  
+    <a href="/page4/
+             " class="page-number">4</a>
+  
+
+  
+    <a href="/page5/
+             " class="page-number">5</a>
+  
+
+  
+    <a href="/page6/
+             " class="page-number">6</a>
+  
+
+  
+    <a href="/page7/
+             " class="page-number">7</a>
+  
+
+  
+    <a href="/page8/
+             " class="page-number">8</a>
+  
+
+  
+    <a href="/page9/
+             " class="page-number">9</a>
+  
+
+  
+    <a href="/page10/
+             " class="page-number">10</a>
+  
+
+  
+    <a href="/page11/
+             " class="page-number">11</a>
+  
+
+  
+    <a href="/page12/
+             " class="page-number">12</a>
+  
+
+  
+    <a href="/page13/
+             " class="page-number">13</a>
+  
+
+  
+    <a href="/page14/
+             " class="page-number">14</a>
+  
+
+  
+    <a href="/page15/
+             " class="page-number">15</a>
+  
+
+  
+    <a href="/page16/
+             " class="page-number">16</a>
+  
+
+
+
+  <a href="/page3" class="right arrow">&#8594;</a>
+
 </div>
 
     </main>
 
     <footer>
   <span>
-    &copy; <time datetime="2023-07-30 21:43:42 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-07-31 21:14:23 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 

@@ -16,11 +16,20 @@ layout: default
 
 <div class="pagination">
   {% if paginator.previous_page %}
-    <a href="{{ paginator.previous_page_path | prepend: site.baseurl }}" class="left arrow">&#8592;</a>
-  {% endif %}
-  {% if paginator.next_page %}
-    <a href="{{ paginator.next_page_path | prepend: site.baseurl }}" class="right arrow">&#8594;</a>
-  {% endif %}
+  <a href="{{ paginator.previous_page_path | prepend: site.baseurl }}" class="left arrow">&#8592;</a>
+{% endif %}
 
-  <span>{{ paginator.page }}</span>
+{% for page_number in (1..paginator.total_pages) %}
+  {% if page_number == paginator.page %}
+    <span class="current-page">{{ page_number }}</span>
+  {% else %}
+    <a href="{{ site.baseurl }}{% if page_number == 1 %}/
+             {% else %}/page{{ page_number }}/
+             {% endif %}" class="page-number">{{ page_number }}</a>
+  {% endif %}
+{% endfor %}
+
+{% if paginator.next_page %}
+  <a href="{{ paginator.next_page_path | prepend: site.baseurl }}" class="right arrow">&#8594;</a>
+{% endif %}
 </div>

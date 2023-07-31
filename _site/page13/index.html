@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Page 13 of 32 for Home | 주경야독학) 개발공부로그</title>
+<title>Page 13 of 16 for Home | 주경야독학) 개발공부로그</title>
 <meta name="generator" content="Jekyll v4.3.2" />
 <meta property="og:title" content="Home" />
 <meta name="author" content="Sunmi Moon" />
@@ -376,16 +376,16 @@
   
 
   
-    <a href="/2022-10-26/TIL" class="catalogue-item">
+    <a href="/2022-08-27/jump-to-django-10" class="catalogue-item">
   <div>
     
-    <time datetime="2022-10-26 12:18:07 +0900" class="catalogue-time">October 26, 2022</time>
-    <h1 class="catalogue-title">TIL) Hulu Clone Coding(Next.js, Tailwind CSS, Responsive)</h1>
+    <time datetime="2022-08-27 22:00:55 +0900" class="catalogue-time">August 27, 2022</time>
+    <h1 class="catalogue-title">점프 투 장고 공부 10</h1>
     <div class="catalogue-line"></div>
 
     <p>
       
-        (달성/목표) 뽀모도리 1일 5/5 1주 13 /40 flip 애니메이션 react-flip-move 설치 후 import Thumbnail from "./Thumbnail"; import FlipMove from "react-flip-move"; const Results = ({ results }) =&gt; { return (...
+        질문 수정 views.py @login_required(login_url='common:login') def question_modify(request, question_id): question = get_object_or_404(Question, pk=question_id) if request.user != question.author: messages.error(request, '수정권한이 없습니다.') return redirect('pybo:detail', question_id=question.id) if request.method == 'POST': form = QuestionForm(request.POST, instance=question) if...
       
     </p>
 
@@ -393,16 +393,16 @@
 </a>
 
   
-    <a href="/2022-10-25/TIL" class="catalogue-item">
+    <a href="/2022-08-25/jump-to-django-9" class="catalogue-item">
   <div>
     
-    <time datetime="2022-10-25 12:18:07 +0900" class="catalogue-time">October 25, 2022</time>
-    <h1 class="catalogue-title">TIL) Hulu Clone Coding(Next.js, Tailwind CSS, Responsive)</h1>
+    <time datetime="2022-08-25 22:19:55 +0900" class="catalogue-time">August 25, 2022</time>
+    <h1 class="catalogue-title">점프 투 장고 공부 9</h1>
     <div class="catalogue-line"></div>
 
     <p>
       
-        (달성/목표) 뽀모도리 1일 3/3 1주 8 /40 Thumbnail component Thumbnail.js import { HandThumbUpIcon } from "@heroicons/react/24/outline"; import Image from "next/image"; function Thumbnail({ result }) { const BASE_URL = "https://image.tmdb.org/t/p/original"; return...
+        수정과 삭제 models.py class Question(models.Model): subject = models.CharField(max_length=200) content = models.TextField() create_date = models.DateTimeField() author = models.ForeignKey(User, on_delete=models.CASCADE) modify_date = models.DateTimeField(null=True, blank=True) def __str__(self): return self.subject class Answer(models.Model): question =...
       
     </p>
 
@@ -410,16 +410,16 @@
 </a>
 
   
-    <a href="/2022-10-24/TIL" class="catalogue-item">
+    <a href="/2022-08-24/jump-to-django-8" class="catalogue-item">
   <div>
     
-    <time datetime="2022-10-24 12:18:07 +0900" class="catalogue-time">October 24, 2022</time>
-    <h1 class="catalogue-title">Hulu Clone Coding(Next.js, Tailwind CSS, Responsive)</h1>
+    <time datetime="2022-08-24 22:25:11 +0900" class="catalogue-time">August 24, 2022</time>
+    <h1 class="catalogue-title">점프 투 장고 공부 8</h1>
     <div class="catalogue-line"></div>
 
     <p>
       
-        (달성/목표) 뽀모도리 1일 5/5 1주 5 /40 Nav에 query 연결하기 useRouter next의 hook을 사용한다. import { useRouter } from "next/router"; import requests from "../utils/requests"; const Nav = () =&gt; {...
+        글쓴이 항목 추가 models.py from django.db import models from django.contrib.auth.models import User class Question(models.Model): subject = models.CharField(max_length=200) content = models.TextField() create_date = models.DateTimeField() author = models.ForeignKey(User, on_delete=models.CASCADE) def __str__(self): return...
       
     </p>
 
@@ -427,16 +427,16 @@
 </a>
 
   
-    <a href="/2022-10-23/13th-week" class="catalogue-item">
+    <a href="/2022-08-23/jump-to-django-7" class="catalogue-item">
   <div>
     
-    <time datetime="2022-10-23 12:34:31 +0900" class="catalogue-time">October 23, 2022</time>
-    <h1 class="catalogue-title">주경야독학) 13주차 - Linkedin, Hulu 클론 코딩</h1>
+    <time datetime="2022-08-23 22:22:51 +0900" class="catalogue-time">August 23, 2022</time>
+    <h1 class="catalogue-title">점프 투 장고 공부 7</h1>
     <div class="catalogue-line"></div>
 
     <p>
       
-        뽀모도로 목표와 달성 개수 달성/목표 10/17(월) 10/18(화) 10/19(수) 10/20(목) 10/21(금) 10/22~23(토일) 합계 뽀모 5/5 3/3 7/5 3/3 8/8 9+5 / 8+8 40/40 등 0/5 5/5 5/5 5/5 5/5 5/5 0/5...
+        회원가입 계정 생성 시 사용할 User 폼. 폼: 페이지 요청시 전달되는 파라미터들을 쉽게 관리하기 위해 사용하는 클래스이다. 폼은 필수 파라미터의 값이 누락되지 않았는지, 파라미터의 형식은 적절한지 등을 검증할 목적으로 사용한다....
       
     </p>
 
@@ -444,16 +444,101 @@
 </a>
 
   
-    <a href="/2022-10-23/TIL" class="catalogue-item">
+    <a href="/2022-08-22/jump-to-django-6" class="catalogue-item">
   <div>
     
-    <time datetime="2022-10-23 12:18:07 +0900" class="catalogue-time">October 23, 2022</time>
-    <h1 class="catalogue-title">Hulu Clone Coding(Next.js, Tailwind CSS, Responsive)</h1>
+    <time datetime="2022-08-22 22:12:22 +0900" class="catalogue-time">August 22, 2022</time>
+    <h1 class="catalogue-title">점프 투 장고 공부 6</h1>
     <div class="catalogue-line"></div>
 
     <p>
       
-        (달성/목표) 뽀모도리 등 가슴 배 1일 5/8 0/5 0/5 0/3 1주 40 /40       tailwindcss에서는 bounce되는 애니메이션을 쉽게 만들 수 있다. HeaderItem.js function HeaderItem({ title, Icon }) {...
+        3-04 답변 개수 표시 question_list.html &lt;td&gt; &lt;a href="{% url 'pybo:detail' question.id %}"&gt;{{ question.subject }}&lt;/a&gt; {% if question.answer_set.count &gt; 0 %} &lt;span class="text-danger small mx-2"&gt;{{ question.answer_set.count }}&lt;/span&gt; {% endif %} &lt;/td&gt;...
+      
+    </p>
+
+  </div>
+</a>
+
+  
+    <a href="/2022-08-21/jump-to-django-5" class="catalogue-item">
+  <div>
+    
+    <time datetime="2022-08-21 22:39:25 +0900" class="catalogue-time">August 21, 2022</time>
+    <h1 class="catalogue-title">점프 투 장고 공부 5</h1>
+    <div class="catalogue-line"></div>
+
+    <p>
+      
+        3장 파이보 서비스 개발! 3-01 내비게이션바 navbar.html &lt;!-- 내비게이션바 start --&gt; &lt;nav class="navbar navbar-expand-lg navbar-light bg-light"&gt; &lt;div class="container-fluid"&gt; &lt;a class="navbar-brand" href="{% url 'pybo:index' %}"&gt;Pybo&lt;/a&gt; &lt;button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"...
+      
+    </p>
+
+  </div>
+</a>
+
+  
+    <a href="/2022-08-20/jump-to-django-4" class="catalogue-item">
+  <div>
+    
+    <time datetime="2022-08-20 22:50:10 +0900" class="catalogue-time">August 20, 2022</time>
+    <h1 class="catalogue-title">점프 투 장고 공부 4</h1>
+    <div class="catalogue-line"></div>
+
+    <p>
+      
+        초보자를 위한 HTML5 태그 유형: 블록 레벨 요소, 인라인 레벨 요소 블록 레벨 요소: 콘텐츠의 양과 무관하게 하나의 요소가 혼자서 한 줄을 통째로 차지 인라인 레벨 요소: 태그에 포함된 콘텐츠의...
+      
+    </p>
+
+  </div>
+</a>
+
+  
+    <a href="/2022-08-19/jump-to-django-3" class="catalogue-item">
+  <div>
+    
+    <time datetime="2022-08-19 22:26:44 +0900" class="catalogue-time">August 19, 2022</time>
+    <h1 class="catalogue-title">점프투 장고 공부 3</h1>
+    <div class="catalogue-line"></div>
+
+    <p>
+      
+        admin.py from django.contrib import admin from .models import Question class QuestionAdmin(admin.ModelAdmin): search_fields = ['subject'] admin.site.register(Question, QuestionAdmin) render 함수는 파이썬 데이터를 템플릿에 적용하여 HTML로 반환하는 함수이다. 즉, 위에서 사용한 render 함수는...
+      
+    </p>
+
+  </div>
+</a>
+
+  
+    <a href="/2022-08-18/jump-to-django-2" class="catalogue-item">
+  <div>
+    
+    <time datetime="2022-08-18 22:13:14 +0900" class="catalogue-time">August 18, 2022</time>
+    <h1 class="catalogue-title">점프투 장고 공부 2</h1>
+    <div class="catalogue-line"></div>
+
+    <p>
+      
+        config의 urls.py 파일은 앱이 아닌 프로젝트 성격의 파일이므로 이곳에는 프로젝트 성격의 URL 매핑만 추가되어야 한다. 따라서 pybo 앱에서만 사용하는 URL 매핑을 config/urls.py 파일에 계속 추가하는 것은 좋은 방법이 아니다. config/urls.py...
+      
+    </p>
+
+  </div>
+</a>
+
+  
+    <a href="/2022-08-17/jump-to-django-1" class="catalogue-item">
+  <div>
+    
+    <time datetime="2022-08-17 22:18:24 +0900" class="catalogue-time">August 17, 2022</time>
+    <h1 class="catalogue-title">점프투 장고 공부 1</h1>
+    <div class="catalogue-line"></div>
+
+    <p>
+      
+        1장 가상환경 파이썬 가상 환경을 이용하면 하나의 PC 안에 독립된 가상 환경을 여러 개 만들 수 있다. 하나의 PC에 서로 다른 버전의 파이썬과 라이브러리를 쉽게 설치해 사용할 수 있다. C:\venvs&gt;...
       
     </p>
 
@@ -465,20 +550,100 @@
 
 <div class="pagination">
   
-    <a href="/page12" class="left arrow">&#8592;</a>
+  <a href="/page12" class="left arrow">&#8592;</a>
+
+
+
   
-  
-    <a href="/page14" class="right arrow">&#8594;</a>
+    <a href="/
+             " class="page-number">1</a>
   
 
-  <span>13</span>
+  
+    <a href="/page2/
+             " class="page-number">2</a>
+  
+
+  
+    <a href="/page3/
+             " class="page-number">3</a>
+  
+
+  
+    <a href="/page4/
+             " class="page-number">4</a>
+  
+
+  
+    <a href="/page5/
+             " class="page-number">5</a>
+  
+
+  
+    <a href="/page6/
+             " class="page-number">6</a>
+  
+
+  
+    <a href="/page7/
+             " class="page-number">7</a>
+  
+
+  
+    <a href="/page8/
+             " class="page-number">8</a>
+  
+
+  
+    <a href="/page9/
+             " class="page-number">9</a>
+  
+
+  
+    <a href="/page10/
+             " class="page-number">10</a>
+  
+
+  
+    <a href="/page11/
+             " class="page-number">11</a>
+  
+
+  
+    <a href="/page12/
+             " class="page-number">12</a>
+  
+
+  
+    <span class="current-page">13</span>
+  
+
+  
+    <a href="/page14/
+             " class="page-number">14</a>
+  
+
+  
+    <a href="/page15/
+             " class="page-number">15</a>
+  
+
+  
+    <a href="/page16/
+             " class="page-number">16</a>
+  
+
+
+
+  <a href="/page14" class="right arrow">&#8594;</a>
+
 </div>
 
     </main>
 
     <footer>
   <span>
-    &copy; <time datetime="2023-07-30 21:43:42 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-07-31 21:14:23 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 

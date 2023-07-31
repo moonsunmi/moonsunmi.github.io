@@ -460,22 +460,198 @@
 </a>
 
   
+    <a href="/2023-05-18/TIL" class="catalogue-item">
+  <div>
+    
+    <time datetime="2023-05-18 12:18:07 +0900" class="catalogue-time">May 18, 2023</time>
+    <h1 class="catalogue-title">TIL) swagger 타입 수동으로 지정해 주기 - django</h1>
+    <div class="catalogue-line"></div>
+
+    <p>
+      
+        swagger 타입을 수동으로 지정하기 swagger가 response의 타입을 잘못 이해하고 있다면, @swagger_auto_schema로 지정해 줄 수 있다. REST framework를 사용한다면 보통 serializer를 사용하므로 이게 좋은 옵션이 될 것 같다. @swagger_serializer_method(serializer_or_field=ReferralCountSerializer) @action(detail=False, methods=['get'],...
+      
+    </p>
+
+  </div>
+</a>
+
+  
+    <a href="/2023-05-16/TIL" class="catalogue-item">
+  <div>
+    
+    <time datetime="2023-05-16 12:18:07 +0900" class="catalogue-time">May 16, 2023</time>
+    <h1 class="catalogue-title">TIL) react-copy-to-clipboard에서 CopyToClipboard가 인식되지 않을 때</h1>
+    <div class="catalogue-line"></div>
+
+    <p>
+      
+        텍스트를 복사해 주는 기능을 만들기 위해서 react-copy-to-clipboard를 설치했다.
+
+yarn add react-copy-to-clipboard
+
+
+그런데 이 패키지만 추가했더니, CopyToClipboard가 불러와지지 않았다. (임포트해지지 않음)
+
+타입스크립트를 사용하므로 다음도 실행해 주었더니 작동한다.
+
+yarn add @types/react-copy-to-clipboard
+
+
+      
+    </p>
+
+  </div>
+</a>
+
+  
+    <a href="/2023-05-14/TIL" class="catalogue-item">
+  <div>
+    
+    <time datetime="2023-05-14 12:18:07 +0900" class="catalogue-time">May 14, 2023</time>
+    <h1 class="catalogue-title">TIL) serializer fields 넣어줄 때 유의점</h1>
+    <div class="catalogue-line"></div>
+
+    <p>
+      
+        모델의 정의와 밀접한 관련이 있는 serializer를 만들 게 될 경우가 많다. 모델에서 만든 필드를 전부 serializer로 만들고 싶다면 다음과 같이 fields = ‘__all__’을 지정해 주면 된다. class AccountSerializer(serializers.ModelSerializer): class Meta:...
+      
+    </p>
+
+  </div>
+</a>
+
+  
+    <a href="/2023-04-10/TIL" class="catalogue-item">
+  <div>
+    
+    <time datetime="2023-04-10 12:18:07 +0900" class="catalogue-time">April 10, 2023</time>
+    <h1 class="catalogue-title">TIL) postgresql permission denied for schema public</h1>
+    <div class="catalogue-line"></div>
+
+    <p>
+      
+        postgresql의 user를 바꾸게 되었는데, 다음과 같은 에러가 발생했다. django.db.migrations.exceptions.MigrationSchemaMissing: Unable to create the django_migrations table (permission denied for schema public LINE 1: CREATE TABLE "django_migrations" ("id" bigserial NOT NULL PR......
+      
+    </p>
+
+  </div>
+</a>
+
+  
+    <a href="/2023-04-05/TIL" class="catalogue-item">
+  <div>
+    
+    <time datetime="2023-04-05 12:18:07 +0900" class="catalogue-time">April 05, 2023</time>
+    <h1 class="catalogue-title">TIL) 네트워크의 기초</h1>
+    <div class="catalogue-line"></div>
+
+    <p>
+      
+        네트워크 네트워크란 노드와 링크가 연결되어 있거나 연결되어 있지 않은 집합체를 의미한다. 컴퓨터들을 연결한 걸 네트워크라고 할 수 있다. 데이터를 주고받는 시스템 전체를 일컫는 용어로 쓰이기도 한다. 라우터 라우터는 자신에게 물려...
+      
+    </p>
+
+  </div>
+</a>
+
+  
 </div>
 
 <div class="pagination">
   
+
+
   
-    <a href="/page2" class="right arrow">&#8594;</a>
+    <span class="current-page">1</span>
   
 
-  <span>1</span>
+  
+    <a href="/page2/
+             " class="page-number">2</a>
+  
+
+  
+    <a href="/page3/
+             " class="page-number">3</a>
+  
+
+  
+    <a href="/page4/
+             " class="page-number">4</a>
+  
+
+  
+    <a href="/page5/
+             " class="page-number">5</a>
+  
+
+  
+    <a href="/page6/
+             " class="page-number">6</a>
+  
+
+  
+    <a href="/page7/
+             " class="page-number">7</a>
+  
+
+  
+    <a href="/page8/
+             " class="page-number">8</a>
+  
+
+  
+    <a href="/page9/
+             " class="page-number">9</a>
+  
+
+  
+    <a href="/page10/
+             " class="page-number">10</a>
+  
+
+  
+    <a href="/page11/
+             " class="page-number">11</a>
+  
+
+  
+    <a href="/page12/
+             " class="page-number">12</a>
+  
+
+  
+    <a href="/page13/
+             " class="page-number">13</a>
+  
+
+  
+    <a href="/page14/
+             " class="page-number">14</a>
+  
+
+  
+    <a href="/page15/
+             " class="page-number">15</a>
+  
+
+  
+    <a href="/page16/
+             " class="page-number">16</a>
+  
+
+
+
+  <a href="/page2" class="right arrow">&#8594;</a>
+
 </div>
 
     </main>
 
     <footer>
   <span>
-    &copy; <time datetime="2023-07-30 21:43:42 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-07-31 21:14:23 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 
