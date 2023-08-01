@@ -106,16 +106,17 @@
 <h3 id="생성된-파일들">생성된 파일들</h3>
 
 <p>다음의 jsx는</p>
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">&lt;div</span> <span class="na">className=</span><span class="s">"App"</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;h1&gt;</span>Hello From React<span class="nt">&lt;/h1&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">className=</span><span class="s">"App"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h1&gt;</span>Hello From React<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
 </code></pre></div></div>
 
 <p>실행 후 브라우저에서 html을 확인하면 평범한 HTML 문법을 이용해서 바뀐 걸 확인할 수 있다. (className =&gt; class)</p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"App"</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;h1&gt;</span>Hello From React<span class="nt">&lt;/h1&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"App"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;h1&gt;</span>Hello From React<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
 </code></pre></div></div>
 
 <p><code class="language-plaintext highlighter-rouge">&lt;h1&gt;</code>을 <code class="language-plaintext highlighter-rouge">&lt;div&gt;</code>로 감싸고 싶지 않다면 <code class="language-plaintext highlighter-rouge">&lt;div&gt;&lt;/div&gt;</code> 대신에 <code class="language-plaintext highlighter-rouge">&lt;&gt;&lt;/&gt;</code>로 바꾼다.</p>
@@ -127,6 +128,7 @@
 <blockquote>
   <p>‘ES7 리액트/Redux/GraphQL…’ 확장 프로그램
 컴포넌트를 위한 다양한 snippet이 존재한다.</p>
+
   <ul>
     <li><code class="language-plaintext highlighter-rouge">rafce</code>(reactArrowFunctionComponenetExport) 를 입력하면 자동으로 arrow function이 입력됨.</li>
   </ul>
@@ -149,10 +151,10 @@
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">Header</span> <span class="o">=</span> <span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
   <span class="k">return</span> <span class="p">(</span>
     <span class="o">&lt;</span><span class="nx">header</span><span class="o">&gt;</span>
-        <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">title</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/h1</span><span class="err">&gt;
+      <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">title</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/h1</span><span class="err">&gt;
 </span>    <span class="o">&lt;</span><span class="sr">/header</span><span class="err">&gt;
-</span>  <span class="p">)</span>
-<span class="p">}</span>
+</span>  <span class="p">);</span>
+<span class="p">};</span>
 </code></pre></div></div>
 
 <p>혹시 App에서 값을 넘겨주지 않을 때를 대비해서 다음과 같이 디폴트값을 지정해 둘 수도 있다. 값이 넘어오면 덮어씌우고, 아니면 디폴트 값이 출력된다.</p>
@@ -160,14 +162,14 @@
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">Header</span> <span class="o">=</span> <span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
   <span class="k">return</span> <span class="p">(</span>
     <span class="o">&lt;</span><span class="nx">header</span><span class="o">&gt;</span>
-        <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">title</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/h1</span><span class="err">&gt;
+      <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">title</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/h1</span><span class="err">&gt;
 </span>    <span class="o">&lt;</span><span class="sr">/header</span><span class="err">&gt;
-</span>  <span class="p">)</span>
-<span class="p">}</span>
+</span>  <span class="p">);</span>
+<span class="p">};</span>
 
 <span class="nx">Header</span><span class="p">.</span><span class="nx">defaultProps</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">title</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Task Tracker</span><span class="dl">'</span><span class="p">,</span>
-<span class="p">}</span>
+  <span class="na">title</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Task Tracker</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">};</span>
 </code></pre></div></div>
 
 <p>props로 받아오는 게 맞긴 한데, 다음과 같이 조금 더 깔끔하게 해 줄 수 있다. <code class="language-plaintext highlighter-rouge">{}</code> 안에 담긴다는 것에 주의하자.</p>
@@ -187,8 +189,9 @@
   </ul>
 </blockquote>
 
-<p>스타일을 매기고 싶다면 다음과 같이 <code class="language-plaintext highlighter-rouge">style</code>값을 설정한다. ``로 감싸져 있음에 주의하자.</p>
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">h1</span> <span class="nx">style</span><span class="o">=&gt;</span><span class="nx">title</span><span class="o">&lt;</span><span class="sr">/h1</span><span class="err">&gt;
+<p>스타일을 매기고 싶다면 다음과 같이 <code class="language-plaintext highlighter-rouge">style</code>값을 설정한다. <code class="language-plaintext highlighter-rouge">{{ }}</code>로 감싸져 있음에 주의하자.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">h1</span> <span class="nx">style</span><span class="o">=</span><span class="p">{{</span> <span class="nx">style</span><span class="o">=</span><span class="p">{{</span> <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">red</span><span class="dl">'</span><span class="p">,</span> <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">black</span><span class="dl">'</span> <span class="p">}}</span> <span class="p">}}</span><span class="o">&gt;</span><span class="nx">title</span><span class="o">&lt;</span><span class="sr">/h1</span><span class="err">&gt;
 </span></code></pre></div></div>
 
 <p>style을 따로 써두고 싶다면 다음과 같이 한다. <code class="language-plaintext highlighter-rouge">{headingStyle}</code>로 표기되어 있다.</p>
@@ -196,15 +199,15 @@
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">Header</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">title</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
   <span class="k">return</span> <span class="p">(</span>
     <span class="o">&lt;</span><span class="nx">header</span><span class="o">&gt;</span>
-        <span class="o">&lt;</span><span class="nx">h1</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">headingStyle</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">title</span><span class="o">&lt;</span><span class="sr">/h1</span><span class="err">&gt;
+      <span class="o">&lt;</span><span class="nx">h1</span> <span class="nx">style</span><span class="o">=</span><span class="p">{</span><span class="nx">headingStyle</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">title</span><span class="o">&lt;</span><span class="sr">/h1</span><span class="err">&gt;
 </span>    <span class="o">&lt;</span><span class="sr">/header</span><span class="err">&gt;
-</span>  <span class="p">)</span>
-<span class="p">}</span>
+</span>  <span class="p">);</span>
+<span class="p">};</span>
 
 <span class="kd">const</span> <span class="nx">headingStyle</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">red</span><span class="dl">'</span><span class="p">,</span>
-    <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">black</span><span class="dl">'</span>
-<span class="p">}</span>
+  <span class="na">color</span><span class="p">:</span> <span class="dl">"</span><span class="s2">red</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">backgroundColor</span><span class="p">:</span> <span class="dl">"</span><span class="s2">black</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">};</span>
 </code></pre></div></div>
 
 <h3 id="버튼-만들기">버튼 만들기</h3>
@@ -212,16 +215,17 @@
 <p>Header.js에 Button 컴포넌트를 추가하자.</p>
 
 <p>Header.js</p>
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Button</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./Button</span><span class="dl">'</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Button</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./Button</span><span class="dl">"</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">Header</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">title</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="k">return</span><span class="p">(</span>
-    <span class="o">&lt;</span><span class="nx">header</span> <span class="nx">className</span><span class="o">=</span><span class="dl">'</span><span class="s1">header</span><span class="dl">'</span><span class="o">&gt;</span>
-      <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="p">{</span> <span class="nx">title</span> <span class="p">}</span><span class="o">&lt;</span><span class="sr">/h1</span><span class="err">&gt;
-</span>      <span class="o">&lt;</span><span class="nx">Button</span> <span class="nx">color</span><span class="o">=</span><span class="dl">'</span><span class="s1">red</span><span class="dl">'</span> <span class="nx">text</span><span class="o">=</span><span class="dl">'</span><span class="s1">Add</span><span class="dl">'</span> <span class="o">/&gt;</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">header</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">header</span><span class="dl">"</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">title</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/h1</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="nx">Button</span> <span class="nx">color</span><span class="o">=</span><span class="dl">"</span><span class="s2">red</span><span class="dl">"</span> <span class="nx">text</span><span class="o">=</span><span class="dl">"</span><span class="s2">Add</span><span class="dl">"</span> <span class="o">/&gt;</span>
     <span class="o">&lt;</span><span class="sr">/header</span><span class="err">&gt;
-</span>  <span class="p">)</span>
-<span class="p">}</span>
+</span>  <span class="p">);</span>
+<span class="p">};</span>
 </code></pre></div></div>
 
 <ol>
@@ -230,11 +234,12 @@
 </ol>
 
 <p>Button.js</p>
+
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">PropTypes</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">prop-types</span><span class="dl">'</span>
 
 <span class="kd">const</span> <span class="nx">Button</span> <span class="p">({</span> <span class="nx">color</span><span class="p">,</span> <span class="nx">text</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
   <span class="k">return</span><span class="p">(</span>
-    <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">style</span><span class="o">=</span> <span class="nx">className</span><span class="o">=</span><span class="dl">'</span><span class="s1">btn</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">{</span> <span class="nx">text</span> <span class="p">}</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
+    <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">style</span><span class="o">=</span><span class="p">{{</span> <span class="na">backgroundColor</span><span class="p">:</span> <span class="nx">color</span> <span class="p">}}</span> <span class="nx">className</span><span class="o">=</span><span class="dl">'</span><span class="s1">btn</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">{</span> <span class="nx">text</span> <span class="p">}</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
 </span>  <span class="p">)</span>
 <span class="p">}</span>
 
@@ -245,26 +250,30 @@
 <span class="nx">Button</span><span class="p">.</span><span class="nx">propTypes</span> <span class="o">=</span> <span class="p">{</span>
   <span class="na">color</span><span class="p">:</span> <span class="nx">PropTypes</span><span class="p">.</span><span class="nx">string</span><span class="p">,</span>
   <span class="na">text</span><span class="p">:</span> <span class="nx">PropTypes</span><span class="p">.</span><span class="nx">string</span><span class="p">,</span>
-<span class="p">}</span> 
+<span class="p">}</span>
 
 </code></pre></div></div>
 
 <p>event를 추가할 수도 있다.</p>
 
 <p>Button.js</p>
+
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">Button</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
   <span class="kd">const</span> <span class="nx">onClick</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="nx">consol</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">clicked</span><span class="dl">'</span><span class="p">);</span>
-  <span class="p">}</span>
-  <span class="k">return</span><span class="p">(</span>
-    <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onclick</span><span class="o">=</span><span class="p">{</span> <span class="nx">onClick</span> <span class="p">}</span> <span class="nx">className</span><span class="o">=</span><span class="dl">'</span><span class="s1">btn</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">{</span> <span class="nx">text</span> <span class="p">}</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
-</span>  <span class="p">)</span> 
-<span class="p">}</span> 
+    <span class="nx">consol</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">clicked</span><span class="dl">"</span><span class="p">);</span>
+  <span class="p">};</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onclick</span><span class="o">=</span><span class="p">{</span><span class="nx">onClick</span><span class="p">}</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">btn</span><span class="dl">"</span><span class="o">&gt;</span>
+      <span class="p">{</span><span class="nx">text</span><span class="p">}</span>
+    <span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
 </code></pre></div></div>
 
 <p>그런데 매번 같은 클릭이 생기는 건 아니기 때문에, onClick 이벤트를 Button 컴포넌트가 아니라 Button을 호출하는 Header.js에서 정의해 줘야 한다.</p>
 
 <p>Header.js</p>
+
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">Header</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
   <span class="p">...</span>
   <span class="nx">onClick</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
@@ -280,9 +289,10 @@
 </code></pre></div></div>
 
 <p>Button.js</p>
+
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">Button</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">color</span><span class="p">,</span> <span class="nx">text</span><span class="p">,</span> <span class="nx">onClick</span> <span class="p">})</span> <span class="p">{</span>
   <span class="k">return</span><span class="p">(</span>
-    <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span> <span class="nx">onClick</span> <span class="p">}</span> <span class="nx">style</span><span class="o">=</span> <span class="nx">className</span><span class="o">=</span><span class="dl">'</span><span class="s1">btn</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">{</span> <span class="nx">text</span> <span class="p">}</span><span class="o">&lt;</span><span class="sr">/button&gt;</span><span class="err"> 
+    <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span> <span class="nx">onClick</span> <span class="p">}</span> <span class="nx">style</span><span class="o">=</span><span class="p">{{</span> <span class="na">backgroundColor</span><span class="p">:</span> <span class="nx">color</span> <span class="p">}}</span> <span class="nx">className</span><span class="o">=</span><span class="dl">'</span><span class="s1">btn</span><span class="dl">'</span><span class="o">&gt;</span><span class="p">{</span> <span class="nx">text</span> <span class="p">}</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
 </span>  <span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div></div>
@@ -292,20 +302,22 @@
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">tasks</span> <span class="o">=</span> <span class="p">[</span>
   <span class="p">{</span>
     <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="na">text</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Doctors Appointment</span><span class="dl">'</span><span class="p">,</span>
-    <span class="na">day</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Feb 5th at 2:30pm</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">text</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Doctors Appointment</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">day</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Feb 5th at 2:30pm</span><span class="dl">"</span><span class="p">,</span>
     <span class="na">reminder</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-  <span class="p">}</span>
-<span class="p">]</span>
+  <span class="p">},</span>
+<span class="p">];</span>
 
 <span class="kd">const</span> <span class="nx">Tasks</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
   <span class="k">return</span> <span class="p">(</span>
     <span class="o">&lt;&gt;</span>
-      <span class="p">{</span><span class="nx">tasks</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">task</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span><span class="o">&lt;</span><span class="nx">h3</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">task</span><span class="p">.</span><span class="nx">text</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/h3&gt;</span><span class="se">))</span><span class="err">}
-</span>    <span class="o">&lt;</span><span class="sr">/</span><span class="err">&gt;
-</span>  <span class="p">)</span>
-<span class="p">}</span>
-<span class="k">export</span> <span class="k">default</span> <span class="nx">Tasks</span>
+      <span class="p">{</span><span class="nx">tasks</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">task</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">h3</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">task</span><span class="p">.</span><span class="nx">text</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/h3</span><span class="err">&gt;
+</span>      <span class="p">))}</span>
+    <span class="o">&lt;</span><span class="sr">/</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+<span class="k">export</span> <span class="k">default</span> <span class="nx">Tasks</span><span class="p">;</span>
 </code></pre></div></div>
 
 <p><code class="language-plaintext highlighter-rouge">tasks.map(func)</code>은 tasks 리스트에 있는 원소들을 하나씩 돌아가면서 괄호 안에 있는 함수(func)를 실행한다.</p>
@@ -318,7 +330,7 @@
 <span class="kd">const</span> <span class="nx">Task</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
   <span class="k">return</span> <span class="p">(</span>
     <span class="o">&lt;&gt;</span>
-      <span class="p">{</span><span class="nx">tasks</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">task</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>  
+      <span class="p">{</span><span class="nx">tasks</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">task</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
         <span class="o">&lt;</span><span class="nx">h3</span> <span class="nx">key</span><span class="o">=</span><span class="p">{</span> <span class="nx">task</span><span class="p">.</span><span class="nx">id</span> <span class="p">}</span><span class="o">&gt;</span><span class="p">{</span> <span class="nx">task</span><span class="p">.</span><span class="nx">text</span> <span class="p">}</span><span class="o">&lt;</span><span class="sr">/h3</span><span class="err">&gt;
 </span>      <span class="p">))}</span>
     <span class="o">&lt;</span><span class="sr">/</span><span class="err">&gt;
@@ -328,31 +340,31 @@
 
 <p>task들을 배열에 저장해 두었는데, state를 이용하자.</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span> <span class="c1">// 리액트 패키지에서 useState라는 함수 불러 오기</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span> <span class="c1">// 리액트 패키지에서 useState라는 함수 불러 오기</span>
 
 <span class="kd">const</span> <span class="nx">Task</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
   <span class="kd">const</span> <span class="p">[</span><span class="nx">tasks</span><span class="p">,</span> <span class="nx">setTasks</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">([</span>
     <span class="p">{</span>
       <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="na">text</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Doctors Appointment</span><span class="dl">'</span><span class="p">,</span>
-      <span class="na">day</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Feb 5th at 2:30pm</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">text</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Doctors Appointment</span><span class="dl">"</span><span class="p">,</span>
+      <span class="na">day</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Feb 5th at 2:30pm</span><span class="dl">"</span><span class="p">,</span>
       <span class="na">reminder</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
     <span class="p">},</span>
     <span class="p">{</span>
       <span class="na">id</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-      <span class="na">text</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Meeting at School</span><span class="dl">'</span><span class="p">,</span>
-      <span class="na">day</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Feb 6th at 1:30pm</span><span class="dl">'</span><span class="p">,</span>
+      <span class="na">text</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Meeting at School</span><span class="dl">"</span><span class="p">,</span>
+      <span class="na">day</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Feb 6th at 1:30pm</span><span class="dl">"</span><span class="p">,</span>
       <span class="na">reminder</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="p">},</span>
-  <span class="p">])</span>
-<span class="p">}</span>
-
+  <span class="p">]);</span>
+<span class="p">};</span>
 </code></pre></div></div>
 
 <p>state는 immutable하기 때문에 tasks.push() 같은 방법으로 state에 추가할 수는 없다. <code class="language-plaintext highlighter-rouge">setTasks[..taks, {}]</code> 이런 식으로 해야 한다.
 그런데 tasks를 Tasks 컴포넌트 안에 두면, Tasks 컴포넌트 안에 embed된 컴포넌트만 tasks에 접근할 수 있다. tasks가 다른 컴포넌트에서도 엑세스할 수 있도록 app.js에 저장하자. app.js에 적어 두면 tasks는 global state가 된다.</p>
 
 <p>app.js</p>
+
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span>
 <span class="k">import</span> <span class="nx">Tasks</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./components/Tasks</span><span class="dl">'</span><span class="p">;</span>
 
@@ -367,17 +379,17 @@
 
 </code></pre></div></div>
 
-<p>유용한 아이콘들을 다운로드해 왔다. 
+<p>유용한 아이콘들을 다운로드해 왔다.
 <code class="language-plaintext highlighter-rouge">npm i react-icons</code></p>
 
 <p>다음과 같이 import하고 사용한다.</p>
+
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">FaTimes</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react-icons/fa</span><span class="dl">'</span>
 <span class="p">...</span>
-      <span class="o">&lt;</span><span class="nx">h3</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">task</span><span class="p">.</span><span class="nx">text</span><span class="p">}</span><span class="o">&lt;</span><span class="nx">FaTimes</span> <span class="nx">style</span><span class="o">=</span><span class="sr">/&gt;&lt;/</span><span class="nx">h3</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">h3</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">task</span><span class="p">.</span><span class="nx">text</span><span class="p">}</span><span class="o">&lt;</span><span class="nx">FaTimes</span> <span class="nx">style</span><span class="o">=</span><span class="p">{{</span> <span class="na">color</span><span class="p">:</span> <span class="dl">'</span><span class="s1">red</span><span class="dl">'</span><span class="p">,</span> <span class="na">cursor</span><span class="p">:</span> <span class="dl">'</span><span class="s1">pointer</span><span class="dl">'</span> <span class="p">}}</span><span class="sr">/&gt;&lt;/</span><span class="nx">h3</span><span class="o">&gt;</span>
 </code></pre></div></div>
 
 <p>여기에서 x 버튼을 누르면 뭔가 되도록 이벤트를 만들어야 한다. 그런데 events들이 App 컴포넌트에 저장되어 있다. 이때 context api와 redux를 이용하면 컴포넌트 안에 있는 state를 쉽게 접근할 수 있지만 지금 여기서는 prop으로 하기로 한다.</p>
-
 
 </div>
 
@@ -397,7 +409,7 @@
 
     <footer>
   <span>
-    &copy; <time datetime="2023-07-31 21:14:23 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-08-01 23:12:59 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 

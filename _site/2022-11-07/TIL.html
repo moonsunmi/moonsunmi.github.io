@@ -95,6 +95,7 @@
 </table>
 
 <h3 id="usememo">useMemo</h3>
+
 <p>useMemo: 이전에 사용한 값을 재사용한다는 의미를 가진다.</p>
 
 <p>다음과 같이 user가 바뀔 때만 다시 계산할 필요가 있는 getActiveUserNumber 함수는 useMemo를 이용하고, deps을 users로 지정해 준다. 그러면 user가 바뀔 때만 getActiveUserNumber를 실행해 계산한다. users가 바뀌지 않았다면 저장해둔 그 전값을 바로 사용한다.</p>
@@ -113,7 +114,7 @@
     <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="na">username</span><span class="p">:</span> <span class="dl">"</span><span class="s2">공유</span><span class="dl">"</span><span class="p">,</span> <span class="na">nickname</span><span class="p">:</span> <span class="dl">"</span><span class="s2">도깨비</span><span class="dl">"</span><span class="p">,</span> <span class="na">active</span><span class="p">:</span> <span class="kc">false</span> <span class="p">},</span>
     <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="na">username</span><span class="p">:</span> <span class="dl">"</span><span class="s2">곽상준</span><span class="dl">"</span><span class="p">,</span> <span class="na">nickname</span><span class="p">:</span> <span class="dl">"</span><span class="s2">각도기</span><span class="dl">"</span><span class="p">,</span> <span class="na">active</span><span class="p">:</span> <span class="kc">false</span> <span class="p">},</span>
   <span class="p">]);</span>
-  
+
   <span class="p">...</span>
 
   <span class="kd">const</span> <span class="nx">activeUserNumber</span> <span class="o">=</span> <span class="nx">useMemo</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
@@ -121,11 +122,12 @@
   <span class="p">},</span> <span class="p">[</span><span class="nx">users</span><span class="p">]);</span>
 
   <span class="p">...</span>
-  
+
   <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">활성</span> <span class="nx">사용자</span> <span class="nx">수</span><span class="p">:</span> <span class="p">{</span><span class="nx">activeUserNumber</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/p</span><span class="err">&gt;
 </span></code></pre></div></div>
 
 <h3 id="usecallback--reactmemo">useCallback &amp; React.memo</h3>
+
 <p>useMemo의 함수 버전이 useCallback이다.</p>
 
 <p>useCallback을 사용하고, React.memo로 컴포넌트 렌더링 최적화 작업을 해 주어야 선응이 최적화된다.</p>
@@ -133,6 +135,7 @@
 <p>얘는 아직 어떻게 되는지 잘 모르겠다.</p>
 
 <p>UserList.js</p>
+
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useEffect</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">User</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">memo</span><span class="p">(({</span> <span class="nx">user</span><span class="p">,</span> <span class="nx">onRemove</span><span class="p">,</span> <span class="nx">onToggleActive</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
@@ -145,7 +148,10 @@
   <span class="k">return</span> <span class="p">(</span>
     <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
       <span class="o">&lt;</span><span class="nx">b</span>
-        <span class="nx">style</span><span class="o">=</span>
+        <span class="nx">style</span><span class="o">=</span><span class="p">{{</span>
+          <span class="na">cursor</span><span class="p">:</span> <span class="dl">"</span><span class="s2">pointer</span><span class="dl">"</span><span class="p">,</span>
+          <span class="na">color</span><span class="p">:</span> <span class="nx">user</span><span class="p">.</span><span class="nx">active</span> <span class="p">?</span> <span class="dl">"</span><span class="s2">green</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">black</span><span class="dl">"</span><span class="p">,</span>
+        <span class="p">}}</span>
         <span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="nx">onToggleActive</span><span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">id</span><span class="p">)}</span>
       <span class="o">&gt;</span>
         <span class="p">{</span><span class="nx">user</span><span class="p">.</span><span class="nx">username</span><span class="p">}</span>
@@ -176,6 +182,7 @@
 </code></pre></div></div>
 
 <p>CreateUser.js</p>
+
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">CreateUser</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">username</span><span class="p">,</span> <span class="nx">nickname</span><span class="p">,</span> <span class="nx">onChange</span><span class="p">,</span> <span class="nx">onCreate</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
@@ -204,6 +211,7 @@
 </code></pre></div></div>
 
 <p>App.js</p>
+
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Info</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./Info</span><span class="dl">"</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useCallback</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
 <span class="k">import</span> <span class="dl">"</span><span class="s2">./App.css</span><span class="dl">"</span><span class="p">;</span>
@@ -317,7 +325,6 @@
   </tbody>
 </table>
 
-
 </div>
 
 
@@ -336,7 +343,7 @@
 
     <footer>
   <span>
-    &copy; <time datetime="2023-07-31 21:14:23 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-08-01 23:12:59 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 

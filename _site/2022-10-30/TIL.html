@@ -121,6 +121,7 @@
 <h3 id="storybar-만들기">storyBar 만들기</h3>
 
 <p>Stories.js</p>
+
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">StoryCard</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./StoryCard</span><span class="dl">"</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">stories</span> <span class="o">=</span> <span class="p">[</span>
@@ -157,6 +158,7 @@
 </code></pre></div></div>
 
 <p>StoryCard.js</p>
+
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Image</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">next/image</span><span class="dl">"</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">StoryCard</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">story</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
@@ -169,7 +171,7 @@
         <span class="nx">alt</span><span class="o">=</span><span class="dl">"</span><span class="s2">profile pic</span><span class="dl">"</span>
         <span class="nx">width</span><span class="o">=</span><span class="dl">"</span><span class="s2">40</span><span class="dl">"</span>
         <span class="nx">height</span><span class="o">=</span><span class="dl">"</span><span class="s2">40</span><span class="dl">"</span>
-        <span class="nx">style</span><span class="o">=</span>
+        <span class="nx">style</span><span class="o">=</span><span class="p">{{</span> <span class="na">objectFit</span><span class="p">:</span> <span class="dl">"</span><span class="s2">cover</span><span class="dl">"</span> <span class="p">}}</span>
       <span class="sr">/</span><span class="err">&gt;
 </span>      <span class="p">{</span><span class="cm">/* 배경의 큰 화면 */</span><span class="p">}</span>
       <span class="o">&lt;</span><span class="nx">Image</span>
@@ -216,7 +218,6 @@
   </tbody>
 </table>
 
-
 </div>
 
 
@@ -235,7 +236,7 @@
 
     <footer>
   <span>
-    &copy; <time datetime="2023-07-31 21:14:23 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-08-01 23:12:59 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 

@@ -1,17 +1,14 @@
 ---
 layout: post
-title:  "w3school React"
-date:   2022-10-13 12:18:07 +0900
+title: "w3school React"
+date: 2022-10-13 12:18:07 +0900
 categories: react
 ---
 
-| (달성/목표) | 뽀모도리  | 등 | 가슴 | 배   |
-|----|-------|---|-------|-----|
-| 1일 | 3/3   | 5/5 | 5/5 | 0/3 |
-| 1주 | 16/40 |   |       |
-
-
-
+| (달성/목표) | 뽀모도리 | 등  | 가슴 | 배  |
+| ----------- | -------- | --- | ---- | --- |
+| 1일         | 3/3      | 5/5 | 5/5  | 0/3 |
+| 1주         | 16/40    |     |      |
 
 ### React Memo
 
@@ -19,37 +16,37 @@ categories: react
 
 다음 예제에서 Todo 컴포넌트는 todo가 변하지도 않았는데, count가 클릭될 때마다 계속 렌더링된다. 이럴 때 todo에 memo를 감싸 주면 된다.
 
-
 index.js
+
 ```js
 import { useState } from "react";
-import ReactDom from "react-dom/client"; 
+import ReactDom from "react-dom/client";
 import Todos from "./Todos";
 
 const increment = () => {
   setCount((c) => c + 1);
-}
+};
 
 const App = () => {
   const [todos, setTodos] = useState(["todo1", "todo2"]);
   const [count, setCount] = useState(0);
-  
+
   return (
     <>
-    <Todos todos={todos} />
-    <hr />
-    Count: {count}
-    <button onClick={increment}>+</button>
+      <Todos todos={todos} />
+      <hr />
+      Count: {count}
+      <button onClick={increment}>+</button>
     </>
   );
-}
+};
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<App />);
 ```
 
-
 Todos.js
+
 ```js
 const Todos = ({ todos }) => {
   return (
@@ -64,26 +61,23 @@ const Todos = ({ todos }) => {
 export default memo(Todos); // memo
 ```
 
-
-
 ### CSS로 리액트 스타일링하기
 
 #### inline styling
-JSX에서 `{}`는 자바스크립트를 나타내기 때문에, 스타일을 나타낼 때는 `{{}}`를 이용한다.
+
+JSX에서 `{}`는 자바스크립트를 나타내기 때문에, 스타일을 나타낼 때는 `{% raw %}{{}}{% endraw %}`를 이용한다.
 
 ```js
 const Header = () => {
   return (
   <>
-    <h1 style={{color: "red"}}>Hello<h1>
+    <h1 style={% raw %}{{color: "red"}}{% endraw %}>Hello<h1>
   </>
   );
 }
 ```
 
 Camelcase로 써야 한다. 예) `backgroundColor`
-
-
 
 #### CSS 스타일시트를 따로 만들기
 
@@ -93,11 +87,9 @@ App.css에 CSS 코드를 넣고, index.js에서 `import './App.css'`로 임포�
 
 my-style.domule.css 파일에 Car 컴포넌트용 CSS를 만들어 넣고, Car 컴포넌트에서 my-style.domule.css를 임포트한다.
 
-
-
 ### Sass 이용하기
 
-Sass는 CSS pre-processor이다. Sass 파일은 서버에서 실행되고, CSS를 전달한다. 
+Sass는 CSS pre-processor이다. Sass 파일은 서버에서 실행되고, CSS를 전달한다.
 
 `npm i sass`로 설치한다.
 
@@ -113,25 +105,24 @@ h1 {
 
 js 파일에서는 CSS하듯 임포트하면 된다.
 
-
 ### React Hook
 
 훅의 세 가지 원칙
+
 1. 훅은 리액트 함수 컴포넌트 안에서만 호출된다.
 2. 훅은 컴포넌트의 top에서만 호출된다.
 3. 훅은 조건문이 될 수 없다.
 
-
 ### useState
 
 useState는 초기화 시 두 가지 값을 반환한다.
+
 ```js
 const [color, setColor] = useState("");
 ```
 
-* `color`: 현재 state
-* `setColor`: state를 업데이트할 때 쓰는 함수
-
+- `color`: 현재 state
+- `setColor`: state를 업데이트할 때 쓰는 함수
 
 state를 업데이트할 때, `color="red"` 같은 식으로 할 수 없다. update 함수를 써야 한다.
 
@@ -157,7 +148,7 @@ function Car() {
     brand: "Ford",
     model: "Mustang",
     year: "1964",
-    color: "red"
+    color: "red",
   });
 }
 ```
@@ -165,14 +156,12 @@ function Car() {
 setCar로 오브젝트를 수정하면, 전부 업데이트된다. brand만 수정했는데도, model, year, color 같은 것들이 다 업데이트된다는 말. 원하는 것만 수정한다고 다음과 같이 쓰면, model, year, color 값이 다 없어진다.
 
 ```js
-setState({brand: "BMW"}); // brand 빼고 다 없어짐.
+setState({ brand: "BMW" }); // brand 빼고 다 없어짐.
 ```
 
 이럴 때 spread operation을 쓴다.
 
-
 ```js
-
 import { useState } from "react";
 import ReactDOM from "react-dom/client";
 
@@ -181,25 +170,24 @@ function Car() {
     brand: "Ford",
     model: "Mustang",
     year: "1964",
-    color: "red"
+    color: "red",
   });
 
   const updateColor = () => {
-    setCar(previousState => {
-      return {...previousState, color: "blue"}
+    setCar((previousState) => {
+      return { ...previousState, color: "blue" };
     });
-  }
+  };
   return (
     <>
       <h1>My is {car.color}</h1>
-      <button type="button" onClick={updateColor}>BLUE</button>
+      <button type="button" onClick={updateColor}>
+        BLUE
+      </button>
     </>
-  )
+  );
 }
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<Car />);
 ```
-
-
-

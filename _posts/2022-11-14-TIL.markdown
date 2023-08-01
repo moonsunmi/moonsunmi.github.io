@@ -1,22 +1,22 @@
 ---
 layout: post
-title:  "TIL) 리액트를 다루는 기술(메인 예제, 안 보고 만들어 보기)"
-date:   2022-11-14 12:18:07 +0900
+title: "TIL) 리액트를 다루는 기술(메인 예제, 안 보고 만들어 보기)"
+date: 2022-11-14 12:18:07 +0900
 categories: react
 ---
 
-| (달성/목표) | 뽀모도리  |
-|----|-------|
-| 1일 | 5 / 5 |
-| 1주 | 5 /40 |
-
-
+| (달성/목표) | 뽀모도리 |
+| ----------- | -------- |
+| 1일         | 5 / 5    |
+| 1주         | 5 /40    |
 
 ### 기술
+
 유저네임과 이메일을 등록하는 예제를 코드를 보지 않고, 직접 만들어 보기로 했다. 입력 창 두 개를 한꺼번에 리셋하는 게 안 된다...
 그래도 배열의 추가, 삭제, 수정은 조금 더 감이 오는 듯...
 
 App.js
+
 ```js
 import "./App.css";
 import { useRef, useState } from "react";
@@ -90,6 +90,7 @@ export default App;
 ```
 
 CreateUsers.js
+
 ```js
 import React from "react";
 
@@ -117,9 +118,7 @@ const CreateUsers = ({ usernameRef, inputs, onChange, onReset }) => {
 };
 
 export default CreateUsers;
-
 ```
-
 
 UserList.js
 
@@ -130,7 +129,7 @@ const User = ({ user, onRemove, toggleActive }) => {
   return (
     <div>
       <b
-        style={{ cursor: "pointer", color: user.active ? "green" : "black" }}
+        style={% raw %}{{ cursor: "pointer", color: user.active ? "green" : "black" }}{% endraw %}
         onClick={() => toggleActive(user.id)}
       >
         {user.username}
@@ -160,12 +159,5 @@ export default UserList;
 
 ```
 
-
 <hr />
 월) 운동<br>
-
-
-
-
-
-

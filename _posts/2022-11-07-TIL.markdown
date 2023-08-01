@@ -1,21 +1,20 @@
 ---
 layout: post
-title:  "TIL) 리액트를 다루는 기술"
-date:   2022-11-07 12:18:07 +0900
+title: "TIL) 리액트를 다루는 기술"
+date: 2022-11-07 12:18:07 +0900
 categories: react
 ---
 
-| (달성/목표) | 뽀모도리  |
-|----|-------|
-| 1일 | 5 / 5 |
-| 1주 | 5 /40 |
-
+| (달성/목표) | 뽀모도리 |
+| ----------- | -------- |
+| 1일         | 5 / 5    |
+| 1주         | 5 /40    |
 
 ### useMemo
+
 useMemo: 이전에 사용한 값을 재사용한다는 의미를 가진다.
 
 다음과 같이 user가 바뀔 때만 다시 계산할 필요가 있는 getActiveUserNumber 함수는 useMemo를 이용하고, deps을 users로 지정해 준다. 그러면 user가 바뀔 때만 getActiveUserNumber를 실행해 계산한다. users가 바뀌지 않았다면 저장해둔 그 전값을 바로 사용한다.
-
 
 ```js
 function getActiveUserNumber(users) {
@@ -32,7 +31,7 @@ function App() {
     { id: 2, username: "공유", nickname: "도깨비", active: false },
     { id: 3, username: "곽상준", nickname: "각도기", active: false },
   ]);
-  
+
   ...
 
   const activeUserNumber = useMemo(() => {
@@ -40,12 +39,12 @@ function App() {
   }, [users]);
 
   ...
-  
+
   <p>활성 사용자 수: {activeUserNumber}</p>
 ```
 
-
 ### useCallback & React.memo
+
 useMemo의 함수 버전이 useCallback이다.
 
 useCallback을 사용하고, React.memo로 컴포넌트 렌더링 최적화 작업을 해 주어야 선응이 최적화된다.
@@ -53,6 +52,7 @@ useCallback을 사용하고, React.memo로 컴포넌트 렌더링 최적화 작�
 얘는 아직 어떻게 되는지 잘 모르겠다.
 
 UserList.js
+
 ```js
 import React, { useEffect } from "react";
 
@@ -66,10 +66,10 @@ const User = React.memo(({ user, onRemove, onToggleActive }) => {
   return (
     <div>
       <b
-        style={{
+        style={% raw %}{{
           cursor: "pointer",
           color: user.active ? "green" : "black",
-        }}
+        }}{% endraw %}
         onClick={() => onToggleActive(user.id)}
       >
         {user.username}
@@ -99,8 +99,8 @@ export default React.memo(UserList);
 
 ```
 
-
 CreateUser.js
+
 ```js
 import React from "react";
 
@@ -129,8 +129,8 @@ const CreateUser = ({ username, nickname, onChange, onCreate }) => {
 export default React.memo(CreateUser);
 ```
 
-
 App.js
+
 ```js
 import Info from "./Info";
 import React, { useCallback } from "react";
@@ -222,13 +222,9 @@ function App() {
 export default App;
 ```
 
-
 <hr />
 월) 운동
 
-| 종아리 | 앞벅지 | 삼두  | 뒷벅지 |  
-|--------|-----|-----|-----|
-| 3/3    | 3/3 | 3/3 | 3/3 |
-
-
-
+| 종아리 | 앞벅지 | 삼두 | 뒷벅지 |
+| ------ | ------ | ---- | ------ |
+| 3/3    | 3/3    | 3/3  | 3/3    |

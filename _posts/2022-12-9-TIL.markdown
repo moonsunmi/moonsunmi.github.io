@@ -1,17 +1,17 @@
 ---
 layout: post
-title:  "TIL) 모범 사례 react-trello-board 배워서 내 스타일 만들기"
-date:   2022-12-08 12:18:07 +0900
+title: "TIL) 모범 사례 react-trello-board 배워서 내 스타일 만들기"
+date: 2022-12-09 12:18:07 +0900
 categories: react
 ---
 
-| (달성/목표) | 뽀모도리  |
-|----|-------|
-| 1일 | 2 / 8 |
-| 1주 | 9 /40 |
-
+| (달성/목표) | 뽀모도리 |
+| ----------- | -------- |
+| 1일         | 2 / 8    |
+| 1주         | 9 /40    |
 
 WeekReport.styles.js
+
 ```jsx
 import styled, { css } from "styled-components";
 import { lighten, darken } from "polished";
@@ -37,6 +37,4 @@ export const AdayDetail = styled.div`
   border-radius: 0.5rem;
   background: hsl(0, 0%, 99%);
 `;
-
 ```
-
