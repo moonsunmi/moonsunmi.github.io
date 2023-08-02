@@ -37,13 +37,15 @@ SOP 정책을 위반하더라도 CORS 정책을 지키면 다른 출처의 리�
 
 Django에서는 Access-Controll-Allow-Origin을 Django-cors-headers를 사용해서 추가할 수 있다.
 
-setting을 다음과 같이 해 주면, 교차 출처 리소스를 무조건 가져올 수 있고,
+setting을 다음과 같이 해 주면, 교차 출처 리소스를 무조건 가져올 수 있다. 하지만 보안상 권장되지 않으며, 기본값은 `False`이다.
 ```
-CORS_ORIGIN_ALLOW_ALL = False
+CORS_ALLOW_ALL_ORIGINS = True
 ```
-다음과 같이 whitelist에 추가해 주면, 해당 출처만 허용된다.
+
+다음과 같이 가능한 origin을 추가해 주면, 지정된 origin은 CORS가 허용된다.
+
 ```
-CORS_ORIGIN_WHITELIST = [
+CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
 ```
