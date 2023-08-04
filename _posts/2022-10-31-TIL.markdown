@@ -1,19 +1,14 @@
 ---
 layout: post
-title:  "TIL) Facebook Clone Coding(Next.js, Tailwind CSS, Responsive)"
-date:   2022-10-31 12:18:07 +0900
+title: "TIL) Facebook Clone Coding(Next.js, Tailwind CSS, Responsive)"
+date: 2022-10-31 12:18:07 +0900
 categories: react
 ---
-
-| (달성/목표) | 뽀모도리  |
-|----|-------|
-| 1일 | 5/5   |
-| 1주 | 5 /40 |
-
 
 ### firebase 연결하기
 
 firebase.js
+
 ```js
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
@@ -34,32 +29,33 @@ export { db };
 ```
 
 post를 입력하면, firebase에 저장한다.
+
 ```js
 const sendPost = (e) => {
-e.preventDefault();
+  e.preventDefault();
 
-if (!inputRef.current.value) return;
+  if (!inputRef.current.value) return;
 
-try {
-  const docRef = addDoc(collection(db, "post"), {
-    message: inputRef.current.value,
-    name: session.user.name,
-    email: session.user.email,
-    image: session.user.image,
-    timestamp: serverTimestamp(),
-  });
-  console.log("Document written with ID: ", docRef.id);
-} catch (e) {
-  console.error("Error adding document: ", e);
-}
+  try {
+    const docRef = addDoc(collection(db, "post"), {
+      message: inputRef.current.value,
+      name: session.user.name,
+      email: session.user.email,
+      image: session.user.image,
+      timestamp: serverTimestamp(),
+    });
+    console.log("Document written with ID: ", docRef.id);
+  } catch (e) {
+    console.error("Error adding document: ", e);
+  }
 
-inputRef.current.value = "";
+  inputRef.current.value = "";
 };
 ```
 
-
 ### useRef vs useState
-useRef: 렌더링이 되더라도 값을 지켜야 할 때 쓴다. 그래서 바로 전 값을 사용하고자 할 때 주로 쓴다. 렌더링과 무관한 값을 저장할 때 쓴다. useRef는 딱 하나만 반환한다. `current` 오브젝트. useRef는 값이 변해도 렌더링되지 않는다. 하지만 useState는 값이 업데이트되면 바로 렌더링된다. 
+
+useRef: 렌더링이 되더라도 값을 지켜야 할 때 쓴다. 그래서 바로 전 값을 사용하고자 할 때 주로 쓴다. 렌더링과 무관한 값을 저장할 때 쓴다. useRef는 딱 하나만 반환한다. `current` 오브젝트. useRef는 값이 변해도 렌더링되지 않는다. 하지만 useState는 값이 업데이트되면 바로 렌더링된다.
 
 그런데 useRef는 상태값 관리가 아니라, 요소의 이름을 짓는 용도로도 사용된다. 여기에서는 요소에 이름을 짓는 용도가 쓰인다.
 
@@ -102,8 +98,6 @@ const InputBox = () => {
   };
 ```
 
-
-
 ### 이미지 업로드하기
 
 이미지 업로드하는 기능은 photo/Image 아이콘을 누르면 type 프러퍼티가 file인 input 엘리먼트가 작동되게 만든다. 이 input 엘리먼트는 숨겨 두고, photo/Image 아이콘이 눌리면(`onChange`) 반응하게 만들어 둔다.
@@ -125,18 +119,12 @@ const InputBox = () => {
 
 우리 눈에 보이는 버튼에 해당하는 div를 클릭하면, input 엘리먼트를 가리키는 filepickerRef를 이용해서, input 엘리먼트가 click되었다고 처리한다. input 엘리먼트는 onChange가 되면 addImageToPost를 실행시킨다.
 
-
-
-
 <hr />
 edge cases: 극단적인 경우
-
 
 <hr />
 월) 운동
 
-| 삼두  | 뒷벅지 |
-|-----|-------|
-| 3/3 | 3/3 |
-
-
+| 삼두 | 뒷벅지 |
+| ---- | ------ |
+| 3/3  | 3/3    |

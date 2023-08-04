@@ -1,15 +1,9 @@
 ---
 layout: post
-title:  "TIL) 뽀모 프로젝트 Reservation 기능 추가 시도"
-date:   2022-11-20 12:18:07 +0900
+title: "TIL) 뽀모 프로젝트 Reservation 기능 추가 시도"
+date: 2022-11-20 12:18:07 +0900
 categories: react
 ---
-
-| (달성/목표) | 뽀모도리   |
-|----|--------|
-| 1일 | 6 / 8  |
-| 1주 | 42 /40 |
-
 
 ### 커스텀 훅과 컨텍스트 API 조합
 
@@ -17,6 +11,7 @@ categories: react
 
 이상해진
 Reservation.js
+
 ```jsx
   // -------------------- Schdule ----------------------
   const testLogs = useContext(timeLogsContext); //<???
@@ -91,6 +86,7 @@ Reservation.js
 useTasks 훅 안에서 context를 접근해야 하나 싶었는데, 그것도 좀... 이상한 방법인 것 같다.
 
 useTasks.js
+
 ```jsx
 import React, { useState } from "react";
 import { tasksContext } from "../../../_app";
@@ -113,11 +109,5 @@ export default useTasks;
 
 다시 기본으로 돌아가 봐야겠다.
 
-
 <hr />
 일) 운동<br>
-
-
-
-
-

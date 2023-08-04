@@ -1,20 +1,13 @@
 ---
 layout: post
-title:  "w3school Javascript"
-date:   2022-10-03 12:18:07 +0900
+title: "w3school Javascript"
+date: 2022-10-03 12:18:07 +0900
 categories: javascript
 ---
-
-| (달성/목표) | 뽀모도리 | 등 | 가슴 | 배 |
-|----|------|---|-------|----|
-| 1일 | 5/4  | 5/5 | 5/5 | 3/3 |
-| 1주 | 5/40 |   |       |
-
 
 ### Object Properties
 
 프로퍼티는 자바스크립트 오브젝트와 관련 있는 값이다. 자바스크립트 오브젝트는 프로퍼티를 순서와 상관 없이 모아둔 것이다.
-
 
 #### for... in loop
 
@@ -24,11 +17,11 @@ categories: javascript
 const person = {
   fname: "John",
   lname: "Doe",
-  age: 25
+  age: 25,
 };
 
 let text = "";
-for (let x in person){
+for (let x in person) {
   text += person[x];
 }
 ```
@@ -36,8 +29,8 @@ for (let x in person){
 #### 프로퍼티 추가/삭제
 
 ```js
-  person.nationality = "English";  // 존재하지 않는 프로퍼티를 이렇게 써 주면 추가가 된다.
-  delete person.nationality; // 삭제는 'delete'로.
+person.nationality = "English"; // 존재하지 않는 프로퍼티를 이렇게 써 주면 추가가 된다.
+delete person.nationality; // 삭제는 'delete'로.
 ```
 
 delete는 오브젝트의 삭제를 위해서 디자인된 것. 함수나 변수 등에 사용할 수는 없다.
@@ -74,10 +67,10 @@ const carOwner = {
 값에 접근하려면 다음과 같이.
 
 ```js
-for (let i in carOwer.cars){
-  for(let j in carOwer.cars[i].models){
+for (let i in carOwer.cars) {
+  for (let j in carOwer.cars[i].models) {
     carOwer.cars[i].models[j]; // 이렇게 접근한다.
-  } 
+  }
 }
 ```
 
@@ -86,12 +79,11 @@ for (let i in carOwer.cars){
 ```js
 const person = {
   name: "John",
-  age: 25
-}
-const myArray = Object.values(person); // "John,25" 
+  age: 25,
+};
+const myArray = Object.values(person); // "John,25"
 let myString = JSON.stringify(person); // {"name":"John","age":30,"city":"New York"}
 ```
-
 
 ### 자바스크립트 접근자
 
@@ -110,32 +102,37 @@ const person = {
 }
 ```
 
-
 Getter/Setter 추가할 때 `Object.defineProperty()` 메서드를 사용한다.
 
 ```js
-const obj = {counter : 0};
+const obj = { counter: 0 };
 
 Object.defineProperty(obj, "reset", {
-  get : function() { this.counter = 0; }
+  get: function () {
+    this.counter = 0;
+  },
 });
 Object.defineProperty(obj, "increment", {
-  get : function() { this.counter += 1; }
+  get: function () {
+    this.counter += 1;
+  },
 });
 Object.defineProperty(obj, "add", {
-  set : function(num) { this.counter += num; }
+  set: function (num) {
+    this.counter += num;
+  },
 });
 ```
 
 ### 오브젝트 생성자
 
 ```js
-function Person(name, age){
+function Person(name, age) {
   this.name = name;
   this.age = age;
-  this.changeName = function (name){
+  this.changeName = function (name) {
     this.name = name;
-  }
+  };
 }
 ```
 
@@ -145,13 +142,12 @@ function Person(name, age){
 Person.nationality = "English"; // X 추가 안 됨.
 ```
 
-
 ### 프로토타입
 
 모든 오브젝트는 프로토타입에서 프러퍼티와 메서드를 상속 받는다.
 
-* `Date` 오브젝트는 `Date.prototype`에서 상속 받고,
-* `Array` 오브젝트는 `Array.prototype`에서 상속 받는다.
+- `Date` 오브젝트는 `Date.prototype`에서 상속 받고,
+- `Array` 오브젝트는 `Array.prototype`에서 상속 받는다.
 
 `Object.prototype`은 프로토타입의 가장 상위. 따라서 `Date` 오브젝트는 `Object.prototype`을 상속받는다.
 
@@ -159,24 +155,22 @@ Person.nationality = "English"; // X 추가 안 됨.
 Person.prototype.nationality = "English"; // 프로포탙입을 이용하면 오브젝트 생성자에 프로퍼티를 추가할 수 있다.
 ```
 
-
 ### Map
 
 #### Object vs. Map
 
-* Object는 Iterable 객체(Symbol.iterator 속성에 특별한 함수가 있어서 for 문 등으로 루프를 돌 수 있다.), Map은 Iterable 객체가 아니다.
-* Object는 size 프러퍼티가 없는데, Map은 있다.
-* Object는 Key가 무조건 문자열이어야 하는데, Map은 어떤 타입이든 상관 없다.
-* Object는 Key가 정렬되어 있지 않은데, Map은 정렬되어 있다.
-* Object는 디폴트 키를 가지는데, Map은 가지지 않는다.
-
+- Object는 Iterable 객체(Symbol.iterator 속성에 특별한 함수가 있어서 for 문 등으로 루프를 돌 수 있다.), Map은 Iterable 객체가 아니다.
+- Object는 size 프러퍼티가 없는데, Map은 있다.
+- Object는 Key가 무조건 문자열이어야 하는데, Map은 어떤 타입이든 상관 없다.
+- Object는 Key가 정렬되어 있지 않은데, Map은 정렬되어 있다.
+- Object는 디폴트 키를 가지는데, Map은 가지지 않는다.
 
 그런데 Map의 원소를 추출할 때 쓰는 다음의 메서드는 iterable 오브젝트를 반환한다.
 
-* Map.forEach() : value, key
-* Map.entries() : `[key, value]`
-* Map.keys(): key
-* Map.values(): value
+- Map.forEach() : value, key
+- Map.entries() : `[key, value]`
+- Map.keys(): key
+- Map.values(): value
 
 따라서 다음과 같이 for문으로 루프를 돈다.
 
@@ -190,7 +184,7 @@ for (const x of fruits.entries()) {
 ### 함수
 
 ```js
-function myFunction(a, b){
+function myFunction(a, b) {
   arguments.length; // arguments의 개수
 }
 ```
@@ -199,9 +193,9 @@ function myFunction(a, b){
 
 ```js
 // ES5
-var x = function(y, z){
+var x = function (y, z) {
   return y * z;
-}
+};
 // ES6
 const x = (y, z) => y * z;
 ```
@@ -209,7 +203,9 @@ const x = (y, z) => y * z;
 return문만 있을 때 생략이 가능한 것이므로, 다음과 같이 쓰는 버릇을 들이는 게 좋다.
 
 ```js
-const x = (y, z) => {return y * z;}
+const x = (y, z) => {
+  return y * z;
+};
 ```
 
 #### 함수 파라미터
@@ -219,10 +215,10 @@ const x = (y, z) => {return y * z;}
 ```js
 x = findMax(1, 123, 500, 115, 44, 88);
 
-function findMax(){
+function findMax() {
   let max = -Infinity;
-  for(let i = 0; i < arguments.length; i++){
-    if(arguments[i] > max){
+  for (let i = 0; i < arguments.length; i++) {
+    if (arguments[i] > max) {
       max = arguments[i];
     }
   }
@@ -232,25 +228,24 @@ function findMax(){
 
 위 함수는 어느 오브젝트에도 속해 있지 않아 보이지만, 사실 글로벌 오브젝트가 존재한다. 이 함수는 자동으로 window 함수가 된다.
 
-
 ### function call
 
 call()을 이용하면, 다른 오브젝트에 있는 메서드를 이용할 수 있다.
 
 ```js
 const person = {
-  fullName: function(city, country) {
+  fullName: function (city, country) {
     return this.firstName + " " + this.lastName + "," + city + "," + country;
-  }
-}
+  },
+};
 const person1 = {
-  firstName:"John",
-  lastName: "Doe"
-}
+  firstName: "John",
+  lastName: "Doe",
+};
 const person2 = {
-  firstName:"Mary",
-  lastName: "Doe"
-}
+  firstName: "Mary",
+  lastName: "Doe",
+};
 
 person.fullName.call(person1, "Oslo", "Norway"); // "John Doe ..."
 person.fullName.call(person2, "Seoul", "Korea"); // "Mary Doe ..."
@@ -260,10 +255,10 @@ person.fullName.apply(person2, ["Seoul", "Korea"]); // "Mary Doe ..."
 apply() 메서드는 call() 메서드와 역할은 비슷한데, arguments를 배열로 전달한다는 차이가 있다.
 
 배열에서 최댓값을 찾을 때 apply() 메서드를 이용할 수 있다.
+
 ```js
 Math.max.apply(아무거나, [1, 2, 3]); // 아무거나: Math, " ", 0 등등... 오브젝트가 아니라서
 ```
-
 
 ### Function Bind
 
@@ -271,17 +266,17 @@ bind는 오브젝트의 메서드를 빌려온다.
 
 ```js
 const person = {
-  firstName:"John",
+  firstName: "John",
   lastName: "Doe",
   fullName: function () {
     return this.firstName + " " + this.lastName;
-  }
-}
+  },
+};
 
 const member = {
-  firstName:"Hege",
+  firstName: "Hege",
   lastName: "Nilsen",
-}
+};
 
 let fullName = person.fullName.bind(member);
 ```
@@ -290,14 +285,14 @@ callback 함수: 어떤 이벤트가 일어나거나 어떤 시점에 도달했�
 
 ```js
 const person = {
-  firstName:"John",
+  firstName: "John",
   lastName: "Doe",
   display: function () {
     let x = document.getElementById("demo");
     x.innerHTML = this.firstName + " " + this.lastName;
-  }
-}
-person.display();  // "John Doe"가 제대로 출력된다.
+  },
+};
+person.display(); // "John Doe"가 제대로 출력된다.
 setTimeout(person.display, 3000); // 3초 뒤에 undefined가 출력된다.
 ```
 
@@ -309,7 +304,3 @@ setTimeout(person.display, 3000); // 3초 뒤에 undefined가 출력된다.
 let display = person.display.bind(person);
 setTimeout(display, 3000);
 ```
-
-
-
-

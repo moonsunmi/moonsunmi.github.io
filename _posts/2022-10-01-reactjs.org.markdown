@@ -1,42 +1,35 @@
 ---
 layout: post
-title:  "reactjs.org 튜토리얼"
-date:   2022-10-01 12:18:07 +0900
+title: "reactjs.org 튜토리얼"
+date: 2022-10-01 12:18:07 +0900
 categories: reactjs
 ---
 
-|                   | 뽀모도리    | 등 운동 | 가슴 운동 |
-|-------------------|---------|------|-------|
-| 1일<br>(달성/목표)     | 12/16+5 | 5/5  | 5/5   |
-| 1주<br>(달성/목표)     | 37/40   |      |       |
-
-
-
 ## w3school의 javascript
+
 Exercise 문제 풀면서 복습해 봄.
-
-
 
 ## reactjs.org
 
 리액트는 자바스크립트 라이브러리로, '컴포넌트'라고 불리는 코드 파편을 이용해서 UI를 구성한다.
 
 ```js
-class ShoppingList extends React.component{
-    render(){
-        return(
-            <div className="shopping-List">
-                <h1>shopping List for {this.props.name}</h1>
-                <ul>
-                    <li>Instagram</li>
-                    <li>What's app</li>
-                    <li>Oculus</li>
-                </ul>
-            </div>
-        );
-    }
+class ShoppingList extends React.component {
+  render() {
+    return (
+      <div className="shopping-List">
+        <h1>shopping List for {this.props.name}</h1>
+        <ul>
+          <li>Instagram</li>
+          <li>What's app</li>
+          <li>Oculus</li>
+        </ul>
+      </div>
+    );
+  }
 }
 ```
+
 리액트에는 여러 컴포넌트가 있지만, 여기서는 React.component를 사용한다. 여기에서 `ShoppingList`는 리액트 컴포넌트 클래스(타입)이다. `prop`라는 프로퍼티를 받아서 처리한 후 `render` 함수를 통해 뷰 계층 구조를 전달한다.
 
 `render()` 함수는 보고자 하는 화면 내용을 전달한다. 전달을 위해서 리액트는 render의 리턴값을 경량화된 React 엘리먼트로 전환한다.
@@ -52,41 +45,31 @@ return React.createElement('div', {className:'shopping-list'},
 
 JSX의 중괄호 안에는 어떤 자바스크립트 코드도 쓸 수 있다. 리액트 엘리먼트는 자바스크립트 객체의 일종이다. 리액트 컴포넌트는 독립, 캡슐화되어 있다.
 
-
-
 ## Tic-Tac-Toa 만들기
 
 ### 초기에 설정되어 있는 리액트 컴포넌트
 
-* Square: 보드판에 안에 있는 작은 칸 하나하나
-* Board: Square 9개를 구성하는 보드판 하나
-* Game: 보드판을 렌더링한다.
-
+- Square: 보드판에 안에 있는 작은 칸 하나하나
+- Board: Square 9개를 구성하는 보드판 하나
+- Game: 보드판을 렌더링한다.
 
 부모인 Board 컴포넌트에서 자식인 Square 컴포넌트로 프로퍼티를 이용해 정보를 전달하자. 리액트에서 정보가 흘러가는 방식이다.
 
 ```js
 class Square extends React.Component {
   render() {
-    return (
-      <button className="square">
-        {this.props.value}
-      </button>
-    );
+    return <button className="square">{this.props.value}</button>;
   }
 }
 ```
 
 ```js
 class Board extends React.Component {
-  renderSquare(i){
+  renderSquare(i) {
     return <Square value={i} />;
   }
 }
 ```
-
-
-
 
 square 한 칸 클릭했을 때 인식하고 log 남기기.
 
@@ -106,19 +89,19 @@ class Square extends React.Component {
 >     <button className="square" onclick={() => console.log('click');}>
 > ```
 
-
 그다음 단계는 클릭된 square가 자기가 클린된 상태라는 걸 기억해서 X라고 표시하는 것이다. 뭔가를 '저장을 할 때' `constructor` 안에서 `state`를 사용한다.
 
 ```js
 class Square extends React.Componenet {
-    constructor(props){
-        super(props);
-        this.state = {
-            value: null,
-        };
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: null,
+    };
+  }
 }
 ```
+
 하위 클래스의 `constructor`를 선언할 때는 늘 `super`를 호출해 줘야 한다. 세트로 나온다고 생각.
 
 ```js
@@ -128,22 +111,18 @@ class Square extends React.Componenet {
 
 #### 클릭한 박스에 X 표시하기
 
-
 ```js
-class Square extends React.Component{
-  constructor(props){
+class Square extends React.Component {
+  constructor(props) {
     super(props);
     this.state = {
       value: null,
     };
   }
-  
-  render(){
-    return(
-      <button
-        className="square" 
-        onClick={() => this.setState({value: 'X'})}
-      >
+
+  render() {
+    return (
+      <button className="square" onClick={() => this.setState({ value: "X" })}>
         {this.state.value}
       </button>
     );
@@ -156,7 +135,7 @@ class Square extends React.Component{
 
 ### Sqaure의 상태 한곳에서 저장하기
 
-`Square`의 상태를 각각의 `Square` 자체에서 저장하고 있으면 되지 않나 생각할 수 있지만, 비효율적이다. 부모인 `Board` 컴포넌트가 가지고 있는 게 좋다. 
+`Square`의 상태를 각각의 `Square` 자체에서 저장하고 있으면 되지 않나 생각할 수 있지만, 비효율적이다. 부모인 `Board` 컴포넌트가 가지고 있는 게 좋다.
 
 자식 컴포넌트들의 값을 모아두거나, 컴포넌트끼리 정보를 전달하기 위해서 부모 컴포넌트는 공유할 state를 저장해 둔다. 그리고 프로퍼티를 이용해서 정보를 전달한다.
 
@@ -175,13 +154,13 @@ class Board extends React.Component {
 
 ```
 
-* 틱택토 상자 안에 있는 숫자(1, 2, 3 ..., 9)는 부모인 `Board` 컴포넌트에서 전달 받았고, 클릭되었을 때 "X" 표시는 `Square` 자체에서 처리하였다.
-
+- 틱택토 상자 안에 있는 숫자(1, 2, 3 ..., 9)는 부모인 `Board` 컴포넌트에서 전달 받았고, 클릭되었을 때 "X" 표시는 `Square` 자체에서 처리하였다.
 
 `Board` 컴포넌트에서 `Square` 값을 저장해 두었기 때문에 `renderSquare`는 다음과 같이 수정한다.
+
 ```js
 renderSquare(i) {
-  return <Square value={this.state.squares[i]}/>; 
+  return <Square value={this.state.squares[i]}/>;
 }
 ```
 
@@ -207,16 +186,12 @@ Square에서 더 이상 state를 쓰지 않으므로 state는 constructor를 지
 class Square extends React.Component {
   render() {
     return (
-      <button
-        className="square"
-        onClick={() => this.prop.onClick()}
-      >
+      <button className="square" onClick={() => this.prop.onClick()}>
         {this.prop.value}
       </button>
     );
   }
 }
-
 ```
 
 이러면 이제, square가 클릭되면 Board에 있는 onclick 함수가 호출된다.
@@ -228,10 +203,9 @@ class Square extends React.Component {
 5. 아직 `handleClick`을 정의하지 않아 오류가 난다.
 
 > Button에서의 onClick과 Board, Square에서의 onClick
-> 
+>
 > `<Button>` 엘리먼트에서의 `onClick` 속성은 내장된 컴포넌트이다. 그런데 Board, Square처럼 우리가 만든 컴포넌트에서의 onClick은 아무렇게나 이름을 붙일 수 있긴 하다.
 > 그렇지만 관습적으로, 프로퍼티 이름은 `on[Event]`, 그 이벤트를 다루는 메서드는 `handle[Event]`로 이름 붙인다.
-
 
 ```js
 class Board extends React.Component {
@@ -249,8 +223,7 @@ class Board extends React.Component {
 
 Square 컴포넌트는 더 이상 컨트롤하는 게 없고, Board가 모든 걸 지휘한다.
 
-`this.state.squres.slice()`를 이용해서 `this.state.squares` 배열의 복사본을 사용했다. 원본 배열은 건드리지 않음. 
-
+`this.state.squres.slice()`를 이용해서 `this.state.squares` 배열의 복사본을 사용했다. 원본 배열은 건드리지 않음.
 
 ## 불변(Immutability)이 중요한 이유
 
@@ -261,14 +234,13 @@ Square 컴포넌트는 더 이상 컨트롤하는 게 없고, Board가 모든 �
 
 2번으로 하는 게, 심플하고, 오류를 잡기도 쉽고, 여러모로 좋다.
 
-
 ## Function Component
 
 Square는 이제 state가 없이 render 메서드만 가지고 있으니, function component로 바꾸자. `React.Component`를 extends할 필요도 없고, 그냥 프로퍼티만 받아서 심플하게 작성할 수 있다.
 
 ```js
 function Square(prop) {
-  return(
+  return (
     <button className="square" onClick={prop.onClick}>
       {prop.value}
     </button>
@@ -292,10 +264,9 @@ handleClick(i){
 
 ```
 
-
 ### 승자 결정하기
 
-이 사이트에서 제공하는 승자 `calculateWinner`를 이용해서 승자를 판별했다. 
+이 사이트에서 제공하는 승자 `calculateWinner`를 이용해서 승자를 판별했다.
 
 ```js
 render() {
@@ -321,21 +292,19 @@ if (calculateWinner(squares) || squares[i]) {
 ### 히스토리 기록하기
 
 히스토리를 남겨 두기 위해서 한 번 할 때마다 다음과 같이 상태를 기록해 둘 것이다.
+
 ```js
 history = [
   {
-    squares: [
-      null, null, null,
-      null, 'X', null,
-      null, null, 'O',
-    ]
+    squares: [null, null, null, null, "X", null, null, null, "O"],
   },
-]
+];
 ```
 
 이 히스토리는 Game 컴포넌트에 저장한다. Board에 저장해 두었던 state와 승자 계산하는 것들 전부 Game 컴포넌트 쪽으로 옮겨 온다.
 
 Game의 render
+
 ```js
 render(){
   const history = this.state.history;
@@ -347,7 +316,7 @@ render(){
   } else {
     status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
   }
-  
+
   return (
     <div className="game">
     <div className="game-board">
@@ -369,8 +338,5 @@ render(){
 
 프로퍼티 집합을 오브젝트라고 한다. 프로퍼티는 대부분(몇 개 제외하고) 바뀔 수 있다.
 
-
-
 <hr />
 리액트 엘리먼트 vs. 리액트 컴포넌트? | corresponding: ~에 상응하는,
-

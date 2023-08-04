@@ -1,16 +1,9 @@
 ---
 layout: post
-title:  "w3school Javascript"
-date:   2022-10-04 12:18:07 +0900
+title: "w3school Javascript"
+date: 2022-10-04 12:18:07 +0900
 categories: javascript
 ---
-
-| (달성/목표) | 뽀모도리 | 등 | 가슴 | 배 |
-|----|------|---|-------|----|
-| 1일 | 3/4  | 5/5 | 5/5 | 3/3 |
-| 1주 | 8/40 |   |       |
-
-
 
 ### Javascript closure
 
@@ -27,9 +20,11 @@ function myFunction() {
 글로벌 변수를 쓰지 않고 counter 딜레마를 해결하는 법
 
 ```js
-function add(){
+function add() {
   let counter = 0;
-  function plus(){ counter += 1;}
+  function plus() {
+    counter += 1;
+  }
   plus();
   return counter;
 }
@@ -40,23 +35,24 @@ function add(){
 ```js
 const add = (function () {
   let counter = 0;
-  return function () {counter += 1; return counter}
+  return function () {
+    counter += 1;
+    return counter;
+  };
 })();
-
 ```
-
 
 ### Class 상속
 
 Model이 Car 상속 받을 때
 
 ```js
-class Car{
-  constructor(brand){
+class Car {
+  constructor(brand) {
     this.carname = brand;
   }
-  present(){
-    return 'I have a ' + this.carname;
+  present() {
+    return "I have a " + this.carname;
   }
 }
 
@@ -65,30 +61,33 @@ class Model extends Car {
     super(brand);
     this.model = mod;
   }
-  slow(){
+  slow() {
     return this.present() + this.model;
   }
 }
 ```
 
 #### Getter/Setter
+
 getter/setter는 겉으로 프로퍼티처럼 보인다. 실제 프로퍼티와 구별하기 위해서 해당 프러퍼티에 언더바를 붙인다.
 
 ```js
-class Car{
-  constructor(brand){
+class Car {
+  constructor(brand) {
     this._carname = brand;
   }
-  get carname(){  // set과 같은 이름
-    return this._carname; 
+  get carname() {
+    // set과 같은 이름
+    return this._carname;
   }
-  set carname(x){  // get과 같은 이름
+  set carname(x) {
+    // get과 같은 이름
     this._carname = x;
   }
 }
-let myCar  = new Car("Ford");
-myCar.carname;  // getter
-myCar.carname = "Volvo";  // setter
+let myCar = new Car("Ford");
+myCar.carname; // getter
+myCar.carname = "Volvo"; // setter
 ```
 
 ### 클래스 static
@@ -107,13 +106,13 @@ class Car {
 
 let myCar = new Car("Ford");
 
-Car.hello()   // O
-myCar.hello() // X
-Car.hello(myCar)  // O 
+Car.hello(); // O
+myCar.hello(); // X
+Car.hello(myCar); // O
 ```
 
-
 ### JS 콜백
+
 (함수의 실행 순서에 대한 것)
 콜백은 다른 함수에 argument로 넘겨지는 함수이다.
 
@@ -121,16 +120,16 @@ Car.hello(myCar)  // O
 function myDisplayer(some) {
   document.getElementById("demo").innerHTML = some;
 }
-function myCalculator(num1, num2, myCallback){
+function myCalculator(num1, num2, myCallback) {
   let sum = num1 + num2;
   myCallback(sum);
 }
 myCalculator(5, 5, myDisplayer);
 ```
-* 함수를 argument로 전달할 때 여닫는 괄호를 쓰지 않는다.!
 
-이 콜백 함수는 비동기 함수에서 진가를 드러낸다. 
+- 함수를 argument로 전달할 때 여닫는 괄호를 쓰지 않는다.!
 
+이 콜백 함수는 비동기 함수에서 진가를 드러낸다.
 
 ### 비동기
 
@@ -144,24 +143,16 @@ function myDisplayer(some) {
 }
 function getFile(myCallback) {
   let req = new XMLHttpRequest();
-  req.open('GET', "mycar.html");
-  req.onload = function() {
-    if (req.status == 200){
+  req.open("GET", "mycar.html");
+  req.onload = function () {
+    if (req.status == 200) {
       myCallback(this.responseText);
     } else {
       myCallback("Error: " + req.status);
     }
-  }
+  };
   req.send();
 }
 
 getFile(myDisplayer);
 ```
-
-
-
-
-
-
-
-

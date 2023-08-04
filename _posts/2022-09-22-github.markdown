@@ -1,43 +1,32 @@
 ---
 layout: post
-title:  "<팀 개발을 위한 Git Github 시작하기> Part 1"
-date:   2022-09-22 22:20:18 +0900
+title: "<팀 개발을 위한 Git Github 시작하기> Part 1"
+date: 2022-09-22 22:20:18 +0900
 categories: javascript
 ---
 
-|           | 뽀모도리  |
-|-----------|-------|
-| 일간(달성/목표) | 3/4   |
-| 주간(달성/목표) | 16/40 |
-
-
-
 ### Git 시작하기
-버전 관리를 하고 싶은 폴더의 경로에서 `git init` 명령을 이용해 초기화한다.
-* 내 정보 저장하기 
-  * `git config --global user.email "celebmoon@naver.com`
-  * `git config --global user.name "moonsunmi"`
 
+버전 관리를 하고 싶은 폴더의 경로에서 `git init` 명령을 이용해 초기화한다.
+
+- 내 정보 저장하기
+  - `git config --global user.email "celebmoon@naver.com`
+  - `git config --global user.name "moonsunmi"`
 
 ### git 명령어
 
-* `git add README.txt` (업데이트하려는 파일을 지정)
-* `git commit -m "README 작성"` (커밋)
+- `git add README.txt` (업데이트하려는 파일을 지정)
+- `git commit -m "README 작성"` (커밋)
 
-* `git log` (저장해둔 버전 목록 확인)
-* `git checkout eea6787045` (log에서 확인한 커밋 아이디로 지정된 버전으로 돌아가기. 커밋 아이디는 '7글자 이상 + ~'을 입력하거나 전체 ID 다 입력)
-* `git checkout -` (최신 커밋으로 돌아가기. '-'를 입력하는 것)
+- `git log` (저장해둔 버전 목록 확인)
+- `git checkout eea6787045` (log에서 확인한 커밋 아이디로 지정된 버전으로 돌아가기. 커밋 아이디는 '7글자 이상 + ~'을 입력하거나 전체 ID 다 입력)
+- `git checkout -` (최신 커밋으로 돌아가기. '-'를 입력하는 것)
 
-* 내 github 레포지토리와 연결하기
-  * `git add origin https://github.com/moonsunmi/github.git`
-  * `git push origin master`
+- 내 github 레포지토리와 연결하기
 
-* github에 있는 레포지토리 클론해 오기
-  * `git clone https://github.com/Cat-Hanbit/iTshirt.git .`
-  * 마지막에 마침표를 붙여야 해당 폴더에 저장된다. 아니라면 [폴더이름]-[폴더이름] 이 구조로 저장된다. 내가 자주 겪었던 어려움...
+  - `git add origin https://github.com/moonsunmi/github.git`
+  - `git push origin master`
 
-
-
-
-
-
+- github에 있는 레포지토리 클론해 오기
+  - `git clone https://github.com/Cat-Hanbit/iTshirt.git .`
+  - 마지막에 마침표를 붙여야 해당 폴더에 저장된다. 아니라면 [폴더이름]-[폴더이름] 이 구조로 저장된다. 내가 자주 겪었던 어려움...

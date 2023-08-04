@@ -1,16 +1,9 @@
 ---
 layout: post
-title:  "w3school React"
-date:   2022-10-14 12:18:07 +0900
+title: "w3school React"
+date: 2022-10-14 12:18:07 +0900
 categories: react
 ---
-
-| (달성/목표) | 뽀모도리  | 등 | 가슴 | 배   |
-|----|-------|---|-------|-----|
-| 1일 | 8/8   | 5/5 | 5/5 | 3/3 |
-| 1주 | 24/40 |   |       |
-
-
 
 #### useEffect Hook
 
@@ -46,26 +39,24 @@ const root = ReactDom.createRoot(document.getElementById("root"));
 root.render(<Timer />);
 ```
 
-
-
 render가 될 때마다 useEffect가 실행된다. 그말은 count가 변경될 때마다, render가 되고, 또 다른 useEffect가 실행된다는 것.
 
 > dependency 전달하는 세 가지.
 >
->```js
->useEffect(() => {}) // 전달 안 함.
->useEffect(() => {},[]); // 빈 배열 전달
->useEffect(() => {}, [prop, state]); // prop과 state 전달.
->```
+> ```js
+> useEffect(() => {}); // 전달 안 함.
+> useEffect(() => {}, []); // 빈 배열 전달
+> useEffect(() => {}, [prop, state]); // prop과 state 전달.
+> ```
 
-첫 렌더링될 때 한 번만 effect가 실행되도록 바꾸려면, `useEffect()`의 dependency를 설정해 주면 된다. 
+첫 렌더링될 때 한 번만 effect가 실행되도록 바꾸려면, `useEffect()`의 dependency를 설정해 주면 된다.
 
 ```js
-  useEffect(() => {
-    setTimeout(() => {
-      setCount((count) => count + 1);
-    }, 1000);
-  }, []); // 빈 array로 dependency를 추가해 주었다.
+useEffect(() => {
+  setTimeout(() => {
+    setCount((count) => count + 1);
+  }, 1000);
+}, []); // 빈 array로 dependency를 추가해 주었다.
 ```
 
 다음처럼, count에 calculation이 의존한 상황이라면(count가 바뀔 때 calculation이 바뀜) 의존성을 count로 전달해 준다. 이때도, 배열 형태로 전달해 준다는 걸 잊지 말자.
@@ -95,7 +86,6 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<Counter />);
 ```
 
-
 #### Effect Cleanup
 
 메모리 누수를 줄이기 위해서 필요 없어진 effect는 없애준다. 여기에서 timeout은 한번 효과를 준 후 이후에는 쓸모 없으므로 삭제해 준다. 삭제하기 위해서는 timeout에 이름을 지정해 주어야 한다.
@@ -106,14 +96,14 @@ import ReactDOM from "react-dom/client";
 
 function Timer() {
   const [count, setCount] = useState(0);
-  
+
   useEffect(() => {
     let timer = setTimeout(()=> {  // 지워줄 timer에 이름 지정해줌.
       setCount((count) => count + 1));
     }, 1000);
     return () => {clearTimeout(timer)};  // return으로 clear
   }, []);
-  
+
   return <h1>I've rendered {count} times!</h1>;
 }
 
@@ -121,13 +111,11 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<Timer />);
 ```
 
-
 ### useContext Hook
 
 useContext는 state를 globally하게 관리하기 위한 것이다. useState는 자기혼자 쓰일 때보다 useContext와 함께 쓰일 때 훨씬 사용하기 편리하다.
 
 컴포넌트 안에 포함된 컴포넌트 안에 포함된 컴포넌트에 인자가 쓰인다면, 중간 컴포넌트들이 인자를 계속 전달해 줘야 한다. useState는 최상위 컴포넌트에서만 쓰일 수 있으므로! 상당히 불편하다. 이때 context를 생성해서 사용한다.
-
 
 ```js
 import { useState, useContext, createContext } from "react";
@@ -164,19 +152,18 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<Component1 />);
 ```
 
-
-
 ### useRef
 
 1. 리렌더링 막기.
 2. DOM에 직접 접근하기
 3. State의 변화 추적하기
 
-
 #### 리렌더링 막기
+
 useState로 어플리케이션이 얼마나 렌더링되었는지 확인해 보면, 무한대값이 나오는 것을 확인할 수 있다. 훅 자체가 계속 다시 렌더링하기 때문이다. 이를 막기 위해서 useRef를 사용한다.
 
 다음과 같이 useState를 하면 리렌더링이 계속 일어나나 보다...?
+
 ```js
 import { useState, useRef, useEffect } from "react";
 import ReactDOM from "react-dom/client";
@@ -204,7 +191,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<App />);
 ```
 
-여튼 useRef를 써 보자. 
+여튼 useRef를 써 보자.
 
 ```js
 import { useState, useRef, useEffect } from "react";
@@ -231,14 +218,12 @@ function App() {
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<App />);
-
 ```
-
-
 
 #### DOM에 직접 접근하기
 
 리액트에서는 엘리먼트에 ref 속성을 추가하면, DOM에 직접 접근할 수 있다.
+
 ```js
 import { useRef } from "react";
 import ReactDOM from "react-dom/client";
@@ -292,15 +277,14 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<App />);
 ```
 
-
 ### useReducer
 
 useReducer는 useState와 비슷하다. 여러 state를 계속 추적해야 한다면, useReducer가 유용할 것이다.
 
 `useReducer(<reducer>, <initialState>)`
 
-* reducer: 내가 직접 만든 state 로직
-* initialState: 초기값을 가진 state. 일반적으로 오브젝트 형태이다.
+- reducer: 내가 직접 만든 state 로직
+- initialState: 초기값을 가진 state. 일반적으로 오브젝트 형태이다.
 
 ```js
 import { useReducer } from "react";
@@ -361,12 +345,5 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<Todos />);
 ```
 
-
-
-
-
 <hr>
 useReducer 뭔지 잘 모르겠다!
-
-
-

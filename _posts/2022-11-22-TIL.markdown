@@ -1,21 +1,15 @@
 ---
 layout: post
-title:  "TIL) 모던 리액트 웹 사이트의 todolist 만들기 클론 코딩"
-date:   2022-11-22 12:18:07 +0900
+title: "TIL) 모던 리액트 웹 사이트의 todolist 만들기 클론 코딩"
+date: 2022-11-22 12:18:07 +0900
 categories: react
 ---
-
-| (달성/목표) | 뽀모도리   |
-|----|--------|
-| 1일 | 5 / 3  |
-| 1주 | 12 /40 |
-
 
 ### 리듀서 만들기
 
 todo 관리하는 리듀서 만들기
-```jsx
 
+```jsx
 function todoReducer(state, action) {
   // action: type, id, todo
   switch (action.type) {
@@ -37,14 +31,11 @@ export function TodoProvider({ children }) {
 
   return children;
 }
-
 ```
-
 
 ### context 만들기
 
 리듀서로 관리하는 state와 dispatch를 다른 컨텍스트로 따로 관리한다. 이렇게 하면 불필요한 렌더링을 방지할 수도 있고(하나만 필요한 컴포넌트 같은 경우), 관리하기도 편하다.
-
 
 ```jsx
 import React, { createContext, useContext, useReducer } from "react";
@@ -110,9 +101,7 @@ export function useTodoState() {
 export function useTodoDispatch() {
   return useContext(TodoDispatchContext);
 }
-
 ```
-
 
 todoHead.js
 
@@ -143,6 +132,7 @@ export default TodoHead;
 ```
 
 TodoCreate.js
+
 ```jsx
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
@@ -280,16 +270,10 @@ const TodoCreate = () => {
 };
 
 export default React.memo(TodoCreate);
-
 ```
-
 
 <hr />
 화) 운동<br>
 
-* 무릎 대고 팔굽혀 펴기 10회 * 5세트
-* 슈퍼맨 10초 * 5세트
-
-
-
-
+- 무릎 대고 팔굽혀 펴기 10회 \* 5세트
+- 슈퍼맨 10초 \* 5세트

@@ -1,20 +1,14 @@
 ---
 layout: post
-title:  "Hulu Clone Coding(Next.js, Tailwind CSS, Responsive)"
-date:   2022-10-23 12:18:07 +0900
+title: "Hulu Clone Coding(Next.js, Tailwind CSS, Responsive)"
+date: 2022-10-23 12:18:07 +0900
 categories: react
 ---
-
-| (달성/목표) | 뽀모도리   | 등   | 가슴  | 배   |
-|----|--------|-----|-----|-----|
-| 1일 | 5/8    | 0/5 | 0/5 | 0/3 |
-| 1주 | 40 /40 |     |     |     |
-
-
 
 tailwindcss에서는 bounce되는 애니메이션을 쉽게 만들 수 있다.
 
 HeaderItem.js
+
 ```js
 function HeaderItem({ title, Icon }) {
   return (
@@ -30,11 +24,9 @@ function HeaderItem({ title, Icon }) {
 export default HeaderItem;
 ```
 
-
 flex를 지정해 주어 아이콘을 한 줄에 배열하고, 가능한 공간만큼 flex item이 다 채우도록 grow를 지정한다. 그러나 이렇게 하면 양끝 배열처럼 아이콘의 공간이 너무 커지니 `max-w-2xl`로 max-width를 지정해 준다. (2xl은 사이즈. small miduem 등 다양하다.)
 
-`sm:w-20` small break point를 width 20(width: 5rem; /* 80px */)로 지정
-
+`sm:w-20` small break point를 width 20(width: 5rem; /_ 80px _/)로 지정
 
 ### enviornment Key
 
@@ -45,12 +37,12 @@ environment key를 사용한다. 'env.local' 파일을 만드는데, 이 파일�
 .env*.local
 ```
 
-
 ### nav bar
 
 API_KEY를 이용해서 데이터를 불러 옴.
 
 requests.js
+
 ```js
 const API_KEY = process.env.API_KEY;
 
@@ -64,37 +56,35 @@ export default {
     url: `/movie/top_rated?api_key=${API_KEY}&language=en-US`,
   },
 ```
-* `?`: query start.
-* `title`: 우리가 화면에서 보는 것을 표시해준 거 
-* `url`: 가져올 곳의 url
 
+- `?`: query start.
+- `title`: 우리가 화면에서 보는 것을 표시해준 거
+- `url`: 가져올 곳의 url
 
 Nav.js
+
 ```js
 <div className="flex px-10 sm:px-20 text-2xl whitespace-nowrap space-x-10 sm:space-x-20 overflow-x-scroll">
-{Object.entries(requests).map(([key, { title, url }]) => (
-  <h2
-    key={key}
-    className="last:pr-24 cursor-pointer transition duration-100 transfrom hover:scale-125 hover:text-white active:text-red-300"
-  >
-    {title}
-  </h2>
-))}
+  {Object.entries(requests).map(([key, { title, url }]) => (
+    <h2
+      key={key}
+      className="last:pr-24 cursor-pointer transition duration-100 transfrom hover:scale-125 hover:text-white active:text-red-300"
+    >
+      {title}
+    </h2>
+  ))}
 </div>
 ```
 
-* `Object.entries`: requests를 전부 loop 돌기 위해서
-* `transition duration`: 변화를 자연스럽게 하기 위해서. (scale이 갑자기 커지는 게 아니라, 스무스하게..). `duration-100`은 100ms 동안
-* `transform`은 rotate, scale, move, skew 같은 것들을 가능하게 한다.
-* `px-10`: x 좌표에 padding 10.
-* `overflow-x-scroll`: 넘는 텍스트 스크롤되도록
-* `last:pr-24`: 가장 마지막에 있는 엘리먼트(last)에 오른쪽 padding을 준다.
-
+- `Object.entries`: requests를 전부 loop 돌기 위해서
+- `transition duration`: 변화를 자연스럽게 하기 위해서. (scale이 갑자기 커지는 게 아니라, 스무스하게..). `duration-100`은 100ms 동안
+- `transform`은 rotate, scale, move, skew 같은 것들을 가능하게 한다.
+- `px-10`: x 좌표에 padding 10.
+- `overflow-x-scroll`: 넘는 텍스트 스크롤되도록
+- `last:pr-24`: 가장 마지막에 있는 엘리먼트(last)에 오른쪽 padding을 준다.
 
 > scrollbar 숨기기
 > tailwind에서 scrollbar를 숨기기 위해서 플러그인을 깔아야 했다. 그런데 지금 시점에서는 특정 작업을 해 주지 않아도 스크롤바가 생기지 않는다. 나중에라도 문제가 생기면 다시 시도하기로 하고 'scrollbar 숨기기' 작업은 스킵하기로.
-
-
 
 #### 오른쪽 엘리먼트 옅게 하기
 
@@ -109,9 +99,5 @@ Nav.js
 
 `bg-gradient-to-l from-[#06202a] to-white`: gradient 값을 준다. to값을 안 주면, 투명으로 인지해서 우리가 원하는 옅어지는 느낌을 줄 수 있다.
 
-
-
 <hr />
 headless : https://www.howdy-mj.me/design/headless-components
-
-

@@ -1,24 +1,17 @@
 ---
 layout: post
-title:  "TIL) 모범 사례 react-trello-board 배워서 내 스타일 만들기"
-date:   2022-12-07 12:18:07 +0900
+title: "TIL) 모범 사례 react-trello-board 배워서 내 스타일 만들기"
+date: 2022-12-07 12:18:07 +0900
 categories: react
 ---
 
-| (달성/목표) | 뽀모도리  |
-|----|-------|
-| 1일 | 4 / 5 |
-| 1주 | 4 /40 |
-
-
-
 ### 모범 사례 배우기
+
 모범으로 삼을 만하다는 'react-trello-board' 프로젝트를 포크해 왔다. github으로 단순히 가져오기만 하면 실행이 되지 않는다. 파일을 복사해 온 것뿐이니...
 
 다음 명령어를 쓰면, 실행시킬 수 있다.
 
-```yarn add 'URL'```
-
+`yarn add 'URL'`
 
 스타일 폴더를 따로 두었고, 여기에서는 스타일만 지정했다. 컴포넌트가 달라지면 스타일 파일도 다르게 한 듯하다.(비슷한 걸 공유하는 건 예외. CardList, CardListHeader) input 엘리먼트는 여러 컴포넌트에서 쓰이고, 스타일링할 게 많아서인지 따로 두었다.
 
@@ -34,15 +27,11 @@ styles
 ㄴInput.styles.js: input 엘리먼트를 위한 것
 ```
 
-
-컴포넌트가 여러 요소를 감싸는 형태라면 컨테이너, 헤더, 래퍼 등으로 구분해서 스타일을 저장해 두었다. 예를 들어 CardList.styles.js에는 ``CardListContainer``, ``CardListHeader``, ``CardListWrapper``가 들어 있다.
-
-
+컴포넌트가 여러 요소를 감싸는 형태라면 컨테이너, 헤더, 래퍼 등으로 구분해서 스타일을 저장해 두었다. 예를 들어 CardList.styles.js에는 `CardListContainer`, `CardListHeader`, `CardListWrapper`가 들어 있다.
 
 ### 나도 따라 한다
 
 나는 컨테이너 형태의 디자인을 계속 사용할 것이기 때문에 Container.styles.js를 만들었다.
-
 
 ```jsx
 import styled, { css } from "styled-components";
@@ -79,5 +68,3 @@ export const ContainerTitle = styled.div`
   }}
 `;
 ```
-
-

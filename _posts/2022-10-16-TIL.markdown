@@ -1,19 +1,13 @@
 ---
 layout: post
-title:  "Likedin Clone Coding"
-date:   2022-10-16 12:18:07 +0900
+title: "Likedin Clone Coding"
+date: 2022-10-16 12:18:07 +0900
 categories: react
 ---
 
-| (달성/목표) | 뽀모도리  | 등   | 가슴 | 배   |
-|----|-------|-----|-------|-----|
-| 1일 | 8/8   | 5/5 | 5/5 | 3/3 |
-| 1주 | 40/40 |     |       |
-
-
 ### material-icon
 
-material-icon 설치 시 경로(?) 에러가 나는 것을 다시 잡았다. 유투브에 나오는 것과 설치 명령어가 달랐는데, 그것 때문인지... stackoverflow를 찾아 보니 기본 설치와 옵션 설치의 순서가 중요하다고 했다. 
+material-icon 설치 시 경로(?) 에러가 나는 것을 다시 잡았다. 유투브에 나오는 것과 설치 명령어가 달랐는데, 그것 때문인지... stackoverflow를 찾아 보니 기본 설치와 옵션 설치의 순서가 중요하다고 했다.
 
 그래서 파일을 다 지우고, mui.com의 공식 문서에 나와 있는 대로 설치를 했더니 잘 되었다.
 
@@ -25,27 +19,20 @@ material-icon 설치 시 경로(?) 에러가 나는 것을 다시 잡았다. 유
 https://drive.google.com/uc?export=view&id=[파일ID]
 ```
 
-
 ### CSS
 
-* `object-fit: container`: container에 맞춰서 object 크기를 다시 조정한다.
-* `display: flex`: 컨테이너에 이 속성이 지정되면, 자식 item들이 flex 아이템이 된다.
-* `!important`: 같은 속성을 여러 번 정의했을 때 나중에 설정한 값이 적용되는데, 그렇게 하지 않으려면 이 속성을 적어준다. `color: red !important;`
-
+- `object-fit: container`: container에 맞춰서 object 크기를 다시 조정한다.
+- `display: flex`: 컨테이너에 이 속성이 지정되면, 자식 item들이 flex 아이템이 된다.
+- `!important`: 같은 속성을 여러 번 정의했을 때 나중에 설정한 값이 적용되는데, 그렇게 하지 않으려면 이 속성을 적어준다. `color: red !important;`
 
 ### 페이지 나누기
 
 가로로 세 개 섹션을 나누는데, sidebar left(20%) / feed - center(30%) / right(20%)
-* left: `flex: 0.2`
-* center: `flex: 0.6`
-* right: `flex: 0.2`
-이 세 개가 다 합쳐져 `1`이 되어야 한다.
 
-
-
-
+- left: `flex: 0.2`
+- center: `flex: 0.6`
+- right: `flex: 0.2`
+  이 세 개가 다 합쳐져 `1`이 되어야 한다.
 
 <hr />
 * rm -rf 디렉터리이름 : 비어 있지 않은 디렉터리도 삭제함.
-
-

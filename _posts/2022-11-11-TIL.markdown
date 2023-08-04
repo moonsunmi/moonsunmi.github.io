@@ -1,15 +1,9 @@
 ---
 layout: post
-title:  "TIL) 리액트를 다루는 기술(useReducer)"
-date:   2022-11-11 12:18:07 +0900
+title: "TIL) 리액트를 다루는 기술(useReducer)"
+date: 2022-11-11 12:18:07 +0900
 categories: react
 ---
-
-| (달성/목표) | 뽀모도리   |
-|----|--------|
-| 1일 | 5 / 8  |
-| 1주 | 19 /40 |
-
 
 ### useReducer
 
@@ -19,50 +13,49 @@ categories: react
 const [상태객체, dispatch함수] = useReducer(reducer 함수, 초기 상태값)
 ```
 
-
-useReducer를 써서 onChange, onCreate, onRemove, onToggleActive 만들기 
+useReducer를 써서 onChange, onCreate, onRemove, onToggleActive 만들기
 
 ```js
-  const onChange = useCallback((e) => {
-    const { name, value } = e.target;
-    console.log("onChange called");
-    dispatch({ type: "CHANGE_INPUT", name, value });
-  }, []);
+const onChange = useCallback((e) => {
+  const { name, value } = e.target;
+  console.log("onChange called");
+  dispatch({ type: "CHANGE_INPUT", name, value });
+}, []);
 
-  const onCreate = useCallback(() => {
-    console.log("onCreate:", username, nickname);
-    dispatch({
-      type: "CREATE_USER",
-      user: {
-        id: nextId.current,
-        username,
-        nickname,
-      },
-    });
-    nextId.current += 1;
-  }, [username, nickname]);
-
-  const onRemove = useCallback(
-    (id) => {
-      dispatch({ type: "REMOVE_USER", id });
+const onCreate = useCallback(() => {
+  console.log("onCreate:", username, nickname);
+  dispatch({
+    type: "CREATE_USER",
+    user: {
+      id: nextId.current,
+      username,
+      nickname,
     },
-    [users]
-  );
+  });
+  nextId.current += 1;
+}, [username, nickname]);
 
-  const onToggleActive = useCallback(
-    (id) => {
-      dispatch({ type: "TOGGLE_USER", id });
-    },
-    [users]
-  );
+const onRemove = useCallback(
+  (id) => {
+    dispatch({ type: "REMOVE_USER", id });
+  },
+  [users]
+);
 
-  const activeUserNumber = useMemo(() => {
-    return getActiveUserNumber(users);
-  }, [users]);
+const onToggleActive = useCallback(
+  (id) => {
+    dispatch({ type: "TOGGLE_USER", id });
+  },
+  [users]
+);
 
+const activeUserNumber = useMemo(() => {
+  return getActiveUserNumber(users);
+}, [users]);
 ```
 
 reducer 함수는 다음과 같다.
+
 ```js
 function reducer(state, action) {
   // action: dispatch 함수에서 넘겨 준 값.
@@ -104,13 +97,9 @@ function reducer(state, action) {
 }
 ```
 
-
 <hr />
 금) 운동
 
-| 이두  | 등   | 가슴  | 어깨 | 
-|-----|-----|-----|-----|
-| 0/3 | 0/3 | 0/3 |0/3 |
-
-
-
+| 이두 | 등  | 가슴 | 어깨 |
+| ---- | --- | ---- | ---- |
+| 0/3  | 0/3 | 0/3  | 0/3  |

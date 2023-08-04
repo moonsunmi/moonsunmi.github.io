@@ -1,19 +1,14 @@
 ---
 layout: post
-title:  "TIL) Facebook Clone Coding(Next.js, Tailwind CSS, Responsive)"
-date:   2022-11-03 12:18:07 +0900
+title: "TIL) Facebook Clone Coding(Next.js, Tailwind CSS, Responsive)"
+date: 2022-11-03 12:18:07 +0900
 categories: react
 ---
-
-| (달성/목표) | 뽀모도리   |
-|----|--------|
-| 1일 | 3/3    |
-| 1주 | 16 /40 |
-
 
 ###
 
 Widgets.js
+
 ```js
 import {
   EllipsisHorizontalIcon,
@@ -56,11 +51,10 @@ const Widgets = () => {
   );
 };
 export default Widgets;
-
 ```
 
-
 Contact.js
+
 ```js
 import Image from "next/image";
 
@@ -86,13 +80,9 @@ const Contact = ({ src, name }) => {
 export default Contact;
 ```
 
-
-
 <hr />
 목) 운동
 
-| 종아리 | 앞벅지 | 복근  | 
-|-----|-----|-----|
-| 3/3 | 3/3 | 0/3 |
-
-
+| 종아리 | 앞벅지 | 복근 |
+| ------ | ------ | ---- |
+| 3/3    | 3/3    | 0/3  |

@@ -1,22 +1,16 @@
 ---
 layout: post
-title:  "TIL) 리액트를 다루는 기술(의존성 배열, useState의 배치 처리)"
-date:   2022-11-13 12:18:07 +0900
+title: "TIL) 리액트를 다루는 기술(의존성 배열, useState의 배치 처리)"
+date: 2022-11-13 12:18:07 +0900
 categories: react
 ---
-
-| (달성/목표) | 뽀모도리   |
-|----|--------|
-| 1일 | 14 / 8 |
-| 1주 | 40 /40 |
-
 
 ### 의존성 배열에 어떤 값을 넣어야 하는가?
 
 의존성 배열이라는 게 감이 잘 안와서 서로 다른 article을 몇 개 읽어 보았다.
 https://devtrium.com/posts/dependency-arrays
 
-의존성 배열은 훅 개념, 나아가 함수형 컴포넌트와 밀접한 연관이 있다. 
+의존성 배열은 훅 개념, 나아가 함수형 컴포넌트와 밀접한 연관이 있다.
 
 의존성 배열은 훅을 trigger하는 값을 정해준 것이다. 이때 trigger는 훅의 종류에 따라 다르다. `useEffect` callback 함수를 의미하고, `useCallback`은 함수의 변화를 의미하고.
 
@@ -53,7 +47,7 @@ const Counter = ({ minutes, seconds, isCounting }) => {
 또한 다음과 같은 경우에도 의존성 배열에 추가해 줄 필요가 없다.
 
 ```js
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 const ExampleComponent = () => {
   const [counter, setCounter] = useState(0);
@@ -68,22 +62,19 @@ const ExampleComponent = () => {
 
 `couter`가 밖에서 선언된 것이기는 하지만, useState는 최적화를 해둔 상태이다. setCounter를 사용한다는 건, 이미 얘가 변할 때만 렌더링한다는 뜻이기 때문에 굳이 의존성 배열에 추가해 줄 필요가 없다.
 
-
-
-
 ### 커스텀 훅 만들기
 
 input에서 자주 사용되는 기능을 커스텀 훅으로 만들었다.
 
 ```js
-import { useState, useCallback } from 'react';
+import { useState, useCallback } from "react";
 
 function useInputs(initialForm) {
   const [form, setForm] = useState(initialForm);
   // change
-  const onChange = useCallback(e => {
+  const onChange = useCallback((e) => {
     const { name, value } = e.target;
-    setForm(form => ({ ...form, [name]: value }));
+    setForm((form) => ({ ...form, [name]: value }));
   }, []);
   const reset = useCallback(() => setForm(initialForm), [initialForm]);
   return [form, onChange, reset];
@@ -92,19 +83,18 @@ function useInputs(initialForm) {
 export default useInputs;
 ```
 
-
 주의) 다음과 같이 useInputs 커스텀 훅에서 받아오는 건 Props이 아니다.(이걸로 헤맸음..)
 
 ```js
 function useInputs(initialForm)
 ```
 
-
 ### useState는 가능하다면 상탯값 변경을 배치로 처리한다
 
-setForm은 다음과 같이 작성하는데, 내 직관과는 맞지 않았다. 
+setForm은 다음과 같이 작성하는데, 내 직관과는 맞지 않았다.
+
 ```js
-setForm(form => ({ ...form, [name]: value }));
+setForm((form) => ({ ...form, [name]: value }));
 ```
 
 나라면 다음과 같이 작성했을 텐데, 그러면 이전에 입력한 값이 자꾸 초기화되었다.
@@ -119,7 +109,6 @@ useState는 상태값을 업데이트할 때 모든 변경 사항에 즉각적�
 
 그러다 보니 현재 입력하고 있는 값을 제외하고는 갱신하지 않은 채로 호출한다.
 
-
 #### 그래서 어떻게 하나?
 
 그렇기 때문에 이전 상태값이 업데이트될 상태값에 영향을 미치는 경우, 이전 상태값을 명시해주는 것을 권장한다.
@@ -129,33 +118,34 @@ useState는 상태값을 업데이트할 때 모든 변경 사항에 즉각적�
 https://ko.reactjs.org/docs/hooks-reference.html#functional-updates
 
 ```js
-function Counter({initialCount}) {
+function Counter({ initialCount }) {
   const [count, setCount] = useState(initialCount);
   return (
     <>
       Count: {count}
       <button onClick={() => setCount(initialCount)}>Reset</button>
-      <button onClick={() => setCount(prevCount => prevCount - 1)}>-</button>
-      <button onClick={() => setCount(prevCount => prevCount + 1)}>+</button>
+      <button onClick={() => setCount((prevCount) => prevCount - 1)}>-</button>
+      <button onClick={() => setCount((prevCount) => prevCount + 1)}>+</button>
     </>
   );
 }
 ```
 
-* reset은 현재 상태값이 어떠냐에 상관 없으므로, `setCount(initialCount)`로 원하는 값만 입력해 준다.
-* 그런데 값을 감소시키거나 증가시켜야 하는 경우에는 이전 상태값을 기준으로 현재 값을 변경하기에, 이전 상태값을 적어 준다.
-
+- reset은 현재 상태값이 어떠냐에 상관 없으므로, `setCount(initialCount)`로 원하는 값만 입력해 준다.
+- 그런데 값을 감소시키거나 증가시켜야 하는 경우에는 이전 상태값을 기준으로 현재 값을 변경하기에, 이전 상태값을 적어 준다.
 
 #### pomo-weekly 프로젝트에도 적용하기
 
 내 프로젝트에 문제는 없지만, 권장 사항을 따르기 위해서 다음과 같이 setCountdownNumber에서 이전 값을 명시해 주었다.
 
 이전
+
 ```js
 setCountdownNumber(countdownNumber - 1);
 ```
 
 수정
+
 ```js
 setCountdownNumber((prevCount) => prevCount - 1);
 ```
@@ -163,23 +153,23 @@ setCountdownNumber((prevCount) => prevCount - 1);
 bool 값은 다음과 같이 수정해 주었다. 지금보니 이전의 코드는 영 별로였던 것 같다.
 
 이전
+
 ```js
 setIsCounting(true);
 ```
 
 수정
+
 ```js
 setIsCounting((prevState) => !prevState);
 ```
-
 
 ### Context API
 
 onRemove, onChange처럼 자식 컴포넌트에게 전달해 줘야 하는 함수들이 있다. 중간에서 하는 일도 별로 없이 이런 걸 전달만 해주는 컴포넌트들도 있다. 이것을 해결하기 위해서 Context API를 사용한다.
 
-
 > redux vs. Context API
-> 
+>
 > 내 프로젝트에 Redux를 사용하려고 했는데, 작은 프로젝트에서는 Context API로도 충분하다고(오히려 이쪽이 낫다고) 한다. 아직 Context API 사용도 익숙하지 않은 상태니 이번 프로젝트는 Redux를 사용하지 않기로 했다.
 
 Context API를 사용하면, 프로젝트 안에서 전역으로 사용할 수 있다.
@@ -190,25 +180,18 @@ Context API를 사용하면, 프로젝트 안에서 전역으로 사용할 수 �
 React.createContext(defaultValue) => {Provider, Consumer}
 ```
 
-
 #### Context를 사용하기 전에 고려할 것
+
 context를 사용하면, 컴포넌트를 재사용하기 어려워지므로 꼭 필요할 때만 써야 한다고 한다(https://ko.reactjs.org/docs/context.html#before-you-use-context).
 
 여러 레벨에 걸쳐 props 넘기는 걸 대체하는 데에는 context보다 컴포넌트 합성이 더 간단한 해결책이 될 수도 있다.
 
-
 <!-- <실전 리액트 프로그래밍>에 나오는 3.4절 공부 중...-->
-
-
 
 #### pomo-weekly에 적용하기
 
 내 프로젝트 pomo-weekly에서 logs, isCounting, nextLogId를 Context API로 만들어 주었다.
 
-
 <hr />
 일) 운동<br>
 토요일에 일일헬스 1시간을 하여 오늘은 운동을 하지 않고 휴식을 취했다.
-
-
-

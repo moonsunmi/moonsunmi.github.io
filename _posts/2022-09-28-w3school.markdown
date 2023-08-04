@@ -1,131 +1,99 @@
 ---
 layout: post
-title:  "w3school CSS"
-date:   2022-09-28 22:18:07 +0900
+title: "w3school CSS"
+date: 2022-09-28 22:18:07 +0900
 categories: HTML+CSS
 ---
-
-|           | 뽀모도리  | 등운동 | 가슴운동 |
-|-----------|-------|-----|------|
-| 일간(달성/목표) | 5/4   | 5/5 | 5/5  |
-| 주간(달성/목표) | 12/40 |     |      |
-
 
 ### CSS background
 
 그림이 가로로만 repeat될 수 있도록 하려면
 
 ```html
-body {
-  background-image: url("gradient_bg.png");
-  background-repeat: repeat-x;
-}
+body { background-image: url("gradient_bg.png"); background-repeat: repeat-x; }
 ```
-
 
 스크롤하더라도 `background-image` 위치가 움직이지 않도록 하려면 `background-attachment: fixed;`. 스크롤에 맞추려면 `fixed` 대신 `scroll`.
 
 ```html
-body {
-  background-image: url("img_tree.png");
-  background-repeat: no-repeat;
-  background-position: right top;
-  background-attachment: fixed;
-}
+body { background-image: url("img_tree.png"); background-repeat: no-repeat;
+background-position: right top; background-attachment: fixed; }
 ```
-
 
 ### 간단하게 쓰는 법!
 
 예제 따라 하면서 background와 background-color가 같은 뜻으로 쓰이는 것 같아서 헷갈렸는데 짧은 표기법이었다.
 
 ```html
-body {
-  background-color: #ffffff;
-  background-image: url("img_tree.png");
-  background-repeat: no-repeat;
-  background-position: right top;
-}
+body { background-color: #ffffff; background-image: url("img_tree.png");
+background-repeat: no-repeat; background-position: right top; }
 ```
 
 다음과 같이 쓸 수 있다.
 
 ```html
-body {
-  background: #ffffff url("img_tree.png") no-repeat right top;
-}
+body { background: #ffffff url("img_tree.png") no-repeat right top; }
 ```
 
 짧게 쓰려면 다음 순서를 지키자. 필요 없는 건 빼 놓고 적으면 된다.
 
-* background-color
-* background-image
-* background-repeat
-* background-attachment
-* background-position
-
+- background-color
+- background-image
+- background-repeat
+- background-attachment
+- background-position
 
 ### CSS border
 
 border도 다음과 같이 줄여서 쓸 수 있다.
 
 ```html
-p {
-  border: 5px solid red;
-}
+p { border: 5px solid red; }
 ```
 
-순서는 다음과 같음. 
+순서는 다음과 같음.
 
-* border-width
-* border-style (required)
-* border-color
-
+- border-width
+- border-style (required)
+- border-color
 
 ### CSS margin
 
 `margin: 25px 50px 75px 100px;`는 다음 순서
-* top margin is 25px
-* right margin is 50px
-* bottom margin is 75px
-* left margin is 100px
 
+- top margin is 25px
+- right margin is 50px
+- bottom margin is 75px
+- left margin is 100px
 
 `margin: 25px 50px 75px;`는 다음 순서
-* top margin is 25px
-* right and left margins are 50px
-* bottom margin is 75px
 
+- top margin is 25px
+- right and left margins are 50px
+- bottom margin is 75px
 
 `margin: 25px 50px;`는 다음 순서
-* top and bottom margins are 25px
-* right and left margins are 50px
 
+- top and bottom margins are 25px
+- right and left margins are 50px
 
 `margin: auto;`: 가운데 정렬
 
 `inherit`는 상위 요소의 값을 받아온다.
 
 ```html
-p.ex1 {
-  margin-left: inherit;
-}
+p.ex1 { margin-left: inherit; }
 <div>
   <p class="ex1"></p>
 </div>
-
 ```
+
 상위 요소인 `div`의 `margin-left` 값을 받아온다.
 
 ### margin collapse
-```html
-h1 {
-  margin: 0 0 50px 0;
-}
 
-h2 {
-  margin: 20px 0 0 0;
-}
+```html
+h1 { margin: 0 0 50px 0; } h2 { margin: 20px 0 0 0; }
 
 <h1>hi</h1>
 <h2>nu</h2>
@@ -133,34 +101,23 @@ h2 {
 
 h1은 하단 마진 50이, h2에는 상단 마진 20이 있다. 둘이 합쳐서 70이 될 거 같지만, 실제로는 margin collapse 때문에 50이 된다.
 
-
-
 ### padding
 
 다음과 같이 주어졌을 때 div 실제 width는 300px이 아니라 350px이다. 양쪽으로 padding 값이 추가되기 때문에.
 
 ```html
-div {
-  width: 300px;
-  padding: 25px;
-}
+div { width: 300px; padding: 25px; }
 ```
 
 다음과 같이 box-sizing: border-box;로 지정해주면, padding 값이 아무리 늘어나도 width를 300으로 유지해 준다.
 
 ```html
-div {
-  width: 300px;
-  padding: 25px;
-  box-sizing: border-box;
-}
+div { width: 300px; padding: 25px; box-sizing: border-box; }
 ```
-
 
 #### outline
 
 border 바깥쪽에 그려지는 outline. border와 달리 두께로 box width나 height에 영향을 미치지 않는다.
-
 
 ### CSS Text
 
@@ -170,16 +127,12 @@ border 바깥쪽에 그려지는 outline. border와 달리 두께로 box width�
 
 자동으로 매겨지는 스타일 취소(하이퍼링크에 밑줄+파란색 되는 거라든가) : `text-decoration: none;`
 
-
-
 ### CSS 서체
 
 다음처럼 비슷한 계열의 폰트로, 여러 개 지정해 두는 게 좋다. 처음 폰트가 없으면, 그다음 폰트를 보여주기 때문에 안전함.
 
 ```html
-p {
-font-family: Tahoma, Verdana, sans-serif;
-}
+p { font-family: Tahoma, Verdana, sans-serif; }
 ```
 
 #### 안전한 서체들
@@ -194,68 +147,60 @@ Garamond (serif)
 Courier New (monospace)
 Brush Script MT (cursive)
 
-
 #### 대비책 서체들
+
 Serif
 Sans-serif
 Monospace
 Cursive
 Fantasy
 
-
 #### 서체 단위
-* em: pixels/16=em
-* vw: 1vw = 1% of viewport width
 
-
+- em: pixels/16=em
+- vw: 1vw = 1% of viewport width
 
 #### 구글 폰트 사용하기
+
 다음과 같이 하면 구글 폰트 쓸 수 있다. 폰트 여러 개 쓰고 싶으면 |로 추가함.
 
 ```html
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide|Sofia|Trirong">
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Audiowide|Sofia|Trirong"
+/>
 ```
-
 
 #### 폰트 정보도 짧게 쓸 수 있다.
 
 ```html
-p.a {
-  font: 20px Arial, sans-serif;
-}
+p.a { font: 20px Arial, sans-serif; }
 ```
-
 
 #### 아이콘 추가
 
 stylesheet 추가하여 아이콘 추가할 수 있다.
 
-
 ### 링크
 
-링크 텍스트를 다음처럼 꾸밀 수 있다. 
+링크 텍스트를 다음처럼 꾸밀 수 있다.
+
 ```html
-a:link {
-  text-decoration: none;
-}
+a:link { text-decoration: none; }
 ```
 
-
 ### List style
+
 다음과 같이 하면 리스트 앞에 데코레이션을 그림으로도 할 수 있다.
 
 ```html
-ul {
-  list-style-image: url('sqpurple.gif');
-}
+ul { list-style-image: url('sqpurple.gif'); }
 ```
 
 줄넘김되는 다음 줄의 시작을 리스트 점 앞에서 할 건지 뒤에서 할건지 정할 수 있다.
 
 ```html
-ul.a {
-  list-style-position: outside;
-}
+ul.a { list-style-position: outside; }
 ```
 
 ### table
@@ -264,36 +209,26 @@ ul.a {
 
 ```html
 <div style="overflow-x:auto;">
-
-<table>
-... table content ...
-</table>
-
+  <table>
+    ... table content ...
+  </table>
 </div>
 ```
 
 ### 레이아웃을 컨트롤할 때 가장 중요한! display 속성
 
-* 항목마다 개행되어 보여지는 것을 한 줄에 보이려면, `display: inline;`
-* inline 형태로 개행되지 않는 걸, 개행하려면 `display: block;`
-
-
+- 항목마다 개행되어 보여지는 것을 한 줄에 보이려면, `display: inline;`
+- inline 형태로 개행되지 않는 걸, 개행하려면 `display: block;`
 
 ### CSS Position
 
 position values: 얘네는 포지션 속성이 세팅된 후 상대적으로 움직인다.
 
-* static: 평범한 페이지처럼 움직임.
-* relative
-* fixed: 고정값
-* absolute: 가장 가까운 조상을 기준으로.
-* sticky: 예를 들어 `top`값이 주어져 있으면 스크롤될 때 그 포지션을 유지한다.
-
-
+- static: 평범한 페이지처럼 움직임.
+- relative
+- fixed: 고정값
+- absolute: 가장 가까운 조상을 기준으로.
+- sticky: 예를 들어 `top`값이 주어져 있으면 스크롤될 때 그 포지션을 유지한다.
 
 <hr />
-radius: 반지름, 반경 | fallback: 대비책 | oblique: 사선의, 비스듬한 | 
-
-
-
-
+radius: 반지름, 반경 | fallback: 대비책 | oblique: 사선의, 비스듬한 |

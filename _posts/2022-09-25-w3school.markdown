@@ -1,87 +1,77 @@
 ---
 layout: post
-title:  "w3school HTML"
-date:   2022-09-25 22:18:07 +0900
+title: "w3school HTML"
+date: 2022-09-25 22:18:07 +0900
 categories: HTML+CSS
 ---
 
-|           | 뽀모도리  |
-|-----------|-------|
-| 일간(달성/목표) | 17/16 |
-| 주간(달성/목표) | 41/40 |
+- `<p title="it's toolkit">`: title은 커서를 놓았을 때 뜨는 도움말을 표시해 준다.
 
+- `<p style="color:blue">`: 색 지정하려면
 
+- `<p style="text-align:center;">This is a paragraph.</p>`: 가운데 정렬
 
-* `<p title="it's toolkit">`: title은 커서를 놓았을 때 뜨는 도움말을 표시해 준다.
+- `<p>Do not forget to buy <mark>milk</mark> today.</p>`: 하이라이트
 
-* `<p style="color:blue">`: 색 지정하려면
-
-* `<p style="text-align:center;">This is a paragraph.</p>`: 가운데 정렬
-
-* `<p>Do not forget to buy <mark>milk</mark> today.</p>`: 하이라이트
-
-* `<p>My favorite color is <del>blue</del> <ins>red</ins>.</p>`: 취소줄과 밑줄
+- `<p>My favorite color is <del>blue</del> <ins>red</ins>.</p>`: 취소줄과 밑줄
 
 ```html
 <blockquote cite="http://www.worldwildlife.org/who/index.html">
-For 50 years, WWF has been protecting the future of nature.
-The world's leading conservation organization,
-WWF works in 100 countries and is supported by
-1.2 million members in the United States and
-close to 5 million globally.
+  For 50 years, WWF has been protecting the future of nature. The world's
+  leading conservation organization, WWF works in 100 countries and is supported
+  by 1.2 million members in the United States and close to 5 million globally.
 </blockquote>
 ```
+
 다른 사이트 등에서 자료를 가져왔을 경우 표시해 둠.
 
-* `<p>WWF's goal is to: <q>Build a future where people live in harmony with nature.</q></p>`: 작은 인용 
-
+- `<p>WWF's goal is to: <q>Build a future where people live in harmony with nature.</q></p>`: 작은 인용
 
 ### 색깔 표현
+
 rgba: rgb + 투명값
 HSL: (색, 채도, 밝기)
 
-
 ### CSS를 HTML 문서에 포함하는 3가지 방법
-* Inline: style 속성을 이용해서 태그 안에 직접 넣는 것
-* Internal: `<head>` 섹션 안에 `<style>` 태그를 이용해서
-* External: `<link>`로 외부의 CSS를 가져옴.
 
+- Inline: style 속성을 이용해서 태그 안에 직접 넣는 것
+- Internal: `<head>` 섹션 안에 `<style>` 태그를 이용해서
+- External: `<link>`로 외부의 CSS를 가져옴.
 
-### CSS 요소 
+### CSS 요소
 
-* Border: HTML 요소의 경계값을 지정해줌
+- Border: HTML 요소의 경계값을 지정해줌
+
 ```css
 p {
   border: 2px solid powderblue;
 }
 ```
+
 p 태그마다 2px의 경계를 지정해 준다.
 
+- Padding: 글자들과 border 사이의 공백을 어느 정도로 할지 지정해 준다.
 
-* Padding: 글자들과 border 사이의 공백을 어느 정도로 할지 지정해 준다.
-
-
-* Margin: border 바깥으로 공백을 얼마나 줄지 정한다. margin은 마이너스 값을 줄 수가 있다.
-
+- Margin: border 바깥으로 공백을 얼마나 줄지 정한다. margin은 마이너스 값을 줄 수가 있다.
 
 ### HTML 링크
 
 #### target 속성의 네 가지 값
-다른 페이지로 옮겨갈 때 
-* `_self`: 현재 창에서 띄운다.
-* `_blank`: 새 윈도우 창이나 탭을 연다.
-* `_parent`: 부모 프레임에서 띄운다(아직 뭔지 잘 모르겠다).
-* `_top`: 최상위 부모 프레임에서 열린다.
 
+다른 페이지로 옮겨갈 때
 
+- `_self`: 현재 창에서 띄운다.
+- `_blank`: 새 윈도우 창이나 탭을 연다.
+- `_parent`: 부모 프레임에서 띄운다(아직 뭔지 잘 모르겠다).
+- `_top`: 최상위 부모 프레임에서 열린다.
 
-* 버튼을 이용해서도 링크를 걸 수 있다.
+- 버튼을 이용해서도 링크를 걸 수 있다.
+
 ```html
 <button onclick="document.location='default.asp'">HTML Tutorial</button>
 ```
 
-
-* 북마크하는 법
+- 북마크하는 법
 
 ```html
 <h2 id="C4">Chapter 4</h2>
@@ -89,67 +79,70 @@ p 태그마다 2px의 경계를 지정해 준다.
 <a href="#C4">Jump to Chapter 4</a>
 ```
 
-
-* 그림 크기의 width, height는 style로 매기는 것을 추천한다. style sheet가 크기를 오버라이드하는 걸 막아주기 때문에.
+- 그림 크기의 width, height는 style로 매기는 것을 추천한다. style sheet가 크기를 오버라이드하는 걸 막아주기 때문에.
 
 ```html
 <style>
-img {
-  width: 100%;
-}
+  img {
+    width: 100%;
+  }
 </style>
 
-<img src="html5.gif" alt="HTML5 Icon" width="128" height="128">  : 비추천 (width가 100%로 오버라이드되어 가로로 긴 그림으로 출력됨)
+<img src="html5.gif" alt="HTML5 Icon" width="128" height="128" /> : 비추천
+(width가 100%로 오버라이드되어 가로로 긴 그림으로 출력됨)
 
-<img src="html5.gif" alt="HTML5 Icon" style="width:128px;height:128px;">  : 추천(width가 128px로 잘 출력됨)
+<img src="html5.gif" alt="HTML5 Icon" style="width:128px;height:128px;" /> :
+추천(width가 128px로 잘 출력됨)
 ```
 
-* float 이미지: `<p><img src="smiley.gif" alt="Smiley face" style="float:left;width:42px;height:42px;">
+- float 이미지: `<p><img src="smiley.gif" alt="Smiley face" style="float:left;width:42px;height:42px;">
 `
 
 ### `<picture>`는 조금 더 유연한 그림 태그
 
 ```html
 <picture>
-  <source media="(min-width: 650px)" srcset="img_food.jpg">
-  <source media="(min-width: 465px)" srcset="img_car.jpg">
-  <img src="img_girl.jpg">
+  <source media="(min-width: 650px)" srcset="img_food.jpg" />
+  <source media="(min-width: 465px)" srcset="img_car.jpg" />
+  <img src="img_girl.jpg" />
 </picture>
 ```
+
 마지막에 항상 img 태그를 넣어 주자. 이 태그를 지원하지 않는 브라우저에서는 img를 통해 볼 수 있도록.
 
-
 ## Favicon
+
 브라우저 탭에 뜨는 웹사이트 아이콘.
+
 ```html
 <html>
-<head>
-  <title>My Page Title</title>
-  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
-</head>
+  <head>
+    <title>My Page Title</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
+  </head>
+</html>
 ```
-
 
 ## table
 
 테이블에서 border 값을 주었는데, th, td 사이 등에서 줄이 겹쳐서 두 개씩 나와서 보기 싫다면, border-collapse 값을 collapse로 지정해 준다.
+
 ```html
-table, th, td {
-  border: 1px solid black;
-  border-collapse: collapse;
-}
+table, th, td { border: 1px solid black; border-collapse: collapse; }
 ```
 
-
 테이블의 줄 색을 스트라이프 형태로 하고 싶다면. even을 odd로 하면 첫 줄부터 색깔이 입혀진다.
+
 ```css
 tr:nth-child(even) {
-  background-color: #D6EEEE;
+  background-color: #d6eeee;
 }
 ```
 
 ### iframe
+
 읽는 사람을 위해서 title 속성값을 꼭 넣어 주는 게 좋다. 링크 target에 iframe 이름을 넣어 주면, 프레임 화면 안에서 해당 페이지가 뜬다.
+
 ```html
 <iframe src="demo_iframe.htm" name="iframe_a" title="Iframe Example"></iframe>
 
@@ -159,31 +152,31 @@ tr:nth-child(even) {
 `<noscript>`: 스크립트 지원하지 않는 클라이언트에 띄우는 메시지
 
 ### 파일 path
-* `<img src="/images/picture.jpg">`: '/' root 디렉토리의 'images' 폴더 안에 있다.
-* `<img src="../picture.jpg">`: 한 단계 위의 디렉터리에 있다.
+
+- `<img src="/images/picture.jpg">`: '/' root 디렉토리의 'images' 폴더 안에 있다.
+- `<img src="../picture.jpg">`: 한 단계 위의 디렉터리에 있다.
 
 파일 path는 가능하면 상대 경로를 쓰는 게 좋다고 한다.
-
 
 ### meta 태그
 
 ```html
-<meta charset="UTF-8">
-<meta name="description" content="Free Web tutorials">
-<meta name="keywords" content="HTML, CSS, JavaScript">
-<meta name="author" content="John Doe">
+<meta charset="UTF-8" />
+<meta name="description" content="Free Web tutorials" />
+<meta name="keywords" content="HTML, CSS, JavaScript" />
+<meta name="author" content="John Doe" />
 ```
 
 다음 코드는 '검색 엔진을 위한 키워드'를 제공한다.
 `<meta name="keywords" content="HTML, CSS, JavaScript">`
 
-
-
 ### base
+
 디폴트 url을 지정해 준다.
+
 ```html
 <head>
-<base href="https://www.w3schools.com/" target="_blank">
+  <base href="https://www.w3schools.com/" target="_blank" />
 </head>
 ```
 
@@ -191,19 +184,19 @@ tr:nth-child(even) {
 
 ```html
 <body>
-<img src="images/stickman.gif" width="24" height="39" alt="Stickman">
-<a href="tags/tag_base.asp">HTML base Tag</a>
+  <img src="images/stickman.gif" width="24" height="39" alt="Stickman" />
+  <a href="tags/tag_base.asp">HTML base Tag</a>
 </body>
 ```
-
 
 ## 반응형 웹을 만들자
 
 ### viewport
 
 모바일 사용자를 위해서 뷰포트를 설정
+
 ```html
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 ```
 
 vw: viewport width 단위이다. 폰트 사이즈를 vw 단위로 적어 주면, 폰트 사이즈가 화면 크기에 따라서 반응하도록 만들 수 있다.
@@ -212,22 +205,9 @@ vw: viewport width 단위이다. 폰트 사이즈를 vw 단위로 적어 주면,
 <h1 style="font-size:10vw">Hello World</h1>
 ```
 
-
-
-
-
-
-
-
 <hr />
 abbreviation: 축약형
 coordinates: 좌표
 span: 폭, 너비
 collapse: 붕괴, 공간을 덜 차지하도록 접다.
 tooltip: 툴팁(커서를 옮기면 컴퓨터 화면에 바로 뜨는 도움말)
-
-
-
-
-
-

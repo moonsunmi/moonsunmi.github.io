@@ -1,22 +1,20 @@
 ---
 layout: post
-title:  "TIL) Facebook Clone Coding(Next.js, Tailwind CSS, Responsive)"
-date:   2022-10-27 12:18:07 +0900
+title: "TIL) Facebook Clone Coding(Next.js, Tailwind CSS, Responsive)"
+date: 2022-10-27 12:18:07 +0900
 categories: react
 ---
-
-| (달성/목표) | 뽀모도리   |
-|----|--------|
-| 1일 | 3/3    |
-| 1주 | 16 /40 |
-
-
 
 `<Image />`: 넥스트에서 제공하는 특별한 이미지 컴포넌트. 이미지를 최적화하고, lazy 로딩함.(레이지 로딩이란, 스크롤을 내리기 전까지 하단의 이미지들이 보여지지 않는 것)
 그리고 webp 버전을 전달한다. 이건 highly compressed 새로운 파일 형식.
 
 ```js
-<Image src="http://links.papareact.com/5me" width={40} height={40} layout='fixed' />
+<Image
+  src="http://links.papareact.com/5me"
+  width={40}
+  height={40}
+  layout="fixed"
+/>
 ```
 
 이렇게만 하면 에러가 난다. 이미지 가져올 곳을 허락해 둬야 한다. 안전상의 조치임.
@@ -24,6 +22,7 @@ categories: react
 다음처럼 추가해 준다. 유투브에서 실습했던 그림과 주소가 달라져 있어서 그에 맞춰서 수정했다.
 
 next.config.js
+
 ```js
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -56,8 +55,8 @@ const nextConfig = {
 module.exports = nextConfig;
 ```
 
-
 Header.js
+
 ```js
 import Image from "next/image";
 import HeaderIcon from "./HeaderIcon";
@@ -105,16 +104,12 @@ const Header = () => {
 export default Header;
 ```
 
-* 컴포넌트 옆에 컴포넌트를 배치하고 싶어서 flex 지정해 줌.
-* flex-grow: 화면 늘리면 그에 맞춰서 늘어남.
-
-
+- 컴포넌트 옆에 컴포넌트를 배치하고 싶어서 flex 지정해 줌.
+- flex-grow: 화면 늘리면 그에 맞춰서 늘어남.
 
 <hr />
 목) 운동
 
-| 앞벅지1 | 앞벅지2 | 종아리 | 복근  |
-|-------|-------|-----|-----|
-| 3/3 | 3/3 | 3/3 | 3/3 |
-
-
+| 앞벅지1 | 앞벅지2 | 종아리 | 복근 |
+| ------- | ------- | ------ | ---- |
+| 3/3     | 3/3     | 3/3    | 3/3  |

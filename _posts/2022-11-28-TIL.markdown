@@ -1,18 +1,12 @@
 ---
 layout: post
-title:  "TIL) 재정비, styled-components"
-date:   2022-11-28 12:18:07 +0900
+title: "TIL) 재정비, styled-components"
+date: 2022-11-28 12:18:07 +0900
 categories: react
 ---
 
-| (달성/목표) | 뽀모도리  |
-|----|-------|
-| 1일 | 3 / 5 |
-| 1주 | 3 /40 |
-
-
-
 Button.js
+
 ```jsx
 import React from "react";
 import styled, { css } from "styled-components";
@@ -124,9 +118,7 @@ Button.defaultProps = {
 };
 
 export default Button;
-
 ```
-
 
 Dialog.js
 
@@ -188,8 +180,4 @@ Dialog.defaultProps = {
 };
 
 export default Dialog;
-
 ```
-
-
-

@@ -1,24 +1,17 @@
 ---
 layout: post
-title:  "Likedin Clone Coding"
-date:   2022-10-17 12:18:07 +0900
+title: "Likedin Clone Coding"
+date: 2022-10-17 12:18:07 +0900
 categories: react
 ---
 
-| (달성/목표) | 뽀모도리 | 등   | 가슴  | 배   |
-|----|------|-----|-----|-----|
-| 1일 | 5/5  | 0/5 | 0/5 | 3/3 |
-| 1주 | 5/40 |     |     |
-
-
 ### CSS
 
-* `object-fit: cover`: 이미지의 사이즈와 다르게 width, height를 지정해 주더라도 가로:세로 1:1 비율이 깨지지 않도록 유지해 준다. 1:1 비율을 넘는 부분은 잘린다.
+- `object-fit: cover`: 이미지의 사이즈와 다르게 width, height를 지정해 주더라도 가로:세로 1:1 비율이 깨지지 않도록 유지해 준다. 1:1 비율을 넘는 부분은 잘린다.
 
-* `justify-content`: 컨테이너 아이템들의 배치 방법을 지정한다.
+- `justify-content`: 컨테이너 아이템들의 배치 방법을 지정한다.
 
-* `flex: 1`: 남은 공간 전부 차지하도록
-
+- `flex: 1`: 남은 공간 전부 차지하도록
 
 Header.js
 
@@ -111,8 +104,8 @@ Header.css
 }
 ```
 
-
 HeaderOption.js
+
 ```js
 import React from "react";
 import "./HeaderOption.css";
@@ -127,10 +120,10 @@ const HeaderOption = ({ avatar, Icon, title }) => {
 };
 
 export default HeaderOption;
-
 ```
 
 HeaderOption.css
+
 ```css
 .headerOption {
   display: flex;
@@ -155,11 +148,10 @@ HeaderOption.css
 .headerOption:hover {
   color: black;
 }
-
 ```
 
-
 Sidebar.js
+
 ```js
 import React from "react";
 import "./Sidebar.css";
@@ -207,11 +199,10 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
-
 ```
 
-
 Sidebar.css
+
 ```css
 .sidebar {
   position: sticky;

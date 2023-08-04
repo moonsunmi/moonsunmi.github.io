@@ -1,21 +1,16 @@
 ---
 layout: post
-title:  "w3school Javascript"
-date:   2022-10-05 12:18:07 +0900
+title: "w3school Javascript"
+date: 2022-10-05 12:18:07 +0900
 categories: javascript
 ---
-
-| (달성/목표) | 뽀모도리  | 등 | 가슴 | 배 |
-|----|-------|---|-------|----|
-| 1일 | 5/4   | 5/5 | 5/5 | 3/3 |
-| 1주 | 13/40 |   |       |
-
 
 ### JS 프로미스
 
 producing code가 결과를 얻으면, 둘 중 하나를 콜백한다.
-* 성공하면 -> myResolve(결괏값)
-* 에러나면 -> myReject(에러 오브젝트)
+
+- 성공하면 -> myResolve(결괏값)
+- 에러나면 -> myReject(에러 오브젝트)
 
 이 두 함수는 optional.
 
@@ -36,18 +31,17 @@ myPromise.then(
 프로미스 오브젝트는 state와 result 프러퍼티를 지원한다.
 
 | myPromise.state | myPromise.result |
-|-----------------|------------------|
+| --------------- | ---------------- |
 | pending         | undefined        |
-| fulfilled       | 결괏값             |
-| rejected        | 에러 오브젝트        |
-
+| fulfilled       | 결괏값           |
+| rejected        | 에러 오브젝트    |
 
 ```js
-function myDisplayer(some){
+function myDisplayer(some) {
   document.getElementById("demo").innerHTML = some;
 }
 
-let myPromise = new Promise(function(myResolve, myReject){
+let myPromise = new Promise(function (myResolve, myReject) {
   let x = 0;
 
   // "producing code"
@@ -59,31 +53,37 @@ let myPromise = new Promise(function(myResolve, myReject){
 });
 
 myPromise.then(
-  function(value) {myDisplayer(value);},
-  function(error) {myDisplayer(error);}
+  function (value) {
+    myDisplayer(value);
+  },
+  function (error) {
+    myDisplayer(error);
+  }
 );
 ```
 
 #### 시간 지나서 메시지 띄우기
 
 ```js
-let myPromise = new Promise(function(myResolve, myReject){
-  setTimeout(function() { myResolve("I love you"); }, 3000);
+let myPromise = new Promise(function (myResolve, myReject) {
+  setTimeout(function () {
+    myResolve("I love you");
+  }, 3000);
 });
 
-myPromise.then(function(value) {
+myPromise.then(function (value) {
   document.getElementById("demo").innerHTML = value;
 });
 ```
 
-
 #### 파일 받을 때까지 기다리기
+
 ```js
-let myPromise = new Promise(function(myResolve, myReject){
+let myPromise = new Promise(function (myResolve, myReject) {
   let req = new XMLHttpRequest();
-  req.open('GET', "mycar.html");
-  req.onload = function() {
-    if (req.status == 200){
+  req.open("GET", "mycar.html");
+  req.onload = function () {
+    if (req.status == 200) {
       myResolve(req.responseText);
     } else {
       myReject("Error: " + req.status);
@@ -93,10 +93,13 @@ let myPromise = new Promise(function(myResolve, myReject){
 });
 
 myPromise.then(
-  function(value) {myDisplayer(value);},
-  function(error) {myDisplayer(error);}
+  function (value) {
+    myDisplayer(value);
+  },
+  function (error) {
+    myDisplayer(error);
+  }
 );
-
 ```
 
 ### Async
@@ -104,33 +107,31 @@ myPromise.then(
 `async`: 함수가 프로미스를 리턴하게 한다.
 
 ```js
-async function myFunction(){
-  return "Hello";  // Promise.resolve("Hello") 리턴함.
+async function myFunction() {
+  return "Hello"; // Promise.resolve("Hello") 리턴함.
 }
 ```
-
 
 `await`: 함수가 프로미스를 기다리게 한다.
 
 ```js
 async function myDisplay() {
-  let myPromise = new Promise(function(resolve, reject){
+  let myPromise = new Promise(function (resolve, reject) {
     resolve("I love you");
   });
   document.getElementById("demo").innerHTML = await myPromise;
 }
 ```
 
-
 ### HTML DOM
 
 웹 페이지가 로딩되면, 브라우저는 페이지 DOM을 만든다. DOM 안에서 모든 HTML 엘리먼트는 오브젝트로 정의된다.
 
 다음은 CSS Selector를 이용해 찾는 것이다.
+
 ```js
 const x = document.querySelectorAll("p.intro");
 ```
-
 
 ### DOM elements
 
@@ -142,9 +143,10 @@ let text = "";
 let xLength = x.length;
 for (let i = 0; i < xLength; i++){
   text += x.elements[i].value + "<br">;
-} 
+}
 ```
-* 이 예제에서는 form ID로 했는데, 원칙으로는 name을 기준으로 하는 것 같다.
+
+- 이 예제에서는 form ID로 했는데, 원칙으로는 name을 기준으로 하는 것 같다.
 
 ### HTML DOM
 
@@ -154,69 +156,76 @@ for (let i = 0; i < xLength; i++){
 document.getElementById("myImage").src = "landscape.jpg";
 ```
 
-
 input validation check
-
 
 ```html
 <script>
-function validateForm() {
-  let x = document.forms["myForm"]["fname"].value;
-} 
+  function validateForm() {
+    let x = document.forms["myForm"]["fname"].value;
+  }
 </script>
 ...
-<form name="myForm" action="/action_page.php" onsubmit="return validateForm()" method="post">
-  Name: <input type="text" name="fname">
-  <input type="submit" value="Submit">
+<form
+  name="myForm"
+  action="/action_page.php"
+  onsubmit="return validateForm()"
+  method="post"
+>
+  Name: <input type="text" name="fname" />
+  <input type="submit" value="Submit" />
 </form>
 ```
-* 여기에서는 form ID가 아니라 form name을 기준으로 매칭했다!
 
-
+- 여기에서는 form ID가 아니라 form name을 기준으로 매칭했다!
 
 ### DOM CSS
 
 이벤트 이용해서 스타일 바꾸기
 
 ```html
-<button type="button" onclick="document.getElementById('id1').style.color = 'red'">Click Me.</button>
+<button
+  type="button"
+  onclick="document.getElementById('id1').style.color = 'red'"
+>
+  Click Me.
+</button>
 ```
 
 ### Animation
 
 ```js
-function myMove(){
+function myMove() {
   let id = null;
   const elem = document.getElementById("animate");
   let pos = 0;
   clearInterval(id);
   id = setInterval(frame, 5);
   function frame() {
-    if (pos == 350) { // 네모 박스가 마지막까지 움직였다면,
+    if (pos == 350) {
+      // 네모 박스가 마지막까지 움직였다면,
       clearInterval(id);
     } else {
       pos++;
-      elem.style.top = pos + 'px';
-      elem.style.left = pos + 'px';
+      elem.style.top = pos + "px";
+      elem.style.left = pos + "px";
     }
   }
 }
 ```
 
-
 ### DOM Event Listener
 
 `addEventListener()`는 엘리먼트에 이벤트 핸들러를 붙여 준다. 하나의 엘리먼트에 많은 이벤트 핸들러를 붙일 수도 있다.
-
 
 #### Event Bubbling or Event Capturing?
 
 `<div>` 엘리먼트 안에 있는 `<p>` 엘리먼트가 클릭되었다면(p가 클릭되었다고 볼 수도 있고, div가 클릭되었다고 볼 수도 있으므로...) 어떤 이벤트가 먼저 handled되어야 할까?
 
-* Bubbling: 가장 안에 있는 `<p>` 엘리먼트부터 핸들링하는 것
-* Capturing: 가장 밖에 있는 `<div>` 엘리먼트부터 핸들링하는 것
+- Bubbling: 가장 안에 있는 `<p>` 엘리먼트부터 핸들링하는 것
+- Capturing: 가장 밖에 있는 `<div>` 엘리먼트부터 핸들링하는 것
 
 `addEventListener()` 세 번째 파라미터에서 Capturing 여부를 지정한다. (기본은 false. 즉, 가장 안에 있는 것부터 처리)
+
 ```js
 document.getElementById("myP").addEventListener("click", myfunction, true);
 document.getElementById("myDiv").addEventListener("click", myfunction, true);
@@ -227,21 +236,11 @@ document.getElementById("myDiv").addEventListener("click", myfunction, true);
 `<p>`는 'Hello world'라는 아이를 하나 가지고 있다.
 
 ```html
-    <p>Hello world!</p>
+<p>Hello world!</p>
 ```
 
 여기서 p가 가진 것은 'text'가 아니라 'text node'이다. "Hello world!"라는 값을 가진 text node. 이 텍스트 노드는 innerHTML 프러퍼티로 접근이 가능하다.
 
 `....innerHTML`과 `....firstChild.nodeValue`는 같다. p의 자식인 Hello world의 nodeValue값이므로.
 
-
-* nodeType 프러퍼티는 타입을 숫자로 표현해서 반환한다.
-
-
-
-
-
-
-
-
-
+- nodeType 프러퍼티는 타입을 숫자로 표현해서 반환한다.

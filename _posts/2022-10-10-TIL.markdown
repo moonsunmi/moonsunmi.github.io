@@ -1,15 +1,9 @@
 ---
 layout: post
-title:  "w3school React"
-date:   2022-10-10 12:18:07 +0900
+title: "w3school React"
+date: 2022-10-10 12:18:07 +0900
 categories: react
 ---
-
-| (달성/목표) | 뽀모도리 | 등 | 가슴 | 배 |
-|----|------|---|-------|----|
-| 1일 | 5/5  | 5/5 | 5/5 | 3/3 |
-| 1주 | 5/40 |   |       |
-
 
 ### React 시작하기
 
@@ -18,26 +12,28 @@ React란 SPA(Single Page Application)의 UI를 만드는 자바스크립트 라�
 React는 메모리에 Virtual DOM을 생성한다. 그리고 broser DOM을 변경하기 전에 필요한 조작들을 virtual DOM에서 한다. React는 실제로 변경할 게 생길 때만 변경을 한다.
 
 react app 만들기
+
 ```js
 npx create-react-app my-react-app
 ```
 
 `npm start`로 방금 만든 앱 실행시켜 보자.
 
-
 ### React ES6
 
 #### Class
+
 ES6에서 소개된 class. properties는 `constructor()` 메서드 안에 들어 간다. `constructor()`는 오브젝트가 초기화될 때 자동으로 호출된다.
 
 ```js
-class Car{
-  constructor (name) {
+class Car {
+  constructor(name) {
     this.brand = name;
   }
-  
-  present(){  // Car class의 메서드 present()
-    return 'I have a' + this.brand;
+
+  present() {
+    // Car class의 메서드 present()
+    return "I have a" + this.brand;
   }
 }
 
@@ -47,13 +43,14 @@ const myCar = new Car("Ford");
 extends 키워드를 이용하면 부모 클래스를 상속 받을 수 있다.
 
 ```js
-class Car{
-  constructor (name) {
+class Car {
+  constructor(name) {
     this.brand = name;
   }
-  
-  present(){  // Car class의 메서드 present()
-    return 'I have a' + this.brand;
+
+  present() {
+    // Car class의 메서드 present()
+    return "I have a" + this.brand;
   }
 }
 
@@ -63,7 +60,7 @@ class Model extends Car {
     this.model = model;
   }
   show() {
-    return this.present() + ', it is ' + this.model;
+    return this.present() + ", it is " + this.model;
   }
 }
 
@@ -71,10 +68,10 @@ const mycar = new Model("Ford", "Mustang");
 mycar.show();
 ```
 
-
 ### Arrow Function
 
 함수를 짧게 표현할 수 있다. 단 하나의 문(statement)가 return되는 상황이라면 다음과 같이 써도 된다.
+
 ```js
 const hello = (name) => "hihi, " + name;
 ```
@@ -83,16 +80,16 @@ this는 일반 함수에서와 arrow 함수에서 다루는 방법이 다르다.
 
 일반 함수에서 this는 언제나 자기를 호출한 오브젝트를 가리킨다. 그래서 window가 될 수도 있고, document가 될 수도 있고, button이 될 수도 있다.
 
-그렇지만 arrow 함수에서 this는, 항상 arrow 함수를 정의하는 오브젝트(Header)를 가리킨다. 
+그렇지만 arrow 함수에서 this는, 항상 arrow 함수를 정의하는 오브젝트(Header)를 가리킨다.
 
 ```js
 class Header {
-  constructor(){
+  constructor() {
     this.color = "red";
   }
   changeColor = () => {
-    document.getElementById("demo").innerHTML += this;  // demo: 비어 있는 <p> element
-  }
+    document.getElementById("demo").innerHTML += this; // demo: 비어 있는 <p> element
+  };
 }
 
 const myheader = new Header();
@@ -108,30 +105,27 @@ document.getElementById("btn").addEventListener("click", myheader.changeColor);
 
 일반 함수에서의 this 결과를 원한다면 일반 함수를 쓰고, 그렇지 않다면 기본적으로 arrow 함수를 쓰도록 하자.
 
-
 ### ES6 변수
 
-* var: function scope
-* let: block scope (for 문 안에서 사용했을 경우, for 문 벗어나면 사용할 수 없다.)
-* const: 한번 할당된 후, 수정할 수 없다. 배열을 const로 할당했을 경우, 배열 자체를 다시 할당할 수는 없지만 배열 안에 있는 element들은 수정할 수 있다. 마찬가지로 object 안에 있는 properties들도 수정 가능하다.
-
+- var: function scope
+- let: block scope (for 문 안에서 사용했을 경우, for 문 벗어나면 사용할 수 없다.)
+- const: 한번 할당된 후, 수정할 수 없다. 배열을 const로 할당했을 경우, 배열 자체를 다시 할당할 수는 없지만 배열 안에 있는 element들은 수정할 수 있다. 마찬가지로 object 안에 있는 properties들도 수정 가능하다.
 
 ### map method
 
 React에서 가장 유용한 함수. 배열 안에 있는 각각의 아이템들을 함수를 이용해서 조작한 후 배열을 반환한다.
 
 ```js
-const myArray = ['apple', 'banana', 'orange']
-const myList = myArray.map((item) => <p>{item}</p>)
+const myArray = ["apple", "banana", "orange"];
+const myList = myArray.map((item) => <p>{item}</p>);
 ```
-
 
 ### destructuring
 
 배열이나 오브젝트에서 모든 값을 쓰는 게 아니다. 필요한 것만 뽑아서 사용한다. destructuring은 원하는 것만 정확히 추출해 내는 걸 쉽게 해 준다.
 
 ```js
-const vehicles = ['mustang', 'f-150', 'expedition']
+const vehicles = ["mustang", "f-150", "expedition"];
 
 // 옛날 방법으로 값을 할당하기
 const car = vehicles[0];
@@ -151,11 +145,11 @@ function calculate(a, b) {
   const subtract = a - b;
   const multiply = a * b;
   const divide = a / b;
-  
+
   return [add, subtract, multiply, divide];
 }
 
-const [add, subtract, multiply, divide] = calculate(3, 7);  
+const [add, subtract, multiply, divide] = calculate(3, 7);
 ```
 
 함수 안에 오브젝트가 있을 때
@@ -165,7 +159,7 @@ const vehicleOne = {
   brand: 'Ford',
   model: 'Mustang',
   type: 'car',
-  year: 2021, 
+  year: 2021,
   color: 'red'
   registration: {
     city: 'Houston',
@@ -181,7 +175,6 @@ function myVehicle({type, color, brand, model, registration: {city}}){
 myVehicle(vehicleOne);
 ```
 
-
 ### Moduels
 
 함수나 변수를 export할 수 있다.
@@ -189,6 +182,7 @@ myVehicle(vehicleOne);
 #### Named export
 
 person.js
+
 ```js
 export const name = "Jesse"
 export const age = 40
@@ -204,6 +198,7 @@ export const {name, age}
 default export는 파일 하나에서 딱 하나만 지정할 수 있다.
 
 message.js
+
 ```JS
 const message = () => {
   const name = "Jesse";
@@ -228,15 +223,15 @@ default export한 것을 import해 오려면, 그냥 한다.
 import message from "./message.js";
 ```
 
-
 ### Render HTML
 
 React에서는 ReactDOM.render를 이용해서 HTML 렌더를 할 수 있다. ReactDOM.render은 두 개의 argument를 가진다. HTML 코드와 HTML 엘리먼트.
 
 HTML 엘리먼트 안에 HTML 코드를 렌더링한다.
+
 ```js
 ReactDOM.render(HTML코드, HTML엘리먼트);
-ReactDOM.render(<p>Hi</p>, document.getElementByID('root'));
+ReactDOM.render(<p>Hi</p>, document.getElementByID("root"));
 ```
 
 public 폴더 안에 index.html 파일에 다음과 같은 결과가 나온다.
@@ -248,5 +243,3 @@ public 폴더 안에 index.html 파일에 다음과 같은 결과가 나온다.
 ```
 
 root 노드는 HTML 엘리먼트이다. root 노드라고 id가 root일 필요는 없다.
-
-

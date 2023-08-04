@@ -1,15 +1,9 @@
 ---
 layout: post
-title:  "TIL) 뽀모 프로젝트 - 컴포넌트&커스텀훅 패턴 적용"
-date:   2022-11-19 12:18:07 +0900
+title: "TIL) 뽀모 프로젝트 - 컴포넌트&커스텀훅 패턴 적용"
+date: 2022-11-19 12:18:07 +0900
 categories: react
 ---
-
-| (달성/목표) | 뽀모도리   |
-|----|--------|
-| 1일 | 10 / 8 |
-| 1주 | 36 /40 |
-
 
 ### 파일 구조
 
@@ -21,17 +15,16 @@ categories: react
 
 test도 나중에 제대로 공부해야 할 것 같다. 공부하면 할수록 점점 더 공부할 게 많아만 진다..
 
-
-
 ### 커스텀 훅
 
-내 뽀모도로 프로젝트에서는 뽀모도로 시작 시간과 목표 개수를 예약할 수 있도록 만들 것이다. 
+내 뽀모도로 프로젝트에서는 뽀모도로 시작 시간과 목표 개수를 예약할 수 있도록 만들 것이다.
 
 그러기 위해서 Reservation 컴포넌트를 만들었다.
 
 Reservation 컴포넌트에는 input 엘리먼트가 많이 나와서 커스텀 훅을 공부하고 사용해 보기에 딱 좋았다.
 
 Reservation.js
+
 ```jsx
 import React, { useContext, useState } from "react";
 import { timeLogsContext } from "../../_app";
@@ -126,8 +119,8 @@ export default Reservation;
 
 useInputs와 useSelectOptions를 만들었다. select/option은 취급하는 방법이 나머지 input과 달라서 훅을 따로 만들었는데, 더 좋은 방법이 있지 않을까 싶다.
 
-
 useInputs.js
+
 ```jsx
 import React, { useCallback, useState } from "react";
 import { PropTypes } from "prop-types";
@@ -156,9 +149,7 @@ useInputs.propTypes = {
 };
 
 export default useInputs;
-
 ```
-
 
 useSelectOptions.js
 
@@ -190,15 +181,7 @@ useSelectOptions.propTypes = {
 };
 
 export default useSelectOptions;
-
 ```
-
-
 
 <hr />
 금) 운동<br>
-
-
-
-
-

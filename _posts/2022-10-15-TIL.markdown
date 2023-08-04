@@ -1,16 +1,9 @@
 ---
 layout: post
-title:  "w3school React"
-date:   2022-10-15 12:18:07 +0900
+title: "w3school React"
+date: 2022-10-15 12:18:07 +0900
 categories: react
 ---
-
-| (달성/목표) | 뽀모도리  | 등   | 가슴 | 배   |
-|----|-------|-----|-------|-----|
-| 1일 | 8/8   | 0/5 | 5/5 | 0/3 |
-| 1주 | 32/40 |     |       |
-
-
 
 ### useCallback
 
@@ -23,6 +16,7 @@ memoization: 컴퓨터 프로그램이 동일한 계산을 반복해야 할 때,
 `useCallback`과 `useMemo`는 매우 비슷하다. 차이점은 `useMemo`는 메모라이즈 값을 반환한다면, `useCallback`은 메모라이즈 함수를 반환한다는 것.
 
 index.js
+
 ```js
 import { useState, useCallback } from "react";
 import ReactDOM from "react-dom/client";
@@ -57,6 +51,7 @@ root.render(<App />);
 ```
 
 Todos.js
+
 ```js
 import { memo } from "react";
 
@@ -66,8 +61,7 @@ const Todos = ({ todos, addTodo }) => {
       <h1>My Todos</h1>
       {todos.map((todo, index) => {
         return <p key={index}>{todo}</p>;
-      })}
-      ;<button onClick={addTodo}>Add Todo</button>
+      })};<button onClick={addTodo}>Add Todo</button>
     </>
   );
 };
@@ -75,11 +69,9 @@ const Todos = ({ todos, addTodo }) => {
 export default memo(Todos);
 ```
 
-
 ### useMemo
 
-`useCallback`처럼 원하는 게 바뀔 때만 리렌더링되게 할 수 있다. `useCallback`은 함수를 의존한다면, `useMemo`는 값을 의존한다. 
-
+`useCallback`처럼 원하는 게 바뀔 때만 리렌더링되게 할 수 있다. `useCallback`은 함수를 의존한다면, `useMemo`는 값을 의존한다.
 
 ```js
 import { useState, useMemo } from "react";
@@ -127,9 +119,7 @@ const expensiveCalculation = (num) => {
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<App />);
-
 ```
-
 
 ### custom Hook
 
@@ -169,6 +159,7 @@ root.render(<Home />);
 fetch 로직은 다른 컴포넌트에서도 충분히 재사용될 수 있다. 이 부분을 커스텀 훅으로 지정해 보자.(커스텀 훅과 일반 함수는 비슷하다. 그런데 커스텀 훅은 내장 훅을 사용한다. 내장 훅을 사용하지 않는다면 그건 훅이 아니라 일반 함수라고 본다.)
 
 index.js
+
 ```js
 import useFetch from "./useFetch";
 import ReactDOM from "react-dom/client";
@@ -188,9 +179,7 @@ const Home = () => {
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<Home />);
-
 ```
-
 
 useFetch.js
 
@@ -212,31 +201,30 @@ const useFetch = (url) => {
 export default useFetch;
 ```
 
-
-
 ## Linked-in Clone Coding
 
-redux까지 함께 
+redux까지 함께
+
 ```
 npx create-react-app linkedin-clone-yt --template redux
 ```
 
 `yarn start`. npm 쓰고 싶으면 써도 됨.
 
-
 firebase
+
 1. firebase.google.com에서 'Cloud Firestore'를 통해 데이터베이스 만든다.
 2. 'Cloud Firestore'에서 규칙을 'public'으로 만듦. (튜토리얼이기 때문에..)
    `allow read, write;`
 3. Authentication에서 이메일 사용을 설정한다.
 4. '설정 - 프로젝트 설정'에서 </> 아이콘을 눌러 웹 앱에 firebase를 추가한다.
 
+### visual
 
-### visual 
-    
 .class만 입력하면 엘리먼트가 자동 완성되게 하려면, 다음을 settings.json 파일에 다음을 추가해 준다.
 
 settings.json
+
 ```
  "emmet.includeLanguages": { "javascript": "javascriptreact" }
 ```
@@ -248,6 +236,7 @@ settings.json
 yarn add @material-ui/core
 yarn add @material-ui/icons
 ```
+
 다음과 같은 오류가 난다..
 
 Module not found: Can't resolve '@mui/material/utils'
@@ -258,4 +247,3 @@ Module not found: Can't resolve '@mui/material/utils'
 * btlr10 --> border-top-left-radius: 10px;
 * df --> display: flex;
 * cmd + spacebar: 컴포넌트 자동으로 import해 줌.
-

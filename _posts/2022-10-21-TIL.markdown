@@ -1,20 +1,12 @@
 ---
 layout: post
-title:  "Likedin Clone Coding"
-date:   2022-10-21 12:18:07 +0900
+title: "Likedin Clone Coding"
+date: 2022-10-21 12:18:07 +0900
 categories: react
 ---
 
-| (달성/목표) | 뽀모도리  | 등   | 가슴  | 배   |
-|----|-------|-----|-----|-----|
-| 1일 | 8/8   | 5/5 | 5/5 | 3/3 |
-| 1주 | 26/40 |     |     |
-
-
-
-
-
 HeaderOption.js
+
 ```js
 import { Avatar } from "@mui/material";
 import React from "react";
@@ -39,8 +31,7 @@ const HeaderOption = ({ avatar, Icon, title, onClick }) => {
 export default HeaderOption;
 ```
 
-
-`user?.photoUrl`: user가 없을 수 있기 때문에 optional chaining으로 연결한다. 
+`user?.photoUrl`: user가 없을 수 있기 때문에 optional chaining으로 연결한다.
 
 react-flip-move를 설치한다.
 
@@ -69,17 +60,14 @@ npm run build
 ```
 
 이제 배포!
+
 ```
 firebase deploy
 ```
 
-
-
 ## 생활코딩 리액트
 
-
 리액트의 컴포넌트: 사용자가 정의한 태그를 컴포넌트라고 부른다.
-
 
 ### 설치
 
@@ -94,8 +82,6 @@ g: global. 어디에서든 create react app을 실행할 수 있도록 하는 �
 > npm vs. npx
 > npx는 creat-react-app이라는 프로그램을 임시로 설치해서 딱 한번만 실행시키고 지운다고 생각하면 된다. 공간 낭비가 없고 항상 최신 상태가 될 수 있다(할 때마다 다운로드 받으므로)
 
-
-
 ### 디렉터리 구조
 
 Create React App을 실행했을 때 나오는 화면은, pulbic/index.html 파일을 실행한 결과이다.
@@ -104,11 +90,10 @@ Create React App을 실행했을 때 나오는 화면은, pulbic/index.html 파�
 
 그중에서 특히 앱의 진입점 역할을 하는 파일이 index.js이다.
 
-
-
 ### 배포
 
 다음과 같이 간단한 예제를 만들어 성능을 살펴보자.
+
 ```js
 import "./App.css";
 
@@ -141,8 +126,6 @@ npm run build
 
 `npx serve -s build`
 
-
-
 ### props vs. state
 
 props는 사용자가 컴포넌트를 사용하는 입장에서 중요한 것이고, state는 props 값에 따른 내부 구현에 필요한 데이터다. props는 컴포넌트 사용자에게 중요한 정보로, 사용자가 컴포넌트를 조작할 때 필요하다. 하지만 state는 내부적으로 사용되므로 사용자가 알 필요도 없고 알아서도 안 된다. 외부에서 알아야 하는 것을 공개하고, 알 필요가 없는 건 철저히 숨겨야 한다.
@@ -151,15 +134,9 @@ props는 사용자가 컴포넌트를 사용하는 입장에서 중요한 것이
 
 > Redux: 데이터를 각 컴포넌트에 분산해서 저장하는 게 아니라 하나의 데이터 저장소를 두고, 그 저장소 안에 있는 값이 바뀌면 모든 컴포넌트의 값도 알아서 바뀌게 하는 기술
 
-
-
 #### setState
 
 state 값을 직접 변경하면 안 되고, setState를 이용해야 값이 변했다는 걸 리액트가 알 수 있다. 리액트가 알아야 화면에 바뀐 정보가 업데이트된다. setState가 호출되면 값을 바꾸는 것 외에 내부적으로 더 많은 일들이 일어난다.
-
-
-
-
 
 ### 이벤트
 
@@ -169,13 +146,10 @@ state 값을 직접 변경하면 안 되고, setState를 이용해야 값이 변
 
 a 태그는 이벤트를 걸면, 기본적으로 refresh를 한다. 그래서 이 동작을 막기 위해서 `e.preventDefault`를 하는 것이다.(그래서 default를 막는다는 표현을 쓴 건가 보다.)
 
-이벤트 객체 내에 굉장히 중요한 속성이 하나 있다. target이라는 속성이다. e.target은 이벤트를 발생한 엘리먼트를 가리킨다. 
+이벤트 객체 내에 굉장히 중요한 속성이 하나 있다. target이라는 속성이다. e.target은 이벤트를 발생한 엘리먼트를 가리킨다.
 
 다음과 같이 이벤트가 발생했을 때, 실행되는 함수를 이벤트 핸들러라고 부른다.
+
 ```
 onClick = {... 함수 ... }
 ```
-
-
-
-

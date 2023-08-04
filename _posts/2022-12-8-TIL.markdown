@@ -1,16 +1,9 @@
 ---
 layout: post
-title:  "TIL) 모범 사례 react-trello-board 배워서 내 스타일 만들기"
-date:   2022-12-08 12:18:07 +0900
+title: "TIL) 모범 사례 react-trello-board 배워서 내 스타일 만들기"
+date: 2022-12-08 12:18:07 +0900
 categories: react
 ---
-
-| (달성/목표) | 뽀모도리  |
-|----|-------|
-| 1일 | 3 / 3 |
-| 1주 | 7 /40 |
-
-
 
 ### react-trello-board
 
@@ -49,6 +42,4 @@ const Input = styled.input`
 `;
 
 export default Input;
-
 ```
-

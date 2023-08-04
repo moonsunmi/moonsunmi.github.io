@@ -1,21 +1,14 @@
 ---
 layout: post
-title:  "TIL) Hulu Clone Coding(Next.js, Tailwind CSS, Responsive)"
-date:   2022-10-25 12:18:07 +0900
+title: "TIL) Hulu Clone Coding(Next.js, Tailwind CSS, Responsive)"
+date: 2022-10-25 12:18:07 +0900
 categories: react
 ---
 
-| (달성/목표) | 뽀모도리  |
-|----|-------|
-| 1일 | 3/3   |
-| 1주 | 8 /40 |
-
-
-
 ### Thumbnail component
 
-
 Thumbnail.js
+
 ```js
 import { HandThumbUpIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
@@ -71,7 +64,6 @@ https://image.tmdb.org/t/p/w500/8uO0gUM8aNqYLs1OsTBQiXu0fEv.jpg
 `truncate`: 긴 텍스트 결과물을 줄여서 보여준다.
 `mx`: margin x axis. (left, right margin 주는 것)
 
-
 ### CSS Grid
 
 모바일용 1칸, 아이패드용 2칸, 브레이크 포인트 xl까지 만들 수 있다.
@@ -84,6 +76,7 @@ https://image.tmdb.org/t/p/w500/8uO0gUM8aNqYLs1OsTBQiXu0fEv.jpg
 3xl를 내가 만들어 본다.
 
 tailwind.config.js
+
 ```js
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -100,7 +93,6 @@ module.exports = {
   },
   plugins: [require("tailwind-scrollbar-hide")],
 };
-
 ```
 
 theme 오브젝트 안의 extend 오브젝트 안에 다음을 추가한다.
@@ -111,17 +103,12 @@ screen: {
 },
 ```
 
-
-
 <hr />
 truncate: (아래나 위를 잘라서) 길이를 줄이다[짧게 하다]
-
 
 <hr />
 화) 운동
 
-| 의자스쿼트 | 종아리운동 | 복근|
-|---------|-------|-------|
-| 3/3 | 3/3 | 3/3 |
-
-
+| 의자스쿼트 | 종아리운동 | 복근 |
+| ---------- | ---------- | ---- |
+| 3/3        | 3/3        | 3/3  |

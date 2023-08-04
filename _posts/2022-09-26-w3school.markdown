@@ -1,71 +1,66 @@
 ---
 layout: post
-title:  "w3school HTML"
-date:   2022-09-26 22:18:07 +0900
+title: "w3school HTML"
+date: 2022-09-26 22:18:07 +0900
 categories: HTML+CSS
 ---
 
-|           | 뽀모도리 | 등운동 | 가슴운동 |
-|-----------|------|------|------|
-| 일간(달성/목표) | 4/4  | 5/5| 5/5
-| 주간(달성/목표) | 4/40 | | |
-
-
 ### Media Queries
-그림이나 텍스트 사이즈를 반응형으로 조정하기 위해서 종종 사용된다. 
+
+그림이나 텍스트 사이즈를 반응형으로 조정하기 위해서 종종 사용된다.
 
 ```css
-@media screen and (max-width: 800px){
-    .left, .right, .main {
-        width: 100%;
-    }
+@media screen and (max-width: 800px) {
+  .left,
+  .right,
+  .main {
+    width: 100%;
+  }
 }
 ```
 
 가로가 800px 이하이면, width를 다 100%로 주어서 left, main, right가 세 줄로 보이게 한다.
 
-
 ### 반응형 웹을 위한 CSS 프레임워크들
+
 W3.CSS: w3school과 연관이 있을 거 같은 css
 bootstrap: 너무 유명해서 엄청 자주 들어 본.
 
-
-* kbd: 키보드 서체 ```<kbd>Ctrl + S</kbd>```
-* samp: 샘플용 아웃풋
-* code: 코드서체. 이것도 태그기 때문에 개행을 마구 해 버리므로 <pre>태그와 함께 쓴다.
-* var: 수학적 표현.
-
+- kbd: 키보드 서체 `<kbd>Ctrl + S</kbd>`
+- samp: 샘플용 아웃풋
+- code: 코드서체. 이것도 태그기 때문에 개행을 마구 해 버리므로 <pre>태그와 함께 쓴다.
+- var: 수학적 표현.
 
 ### 시맨틱
 
-* section: 특히 제목이 있는 콘텐츠
-  * Chapters
-  * Introduction
-  * News items
-  * Contact information
-* article: 그 자체로 완결성을 가지는 콘텐츠(독립적인 글 한 덩어리)
-  * Forum posts
-  * Blog posts
-  * User comments
-  * Product cards
-  * Newspaper articles
-* header: 제목 같은 것, article 등 안에서 쓰임.
-* footer: 
-  * authorship information
-  * copyright information
-  * contact information
-  * sitemap
-  * back to top links
-  * related documents
+- section: 특히 제목이 있는 콘텐츠
+  - Chapters
+  - Introduction
+  - News items
+  - Contact information
+- article: 그 자체로 완결성을 가지는 콘텐츠(독립적인 글 한 덩어리)
+  - Forum posts
+  - Blog posts
+  - User comments
+  - Product cards
+  - Newspaper articles
+- header: 제목 같은 것, article 등 안에서 쓰임.
+- footer:
 
+  - authorship information
+  - copyright information
+  - contact information
+  - sitemap
+  - back to top links
+  - related documents
 
-* nav: 네비게이션 링크들을 모아 둠.
-* aside: 각주 같은 것. `float: right;` 같은 것 써서 화면 오른쪽에 텍스트 상자 띄워 주면 좋다.
-* figure
+- nav: 네비게이션 링크들을 모아 둠.
+- aside: 각주 같은 것. `float: right;` 같은 것 써서 화면 오른쪽에 텍스트 상자 띄워 주면 좋다.
+- figure
 
 ```html
 <figure>
-  <img src="pic_trulli.jpg" alt="Trulli" style="width:100%">
+  <img src="pic_trulli.jpg" alt="Trulli" style="width:100%" />
   <figcaption>Fig.1 - Trulli, Puglia, Italy.</figcaption>
 </figure>
 ```
@@ -80,7 +75,7 @@ bootstrap: 너무 유명해서 엄청 자주 들어 본.
 6. 그림을 실을 때 alt, width, height는 무조건 지정하기. 웹 페이지가 로딩될 때 width와 height로 그림용 영역을 마련해 두기 때문에 꼭 필요.
 
 ```html
-<img src="html5.gif" alt="HTML5" style="width:128px;height:128px">
+<img src="html5.gif" alt="HTML5" style="width:128px;height:128px" />
 ```
 
 7. 대입문의 '=' 양쪽에 공백 넣지 말기.
@@ -90,10 +85,10 @@ bootstrap: 너무 유명해서 엄청 자주 들어 본.
 11. XML/XHTML 소프트웨어를 접근할 거라면 '/>'로 닫아 주기. `<meta charset="utf-8" />` 이런 식으로. 혹시 모르니 매번 이렇게 하는 게 나을듯
 12. `<html lang="en-us">` 이것도 잊지 말고.
 13. `<meta charset="UTF-8">` 얘도.
-13. 뷰포트를 세팅하자.
+14. 뷰포트를 세팅하자.
 
 ```html
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 ```
 
 14. 주석 긴 건 이렇게.
@@ -108,36 +103,32 @@ bootstrap: 너무 유명해서 엄청 자주 들어 본.
 15. 스타일 시트를 쓰세요.
 16. 파일 이름도 소문자로
 
-
-
-* URL 인코딩: URL은 ASCII 문자를 쓰기 때문에 %+'16진수'로 기호를 적음.
-* XHTML: 요구사항이 조금 더 엄격해서 오류를 핸들링하기가 편하다.
-
+- URL 인코딩: URL은 ASCII 문자를 쓰기 때문에 %+'16진수'로 기호를 적음.
+- XHTML: 요구사항이 조금 더 엄격해서 오류를 핸들링하기가 편하다.
 
 ### HTML 폼
 
-* `<form>` 태그는 입력 받는 요소(텍스트 필드, 체크 박스 등)들을 담은 그릇임. 따라서 form 태그는 화면에 보이지도 않음.
+- `<form>` 태그는 입력 받는 요소(텍스트 필드, 체크 박스 등)들을 담은 그릇임. 따라서 form 태그는 화면에 보이지도 않음.
 
-* input 요소는 가장 자주 사용되는 입력 폼.
+- input 요소는 가장 자주 사용되는 입력 폼.
 
 ```html
-<input type="text">
-<input type="radio">
-<input type="checkbox">
-<input type="submit">
-<input type="button">
+<input type="text" />
+<input type="radio" />
+<input type="checkbox" />
+<input type="submit" />
+<input type="button" />
 ```
 
-* label: 입력 칸들의 이름표 역할. `<label>`의 for 속성과 `input`의 id 속성값이 같아야 한다.
+- label: 입력 칸들의 이름표 역할. `<label>`의 for 속성과 `input`의 id 속성값이 같아야 한다.
 
-* submit 버튼: `<input type="submit">`은 폼 데이터를 폼핸들러에게 넘겨주는 역할을 한다. 폼핸들러는 action 속성에 지정되어 있다.
+- submit 버튼: `<input type="submit">`은 폼 데이터를 폼핸들러에게 넘겨주는 역할을 한다. 폼핸들러는 action 속성에 지정되어 있다.
 
-* input 필드에는 name 속성이 있어야만 한다. 없으면 입력값이 아무 데도 보내지지 않는다.
-
+- input 필드에는 name 속성이 있어야만 한다. 없으면 입력값이 아무 데도 보내지지 않는다.
 
 ### 폼 요소
 
-* `<select>` 드롭다운 리스트 만들어 낸다.
+- `<select>` 드롭다운 리스트 만들어 낸다.
 
 ```html
 <label for="cars">Choose a car:</label>
@@ -146,61 +137,62 @@ bootstrap: 너무 유명해서 엄청 자주 들어 본.
 </select>
 ```
 
-
-* `<fieldset>`은 폼 안에 관계 있는 데이터를 묶어 준다. `<legend>`는 `<fieldset>`의 캡션.
-
+- `<fieldset>`은 폼 안에 관계 있는 데이터를 묶어 준다. `<legend>`는 `<fieldset>`의 캡션.
 
 ### input 타입
+
 가능한 input 타입 상당히 많다..! 여기서는 결과만 확인하고 넘어가자.
 
 ```html
-<input type="button">
-<input type="checkbox">
-<input type="color">
-<input type="date">
-<input type="datetime-local">
-<input type="email">
-<input type="file">
-<input type="hidden">
-<input type="image">
-<input type="month">
-<input type="number">
-<input type="password">
-<input type="radio">
-<input type="range">
-<input type="reset">
-<input type="search">
-<input type="submit">
-<input type="tel">
-<input type="text">
-<input type="time">
-<input type="url">
-<input type="week">
+<input type="button" />
+<input type="checkbox" />
+<input type="color" />
+<input type="date" />
+<input type="datetime-local" />
+<input type="email" />
+<input type="file" />
+<input type="hidden" />
+<input type="image" />
+<input type="month" />
+<input type="number" />
+<input type="password" />
+<input type="radio" />
+<input type="range" />
+<input type="reset" />
+<input type="search" />
+<input type="submit" />
+<input type="tel" />
+<input type="text" />
+<input type="time" />
+<input type="url" />
+<input type="week" />
 ```
-
 
 ### input 속성들
 
 파일 첨부를 여러 개 가능하게 하고 싶다면, multiple 속성 추가해야 한다.
 
 ```html
-<input type="file" id="files" name="files" multiple>
+<input type="file" id="files" name="files" multiple />
 ```
 
 정규식 쓰고 싶다면, pattern.
 
 ```html
-  <input type="text" id="country_code" name="country_code"
-  pattern="[A-Za-z]{3}" title="Three letter country code">
+<input
+  type="text"
+  id="country_code"
+  name="country_code"
+  pattern="[A-Za-z]{3}"
+  title="Three letter country code"
+/>
 ```
 
-* placeholder: 힌트 주는 것(입력 창에 회색으로 써 있는 글자)
+- placeholder: 힌트 주는 것(입력 창에 회색으로 써 있는 글자)
 
-* required: 필수 입력 항목
+- required: 필수 입력 항목
 
-* autofocus: 화면 열리자마자 커서가 가 있을 곳 지정.
-
+- autofocus: 화면 열리자마자 커서가 가 있을 곳 지정.
 
 <hr />
 * 플레이스홀더. 텍스트 필드에 무엇을 입력해야 할 지 알려주는 역할을 한다. 보통 짧은 구문 형식으로 제공되며 인풋 프롬프트(Input Prompt)라고도 불린다.
-

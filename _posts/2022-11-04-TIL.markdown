@@ -1,18 +1,9 @@
 ---
 layout: post
-title:  "TIL) POMO-WEEKLY 프로젝트 시작"
-date:   2022-11-04 12:18:07 +0900
+title: "TIL) POMO-WEEKLY 프로젝트 시작"
+date: 2022-11-04 12:18:07 +0900
 categories: react
 ---
-
-| (달성/목표) | 뽀모도리   |
-|----|--------|
-| 1일 | 8/8    |
-| 1주 | 24 /40 |
-
-
-<!-- 뽀모도로 1. facebook clone coding -->
-
 
 ### pomo-weekly 프로젝트 시작
 
@@ -21,6 +12,7 @@ categories: react
 폰트는 구글 폰트를 이용했다. https://fonts.google.com/ 해당 사이트에서 나오는 import 문을 global.css에다 추가하고, tailwind.config.js 파일에 다음과 같이 사용할 폰트를 추가해 준다.
 
 tailwind.config.js
+
 ```js
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -38,12 +30,10 @@ module.exports = {
   },
   plugins: [],
 };
-
 ```
 
-
-
 ### CountDown
+
 우선 카운트다운을 하는 컴포넌트부터 만들어 보기로 했다. 뽀모도로의 카운트다운은 정해진 시간이 있고, 그걸 쓰는 방식이기 때문에 다음과 같이 작성했다.
 
 ```js
@@ -74,13 +64,12 @@ export default TimerContainer;
 그런데 단 setInterval을 단 한 번만 작동시키려면 setTimeOut 사용이 권장된다.
 
 ```js
-  useEffect(() => {
-    const interval = setTimeout(() => {
-      setNumber(number - 1);
-    }, 1000);
-  }, [number]);
+useEffect(() => {
+  const interval = setTimeout(() => {
+    setNumber(number - 1);
+  }, 1000);
+}, [number]);
 ```
-
 
 setTimeout은 다음과 같이 나오고,
 0 / 1581 requests
@@ -90,7 +79,6 @@ Finish: 1.1 hrs
 DOMContentLoaded: 1.1 hrs
 Load: 1.1 hrs
 
-
 setInterval은 다음과 같이 나온다.
 0 / 1524 requests
 0 B / 66.1 MB transferred
@@ -99,16 +87,11 @@ Finish: 1.1 hrs
 DOMContentLoaded: 1.1 hrs
 Load: 1.1 hrs
 
-
-
 뭘까..? 차이가 없는 것 같고, 결국에는 setTimeout이 더 안 좋아 보이기도 하는데...
-
 
 <hr />
 금) 운동
 
-| 이두  | 등 | 가슴  | 어깨 | 
-|-----|-----|-----|-----|
-| 3/3 | 3/3 | 0/3 | 0/3 |
-
-
+| 이두 | 등  | 가슴 | 어깨 |
+| ---- | --- | ---- | ---- |
+| 3/3  | 3/3 | 0/3  | 0/3  |

@@ -1,16 +1,9 @@
 ---
 layout: post
-title:  "w3school React"
-date:   2022-10-12 12:18:07 +0900
+title: "w3school React"
+date: 2022-10-12 12:18:07 +0900
 categories: react
 ---
-
-| (달성/목표) | 뽀모도리  | 등 | 가슴 | 배 |
-|----|-------|---|-------|----|
-| 1일 | 5/5   | 5/5 | 5/5 | 3/3 |
-| 1주 | 13/40 |   |       |
-
-
 
 ### Handling Forms
 
@@ -19,18 +12,18 @@ HTML에서 form data는 주로 DOM에 의해 핸들링되고, React에서 form d
 useState 훅을 이용하자. `<input>`이 변할 때마다 이벤트 핸들러를 호출하려면 `<input onChange= ... />`, 전송 버튼이 눌렸을 때 이벤트 핸들러를 호출하려면 `<form onSubmit />`
 
 ```js
-
-function MyForm(){
+function MyForm() {
   const [name, setName] = useState("");
-  
+
   const handleSubmit = (event) => {
     event.preventDefault();
     alert(name);
-  }
-  
-  return(
+  };
+
+  return (
     <form onSubmit={handleSubmit}>
-      <label>Enter your name:
+      <label>
+        Enter your name:
         <input
           type="text"
           value={name}
@@ -41,18 +34,18 @@ function MyForm(){
   );
 }
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<MyForm />);
 ```
 
-* `e.preventDefault()`: submit 버튼을 누르면 결과를 실행한 후 창이 다시 실행된다. (덧셈의 결과를 보여주는 거라면, 그 결과를 보여주고 바로 리셋해서 없어짐) 그걸 막기 위한 장치.
-
+- `e.preventDefault()`: submit 버튼을 누르면 결과를 실행한 후 창이 다시 실행된다. (덧셈의 결과를 보여주는 거라면, 그 결과를 보여주고 바로 리셋해서 없어짐) 그걸 막기 위한 장치.
 
 ### 여러 개 input 필드
+
 각 엘리먼트에 `name` attribute를 추가하여 값을 컨트롤할 수 있다. useState는 {}로 초기화한다.
 
-* `event.target.name`: event를 일으킨 엘리먼트의 name attribute. (이걸로 구분해 주기 위해서 엘리먼트의 name 속성을 추가해 준 것.)
-* `event.target.value`: event 일으킨 엘리먼트의 값. 
+- `event.target.name`: event를 일으킨 엘리먼트의 name attribute. (이걸로 구분해 주기 위해서 엘리먼트의 name 속성을 추가해 준 것.)
+- `event.target.value`: event 일으킨 엘리먼트의 값.
 
 ```js
 import { useState } from "react";
@@ -101,22 +94,21 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<MyForm />);
 ```
 
-
 ### React Router
 
 npm i -D react-router-dom@latest
 
 src 폴더 안에 pages 폴더를 만들고, 몇 개 파일을 넣는다.
 
-* src\pages\:
-  * Layout.js
-  * Home.js
-  * Blogs.js
-  * Contact.js
-  * NoPage.js
-
+- src\pages\:
+  - Layout.js
+  - Home.js
+  - Blogs.js
+  - Contact.js
+  - NoPage.js
 
 index.js
+
 ```js
 import ReactDOM from "react-dom/client";
 import Layout from "./pages/Layout";
@@ -142,25 +134,23 @@ export default function App() {
   );
 }
 
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<App />);
 ```
 
-
 #### Pages/Components
 
-Layout 컴포넌트는 `<Outlet>`과 `<Link>` 엘리먼트를 가진다. 
+Layout 컴포넌트는 `<Outlet>`과 `<Link>` 엘리먼트를 가진다.
 
-* `<Outlet>`은 현재 선택된 `route`를 렌더링한다.
-* `<Link>`는 URL 세팅할 때, 히스토리를 밟을 때 사용한다. `<a href=..>` 대신 쓴다.
+- `<Outlet>`은 현재 선택된 `route`를 렌더링한다.
+- `<Link>`는 URL 세팅할 때, 히스토리를 밟을 때 사용한다. `<a href=..>` 대신 쓴다.
 
 Layout route는 어느 페이지를 가도 나오는, 내비게이션바 같은 컴포넌트들용이다.
 
 ```js
-import { Outlet, Link } from "react-router-dom" 
+import { Outlet, Link } from "react-router-dom";
 const Layout = () => {
-  return(
+  return (
     <>
       <nav>
         <ul>
@@ -175,16 +165,10 @@ const Layout = () => {
           </li>
         </ul>
       </nav>
-      <Outlet />  
+      <Outlet />
     </>
   );
-}
+};
 
 export default Layout;
 ```
-
-
-
-
-
-

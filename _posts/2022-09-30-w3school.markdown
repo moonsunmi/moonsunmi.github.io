@@ -1,34 +1,23 @@
 ---
 layout: post
-title:  "w3school CSS"
-date:   2022-09-30 12:18:07 +0900
+title: "w3school CSS"
+date: 2022-09-30 12:18:07 +0900
 categories: HTML+CSS
 ---
-
-|           | 뽀모도리  | 등운동 | 가슴운동 |
-|-----------|-------|-----|------|
-| 일간(달성/목표) | 2/8   | 5/5 | 5/5  |
-| 주간(달성/목표) | 17/40 |     |      |
-
 
 ### CSS Attribute Selector
 
 attribute를 선택해서 스타일을 지정할 수도 있다.
 
 ```html
-a[target] {
-  background-color: yellow;
-}
-...
+a[target] { background-color: yellow; } ...
 <a href="http://www.disney.com" target="_blank">disney.com</a>
 ```
 
 attribute가 특정값을 가지는 것만도 선택할 수 있다.
 
 ```html
-a[target="_blank"] {
-  background-color: yellow;
-}
+a[target="_blank"] { background-color: yellow; }
 ```
 
 다음과 같이 물결 표시를 쓰면, 'flower'가 포함된 게 다 선택된다.
@@ -43,56 +32,53 @@ a[target="_blank"] {
 title="klematis flower"
 ```
 
-다음과 같이 `|`을 이용하면 하이픈으로 구분되기 전까지의 단어로 구분하는 것도 가능하다. 
+다음과 같이 `|`을 이용하면 하이픈으로 구분되기 전까지의 단어로 구분하는 것도 가능하다.
 
 ```html
-[class|="top"] {
-  background: yellow;
-}
-...
-<p class="top-text">Hello world!</p> <!-- 선택됨 (하이픈 전까지의 단어가 top) -->
-<p class="topcontent">Are you learning CSS?</p>  <!-- 선택 안 됨 (하이픈 기준임) -->
+[class|="top"] { background: yellow; } ...
+<p class="top-text">Hello world!</p>
+<!-- 선택됨 (하이픈 전까지의 단어가 top) -->
+<p class="topcontent">Are you learning CSS?</p>
+<!-- 선택 안 됨 (하이픈 기준임) -->
 ```
 
 단순히 어떤 단어로 시작하는 attribute값을 선택하고 싶다면 `^`를 이용한다.
 
 ```html
-[class^="top"] {
-  background: yellow;
-}
-...
-<p class="top-text">Hello world!</p> <!-- 선택됨 -->
-<p class="topcontent">Are you learning CSS?</p>  <!-- 선택 됨 -->
+[class^="top"] { background: yellow; } ...
+<p class="top-text">Hello world!</p>
+<!-- 선택됨 -->
+<p class="topcontent">Are you learning CSS?</p>
+<!-- 선택 됨 -->
 ```
 
 test로 '끝나는' 단어 선택하고 싶다면 `$`
+
 ```html
-[class$="test"] {
-  background: yellow;
-}
-...
-<div class="my-test">The third div element.</div> <!-- 선택 됨 -->
-<p class="mytest">This is some text in a paragraph.</p> <!-- 선택 됨 -->
+[class$="test"] { background: yellow; } ...
+<div class="my-test">The third div element.</div>
+<!-- 선택 됨 -->
+<p class="mytest">This is some text in a paragraph.</p>
+<!-- 선택 됨 -->
 ```
 
-다른 조건 없이 포함하기만 하면 무조건 '*'
-
+다른 조건 없이 포함하기만 하면 무조건 '\*'
 
 ```html
-[class*="te"] {
-  background: yellow;
-}
-<div class="hitejava">The third div element.</div> <!-- 선택 됨 -->
-<p class="mytest">This is some text in a paragraph.</p> <!-- 선택 됨 -->
+[class*="te"] { background: yellow; }
+<div class="hitejava">The third div element.</div>
+<!-- 선택 됨 -->
+<p class="mytest">This is some text in a paragraph.</p>
+<!-- 선택 됨 -->
 ```
 
 class나 ID 없는 폼필드를 스타일링할 때 유용합니다.
+
 ```html
-input[type=text] {
-}
-...
-  Firstname:<input type="text" name="Name" value="Peter" size="20">
+input[type=text] { } ... Firstname:<input
+  type="text"
+  name="Name"
+  value="Peter"
+  size="20"
+/>
 ```
-
-
-

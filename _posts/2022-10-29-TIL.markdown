@@ -1,30 +1,19 @@
 ---
 layout: post
-title:  "TIL) Facebook Clone Coding(Next.js, Tailwind CSS, Responsive)"
-date:   2022-10-29 12:18:07 +0900
+title: "TIL) Facebook Clone Coding(Next.js, Tailwind CSS, Responsive)"
+date: 2022-10-29 12:18:07 +0900
 categories: react
 ---
 
-| (달성/목표) | 뽀모도리   |
-|----|--------|
-| 1일 | 6/8    |
-| 1주 | 30 /40 |
-
-
-
-
-
 gird로 했을 때는, place-items-center로 해야 가운데 정렬이 된다.
 
-
-
 > 오답 노트
-> 
+>
 > status에는 authenticated, unauthenticated, loading 세 가지가 올 수 있다. 그런데 'authenticated'가 되었을 때 메인 화면을 로딩해야 하는데, unauthenticated일 때 Login 화면을 로딩했던 것이다.
 > 그래서 loading 중일 때 메인 화면을 띄우려고 했고, 아직 가져오지 못한 user 정보가 undefined되었던 것이다.
 
-
 Login.js
+
 ```js
 import { signIn } from "next-auth/react";
 import Image from "next/image";
@@ -51,8 +40,8 @@ const Login = () => {
 export default Login;
 ```
 
-
 Sidebar.js
+
 ```js
 import {
   CheckIcon,
@@ -79,10 +68,10 @@ const Sidebar = ({ session }) => {
 };
 
 export default Sidebar;
-
 ```
 
 SidebarRow.js
+
 ```js
 import Image from "next/image";
 
@@ -101,12 +90,9 @@ const SidebarRow = ({ Icon, title, src }) => {
 export default SidebarRow;
 ```
 
-
 <hr />
 토) 운동
 
 | 하체폼롤러 | 삼두 | 뒷벅지 |
-|-------|-------|-----|
-| 0/3   | 3/3 | 3/3 |
-
-
+| ---------- | ---- | ------ |
+| 0/3        | 3/3  | 3/3    |

@@ -1,34 +1,24 @@
 ---
 layout: post
-title:  "TIL) 모던 리액트 웹 사이트의 todolist 만들기 클론 코딩"
-date:   2022-11-21 12:18:07 +0900
+title: "TIL) 모던 리액트 웹 사이트의 todolist 만들기 클론 코딩"
+date: 2022-11-21 12:18:07 +0900
 categories: react
 ---
-
-| (달성/목표) | 뽀모도리  |
-|----|-------|
-| 1일 | 7 / 5 |
-| 1주 | 7 /40 |
-
-
-
 
 ### todolist 컴포넌트들
 
 컴포넌트들 전부에 todo-를 접두어로 붙였고, 레이아웃 역할을 하는 컴포넌트에는 -template이라고 했다. 낱개는 item, 여러 개의 item을 모은 건 list라고 했다. 내 프로젝트의 컴포넌트 이름도 이런 식으로 수정하면 좋을 것 같다.
 
-
 ### 컴포넌트들 디자인
 
 styled-components를 처음 써 봤다. 일반 css 작성법과 거의 비슷하다. css에도 익숙해져야 하는 초보자들은 이거에 더 익숙해지는 게 좋을 거 같기도 하다.
-
 
 ### 컴포넌트들
 
 오늘은 styled-component 작성으로 시간을 거의 보냈다.
 
-
 TodoHead.js
+
 ```jsx
 import React from "react";
 import styled from "styled-components";
@@ -94,9 +84,7 @@ const TodoList = () => {
 };
 
 export default TodoList;
-
 ```
-
 
 TodoItem.js
 
@@ -173,11 +161,10 @@ const TodoItem = ({ id, done, text }) => {
 };
 
 export default TodoItem;
-
-
 ```
 
 TodoCreate.js
+
 ```jsx
 import React, { useState } from "react";
 import styled, { css } from "styled-components";
@@ -278,19 +265,11 @@ const TodoCreate = () => {
 };
 
 export default TodoCreate;
-
 ```
-
-
 
 <hr />
 월) 운동<br>
 
 어깨 삼두 운동
 2키로짜리 아령으로 덤벨숄더프레스 10회 사이드레터럴레이즈 10회 4~5세트
-덤벨 오버헤드 익스텐션 15회 4~5세트 
-
-
-
-
-
+덤벨 오버헤드 익스텐션 15회 4~5세트
