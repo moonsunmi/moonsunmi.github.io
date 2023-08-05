@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,8 +10,8 @@
 <meta property="og:title" content="reactjs.org 튜토리얼" />
 <meta name="author" content="Sunmi Moon" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="  뽀모도리 등 운동 가슴 운동 1일(달성/목표) 12/16+5 5/5 5/5 1주(달성/목표) 37/40    " />
-<meta property="og:description" content="  뽀모도리 등 운동 가슴 운동 1일(달성/목표) 12/16+5 5/5 5/5 1주(달성/목표) 37/40    " />
+<meta name="description" content="w3school의 javascript" />
+<meta property="og:description" content="w3school의 javascript" />
 <link rel="canonical" href="http://localhost:4000/2022-10-01/reactjs.org" />
 <meta property="og:url" content="http://localhost:4000/2022-10-01/reactjs.org" />
 <meta property="og:site_name" content="주경야독학) 개발공부로그" />
@@ -21,7 +20,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="reactjs.org 튜토리얼" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-10-01T12:18:07+09:00","datePublished":"2022-10-01T12:18:07+09:00","description":"  뽀모도리 등 운동 가슴 운동 1일(달성/목표) 12/16+5 5/5 5/5 1주(달성/목표) 37/40    ","headline":"reactjs.org 튜토리얼","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-10-01/reactjs.org"},"url":"http://localhost:4000/2022-10-01/reactjs.org"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-10-01T12:18:07+09:00","datePublished":"2022-10-01T12:18:07+09:00","description":"w3school의 javascript","headline":"reactjs.org 튜토리얼","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-10-01/reactjs.org"},"url":"http://localhost:4000/2022-10-01/reactjs.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -43,7 +42,6 @@
 
 
   <body>
-
     <nav class="nav">
   <div class="nav-container">
     <a href="/">
@@ -58,70 +56,41 @@
 </nav>
 
 
-    <main>
-      <div class="post">
-  <div class="post-info">
-    <span>Written by</span>
-    
-        Sunmi Moon
-    
+    <main><div class="post">
+  <h1 class="post-title">reactjs.org 튜토리얼</h1>
 
+  <div class="post-info">
     
-      <br>
-      <span>on&nbsp;</span><time datetime="2022-10-01 12:18:07 +0900">October 01, 2022</time>
+    <br />
+    <span>on&nbsp;</span
+    ><time datetime="2022-10-01 12:18:07 +0900">October 01, 2022</time>
     
   </div>
 
-  <h1 class="post-title">reactjs.org 튜토리얼</h1>
-  <div class="post-line"></div>
+  <h2 id="w3school의-javascript">w3school의 javascript</h2>
 
-  <table>
-  <thead>
-    <tr>
-      <th> </th>
-      <th>뽀모도리</th>
-      <th>등 운동</th>
-      <th>가슴 운동</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1일<br />(달성/목표)</td>
-      <td>12/16+5</td>
-      <td>5/5</td>
-      <td>5/5</td>
-    </tr>
-    <tr>
-      <td>1주<br />(달성/목표)</td>
-      <td>37/40</td>
-      <td> </td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="w3school의-javascript">w3school의 javascript</h2>
 <p>Exercise 문제 풀면서 복습해 봄.</p>
 
 <h2 id="reactjsorg">reactjs.org</h2>
 
 <p>리액트는 자바스크립트 라이브러리로, ‘컴포넌트’라고 불리는 코드 파편을 이용해서 UI를 구성한다.</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">ShoppingList</span> <span class="kd">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">component</span><span class="p">{</span>
-    <span class="nx">render</span><span class="p">(){</span>
-        <span class="k">return</span><span class="p">(</span>
-            <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">shopping-List</span><span class="dl">"</span><span class="o">&gt;</span>
-                <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">shopping</span> <span class="nx">List</span> <span class="k">for</span> <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/h1</span><span class="err">&gt;
-</span>                <span class="o">&lt;</span><span class="nx">ul</span><span class="o">&gt;</span>
-                    <span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;</span><span class="nx">Instagram</span><span class="o">&lt;</span><span class="sr">/li</span><span class="err">&gt;
-</span>                    <span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;</span><span class="nx">What</span><span class="dl">'</span><span class="s1">s app&lt;/li&gt;
-                    &lt;li&gt;Oculus&lt;/li&gt;
-                &lt;/ul&gt;
-            &lt;/div&gt;
-        );
-    }
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">ShoppingList</span> <span class="kd">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">component</span> <span class="p">{</span>
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">shopping-List</span><span class="dl">"</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">shopping</span> <span class="nx">List</span> <span class="k">for</span> <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/h1</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">ul</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;</span><span class="nx">Instagram</span><span class="o">&lt;</span><span class="sr">/li</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;</span><span class="nx">What</span><span class="dl">'</span><span class="s1">s app&lt;/li&gt;
+          &lt;li&gt;Oculus&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/div&gt;
+    );
+  }
 }
 </span></code></pre></div></div>
+
 <p>리액트에는 여러 컴포넌트가 있지만, 여기서는 React.component를 사용한다. 여기에서 <code class="language-plaintext highlighter-rouge">ShoppingList</code>는 리액트 컴포넌트 클래스(타입)이다. <code class="language-plaintext highlighter-rouge">prop</code>라는 프로퍼티를 받아서 처리한 후 <code class="language-plaintext highlighter-rouge">render</code> 함수를 통해 뷰 계층 구조를 전달한다.</p>
 
 <p><code class="language-plaintext highlighter-rouge">render()</code> 함수는 보고자 하는 화면 내용을 전달한다. 전달을 위해서 리액트는 render의 리턴값을 경량화된 React 엘리먼트로 전환한다.</p>
@@ -150,17 +119,13 @@
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Square</span> <span class="kd">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
   <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="p">(</span>
-      <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">square</span><span class="dl">"</span><span class="o">&gt;</span>
-        <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">value</span><span class="p">}</span>
-      <span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
-</span>    <span class="p">);</span>
-  <span class="p">}</span>
+    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">square</span><span class="dl">"</span><span class="o">&gt;</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">value</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/button&gt;</span><span class="err">;
+</span>  <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Board</span> <span class="kd">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
-  <span class="nx">renderSquare</span><span class="p">(</span><span class="nx">i</span><span class="p">){</span>
+  <span class="nx">renderSquare</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="o">&lt;</span><span class="nx">Square</span> <span class="nx">value</span><span class="o">=</span><span class="p">{</span><span class="nx">i</span><span class="p">}</span> <span class="sr">/&gt;</span><span class="err">;
 </span>  <span class="p">}</span>
 <span class="p">}</span>
@@ -187,14 +152,15 @@
 <p>그다음 단계는 클릭된 square가 자기가 클린된 상태라는 걸 기억해서 X라고 표시하는 것이다. 뭔가를 ‘저장을 할 때’ <code class="language-plaintext highlighter-rouge">constructor</code> 안에서 <code class="language-plaintext highlighter-rouge">state</code>를 사용한다.</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Square</span> <span class="kd">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Componenet</span> <span class="p">{</span>
-    <span class="kd">constructor</span><span class="p">(</span><span class="nx">props</span><span class="p">){</span>
-        <span class="k">super</span><span class="p">(</span><span class="nx">props</span><span class="p">);</span>
-        <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="na">value</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
-        <span class="p">};</span>
-    <span class="p">}</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">super</span><span class="p">(</span><span class="nx">props</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">value</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="p">};</span>
+  <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></div>
+
 <p>하위 클래스의 <code class="language-plaintext highlighter-rouge">constructor</code>를 선언할 때는 늘 <code class="language-plaintext highlighter-rouge">super</code>를 호출해 줘야 한다. 세트로 나온다고 생각.</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="kd">constructor</span><span class="p">(</span><span class="nx">props</span><span class="p">){</span>
@@ -203,20 +169,17 @@
 
 <h4 id="클릭한-박스에-x-표시하기">클릭한 박스에 X 표시하기</h4>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Square</span> <span class="kd">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span><span class="p">{</span>
-  <span class="kd">constructor</span><span class="p">(</span><span class="nx">props</span><span class="p">){</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Square</span> <span class="kd">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">super</span><span class="p">(</span><span class="nx">props</span><span class="p">);</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
       <span class="na">value</span><span class="p">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="p">};</span>
   <span class="p">}</span>
-  
-  <span class="nx">render</span><span class="p">(){</span>
-    <span class="k">return</span><span class="p">(</span>
-      <span class="o">&lt;</span><span class="nx">button</span>
-        <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">square</span><span class="dl">"</span> 
-        <span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span><span class="na">value</span><span class="p">:</span> <span class="dl">'</span><span class="s1">X</span><span class="dl">'</span><span class="p">})}</span>
-      <span class="o">&gt;</span>
+
+  <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">square</span><span class="dl">"</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span> <span class="na">value</span><span class="p">:</span> <span class="dl">"</span><span class="s2">X</span><span class="dl">"</span> <span class="p">})}</span><span class="o">&gt;</span>
         <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">value</span><span class="p">}</span>
       <span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
 </span>    <span class="p">);</span>
@@ -252,8 +215,9 @@
 </ul>
 
 <p><code class="language-plaintext highlighter-rouge">Board</code> 컴포넌트에서 <code class="language-plaintext highlighter-rouge">Square</code> 값을 저장해 두었기 때문에 <code class="language-plaintext highlighter-rouge">renderSquare</code>는 다음과 같이 수정한다.</p>
+
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">renderSquare</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="o">&lt;</span><span class="nx">Square</span> <span class="nx">value</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">squares</span><span class="p">[</span><span class="nx">i</span><span class="p">]}</span><span class="sr">/&gt;;</span><span class="err"> 
+  <span class="k">return</span> <span class="o">&lt;</span><span class="nx">Square</span> <span class="nx">value</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">squares</span><span class="p">[</span><span class="nx">i</span><span class="p">]}</span><span class="sr">/&gt;</span><span class="err">;
 </span><span class="p">}</span>
 </code></pre></div></div>
 
@@ -277,16 +241,12 @@
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Square</span> <span class="kd">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
   <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">return</span> <span class="p">(</span>
-      <span class="o">&lt;</span><span class="nx">button</span>
-        <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">square</span><span class="dl">"</span>
-        <span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">prop</span><span class="p">.</span><span class="nx">onClick</span><span class="p">()}</span>
-      <span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">square</span><span class="dl">"</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">prop</span><span class="p">.</span><span class="nx">onClick</span><span class="p">()}</span><span class="o">&gt;</span>
         <span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">prop</span><span class="p">.</span><span class="nx">value</span><span class="p">}</span>
       <span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
 </span>    <span class="p">);</span>
   <span class="p">}</span>
 <span class="p">}</span>
-
 </code></pre></div></div>
 
 <p>이러면 이제, square가 클릭되면 Board에 있는 onclick 함수가 호출된다.</p>
@@ -339,7 +299,7 @@
 <p>Square는 이제 state가 없이 render 메서드만 가지고 있으니, function component로 바꾸자. <code class="language-plaintext highlighter-rouge">React.Component</code>를 extends할 필요도 없고, 그냥 프로퍼티만 받아서 심플하게 작성할 수 있다.</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Square</span><span class="p">(</span><span class="nx">prop</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">return</span><span class="p">(</span>
+  <span class="k">return</span> <span class="p">(</span>
     <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">square</span><span class="dl">"</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">prop</span><span class="p">.</span><span class="nx">onClick</span><span class="p">}</span><span class="o">&gt;</span>
       <span class="p">{</span><span class="nx">prop</span><span class="p">.</span><span class="nx">value</span><span class="p">}</span>
     <span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
@@ -388,20 +348,18 @@
 <h3 id="히스토리-기록하기">히스토리 기록하기</h3>
 
 <p>히스토리를 남겨 두기 위해서 한 번 할 때마다 다음과 같이 상태를 기록해 둘 것이다.</p>
+
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">history</span> <span class="o">=</span> <span class="p">[</span>
   <span class="p">{</span>
-    <span class="na">squares</span><span class="p">:</span> <span class="p">[</span>
-      <span class="kc">null</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span>
-      <span class="kc">null</span><span class="p">,</span> <span class="dl">'</span><span class="s1">X</span><span class="dl">'</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span>
-      <span class="kc">null</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="dl">'</span><span class="s1">O</span><span class="dl">'</span><span class="p">,</span>
-    <span class="p">]</span>
+    <span class="na">squares</span><span class="p">:</span> <span class="p">[</span><span class="kc">null</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="dl">"</span><span class="s2">X</span><span class="dl">"</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="dl">"</span><span class="s2">O</span><span class="dl">"</span><span class="p">],</span>
   <span class="p">},</span>
-<span class="p">]</span>
+<span class="p">];</span>
 </code></pre></div></div>
 
 <p>이 히스토리는 Game 컴포넌트에 저장한다. Board에 저장해 두었던 state와 승자 계산하는 것들 전부 Game 컴포넌트 쪽으로 옮겨 온다.</p>
 
 <p>Game의 render</p>
+
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">render</span><span class="p">(){</span>
   <span class="kd">const</span> <span class="nx">history</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">history</span><span class="p">;</span>
   <span class="kd">const</span> <span class="nx">current</span> <span class="o">=</span> <span class="nx">history</span><span class="p">[</span><span class="nx">history</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
@@ -412,7 +370,7 @@
   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
     <span class="nx">status</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Next player: </span><span class="dl">'</span> <span class="o">+</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">xIsNext</span> <span class="p">?</span> <span class="dl">'</span><span class="s1">X</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">O</span><span class="dl">'</span><span class="p">);</span>
   <span class="p">}</span>
-  
+
   <span class="k">return</span> <span class="p">(</span>
     <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">game</span><span class="dl">"</span><span class="o">&gt;</span>
     <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">game-board</span><span class="dl">"</span><span class="o">&gt;</span>
@@ -445,26 +403,28 @@
   </tbody>
 </table>
 
-
 </div>
 
 
 
 <div class="pagination">
   
-    <a href="/2022-10-02/reactjs.org" class="left arrow">&#8592;</a>
-  
-  
-    <a href="/2022-09-30/w3school" class="right arrow">&#8594;</a>
+  <a href="/2022-10-02/reactjs.org" class="left arrow"
+    >&#8592;</a
+  >
+   
+  <a href="/2022-09-30/w3school" class="right arrow"
+    >&#8594;</a
+  >
   
 
   <a href="#" class="top">Top</a>
 </div>
-    </main>
+</main>
 
     <footer>
   <span>
-    &copy; <time datetime="2023-08-01 23:12:59 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-08-05 10:07:13 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 

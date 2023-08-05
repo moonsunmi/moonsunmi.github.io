@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,8 +10,8 @@
 <meta property="og:title" content="w3school React" />
 <meta name="author" content="Sunmi Moon" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="(달성/목표) 뽀모도리 등 가슴 배 1일 8/8 5/5 5/5 3/3 1주 24/40      " />
-<meta property="og:description" content="(달성/목표) 뽀모도리 등 가슴 배 1일 8/8 5/5 5/5 3/3 1주 24/40      " />
+<meta name="description" content="useEffect Hook" />
+<meta property="og:description" content="useEffect Hook" />
 <link rel="canonical" href="http://localhost:4000/2022-10-14/TIL" />
 <meta property="og:url" content="http://localhost:4000/2022-10-14/TIL" />
 <meta property="og:site_name" content="주경야독학) 개발공부로그" />
@@ -21,7 +20,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="w3school React" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-10-14T12:18:07+09:00","datePublished":"2022-10-14T12:18:07+09:00","description":"(달성/목표) 뽀모도리 등 가슴 배 1일 8/8 5/5 5/5 3/3 1주 24/40      ","headline":"w3school React","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-10-14/TIL"},"url":"http://localhost:4000/2022-10-14/TIL"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-10-14T12:18:07+09:00","datePublished":"2022-10-14T12:18:07+09:00","description":"useEffect Hook","headline":"w3school React","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-10-14/TIL"},"url":"http://localhost:4000/2022-10-14/TIL"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -43,7 +42,6 @@
 
 
   <body>
-
     <nav class="nav">
   <div class="nav-container">
     <a href="/">
@@ -58,52 +56,18 @@
 </nav>
 
 
-    <main>
-      <div class="post">
-  <div class="post-info">
-    <span>Written by</span>
-    
-        Sunmi Moon
-    
+    <main><div class="post">
+  <h1 class="post-title">w3school React</h1>
 
+  <div class="post-info">
     
-      <br>
-      <span>on&nbsp;</span><time datetime="2022-10-14 12:18:07 +0900">October 14, 2022</time>
+    <br />
+    <span>on&nbsp;</span
+    ><time datetime="2022-10-14 12:18:07 +0900">October 14, 2022</time>
     
   </div>
 
-  <h1 class="post-title">w3school React</h1>
-  <div class="post-line"></div>
-
-  <table>
-  <thead>
-    <tr>
-      <th>(달성/목표)</th>
-      <th>뽀모도리</th>
-      <th>등</th>
-      <th>가슴</th>
-      <th>배</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1일</td>
-      <td>8/8</td>
-      <td>5/5</td>
-      <td>5/5</td>
-      <td>3/3</td>
-    </tr>
-    <tr>
-      <td>1주</td>
-      <td>24/40</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-<h4 id="useeffect-hook">useEffect Hook</h4>
+  <h4 id="useeffect-hook">useEffect Hook</h4>
 
 <p>useEffect란 컴포넌트가 렌더링될 때 특정 작업을 실행할 수 있도록 하는 Hook이다.</p>
 
@@ -140,19 +104,19 @@ root.render(&lt;Timer /&gt;);
 <blockquote>
   <p>dependency 전달하는 세 가지.</p>
 
-  <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{})</span> <span class="c1">// 전달 안 함.</span>
-<span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{},[]);</span> <span class="c1">// 빈 배열 전달</span>
+  <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{});</span> <span class="c1">// 전달 안 함.</span>
+<span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{},</span> <span class="p">[]);</span> <span class="c1">// 빈 배열 전달</span>
 <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{},</span> <span class="p">[</span><span class="nx">prop</span><span class="p">,</span> <span class="nx">state</span><span class="p">]);</span> <span class="c1">// prop과 state 전달.</span>
 </code></pre></div>  </div>
 </blockquote>
 
 <p>첫 렌더링될 때 한 번만 effect가 실행되도록 바꾸려면, <code class="language-plaintext highlighter-rouge">useEffect()</code>의 dependency를 설정해 주면 된다.</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-      <span class="nx">setCount</span><span class="p">((</span><span class="nx">count</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
-    <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
-  <span class="p">},</span> <span class="p">[]);</span> <span class="c1">// 빈 array로 dependency를 추가해 주었다.</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setCount</span><span class="p">((</span><span class="nx">count</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+  <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+<span class="p">},</span> <span class="p">[]);</span> <span class="c1">// 빈 array로 dependency를 추가해 주었다.</span>
 </code></pre></div></div>
 
 <p>다음처럼, count에 calculation이 의존한 상황이라면(count가 바뀔 때 calculation이 바뀜) 의존성을 count로 전달해 준다. 이때도, 배열 형태로 전달해 준다는 걸 잊지 말자.</p>
@@ -190,14 +154,14 @@ root.render(&lt;Timer /&gt;);
 
 <span class="kd">function</span> <span class="nx">Timer</span><span class="p">()</span> <span class="p">{</span>
   <span class="kd">const</span> <span class="p">[</span><span class="nx">count</span><span class="p">,</span> <span class="nx">setCount</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-  
+
   <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="kd">let</span> <span class="nx">timer</span> <span class="o">=</span> <span class="nx">setTimeout</span><span class="p">(()</span><span class="o">=&gt;</span> <span class="p">{</span>  <span class="c1">// 지워줄 timer에 이름 지정해줌.</span>
       <span class="nx">setCount</span><span class="p">((</span><span class="nx">count</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">));</span>
     <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
     <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span><span class="nx">clearTimeout</span><span class="p">(</span><span class="nx">timer</span><span class="p">)};</span>  <span class="c1">// return으로 clear</span>
   <span class="p">},</span> <span class="p">[]);</span>
-  
+
   <span class="k">return</span> <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">I</span><span class="dl">'</span><span class="s1">ve rendered {count} times!&lt;/h1&gt;;
 }
 
@@ -254,9 +218,11 @@ root.render(&lt;Timer /&gt;);
 </ol>
 
 <h4 id="리렌더링-막기">리렌더링 막기</h4>
+
 <p>useState로 어플리케이션이 얼마나 렌더링되었는지 확인해 보면, 무한대값이 나오는 것을 확인할 수 있다. 훅 자체가 계속 다시 렌더링하기 때문이다. 이를 막기 위해서 useRef를 사용한다.</p>
 
 <p>다음과 같이 useState를 하면 리렌더링이 계속 일어나나 보다…?</p>
+
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useRef</span><span class="p">,</span> <span class="nx">useEffect</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">ReactDOM</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react-dom/client</span><span class="dl">"</span><span class="p">;</span>
 
@@ -309,12 +275,12 @@ root.render(&lt;Timer /&gt;);
 
 <span class="kd">const</span> <span class="nx">root</span> <span class="o">=</span> <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">createRoot</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">root</span><span class="dl">"</span><span class="p">));</span>
 <span class="nx">root</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">App</span> <span class="o">/&gt;</span><span class="p">);</span>
-
 </code></pre></div></div>
 
 <h4 id="dom에-직접-접근하기">DOM에 직접 접근하기</h4>
 
 <p>리액트에서는 엘리먼트에 ref 속성을 추가하면, DOM에 직접 접근할 수 있다.</p>
+
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useRef</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">ReactDOM</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react-dom/client</span><span class="dl">"</span><span class="p">;</span>
 
@@ -439,26 +405,28 @@ root.render(&lt;Timer /&gt;);
 
 <p>useReducer 뭔지 잘 모르겠다!</p>
 
-
 </div>
 
 
 
 <div class="pagination">
   
-    <a href="/2022-10-15/TIL" class="left arrow">&#8592;</a>
-  
-  
-    <a href="/2022-10-13/TIL" class="right arrow">&#8594;</a>
+  <a href="/2022-10-15/TIL" class="left arrow"
+    >&#8592;</a
+  >
+   
+  <a href="/2022-10-13/TIL" class="right arrow"
+    >&#8594;</a
+  >
   
 
   <a href="#" class="top">Top</a>
 </div>
-    </main>
+</main>
 
     <footer>
   <span>
-    &copy; <time datetime="2023-08-01 23:12:59 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-08-05 10:07:13 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 

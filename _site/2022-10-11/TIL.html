@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,8 +10,8 @@
 <meta property="og:title" content="w3school React" />
 <meta name="author" content="Sunmi Moon" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="(달성/목표) 뽀모도리 등 가슴 배 1일 3/3 5/5 5/5 3/3 1주 8/40      " />
-<meta property="og:description" content="(달성/목표) 뽀모도리 등 가슴 배 1일 3/3 5/5 5/5 3/3 1주 8/40      " />
+<meta name="description" content="JSX" />
+<meta property="og:description" content="JSX" />
 <link rel="canonical" href="http://localhost:4000/2022-10-11/TIL" />
 <meta property="og:url" content="http://localhost:4000/2022-10-11/TIL" />
 <meta property="og:site_name" content="주경야독학) 개발공부로그" />
@@ -21,7 +20,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="w3school React" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-10-11T12:18:07+09:00","datePublished":"2022-10-11T12:18:07+09:00","description":"(달성/목표) 뽀모도리 등 가슴 배 1일 3/3 5/5 5/5 3/3 1주 8/40      ","headline":"w3school React","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-10-11/TIL"},"url":"http://localhost:4000/2022-10-11/TIL"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-10-11T12:18:07+09:00","datePublished":"2022-10-11T12:18:07+09:00","description":"JSX","headline":"w3school React","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-10-11/TIL"},"url":"http://localhost:4000/2022-10-11/TIL"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -43,7 +42,6 @@
 
 
   <body>
-
     <nav class="nav">
   <div class="nav-container">
     <a href="/">
@@ -58,58 +56,25 @@
 </nav>
 
 
-    <main>
-      <div class="post">
-  <div class="post-info">
-    <span>Written by</span>
-    
-        Sunmi Moon
-    
+    <main><div class="post">
+  <h1 class="post-title">w3school React</h1>
 
+  <div class="post-info">
     
-      <br>
-      <span>on&nbsp;</span><time datetime="2022-10-11 12:18:07 +0900">October 11, 2022</time>
+    <br />
+    <span>on&nbsp;</span
+    ><time datetime="2022-10-11 12:18:07 +0900">October 11, 2022</time>
     
   </div>
 
-  <h1 class="post-title">w3school React</h1>
-  <div class="post-line"></div>
-
-  <table>
-  <thead>
-    <tr>
-      <th>(달성/목표)</th>
-      <th>뽀모도리</th>
-      <th>등</th>
-      <th>가슴</th>
-      <th>배</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1일</td>
-      <td>3/3</td>
-      <td>5/5</td>
-      <td>5/5</td>
-      <td>3/3</td>
-    </tr>
-    <tr>
-      <td>1주</td>
-      <td>8/40</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="jsx">JSX</h3>
+  <h3 id="jsx">JSX</h3>
 
 <p>JSX: JavaScript XML. React 안에 HTML을 쓸 수 있게 한다.</p>
 
 <p>JSX에서 식은 {}로 감싸서 쓴다.</p>
 
 <p>긴 줄은 다음과 같이 쓰면 된다.</p>
+
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">myElement</span> <span class="o">=</span> <span class="p">(</span>
   <span class="o">&lt;</span><span class="nx">ul</span><span class="o">&gt;</span>
     <span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;</span><span class="nx">Apples</span><span class="o">&lt;</span><span class="sr">/li</span><span class="err">&gt;
@@ -118,7 +83,7 @@
 </span>  <span class="o">&lt;</span><span class="sr">/ul</span><span class="err">&gt;
 </span><span class="p">);</span>
 
-<span class="kd">const</span> <span class="nx">root</span> <span class="o">=</span> <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">creatRoot</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">root</span><span class="dl">'</span><span class="p">));</span>
+<span class="kd">const</span> <span class="nx">root</span> <span class="o">=</span> <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">creatRoot</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">root</span><span class="dl">"</span><span class="p">));</span>
 <span class="nx">root</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="nx">myElement</span><span class="p">);</span>
 </code></pre></div></div>
 
@@ -130,6 +95,7 @@
 </code></pre></div></div>
 
 <h4 id="jsx에서의-규칙">JSX에서의 규칙</h4>
+
 <ul>
   <li>JSX에서는 class 대신에 className을 써준다.</li>
   <li>if문을 쓸 수 없으므로, ternary expression을 쓴다. (<code class="language-plaintext highlighter-rouge">x&gt;10? 'big': 'small'</code>)</li>
@@ -139,13 +105,14 @@
 
 <p>컴포넌트는 HTML 엘리먼트를 반환하는 함수와 같다. <code class="language-plaintext highlighter-rouge">&lt;h2&gt;</code> HTML 엘리먼트를 반환하는 <code class="language-plaintext highlighter-rouge">Car</code> 컴포넌트.</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Car</span><span class="p">(){</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Car</span><span class="p">()</span> <span class="p">{</span>
   <span class="k">return</span> <span class="o">&lt;</span><span class="nx">h2</span><span class="o">&gt;</span><span class="nx">Hi</span><span class="p">,</span> <span class="nx">I</span><span class="dl">'</span><span class="s1">m a Car!&lt;/h2&gt;;
 }
 </span></code></pre></div></div>
 
 <p>이제 이 컴포넌트는 <code class="language-plaintext highlighter-rouge">&lt;Car /&gt;</code>라는 평범한 HTML처럼 이용할 수 있다.</p>
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">root</span> <span class="o">=</span> <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">createRoot</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">root</span><span class="dl">'</span><span class="p">));</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">root</span> <span class="o">=</span> <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">createRoot</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">root</span><span class="dl">"</span><span class="p">));</span>
 <span class="nx">root</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">Car</span> <span class="o">/&gt;</span><span class="p">);</span>
 </code></pre></div></div>
 
@@ -165,7 +132,7 @@ root.render(&lt;Car color="red" /&gt;);
 
 <p>props는 컴포넌트 안으로 전달되는 arguments들이다. props는 HTML attribute를 통해서 컴포넌트의 프러퍼티로 전달된다.</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Car</span><span class="p">(</span><span class="nx">props</span><span class="p">){</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Car</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="o">&lt;</span><span class="nx">h2</span><span class="o">&gt;</span><span class="nx">I</span> <span class="nx">am</span> <span class="nx">a</span> <span class="p">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">brand</span><span class="p">}</span> <span class="nx">car</span><span class="o">!</span> <span class="o">&lt;</span><span class="sr">/h2&gt;</span><span class="err">;
 </span><span class="p">}</span>
 
@@ -175,9 +142,9 @@ root.render(&lt;Car color="red" /&gt;);
       <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">Who</span> <span class="nx">lives</span> <span class="k">in</span> <span class="nx">my</span> <span class="nx">garage</span><span class="p">?</span><span class="o">&lt;</span><span class="sr">/h1</span><span class="err">&gt;
 </span>      <span class="o">&lt;</span><span class="nx">Car</span> <span class="nx">brand</span><span class="o">=</span><span class="dl">"</span><span class="s2">Ford</span><span class="dl">"</span> <span class="o">/&gt;</span>
     <span class="o">&lt;</span><span class="sr">/</span><span class="err">&gt;
-</span>  <span class="p">)</span>
+</span>  <span class="p">);</span>
 <span class="p">}</span>
-<span class="kd">const</span> <span class="nx">root</span> <span class="o">=</span> <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">creatRoot</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">root</span><span class="dl">'</span><span class="p">));</span>
+<span class="kd">const</span> <span class="nx">root</span> <span class="o">=</span> <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">creatRoot</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">root</span><span class="dl">"</span><span class="p">));</span>
 <span class="nx">root</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">Garage</span> <span class="o">/&gt;</span><span class="p">);</span>
 </code></pre></div></div>
 
@@ -193,12 +160,10 @@ root.render(&lt;Car color="red" /&gt;);
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Football</span><span class="p">()</span> <span class="p">{</span>
   <span class="kd">const</span> <span class="nx">shoot</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="nx">alert</span><span class="p">(</span><span class="dl">"</span><span class="s2">Great Shot!</span><span class="dl">"</span><span class="p">);</span>
-  <span class="p">}</span>
-  <span class="k">return</span> <span class="p">(</span>
-    <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">shoot</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Take</span> <span class="nx">the</span> <span class="nx">shot</span><span class="o">!&lt;</span><span class="sr">/button</span><span class="err">&gt;
-</span>  <span class="p">);</span>
-<span class="p">}</span>
-<span class="kd">const</span> <span class="nx">root</span> <span class="o">=</span> <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">createRoot</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">root</span><span class="dl">'</span><span class="p">));</span>
+  <span class="p">};</span>
+  <span class="k">return</span> <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">shoot</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Take</span> <span class="nx">the</span> <span class="nx">shot</span><span class="o">!&lt;</span><span class="sr">/button&gt;</span><span class="err">;
+</span><span class="p">}</span>
+<span class="kd">const</span> <span class="nx">root</span> <span class="o">=</span> <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">createRoot</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">root</span><span class="dl">"</span><span class="p">));</span>
 <span class="nx">root</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">Football</span> <span class="o">/&gt;</span><span class="p">);</span>
 </code></pre></div></div>
 
@@ -207,12 +172,10 @@ root.render(&lt;Car color="red" /&gt;);
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Football</span><span class="p">()</span> <span class="p">{</span>
   <span class="kd">const</span> <span class="nx">shoot</span> <span class="o">=</span> <span class="p">(</span><span class="nx">what</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="nx">alert</span><span class="p">(</span><span class="nx">what</span><span class="p">);</span>
-  <span class="p">}</span>
-  <span class="k">return</span> <span class="p">(</span>
-    <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">shoot</span><span class="p">(</span><span class="dl">"</span><span class="s2">Goal</span><span class="dl">"</span><span class="p">)}</span><span class="o">&gt;</span><span class="nx">Take</span> <span class="nx">the</span> <span class="nx">shot</span><span class="o">!&lt;</span><span class="sr">/button</span><span class="err">&gt;
-</span>  <span class="p">);</span>
-<span class="p">}</span>
-<span class="kd">const</span> <span class="nx">root</span> <span class="o">=</span> <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">createRoot</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">root</span><span class="dl">'</span><span class="p">));</span>
+  <span class="p">};</span>
+  <span class="k">return</span> <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">shoot</span><span class="p">(</span><span class="dl">"</span><span class="s2">Goal</span><span class="dl">"</span><span class="p">)}</span><span class="o">&gt;</span><span class="nx">Take</span> <span class="nx">the</span> <span class="nx">shot</span><span class="o">!&lt;</span><span class="sr">/button&gt;</span><span class="err">;
+</span><span class="p">}</span>
+<span class="kd">const</span> <span class="nx">root</span> <span class="o">=</span> <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">createRoot</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">root</span><span class="dl">"</span><span class="p">));</span>
 <span class="nx">root</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">Football</span> <span class="o">/&gt;</span><span class="p">);</span>
 </code></pre></div></div>
 
@@ -220,66 +183,62 @@ root.render(&lt;Car color="red" /&gt;);
 
 <p>리액트에서는 컴포넌트를 선택적으로 렌더링할 수 있다.</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Goal</span><span class="p">(</span><span class="nx">props</span><span class="p">){</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Goal</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">if</span> <span class="p">(</span><span class="nx">props</span><span class="p">.</span><span class="nx">isGoal</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">MadeGoal</span><span class="o">/&gt;</span><span class="p">;</span>
+    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">MadeGoal</span> <span class="o">/&gt;</span><span class="p">;</span>
   <span class="p">}</span>
-  <span class="k">return</span> <span class="o">&lt;</span><span class="nx">MissedGoal</span><span class="o">/&gt;</span><span class="p">;</span>
+  <span class="k">return</span> <span class="o">&lt;</span><span class="nx">MissedGoal</span> <span class="o">/&gt;</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="kd">const</span> <span class="nx">root</span> <span class="o">=</span> <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">createRoot</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">root</span><span class="dl">'</span><span class="p">));</span>
+<span class="kd">const</span> <span class="nx">root</span> <span class="o">=</span> <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">createRoot</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">root</span><span class="dl">"</span><span class="p">));</span>
 <span class="nx">root</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">Goal</span> <span class="nx">isGoal</span><span class="o">=</span><span class="p">{</span><span class="kc">false</span><span class="p">}</span> <span class="sr">/&gt;</span><span class="se">)</span><span class="err">;
-</span>
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <p><code class="language-plaintext highlighter-rouge">{ }</code>를 이용하면 JSX 안에 자바스크립트 문법을 사용할 수도 있다.</p>
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Garage</span><span class="p">(</span><span class="nx">props</span><span class="p">){</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Garage</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
   <span class="kd">const</span> <span class="nx">cars</span> <span class="o">=</span> <span class="nx">props</span><span class="p">.</span><span class="nx">cars</span><span class="p">;</span>
-  <span class="k">return</span><span class="p">(</span>
+  <span class="k">return</span> <span class="p">(</span>
     <span class="o">&lt;&gt;</span>
       <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">Garage</span><span class="o">&lt;</span><span class="sr">/h1</span><span class="err">&gt;
-</span>      <span class="p">{</span><span class="nx">cars</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span>
-        <span class="o">&lt;</span><span class="nx">h2</span><span class="o">&gt;</span> <span class="nx">You</span> <span class="nx">have</span> <span class="p">{</span> <span class="nx">cars</span><span class="p">.</span><span class="nx">length</span> <span class="p">}</span> <span class="nx">cars</span><span class="p">.</span> <span class="o">&lt;</span><span class="sr">/h2</span><span class="err">&gt;
-</span>      <span class="p">}</span>
-    <span class="o">&lt;</span><span class="sr">/</span><span class="err">&gt;
-</span>  <span class="p">)</span>
+</span>      <span class="p">{</span><span class="nx">cars</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="o">&lt;</span><span class="nx">h2</span><span class="o">&gt;</span> <span class="nx">You</span> <span class="nx">have</span> <span class="p">{</span><span class="nx">cars</span><span class="p">.</span><span class="nx">length</span><span class="p">}</span> <span class="nx">cars</span><span class="p">.</span> <span class="o">&lt;</span><span class="sr">/h2&gt;</span><span class="err">}
+</span>    <span class="o">&lt;</span><span class="sr">/</span><span class="err">&gt;
+</span>  <span class="p">);</span>
 <span class="p">}</span>
-<span class="kd">const</span> <span class="nx">cars</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Ford</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">BMW</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Audi</span><span class="dl">'</span><span class="p">];</span>
-<span class="kd">const</span> <span class="nx">root</span> <span class="o">=</span> <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">createRoot</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">root</span><span class="dl">'</span><span class="p">));</span>
+<span class="kd">const</span> <span class="nx">cars</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Ford</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">BMW</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Audi</span><span class="dl">"</span><span class="p">];</span>
+<span class="kd">const</span> <span class="nx">root</span> <span class="o">=</span> <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">createRoot</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">root</span><span class="dl">"</span><span class="p">));</span>
 <span class="nx">root</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">Garage</span> <span class="nx">cars</span><span class="o">=</span><span class="p">{</span><span class="nx">cars</span><span class="p">}</span> <span class="sr">/&gt;</span><span class="se">)</span><span class="err">;
 </span></code></pre></div></div>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Goal</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
   <span class="kd">const</span> <span class="nx">isGoal</span> <span class="o">=</span> <span class="nx">props</span><span class="p">.</span><span class="nx">isGoal</span><span class="p">;</span>
-  <span class="k">return</span> <span class="p">(</span>
-  <span class="o">&lt;&gt;</span>
-    <span class="p">{</span> <span class="nx">isGoal</span><span class="p">?</span> <span class="o">&lt;</span><span class="nx">MadeGoal</span> <span class="o">/&gt;</span> <span class="p">:</span> <span class="o">&lt;</span><span class="nx">MissedGoal</span> <span class="o">/&gt;</span> <span class="p">}</span>
-  <span class="o">&lt;</span><span class="sr">/</span><span class="err">&gt;
-</span>  <span class="p">)</span>
-<span class="p">}</span>
-<span class="kd">const</span> <span class="nx">root</span> <span class="o">=</span> <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">createRoot</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">root</span><span class="dl">'</span><span class="p">));</span>
+  <span class="k">return</span> <span class="o">&lt;&gt;</span><span class="p">{</span><span class="nx">isGoal</span> <span class="p">?</span> <span class="o">&lt;</span><span class="nx">MadeGoal</span> <span class="o">/&gt;</span> <span class="p">:</span> <span class="o">&lt;</span><span class="nx">MissedGoal</span> <span class="o">/&gt;</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/&gt;</span><span class="err">;
+</span><span class="p">}</span>
+<span class="kd">const</span> <span class="nx">root</span> <span class="o">=</span> <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">createRoot</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">root</span><span class="dl">"</span><span class="p">));</span>
 <span class="nx">root</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">Goal</span> <span class="nx">isGoal</span><span class="o">=</span><span class="p">{</span><span class="kc">false</span><span class="p">}</span> <span class="sr">/&gt;</span><span class="se">)</span><span class="err">;
 </span></code></pre></div></div>
 
 <h3 id="lists">Lists</h3>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Car</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;</span><span class="nx">I</span> <span class="nx">am</span> <span class="nx">a</span> <span class="p">{</span> <span class="nx">props</span><span class="p">.</span><span class="nx">brand</span> <span class="p">}</span><span class="o">&lt;</span><span class="sr">/li&gt;</span><span class="err">;
+  <span class="k">return</span> <span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;</span><span class="nx">I</span> <span class="nx">am</span> <span class="nx">a</span> <span class="p">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">brand</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/li&gt;</span><span class="err">;
 </span><span class="p">}</span>
 
 <span class="kd">function</span> <span class="nx">Garage</span><span class="p">()</span> <span class="p">{</span>
-  <span class="kd">const</span> <span class="nx">cars</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">Ford</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">BMW</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Audi</span><span class="dl">'</span><span class="p">];</span>
+  <span class="kd">const</span> <span class="nx">cars</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Ford</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">BMW</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Audi</span><span class="dl">"</span><span class="p">];</span>
   <span class="k">return</span> <span class="p">(</span>
     <span class="o">&lt;&gt;</span>
       <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">Who</span> <span class="nx">lives</span> <span class="k">in</span> <span class="nx">the</span> <span class="nx">garage</span><span class="p">?</span><span class="o">&lt;</span><span class="sr">/h1</span><span class="err">&gt;
 </span>      <span class="o">&lt;</span><span class="nx">ul</span><span class="o">&gt;</span>
-        <span class="p">{</span> <span class="nx">cars</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">car</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="o">&lt;</span><span class="nx">Car</span> <span class="nx">brand</span><span class="o">=</span><span class="p">{</span><span class="nx">car</span><span class="p">}</span> <span class="sr">/&gt;</span><span class="se">)</span><span class="sr"> </span><span class="err">}
-</span>      <span class="o">&lt;</span><span class="sr">/ul</span><span class="err">&gt;
+        <span class="p">{</span><span class="nx">cars</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">car</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
+          <span class="o">&lt;</span><span class="nx">Car</span> <span class="nx">brand</span><span class="o">=</span><span class="p">{</span><span class="nx">car</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>        <span class="p">))}</span>
+      <span class="o">&lt;</span><span class="sr">/ul</span><span class="err">&gt;
 </span>    <span class="o">&lt;</span><span class="sr">/</span><span class="err">&gt;
-</span>  <span class="p">)</span>
+</span>  <span class="p">);</span>
 <span class="p">}</span>
 
-<span class="kd">const</span> <span class="nx">root</span> <span class="o">=</span> <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">createRoot</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">root</span><span class="dl">'</span><span class="p">));</span>
+<span class="kd">const</span> <span class="nx">root</span> <span class="o">=</span> <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">createRoot</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">root</span><span class="dl">"</span><span class="p">));</span>
 <span class="nx">root</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">Garage</span> <span class="o">/&gt;</span><span class="p">);</span>
 </code></pre></div></div>
 
@@ -293,7 +252,7 @@ root.render(&lt;Car color="red" /&gt;);
 
 <span class="kd">function</span> <span class="nx">Garage</span><span class="p">()</span> <span class="p">{</span>
   <span class="kd">const</span> <span class="nx">cars</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">{</span><span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">brand</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Ford</span><span class="dl">'</span><span class="p">},</span> 
+    <span class="p">{</span><span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">brand</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Ford</span><span class="dl">'</span><span class="p">},</span>
     <span class="p">{</span><span class="na">id</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="na">brand</span><span class="p">:</span> <span class="dl">'</span><span class="s1">BMW</span><span class="dl">'</span><span class="p">},</span>
     <span class="p">{</span><span class="na">id</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Audi</span><span class="dl">'</span><span class="p">}</span>
   <span class="p">];</span>
@@ -322,7 +281,7 @@ root.render(&lt;Car color="red" /&gt;);
 
 <span class="kd">function</span> <span class="nx">MyForm</span><span class="p">(){</span>
   <span class="kd">const</span> <span class="p">[</span><span class="nx">name</span><span class="p">,</span> <span class="nx">setName</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="dl">""</span><span class="p">);</span>
-  
+
   <span class="k">return</span><span class="p">(</span>
     <span class="o">&lt;</span><span class="nx">form</span><span class="o">&gt;</span>
       <span class="o">&lt;</span><span class="nx">input</span>
@@ -347,19 +306,22 @@ root.render(&lt;Car color="red" /&gt;);
 
 <div class="pagination">
   
-    <a href="/2022-10-12/TIL" class="left arrow">&#8592;</a>
-  
-  
-    <a href="/2022-10-10/TIL" class="right arrow">&#8594;</a>
+  <a href="/2022-10-12/TIL" class="left arrow"
+    >&#8592;</a
+  >
+   
+  <a href="/2022-10-10/TIL" class="right arrow"
+    >&#8594;</a
+  >
   
 
   <a href="#" class="top">Top</a>
 </div>
-    </main>
+</main>
 
     <footer>
   <span>
-    &copy; <time datetime="2023-08-01 23:12:59 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-08-05 10:07:13 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 

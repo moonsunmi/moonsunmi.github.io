@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,8 +10,8 @@
 <meta property="og:title" content="TIL) 모던 리액트 웹 사이트의 todolist 만들기 클론 코딩" />
 <meta name="author" content="Sunmi Moon" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="(달성/목표) 뽀모도리 1일 7 / 5 1주 7 /40" />
-<meta property="og:description" content="(달성/목표) 뽀모도리 1일 7 / 5 1주 7 /40" />
+<meta name="description" content="todolist 컴포넌트들" />
+<meta property="og:description" content="todolist 컴포넌트들" />
 <link rel="canonical" href="http://localhost:4000/2022-11-21/TIL" />
 <meta property="og:url" content="http://localhost:4000/2022-11-21/TIL" />
 <meta property="og:site_name" content="주경야독학) 개발공부로그" />
@@ -21,7 +20,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="TIL) 모던 리액트 웹 사이트의 todolist 만들기 클론 코딩" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-11-21T12:18:07+09:00","datePublished":"2022-11-21T12:18:07+09:00","description":"(달성/목표) 뽀모도리 1일 7 / 5 1주 7 /40","headline":"TIL) 모던 리액트 웹 사이트의 todolist 만들기 클론 코딩","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-11-21/TIL"},"url":"http://localhost:4000/2022-11-21/TIL"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-11-21T12:18:07+09:00","datePublished":"2022-11-21T12:18:07+09:00","description":"todolist 컴포넌트들","headline":"TIL) 모던 리액트 웹 사이트의 todolist 만들기 클론 코딩","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-11-21/TIL"},"url":"http://localhost:4000/2022-11-21/TIL"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -43,7 +42,6 @@
 
 
   <body>
-
     <nav class="nav">
   <div class="nav-container">
     <a href="/">
@@ -58,43 +56,18 @@
 </nav>
 
 
-    <main>
-      <div class="post">
-  <div class="post-info">
-    <span>Written by</span>
-    
-        Sunmi Moon
-    
+    <main><div class="post">
+  <h1 class="post-title">TIL) 모던 리액트 웹 사이트의 todolist 만들기 클론 코딩</h1>
 
+  <div class="post-info">
     
-      <br>
-      <span>on&nbsp;</span><time datetime="2022-11-21 12:18:07 +0900">November 21, 2022</time>
+    <br />
+    <span>on&nbsp;</span
+    ><time datetime="2022-11-21 12:18:07 +0900">November 21, 2022</time>
     
   </div>
 
-  <h1 class="post-title">TIL) 모던 리액트 웹 사이트의 todolist 만들기 클론 코딩</h1>
-  <div class="post-line"></div>
-
-  <table>
-  <thead>
-    <tr>
-      <th>(달성/목표)</th>
-      <th>뽀모도리</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1일</td>
-      <td>7 / 5</td>
-    </tr>
-    <tr>
-      <td>1주</td>
-      <td>7 /40</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="todolist-컴포넌트들">todolist 컴포넌트들</h3>
+  <h3 id="todolist-컴포넌트들">todolist 컴포넌트들</h3>
 
 <p>컴포넌트들 전부에 todo-를 접두어로 붙였고, 레이아웃 역할을 하는 컴포넌트에는 -template이라고 했다. 낱개는 item, 여러 개의 item을 모은 건 list라고 했다. 내 프로젝트의 컴포넌트 이름도 이런 식으로 수정하면 좋을 것 같다.</p>
 
@@ -107,6 +80,7 @@
 <p>오늘은 styled-component 작성으로 시간을 거의 보냈다.</p>
 
 <p>TodoHead.js</p>
+
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">styled</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">styled-components</span><span class="dl">"</span><span class="p">;</span>
 
@@ -170,7 +144,6 @@
 <span class="p">};</span>
 
 <span class="k">export</span> <span class="k">default</span> <span class="nx">TodoList</span><span class="p">;</span>
-
 </code></pre></div></div>
 
 <p>TodoItem.js</p>
@@ -247,11 +220,10 @@
 <span class="p">};</span>
 
 <span class="k">export</span> <span class="k">default</span> <span class="nx">TodoItem</span><span class="p">;</span>
-
-
 </code></pre></div></div>
 
 <p>TodoCreate.js</p>
+
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">styled</span><span class="p">,</span> <span class="p">{</span> <span class="nx">css</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">styled-components</span><span class="dl">"</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">MdAdd</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react-icons/md</span><span class="dl">"</span><span class="p">;</span>
@@ -351,7 +323,6 @@
 <span class="p">};</span>
 
 <span class="k">export</span> <span class="k">default</span> <span class="nx">TodoCreate</span><span class="p">;</span>
-
 </code></pre></div></div>
 
 <hr />
@@ -362,26 +333,28 @@
 2키로짜리 아령으로 덤벨숄더프레스 10회 사이드레터럴레이즈 10회 4~5세트
 덤벨 오버헤드 익스텐션 15회 4~5세트</p>
 
-
 </div>
 
 
 
 <div class="pagination">
   
-    <a href="/2022-11-22/TIL" class="left arrow">&#8592;</a>
-  
-  
-    <a href="/2022-11-20/17th-week" class="right arrow">&#8594;</a>
+  <a href="/2022-11-22/TIL" class="left arrow"
+    >&#8592;</a
+  >
+   
+  <a href="/2022-11-20/17th-week" class="right arrow"
+    >&#8594;</a
+  >
   
 
   <a href="#" class="top">Top</a>
 </div>
-    </main>
+</main>
 
     <footer>
   <span>
-    &copy; <time datetime="2023-08-01 23:12:59 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-08-05 10:07:13 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 

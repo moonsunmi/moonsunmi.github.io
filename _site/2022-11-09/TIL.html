@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,8 +10,8 @@
 <meta property="og:title" content="TIL) POMO-WEEKLY 프로젝트 로그 만드는 중" />
 <meta name="author" content="Sunmi Moon" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="(달성/목표) 뽀모도리 1일 5 / 5 1주 10 /40" />
-<meta property="og:description" content="(달성/목표) 뽀모도리 1일 5 / 5 1주 10 /40" />
+<meta name="description" content="로그를 만들어 보자" />
+<meta property="og:description" content="로그를 만들어 보자" />
 <link rel="canonical" href="http://localhost:4000/2022-11-09/TIL" />
 <meta property="og:url" content="http://localhost:4000/2022-11-09/TIL" />
 <meta property="og:site_name" content="주경야독학) 개발공부로그" />
@@ -21,7 +20,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="TIL) POMO-WEEKLY 프로젝트 로그 만드는 중" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-11-09T12:18:07+09:00","datePublished":"2022-11-09T12:18:07+09:00","description":"(달성/목표) 뽀모도리 1일 5 / 5 1주 10 /40","headline":"TIL) POMO-WEEKLY 프로젝트 로그 만드는 중","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-11-09/TIL"},"url":"http://localhost:4000/2022-11-09/TIL"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-11-09T12:18:07+09:00","datePublished":"2022-11-09T12:18:07+09:00","description":"로그를 만들어 보자","headline":"TIL) POMO-WEEKLY 프로젝트 로그 만드는 중","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-11-09/TIL"},"url":"http://localhost:4000/2022-11-09/TIL"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -43,7 +42,6 @@
 
 
   <body>
-
     <nav class="nav">
   <div class="nav-container">
     <a href="/">
@@ -58,43 +56,18 @@
 </nav>
 
 
-    <main>
-      <div class="post">
-  <div class="post-info">
-    <span>Written by</span>
-    
-        Sunmi Moon
-    
+    <main><div class="post">
+  <h1 class="post-title">TIL) POMO-WEEKLY 프로젝트 로그 만드는 중</h1>
 
+  <div class="post-info">
     
-      <br>
-      <span>on&nbsp;</span><time datetime="2022-11-09 12:18:07 +0900">November 09, 2022</time>
+    <br />
+    <span>on&nbsp;</span
+    ><time datetime="2022-11-09 12:18:07 +0900">November 09, 2022</time>
     
   </div>
 
-  <h1 class="post-title">TIL) POMO-WEEKLY 프로젝트 로그 만드는 중</h1>
-  <div class="post-line"></div>
-
-  <table>
-  <thead>
-    <tr>
-      <th>(달성/목표)</th>
-      <th>뽀모도리</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1일</td>
-      <td>5 / 5</td>
-    </tr>
-    <tr>
-      <td>1주</td>
-      <td>10 /40</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="로그를-만들어-보자">로그를 만들어 보자</h3>
+  <h3 id="로그를-만들어-보자">로그를 만들어 보자</h3>
 
 <p>LOG를 기록하고 출력하기 위해서 logs를 useState로 만들었다. 지금 버전은 props를 계속 전달해 주고 있는데, 조만간 redux를 공부해서 데이터를 조금 더 체계적으로 관리해야 할 것 같다.</p>
 
@@ -105,11 +78,13 @@
 <p>로그의 개수는 useRef로 다룬다.</p>
 
 <p>index.js</p>
+
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="p">[</span><span class="nx">logs</span><span class="p">,</span> <span class="nx">setLogs</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">([{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">start</span><span class="p">:</span> <span class="nb">Date</span><span class="p">(),</span> <span class="na">end</span><span class="p">:</span> <span class="nb">Date</span><span class="p">()</span> <span class="p">}]);</span>
 <span class="kd">const</span> <span class="nx">nextLogId</span> <span class="o">=</span> <span class="nx">useRef</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
 </code></pre></div></div>
 
 <p>Counter.js</p>
+
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">getTimeRecord</span><span class="p">(</span><span class="nx">now</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="s2">`</span><span class="p">${</span><span class="nx">now</span><span class="p">.</span><span class="nx">getFullYear</span><span class="p">()}</span><span class="s2">년 </span><span class="p">${</span><span class="nx">now</span><span class="p">.</span><span class="nx">getMonth</span><span class="p">()}</span><span class="s2">월 </span><span class="p">${</span><span class="nx">now</span><span class="p">.</span><span class="nx">getDate</span><span class="p">()}</span><span class="s2">일 </span><span class="p">${</span><span class="nx">now</span><span class="p">.</span><span class="nx">getHours</span><span class="p">()}</span><span class="s2">시 </span><span class="p">${</span><span class="nx">now</span><span class="p">.</span><span class="nx">getMinutes</span><span class="p">()}</span><span class="s2">분 `</span><span class="p">;</span>
 <span class="p">}</span>
@@ -172,26 +147,28 @@
   </tbody>
 </table>
 
-
 </div>
 
 
 
 <div class="pagination">
   
-    <a href="/2022-11-10/TIL" class="left arrow">&#8592;</a>
-  
-  
-    <a href="/2022-11-07/TIL" class="right arrow">&#8594;</a>
+  <a href="/2022-11-10/TIL" class="left arrow"
+    >&#8592;</a
+  >
+   
+  <a href="/2022-11-07/TIL" class="right arrow"
+    >&#8594;</a
+  >
   
 
   <a href="#" class="top">Top</a>
 </div>
-    </main>
+</main>
 
     <footer>
   <span>
-    &copy; <time datetime="2023-08-01 23:12:59 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-08-05 10:07:13 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 

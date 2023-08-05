@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-08-01T23:12:59+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">주경야독학) 개발공부로그</title><subtitle>주경야독, 독학으로 웹 프로그래밍을 공부하고 있습니다.</subtitle><author><name>Sunmi Moon</name><email>celebmoon@naver.com</email></author><entry><title type="html">TIL) CORS 에러와 Django에서 해결</title><link href="http://localhost:4000/2023-07-28/TIL" rel="alternate" type="text/html" title="TIL) CORS 에러와 Django에서 해결" /><published>2023-07-28T12:18:07+09:00</published><updated>2023-07-28T12:18:07+09:00</updated><id>http://localhost:4000/2023-07-28/TIL</id><content type="html" xml:base="http://localhost:4000/2023-07-28/TIL"><![CDATA[<p>프론트에서 다음과 같은 CORS 에러가 발생했다.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-08-05T10:07:13+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">주경야독학) 개발공부로그</title><subtitle>주경야독, 독학으로 웹 프로그래밍을 공부하고 있습니다.</subtitle><author><name>Sunmi Moon</name><email>celebmoon@naver.com</email></author><entry><title type="html">TIL) CORS 에러와 Django에서 해결</title><link href="http://localhost:4000/2023-07-28/TIL" rel="alternate" type="text/html" title="TIL) CORS 에러와 Django에서 해결" /><published>2023-07-28T12:18:07+09:00</published><updated>2023-07-28T12:18:07+09:00</updated><id>http://localhost:4000/2023-07-28/TIL</id><content type="html" xml:base="http://localhost:4000/2023-07-28/TIL"><![CDATA[<p>프론트에서 다음과 같은 CORS 에러가 발생했다.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Access to XMLHttpRequest at 'https://...' from origin 'http://localhost:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
 </code></pre></div></div>
@@ -22,11 +22,13 @@ SOP 정책을 위반하더라도 CORS 정책을 지키면 다른 출처의 리�
 
 <p>Django에서는 Access-Controll-Allow-Origin을 Django-cors-headers를 사용해서 추가할 수 있다.</p>
 
-<p>setting을 다음과 같이 해 주면, 교차 출처 리소스를 무조건 가져올 수 있고,</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CORS_ORIGIN_ALLOW_ALL = False
+<p>setting을 다음과 같이 해 주면, 교차 출처 리소스를 무조건 가져올 수 있다. 하지만 보안상 권장되지 않으며, 기본값은 <code class="language-plaintext highlighter-rouge">False</code>이다.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CORS_ALLOW_ALL_ORIGINS = True
 </code></pre></div></div>
-<p>다음과 같이 whitelist에 추가해 주면, 해당 출처만 허용된다.</p>
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CORS_ORIGIN_WHITELIST = [
+
+<p>다음과 같이 가능한 origin을 추가해 주면, 지정된 origin은 CORS가 허용된다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
 </code></pre></div></div>]]></content><author><name>Sunmi Moon</name><email>celebmoon@naver.com</email></author><category term="Django" /><summary type="html"><![CDATA[프론트에서 다음과 같은 CORS 에러가 발생했다.]]></summary></entry><entry><title type="html">TIL) csv import/export in Django</title><link href="http://localhost:4000/2023-07-24/TIL" rel="alternate" type="text/html" title="TIL) csv import/export in Django" /><published>2023-07-24T12:18:07+09:00</published><updated>2023-07-24T12:18:07+09:00</updated><id>http://localhost:4000/2023-07-24/TIL</id><content type="html" xml:base="http://localhost:4000/2023-07-24/TIL"><![CDATA[<p>admin 화면을 구성하려면 csv 등의 파일을 improt하거나 export하는 게 필요할 때가 있다. admin에서 export만 구현하려면 다음과 같이 하면 된다.

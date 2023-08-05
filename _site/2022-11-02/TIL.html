@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,8 +10,8 @@
 <meta property="og:title" content="TIL) Facebook Clone Coding(Next.js, Tailwind CSS, Responsive)" />
 <meta name="author" content="Sunmi Moon" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="(달성/목표) 뽀모도리 1일 5/5 1주 13 /40" />
-<meta property="og:description" content="(달성/목표) 뽀모도리 1일 5/5 1주 13 /40" />
+<meta name="description" content="###" />
+<meta property="og:description" content="###" />
 <link rel="canonical" href="http://localhost:4000/2022-11-02/TIL" />
 <meta property="og:url" content="http://localhost:4000/2022-11-02/TIL" />
 <meta property="og:site_name" content="주경야독학) 개발공부로그" />
@@ -21,7 +20,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="TIL) Facebook Clone Coding(Next.js, Tailwind CSS, Responsive)" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-11-02T12:18:07+09:00","datePublished":"2022-11-02T12:18:07+09:00","description":"(달성/목표) 뽀모도리 1일 5/5 1주 13 /40","headline":"TIL) Facebook Clone Coding(Next.js, Tailwind CSS, Responsive)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-11-02/TIL"},"url":"http://localhost:4000/2022-11-02/TIL"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-11-02T12:18:07+09:00","datePublished":"2022-11-02T12:18:07+09:00","description":"###","headline":"TIL) Facebook Clone Coding(Next.js, Tailwind CSS, Responsive)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-11-02/TIL"},"url":"http://localhost:4000/2022-11-02/TIL"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -43,7 +42,6 @@
 
 
   <body>
-
     <nav class="nav">
   <div class="nav-container">
     <a href="/">
@@ -58,44 +56,20 @@
 </nav>
 
 
-    <main>
-      <div class="post">
-  <div class="post-info">
-    <span>Written by</span>
-    
-        Sunmi Moon
-    
+    <main><div class="post">
+  <h1 class="post-title">TIL) Facebook Clone Coding(Next.js, Tailwind CSS, Responsive)</h1>
 
+  <div class="post-info">
     
-      <br>
-      <span>on&nbsp;</span><time datetime="2022-11-02 12:18:07 +0900">November 02, 2022</time>
+    <br />
+    <span>on&nbsp;</span
+    ><time datetime="2022-11-02 12:18:07 +0900">November 02, 2022</time>
     
   </div>
 
-  <h1 class="post-title">TIL) Facebook Clone Coding(Next.js, Tailwind CSS, Responsive)</h1>
-  <div class="post-line"></div>
+  <p>###</p>
 
-  <table>
-  <thead>
-    <tr>
-      <th>(달성/목표)</th>
-      <th>뽀모도리</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1일</td>
-      <td>5/5</td>
-    </tr>
-    <tr>
-      <td>1주</td>
-      <td>13 /40</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>###
-공식 문서를 이용해서 파일 업로드를 구현했다. 새로운 방법이 훨씬 간단하고 편리하다.</p>
+<p>공식 문서를 이용해서 파일 업로드를 구현했다. 새로운 방법이 훨씬 간단하고 편리하다.</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="nx">imageToPost</span><span class="p">)</span> <span class="p">{</span>
   <span class="kd">const</span> <span class="nx">storage</span> <span class="o">=</span> <span class="nx">getStorage</span><span class="p">(</span><span class="nx">app</span><span class="p">);</span>
@@ -113,9 +87,11 @@
 <p>파일 이름은 uuidv4를 이용해 중복되지 않게 했다. Blob이나 File을 넣으라는 공간에 도대체 뭘 넣어야 할지를 몰랐었는데, 파일을 업로드할 때 눌렀던 부분(photo 아이콘 부분) <code class="language-plaintext highlighter-rouge">&lt;input type="file"</code>에서 이벤트가 발생하면 <code class="language-plaintext highlighter-rouge">e.target.files</code>에 해당 그림 파일이 지정되었다. 그 부분을 넣어 주었다. 다른 메서드에 있기에 어떻게 넘겨줄까 고민하다가 state를 썼는데… 좋은 방법인 건지는 잘 모르겠다.</p>
 
 <h3 id="react-firbase-hooks">react-firbase-hooks</h3>
+
 <p>파이어베이스에 업로드를 한 파일을 화면으로 다시 가져와서 보여 주어야 한다. Post 컴포넌트 구현. <code class="language-plaintext highlighter-rouge">useCollections</code> 훅은 query를 매개변수로 받아 snapshot, loading(boolean), error 세 값을 반환한다.</p>
 
 <p>Posts.js</p>
+
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useCollection</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react-firebase-hooks/firestore</span><span class="dl">"</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">db</span><span class="p">,</span> <span class="nx">app</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">../firebase</span><span class="dl">"</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">getFirestore</span><span class="p">,</span> <span class="nx">collection</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">firebase/firestore</span><span class="dl">"</span><span class="p">;</span>
@@ -171,26 +147,28 @@
   </tbody>
 </table>
 
-
 </div>
 
 
 
 <div class="pagination">
   
-    <a href="/2022-11-03/TIL" class="left arrow">&#8592;</a>
-  
-  
-    <a href="/2022-11-01/TIL" class="right arrow">&#8594;</a>
+  <a href="/2022-11-03/TIL" class="left arrow"
+    >&#8592;</a
+  >
+   
+  <a href="/2022-11-01/TIL" class="right arrow"
+    >&#8594;</a
+  >
   
 
   <a href="#" class="top">Top</a>
 </div>
-    </main>
+</main>
 
     <footer>
   <span>
-    &copy; <time datetime="2023-08-01 23:12:59 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-08-05 10:07:13 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 

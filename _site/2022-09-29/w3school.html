@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,8 +10,8 @@
 <meta property="og:title" content="w3school CSS" />
 <meta name="author" content="Sunmi Moon" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="  뽀모도리 등운동 가슴운동 일간(달성/목표) 3/4 5/5 5/5 주간(달성/목표) 15/40    " />
-<meta property="og:description" content="  뽀모도리 등운동 가슴운동 일간(달성/목표) 3/4 5/5 5/5 주간(달성/목표) 15/40    " />
+<meta name="description" content="z-index" />
+<meta property="og:description" content="z-index" />
 <link rel="canonical" href="http://localhost:4000/2022-09-29/w3school" />
 <meta property="og:url" content="http://localhost:4000/2022-09-29/w3school" />
 <meta property="og:site_name" content="주경야독학) 개발공부로그" />
@@ -21,7 +20,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="w3school CSS" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-09-29T12:18:07+09:00","datePublished":"2022-09-29T12:18:07+09:00","description":"  뽀모도리 등운동 가슴운동 일간(달성/목표) 3/4 5/5 5/5 주간(달성/목표) 15/40    ","headline":"w3school CSS","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-09-29/w3school"},"url":"http://localhost:4000/2022-09-29/w3school"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-09-29T12:18:07+09:00","datePublished":"2022-09-29T12:18:07+09:00","description":"z-index","headline":"w3school CSS","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-09-29/w3school"},"url":"http://localhost:4000/2022-09-29/w3school"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -43,7 +42,6 @@
 
 
   <body>
-
     <nav class="nav">
   <div class="nav-container">
     <a href="/">
@@ -58,57 +56,22 @@
 </nav>
 
 
-    <main>
-      <div class="post">
-  <div class="post-info">
-    <span>Written by</span>
-    
-        Sunmi Moon
-    
+    <main><div class="post">
+  <h1 class="post-title">w3school CSS</h1>
 
+  <div class="post-info">
     
-      <br>
-      <span>on&nbsp;</span><time datetime="2022-09-29 12:18:07 +0900">September 29, 2022</time>
+    <br />
+    <span>on&nbsp;</span
+    ><time datetime="2022-09-29 12:18:07 +0900">September 29, 2022</time>
     
   </div>
 
-  <h1 class="post-title">w3school CSS</h1>
-  <div class="post-line"></div>
-
-  <table>
-  <thead>
-    <tr>
-      <th> </th>
-      <th>뽀모도리</th>
-      <th>등운동</th>
-      <th>가슴운동</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>일간(달성/목표)</td>
-      <td>3/4</td>
-      <td>5/5</td>
-      <td>5/5</td>
-    </tr>
-    <tr>
-      <td>주간(달성/목표)</td>
-      <td>15/40</td>
-      <td> </td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="z-index">z-index</h3>
+  <h3 id="z-index">z-index</h3>
 
 <p>엘리먼트들이 겹치게 되었을 때, 순서를 지정해 준다.</p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>img {
-  position: absolute;
-  ...
-  z-index: -1;
-}
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>img { position: absolute; ... z-index: -1; }
 </code></pre></div></div>
 
 <p>z-index: -1로 지정해 주면, 이미지는 항상 다른 엘리먼트보다 뒤에 위치해 있게 된다.</p>
@@ -128,57 +91,33 @@
 
 <p>x, y 조합도 가능</p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>div {
-  overflow-x: hidden; /* Hide horizontal scrollbar */
-  overflow-y: scroll; /* Add vertical scrollbar */
-}
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>div { overflow-x: hidden; /* Hide horizontal scrollbar */ overflow-y: scroll; /*
+Add vertical scrollbar */ }
 </code></pre></div></div>
 
 <h3 id="float">float</h3>
 
 <p>워드 편집기에서 그림을 글자로 취급하기로 넣은 것처럼,</p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>img {
-  float: none;
-}
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>img { float: none; }
 </code></pre></div></div>
 
 <p>float로 div 박스 세 개 나란히 쉽게 만든다.</p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>div {
-  float: left;
-  padding: 15px; 
-}
-
-.div1 {
-  background: red;
-}
-
-.div2 {
-  background: yellow;
-}
-
-.div3 {
-  background: green;
-}
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>div { float: left; padding: 15px; } .div1 { background: red; } .div2 {
+background: yellow; } .div3 { background: green; }
 </code></pre></div></div>
 
 <p>다음 float를 하단에 만들고 싶다면, clear 속성을 이용한다.</p>
 
 <p>자신을 감싸고 있는 컨테이너보다 크면, 자동으로 컨테이너를 키워주는 것.</p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.clearfix {
-  overflow: auto;
-}
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.clearfix { overflow: auto; }
 </code></pre></div></div>
 
 <p>모던한 방법은 하단이라네.</p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
-}
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.clearfix::after { content: ""; clear: both; display: table; }
 </code></pre></div></div>
 
 <h3 id="css-콤비네이터">CSS 콤비네이터</h3>
@@ -193,29 +132,23 @@
 </ul>
 
 <p>div 엘리먼트 안에 있는 모든 p 엘리먼트들 선택됨</p>
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>div p {
-  background-color: yellow;
-}
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>div p { background-color: yellow; }
 </code></pre></div></div>
 
 <p>div 엘리먼트 안에 있는 자식 p 엘리먼트만. 손주 p 엘리먼트는 해당되지 않음</p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>div &gt; p {
-  background-color: yellow;
-}
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>div &gt; p { background-color: yellow; }
 </code></pre></div></div>
 
 <p>div와 인접한 형제 p만. 즉, 같은 계층인데 div 바로 다음에 나오는 p 엘리먼트가 선택된다.</p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>div + p {
-  background-color: yellow;
-}
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>div + p { background-color: yellow; }
 </code></pre></div></div>
 
 <p>div와 형제인 p들 전부. div가 나온 이후로의 p들만 해당.</p>
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>div ~ p {
-  background-color: yellow;
-}
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>div ~ p { background-color: yellow; }
 </code></pre></div></div>
 
 <h3 id="css-pseudo-class">CSS pseudo-class</h3>
@@ -228,31 +161,24 @@
 </ul>
 
 <p>모든 p 엘리먼트 안의 첫 번째 i 엘리먼트</p>
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>p i:first-child {
-  color: blue;
-}
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>p i:first-child { color: blue; }
 </code></pre></div></div>
 
 <p>첫 번째 p 엘리먼트 안에 있는 모든 i 엘리먼트</p>
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>p:first-child i {
-  color: blue;
-}
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>p:first-child i { color: blue; }
 </code></pre></div></div>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>q:lang(no) {
-  quotes: "~" "~";
-}
-<span class="nt">&lt;q</span> <span class="na">lang=</span><span class="s">"no"</span><span class="nt">&gt;</span>A quote in a paragraph<span class="nt">&lt;/q&gt;</span> <span class="c">&lt;!-- 이렇게 표시된다. "text ~A quote in a paragraph~ text.." --&gt;</span> 
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>q:lang(no) { quotes: "~" "~"; } <span class="nt">&lt;q</span> <span class="na">lang=</span><span class="s">"no"</span><span class="nt">&gt;</span>A quote in a paragraph<span class="nt">&lt;/q&gt;</span>
+<span class="c">&lt;!-- 이렇게 표시된다. "text ~A quote in a paragraph~ text.." --&gt;</span>
 </code></pre></div></div>
 
 <h3 id="pseudo-element">Pseudo Element</h3>
 
 <p>p 엘리먼트 안의 첫 줄(p 엘리먼트로 감싸 있는 콘텐츠 텍스트)</p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>p::first-line {
-  color: #ff0000;
-  font-variant: small-caps;
-}
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>p::first-line { color: #ff0000; font-variant: small-caps; }
 </code></pre></div></div>
 
 <h3 id="navigation-bar--list-of-links">Navigation Bar = List of Links</h3>
@@ -268,36 +194,23 @@
 </code></pre></div></div>
 
 <p>점 없애고, 마진, 패딩 없애고.</p>
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ul { list-style-type: none; margin: 0; padding: 0; }
 </code></pre></div></div>
 
 <p>내비게이션 바 세로로 만들고 싶다면,</p>
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>li a {
-  display: block;
-  width: 60px;
-}
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>li a { display: block; width: 60px; }
 </code></pre></div></div>
 
 <p>내비게이션 바 가로로 만들기</p>
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>li {
-  display: inline;
-}
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>li { display: inline; }
 </code></pre></div></div>
 
 <p>내비게이션 바 가로로 만들기 2: float 이용해서</p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>li {
-  float: left;
-}
-
-a {
-  display: block;
-  padding: 8px;
-  background-color: #dddddd;
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>li { float: left; } a { display: block; padding: 8px; background-color: #dddddd;
 }
 </code></pre></div></div>
 
@@ -311,26 +224,28 @@ a {
   </tbody>
 </table>
 
-
 </div>
 
 
 
 <div class="pagination">
   
-    <a href="/2022-09-30/w3school" class="left arrow">&#8592;</a>
-  
-  
-    <a href="/2022-09-28/w3school" class="right arrow">&#8594;</a>
+  <a href="/2022-09-30/w3school" class="left arrow"
+    >&#8592;</a
+  >
+   
+  <a href="/2022-09-28/w3school" class="right arrow"
+    >&#8594;</a
+  >
   
 
   <a href="#" class="top">Top</a>
 </div>
-    </main>
+</main>
 
     <footer>
   <span>
-    &copy; <time datetime="2023-08-01 23:12:59 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-08-05 10:07:13 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 

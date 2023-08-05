@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,8 +10,8 @@
 <meta property="og:title" content="TIL) 모던 리액트 웹 사이트의 todolist 만들기 클론 코딩" />
 <meta name="author" content="Sunmi Moon" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="(달성/목표) 뽀모도리 1일 5 / 3 1주 12 /40" />
-<meta property="og:description" content="(달성/목표) 뽀모도리 1일 5 / 3 1주 12 /40" />
+<meta name="description" content="리듀서 만들기" />
+<meta property="og:description" content="리듀서 만들기" />
 <link rel="canonical" href="http://localhost:4000/2022-11-22/TIL" />
 <meta property="og:url" content="http://localhost:4000/2022-11-22/TIL" />
 <meta property="og:site_name" content="주경야독학) 개발공부로그" />
@@ -21,7 +20,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="TIL) 모던 리액트 웹 사이트의 todolist 만들기 클론 코딩" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-11-22T12:18:07+09:00","datePublished":"2022-11-22T12:18:07+09:00","description":"(달성/목표) 뽀모도리 1일 5 / 3 1주 12 /40","headline":"TIL) 모던 리액트 웹 사이트의 todolist 만들기 클론 코딩","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-11-22/TIL"},"url":"http://localhost:4000/2022-11-22/TIL"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-11-22T12:18:07+09:00","datePublished":"2022-11-22T12:18:07+09:00","description":"리듀서 만들기","headline":"TIL) 모던 리액트 웹 사이트의 todolist 만들기 클론 코딩","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-11-22/TIL"},"url":"http://localhost:4000/2022-11-22/TIL"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -43,7 +42,6 @@
 
 
   <body>
-
     <nav class="nav">
   <div class="nav-container">
     <a href="/">
@@ -58,47 +56,22 @@
 </nav>
 
 
-    <main>
-      <div class="post">
-  <div class="post-info">
-    <span>Written by</span>
-    
-        Sunmi Moon
-    
+    <main><div class="post">
+  <h1 class="post-title">TIL) 모던 리액트 웹 사이트의 todolist 만들기 클론 코딩</h1>
 
+  <div class="post-info">
     
-      <br>
-      <span>on&nbsp;</span><time datetime="2022-11-22 12:18:07 +0900">November 22, 2022</time>
+    <br />
+    <span>on&nbsp;</span
+    ><time datetime="2022-11-22 12:18:07 +0900">November 22, 2022</time>
     
   </div>
 
-  <h1 class="post-title">TIL) 모던 리액트 웹 사이트의 todolist 만들기 클론 코딩</h1>
-  <div class="post-line"></div>
-
-  <table>
-  <thead>
-    <tr>
-      <th>(달성/목표)</th>
-      <th>뽀모도리</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1일</td>
-      <td>5 / 3</td>
-    </tr>
-    <tr>
-      <td>1주</td>
-      <td>12 /40</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="리듀서-만들기">리듀서 만들기</h3>
+  <h3 id="리듀서-만들기">리듀서 만들기</h3>
 
 <p>todo 관리하는 리듀서 만들기</p>
-<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="kd">function</span> <span class="nx">todoReducer</span><span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="p">{</span>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">todoReducer</span><span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="p">{</span>
   <span class="c1">// action: type, id, todo</span>
   <span class="k">switch</span> <span class="p">(</span><span class="nx">action</span><span class="p">.</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">case</span> <span class="dl">"</span><span class="s2">CREATE</span><span class="dl">"</span><span class="p">:</span>
@@ -119,7 +92,6 @@
 
   <span class="k">return</span> <span class="nx">children</span><span class="p">;</span>
 <span class="p">}</span>
-
 </code></pre></div></div>
 
 <h3 id="context-만들기">context 만들기</h3>
@@ -189,7 +161,6 @@
 <span class="k">export</span> <span class="kd">function</span> <span class="nx">useTodoDispatch</span><span class="p">()</span> <span class="p">{</span>
   <span class="k">return</span> <span class="nx">useContext</span><span class="p">(</span><span class="nx">TodoDispatchContext</span><span class="p">);</span>
 <span class="p">}</span>
-
 </code></pre></div></div>
 
 <p>todoHead.js</p>
@@ -220,6 +191,7 @@
 </code></pre></div></div>
 
 <p>TodoCreate.js</p>
+
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">styled</span><span class="p">,</span> <span class="p">{</span> <span class="nx">css</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">styled-components</span><span class="dl">"</span><span class="p">;</span>
 <span class="k">import</span> <span class="p">{</span> <span class="nx">MdAdd</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react-icons/md</span><span class="dl">"</span><span class="p">;</span>
@@ -356,7 +328,6 @@
 <span class="p">};</span>
 
 <span class="k">export</span> <span class="k">default</span> <span class="nx">React</span><span class="p">.</span><span class="nx">memo</span><span class="p">(</span><span class="nx">TodoCreate</span><span class="p">);</span>
-
 </code></pre></div></div>
 
 <hr />
@@ -368,26 +339,28 @@
   <li>슈퍼맨 10초 * 5세트</li>
 </ul>
 
-
 </div>
 
 
 
 <div class="pagination">
   
-    <a href="/2022-11-23/TIL" class="left arrow">&#8592;</a>
-  
-  
-    <a href="/2022-11-21/TIL" class="right arrow">&#8594;</a>
+  <a href="/2022-11-23/TIL" class="left arrow"
+    >&#8592;</a
+  >
+   
+  <a href="/2022-11-21/TIL" class="right arrow"
+    >&#8594;</a
+  >
   
 
   <a href="#" class="top">Top</a>
 </div>
-    </main>
+</main>
 
     <footer>
   <span>
-    &copy; <time datetime="2023-08-01 23:12:59 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-08-05 10:07:13 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 

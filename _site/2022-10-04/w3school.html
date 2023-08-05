@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,8 +10,8 @@
 <meta property="og:title" content="w3school Javascript" />
 <meta name="author" content="Sunmi Moon" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="(달성/목표) 뽀모도리 등 가슴 배 1일 3/4 5/5 5/5 3/3 1주 8/40      " />
-<meta property="og:description" content="(달성/목표) 뽀모도리 등 가슴 배 1일 3/4 5/5 5/5 3/3 1주 8/40      " />
+<meta name="description" content="Javascript closure" />
+<meta property="og:description" content="Javascript closure" />
 <link rel="canonical" href="http://localhost:4000/2022-10-04/w3school" />
 <meta property="og:url" content="http://localhost:4000/2022-10-04/w3school" />
 <meta property="og:site_name" content="주경야독학) 개발공부로그" />
@@ -21,7 +20,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="w3school Javascript" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-10-04T12:18:07+09:00","datePublished":"2022-10-04T12:18:07+09:00","description":"(달성/목표) 뽀모도리 등 가슴 배 1일 3/4 5/5 5/5 3/3 1주 8/40      ","headline":"w3school Javascript","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-10-04/w3school"},"url":"http://localhost:4000/2022-10-04/w3school"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-10-04T12:18:07+09:00","datePublished":"2022-10-04T12:18:07+09:00","description":"Javascript closure","headline":"w3school Javascript","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-10-04/w3school"},"url":"http://localhost:4000/2022-10-04/w3school"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -43,7 +42,6 @@
 
 
   <body>
-
     <nav class="nav">
   <div class="nav-container">
     <a href="/">
@@ -58,52 +56,18 @@
 </nav>
 
 
-    <main>
-      <div class="post">
-  <div class="post-info">
-    <span>Written by</span>
-    
-        Sunmi Moon
-    
+    <main><div class="post">
+  <h1 class="post-title">w3school Javascript</h1>
 
+  <div class="post-info">
     
-      <br>
-      <span>on&nbsp;</span><time datetime="2022-10-04 12:18:07 +0900">October 04, 2022</time>
+    <br />
+    <span>on&nbsp;</span
+    ><time datetime="2022-10-04 12:18:07 +0900">October 04, 2022</time>
     
   </div>
 
-  <h1 class="post-title">w3school Javascript</h1>
-  <div class="post-line"></div>
-
-  <table>
-  <thead>
-    <tr>
-      <th>(달성/목표)</th>
-      <th>뽀모도리</th>
-      <th>등</th>
-      <th>가슴</th>
-      <th>배</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1일</td>
-      <td>3/4</td>
-      <td>5/5</td>
-      <td>5/5</td>
-      <td>3/3</td>
-    </tr>
-    <tr>
-      <td>1주</td>
-      <td>8/40</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="javascript-closure">Javascript closure</h3>
+  <h3 id="javascript-closure">Javascript closure</h3>
 
 <p>자바스크립트의 변수는 글로벌 변수 혹은 로컬 변수가 될 수 있다. 이때 글로벌 변수는 클로저를 이용하면 로컬 변수로 바꿀 수 있다.</p>
 
@@ -116,9 +80,11 @@
 
 <p>글로벌 변수를 쓰지 않고 counter 딜레마를 해결하는 법</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">add</span><span class="p">(){</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">add</span><span class="p">()</span> <span class="p">{</span>
   <span class="kd">let</span> <span class="nx">counter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-  <span class="kd">function</span> <span class="nx">plus</span><span class="p">(){</span> <span class="nx">counter</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;}</span>
+  <span class="kd">function</span> <span class="nx">plus</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">counter</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span>
   <span class="nx">plus</span><span class="p">();</span>
   <span class="k">return</span> <span class="nx">counter</span><span class="p">;</span>
 <span class="p">}</span>
@@ -128,21 +94,23 @@
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">add</span> <span class="o">=</span> <span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
   <span class="kd">let</span> <span class="nx">counter</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-  <span class="k">return</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span><span class="nx">counter</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span> <span class="k">return</span> <span class="nx">counter</span><span class="p">}</span>
+  <span class="k">return</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="nx">counter</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nx">counter</span><span class="p">;</span>
+  <span class="p">};</span>
 <span class="p">})();</span>
-
 </code></pre></div></div>
 
 <h3 id="class-상속">Class 상속</h3>
 
 <p>Model이 Car 상속 받을 때</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Car</span><span class="p">{</span>
-  <span class="kd">constructor</span><span class="p">(</span><span class="nx">brand</span><span class="p">){</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Car</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">brand</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">carname</span> <span class="o">=</span> <span class="nx">brand</span><span class="p">;</span>
   <span class="p">}</span>
-  <span class="nx">present</span><span class="p">(){</span>
-    <span class="k">return</span> <span class="dl">'</span><span class="s1">I have a </span><span class="dl">'</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">carname</span><span class="p">;</span>
+  <span class="nx">present</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="dl">"</span><span class="s2">I have a </span><span class="dl">"</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">carname</span><span class="p">;</span>
   <span class="p">}</span>
 <span class="p">}</span>
 
@@ -151,29 +119,32 @@
     <span class="k">super</span><span class="p">(</span><span class="nx">brand</span><span class="p">);</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">model</span> <span class="o">=</span> <span class="nx">mod</span><span class="p">;</span>
   <span class="p">}</span>
-  <span class="nx">slow</span><span class="p">(){</span>
+  <span class="nx">slow</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">present</span><span class="p">()</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">model</span><span class="p">;</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
 <h4 id="gettersetter">Getter/Setter</h4>
+
 <p>getter/setter는 겉으로 프로퍼티처럼 보인다. 실제 프로퍼티와 구별하기 위해서 해당 프러퍼티에 언더바를 붙인다.</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Car</span><span class="p">{</span>
-  <span class="kd">constructor</span><span class="p">(</span><span class="nx">brand</span><span class="p">){</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Car</span> <span class="p">{</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">brand</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">_carname</span> <span class="o">=</span> <span class="nx">brand</span><span class="p">;</span>
   <span class="p">}</span>
-  <span class="kd">get</span> <span class="nx">carname</span><span class="p">(){</span>  <span class="c1">// set과 같은 이름</span>
-    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_carname</span><span class="p">;</span> 
+  <span class="kd">get</span> <span class="nx">carname</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// set과 같은 이름</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">_carname</span><span class="p">;</span>
   <span class="p">}</span>
-  <span class="kd">set</span> <span class="nx">carname</span><span class="p">(</span><span class="nx">x</span><span class="p">){</span>  <span class="c1">// get과 같은 이름</span>
+  <span class="kd">set</span> <span class="nx">carname</span><span class="p">(</span><span class="nx">x</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// get과 같은 이름</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">_carname</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
   <span class="p">}</span>
 <span class="p">}</span>
-<span class="kd">let</span> <span class="nx">myCar</span>  <span class="o">=</span> <span class="k">new</span> <span class="nx">Car</span><span class="p">(</span><span class="dl">"</span><span class="s2">Ford</span><span class="dl">"</span><span class="p">);</span>
-<span class="nx">myCar</span><span class="p">.</span><span class="nx">carname</span><span class="p">;</span>  <span class="c1">// getter</span>
-<span class="nx">myCar</span><span class="p">.</span><span class="nx">carname</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Volvo</span><span class="dl">"</span><span class="p">;</span>  <span class="c1">// setter</span>
+<span class="kd">let</span> <span class="nx">myCar</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Car</span><span class="p">(</span><span class="dl">"</span><span class="s2">Ford</span><span class="dl">"</span><span class="p">);</span>
+<span class="nx">myCar</span><span class="p">.</span><span class="nx">carname</span><span class="p">;</span> <span class="c1">// getter</span>
+<span class="nx">myCar</span><span class="p">.</span><span class="nx">carname</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Volvo</span><span class="dl">"</span><span class="p">;</span> <span class="c1">// setter</span>
 </code></pre></div></div>
 
 <h3 id="클래스-static">클래스 static</h3>
@@ -191,24 +162,26 @@
 
 <span class="kd">let</span> <span class="nx">myCar</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Car</span><span class="p">(</span><span class="dl">"</span><span class="s2">Ford</span><span class="dl">"</span><span class="p">);</span>
 
-<span class="nx">Car</span><span class="p">.</span><span class="nx">hello</span><span class="p">()</span>   <span class="c1">// O</span>
-<span class="nx">myCar</span><span class="p">.</span><span class="nx">hello</span><span class="p">()</span> <span class="c1">// X</span>
-<span class="nx">Car</span><span class="p">.</span><span class="nx">hello</span><span class="p">(</span><span class="nx">myCar</span><span class="p">)</span>  <span class="c1">// O </span>
+<span class="nx">Car</span><span class="p">.</span><span class="nx">hello</span><span class="p">();</span> <span class="c1">// O</span>
+<span class="nx">myCar</span><span class="p">.</span><span class="nx">hello</span><span class="p">();</span> <span class="c1">// X</span>
+<span class="nx">Car</span><span class="p">.</span><span class="nx">hello</span><span class="p">(</span><span class="nx">myCar</span><span class="p">);</span> <span class="c1">// O</span>
 </code></pre></div></div>
 
 <h3 id="js-콜백">JS 콜백</h3>
+
 <p>(함수의 실행 순서에 대한 것)
 콜백은 다른 함수에 argument로 넘겨지는 함수이다.</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">myDisplayer</span><span class="p">(</span><span class="nx">some</span><span class="p">)</span> <span class="p">{</span>
   <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">demo</span><span class="dl">"</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="nx">some</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="kd">function</span> <span class="nx">myCalculator</span><span class="p">(</span><span class="nx">num1</span><span class="p">,</span> <span class="nx">num2</span><span class="p">,</span> <span class="nx">myCallback</span><span class="p">){</span>
+<span class="kd">function</span> <span class="nx">myCalculator</span><span class="p">(</span><span class="nx">num1</span><span class="p">,</span> <span class="nx">num2</span><span class="p">,</span> <span class="nx">myCallback</span><span class="p">)</span> <span class="p">{</span>
   <span class="kd">let</span> <span class="nx">sum</span> <span class="o">=</span> <span class="nx">num1</span> <span class="o">+</span> <span class="nx">num2</span><span class="p">;</span>
   <span class="nx">myCallback</span><span class="p">(</span><span class="nx">sum</span><span class="p">);</span>
 <span class="p">}</span>
 <span class="nx">myCalculator</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="nx">myDisplayer</span><span class="p">);</span>
 </code></pre></div></div>
+
 <ul>
   <li>함수를 argument로 전달할 때 여닫는 괄호를 쓰지 않는다.!</li>
 </ul>
@@ -226,20 +199,19 @@
 <span class="p">}</span>
 <span class="kd">function</span> <span class="nx">getFile</span><span class="p">(</span><span class="nx">myCallback</span><span class="p">)</span> <span class="p">{</span>
   <span class="kd">let</span> <span class="nx">req</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
-  <span class="nx">req</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="dl">'</span><span class="s1">GET</span><span class="dl">'</span><span class="p">,</span> <span class="dl">"</span><span class="s2">mycar.html</span><span class="dl">"</span><span class="p">);</span>
-  <span class="nx">req</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">status</span> <span class="o">==</span> <span class="mi">200</span><span class="p">){</span>
+  <span class="nx">req</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="dl">"</span><span class="s2">GET</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">mycar.html</span><span class="dl">"</span><span class="p">);</span>
+  <span class="nx">req</span><span class="p">.</span><span class="nx">onload</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">status</span> <span class="o">==</span> <span class="mi">200</span><span class="p">)</span> <span class="p">{</span>
       <span class="nx">myCallback</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">responseText</span><span class="p">);</span>
     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
       <span class="nx">myCallback</span><span class="p">(</span><span class="dl">"</span><span class="s2">Error: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">req</span><span class="p">.</span><span class="nx">status</span><span class="p">);</span>
     <span class="p">}</span>
-  <span class="p">}</span>
+  <span class="p">};</span>
   <span class="nx">req</span><span class="p">.</span><span class="nx">send</span><span class="p">();</span>
 <span class="p">}</span>
 
 <span class="nx">getFile</span><span class="p">(</span><span class="nx">myDisplayer</span><span class="p">);</span>
 </code></pre></div></div>
-
 
 </div>
 
@@ -247,19 +219,22 @@
 
 <div class="pagination">
   
-    <a href="/2022-10-05/w3school" class="left arrow">&#8592;</a>
-  
-  
-    <a href="/2022-10-03/w3school" class="right arrow">&#8594;</a>
+  <a href="/2022-10-05/w3school" class="left arrow"
+    >&#8592;</a
+  >
+   
+  <a href="/2022-10-03/w3school" class="right arrow"
+    >&#8594;</a
+  >
   
 
   <a href="#" class="top">Top</a>
 </div>
-    </main>
+</main>
 
     <footer>
   <span>
-    &copy; <time datetime="2023-08-01 23:12:59 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-08-05 10:07:13 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 

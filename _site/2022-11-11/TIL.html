@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,8 +10,8 @@
 <meta property="og:title" content="TIL) 리액트를 다루는 기술(useReducer)" />
 <meta name="author" content="Sunmi Moon" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="(달성/목표) 뽀모도리 1일 5 / 8 1주 19 /40" />
-<meta property="og:description" content="(달성/목표) 뽀모도리 1일 5 / 8 1주 19 /40" />
+<meta name="description" content="useReducer" />
+<meta property="og:description" content="useReducer" />
 <link rel="canonical" href="http://localhost:4000/2022-11-11/TIL" />
 <meta property="og:url" content="http://localhost:4000/2022-11-11/TIL" />
 <meta property="og:site_name" content="주경야독학) 개발공부로그" />
@@ -21,7 +20,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="TIL) 리액트를 다루는 기술(useReducer)" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-11-11T12:18:07+09:00","datePublished":"2022-11-11T12:18:07+09:00","description":"(달성/목표) 뽀모도리 1일 5 / 8 1주 19 /40","headline":"TIL) 리액트를 다루는 기술(useReducer)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-11-11/TIL"},"url":"http://localhost:4000/2022-11-11/TIL"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-11-11T12:18:07+09:00","datePublished":"2022-11-11T12:18:07+09:00","description":"useReducer","headline":"TIL) 리액트를 다루는 기술(useReducer)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-11-11/TIL"},"url":"http://localhost:4000/2022-11-11/TIL"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -43,7 +42,6 @@
 
 
   <body>
-
     <nav class="nav">
   <div class="nav-container">
     <a href="/">
@@ -58,43 +56,18 @@
 </nav>
 
 
-    <main>
-      <div class="post">
-  <div class="post-info">
-    <span>Written by</span>
-    
-        Sunmi Moon
-    
+    <main><div class="post">
+  <h1 class="post-title">TIL) 리액트를 다루는 기술(useReducer)</h1>
 
+  <div class="post-info">
     
-      <br>
-      <span>on&nbsp;</span><time datetime="2022-11-11 12:18:07 +0900">November 11, 2022</time>
+    <br />
+    <span>on&nbsp;</span
+    ><time datetime="2022-11-11 12:18:07 +0900">November 11, 2022</time>
     
   </div>
 
-  <h1 class="post-title">TIL) 리액트를 다루는 기술(useReducer)</h1>
-  <div class="post-line"></div>
-
-  <table>
-  <thead>
-    <tr>
-      <th>(달성/목표)</th>
-      <th>뽀모도리</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1일</td>
-      <td>5 / 8</td>
-    </tr>
-    <tr>
-      <td>1주</td>
-      <td>19 /40</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="usereducer">useReducer</h3>
+  <h3 id="usereducer">useReducer</h3>
 
 <p>현재 상태(state) 객체와 행동(action) 객체를 인자로 받아서 새로운 상태(state) 객체를 반환하는 함수이다.</p>
 
@@ -103,46 +76,46 @@
 
 <p>useReducer를 써서 onChange, onCreate, onRemove, onToggleActive 만들기</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="kd">const</span> <span class="nx">onChange</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">((</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="kd">const</span> <span class="p">{</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">value</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">;</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">onChange called</span><span class="dl">"</span><span class="p">);</span>
-    <span class="nx">dispatch</span><span class="p">({</span> <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">CHANGE_INPUT</span><span class="dl">"</span><span class="p">,</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">value</span> <span class="p">});</span>
-  <span class="p">},</span> <span class="p">[]);</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">onChange</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">((</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">{</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">value</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">;</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">onChange called</span><span class="dl">"</span><span class="p">);</span>
+  <span class="nx">dispatch</span><span class="p">({</span> <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">CHANGE_INPUT</span><span class="dl">"</span><span class="p">,</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">value</span> <span class="p">});</span>
+<span class="p">},</span> <span class="p">[]);</span>
 
-  <span class="kd">const</span> <span class="nx">onCreate</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">onCreate:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">username</span><span class="p">,</span> <span class="nx">nickname</span><span class="p">);</span>
-    <span class="nx">dispatch</span><span class="p">({</span>
-      <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">CREATE_USER</span><span class="dl">"</span><span class="p">,</span>
-      <span class="na">user</span><span class="p">:</span> <span class="p">{</span>
-        <span class="na">id</span><span class="p">:</span> <span class="nx">nextId</span><span class="p">.</span><span class="nx">current</span><span class="p">,</span>
-        <span class="nx">username</span><span class="p">,</span>
-        <span class="nx">nickname</span><span class="p">,</span>
-      <span class="p">},</span>
-    <span class="p">});</span>
-    <span class="nx">nextId</span><span class="p">.</span><span class="nx">current</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
-  <span class="p">},</span> <span class="p">[</span><span class="nx">username</span><span class="p">,</span> <span class="nx">nickname</span><span class="p">]);</span>
-
-  <span class="kd">const</span> <span class="nx">onRemove</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(</span>
-    <span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-      <span class="nx">dispatch</span><span class="p">({</span> <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">REMOVE_USER</span><span class="dl">"</span><span class="p">,</span> <span class="nx">id</span> <span class="p">});</span>
+<span class="kd">const</span> <span class="nx">onCreate</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">onCreate:</span><span class="dl">"</span><span class="p">,</span> <span class="nx">username</span><span class="p">,</span> <span class="nx">nickname</span><span class="p">);</span>
+  <span class="nx">dispatch</span><span class="p">({</span>
+    <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">CREATE_USER</span><span class="dl">"</span><span class="p">,</span>
+    <span class="na">user</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">id</span><span class="p">:</span> <span class="nx">nextId</span><span class="p">.</span><span class="nx">current</span><span class="p">,</span>
+      <span class="nx">username</span><span class="p">,</span>
+      <span class="nx">nickname</span><span class="p">,</span>
     <span class="p">},</span>
-    <span class="p">[</span><span class="nx">users</span><span class="p">]</span>
-  <span class="p">);</span>
+  <span class="p">});</span>
+  <span class="nx">nextId</span><span class="p">.</span><span class="nx">current</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">},</span> <span class="p">[</span><span class="nx">username</span><span class="p">,</span> <span class="nx">nickname</span><span class="p">]);</span>
 
-  <span class="kd">const</span> <span class="nx">onToggleActive</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(</span>
-    <span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-      <span class="nx">dispatch</span><span class="p">({</span> <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">TOGGLE_USER</span><span class="dl">"</span><span class="p">,</span> <span class="nx">id</span> <span class="p">});</span>
-    <span class="p">},</span>
-    <span class="p">[</span><span class="nx">users</span><span class="p">]</span>
-  <span class="p">);</span>
+<span class="kd">const</span> <span class="nx">onRemove</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(</span>
+  <span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">dispatch</span><span class="p">({</span> <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">REMOVE_USER</span><span class="dl">"</span><span class="p">,</span> <span class="nx">id</span> <span class="p">});</span>
+  <span class="p">},</span>
+  <span class="p">[</span><span class="nx">users</span><span class="p">]</span>
+<span class="p">);</span>
 
-  <span class="kd">const</span> <span class="nx">activeUserNumber</span> <span class="o">=</span> <span class="nx">useMemo</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">getActiveUserNumber</span><span class="p">(</span><span class="nx">users</span><span class="p">);</span>
-  <span class="p">},</span> <span class="p">[</span><span class="nx">users</span><span class="p">]);</span>
+<span class="kd">const</span> <span class="nx">onToggleActive</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(</span>
+  <span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">dispatch</span><span class="p">({</span> <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">TOGGLE_USER</span><span class="dl">"</span><span class="p">,</span> <span class="nx">id</span> <span class="p">});</span>
+  <span class="p">},</span>
+  <span class="p">[</span><span class="nx">users</span><span class="p">]</span>
+<span class="p">);</span>
 
+<span class="kd">const</span> <span class="nx">activeUserNumber</span> <span class="o">=</span> <span class="nx">useMemo</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">getActiveUserNumber</span><span class="p">(</span><span class="nx">users</span><span class="p">);</span>
+<span class="p">},</span> <span class="p">[</span><span class="nx">users</span><span class="p">]);</span>
 </code></pre></div></div>
 
 <p>reducer 함수는 다음과 같다.</p>
+
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">reducer</span><span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="p">{</span>
   <span class="c1">// action: dispatch 함수에서 넘겨 준 값.</span>
   <span class="c1">//         onChange의 경우 { type: "CHANGE_INPUT", name, value }</span>
@@ -206,26 +179,28 @@
   </tbody>
 </table>
 
-
 </div>
 
 
 
 <div class="pagination">
   
-    <a href="/2022-11-12/TIL" class="left arrow">&#8592;</a>
-  
-  
-    <a href="/2022-11-10/TIL" class="right arrow">&#8594;</a>
+  <a href="/2022-11-12/TIL" class="left arrow"
+    >&#8592;</a
+  >
+   
+  <a href="/2022-11-10/TIL" class="right arrow"
+    >&#8594;</a
+  >
   
 
   <a href="#" class="top">Top</a>
 </div>
-    </main>
+</main>
 
     <footer>
   <span>
-    &copy; <time datetime="2023-08-01 23:12:59 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-08-05 10:07:13 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 

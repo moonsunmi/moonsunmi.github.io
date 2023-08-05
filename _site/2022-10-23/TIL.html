@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,8 +10,8 @@
 <meta property="og:title" content="Hulu Clone Coding(Next.js, Tailwind CSS, Responsive)" />
 <meta name="author" content="Sunmi Moon" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="(달성/목표) 뽀모도리 등 가슴 배 1일 5/8 0/5 0/5 0/3 1주 40 /40      " />
-<meta property="og:description" content="(달성/목표) 뽀모도리 등 가슴 배 1일 5/8 0/5 0/5 0/3 1주 40 /40      " />
+<meta name="description" content="tailwindcss에서는 bounce되는 애니메이션을 쉽게 만들 수 있다." />
+<meta property="og:description" content="tailwindcss에서는 bounce되는 애니메이션을 쉽게 만들 수 있다." />
 <link rel="canonical" href="http://localhost:4000/2022-10-23/TIL" />
 <meta property="og:url" content="http://localhost:4000/2022-10-23/TIL" />
 <meta property="og:site_name" content="주경야독학) 개발공부로그" />
@@ -21,7 +20,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Hulu Clone Coding(Next.js, Tailwind CSS, Responsive)" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-10-23T12:18:07+09:00","datePublished":"2022-10-23T12:18:07+09:00","description":"(달성/목표) 뽀모도리 등 가슴 배 1일 5/8 0/5 0/5 0/3 1주 40 /40      ","headline":"Hulu Clone Coding(Next.js, Tailwind CSS, Responsive)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-10-23/TIL"},"url":"http://localhost:4000/2022-10-23/TIL"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-10-23T12:18:07+09:00","datePublished":"2022-10-23T12:18:07+09:00","description":"tailwindcss에서는 bounce되는 애니메이션을 쉽게 만들 수 있다.","headline":"Hulu Clone Coding(Next.js, Tailwind CSS, Responsive)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-10-23/TIL"},"url":"http://localhost:4000/2022-10-23/TIL"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -43,7 +42,6 @@
 
 
   <body>
-
     <nav class="nav">
   <div class="nav-container">
     <a href="/">
@@ -58,54 +56,21 @@
 </nav>
 
 
-    <main>
-      <div class="post">
-  <div class="post-info">
-    <span>Written by</span>
-    
-        Sunmi Moon
-    
+    <main><div class="post">
+  <h1 class="post-title">Hulu Clone Coding(Next.js, Tailwind CSS, Responsive)</h1>
 
+  <div class="post-info">
     
-      <br>
-      <span>on&nbsp;</span><time datetime="2022-10-23 12:18:07 +0900">October 23, 2022</time>
+    <br />
+    <span>on&nbsp;</span
+    ><time datetime="2022-10-23 12:18:07 +0900">October 23, 2022</time>
     
   </div>
 
-  <h1 class="post-title">Hulu Clone Coding(Next.js, Tailwind CSS, Responsive)</h1>
-  <div class="post-line"></div>
-
-  <table>
-  <thead>
-    <tr>
-      <th>(달성/목표)</th>
-      <th>뽀모도리</th>
-      <th>등</th>
-      <th>가슴</th>
-      <th>배</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1일</td>
-      <td>5/8</td>
-      <td>0/5</td>
-      <td>0/5</td>
-      <td>0/3</td>
-    </tr>
-    <tr>
-      <td>1주</td>
-      <td>40 /40</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-<p>tailwindcss에서는 bounce되는 애니메이션을 쉽게 만들 수 있다.</p>
+  <p>tailwindcss에서는 bounce되는 애니메이션을 쉽게 만들 수 있다.</p>
 
 <p>HeaderItem.js</p>
+
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">HeaderItem</span><span class="p">({</span> <span class="nx">title</span><span class="p">,</span> <span class="nx">Icon</span> <span class="p">})</span> <span class="p">{</span>
   <span class="k">return</span> <span class="p">(</span>
     <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">flex flex-col items-center group w-12 sm:w-20 hover:text-white</span><span class="dl">"</span><span class="o">&gt;</span>
@@ -122,7 +87,7 @@
 
 <p>flex를 지정해 주어 아이콘을 한 줄에 배열하고, 가능한 공간만큼 flex item이 다 채우도록 grow를 지정한다. 그러나 이렇게 하면 양끝 배열처럼 아이콘의 공간이 너무 커지니 <code class="language-plaintext highlighter-rouge">max-w-2xl</code>로 max-width를 지정해 준다. (2xl은 사이즈. small miduem 등 다양하다.)</p>
 
-<p><code class="language-plaintext highlighter-rouge">sm:w-20</code> small break point를 width 20(width: 5rem; /* 80px */)로 지정</p>
+<p><code class="language-plaintext highlighter-rouge">sm:w-20</code> small break point를 width 20(width: 5rem; /_ 80px _/)로 지정</p>
 
 <h3 id="enviornment-key">enviornment Key</h3>
 
@@ -137,6 +102,7 @@
 <p>API_KEY를 이용해서 데이터를 불러 옴.</p>
 
 <p>requests.js</p>
+
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">API_KEY</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">API_KEY</span><span class="p">;</span>
 
 <span class="k">export</span> <span class="k">default</span> <span class="p">{</span>
@@ -149,6 +115,7 @@
     <span class="na">url</span><span class="p">:</span> <span class="s2">`/movie/top_rated?api_key=</span><span class="p">${</span><span class="nx">API_KEY</span><span class="p">}</span><span class="s2">&amp;language=en-US`</span><span class="p">,</span>
   <span class="p">},</span>
 </code></pre></div></div>
+
 <ul>
   <li><code class="language-plaintext highlighter-rouge">?</code>: query start.</li>
   <li><code class="language-plaintext highlighter-rouge">title</code>: 우리가 화면에서 보는 것을 표시해준 거</li>
@@ -156,15 +123,16 @@
 </ul>
 
 <p>Nav.js</p>
+
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">flex px-10 sm:px-20 text-2xl whitespace-nowrap space-x-10 sm:space-x-20 overflow-x-scroll</span><span class="dl">"</span><span class="o">&gt;</span>
-<span class="p">{</span><span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">requests</span><span class="p">).</span><span class="nx">map</span><span class="p">(([</span><span class="nx">key</span><span class="p">,</span> <span class="p">{</span> <span class="nx">title</span><span class="p">,</span> <span class="nx">url</span> <span class="p">}])</span> <span class="o">=&gt;</span> <span class="p">(</span>
-  <span class="o">&lt;</span><span class="nx">h2</span>
-    <span class="nx">key</span><span class="o">=</span><span class="p">{</span><span class="nx">key</span><span class="p">}</span>
-    <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">last:pr-24 cursor-pointer transition duration-100 transfrom hover:scale-125 hover:text-white active:text-red-300</span><span class="dl">"</span>
-  <span class="o">&gt;</span>
-    <span class="p">{</span><span class="nx">title</span><span class="p">}</span>
-  <span class="o">&lt;</span><span class="sr">/h2</span><span class="err">&gt;
-</span><span class="p">))}</span>
+  <span class="p">{</span><span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">requests</span><span class="p">).</span><span class="nx">map</span><span class="p">(([</span><span class="nx">key</span><span class="p">,</span> <span class="p">{</span> <span class="nx">title</span><span class="p">,</span> <span class="nx">url</span> <span class="p">}])</span> <span class="o">=&gt;</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">h2</span>
+      <span class="nx">key</span><span class="o">=</span><span class="p">{</span><span class="nx">key</span><span class="p">}</span>
+      <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">last:pr-24 cursor-pointer transition duration-100 transfrom hover:scale-125 hover:text-white active:text-red-300</span><span class="dl">"</span>
+    <span class="o">&gt;</span>
+      <span class="p">{</span><span class="nx">title</span><span class="p">}</span>
+    <span class="o">&lt;</span><span class="sr">/h2</span><span class="err">&gt;
+</span>  <span class="p">))}</span>
 <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
 </span></code></pre></div></div>
 
@@ -198,26 +166,28 @@ tailwind에서 scrollbar를 숨기기 위해서 플러그인을 깔아야 했다
 
 <p>headless : https://www.howdy-mj.me/design/headless-components</p>
 
-
 </div>
 
 
 
 <div class="pagination">
   
-    <a href="/2022-10-23/13th-week" class="left arrow">&#8592;</a>
-  
-  
-    <a href="/2022-10-22/TIL" class="right arrow">&#8594;</a>
+  <a href="/2022-10-23/13th-week" class="left arrow"
+    >&#8592;</a
+  >
+   
+  <a href="/2022-10-22/TIL" class="right arrow"
+    >&#8594;</a
+  >
   
 
   <a href="#" class="top">Top</a>
 </div>
-    </main>
+</main>
 
     <footer>
   <span>
-    &copy; <time datetime="2023-08-01 23:12:59 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-08-05 10:07:13 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 

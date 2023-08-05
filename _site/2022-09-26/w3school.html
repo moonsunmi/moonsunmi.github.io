@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,8 +10,8 @@
 <meta property="og:title" content="w3school HTML" />
 <meta name="author" content="Sunmi Moon" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="  뽀모도리 등운동 가슴운동 일간(달성/목표) 4/4 5/5 5/5 주간(달성/목표) 4/40    " />
-<meta property="og:description" content="  뽀모도리 등운동 가슴운동 일간(달성/목표) 4/4 5/5 5/5 주간(달성/목표) 4/40    " />
+<meta name="description" content="Media Queries" />
+<meta property="og:description" content="Media Queries" />
 <link rel="canonical" href="http://localhost:4000/2022-09-26/w3school" />
 <meta property="og:url" content="http://localhost:4000/2022-09-26/w3school" />
 <meta property="og:site_name" content="주경야독학) 개발공부로그" />
@@ -21,7 +20,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="w3school HTML" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-09-26T22:18:07+09:00","datePublished":"2022-09-26T22:18:07+09:00","description":"  뽀모도리 등운동 가슴운동 일간(달성/목표) 4/4 5/5 5/5 주간(달성/목표) 4/40    ","headline":"w3school HTML","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-09-26/w3school"},"url":"http://localhost:4000/2022-09-26/w3school"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-09-26T22:18:07+09:00","datePublished":"2022-09-26T22:18:07+09:00","description":"Media Queries","headline":"w3school HTML","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-09-26/w3school"},"url":"http://localhost:4000/2022-09-26/w3school"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -43,7 +42,6 @@
 
 
   <body>
-
     <nav class="nav">
   <div class="nav-container">
     <a href="/">
@@ -58,61 +56,34 @@
 </nav>
 
 
-    <main>
-      <div class="post">
-  <div class="post-info">
-    <span>Written by</span>
-    
-        Sunmi Moon
-    
+    <main><div class="post">
+  <h1 class="post-title">w3school HTML</h1>
 
+  <div class="post-info">
     
-      <br>
-      <span>on&nbsp;</span><time datetime="2022-09-26 22:18:07 +0900">September 26, 2022</time>
+    <br />
+    <span>on&nbsp;</span
+    ><time datetime="2022-09-26 22:18:07 +0900">September 26, 2022</time>
     
   </div>
 
-  <h1 class="post-title">w3school HTML</h1>
-  <div class="post-line"></div>
+  <h3 id="media-queries">Media Queries</h3>
 
-  <table>
-  <thead>
-    <tr>
-      <th> </th>
-      <th>뽀모도리</th>
-      <th>등운동</th>
-      <th>가슴운동</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>일간(달성/목표)</td>
-      <td>4/4</td>
-      <td>5/5</td>
-      <td>5/5</td>
-    </tr>
-    <tr>
-      <td>주간(달성/목표)</td>
-      <td>4/40</td>
-      <td> </td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="media-queries">Media Queries</h3>
 <p>그림이나 텍스트 사이즈를 반응형으로 조정하기 위해서 종종 사용된다.</p>
 
-<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">@media</span> <span class="n">screen</span> <span class="n">and</span> <span class="p">(</span><span class="n">max-width</span><span class="p">:</span> <span class="m">800px</span><span class="p">){</span>
-    <span class="nc">.left</span><span class="o">,</span> <span class="nc">.right</span><span class="o">,</span> <span class="nc">.main</span> <span class="p">{</span>
-        <span class="nl">width</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
-    <span class="p">}</span>
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">@media</span> <span class="n">screen</span> <span class="n">and</span> <span class="p">(</span><span class="n">max-width</span><span class="p">:</span> <span class="m">800px</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nc">.left</span><span class="o">,</span>
+  <span class="nc">.right</span><span class="o">,</span>
+  <span class="nc">.main</span> <span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+  <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
 <p>가로가 800px 이하이면, width를 다 100%로 주어서 left, main, right가 세 줄로 보이게 한다.</p>
 
 <h3 id="반응형-웹을-위한-css-프레임워크들">반응형 웹을 위한 CSS 프레임워크들</h3>
+
 <p>W3.CSS: w3school과 연관이 있을 거 같은 css
 bootstrap: 너무 유명해서 엄청 자주 들어 본.</p>
 
@@ -144,7 +115,9 @@ bootstrap: 너무 유명해서 엄청 자주 들어 본.</p>
     </ul>
   </li>
   <li>header: 제목 같은 것, article 등 안에서 쓰임.</li>
-  <li>footer:
+  <li>
+    <p>footer:</p>
+
     <ul>
       <li>authorship information</li>
       <li>copyright information</li>
@@ -160,7 +133,7 @@ bootstrap: 너무 유명해서 엄청 자주 들어 본.</p>
 </ul>
 
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;figure&gt;</span>
-  <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"pic_trulli.jpg"</span> <span class="na">alt=</span><span class="s">"Trulli"</span> <span class="na">style=</span><span class="s">"width:100%"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"pic_trulli.jpg"</span> <span class="na">alt=</span><span class="s">"Trulli"</span> <span class="na">style=</span><span class="s">"width:100%"</span> <span class="nt">/&gt;</span>
   <span class="nt">&lt;figcaption&gt;</span>Fig.1 - Trulli, Puglia, Italy.<span class="nt">&lt;/figcaption&gt;</span>
 <span class="nt">&lt;/figure&gt;</span>
 </code></pre></div></div>
@@ -176,7 +149,7 @@ bootstrap: 너무 유명해서 엄청 자주 들어 본.</p>
   <li>그림을 실을 때 alt, width, height는 무조건 지정하기. 웹 페이지가 로딩될 때 width와 height로 그림용 영역을 마련해 두기 때문에 꼭 필요.</li>
 </ol>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"html5.gif"</span> <span class="na">alt=</span><span class="s">"HTML5"</span> <span class="na">style=</span><span class="s">"width:128px;height:128px"</span><span class="nt">&gt;</span>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;img</span> <span class="na">src=</span><span class="s">"html5.gif"</span> <span class="na">alt=</span><span class="s">"HTML5"</span> <span class="na">style=</span><span class="s">"width:128px;height:128px"</span> <span class="nt">/&gt;</span>
 </code></pre></div></div>
 
 <ol>
@@ -190,7 +163,7 @@ bootstrap: 너무 유명해서 엄청 자주 들어 본.</p>
   <li>뷰포트를 세팅하자.</li>
 </ol>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1.0"</span><span class="nt">&gt;</span>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"viewport"</span> <span class="na">content=</span><span class="s">"width=device-width, initial-scale=1.0"</span> <span class="nt">/&gt;</span>
 </code></pre></div></div>
 
 <ol>
@@ -224,11 +197,11 @@ bootstrap: 너무 유명해서 엄청 자주 들어 본.</p>
   </li>
 </ul>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"radio"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span><span class="nt">&gt;</span>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"radio"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="nt">/&gt;</span>
 </code></pre></div></div>
 
 <ul>
@@ -260,43 +233,49 @@ bootstrap: 너무 유명해서 엄청 자주 들어 본.</p>
 </ul>
 
 <h3 id="input-타입">input 타입</h3>
+
 <p>가능한 input 타입 상당히 많다..! 여기서는 결과만 확인하고 넘어가자.</p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"color"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"date"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"datetime-local"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"email"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"file"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"hidden"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"image"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"month"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"number"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"password"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"radio"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"range"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"reset"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"search"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"tel"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"time"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"url"</span><span class="nt">&gt;</span>
-<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"week"</span><span class="nt">&gt;</span>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"button"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"checkbox"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"color"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"date"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"datetime-local"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"email"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"file"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"hidden"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"image"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"month"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"number"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"password"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"radio"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"range"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"reset"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"search"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"tel"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"time"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"url"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"week"</span> <span class="nt">/&gt;</span>
 </code></pre></div></div>
 
 <h3 id="input-속성들">input 속성들</h3>
 
 <p>파일 첨부를 여러 개 가능하게 하고 싶다면, multiple 속성 추가해야 한다.</p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"file"</span> <span class="na">id=</span><span class="s">"files"</span> <span class="na">name=</span><span class="s">"files"</span> <span class="na">multiple</span><span class="nt">&gt;</span>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"file"</span> <span class="na">id=</span><span class="s">"files"</span> <span class="na">name=</span><span class="s">"files"</span> <span class="na">multiple</span> <span class="nt">/&gt;</span>
 </code></pre></div></div>
 
 <p>정규식 쓰고 싶다면, pattern.</p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"text"</span> <span class="na">id=</span><span class="s">"country_code"</span> <span class="na">name=</span><span class="s">"country_code"</span>
-  <span class="na">pattern=</span><span class="s">"[A-Za-z]{3}"</span> <span class="na">title=</span><span class="s">"Three letter country code"</span><span class="nt">&gt;</span>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;input</span>
+  <span class="na">type=</span><span class="s">"text"</span>
+  <span class="na">id=</span><span class="s">"country_code"</span>
+  <span class="na">name=</span><span class="s">"country_code"</span>
+  <span class="na">pattern=</span><span class="s">"[A-Za-z]{3}"</span>
+  <span class="na">title=</span><span class="s">"Three letter country code"</span>
+<span class="nt">/&gt;</span>
 </code></pre></div></div>
 
 <ul>
@@ -317,26 +296,28 @@ bootstrap: 너무 유명해서 엄청 자주 들어 본.</p>
   <li>플레이스홀더. 텍스트 필드에 무엇을 입력해야 할 지 알려주는 역할을 한다. 보통 짧은 구문 형식으로 제공되며 인풋 프롬프트(Input Prompt)라고도 불린다.</li>
 </ul>
 
-
 </div>
 
 
 
 <div class="pagination">
   
-    <a href="/2022-09-27/w3school" class="left arrow">&#8592;</a>
-  
-  
-    <a href="/2022-09-25/9th-week" class="right arrow">&#8594;</a>
+  <a href="/2022-09-27/w3school" class="left arrow"
+    >&#8592;</a
+  >
+   
+  <a href="/2022-09-25/9th-week" class="right arrow"
+    >&#8594;</a
+  >
   
 
   <a href="#" class="top">Top</a>
 </div>
-    </main>
+</main>
 
     <footer>
   <span>
-    &copy; <time datetime="2023-08-01 23:12:59 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-08-05 10:07:13 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,8 +10,8 @@
 <meta property="og:title" content="TIL) 뽀모 프로젝트 예약 기능 - 반복 일정을 위해 rrule" />
 <meta name="author" content="Sunmi Moon" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="(달성/목표) 뽀모도리 1일 5 / 5 1주 17 /40" />
-<meta property="og:description" content="(달성/목표) 뽀모도리 1일 5 / 5 1주 17 /40" />
+<meta name="description" content="반복되는 일정을 위한 rrule" />
+<meta property="og:description" content="반복되는 일정을 위한 rrule" />
 <link rel="canonical" href="http://localhost:4000/2022-11-23/TIL" />
 <meta property="og:url" content="http://localhost:4000/2022-11-23/TIL" />
 <meta property="og:site_name" content="주경야독학) 개발공부로그" />
@@ -21,7 +20,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="TIL) 뽀모 프로젝트 예약 기능 - 반복 일정을 위해 rrule" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-11-23T12:18:07+09:00","datePublished":"2022-11-23T12:18:07+09:00","description":"(달성/목표) 뽀모도리 1일 5 / 5 1주 17 /40","headline":"TIL) 뽀모 프로젝트 예약 기능 - 반복 일정을 위해 rrule","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-11-23/TIL"},"url":"http://localhost:4000/2022-11-23/TIL"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-11-23T12:18:07+09:00","datePublished":"2022-11-23T12:18:07+09:00","description":"반복되는 일정을 위한 rrule","headline":"TIL) 뽀모 프로젝트 예약 기능 - 반복 일정을 위해 rrule","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-11-23/TIL"},"url":"http://localhost:4000/2022-11-23/TIL"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -43,7 +42,6 @@
 
 
   <body>
-
     <nav class="nav">
   <div class="nav-container">
     <a href="/">
@@ -58,46 +56,23 @@
 </nav>
 
 
-    <main>
-      <div class="post">
-  <div class="post-info">
-    <span>Written by</span>
-    
-        Sunmi Moon
-    
+    <main><div class="post">
+  <h1 class="post-title">TIL) 뽀모 프로젝트 예약 기능 - 반복 일정을 위해 rrule</h1>
 
+  <div class="post-info">
     
-      <br>
-      <span>on&nbsp;</span><time datetime="2022-11-23 12:18:07 +0900">November 23, 2022</time>
+    <br />
+    <span>on&nbsp;</span
+    ><time datetime="2022-11-23 12:18:07 +0900">November 23, 2022</time>
     
   </div>
 
-  <h1 class="post-title">TIL) 뽀모 프로젝트 예약 기능 - 반복 일정을 위해 rrule</h1>
-  <div class="post-line"></div>
+  <h3 id="반복되는-일정을-위한-rrule">반복되는 일정을 위한 rrule</h3>
 
-  <table>
-  <thead>
-    <tr>
-      <th>(달성/목표)</th>
-      <th>뽀모도리</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1일</td>
-      <td>5 / 5</td>
-    </tr>
-    <tr>
-      <td>1주</td>
-      <td>17 /40</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="반복되는-일정을-위한-rrule">반복되는 일정을 위한 rrule</h3>
 <p>뽀모 프로젝트는 목표 뽀모도리 개수 대비 달성을 보여 주기 때문에 반복되는 일정을 저장해야 한다. 그래서 rrule을 사용한다. 다음은 rrule의 예제</p>
 
 <p>rrule.js</p>
+
 <div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">RRule</span><span class="p">,</span> <span class="nx">RRuleSet</span><span class="p">,</span> <span class="nx">rrulestr</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">rrule</span><span class="dl">"</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">TestingRrule</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
@@ -156,10 +131,10 @@
 
 <ul>
   <li>덤벨컬 좌우 번갈아가며 5분간</li>
-  <li>크로스 크런치 힘들 때까지 5세트</li>
-  <li></li>
+  <li>
+    <h2 id="크로스-크런치-힘들-때까지-5세트">크로스 크런치 힘들 때까지 5세트</h2>
+  </li>
 </ul>
-
 
 </div>
 
@@ -167,19 +142,22 @@
 
 <div class="pagination">
   
-    <a href="/2022-11-24/TIL" class="left arrow">&#8592;</a>
-  
-  
-    <a href="/2022-11-22/TIL" class="right arrow">&#8594;</a>
+  <a href="/2022-11-24/TIL" class="left arrow"
+    >&#8592;</a
+  >
+   
+  <a href="/2022-11-22/TIL" class="right arrow"
+    >&#8594;</a
+  >
   
 
   <a href="#" class="top">Top</a>
 </div>
-    </main>
+</main>
 
     <footer>
   <span>
-    &copy; <time datetime="2023-08-01 23:12:59 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-08-05 10:07:13 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 

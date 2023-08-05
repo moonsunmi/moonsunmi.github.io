@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,8 +10,8 @@
 <meta property="og:title" content="reactjs.org 튜토리얼 + w3school Javascript" />
 <meta name="author" content="Sunmi Moon" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="  뽀모도리 등 운동 가슴 운동 1일(달성/목표) 13/16+5 5/5 5/5 1주(달성/목표) 42/40    " />
-<meta property="og:description" content="  뽀모도리 등 운동 가슴 운동 1일(달성/목표) 13/16+5 5/5 5/5 1주(달성/목표) 42/40    " />
+<meta name="description" content="움직임 내역 보여주기" />
+<meta property="og:description" content="움직임 내역 보여주기" />
 <link rel="canonical" href="http://localhost:4000/2022-10-02/reactjs.org" />
 <meta property="og:url" content="http://localhost:4000/2022-10-02/reactjs.org" />
 <meta property="og:site_name" content="주경야독학) 개발공부로그" />
@@ -21,7 +20,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="reactjs.org 튜토리얼 + w3school Javascript" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-10-02T12:18:07+09:00","datePublished":"2022-10-02T12:18:07+09:00","description":"  뽀모도리 등 운동 가슴 운동 1일(달성/목표) 13/16+5 5/5 5/5 1주(달성/목표) 42/40    ","headline":"reactjs.org 튜토리얼 + w3school Javascript","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-10-02/reactjs.org"},"url":"http://localhost:4000/2022-10-02/reactjs.org"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-10-02T12:18:07+09:00","datePublished":"2022-10-02T12:18:07+09:00","description":"움직임 내역 보여주기","headline":"reactjs.org 튜토리얼 + w3school Javascript","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-10-02/reactjs.org"},"url":"http://localhost:4000/2022-10-02/reactjs.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -43,7 +42,6 @@
 
 
   <body>
-
     <nav class="nav">
   <div class="nav-container">
     <a href="/">
@@ -58,56 +56,25 @@
 </nav>
 
 
-    <main>
-      <div class="post">
-  <div class="post-info">
-    <span>Written by</span>
-    
-        Sunmi Moon
-    
+    <main><div class="post">
+  <h1 class="post-title">reactjs.org 튜토리얼 + w3school Javascript</h1>
 
+  <div class="post-info">
     
-      <br>
-      <span>on&nbsp;</span><time datetime="2022-10-02 12:18:07 +0900">October 02, 2022</time>
+    <br />
+    <span>on&nbsp;</span
+    ><time datetime="2022-10-02 12:18:07 +0900">October 02, 2022</time>
     
   </div>
 
-  <h1 class="post-title">reactjs.org 튜토리얼 + w3school Javascript</h1>
-  <div class="post-line"></div>
-
-  <table>
-  <thead>
-    <tr>
-      <th> </th>
-      <th>뽀모도리</th>
-      <th>등 운동</th>
-      <th>가슴 운동</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1일<br />(달성/목표)</td>
-      <td>13/16+5</td>
-      <td>5/5</td>
-      <td>5/5</td>
-    </tr>
-    <tr>
-      <td>1주<br />(달성/목표)</td>
-      <td>42/40</td>
-      <td> </td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="움직임-내역-보여주기">움직임 내역 보여주기</h2>
+  <h2 id="움직임-내역-보여주기">움직임 내역 보여주기</h2>
 
 <p>React 컴포넌트는 자바스크립트의 first-class 오브젝트이다.</p>
 
 <p>자바스크립트 배열에는 map 메서드가 있다. 다음과 같이 씀. 히스토리를 map 메서드를 이용해서 매칭시켜준다.</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">];</span>
-<span class="kd">const</span> <span class="nx">doubled</span> <span class="o">=</span> <span class="nx">numbers</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">x</span> <span class="o">=&gt;</span> <span class="nx">x</span> <span class="o">*</span> <span class="mi">2</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">doubled</span> <span class="o">=</span> <span class="nx">numbers</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">x</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">x</span> <span class="o">*</span> <span class="mi">2</span><span class="p">);</span>
 </code></pre></div></div>
 
 <ul>
@@ -117,7 +84,7 @@
 <h2 id="틱택토-완성-코드">틱택토 완성 코드</h2>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Square</span><span class="p">(</span><span class="nx">prop</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">return</span><span class="p">(</span>
+  <span class="k">return</span> <span class="p">(</span>
     <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">square</span><span class="dl">"</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">prop</span><span class="p">.</span><span class="nx">onClick</span><span class="p">}</span><span class="o">&gt;</span>
       <span class="p">{</span><span class="nx">prop</span><span class="p">.</span><span class="nx">value</span><span class="p">}</span>
     <span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
@@ -126,10 +93,11 @@
 
 <span class="kd">class</span> <span class="nx">Board</span> <span class="kd">extends</span> <span class="nx">React</span><span class="p">.</span><span class="nx">Component</span> <span class="p">{</span>
   <span class="nx">renderSquare</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="p">(</span><span class="o">&lt;</span><span class="nx">Square</span> 
-             <span class="nx">value</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">squares</span><span class="p">[</span><span class="nx">i</span><span class="p">]}</span>
-             <span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">onClick</span><span class="p">(</span><span class="nx">i</span><span class="p">)}</span>
-           <span class="sr">/</span><span class="err">&gt;
+    <span class="k">return</span> <span class="p">(</span>
+      <span class="o">&lt;</span><span class="nx">Square</span>
+        <span class="nx">value</span><span class="o">=</span><span class="p">{</span><span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">squares</span><span class="p">[</span><span class="nx">i</span><span class="p">]}</span>
+        <span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">props</span><span class="p">.</span><span class="nx">onClick</span><span class="p">(</span><span class="nx">i</span><span class="p">)}</span>
+      <span class="sr">/</span><span class="err">&gt;
 </span>    <span class="p">);</span>
   <span class="p">}</span>
 
@@ -160,62 +128,64 @@
   <span class="kd">constructor</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">super</span><span class="p">(</span><span class="nx">props</span><span class="p">);</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">state</span> <span class="o">=</span> <span class="p">{</span>
-      <span class="na">history</span><span class="p">:</span> <span class="p">[{</span>
-        <span class="na">squares</span><span class="p">:</span> <span class="nb">Array</span><span class="p">(</span><span class="mi">9</span><span class="p">).</span><span class="nx">fill</span><span class="p">(</span><span class="kc">null</span><span class="p">),</span>   
-      <span class="p">}],</span>
+      <span class="na">history</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="na">squares</span><span class="p">:</span> <span class="nb">Array</span><span class="p">(</span><span class="mi">9</span><span class="p">).</span><span class="nx">fill</span><span class="p">(</span><span class="kc">null</span><span class="p">),</span>
+        <span class="p">},</span>
+      <span class="p">],</span>
       <span class="na">stepNumber</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
       <span class="na">xIsNext</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
     <span class="p">};</span>
   <span class="p">}</span>
-  <span class="nx">handleClick</span><span class="p">(</span><span class="nx">i</span><span class="p">){</span>
+  <span class="nx">handleClick</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">const</span> <span class="nx">history</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">history</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">stepNumber</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
     <span class="kd">const</span> <span class="nx">current</span> <span class="o">=</span> <span class="nx">history</span><span class="p">[</span><span class="nx">history</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
     <span class="kd">const</span> <span class="nx">squares</span> <span class="o">=</span> <span class="nx">current</span><span class="p">.</span><span class="nx">squares</span><span class="p">.</span><span class="nx">slice</span><span class="p">();</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">calculateWinner</span><span class="p">(</span><span class="nx">squares</span><span class="p">)</span> <span class="o">||</span> <span class="nx">squares</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span> <span class="p">{</span>
-      <span class="k">return</span> <span class="p">;</span>
+      <span class="k">return</span><span class="p">;</span>
     <span class="p">}</span>
-    <span class="nx">squares</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">xIsNext</span><span class="p">?</span> <span class="dl">'</span><span class="s1">X</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">O</span><span class="dl">'</span><span class="p">;</span>
+    <span class="nx">squares</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">xIsNext</span> <span class="p">?</span> <span class="dl">"</span><span class="s2">X</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">O</span><span class="dl">"</span><span class="p">;</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
-      <span class="na">history</span><span class="p">:</span> <span class="nx">history</span><span class="p">.</span><span class="nx">concat</span><span class="p">([{</span>
-        <span class="na">squares</span><span class="p">:</span> <span class="nx">squares</span><span class="p">,</span>  
-      <span class="p">}]),</span>
+      <span class="na">history</span><span class="p">:</span> <span class="nx">history</span><span class="p">.</span><span class="nx">concat</span><span class="p">([</span>
+        <span class="p">{</span>
+          <span class="na">squares</span><span class="p">:</span> <span class="nx">squares</span><span class="p">,</span>
+        <span class="p">},</span>
+      <span class="p">]),</span>
       <span class="na">stepNumber</span><span class="p">:</span> <span class="nx">history</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span>
       <span class="na">xIsNext</span><span class="p">:</span> <span class="o">!</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">xIsNext</span><span class="p">,</span>
     <span class="p">});</span>
   <span class="p">}</span>
-  <span class="nx">jumpTo</span><span class="p">(</span><span class="nx">step</span><span class="p">){</span>
+  <span class="nx">jumpTo</span><span class="p">(</span><span class="nx">step</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">setState</span><span class="p">({</span>
       <span class="na">stepNumber</span><span class="p">:</span> <span class="nx">step</span><span class="p">,</span>
-      <span class="na">xIsNext</span><span class="p">:</span> <span class="p">(</span><span class="nx">step</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="o">===</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="p">});</span>  
+      <span class="na">xIsNext</span><span class="p">:</span> <span class="nx">step</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">===</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="p">});</span>
   <span class="p">}</span>
 
   <span class="nx">render</span><span class="p">()</span> <span class="p">{</span>
     <span class="kd">const</span> <span class="nx">history</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">history</span><span class="p">;</span>
     <span class="kd">const</span> <span class="nx">current</span> <span class="o">=</span> <span class="nx">history</span><span class="p">[</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">stepNumber</span><span class="p">];</span>
     <span class="kd">const</span> <span class="nx">winner</span> <span class="o">=</span> <span class="nx">calculateWinner</span><span class="p">(</span><span class="nx">current</span><span class="p">.</span><span class="nx">squares</span><span class="p">);</span>
-    
+
     <span class="kd">const</span> <span class="nx">moves</span> <span class="o">=</span> <span class="nx">history</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">step</span><span class="p">,</span> <span class="nx">move</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-      <span class="kd">const</span> <span class="nx">desc</span> <span class="o">=</span> <span class="nx">move</span> <span class="p">?</span>
-            <span class="dl">"</span><span class="s2">Go to #</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">move</span> <span class="p">:</span>
-            <span class="dl">"</span><span class="s2">Go to Game Start</span><span class="dl">"</span><span class="p">;</span>
+      <span class="kd">const</span> <span class="nx">desc</span> <span class="o">=</span> <span class="nx">move</span> <span class="p">?</span> <span class="dl">"</span><span class="s2">Go to #</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">move</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">Go to Game Start</span><span class="dl">"</span><span class="p">;</span>
       <span class="k">return</span> <span class="p">(</span>
         <span class="o">&lt;</span><span class="nx">li</span> <span class="nx">key</span><span class="o">=</span><span class="p">{</span><span class="nx">move</span><span class="p">}</span><span class="o">&gt;</span>
           <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">jumpTo</span><span class="p">(</span><span class="nx">move</span><span class="p">)}</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">desc</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
 </span>        <span class="o">&lt;</span><span class="sr">/li</span><span class="err">&gt;
-</span>      <span class="p">)</span>
+</span>      <span class="p">);</span>
     <span class="p">});</span>
-    
+
     <span class="kd">let</span> <span class="nx">status</span><span class="p">;</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">winner</span><span class="p">)</span> <span class="p">{</span>
-      <span class="nx">status</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Winner</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">winner</span><span class="p">;</span>
+      <span class="nx">status</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Winner</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">winner</span><span class="p">;</span>
     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-      <span class="nx">status</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Next player: </span><span class="dl">'</span> <span class="o">+</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">xIsNext</span><span class="p">?</span> <span class="dl">'</span><span class="s1">X</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">'</span><span class="s1">O</span><span class="dl">'</span><span class="p">);</span>
+      <span class="nx">status</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Next player: </span><span class="dl">"</span> <span class="o">+</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">xIsNext</span> <span class="p">?</span> <span class="dl">"</span><span class="s2">X</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">O</span><span class="dl">"</span><span class="p">);</span>
     <span class="p">}</span>
     <span class="k">return</span> <span class="p">(</span>
       <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">game</span><span class="dl">"</span><span class="o">&gt;</span>
         <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">game-board</span><span class="dl">"</span><span class="o">&gt;</span>
-          <span class="o">&lt;</span><span class="nx">Board</span> 
+          <span class="o">&lt;</span><span class="nx">Board</span>
             <span class="nx">squares</span><span class="o">=</span><span class="p">{</span><span class="nx">current</span><span class="p">.</span><span class="nx">squares</span><span class="p">}</span>
             <span class="nx">onClick</span><span class="o">=</span><span class="p">{(</span><span class="nx">i</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="k">this</span><span class="p">.</span><span class="nx">handleClick</span><span class="p">(</span><span class="nx">i</span><span class="p">)}</span>
           <span class="sr">/</span><span class="err">&gt;
@@ -257,6 +227,7 @@
 <p>##</p>
 
 <h3 id="what-should-i-know-first">What should I know first?</h3>
+
 <p>have a goodhandle on javascript.</p>
 
 <ol>
@@ -275,6 +246,7 @@
 </ul>
 
 <h3 id="주석">주석</h3>
+
 <ul>
   <li>HTML: <code class="language-plaintext highlighter-rouge">&lt;!-- --&gt;</code></li>
   <li>CSS: <code class="language-plaintext highlighter-rouge">/* ... */</code></li>
@@ -289,8 +261,8 @@
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">cars</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Saab</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Volvo</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">BMW</span><span class="dl">"</span><span class="p">];</span>
 
-<span class="nx">cars</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Toyota</span><span class="dl">"</span><span class="p">;</span>                  <span class="c1">// O</span>
-<span class="nx">cars</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Toyota</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Volvo</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Audi</span><span class="dl">"</span><span class="p">];</span>  <span class="c1">// X</span>
+<span class="nx">cars</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Toyota</span><span class="dl">"</span><span class="p">;</span> <span class="c1">// O</span>
+<span class="nx">cars</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Toyota</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Volvo</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Audi</span><span class="dl">"</span><span class="p">];</span> <span class="c1">// X</span>
 </code></pre></div></div>
 
 <h3 id="objects">objects</h3>
@@ -303,7 +275,7 @@
 
 <p>object도 변수와 마찬가지로 값을 담을 수 있다. 그런데 많은 값을 담을 수 있다.</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">car</span> <span class="o">=</span> <span class="p">{</span><span class="na">type</span><span class="p">:</span><span class="dl">"</span><span class="s2">Fiat</span><span class="dl">"</span><span class="p">,</span> <span class="na">model</span><span class="p">:</span><span class="dl">"</span><span class="s2">500</span><span class="dl">"</span><span class="p">,</span> <span class="na">color</span><span class="p">:</span><span class="dl">"</span><span class="s2">white</span><span class="dl">"</span><span class="p">};</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">car</span> <span class="o">=</span> <span class="p">{</span> <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Fiat</span><span class="dl">"</span><span class="p">,</span> <span class="na">model</span><span class="p">:</span> <span class="dl">"</span><span class="s2">500</span><span class="dl">"</span><span class="p">,</span> <span class="na">color</span><span class="p">:</span> <span class="dl">"</span><span class="s2">white</span><span class="dl">"</span> <span class="p">};</span>
 </code></pre></div></div>
 
 <p>object 선언이니까 const로. value는 다음과 같이 접근할 수 있다.</p>
@@ -316,11 +288,11 @@
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">person</span> <span class="o">=</span> <span class="p">{</span>
   <span class="na">firstName</span><span class="p">:</span> <span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">,</span>
-  <span class="na">lastName</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">Doe</span><span class="dl">"</span><span class="p">,</span>
-  <span class="na">id</span>       <span class="p">:</span> <span class="mi">5566</span><span class="p">,</span>
-  <span class="na">fullName</span> <span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="na">lastName</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Doe</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">id</span><span class="p">:</span> <span class="mi">5566</span><span class="p">,</span>
+  <span class="na">fullName</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
     <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">firstName</span> <span class="o">+</span> <span class="dl">"</span><span class="s2"> </span><span class="dl">"</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">lastName</span><span class="p">;</span>
-  <span class="p">}</span>
+  <span class="p">},</span>
 <span class="p">};</span>
 </code></pre></div></div>
 
@@ -338,10 +310,14 @@
 <h2 id="event">Event</h2>
 
 <p>다음 코드를 실행하면, 자바스크립트는 ID가 ‘demo’인 엘리먼트의 내용을 바꾼다.</p>
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"document.getElementById('demo').innerHTML = Date()"</span><span class="nt">&gt;</span>The time is?<span class="nt">&lt;/button&gt;</span>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"document.getElementById('demo').innerHTML = Date()"</span><span class="nt">&gt;</span>
+  The time is?
+<span class="nt">&lt;/button&gt;</span>
 </code></pre></div></div>
 
 <p>다음의 코드는 자기자신 엘리먼트의 내용을 바꾼다. 따라서 ‘The time is?’가 지워지고, 시간 결과가 출력됨.</p>
+
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;button</span> <span class="na">onclick=</span><span class="s">"this.innerHTML=Date()"</span><span class="nt">&gt;</span>The time is?<span class="nt">&lt;/button&gt;</span>
 </code></pre></div></div>
 
@@ -349,12 +325,14 @@
 
 <p><code class="language-plaintext highlighter-rouge">===</code>는 값과 타입이 전부 같아야 한다.</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">;</span>        <span class="c1">// x is a string</span>
-<span class="kd">let</span> <span class="nx">y</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">String</span><span class="p">(</span><span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">);</span>  <span class="c1">// y is an object</span>
-<span class="kd">let</span> <span class="nx">z</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">String</span><span class="p">(</span><span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">);</span>  <span class="c1">// z is an object</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">;</span> <span class="c1">// x is a string</span>
+<span class="kd">let</span> <span class="nx">y</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">String</span><span class="p">(</span><span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// y is an object</span>
+<span class="kd">let</span> <span class="nx">z</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">String</span><span class="p">(</span><span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// z is an object</span>
 
-<span class="p">(</span><span class="nx">x</span><span class="o">===</span><span class="nx">y</span><span class="p">)</span> <span class="c1">// False: string과 object 비교라서</span>
-<span class="p">(</span><span class="nx">y</span><span class="o">===</span><span class="nx">z</span><span class="p">)</span> <span class="c1">// False: object끼리는 비교하지 않는다고 합니다.</span>
+<span class="p">(</span><span class="nx">x</span> <span class="o">===</span> <span class="nx">y</span><span class="p">)(</span>
+  <span class="c1">// False: string과 object 비교라서</span>
+  <span class="nx">y</span> <span class="o">===</span> <span class="nx">z</span>
+<span class="p">);</span> <span class="c1">// False: object끼리는 비교하지 않는다고 합니다.</span>
 </code></pre></div></div>
 
 <p>오브젝트끼리의 <code class="language-plaintext highlighter-rouge">===</code> 비교는 언제나 false.</p>
@@ -370,6 +348,7 @@
 <p><code class="language-plaintext highlighter-rouge">trim</code>: 글자 양쪽에 있는 빈칸들을 알아서 정리해 준다. 앞부분 정리해 주는 <code class="language-plaintext highlighter-rouge">trimStart</code>와 뒷부분 정리해 주는 <code class="language-plaintext highlighter-rouge">trimEnd</code>도 있다.</p>
 
 <h3 id="string-search">String Search</h3>
+
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">str</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Please locate where 'locate' occurs!</span><span class="dl">"</span><span class="p">;</span>
 <span class="nx">str</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="dl">"</span><span class="s2">locate</span><span class="dl">"</span><span class="p">);</span>
 </code></pre></div></div>
@@ -381,20 +360,23 @@
 <p>ES6에서 새롭게 도입한 문자열 표기법</p>
 
 <p>여러 줄을 그냥 써도 되고,</p>
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">text</span> <span class="o">=</span>
-<span class="s2">`The quick
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">text</span> <span class="o">=</span> <span class="s2">`The quick
 brown fox
 jumps over
 the lazy dog`</span><span class="p">;</span>
 </code></pre></div></div>
+
 <p>다음과 같이 <code class="language-plaintext highlighter-rouge">+</code> 연산자 없이 string 안에 변수를 넣어서 표기할 수 있다.</p>
+
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">firstName</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">John</span><span class="dl">"</span><span class="p">;</span>
 <span class="kd">let</span> <span class="nx">lastName</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">Doe</span><span class="dl">"</span><span class="p">;</span>
 
-<span class="kd">let</span> <span class="nx">text</span> <span class="o">=</span> <span class="s2">`welcome, #{firstName} #{lastName}`</span>
+<span class="kd">let</span> <span class="nx">text</span> <span class="o">=</span> <span class="s2">`welcome, #{firstName} #{lastName}`</span><span class="p">;</span>
 </code></pre></div></div>
 
 <p>string에서 글자 하나 추출해주는 charAt</p>
+
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">text</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">HELLO WORLD</span><span class="dl">"</span><span class="p">;</span>
 <span class="kd">let</span> <span class="nx">char</span> <span class="o">=</span> <span class="nx">text</span><span class="p">.</span><span class="nx">charAt</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
 </code></pre></div></div>
@@ -414,9 +396,9 @@ the lazy dog`</span><span class="p">;</span>
 
 <p>배열은 object의 특별한 종류이다. 배열 안에는 오브젝트, 함수, 또 다른 배열 등이 다 들어갈 수 있다.</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">myArray</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">;</span>  <span class="c1">// object</span>
-<span class="nx">myArray</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nx">myFunction</span><span class="p">;</span>  <span class="c1">// function</span>
-<span class="nx">myArray</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="nx">myCars</span><span class="p">;</span>   <span class="c1">// array</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">myArray</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">;</span> <span class="c1">// object</span>
+<span class="nx">myArray</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nx">myFunction</span><span class="p">;</span> <span class="c1">// function</span>
+<span class="nx">myArray</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="nx">myCars</span><span class="p">;</span> <span class="c1">// array</span>
 </code></pre></div></div>
 
 <ul>
@@ -433,10 +415,9 @@ the lazy dog`</span><span class="p">;</span>
 <span class="nx">fruits</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">myFunction</span><span class="p">);</span>
 <span class="nx">text</span> <span class="o">+=</span> <span class="dl">"</span><span class="s2">&lt;/ul&gt;</span><span class="dl">"</span><span class="p">;</span>
 
-<span class="kd">function</span> <span class="nx">myFunction</span><span class="p">(</span><span class="nx">value</span><span class="p">){</span>
+<span class="kd">function</span> <span class="nx">myFunction</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">text</span> <span class="o">+=</span> <span class="dl">"</span><span class="s2">&lt;li&gt;</span><span class="dl">"</span> <span class="o">+</span> <span class="nx">value</span> <span class="o">+</span> <span class="dl">"</span><span class="s2">&lt;/li&gt;</span><span class="dl">"</span><span class="p">;</span>
 <span class="p">}</span>
-
 </code></pre></div></div>
 
 <h3 id="배열-메서드">배열 메서드</h3>
@@ -448,13 +429,16 @@ the lazy dog`</span><span class="p">;</span>
 </code></pre></div></div>
 
 <p>결과가 다음과 같이 나옴.</p>
+
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Banana * Orange * Apple * Mango
 </code></pre></div></div>
 
 <p>배열 원소를 중간에 끼워 넣을 때, <code class="language-plaintext highlighter-rouge">splice</code> 메서드.</p>
+
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">fruits</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Banana</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Orange</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Apple</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Mango</span><span class="dl">"</span><span class="p">];</span>
 <span class="nx">fruits</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Lemon</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Kiwi</span><span class="dl">"</span><span class="p">);</span>
 </code></pre></div></div>
+
 <p>결과: Banana,Orange,Lemon,Kiwi,Apple,Mango</p>
 
 <p>두 번째 파마리터 <code class="language-plaintext highlighter-rouge">0</code>은 삭제될 원소의 개수를 의미한다. 삭제하지 않고 끼워 넣을 것이므로 0</p>
@@ -464,14 +448,20 @@ the lazy dog`</span><span class="p">;</span>
 <p>숫자가 들어 있는 배열을 sort해도, alphabet 순서(예: 1,10,100,25,40,5) 로 정렬된다. 따라서 숫자의 대소를 기준으로 정렬하려면 약간의 트릭을 써야 한다.</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">points</span> <span class="o">=</span> <span class="p">[</span><span class="mi">40</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">10</span><span class="p">];</span>
-<span class="nx">points</span><span class="p">.</span><span class="nx">sort</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">){</span><span class="k">return</span> <span class="nx">a</span> <span class="o">-</span> <span class="nx">b</span><span class="p">});</span> <span class="c1">// 오름차순</span>
-<span class="nx">points</span><span class="p">.</span><span class="nx">sort</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">){</span><span class="k">return</span> <span class="nx">b</span> <span class="o">-</span> <span class="nx">a</span><span class="p">});</span> <span class="c1">// 내림차순</span>
+<span class="nx">points</span><span class="p">.</span><span class="nx">sort</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">a</span> <span class="o">-</span> <span class="nx">b</span><span class="p">;</span>
+<span class="p">});</span> <span class="c1">// 오름차순</span>
+<span class="nx">points</span><span class="p">.</span><span class="nx">sort</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">b</span> <span class="o">-</span> <span class="nx">a</span><span class="p">;</span>
+<span class="p">});</span> <span class="c1">// 내림차순</span>
 </code></pre></div></div>
 
 <p>랜덤으로 재정렬하려면 다음과 같이</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">points</span> <span class="o">=</span> <span class="p">[</span><span class="mi">40</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">10</span><span class="p">];</span>
-<span class="nx">points</span><span class="p">.</span><span class="nx">sort</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span><span class="k">return</span> <span class="mf">0.5</span> <span class="o">-</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()});</span>
+<span class="nx">points</span><span class="p">.</span><span class="nx">sort</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="mf">0.5</span> <span class="o">-</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">();</span>
+<span class="p">});</span>
 </code></pre></div></div>
 
 <h3 id="iterables">iterables</h3>
@@ -480,8 +470,8 @@ the lazy dog`</span><span class="p">;</span>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">name</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">school</span><span class="dl">"</span><span class="p">;</span>
 
-<span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">x</span> <span class="k">of</span> <span class="nx">name</span><span class="p">){</span>
-    <span class="c1">// x: 낱단어 하나하나씩</span>
+<span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">x</span> <span class="k">of</span> <span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// x: 낱단어 하나하나씩</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
@@ -495,13 +485,19 @@ the lazy dog`</span><span class="p">;</span>
 </code></pre></div></div>
 
 <h3 id="map">map</h3>
+
 <p>key-value 쌍으로 관리한다.</p>
 
 <p>다음과 같이 배열을 전달해서 만들 수도 있고, set 메서드로 추가해도 된다.</p>
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">fruits</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Map</span><span class="p">([[</span><span class="dl">"</span><span class="s2">banana</span><span class="dl">"</span><span class="p">,</span> <span class="mi">500</span><span class="p">],</span> <span class="p">[</span><span class="dl">"</span><span class="s2">apple</span><span class="dl">"</span><span class="p">,</span> <span class="mi">100</span><span class="p">]]);</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">fruits</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Map</span><span class="p">([</span>
+  <span class="p">[</span><span class="dl">"</span><span class="s2">banana</span><span class="dl">"</span><span class="p">,</span> <span class="mi">500</span><span class="p">],</span>
+  <span class="p">[</span><span class="dl">"</span><span class="s2">apple</span><span class="dl">"</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span>
+<span class="p">]);</span>
 </code></pre></div></div>
 
 <p>set 메서드는 수정할 때도 쓸 수 있다. get은 key 값으로 value 구할 때</p>
+
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">fruits</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Map</span><span class="p">();</span>
 
 <span class="nx">fruits</span><span class="p">.</span><span class="kd">set</span><span class="p">(</span><span class="dl">"</span><span class="s2">apple</span><span class="dl">"</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span> <span class="c1">// apple 추가</span>
@@ -510,14 +506,16 @@ the lazy dog`</span><span class="p">;</span>
 </code></pre></div></div>
 
 <p><code class="language-plaintext highlighter-rouge">forEach()</code> 메서드 이용하기. value, key 순서로 파라미터가 나옴에 유의하자.</p>
+
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">fruits</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">key</span><span class="p">){</span>
     <span class="p">...</span> <span class="nx">value</span> <span class="p">...</span> <span class="nx">key</span> <span class="p">;</span>
 <span class="p">})</span>
 </code></pre></div></div>
 
 <p><code class="language-plaintext highlighter-rouge">entries</code> 메서드 이용하기. <code class="language-plaintext highlighter-rouge">[key, values]</code> object가 리턴된다.</p>
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">x</span> <span class="k">of</span> <span class="nx">fruits</span><span class="p">.</span><span class="nx">entries</span><span class="p">()){</span>
-  <span class="nx">text</span> <span class="o">+=</span> <span class="nx">x</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="dl">'</span><span class="s1">/</span><span class="dl">'</span><span class="p">);</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="p">(</span><span class="kd">const</span> <span class="nx">x</span> <span class="k">of</span> <span class="nx">fruits</span><span class="p">.</span><span class="nx">entries</span><span class="p">())</span> <span class="p">{</span>
+  <span class="nx">text</span> <span class="o">+=</span> <span class="nx">x</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">);</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
@@ -533,7 +531,7 @@ the lazy dog`</span><span class="p">;</span>
 <span class="kd">function</span> <span class="nx">myFunction</span><span class="p">(){</span>
   <span class="kd">const</span> <span class="nx">message</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">p01</span><span class="dl">"</span><span class="p">);</span>
   <span class="nx">message</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="dl">""</span><span class="p">;</span>
-  
+
   <span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">demo</span><span class="dl">"</span><span class="p">).</span><span class="nx">value</span><span class="p">;</span>
   <span class="k">try</span> <span class="p">{</span>
     <span class="k">if</span><span class="p">(</span><span class="nx">x</span> <span class="o">==</span> <span class="dl">""</span><span class="p">)</span> <span class="k">throw</span> <span class="dl">"</span><span class="s2">empty</span><span class="dl">"</span><span class="p">;</span>
@@ -553,9 +551,13 @@ the lazy dog`</span><span class="p">;</span>
 
 <h3 id="arrow-function">arrow function</h3>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">hello</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="dl">"</span><span class="s2">HELLO</span><span class="dl">"</span><span class="p">;</span> <span class="p">}</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">hello</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="dl">"</span><span class="s2">HELLO</span><span class="dl">"</span><span class="p">;</span>
+<span class="p">};</span>
 
-<span class="nx">hello</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span> <span class="k">return</span> <span class="dl">"</span><span class="s2">HELLO</span><span class="dl">"</span><span class="p">;</span> <span class="p">}</span>
+<span class="nx">hello</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="dl">"</span><span class="s2">HELLO</span><span class="dl">"</span><span class="p">;</span>
+<span class="p">};</span>
 
 <span class="nx">hello</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="dl">"</span><span class="s2">HELLO</span><span class="dl">"</span><span class="p">;</span> <span class="c1">// 값을 리턴하는 한 줄뿐이라면 이렇게도 줄일 수 있다.</span>
 </code></pre></div></div>
@@ -572,9 +574,9 @@ the lazy dog`</span><span class="p">;</span>
   <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">demo</span><span class="dl">"</span><span class="p">).</span><span class="nx">innerHTML</span> <span class="o">+=</span> <span class="k">this</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">load</span><span class="dl">"</span><span class="p">,</span> <span class="nx">hello</span><span class="p">);</span>  <span class="c1">// 1. </span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">load</span><span class="dl">"</span><span class="p">,</span> <span class="nx">hello</span><span class="p">);</span>  <span class="c1">// 1.</span>
 
-<span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">btn</span><span class="dl">"</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="p">,</span> <span class="nx">hello</span><span class="p">);</span>  <span class="c1">// 2. </span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">btn</span><span class="dl">"</span><span class="p">).</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">"</span><span class="s2">click</span><span class="dl">"</span><span class="p">,</span> <span class="nx">hello</span><span class="p">);</span>  <span class="c1">// 2.</span>
 
 <span class="o">&lt;</span><span class="sr">/script</span><span class="err">&gt;
 </span>
@@ -590,7 +592,7 @@ the lazy dog`</span><span class="p">;</span>
 <p>자바스크립트 class는 object가 아니다. 자바스크립트 오브젝트를 위한 template이다.</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nx">Car</span> <span class="p">{</span>
-  <span class="kd">constructor</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">year</span><span class="p">){</span>
+  <span class="kd">constructor</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">year</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">year</span> <span class="o">=</span> <span class="nx">year</span><span class="p">;</span>
   <span class="p">}</span>
@@ -603,7 +605,7 @@ the lazy dog`</span><span class="p">;</span>
 
 <p>attribute는 HTML 문서에서 elements 안에 추가적인 정보를 담을 때 사용한다.</p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"myclass"</span><span class="nt">&gt;</span>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"myclass"</span><span class="nt">&gt;&lt;/div&gt;</span>
 </code></pre></div></div>
 
 <ul>
@@ -612,26 +614,28 @@ the lazy dog`</span><span class="p">;</span>
   <li><code class="language-plaintext highlighter-rouge">myclass</code>: attribute의 value</li>
 </ul>
 
-
 </div>
 
 
 
 <div class="pagination">
   
-    <a href="/2022-10-02/10th-week" class="left arrow">&#8592;</a>
-  
-  
-    <a href="/2022-10-01/reactjs.org" class="right arrow">&#8594;</a>
+  <a href="/2022-10-02/10th-week" class="left arrow"
+    >&#8592;</a
+  >
+   
+  <a href="/2022-10-01/reactjs.org" class="right arrow"
+    >&#8594;</a
+  >
   
 
   <a href="#" class="top">Top</a>
 </div>
-    </main>
+</main>
 
     <footer>
   <span>
-    &copy; <time datetime="2023-08-01 23:12:59 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-08-05 10:07:13 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 

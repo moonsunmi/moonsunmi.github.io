@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,8 +10,8 @@
 <meta property="og:title" content="TIL) 리액트를 다루는 기술(의존성 배열, useState의 배치 처리)" />
 <meta name="author" content="Sunmi Moon" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="(달성/목표) 뽀모도리 1일 14 / 8 1주 40 /40" />
-<meta property="og:description" content="(달성/목표) 뽀모도리 1일 14 / 8 1주 40 /40" />
+<meta name="description" content="의존성 배열에 어떤 값을 넣어야 하는가?" />
+<meta property="og:description" content="의존성 배열에 어떤 값을 넣어야 하는가?" />
 <link rel="canonical" href="http://localhost:4000/2022-11-13/TIL" />
 <meta property="og:url" content="http://localhost:4000/2022-11-13/TIL" />
 <meta property="og:site_name" content="주경야독학) 개발공부로그" />
@@ -21,7 +20,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="TIL) 리액트를 다루는 기술(의존성 배열, useState의 배치 처리)" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-11-13T12:18:07+09:00","datePublished":"2022-11-13T12:18:07+09:00","description":"(달성/목표) 뽀모도리 1일 14 / 8 1주 40 /40","headline":"TIL) 리액트를 다루는 기술(의존성 배열, useState의 배치 처리)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-11-13/TIL"},"url":"http://localhost:4000/2022-11-13/TIL"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-11-13T12:18:07+09:00","datePublished":"2022-11-13T12:18:07+09:00","description":"의존성 배열에 어떤 값을 넣어야 하는가?","headline":"TIL) 리액트를 다루는 기술(의존성 배열, useState의 배치 처리)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-11-13/TIL"},"url":"http://localhost:4000/2022-11-13/TIL"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -43,7 +42,6 @@
 
 
   <body>
-
     <nav class="nav">
   <div class="nav-container">
     <a href="/">
@@ -58,43 +56,18 @@
 </nav>
 
 
-    <main>
-      <div class="post">
-  <div class="post-info">
-    <span>Written by</span>
-    
-        Sunmi Moon
-    
+    <main><div class="post">
+  <h1 class="post-title">TIL) 리액트를 다루는 기술(의존성 배열, useState의 배치 처리)</h1>
 
+  <div class="post-info">
     
-      <br>
-      <span>on&nbsp;</span><time datetime="2022-11-13 12:18:07 +0900">November 13, 2022</time>
+    <br />
+    <span>on&nbsp;</span
+    ><time datetime="2022-11-13 12:18:07 +0900">November 13, 2022</time>
     
   </div>
 
-  <h1 class="post-title">TIL) 리액트를 다루는 기술(의존성 배열, useState의 배치 처리)</h1>
-  <div class="post-line"></div>
-
-  <table>
-  <thead>
-    <tr>
-      <th>(달성/목표)</th>
-      <th>뽀모도리</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1일</td>
-      <td>14 / 8</td>
-    </tr>
-    <tr>
-      <td>1주</td>
-      <td>40 /40</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="의존성-배열에-어떤-값을-넣어야-하는가">의존성 배열에 어떤 값을 넣어야 하는가?</h3>
+  <h3 id="의존성-배열에-어떤-값을-넣어야-하는가">의존성 배열에 어떤 값을 넣어야 하는가?</h3>
 
 <p>의존성 배열이라는 게 감이 잘 안와서 서로 다른 article을 몇 개 읽어 보았다.
 https://devtrium.com/posts/dependency-arrays</p>
@@ -134,7 +107,7 @@ https://devtrium.com/posts/dependency-arrays</p>
 
 <p>또한 다음과 같은 경우에도 의존성 배열에 추가해 줄 필요가 없다.</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useEffect</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useEffect</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
 
 <span class="kd">const</span> <span class="nx">ExampleComponent</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
   <span class="kd">const</span> <span class="p">[</span><span class="nx">counter</span><span class="p">,</span> <span class="nx">setCounter</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
@@ -153,14 +126,14 @@ https://devtrium.com/posts/dependency-arrays</p>
 
 <p>input에서 자주 사용되는 기능을 커스텀 훅으로 만들었다.</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useCallback</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">react</span><span class="dl">'</span><span class="p">;</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useState</span><span class="p">,</span> <span class="nx">useCallback</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
 
 <span class="kd">function</span> <span class="nx">useInputs</span><span class="p">(</span><span class="nx">initialForm</span><span class="p">)</span> <span class="p">{</span>
   <span class="kd">const</span> <span class="p">[</span><span class="nx">form</span><span class="p">,</span> <span class="nx">setForm</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="nx">initialForm</span><span class="p">);</span>
   <span class="c1">// change</span>
-  <span class="kd">const</span> <span class="nx">onChange</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(</span><span class="nx">e</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">onChange</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">((</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
     <span class="kd">const</span> <span class="p">{</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">value</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">;</span>
-    <span class="nx">setForm</span><span class="p">(</span><span class="nx">form</span> <span class="o">=&gt;</span> <span class="p">({</span> <span class="p">...</span><span class="nx">form</span><span class="p">,</span> <span class="p">[</span><span class="nx">name</span><span class="p">]:</span> <span class="nx">value</span> <span class="p">}));</span>
+    <span class="nx">setForm</span><span class="p">((</span><span class="nx">form</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">({</span> <span class="p">...</span><span class="nx">form</span><span class="p">,</span> <span class="p">[</span><span class="nx">name</span><span class="p">]:</span> <span class="nx">value</span> <span class="p">}));</span>
   <span class="p">},</span> <span class="p">[]);</span>
   <span class="kd">const</span> <span class="nx">reset</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="nx">setForm</span><span class="p">(</span><span class="nx">initialForm</span><span class="p">),</span> <span class="p">[</span><span class="nx">initialForm</span><span class="p">]);</span>
   <span class="k">return</span> <span class="p">[</span><span class="nx">form</span><span class="p">,</span> <span class="nx">onChange</span><span class="p">,</span> <span class="nx">reset</span><span class="p">];</span>
@@ -177,7 +150,8 @@ https://devtrium.com/posts/dependency-arrays</p>
 <h3 id="usestate는-가능하다면-상탯값-변경을-배치로-처리한다">useState는 가능하다면 상탯값 변경을 배치로 처리한다</h3>
 
 <p>setForm은 다음과 같이 작성하는데, 내 직관과는 맞지 않았다.</p>
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">setForm</span><span class="p">(</span><span class="nx">form</span> <span class="o">=&gt;</span> <span class="p">({</span> <span class="p">...</span><span class="nx">form</span><span class="p">,</span> <span class="p">[</span><span class="nx">name</span><span class="p">]:</span> <span class="nx">value</span> <span class="p">}));</span>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">setForm</span><span class="p">((</span><span class="nx">form</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">({</span> <span class="p">...</span><span class="nx">form</span><span class="p">,</span> <span class="p">[</span><span class="nx">name</span><span class="p">]:</span> <span class="nx">value</span> <span class="p">}));</span>
 </code></pre></div></div>
 
 <p>나라면 다음과 같이 작성했을 텐데, 그러면 이전에 입력한 값이 자꾸 초기화되었다.</p>
@@ -199,14 +173,14 @@ https://devtrium.com/posts/dependency-arrays</p>
 
 <p>https://ko.reactjs.org/docs/hooks-reference.html#functional-updates</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Counter</span><span class="p">({</span><span class="nx">initialCount</span><span class="p">})</span> <span class="p">{</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Counter</span><span class="p">({</span> <span class="nx">initialCount</span> <span class="p">})</span> <span class="p">{</span>
   <span class="kd">const</span> <span class="p">[</span><span class="nx">count</span><span class="p">,</span> <span class="nx">setCount</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="nx">initialCount</span><span class="p">);</span>
   <span class="k">return</span> <span class="p">(</span>
     <span class="o">&lt;&gt;</span>
       <span class="nx">Count</span><span class="p">:</span> <span class="p">{</span><span class="nx">count</span><span class="p">}</span>
       <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="nx">setCount</span><span class="p">(</span><span class="nx">initialCount</span><span class="p">)}</span><span class="o">&gt;</span><span class="nx">Reset</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
-</span>      <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="nx">setCount</span><span class="p">(</span><span class="nx">prevCount</span> <span class="o">=&gt;</span> <span class="nx">prevCount</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)}</span><span class="o">&gt;-&lt;</span><span class="sr">/button</span><span class="err">&gt;
-</span>      <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="nx">setCount</span><span class="p">(</span><span class="nx">prevCount</span> <span class="o">=&gt;</span> <span class="nx">prevCount</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)}</span><span class="o">&gt;+&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="nx">setCount</span><span class="p">((</span><span class="nx">prevCount</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">prevCount</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)}</span><span class="o">&gt;-&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="nx">setCount</span><span class="p">((</span><span class="nx">prevCount</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">prevCount</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)}</span><span class="o">&gt;+&lt;</span><span class="sr">/button</span><span class="err">&gt;
 </span>    <span class="o">&lt;</span><span class="sr">/</span><span class="err">&gt;
 </span>  <span class="p">);</span>
 <span class="p">}</span>
@@ -222,20 +196,24 @@ https://devtrium.com/posts/dependency-arrays</p>
 <p>내 프로젝트에 문제는 없지만, 권장 사항을 따르기 위해서 다음과 같이 setCountdownNumber에서 이전 값을 명시해 주었다.</p>
 
 <p>이전</p>
+
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">setCountdownNumber</span><span class="p">(</span><span class="nx">countdownNumber</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
 </code></pre></div></div>
 
 <p>수정</p>
+
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">setCountdownNumber</span><span class="p">((</span><span class="nx">prevCount</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">prevCount</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
 </code></pre></div></div>
 
 <p>bool 값은 다음과 같이 수정해 주었다. 지금보니 이전의 코드는 영 별로였던 것 같다.</p>
 
 <p>이전</p>
+
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">setIsCounting</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
 </code></pre></div></div>
 
 <p>수정</p>
+
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">setIsCounting</span><span class="p">((</span><span class="nx">prevState</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="o">!</span><span class="nx">prevState</span><span class="p">);</span>
 </code></pre></div></div>
 
@@ -257,6 +235,7 @@ https://devtrium.com/posts/dependency-arrays</p>
 </code></pre></div></div>
 
 <h4 id="context를-사용하기-전에-고려할-것">Context를 사용하기 전에 고려할 것</h4>
+
 <p>context를 사용하면, 컴포넌트를 재사용하기 어려워지므로 꼭 필요할 때만 써야 한다고 한다(https://ko.reactjs.org/docs/context.html#before-you-use-context).</p>
 
 <p>여러 레벨에 걸쳐 props 넘기는 걸 대체하는 데에는 context보다 컴포넌트 합성이 더 간단한 해결책이 될 수도 있다.</p>
@@ -272,26 +251,28 @@ https://devtrium.com/posts/dependency-arrays</p>
 <p>일) 운동<br />
 토요일에 일일헬스 1시간을 하여 오늘은 운동을 하지 않고 휴식을 취했다.</p>
 
-
 </div>
 
 
 
 <div class="pagination">
   
-    <a href="/2022-11-13/16th-week" class="left arrow">&#8592;</a>
-  
-  
-    <a href="/2022-11-12/TIL" class="right arrow">&#8594;</a>
+  <a href="/2022-11-13/16th-week" class="left arrow"
+    >&#8592;</a
+  >
+   
+  <a href="/2022-11-12/TIL" class="right arrow"
+    >&#8594;</a
+  >
   
 
   <a href="#" class="top">Top</a>
 </div>
-    </main>
+</main>
 
     <footer>
   <span>
-    &copy; <time datetime="2023-08-01 23:12:59 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-08-05 10:07:13 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 

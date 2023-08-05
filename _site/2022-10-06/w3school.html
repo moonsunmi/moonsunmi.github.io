@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,8 +10,8 @@
 <meta property="og:title" content="w3school Javascript + React JS Crash Course" />
 <meta name="author" content="Sunmi Moon" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="(달성/목표) 뽀모도리 등 가슴 배 1일 3/4 5/5 5/5 3/3 1주 16/40      " />
-<meta property="og:description" content="(달성/목표) 뽀모도리 등 가슴 배 1일 3/4 5/5 5/5 3/3 1주 16/40      " />
+<meta name="description" content="DOM Nodes" />
+<meta property="og:description" content="DOM Nodes" />
 <link rel="canonical" href="http://localhost:4000/2022-10-06/w3school" />
 <meta property="og:url" content="http://localhost:4000/2022-10-06/w3school" />
 <meta property="og:site_name" content="주경야독학) 개발공부로그" />
@@ -21,7 +20,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="w3school Javascript + React JS Crash Course" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-10-06T12:18:07+09:00","datePublished":"2022-10-06T12:18:07+09:00","description":"(달성/목표) 뽀모도리 등 가슴 배 1일 3/4 5/5 5/5 3/3 1주 16/40      ","headline":"w3school Javascript + React JS Crash Course","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-10-06/w3school"},"url":"http://localhost:4000/2022-10-06/w3school"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-10-06T12:18:07+09:00","datePublished":"2022-10-06T12:18:07+09:00","description":"DOM Nodes","headline":"w3school Javascript + React JS Crash Course","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-10-06/w3school"},"url":"http://localhost:4000/2022-10-06/w3school"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -43,7 +42,6 @@
 
 
   <body>
-
     <nav class="nav">
   <div class="nav-container">
     <a href="/">
@@ -58,52 +56,18 @@
 </nav>
 
 
-    <main>
-      <div class="post">
-  <div class="post-info">
-    <span>Written by</span>
-    
-        Sunmi Moon
-    
+    <main><div class="post">
+  <h1 class="post-title">w3school Javascript + React JS Crash Course</h1>
 
+  <div class="post-info">
     
-      <br>
-      <span>on&nbsp;</span><time datetime="2022-10-06 12:18:07 +0900">October 06, 2022</time>
+    <br />
+    <span>on&nbsp;</span
+    ><time datetime="2022-10-06 12:18:07 +0900">October 06, 2022</time>
     
   </div>
 
-  <h1 class="post-title">w3school Javascript + React JS Crash Course</h1>
-  <div class="post-line"></div>
-
-  <table>
-  <thead>
-    <tr>
-      <th>(달성/목표)</th>
-      <th>뽀모도리</th>
-      <th>등</th>
-      <th>가슴</th>
-      <th>배</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1일</td>
-      <td>3/4</td>
-      <td>5/5</td>
-      <td>5/5</td>
-      <td>3/3</td>
-    </tr>
-    <tr>
-      <td>1주</td>
-      <td>16/40</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="dom-nodes">DOM Nodes</h3>
+  <h3 id="dom-nodes">DOM Nodes</h3>
 
 <p>새 노드 만들기</p>
 
@@ -113,14 +77,13 @@
 <span class="nt">&lt;/div&gt;</span>
 
 <span class="nt">&lt;script&gt;</span>
-<span class="kd">const</span> <span class="nx">para</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">"</span><span class="s2">p</span><span class="dl">"</span><span class="p">);</span>
-<span class="kd">const</span> <span class="nx">node</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createTextNode</span><span class="p">(</span><span class="dl">"</span><span class="s2">Hello</span><span class="dl">"</span><span class="p">);</span>
-<span class="nx">para</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">node</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">para</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="dl">"</span><span class="s2">p</span><span class="dl">"</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">node</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createTextNode</span><span class="p">(</span><span class="dl">"</span><span class="s2">Hello</span><span class="dl">"</span><span class="p">);</span>
+  <span class="nx">para</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">node</span><span class="p">);</span>
 
-<span class="kd">const</span> <span class="nx">element</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">div1</span><span class="dl">"</span><span class="p">);</span>
-<span class="nx">element</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">para</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">element</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">div1</span><span class="dl">"</span><span class="p">);</span>
+  <span class="nx">element</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">para</span><span class="p">);</span>
 <span class="nt">&lt;/script&gt;</span>
-
 </code></pre></div></div>
 
 <p>뒤가 아닌 앞에 추가하고 싶다면 <code class="language-plaintext highlighter-rouge">insertBefore()</code>. <code class="language-plaintext highlighter-rouge">appendChild()</code>의 앞부분 버전이므로, 부모가 호출해야 하는 걸 잊지 말자.</p>
@@ -130,13 +93,10 @@
   <span class="nt">&lt;p</span> <span class="na">id=</span><span class="s">"p2"</span><span class="nt">&gt;</span>This is another paragraph.<span class="nt">&lt;/p&gt;</span>
 <span class="nt">&lt;/div&gt;</span>
 
-const para = document.createElement("p");
-const node = document.createTextNode("Hello");
-para.appendChild(node);
-
-const element = document.getElementById("div1");
-const child = document.getElementById("p1");
-element.insertBefore(para, child);  // 
+const para = document.createElement("p"); const node =
+document.createTextNode("Hello"); para.appendChild(node); const element =
+document.getElementById("div1"); const child = document.getElementById("p1");
+element.insertBefore(para, child); //
 </code></pre></div></div>
 
 <p>삭제도 마찬가지, 부모 노드에서 자식 노드를 삭제하는 것이다. 따라서 삭제하려는 노드의 부모의 자식(결국 삭제하려는 노드가 된다)을 찾는 방법으로 삭제한다.</p>
@@ -152,7 +112,7 @@ element.insertBefore(para, child);  //
 <p><code class="language-plaintext highlighter-rouge">getElementsByTagName()</code> 메서드는 HTML Collection 오브젝트를 반환한다. HTML Collection은 HTML 엘리먼트의 배열과 비슷한 리스트이다. (배열이 아니므로 <code class="language-plaintext highlighter-rouge">pop()</code> 같은 메서드 쓸 수 없다.)</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">myCollection</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="dl">"</span><span class="s2">p</span><span class="dl">"</span><span class="p">);</span>
-<span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">myCollection</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">myCollection</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">myCollection</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">style</span><span class="p">.</span><span class="nx">color</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">red</span><span class="dl">"</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div></div>
@@ -177,6 +137,7 @@ element.insertBefore(para, child);  //
 <p>node.js를 설치한 후, chrome에서 react developer tool을 추가한다.</p>
 
 <p>다음 명령어로 react app 만들기</p>
+
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npx create-react-app react-task-tracker
 </code></pre></div></div>
 
@@ -198,26 +159,28 @@ element.insertBefore(para, child);  //
 <span class="p">}</span>
 </code></pre></div></div>
 
-
 </div>
 
 
 
 <div class="pagination">
   
-    <a href="/2022-10-07/w3school" class="left arrow">&#8592;</a>
-  
-  
-    <a href="/2022-10-05/w3school" class="right arrow">&#8594;</a>
+  <a href="/2022-10-07/w3school" class="left arrow"
+    >&#8592;</a
+  >
+   
+  <a href="/2022-10-05/w3school" class="right arrow"
+    >&#8594;</a
+  >
   
 
   <a href="#" class="top">Top</a>
 </div>
-    </main>
+</main>
 
     <footer>
   <span>
-    &copy; <time datetime="2023-08-01 23:12:59 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-08-05 10:07:13 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 

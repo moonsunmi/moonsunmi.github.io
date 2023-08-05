@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,8 +10,8 @@
 <meta property="og:title" content="실전 프로젝트 1~2" />
 <meta name="author" content="Sunmi Moon" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="9/19(월) 평일 공부 시간 목표: 4 뽀모도리 9/19(월) 평일 실제 공부 시간: 4 뽀모도리" />
-<meta property="og:description" content="9/19(월) 평일 공부 시간 목표: 4 뽀모도리 9/19(월) 평일 실제 공부 시간: 4 뽀모도리" />
+<meta name="description" content="[실전 1] 숫자 맞히기 게임" />
+<meta property="og:description" content="[실전 1] 숫자 맞히기 게임" />
 <link rel="canonical" href="http://localhost:4000/2022-09-19/do-it-javascript" />
 <meta property="og:url" content="http://localhost:4000/2022-09-19/do-it-javascript" />
 <meta property="og:site_name" content="주경야독학) 개발공부로그" />
@@ -21,7 +20,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="실전 프로젝트 1~2" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-09-19T22:34:31+09:00","datePublished":"2022-09-19T22:34:31+09:00","description":"9/19(월) 평일 공부 시간 목표: 4 뽀모도리 9/19(월) 평일 실제 공부 시간: 4 뽀모도리","headline":"실전 프로젝트 1~2","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-09-19/do-it-javascript"},"url":"http://localhost:4000/2022-09-19/do-it-javascript"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-09-19T22:34:31+09:00","datePublished":"2022-09-19T22:34:31+09:00","description":"[실전 1] 숫자 맞히기 게임","headline":"실전 프로젝트 1~2","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-09-19/do-it-javascript"},"url":"http://localhost:4000/2022-09-19/do-it-javascript"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -43,7 +42,6 @@
 
 
   <body>
-
     <nav class="nav">
   <div class="nav-container">
     <a href="/">
@@ -58,67 +56,55 @@
 </nav>
 
 
-    <main>
-      <div class="post">
-  <div class="post-info">
-    <span>Written by</span>
-    
-        Sunmi Moon
-    
+    <main><div class="post">
+  <h1 class="post-title"><do-it 자바스크립트 입문> 실전 프로젝트 1~2</h1>
 
+  <div class="post-info">
     
-      <br>
-      <span>on&nbsp;</span><time datetime="2022-09-19 22:34:31 +0900">September 19, 2022</time>
+    <br />
+    <span>on&nbsp;</span
+    ><time datetime="2022-09-19 22:34:31 +0900">September 19, 2022</time>
     
   </div>
 
-  <h1 class="post-title"><do-it 자바스크립트 입문> 실전 프로젝트 1~2</h1>
-  <div class="post-line"></div>
-
-  <p>9/19(월) 평일 공부 시간 목표: 4 뽀모도리
-9/19(월) 평일 실제 공부 시간: 4 뽀모도리</p>
-
-<h3 id="실전-1-숫자-맞히기-게임">[실전 1] 숫자 맞히기 게임</h3>
+  <h3 id="실전-1-숫자-맞히기-게임">[실전 1] 숫자 맞히기 게임</h3>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">let</span> <span class="nx">answerNumber</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
 <span class="kd">let</span> <span class="nx">totalNumber</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
-<span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">#try</span><span class="dl">"</span><span class="p">).</span><span class="nx">onkeypress</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">){</span>
-    <span class="k">if</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">keycode</span> <span class="o">==</span> <span class="mi">13</span> <span class="o">||</span> <span class="nx">e</span><span class="p">.</span><span class="nx">which</span> <span class="o">==</span> <span class="mi">3</span><span class="p">){</span> <span class="c1">// 파이어폭스는 which로 확인함.</span>
-        <span class="nx">finding</span><span class="p">();</span>
-        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">#try</span><span class="dl">"</span><span class="p">).</span><span class="nx">onkeypress</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">keycode</span> <span class="o">==</span> <span class="mi">13</span> <span class="o">||</span> <span class="nx">e</span><span class="p">.</span><span class="nx">which</span> <span class="o">==</span> <span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 파이어폭스는 which로 확인함.</span>
+    <span class="nx">finding</span><span class="p">();</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kd">function</span> <span class="nx">finding</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">answerNumber</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">totalNumber</span><span class="p">);</span>
+
+  <span class="kd">let</span> <span class="nx">tryNumber</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">#try</span><span class="dl">"</span><span class="p">).</span><span class="nx">value</span><span class="p">;</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">tryNumber</span> <span class="o">&gt;=</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nx">tryNumber</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">tryNumber</span> <span class="o">!=</span> <span class="nx">answerNumber</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">tryNumber</span><span class="p">);</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">tryNumber</span> <span class="o">&lt;</span> <span class="nx">answerNumber</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">#display</span><span class="dl">"</span><span class="p">).</span><span class="nx">innerText</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">UP</span><span class="dl">"</span><span class="p">;</span>
+      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">#display</span><span class="dl">"</span><span class="p">).</span><span class="nx">innerText</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">DOWN</span><span class="dl">"</span><span class="p">;</span>
+      <span class="p">}</span>
+
+      <span class="nx">tryNumber</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">#try</span><span class="dl">"</span><span class="p">).</span><span class="nx">value</span> <span class="o">=</span> <span class="dl">""</span><span class="p">;</span>
+      <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">#try</span><span class="dl">"</span><span class="p">).</span><span class="nx">focus</span><span class="p">();</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">#display</span><span class="dl">"</span><span class="p">).</span><span class="nx">innerText</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">맞혔습니다.</span><span class="dl">"</span><span class="p">;</span>
     <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="kd">function</span> <span class="nx">finding</span><span class="p">(){</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">answerNumber</span><span class="p">);</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">totalNumber</span><span class="p">);</span>
-
-    <span class="kd">let</span> <span class="nx">tryNumber</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">#try</span><span class="dl">"</span><span class="p">).</span><span class="nx">value</span><span class="p">;</span>
-
-    <span class="k">if</span> <span class="p">(</span><span class="nx">tryNumber</span> <span class="o">&gt;=</span> <span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="nx">tryNumber</span> <span class="o">&lt;=</span> <span class="mi">100</span><span class="p">){</span>
-
-        <span class="k">if</span> <span class="p">(</span><span class="nx">tryNumber</span> <span class="o">!=</span> <span class="nx">answerNumber</span><span class="p">){</span>
-            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">tryNumber</span><span class="p">);</span>
-            <span class="k">if</span><span class="p">(</span><span class="nx">tryNumber</span> <span class="o">&lt;</span> <span class="nx">answerNumber</span><span class="p">){</span>
-                <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">#display</span><span class="dl">"</span><span class="p">).</span><span class="nx">innerText</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">UP</span><span class="dl">"</span><span class="p">;</span>
-            <span class="p">}</span>
-            <span class="k">else</span><span class="p">{</span>
-                <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">#display</span><span class="dl">"</span><span class="p">).</span><span class="nx">innerText</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">DOWN</span><span class="dl">"</span><span class="p">;</span>
-            <span class="p">}</span>
-
-            <span class="nx">tryNumber</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">#try</span><span class="dl">"</span><span class="p">).</span><span class="nx">value</span> <span class="o">=</span> <span class="dl">""</span><span class="p">;</span>
-            <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">#try</span><span class="dl">"</span><span class="p">).</span><span class="nx">focus</span><span class="p">();</span>
-        <span class="p">}</span>
-        <span class="k">else</span><span class="p">{</span>
-            <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">#display</span><span class="dl">"</span><span class="p">).</span><span class="nx">innerText</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">맞혔습니다.</span><span class="dl">"</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="nx">totalNumber</span><span class="o">++</span><span class="p">;</span>
-        <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">#counter</span><span class="dl">"</span><span class="p">).</span><span class="nx">innerText</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">시도횟수: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">totalNumber</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">else</span><span class="p">{</span>
-        <span class="nx">alert</span><span class="p">(</span><span class="dl">"</span><span class="s2">1~100 사이의 숫자를 넣으세요.</span><span class="dl">"</span><span class="p">)</span>
-    <span class="p">}</span>
+    <span class="nx">totalNumber</span><span class="o">++</span><span class="p">;</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">#counter</span><span class="dl">"</span><span class="p">).</span><span class="nx">innerText</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">시도횟수: </span><span class="dl">"</span> <span class="o">+</span> <span class="nx">totalNumber</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="dl">"</span><span class="s2">1~100 사이의 숫자를 넣으세요.</span><span class="dl">"</span><span class="p">);</span>
+  <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
@@ -134,32 +120,32 @@
 <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">#prev</span><span class="dl">"</span><span class="p">).</span><span class="nx">onclick</span> <span class="o">=</span> <span class="nx">prevSlide</span><span class="p">;</span>
 <span class="nb">document</span><span class="p">.</span><span class="nx">querySelector</span><span class="p">(</span><span class="dl">"</span><span class="s2">#next</span><span class="dl">"</span><span class="p">).</span><span class="nx">onclick</span> <span class="o">=</span> <span class="nx">nextSlide</span><span class="p">;</span>
 
-<span class="kd">function</span> <span class="nx">showSlide</span><span class="p">(){</span>
-    <span class="k">for</span><span class="p">(</span><span class="kd">let</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">pics</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
-        <span class="nx">pics</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">style</span><span class="o">=</span><span class="dl">"</span><span class="s2">display: none</span><span class="dl">"</span><span class="p">;</span>
-        <span class="c1">//console.log(pics[i].style)</span>
-    <span class="p">}</span>
-    <span class="nx">pics</span><span class="p">[</span><span class="nx">showPicIndex</span><span class="p">].</span><span class="nx">style</span><span class="o">=</span><span class="dl">"</span><span class="s2">display: block</span><span class="dl">"</span><span class="p">;</span>
+<span class="kd">function</span> <span class="nx">showSlide</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">pics</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">pics</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">style</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">display: none</span><span class="dl">"</span><span class="p">;</span>
+    <span class="c1">//console.log(pics[i].style)</span>
+  <span class="p">}</span>
+  <span class="nx">pics</span><span class="p">[</span><span class="nx">showPicIndex</span><span class="p">].</span><span class="nx">style</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">display: block</span><span class="dl">"</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="kd">function</span> <span class="nx">prevSlide</span><span class="p">(){</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">showPicIndex</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span> <span class="c1">// 맨 앞에서 앞으로 버튼을 누르면, 맨 뒤로</span>
-        <span class="nx">showPicIndex</span> <span class="o">=</span> <span class="nx">pics</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">else</span><span class="p">{</span>
-        <span class="nx">showPicIndex</span><span class="o">--</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="nx">showSlide</span><span class="p">();</span>
+<span class="kd">function</span> <span class="nx">prevSlide</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">showPicIndex</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 맨 앞에서 앞으로 버튼을 누르면, 맨 뒤로</span>
+    <span class="nx">showPicIndex</span> <span class="o">=</span> <span class="nx">pics</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">showPicIndex</span><span class="o">--</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nx">showSlide</span><span class="p">();</span>
 <span class="p">}</span>
 
-<span class="kd">function</span> <span class="nx">nextSlide</span><span class="p">(){</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">showPicIndex</span> <span class="o">==</span> <span class="nx">pics</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">){</span> <span class="c1">// 맨 뒤에서 뒤로 버튼을 누르면, 맨 앞으로</span>
-        <span class="nx">showPicIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">else</span><span class="p">{</span>
-        <span class="nx">showPicIndex</span><span class="o">++</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="nx">showSlide</span><span class="p">();</span>
+<span class="kd">function</span> <span class="nx">nextSlide</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">showPicIndex</span> <span class="o">==</span> <span class="nx">pics</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 맨 뒤에서 뒤로 버튼을 누르면, 맨 앞으로</span>
+    <span class="nx">showPicIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">showPicIndex</span><span class="o">++</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nx">showSlide</span><span class="p">();</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
@@ -167,26 +153,28 @@
   <li><code class="language-plaintext highlighter-rouge">let pics = document.querySelectorAll("#container &gt; img");</code>에서 &gt;는 ‘부모 선택자 &gt; 자식 선택자’</li>
 </ul>
 
-
 </div>
 
 
 
 <div class="pagination">
   
-    <a href="/2022-09-20/do-it-javascript" class="left arrow">&#8592;</a>
-  
-  
-    <a href="/2022-09-18/do-it-javascript" class="right arrow">&#8594;</a>
+  <a href="/2022-09-20/do-it-javascript" class="left arrow"
+    >&#8592;</a
+  >
+   
+  <a href="/2022-09-18/do-it-javascript" class="right arrow"
+    >&#8594;</a
+  >
   
 
   <a href="#" class="top">Top</a>
 </div>
-    </main>
+</main>
 
     <footer>
   <span>
-    &copy; <time datetime="2023-08-01 23:12:59 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-08-05 10:07:13 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,8 +10,8 @@
 <meta property="og:title" content="TIL) Hulu Clone Coding(Next.js, Tailwind CSS, Responsive)" />
 <meta name="author" content="Sunmi Moon" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="(달성/목표) 뽀모도리 1일 3/3 1주 8 /40" />
-<meta property="og:description" content="(달성/목표) 뽀모도리 1일 3/3 1주 8 /40" />
+<meta name="description" content="Thumbnail component" />
+<meta property="og:description" content="Thumbnail component" />
 <link rel="canonical" href="http://localhost:4000/2022-10-25/TIL" />
 <meta property="og:url" content="http://localhost:4000/2022-10-25/TIL" />
 <meta property="og:site_name" content="주경야독학) 개발공부로그" />
@@ -21,7 +20,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="TIL) Hulu Clone Coding(Next.js, Tailwind CSS, Responsive)" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-10-25T12:18:07+09:00","datePublished":"2022-10-25T12:18:07+09:00","description":"(달성/목표) 뽀모도리 1일 3/3 1주 8 /40","headline":"TIL) Hulu Clone Coding(Next.js, Tailwind CSS, Responsive)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-10-25/TIL"},"url":"http://localhost:4000/2022-10-25/TIL"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-10-25T12:18:07+09:00","datePublished":"2022-10-25T12:18:07+09:00","description":"Thumbnail component","headline":"TIL) Hulu Clone Coding(Next.js, Tailwind CSS, Responsive)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-10-25/TIL"},"url":"http://localhost:4000/2022-10-25/TIL"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -43,7 +42,6 @@
 
 
   <body>
-
     <nav class="nav">
   <div class="nav-container">
     <a href="/">
@@ -58,45 +56,21 @@
 </nav>
 
 
-    <main>
-      <div class="post">
-  <div class="post-info">
-    <span>Written by</span>
-    
-        Sunmi Moon
-    
+    <main><div class="post">
+  <h1 class="post-title">TIL) Hulu Clone Coding(Next.js, Tailwind CSS, Responsive)</h1>
 
+  <div class="post-info">
     
-      <br>
-      <span>on&nbsp;</span><time datetime="2022-10-25 12:18:07 +0900">October 25, 2022</time>
+    <br />
+    <span>on&nbsp;</span
+    ><time datetime="2022-10-25 12:18:07 +0900">October 25, 2022</time>
     
   </div>
 
-  <h1 class="post-title">TIL) Hulu Clone Coding(Next.js, Tailwind CSS, Responsive)</h1>
-  <div class="post-line"></div>
-
-  <table>
-  <thead>
-    <tr>
-      <th>(달성/목표)</th>
-      <th>뽀모도리</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1일</td>
-      <td>3/3</td>
-    </tr>
-    <tr>
-      <td>1주</td>
-      <td>8 /40</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="thumbnail-component">Thumbnail component</h3>
+  <h3 id="thumbnail-component">Thumbnail component</h3>
 
 <p>Thumbnail.js</p>
+
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">HandThumbUpIcon</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@heroicons/react/24/outline</span><span class="dl">"</span><span class="p">;</span>
 <span class="k">import</span> <span class="nx">Image</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">next/image</span><span class="dl">"</span><span class="p">;</span>
 
@@ -161,6 +135,7 @@ TMDB에서 가져온 이미지 url은 세 가지(base ulr, size, file_path) 파�
 3xl를 내가 만들어 본다.</p>
 
 <p>tailwind.config.js</p>
+
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/** @type {import('tailwindcss').Config} */</span>
 <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
   <span class="na">content</span><span class="p">:</span> <span class="p">[</span>
@@ -176,7 +151,6 @@ TMDB에서 가져온 이미지 url은 세 가지(base ulr, size, file_path) 파�
   <span class="p">},</span>
   <span class="na">plugins</span><span class="p">:</span> <span class="p">[</span><span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">tailwind-scrollbar-hide</span><span class="dl">"</span><span class="p">)],</span>
 <span class="p">};</span>
-
 </code></pre></div></div>
 
 <p>theme 오브젝트 안의 extend 오브젝트 안에 다음을 추가한다.</p>
@@ -211,26 +185,28 @@ TMDB에서 가져온 이미지 url은 세 가지(base ulr, size, file_path) 파�
   </tbody>
 </table>
 
-
 </div>
 
 
 
 <div class="pagination">
   
-    <a href="/2022-10-26/TIL" class="left arrow">&#8592;</a>
-  
-  
-    <a href="/2022-10-24/TIL" class="right arrow">&#8594;</a>
+  <a href="/2022-10-26/TIL" class="left arrow"
+    >&#8592;</a
+  >
+   
+  <a href="/2022-10-24/TIL" class="right arrow"
+    >&#8594;</a
+  >
   
 
   <a href="#" class="top">Top</a>
 </div>
-    </main>
+</main>
 
     <footer>
   <span>
-    &copy; <time datetime="2023-08-01 23:12:59 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-08-05 10:07:13 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 
