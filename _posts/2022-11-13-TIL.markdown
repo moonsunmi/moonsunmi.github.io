@@ -2,7 +2,7 @@
 layout: post
 title: "TIL) 리액트를 다루는 기술(의존성 배열, useState의 배치 처리)"
 date: 2022-11-13 12:18:07 +0900
-categories: react
+tags: React
 ---
 
 ### 의존성 배열에 어떤 값을 넣어야 하는가?

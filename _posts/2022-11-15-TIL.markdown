@@ -2,7 +2,7 @@
 layout: post
 title: "TIL) 리액트를 다루는 기술(라우팅 시도...)"
 date: 2022-11-15 12:18:07 +0900
-categories: react
+tags: React
 ---
 
 ### 라우팅

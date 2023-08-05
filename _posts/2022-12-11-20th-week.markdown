@@ -2,7 +2,7 @@
 layout: post
 title: "주경야독학) 20주차 - 다시 힘을 내자"
 date: 2022-12-11 12:34:31 +0900
-categories: week-report
+tags: week-report
 ---
 
 일로 스트레스를 많이 받았더니 정신적인 에너지가 고갈되었던 것 같다. 앞으로 어떻게 해 나가야 할지 막막하던 차라서, 계속 미루었던 tailwind->styled-component, next.js->react.jsf 작업을 했다.

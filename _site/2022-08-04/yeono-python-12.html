@@ -68,6 +68,7 @@
   </div>
 
   <p>코드 8-31</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Cake</span><span class="p">:</span>
    <span class="s">"""케이크를 나타내는 클래스"""</span>
    <span class="n">coat</span> <span class="o">=</span> <span class="s">'생크림'</span>
@@ -80,12 +81,14 @@
 <p><code class="language-plaintext highlighter-rouge">self</code>: 파이썬에서 인스턴스를 전달받는 메서드의 매개변수 이름. 관례임.</p>
 
 <p><code class="language-plaintext highlighter-rouge">Cake()</code>를 실행해 인스턴스화를 명령하면, 파이썬은 다음 두 단계를 수행한다.</p>
+
 <ol>
   <li><code class="language-plaintext highlighter-rouge">__new__()</code> 메서드를 실행해 새 객체를 만든다.</li>
   <li><code class="language-plaintext highlighter-rouge">__init__()</code> 메서드를 실행해 객체를 초기화한다.</li>
 </ol>
 
 <p>코드 8-36</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Cake</span><span class="p">:</span>
    <span class="s">"""케이크를 나타낸는 클래스"""</span>
    <span class="n">coat</span> <span class="o">=</span> <span class="s">'생크림'</span>
@@ -111,6 +114,7 @@
 </code></pre></div></div>
 
 <p>연습문제 8-5</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Coordinate</span><span class="p">:</span>
    <span class="s">"""좌표를 나타내는 클래스"""</span>
    <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
@@ -118,6 +122,7 @@
 </code></pre></div></div>
 
 <p>연습문제 8-6</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Coordinate</span><span class="p">:</span>
    <span class="s">"""좌표를 나타내는 클래스"""</span>
    <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
@@ -134,6 +139,7 @@
 </code></pre></div></div>
 
 <p>연습문제 8-7</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">math</span>
 
 <span class="k">class</span> <span class="nc">Coordinate</span><span class="p">:</span>
@@ -165,6 +171,7 @@
 </code></pre></div></div>
 
 <p>연습문제 8-8</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">math</span>
 
 
@@ -195,6 +202,7 @@
 </code></pre></div></div>
 
 <p>연습문제 8-9</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="kn">import</span> <span class="nn">math</span>
 
@@ -226,6 +234,7 @@
 <p>클래스를 정의할 때 상위 클래스를 지정할 수 있다.</p>
 
 <p>코드 8-41</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Cake</span><span class="p">:</span>
    <span class="s">"""케이크를 나타내는 클래스"""</span>
    <span class="n">coat</span> <span class="o">=</span> <span class="s">'생크림'</span>
@@ -254,6 +263,7 @@
 </code></pre></div></div>
 
 <p>코드 8-42</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Cake</span><span class="p">:</span>
    <span class="s">"""케이크를 나타내는 클래스"""</span>
    <span class="n">coat</span> <span class="o">=</span> <span class="s">'생크림'</span>
@@ -285,6 +295,7 @@
 </code></pre></div></div>
 
 <p>코드 8-44</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Cake</span><span class="p">:</span>
    <span class="s">"""케이크를 나타내는 클래스"""</span>
    <span class="n">coat</span> <span class="o">=</span> <span class="s">'생크림'</span>
@@ -324,6 +335,7 @@
 </code></pre></div></div>
 
 <p>코드 8-46</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Cake</span><span class="p">:</span>
    <span class="s">"""케이크를 나타내는 클래스"""</span>
    <span class="n">coat</span> <span class="o">=</span> <span class="s">'생크림'</span>
@@ -374,6 +386,7 @@
 <p>모든 클래스는 object의 하위클래스이다.</p>
 
 <p>코드 8-48</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Cake</span><span class="p">:</span>
    <span class="s">"""케이크를 나타내는 클래스"""</span>
    <span class="n">coat</span> <span class="o">=</span> <span class="s">'생크림'</span>
@@ -430,6 +443,7 @@
 <p>다중속성이란 클래스가 두 개 이상의 상위 클래스를 나란히 상속하는 것. 수직적 관계로 여러 개의 클래스를 상속하는 것을 다중 상속이라고 하지 않는다.</p>
 
 <p>코드 8-50</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Cake</span><span class="p">:</span>
    <span class="s">"""케이크"""</span>
    <span class="n">coat</span> <span class="o">=</span> <span class="s">'생크림'</span>
@@ -458,6 +472,7 @@
 <p>다중상속을 하면 이름공간의 검색 순서가 복잡해져서 인스턴스의 속성이 어느 것을 가르키는지 알기 어려워진다. 그러므로 다중속성은 꼭 필요할 때만 쓰는 것이 바람직하다.</p>
 
 <p>연습문제 8-10</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Shape</span><span class="p">:</span>
    <span class="s">"""도형을 나타내는 클래스"""</span>
 
@@ -484,6 +499,7 @@
 </code></pre></div></div>
 
 <p>연습문제 8-11</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">math</span>
 
 
@@ -559,6 +575,7 @@
 <p>클래스를 정의할 때 클래스의 속성을 감추어 두고 연산자와 메서드를 인터페이스(한 대상이 다른 대상과 맞닿는 면)로 제공하는 방법을 캡슐화라 한다.</p>
 
 <p>코드 5-52</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">FruitJuice</span><span class="p">():</span>
    <span class="s">"""과일 주스"""</span>
    <span class="n">valid_fruits</span> <span class="o">=</span> <span class="p">{</span><span class="s">'귤'</span><span class="p">,</span> <span class="s">'복숭아'</span><span class="p">,</span> <span class="s">'청포도'</span><span class="p">,</span> <span class="s">'딸기'</span><span class="p">,</span> <span class="s">'사과'</span><span class="p">}</span>
@@ -581,7 +598,7 @@
        <span class="k">for</span> <span class="n">ingredient</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">ingredients</span><span class="p">:</span>
            <span class="k">print</span><span class="p">(</span><span class="n">ingredient</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">' '</span><span class="p">)</span>
 
-          
+
 <span class="n">juice_1</span> <span class="o">=</span> <span class="n">FruitJuice</span><span class="p">()</span>
 <span class="n">juice_1</span><span class="p">.</span><span class="n">add_ingredient</span><span class="p">(</span><span class="s">'청포도'</span><span class="p">)</span>
 <span class="n">juice_1</span><span class="p">.</span><span class="n">add_ingredient</span><span class="p">(</span><span class="s">'복숭아'</span><span class="p">)</span>
@@ -592,6 +609,7 @@
 <p>파이썬 문화에서 비공개 속성의 이름은 밑줄 기호 하나로 시작하게 짓는다.</p>
 
 <p>코드 8-54</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">FruitJuice</span><span class="p">():</span>
    <span class="s">"""과일 주스"""</span>
    <span class="n">_valid_fruits</span> <span class="o">=</span> <span class="p">{</span><span class="s">'귤'</span><span class="p">,</span> <span class="s">'복숭아'</span><span class="p">,</span> <span class="s">'청포도'</span><span class="p">,</span> <span class="s">'딸기'</span><span class="p">,</span> <span class="s">'사과'</span><span class="p">}</span>
@@ -615,7 +633,6 @@
            <span class="k">print</span><span class="p">(</span><span class="n">ingredient</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">' '</span><span class="p">)</span>
 </code></pre></div></div>
 
-
 </div>
 
 
@@ -637,7 +654,7 @@
 
     <footer>
   <span>
-    &copy; <time datetime="2023-08-05 10:07:13 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-08-05 14:34:20 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 

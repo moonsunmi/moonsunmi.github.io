@@ -2,7 +2,7 @@
 layout: post
 title: "React JS Crash Course"
 date: 2022-10-08 12:18:07 +0900
-categories: react
+tags: React
 ---
 
 x 버튼을 누르면 뭔가 되도록 이벤트를 만들어야 한다. 그런데 events들이 App 컴포넌트에 저장되어 있다. 이때 context api와 redux를 이용하면 컴포넌트 안에 있는 state를 쉽게 접근할 수 있지만 지금 여기서는 prop(`onDelete={deleteTask}`)으로 전달하기로 한다.

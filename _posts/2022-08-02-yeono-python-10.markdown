@@ -1,11 +1,12 @@
 ---
 layout: post
-title:  "연오의 파이썬 공부 10"
-date:   2022-08-02 22:15:22 +0900
-categories: yeono-python
+title: "연오의 파이썬 공부 10"
+date: 2022-08-02 22:15:22 +0900
+tags: yeono-python
 ---
 
 연습문제 7-11
+
 ```python
 용의자 = [
    {'이름': '멍멍', '털': '흰색', '주둥이': '크다', '발': '크다'},
@@ -30,9 +31,7 @@ print()
 print(유력_용의자)
 ```
 
-
 연습문제 7-11 filter 함수 사용해서 작성하기
-
 
 ```python
 용의자 = [
@@ -53,9 +52,8 @@ for 개 in 주둥이_발_털_용의자:
    print(개['이름'])
 ```
 
-
-
 연습문제 7-12
+
 ```python
 def faulty_rate(diameters):
    # 정상: 지름 0.99mm 이상, 1.01mm 미만
@@ -71,26 +69,22 @@ print(faulty_rate(diameters))
 # lambda diameter: not (0.99 <= diameter < 1.01)
 ```
 
-
-
 연습문제 7-13
+
 ```python
 fruits = ['배', '사과', '복숭아', '블루베리']
 
 print(sorted(fruits, key=len, reverse=True))
 ```
 
-
-
 #### 반복자와 생성기
-
 
 반복자: 다음에 무엇을 출력할 차례인지를 기억하여 데이터를 순서대로 꺼낼 수 있도록 돕는 인터페이스이다.
 `iter()` 함수는 전달된 데이터의 반복자를 꺼내 반환한다.
 `next()` 함수는 반복자를 입력받아 그 반복자가 다음에 출력해야 할 요소를 반환한다.
 
-
 코드 7-42
+
 ```python
 it = iter([1, 2, 3])
 
@@ -100,20 +94,14 @@ print(next(it))
 print(next(it))
 ```
 
-
-
 정해둔 순서대로 값을 생성하는 함수를 정의하면, 이 함수를 이용해 값을 하나씩 꺼내는 반복자를 만들 수 있다. 이런 식으로 값을 생성해 내는 반복자를 생성기라고 한다.
-
-
 
 yield 문: return 문처럼 함수가 값을 반환하고 정지하도록 하는데, 그 함수를 나중에 다시 실행하면 정지했던 위치부터 다시 실행되도록 한다.
 
-
 yield 문을 포함한 함수는 일반적인 함수와 실행 방식이 다르다. 이 함수는 호출되어도 본문을 실행하지 않고 생성기를 반환할 뿐이며, 본문은 생성기가 `next()` 함수에 전달되었을 때 비로소 실행된다.
 
-
-
 코드 7-44
+
 ```python
 def abc():
    """a, b, c를 출력하는 생성기를 반환한다."""
@@ -130,9 +118,8 @@ print(next(abc_generator))
 print(next(abc_generator))
 ```
 
-
-
 코드 7-45
+
 ```python
 def one_to_three():
    """1, 2, 3을 반환하는 생성기를 반환한다."""
@@ -147,9 +134,8 @@ print(next(one_to_three_generator))
 print(next(one_to_three_generator))
 ```
 
-
-
 코드 7-46
+
 ```python
 def one_to_infinite():
    """ 1부터 무한대 범위의 자연수를 순서대로 내는 생성기를 반환한다."""
@@ -169,12 +155,10 @@ print(next(one_to_infinite_generator))
 print(next(one_to_infinite_generator))
 ```
 
-
-
 생성기는 반복자이므로, 반복자와 마찬가지로 for 문을 순회하거나 리스트, 튜플로 변환할 수 있다.
 
-
 코드 7-47
+
 ```python
 def countdown(start, end):
    """start(포함)부터 end(비포함)까지 거꾸로 세는 생성기를 반환한다."""
@@ -187,18 +171,16 @@ print(list(countdown(10, 0)))
 print(tuple(countdown(100, 95)))
 ```
 
-
-
 생성기 식은 원본 반복 가능 데이터를 가공하여 데이터를 생성한다. 리스트 조건제시법과 유사하다.
 
-
 코드 7-48
+
 ```python
 print([e ** 3 for e in range(10)])
 ```
 
-
 코드 7-51
+
 ```python
 cube_generator = (e ** 3 for e in range(100000000))
 print(next(cube_generator))
@@ -206,9 +188,8 @@ print(next(cube_generator))
 print(next(cube_generator))
 ```
 
-
-
 연습문제 7-14
+
 ```python
 import random
 
@@ -224,9 +205,8 @@ print(next(infinite_random_number_generator))
 print(next(infinite_random_number_generator))
 ```
 
-
-
 연습문제 7-15
+
 ```python
 def input_orders(n):
    """n개의 음료를 주문받아 리스트로 반환한다."""
@@ -238,12 +218,10 @@ for drink in input_orders(3):
 
 ```
 
-
-
 ## 8장
 
-
 코드 8-1
+
 ```python
 coordinate_1 = {'x': 5, 'y': 3}
 
@@ -261,8 +239,8 @@ rectangle_1 = {
 }
 ```
 
-
 코드 8-3
+
 ```python
 import math
 
@@ -313,5 +291,3 @@ rectangle_1 = {
 print(circumference_of_triangle(triangle_1))
 print(circumference_of_rectangle(rectangle_1))
 ```
-
-

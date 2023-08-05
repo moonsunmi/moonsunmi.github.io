@@ -2,7 +2,7 @@
 layout: post
 title: "주경야독학) 11주차 - w3school Javascript 졸업, Task Tracker"
 date: 2022-10-09 12:34:31 +0900
-categories: week-report
+tags: week-report
 ---
 
 ## 이번주 학습 목표였던 것

@@ -2,7 +2,7 @@
 layout: post
 title: "TIL) Facebook Clone Coding(Next.js, Tailwind CSS, Responsive)"
 date: 2022-10-30 12:18:07 +0900
-categories: react
+tags: React
 ---
 
 ### 위치 속성과 관련된 공식(<HTML+CSS 바이블)

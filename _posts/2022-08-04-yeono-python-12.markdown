@@ -1,14 +1,12 @@
 ---
 layout: post
-title:  "연오의 파이썬 공부 12"
-date:   2022-08-04 22:21:33 +0900
-categories: yeono-python
+title: "연오의 파이썬 공부 12"
+date: 2022-08-04 22:21:33 +0900
+tags: yeono-python
 ---
 
-
-
-
 코드 8-31
+
 ```python
 class Cake:
    """케이크를 나타내는 클래스"""
@@ -21,17 +19,13 @@ class Cake:
 
 `self`: 파이썬에서 인스턴스를 전달받는 메서드의 매개변수 이름. 관례임.
 
-
-
-
 `Cake()`를 실행해 인스턴스화를 명령하면, 파이썬은 다음 두 단계를 수행한다.
+
 1. `__new__()` 메서드를 실행해 새 객체를 만든다.
 2. `__init__()` 메서드를 실행해 객체를 초기화한다.
 
-
-
-
 코드 8-36
+
 ```python
 class Cake:
    """케이크를 나타낸는 클래스"""
@@ -57,11 +51,8 @@ print('케이크 2:')
 cake_2.describe()
 ```
 
-
-
-
-
 연습문제 8-5
+
 ```python
 class Coordinate:
    """좌표를 나타내는 클래스"""
@@ -69,9 +60,8 @@ class Coordinate:
    y = 0
 ```
 
-
-
 연습문제 8-6
+
 ```python
 class Coordinate:
    """좌표를 나타내는 클래스"""
@@ -88,9 +78,8 @@ point_2.x = 2
 point_2.y = 3
 ```
 
-
-
 연습문제 8-7
+
 ```python
 import math
 
@@ -122,8 +111,8 @@ point_2.y = 3
 print(distance(point_1, point_2))
 ```
 
-
 연습문제 8-8
+
 ```python
 import math
 
@@ -154,8 +143,8 @@ point_2.y = 3
 print(point_1.distance(point_2))
 ```
 
-
 연습문제 8-9
+
 ```python
 
 import math
@@ -185,14 +174,10 @@ point_2 = Coordinate(2, 3)
 print(point_1.distance(point_2))
 ```
 
-
-
-
-클래스를 정의할 때 상위 클래스를 지정할 수 있다. 
-
-
+클래스를 정의할 때 상위 클래스를 지정할 수 있다.
 
 코드 8-41
+
 ```python
 class Cake:
    """케이크를 나타내는 클래스"""
@@ -221,8 +206,8 @@ print(ChocolateCake.coat)
 print(ChocolateCake.cacao_percent)
 ```
 
-
 코드 8-42
+
 ```python
 class Cake:
    """케이크를 나타내는 클래스"""
@@ -254,8 +239,8 @@ chocolate_cake_1 = ChocolateCake('막대사탕', 12000)
 chocolate_cake_1.describe()
 ```
 
-
 코드 8-44
+
 ```python
 class Cake:
    """케이크를 나타내는 클래스"""
@@ -295,10 +280,8 @@ ice_cream_cake_1 = IceCreamCake('바닐라맛', '쿠키 인형', 12000)
 ice_cream_cake_1.describe()
 ```
 
-
-
-
 코드 8-46
+
 ```python
 class Cake:
    """케이크를 나타내는 클래스"""
@@ -347,14 +330,10 @@ print(issubclass(Cake, Cake))
 print(issubclass(int, Cake))
 ```
 
-
-
 모든 클래스는 object의 하위클래스이다.
 
-
-
-
 코드 8-48
+
 ```python
 class Cake:
    """케이크를 나타내는 클래스"""
@@ -409,14 +388,10 @@ print(FruitIceCreamCake.temperature)
 print(Cake.temperature)
 ```
 
-
-
-
-
 다중속성이란 클래스가 두 개 이상의 상위 클래스를 나란히 상속하는 것. 수직적 관계로 여러 개의 클래스를 상속하는 것을 다중 상속이라고 하지 않는다.
 
-
 코드 8-50
+
 ```python
 class Cake:
    """케이크"""
@@ -441,15 +416,12 @@ print('size:', CheeseCakePiece.size)
 print('calorie:', CheeseCakePiece.calorie)
 ```
 
-
-
 다중상속한 클래스에서 속성의 이름이 같으면, 왼쪽에 나열한 클래스의 속성부터…
 
 다중상속을 하면 이름공간의 검색 순서가 복잡해져서 인스턴스의 속성이 어느 것을 가르키는지 알기 어려워진다. 그러므로 다중속성은 꼭 필요할 때만 쓰는 것이 바람직하다.
 
-
-
 연습문제 8-10
+
 ```python
 class Shape:
    """도형을 나타내는 클래스"""
@@ -476,9 +448,8 @@ for shape in shapes:
    shape.describe()
 ```
 
-
-
 연습문제 8-11
+
 ```python
 import math
 
@@ -550,15 +521,12 @@ for shape in shapes:
    print('둘레:', shape.circumference())
 ```
 
-
 메서드를 활용해 이용해 데이터 유형에 따라 데이터를 다루는 연산을 정의하는 방법을 알아보자.
-
-
 
 클래스를 정의할 때 클래스의 속성을 감추어 두고 연산자와 메서드를 인터페이스(한 대상이 다른 대상과 맞닿는 면)로 제공하는 방법을 캡슐화라 한다.
 
-
 코드 5-52
+
 ```python
 class FruitJuice():
    """과일 주스"""
@@ -582,7 +550,7 @@ class FruitJuice():
        for ingredient in self.ingredients:
            print(ingredient, end=' ')
 
-          
+
 juice_1 = FruitJuice()
 juice_1.add_ingredient('청포도')
 juice_1.add_ingredient('복숭아')
@@ -590,13 +558,10 @@ juice_1.add_ingredient('도라지')
 juice_1.describe()
 ```
 
-
-
 파이썬 문화에서 비공개 속성의 이름은 밑줄 기호 하나로 시작하게 짓는다.
 
-
-
 코드 8-54
+
 ```python
 class FruitJuice():
    """과일 주스"""
@@ -620,7 +585,3 @@ class FruitJuice():
        for ingredient in self._ingredients:
            print(ingredient, end=' ')
 ```
-
-
-
-

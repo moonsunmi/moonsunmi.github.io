@@ -2,7 +2,7 @@
 layout: post
 title: "TIL) 모던 리액트 웹 사이트의 todolist 만들기 클론 코딩"
 date: 2022-11-21 12:18:07 +0900
-categories: react
+tags: React
 ---
 
 ### todolist 컴포넌트들

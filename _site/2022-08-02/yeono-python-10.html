@@ -68,6 +68,7 @@
   </div>
 
   <p>연습문제 7-11</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">용의자</span> <span class="o">=</span> <span class="p">[</span>
    <span class="p">{</span><span class="s">'이름'</span><span class="p">:</span> <span class="s">'멍멍'</span><span class="p">,</span> <span class="s">'털'</span><span class="p">:</span> <span class="s">'흰색'</span><span class="p">,</span> <span class="s">'주둥이'</span><span class="p">:</span> <span class="s">'크다'</span><span class="p">,</span> <span class="s">'발'</span><span class="p">:</span> <span class="s">'크다'</span><span class="p">},</span>
    <span class="p">{</span><span class="s">'이름'</span><span class="p">:</span> <span class="s">'킁킁'</span><span class="p">,</span> <span class="s">'털'</span><span class="p">:</span> <span class="s">'검은색'</span><span class="p">,</span> <span class="s">'주둥이'</span><span class="p">:</span> <span class="s">'작다'</span><span class="p">,</span> <span class="s">'발'</span><span class="p">:</span> <span class="s">'크다'</span><span class="p">},</span>
@@ -112,6 +113,7 @@
 </code></pre></div></div>
 
 <p>연습문제 7-12</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">faulty_rate</span><span class="p">(</span><span class="n">diameters</span><span class="p">):</span>
    <span class="c1"># 정상: 지름 0.99mm 이상, 1.01mm 미만
 </span>
@@ -127,6 +129,7 @@
 </span></code></pre></div></div>
 
 <p>연습문제 7-13</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fruits</span> <span class="o">=</span> <span class="p">[</span><span class="s">'배'</span><span class="p">,</span> <span class="s">'사과'</span><span class="p">,</span> <span class="s">'복숭아'</span><span class="p">,</span> <span class="s">'블루베리'</span><span class="p">]</span>
 
 <span class="k">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">fruits</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="nb">len</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
@@ -139,6 +142,7 @@
 <code class="language-plaintext highlighter-rouge">next()</code> 함수는 반복자를 입력받아 그 반복자가 다음에 출력해야 할 요소를 반환한다.</p>
 
 <p>코드 7-42</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">it</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
 
 <span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">it</span><span class="p">))</span>
@@ -154,6 +158,7 @@
 <p>yield 문을 포함한 함수는 일반적인 함수와 실행 방식이 다르다. 이 함수는 호출되어도 본문을 실행하지 않고 생성기를 반환할 뿐이며, 본문은 생성기가 <code class="language-plaintext highlighter-rouge">next()</code> 함수에 전달되었을 때 비로소 실행된다.</p>
 
 <p>코드 7-44</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">abc</span><span class="p">():</span>
    <span class="s">"""a, b, c를 출력하는 생성기를 반환한다."""</span>
    <span class="k">yield</span> <span class="s">'a'</span>
@@ -170,6 +175,7 @@
 </code></pre></div></div>
 
 <p>코드 7-45</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">one_to_three</span><span class="p">():</span>
    <span class="s">"""1, 2, 3을 반환하는 생성기를 반환한다."""</span>
    <span class="k">yield</span> <span class="mi">1</span>
@@ -184,6 +190,7 @@
 </code></pre></div></div>
 
 <p>코드 7-46</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">one_to_infinite</span><span class="p">():</span>
    <span class="s">""" 1부터 무한대 범위의 자연수를 순서대로 내는 생성기를 반환한다."""</span>
 
@@ -205,6 +212,7 @@
 <p>생성기는 반복자이므로, 반복자와 마찬가지로 for 문을 순회하거나 리스트, 튜플로 변환할 수 있다.</p>
 
 <p>코드 7-47</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">countdown</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
    <span class="s">"""start(포함)부터 end(비포함)까지 거꾸로 세는 생성기를 반환한다."""</span>
    <span class="n">n</span> <span class="o">=</span> <span class="n">start</span>
@@ -219,10 +227,12 @@
 <p>생성기 식은 원본 반복 가능 데이터를 가공하여 데이터를 생성한다. 리스트 조건제시법과 유사하다.</p>
 
 <p>코드 7-48</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">([</span><span class="n">e</span> <span class="o">**</span> <span class="mi">3</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)])</span>
 </code></pre></div></div>
 
 <p>코드 7-51</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cube_generator</span> <span class="o">=</span> <span class="p">(</span><span class="n">e</span> <span class="o">**</span> <span class="mi">3</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100000000</span><span class="p">))</span>
 <span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">cube_generator</span><span class="p">))</span>
 <span class="k">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">cube_generator</span><span class="p">))</span>
@@ -230,6 +240,7 @@
 </code></pre></div></div>
 
 <p>연습문제 7-14</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">random</span>
 
 <span class="k">def</span> <span class="nf">infinite_random_number</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
@@ -245,6 +256,7 @@
 </code></pre></div></div>
 
 <p>연습문제 7-15</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">input_orders</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
    <span class="s">"""n개의 음료를 주문받아 리스트로 반환한다."""</span>
    <span class="k">return</span> <span class="p">(</span><span class="nb">input</span><span class="p">()</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>  <span class="c1"># return [input() for _ in range(n)]
@@ -258,6 +270,7 @@
 <h2 id="8장">8장</h2>
 
 <p>코드 8-1</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">coordinate_1</span> <span class="o">=</span> <span class="p">{</span><span class="s">'x'</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s">'y'</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
 
 <span class="n">triangle_1</span> <span class="o">=</span> <span class="p">{</span>
@@ -275,6 +288,7 @@
 </code></pre></div></div>
 
 <p>코드 8-3</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">math</span>
 
 
@@ -325,7 +339,6 @@
 <span class="k">print</span><span class="p">(</span><span class="n">circumference_of_rectangle</span><span class="p">(</span><span class="n">rectangle_1</span><span class="p">))</span>
 </code></pre></div></div>
 
-
 </div>
 
 
@@ -347,7 +360,7 @@
 
     <footer>
   <span>
-    &copy; <time datetime="2023-08-05 10:07:13 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-08-05 14:34:20 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 

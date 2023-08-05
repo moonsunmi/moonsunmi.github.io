@@ -68,14 +68,17 @@
   </div>
 
   <p>현재 시간 측정 후 해석</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">time</span>
-<span class="n">now</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="n">gmtime</span><span class="p">(</span><span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">())</span> 
+<span class="n">now</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="n">gmtime</span><span class="p">(</span><span class="n">time</span><span class="p">.</span><span class="n">time</span><span class="p">())</span>
 </code></pre></div></div>
 
 <p>시간 단위 다룰 때 많이 쓰는 datetime 모듈</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">time</span>
 <span class="n">time</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">45</span><span class="p">)</span> <span class="c1"># 15시 30분 45초
 </span></code></pre></div></div>
+
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from datetime import datetime
 datetime(2020, 11, 14, 8, 30)  # 2020년 11월 14일 8시 30분
 </code></pre></div></div>
@@ -83,11 +86,13 @@ datetime(2020, 11, 14, 8, 30)  # 2020년 11월 14일 8시 30분
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>now.isoformat()
 '2022-08-07T06:44:30.304039'
 </code></pre></div></div>
+
 <p>날짜와 시간을 <code class="language-plaintext highlighter-rouge">T</code>로 구별. <code class="language-plaintext highlighter-rouge">now.isoformat((sep=' '))</code>와 같이 매개변수로 지정할 수 있다.</p>
 
 <p><code class="language-plaintext highlighter-rouge">strftime()</code> 메서드는 양식 문자열을 전달받아 시간 정보 객체를 양식화한다.</p>
 
 <p>코드 11-45</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">timedelta</span>
 <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="n">datetime</span><span class="p">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
@@ -96,6 +101,7 @@ datetime(2020, 11, 14, 8, 30)  # 2020년 11월 14일 8시 30분
 </code></pre></div></div>
 
 <p>연습문제 11-3 -&gt; 논리 오류: 윤년을 생각 못하고, 1년 365일로 계산하였음.</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span>
 
 
@@ -241,6 +247,7 @@ datetime(2020, 11, 14, 8, 30)  # 2020년 11월 14일 8시 30분
 약속에 따라 입체적인 데이터를 텍스트나 바이트로 표현하는 것을 직렬화(serialization)라고 한다.</p>
 
 <p>코드 11-50</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">'당신의 이름은 무엇인가요?'</span><span class="p">)</span>
 <span class="n">name</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
 
@@ -249,6 +256,7 @@ datetime(2020, 11, 14, 8, 30)  # 2020년 11월 14일 8시 30분
 </code></pre></div></div>
 
 <p>코드 11-51</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">date</span>
 <span class="n">today</span> <span class="o">=</span> <span class="n">date</span><span class="p">.</span><span class="n">today</span><span class="p">()</span>
 
@@ -259,6 +267,7 @@ datetime(2020, 11, 14, 8, 30)  # 2020년 11월 14일 8시 30분
 </code></pre></div></div>
 
 <p>코드 11-52</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="p">.</span><span class="n">now</span><span class="p">()</span>
 
@@ -269,6 +278,7 @@ datetime(2020, 11, 14, 8, 30)  # 2020년 11월 14일 8시 30분
 </code></pre></div></div>
 
 <p>코드 11-53</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">try</span><span class="p">:</span>
    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'once.text'</span><span class="p">,</span> <span class="s">'x'</span><span class="p">)</span> <span class="k">as</span> <span class="nb">file</span><span class="p">:</span>
        <span class="nb">file</span><span class="p">.</span><span class="n">write</span><span class="p">(</span><span class="s">'이 파일은 한 번만 작성됩니다.'</span><span class="p">)</span>
@@ -277,6 +287,7 @@ datetime(2020, 11, 14, 8, 30)  # 2020년 11월 14일 8시 30분
 </code></pre></div></div>
 
 <p>코드 11-54</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'time.txt'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="nb">file</span><span class="p">:</span>
    <span class="n">date</span> <span class="o">=</span> <span class="nb">file</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
 
@@ -284,12 +295,14 @@ datetime(2020, 11, 14, 8, 30)  # 2020년 11월 14일 8시 30분
 </code></pre></div></div>
 
 <p>코드 11-55</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">'time.txt'</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="nb">file</span><span class="p">:</span>
    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">file</span><span class="p">:</span>
        <span class="k">print</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s">''</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>코드 11-56</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">csv</span>
 <span class="kn">import</span> <span class="nn">pprint</span>
 
@@ -301,6 +314,7 @@ datetime(2020, 11, 14, 8, 30)  # 2020년 11월 14일 8시 30분
 </code></pre></div></div>
 
 <p>코드 11-57</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">csv</span>
 
 <span class="n">table</span> <span class="o">=</span> <span class="p">[</span>
@@ -317,6 +331,7 @@ datetime(2020, 11, 14, 8, 30)  # 2020년 11월 14일 8시 30분
 </code></pre></div></div>
 
 <p>코드 11-58</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">json</span>
 
 <span class="n">data</span> <span class="o">=</span> <span class="p">[</span>
@@ -341,6 +356,7 @@ datetime(2020, 11, 14, 8, 30)  # 2020년 11월 14일 8시 30분
 </code></pre></div></div>
 
 <p>코드 11-59</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">import</span> <span class="nn">pprint</span>
 
@@ -364,6 +380,7 @@ datetime(2020, 11, 14, 8, 30)  # 2020년 11월 14일 8시 30분
 </span></code></pre></div></div>
 
 <p>코드 11-63</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s">'/Users'</span><span class="p">)</span>
 <span class="n">path_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">path</span><span class="p">.</span><span class="n">iterdir</span><span class="p">())</span>
@@ -373,6 +390,7 @@ datetime(2020, 11, 14, 8, 30)  # 2020년 11월 14일 8시 30분
 </code></pre></div></div>
 
 <p>코드 11-65</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s">'/Users'</span><span class="p">)</span>
 <span class="n">path_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">path</span><span class="p">.</span><span class="n">iterdir</span><span class="p">())</span>
@@ -387,6 +405,7 @@ datetime(2020, 11, 14, 8, 30)  # 2020년 11월 14일 8시 30분
 </code></pre></div></div>
 
 <p>코드 11-66</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="k">def</span> <span class="nf">mv</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">dst</span><span class="p">):</span>
    <span class="s">"""src 경로의 파일을 dst 경로로 이동한다."""</span>
@@ -401,6 +420,7 @@ datetime(2020, 11, 14, 8, 30)  # 2020년 11월 14일 8시 30분
 </code></pre></div></div>
 
 <p>연습문제 11-4</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 
 
@@ -422,6 +442,7 @@ datetime(2020, 11, 14, 8, 30)  # 2020년 11월 14일 8시 30분
 </code></pre></div></div>
 
 <p>연습문제 11-4 모범답안처럼 업데이트</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">cp</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">dst</span><span class="p">):</span>
 
    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="s">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">read_file</span><span class="p">,</span> <span class="nb">open</span><span class="p">(</span><span class="n">dst</span><span class="p">,</span> <span class="s">'w'</span><span class="p">)</span> <span class="k">as</span> <span class="n">write_file</span><span class="p">:</span>
@@ -432,6 +453,7 @@ datetime(2020, 11, 14, 8, 30)  # 2020년 11월 14일 8시 30분
 </code></pre></div></div>
 
 <p>연습문제 11-5</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">csv</span>
 
 <span class="c1"># 인구 밀도가 높은 나라부터 낮은 나라 순으로 나라 이름과 인구 밀도를 출력하라.
@@ -457,6 +479,7 @@ datetime(2020, 11, 14, 8, 30)  # 2020년 11월 14일 8시 30분
 </code></pre></div></div>
 
 <p>연습문제 11-5 모범답안처럼 업데이트</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">csv</span>
 
 
@@ -498,6 +521,7 @@ datetime(2020, 11, 14, 8, 30)  # 2020년 11월 14일 8시 30분
 <p>HTTPS는 HTTP에 SSL이라는 암·복호화 단계를 적용하여 보안 통신을 수행하는 프로토콜</p>
 
 <p>코드 11-68</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">urllib.request</span>
 <span class="k">def</span> <span class="nf">request</span><span class="p">(</span><span class="n">url</span><span class="p">):</span>
    <span class="s">"""지정한 url의 웹 문서를 요청하여, 본문을 반환한다."""</span>
@@ -508,6 +532,7 @@ datetime(2020, 11, 14, 8, 30)  # 2020년 11월 14일 8시 30분
 </code></pre></div></div>
 
 <p>코드 11-69</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">urllib.request</span>
 
 <span class="n">url</span> <span class="o">=</span> <span class="s">'https://python.bakyeono.net'</span>
@@ -516,6 +541,7 @@ datetime(2020, 11, 14, 8, 30)  # 2020년 11월 14일 8시 30분
 </code></pre></div></div>
 
 <p>코드 11-70</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">urllib.request</span>
 
 <span class="n">url</span> <span class="o">=</span> <span class="s">'https://python.bakyeono.net/data/movies.json'</span>
@@ -524,6 +550,7 @@ datetime(2020, 11, 14, 8, 30)  # 2020년 11월 14일 8시 30분
 </code></pre></div></div>
 
 <p>코드 11-71</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">urllib.request</span>
 <span class="kn">import</span> <span class="nn">json</span>
 
@@ -537,6 +564,7 @@ datetime(2020, 11, 14, 8, 30)  # 2020년 11월 14일 8시 30분
 </code></pre></div></div>
 
 <p>코드 11-72</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">urllib.parse</span>
 
 <span class="n">url</span> <span class="o">=</span> <span class="s">'https://python.bakyeono.net/data/movies.json'</span>
@@ -547,6 +575,7 @@ datetime(2020, 11, 14, 8, 30)  # 2020년 11월 14일 8시 30분
 </code></pre></div></div>
 
 <p>코드 11-73</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">urllib.parse</span>
 
 <span class="n">url</span> <span class="o">=</span> <span class="s">'https://python.bakyeono.net/data/movies.json'</span>
@@ -561,6 +590,7 @@ datetime(2020, 11, 14, 8, 30)  # 2020년 11월 14일 8시 30분
 <p>http.server 모듈로 간단한 웹 서버를 만들 수 있다.</p>
 
 <p>코드 11-78</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">http.server</span>
 
 
@@ -598,7 +628,6 @@ datetime(2020, 11, 14, 8, 30)  # 2020년 11월 14일 8시 30분
 <span class="n">listener</span><span class="p">.</span><span class="n">serve_forever</span><span class="p">()</span>
 </code></pre></div></div>
 
-
 </div>
 
 
@@ -620,7 +649,7 @@ datetime(2020, 11, 14, 8, 30)  # 2020년 11월 14일 8시 30분
 
     <footer>
   <span>
-    &copy; <time datetime="2023-08-05 10:07:13 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-08-05 14:34:20 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 

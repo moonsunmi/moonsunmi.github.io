@@ -55,20 +55,12 @@
     padding: 5px 0;
 
     &-title {
-      color: $default-color;
+      color: $default-tint;
       text-decoration: none;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
-
-    &-line {
-      @include transition(all 0.3s ease-out);
-      border-top: 0.1rem solid $default-shade;
-      display: block;
-      width: 0;
-    }
-
     &-meta {
       color: $default-tint;
       text-align: right;
@@ -77,10 +69,7 @@
 
     &:hover,
     &:active {
-      .tags-post-line {
-        width: 3rem;
-      }
-
+      .tags-post-title,
       .tags-post-meta {
         color: $default-shade;
       }

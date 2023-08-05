@@ -2,7 +2,7 @@
 layout: post
 title: "TIL) 리액트를 다루는 기술(메인 예제, 안 보고 만들어 보기)"
 date: 2022-11-14 12:18:07 +0900
-categories: react
+tags: React
 ---
 
 ### 기술

@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "TIL) csv import/export in Django"
-date:   2023-07-24 12:18:07 +0900
-categories: Django, DRF
+title: "TIL) csv import/export in Django"
+date: 2023-07-24 12:18:07 +0900
+tags: Django DRF
 ---
 
 admin 화면을 구성하려면 csv 등의 파일을 improt하거나 export하는 게 필요할 때가 있다. admin에서 export만 구현하려면 다음과 같이 하면 된다.
@@ -42,7 +42,7 @@ def import_as_csv(self, request):
    return render(request, 'admin/csv_form.html', payload)
 ```
 
-그런데 보다시피, csv 파일을 업로드할 페이지(csv_form.html)를 따로 만들어야 한다. 
+그런데 보다시피, csv 파일을 업로드할 페이지(csv_form.html)를 따로 만들어야 한다.
 
 ```django
 {% raw %}
@@ -65,7 +65,6 @@ def import_as_csv(self, request):
 
 (장고 template 정말 오랜만에 봄..)
 
-
 django-rest-framework를 사용하면서 템플릿을 하나도 안 쓰고 있는데, csv export 때문에 template을 만드는 건 좀 어색한 것 같았다.
 
 다른 방법으로 django-import-export 라이브러리를 사용할 수도 있다. 당연히 그냥 장고를 쓸 때도 쓸 수 있다.
@@ -73,5 +72,3 @@ django-rest-framework를 사용하면서 템플릿을 하나도 안 쓰고 있�
 https://django-import-export.readthedocs.io/en/latest/
 
 쉽게 구현할 수 있고, csv 외의 다른 파일 형태도 많이 지원한다.
-
-

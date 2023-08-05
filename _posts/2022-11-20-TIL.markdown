@@ -2,7 +2,7 @@
 layout: post
 title: "TIL) 뽀모 프로젝트 Reservation 기능 추가 시도"
 date: 2022-11-20 12:18:07 +0900
-categories: react
+tags: React
 ---
 
 ### 커스텀 훅과 컨텍스트 API 조합

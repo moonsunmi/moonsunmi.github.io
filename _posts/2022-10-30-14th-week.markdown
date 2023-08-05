@@ -2,7 +2,7 @@
 layout: post
 title: "주경야독학) 14주차 - Facebook 클론 코딩"
 date: 2022-10-30 12:34:31 +0900
-categories: week-report
+tags: week-report
 ---
 
 ### 오류의 기록들

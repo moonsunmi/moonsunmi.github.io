@@ -70,6 +70,7 @@
   <p>config의 urls.py 파일은 앱이 아닌 프로젝트 성격의 파일이므로 이곳에는 프로젝트 성격의 URL 매핑만 추가되어야 한다. 따라서 pybo 앱에서만 사용하는 URL 매핑을 config/urls.py 파일에 계속 추가하는 것은 좋은 방법이 아니다.</p>
 
 <p>config/urls.py</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
 <span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">path</span><span class="p">,</span> <span class="n">include</span>
@@ -81,6 +82,7 @@
 </code></pre></div></div>
 
 <p>pybo/urls.py</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">path</span>
 
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">views</span>
@@ -97,6 +99,7 @@
 <code class="language-plaintext highlighter-rouge">CASCADE</code> 옵션은 질문을 삭제하면 그에 달린 답변들도 모두 함께 삭제한다.</p>
 
 <p>models.py</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
 
 
@@ -117,7 +120,6 @@
 <p>데이터가 1건 생성되면 반드시 다음처럼 id 값이 생성된다. id는 모델 데이터의 유일한 값으로 프라이머리 키(PK:Primary Key)라고도 한다. 이 id 값은 데이터를 생성할 때마다 1씩 증가된다.</p>
 
 <p>Question 모델에는 answer_set 이라는 속성이 없지만 Answer 모델에 Question 모델이 ForignKey로 연결되어 있기 때문에 <code class="language-plaintext highlighter-rouge">q.answer_set</code>과 같은 역방향 접근이 가능하다.</p>
-
 
 </div>
 
@@ -140,7 +142,7 @@
 
     <footer>
   <span>
-    &copy; <time datetime="2023-08-05 10:07:13 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-08-05 14:34:20 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 

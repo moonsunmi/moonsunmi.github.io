@@ -2,7 +2,7 @@
 layout: post
 title: "<팀 개발을 위한 Git Github 시작하기> 2, john-smilga Project"
 date: 2022-09-23 22:18:07 +0900
-categories: etc
+tags: etc
 ---
 
 다음 명령어는 원격 저장소를 origin이라는 이름으로 추가하라는 뜻이었다.

@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "TIL) serializer fields 넣어줄 때 유의점"
-date:   2023-05-14 12:18:07 +0900
-categories: Django, REST framework
+title: "TIL) serializer fields 넣어줄 때 유의점"
+date: 2023-05-14 12:18:07 +0900
+tags: DRF
 ---
 
 모델의 정의와 밀접한 관련이 있는 serializer를 만들 게 될 경우가 많다.

@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "점프 투 장고 공부 7"
-date:   2022-08-23 22:22:51 +0900
-categories: jumptodjango
+title: "점프 투 장고 공부 7"
+date: 2022-08-23 22:22:51 +0900
+tags: jumptodjango
 ---
 
 ### 회원가입
@@ -12,6 +12,7 @@ categories: jumptodjango
 
 common/forms.py
 {% raw %}
+
 ```python
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
@@ -25,8 +26,8 @@ class UserForm(UserCreationForm):
         model = User
         fields = ("username", "password1", "password2", "email")
 ```
-{% endraw %}
 
+{% endraw %}
 
 이메일 항목을 추가하기 위해서 `UserCreationForm`을 상속한 `UserForm`을 만듦.
 
@@ -34,6 +35,7 @@ class UserForm(UserCreationForm):
 
 common/views.py
 {% raw %}
+
 ```python
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redicrect
@@ -56,13 +58,14 @@ def signup(request):
         form = UserForm()
     return render(request, 'common/signup.html', {'form': form})
 ```
-{% endraw %}
 
+{% endraw %}
 
 `form.cleaned_data.get` 함수는 폼의 입력값을 개별적으로 얻고 싶은 경우에 사용하는 함수
 
 signup.html
 {% raw %}
+
 ```html
 {% extends "base.html" %}
 {% block content %}
@@ -91,16 +94,7 @@ signup.html
 </div>
 {% endblock %}
 ```
+
 {% endraw %}
 
-
-* `mb`: maring-buttom. mb-3은 하단에 3칸 공백을 줌. 2로 바꾸면 2칸
-
-
-
-
-
-
-
-
-
+- `mb`: maring-buttom. mb-3은 하단에 3칸 공백을 줌. 2로 바꾸면 2칸

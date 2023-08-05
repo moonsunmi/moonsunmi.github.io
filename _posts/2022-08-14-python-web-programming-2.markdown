@@ -1,12 +1,12 @@
 ---
 layout: post
-title:  "파이썬 웹 프로그래밍 공부 2"
-date:   2022-08-14 22:17:31 +0900
-categories: python_web_programming
+title: "파이썬 웹 프로그래밍 공부 2"
+date: 2022-08-14 22:17:31 +0900
+tags: python-web-programming
 ---
 
+요청 헤더를 지정해서 보내고 싶다면 ulr 인자에 Request 객체를 지정한다.
 
-요청 헤더를 지정해서 보내고 싶다면 ulr 인자에 Request 객체를 지정한다. 
 ```python
 from urllib.request import urlopen, Request
 from urllib.parse import urlencode
@@ -27,7 +27,6 @@ print(f.info())
 print(f.read(500).decode('utf-8'))
 ```
 
-
 인증 데이터, 쿠키 데이터를 추가하여 요청을 보내는 등 HTTP의 고급 기능을 포함하여 요청을 보낼 수도 있다. 핸들러 객체를 정의하면 됨.
 
 ```python
@@ -39,7 +38,6 @@ opener = build_opener(auth_handler)
 resp = opener.open('http://127.0.0.1:8000/auth/')
 print(resp.read().decode('utf-8'))
 ```
-
 
 쿠키 데이터를 처리하는 프로그램:
 
@@ -71,7 +69,6 @@ print(res.info())
 print(res.read().decode('utf-8'))
 ```
 
-
 프록시 서버를 통과해서 웹 서버로 요청 보내기
 
 ```python
@@ -99,14 +96,10 @@ print("geturl():", f.geturl())
 print(f.read().decode('utf-8'))
 ```
 
-
-
-
-
-urllib.request 구글 메인 화면의 이미지 가져오는 예제. 공부하면서 기록할 만한 내용은 주석으로 달았다. 
-
+urllib.request 구글 메인 화면의 이미지 가져오는 예제. 공부하면서 기록할 만한 내용은 주석으로 달았다.
 
 parse_image.py
+
 ```python
 from urllib.request import urlopen
 from html.parser import HTMLParser
@@ -146,10 +139,8 @@ if __name__ == '__main__':
    main()
 ```
 
-
-
-
 같은 코드를 외부 라이브러리인 requests와 beautifulsoup4로 작성한 것(부록 A)
+
 ```python
 import requests
 from bs4 import BeautifulSoup
@@ -164,11 +155,11 @@ def parse_image(data):
 
 def main():
    url = 'http://www.google.co.kr'
-  
+
    res = requests.get(url)
    charset = res.encoding
    data = res.content.decode(charset)
-  
+
    data_set = parse_image(data)
    print('\n>>>>>>> Fetch Images from', url)
    print('\n'.join(data_set))
@@ -178,21 +169,17 @@ if __name__ == '__main__':
    main()
 ```
 
-
-
-
 http.client 모듈
 `urllib.request` 모듈로는 쉽게 처리할 수 없는 경우, HTTP 프로토콜 요청에 대한 저수준의 세밀한 기능이 필요한 경우 사용.
 
-* 연결 객체 생성
-* 요청을 보냄
-* 응답 객체 생성
-* 응답 데이터 읽음
-* 연결 닫음
-
-
+- 연결 객체 생성
+- 요청을 보냄
+- 응답 객체 생성
+- 응답 데이터 읽음
+- 연결 닫음
 
 http.client GET 방식으로
+
 ```python
 from http.client import HTTPConnection
 
@@ -217,9 +204,8 @@ print(data2.decode())
 conn.close()
 ```
 
-
-
 http.client HEAD 방식으로
+
 ```python
 from http.client import HTTPConnection
 
@@ -233,11 +219,8 @@ print(len(data))
 print(data == b'')
 ```
 
-
-
-
-
 http.client 모듈을 사용하여 POST 메서드로 요청 보내기
+
 ```python
 from http.client import HTTPConnection
 from urllib.parse import urlencode
@@ -264,8 +247,8 @@ print(data.decode('utf-8'))
 conn.close()
 ```
 
-
 http.client 모듈 사용하여 PUT 메서드로 요청 보내기
+
 ```python
 from http.client import HTTPConnection
 from urllib.parse import urlencode
@@ -291,8 +274,6 @@ print(data.decode('utf-8'))
 
 conn.close()
 ```
-
-
 
 http.client 모듈을 이용한 이미지 다운로드하는 코드
 
@@ -355,8 +336,6 @@ if __name__ == '__main__':
    main()
 ```
 
-
-
 http.client 모듈 예제 beautifulsoup으로 재작성(부록A)
 
 ```python
@@ -406,15 +385,12 @@ if __name__ == '__main__':
    main()
 ```
 
-
-
 웹 서버 라이브러리
 
 웹 서버의 역할: http 통신에서 클라이언트의 요청을 받고 이를 처리하여 결과를 되돌려주는 것
 
-
-
 간단하지만, 웹 서버를 만드는 가장 기본적인 방법을 따른 것
+
 ```python
 from http.server import HTTPServer, BaseHTTPRequestHandler
 
@@ -434,12 +410,10 @@ if __name__ == '__main__':
    server.serve_forever()
 ```
 
-
 `HTTPServer`와 `BaseHTTPRequestHandler`가 기반이 되는 클래스. HTTP 프로토콜을 처리해 주는 기능이 있어서 이 클래스들을 상속받으면 관련 로직을 코딩하지 않아도 된다.
 
-
-
 CGI 웹 서버용 CGI 스크립트
+
 ```python
 import cgi
 
@@ -457,8 +431,8 @@ print('email is', email)
 print('url is', url)
 ```
 
-
 CGI 웹 서버 시험용 클라이언트
+
 ```python
 from urllib.request import urlopen
 from urllib.parse import urlencode
@@ -477,15 +451,7 @@ f = urlopen(url, post_data)
 print(f.read().decode('cp949'))
 ```
 
-
-
 #### xxxHTTPServer 모듈 간의 관계
 
 모든 HTTP 웹 서버는 BaseHTTPServer 모듈의 HTTPServer 클래스를 사용하여 작성된다.
 웹 서버에 사용되는 핸들러는 BaseHTTPServer 모듈의 BaseHTTPRequestHandler를 상속 받아 작성
-
-
-
-
-
-

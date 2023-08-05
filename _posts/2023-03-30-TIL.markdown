@@ -1,14 +1,13 @@
 ---
 layout: post
-title:  "TIL) 문자열 Enum"
-date:   2023-03-30 12:18:07 +0900
-categories: Python
+title: "TIL) 문자열 Enum"
+date: 2023-03-30 12:18:07 +0900
+tags: Python
 ---
 
 ### 문자열 Enum
 
 Enum은 고유한 상숫값에 연결된 기호 이름(멤버)의 집합이다. String의 Enum을 사용하고 싶다면 다음과 같은 장치를 사용하더라.
-
 
 ```python
 from enum import Enum, auto
@@ -30,11 +29,10 @@ class stringEnum(StrEnum):
 
 그런데 string 값을 반환하고 싶다면 다음처럼 `__str__`을 오버라이드하면 되지 않나 생각했다.
 
-
 ```python
 class presentStringEnum(Enum):
     HTML = 'HTML'
-    
+
     def __str__(self):
         return self.value
 ```
@@ -47,9 +45,9 @@ def test():
     print(isinstance(presentStringEnum.HTML, str))  # 출력: False (실제로는 string 타입이 아니다)
     print(presentStringEnum.HTML.value)                   # 출력: HTML
     print(isinstance(presentStringEnum.HTML.value, str))  # 출력: True
-    
+
     print(stringEnum.HTML)                   # 출력: HTML
     print(isinstance(stringEnum.HTML, str))  # 출력: True (HTML 멤버의 타입 자체가 string)
-    
+
 test()
 ```

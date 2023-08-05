@@ -2,7 +2,7 @@
 layout: post
 title: "reactjs.org 튜토리얼"
 date: 2022-10-01 12:18:07 +0900
-categories: reactjs
+tags: React
 ---
 
 ## w3school의 javascript

@@ -1,14 +1,15 @@
 ---
 layout: post
-title:  "점프 투 장고 공부 9"
-date:   2022-08-25 22:19:55 +0900
-categories: jumptodjango
+title: "점프 투 장고 공부 9"
+date: 2022-08-25 22:19:55 +0900
+tags: jumptodjango
 ---
 
 ### 수정과 삭제
 
 models.py
 {% raw %}
+
 ```python
 class Question(models.Model):
     subject = models.CharField(max_length=200)
@@ -28,27 +29,32 @@ class Answer(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     modify_date = models.DateTimeField(null=True, blank=True)
 ```
+
 {% endraw %}
-
-
 
 #### 질문의 수정 버튼 추가
 
 question_detail.html
 
 {% raw %}
+
 ```html
 <div class="my-3">
-{% if request.user == question.user %}
-    <a href="{% url pybo:question_modify question.id %}" class="btn btn-sm btn-outline-secondary">수정</a>
-{% endif %}
+  {% if request.user == question.user %}
+  <a
+    href="{% url pybo:question_modify question.id %}"
+    class="btn btn-sm btn-outline-secondary"
+    >수정</a
+  >
+  {% endif %}
 </div>
 ```
-{% endraw %}
 
+{% endraw %}
 
 urls.py
 {% raw %}
+
 ```python
 urlpatterns = [
     path('', views.index, name='index'),
@@ -58,11 +64,12 @@ urlpatterns = [
     path('question/modify/', views.question_modify, name='question_modify'),
 ]
 ```
-{% endraw %}
 
+{% endraw %}
 
 views.py
 {% raw %}
+
 ```python
 
 @login_required(login_url='common:login')
@@ -84,11 +91,5 @@ def question_modify(request):
     return render(request, 'pybo/question_form.html', context)
 
 ```
+
 {% endraw %}
-
-
-
-
-
-
-

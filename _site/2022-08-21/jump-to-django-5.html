@@ -75,24 +75,27 @@
 
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">&lt;!-- 내비게이션바 start --&gt;</span>
 <span class="nt">&lt;nav</span> <span class="na">class=</span><span class="s">"navbar navbar-expand-lg navbar-light bg-light"</span><span class="nt">&gt;</span>
-   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container-fluid"</span><span class="nt">&gt;</span>
-       <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"navbar-brand"</span> <span class="na">href=</span><span class="s">"{% url 'pybo:index' %}"</span><span class="nt">&gt;</span>Pybo<span class="nt">&lt;/a&gt;</span>
-       <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">"navbar-toggler"</span> <span class="na">type=</span><span class="s">"button"</span>
-               <span class="na">data-bs-toggle=</span><span class="s">"collapse"</span>
-               <span class="na">data-bs-target=</span><span class="s">"#navbarSupportedContent"</span>
-               <span class="na">aria-controls=</span><span class="s">"navbarSupportedContent"</span>
-               <span class="na">aria-expanded=</span><span class="s">"false"</span>
-               <span class="na">aria-label=</span><span class="s">"Toggle navigation"</span><span class="nt">&gt;</span>
-           <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"navbar-toggler-icon"</span><span class="nt">&gt;&lt;/span&gt;</span>
-       <span class="nt">&lt;/button&gt;</span>
-       <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"collapse navbar-collapse"</span> <span class="na">id=</span><span class="s">"navbarSupportedContent"</span><span class="nt">&gt;</span>
-           <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"navbar-nav me-auto mb-2 mb-lg-0"</span><span class="nt">&gt;</span>
-               <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"nav-item"</span><span class="nt">&gt;</span>
-                   <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"nav-link"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>로그인<span class="nt">&lt;/a&gt;</span>
-               <span class="nt">&lt;/li&gt;</span>
-           <span class="nt">&lt;/ul&gt;</span>
-       <span class="nt">&lt;/div&gt;</span>
-   <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"container-fluid"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"navbar-brand"</span> <span class="na">href=</span><span class="s">"{% url 'pybo:index' %}"</span><span class="nt">&gt;</span>Pybo<span class="nt">&lt;/a&gt;</span>
+    <span class="nt">&lt;button</span>
+      <span class="na">class=</span><span class="s">"navbar-toggler"</span>
+      <span class="na">type=</span><span class="s">"button"</span>
+      <span class="na">data-bs-toggle=</span><span class="s">"collapse"</span>
+      <span class="na">data-bs-target=</span><span class="s">"#navbarSupportedContent"</span>
+      <span class="na">aria-controls=</span><span class="s">"navbarSupportedContent"</span>
+      <span class="na">aria-expanded=</span><span class="s">"false"</span>
+      <span class="na">aria-label=</span><span class="s">"Toggle navigation"</span>
+    <span class="nt">&gt;</span>
+      <span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">"navbar-toggler-icon"</span><span class="nt">&gt;&lt;/span&gt;</span>
+    <span class="nt">&lt;/button&gt;</span>
+    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"collapse navbar-collapse"</span> <span class="na">id=</span><span class="s">"navbarSupportedContent"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;ul</span> <span class="na">class=</span><span class="s">"navbar-nav me-auto mb-2 mb-lg-0"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;li</span> <span class="na">class=</span><span class="s">"nav-item"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;a</span> <span class="na">class=</span><span class="s">"nav-link"</span> <span class="na">href=</span><span class="s">"#"</span><span class="nt">&gt;</span>로그인<span class="nt">&lt;/a&gt;</span>
+        <span class="nt">&lt;/li&gt;</span>
+      <span class="nt">&lt;/ul&gt;</span>
+    <span class="nt">&lt;/div&gt;</span>
+  <span class="nt">&lt;/div&gt;</span>
 <span class="nt">&lt;/nav&gt;</span>
 
 <span class="c">&lt;!-- 내비게이션바 end --&gt;</span>
@@ -124,6 +127,7 @@
 
 <blockquote>
   <p>HTML5</p>
+
   <ul>
     <li><code class="language-plaintext highlighter-rouge">&lt;ul&gt;</code> 순서 없는 목록(Unordered List)이란 나열된 항목들 간의 구분이 없는 목록을 뜻합니다.</li>
     <li><code class="language-plaintext highlighter-rouge">&lt;ol&gt;</code> 순서 있는 목록(Ordered List)이란 기호를 이용해서 각 항목들 사이의 순서를 구분하는 목록을 뜻합니다.</li>
@@ -192,29 +196,30 @@
 
 <p>question_list.html</p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        {% if question_list %}
-        {% for question in question_list %}
-            <span class="nt">&lt;tr&gt;</span>
-                <span class="nt">&lt;td&gt;</span>
-                    <span class="c">&lt;!-- 번호 = 전체건수 - 시작인덱스 - 현재인덱스 + 1 --&gt;</span>
-                    {{ question_list.paginator.count|sub:question_list.start_index|sub:forloop.counter0|add:1 }}
-                <span class="nt">&lt;/td&gt;</span>
-                <span class="nt">&lt;td&gt;</span>
-                    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"{% url 'pybo:detail' question.id %}"</span><span class="nt">&gt;</span>{{ question.subject }}<span class="nt">&lt;/a&gt;</span>
-                <span class="nt">&lt;/td&gt;</span>
-                <span class="nt">&lt;td&gt;</span>{{ question.author }}<span class="nt">&lt;/td&gt;</span>
-                <span class="nt">&lt;td&gt;</span>{{ question.create_date }}<span class="nt">&lt;/td&gt;</span>
-            <span class="nt">&lt;/tr&gt;</span>
-        {% endfor %}
-        {% else %}
-        <span class="nt">&lt;tr&gt;</span>
-            <span class="nt">&lt;td</span> <span class="na">colspan=</span><span class="s">"3"</span><span class="nt">&gt;</span>질문이 없습니다.<span class="nt">&lt;/td&gt;</span>
-        <span class="nt">&lt;/tr&gt;</span>
-        {% endif %}
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% if question_list %} {% for question in question_list %}
+<span class="nt">&lt;tr&gt;</span>
+  <span class="nt">&lt;td&gt;</span>
+    <span class="c">&lt;!-- 번호 = 전체건수 - 시작인덱스 - 현재인덱스 + 1 --&gt;</span>
+    {{
+    question_list.paginator.count|sub:question_list.start_index|sub:forloop.counter0|add:1
+    }}
+  <span class="nt">&lt;/td&gt;</span>
+  <span class="nt">&lt;td&gt;</span>
+    <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"{% url 'pybo:detail' question.id %}"</span><span class="nt">&gt;</span>{{ question.subject }}<span class="nt">&lt;/a&gt;</span>
+  <span class="nt">&lt;/td&gt;</span>
+  <span class="nt">&lt;td&gt;</span>{{ question.author }}<span class="nt">&lt;/td&gt;</span>
+  <span class="nt">&lt;td&gt;</span>{{ question.create_date }}<span class="nt">&lt;/td&gt;</span>
+<span class="nt">&lt;/tr&gt;</span>
+{% endfor %} {% else %}
+<span class="nt">&lt;tr&gt;</span>
+  <span class="nt">&lt;td</span> <span class="na">colspan=</span><span class="s">"3"</span><span class="nt">&gt;</span>질문이 없습니다.<span class="nt">&lt;/td&gt;</span>
+<span class="nt">&lt;/tr&gt;</span>
+{% endif %}
 </code></pre></div></div>
 
 <blockquote>
   <p>django 코드 github.io 블로그 글 업로드 에러</p>
+
   <ul>
     <li>django 코드가 포함된 블로그 글이 업로드되지 않았다. 지킬 태그로 인식하여 오류가 나는 것이었다. 이를 방지하려면 raw와 endraw로 코드를 감싸면 된다.</li>
   </ul>
@@ -241,7 +246,7 @@
 
     <footer>
   <span>
-    &copy; <time datetime="2023-08-05 10:07:13 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-08-05 14:34:20 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 

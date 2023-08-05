@@ -10,8 +10,8 @@
 <meta property="og:title" content="TIL) git checkout, django related_name" />
 <meta name="author" content="Sunmi Moon" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Git) checkout checkout으로 현재 기준으로 커밋의 앞뒤를 왔다갔다 할 수 있다. 그런데 이때 상태를 저장해 두기 위해 깃은 임의의 브랜치를 만들게 된다. 한 번이라도 커밋의 뒤에 가 본 적이 있다면, 내가 있던 브랜치에서는 이미 벗어난 상태가 되는 것이다. 그래서 내가 A 브랜치에 있었더라도 checkout을 하면 다른 브랜치로 옮겨지게 된다. A 브랜치의 HEAD는 새로 옮겨진 브랜치의 최종 커밋을 가리키게 된다." />
-<meta property="og:description" content="Git) checkout checkout으로 현재 기준으로 커밋의 앞뒤를 왔다갔다 할 수 있다. 그런데 이때 상태를 저장해 두기 위해 깃은 임의의 브랜치를 만들게 된다. 한 번이라도 커밋의 뒤에 가 본 적이 있다면, 내가 있던 브랜치에서는 이미 벗어난 상태가 되는 것이다. 그래서 내가 A 브랜치에 있었더라도 checkout을 하면 다른 브랜치로 옮겨지게 된다. A 브랜치의 HEAD는 새로 옮겨진 브랜치의 최종 커밋을 가리키게 된다." />
+<meta name="description" content="Git) checkout" />
+<meta property="og:description" content="Git) checkout" />
 <link rel="canonical" href="http://localhost:4000/2023-03-21/TIL" />
 <meta property="og:url" content="http://localhost:4000/2023-03-21/TIL" />
 <meta property="og:site_name" content="주경야독학) 개발공부로그" />
@@ -20,7 +20,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="TIL) git checkout, django related_name" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2023-03-21T12:18:07+09:00","datePublished":"2023-03-21T12:18:07+09:00","description":"Git) checkout checkout으로 현재 기준으로 커밋의 앞뒤를 왔다갔다 할 수 있다. 그런데 이때 상태를 저장해 두기 위해 깃은 임의의 브랜치를 만들게 된다. 한 번이라도 커밋의 뒤에 가 본 적이 있다면, 내가 있던 브랜치에서는 이미 벗어난 상태가 되는 것이다. 그래서 내가 A 브랜치에 있었더라도 checkout을 하면 다른 브랜치로 옮겨지게 된다. A 브랜치의 HEAD는 새로 옮겨진 브랜치의 최종 커밋을 가리키게 된다.","headline":"TIL) git checkout, django related_name","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2023-03-21/TIL"},"url":"http://localhost:4000/2023-03-21/TIL"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2023-03-21T12:18:07+09:00","datePublished":"2023-03-21T12:18:07+09:00","description":"Git) checkout","headline":"TIL) git checkout, django related_name","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2023-03-21/TIL"},"url":"http://localhost:4000/2023-03-21/TIL"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -68,11 +68,13 @@
   </div>
 
   <h3 id="git-checkout">Git) checkout</h3>
+
 <p>checkout으로 현재 기준으로 커밋의 앞뒤를 왔다갔다 할 수 있다. 그런데 이때 상태를 저장해 두기 위해 깃은 임의의 브랜치를 만들게 된다. 한 번이라도 커밋의 뒤에 가 본 적이 있다면, 내가 있던 브랜치에서는 이미 벗어난 상태가 되는 것이다.
 그래서 내가 A 브랜치에 있었더라도 checkout을 하면 다른 브랜치로 옮겨지게 된다. A 브랜치의 HEAD는 새로 옮겨진 브랜치의 최종 커밋을 가리키게 된다.</p>
 
 <h3 id="python-related_name">Python) related_name</h3>
-<p>필드의 <code class="language-plaintext highlighter-rouge">related_name</code> 파라미터는 필수로 입력해야 하는 건 아니다. 그러나 <code class="language-plaintext highlighter-rouge">related_name</code>이 꼭 필요해서 입력하지 않으면 장고가 에러를 발생시키는 상황이 존재한다. 역참조 매니저의 이름이 같을 경우이다. 
+
+<p>필드의 <code class="language-plaintext highlighter-rouge">related_name</code> 파라미터는 필수로 입력해야 하는 건 아니다. 그러나 <code class="language-plaintext highlighter-rouge">related_name</code>이 꼭 필요해서 입력하지 않으면 장고가 에러를 발생시키는 상황이 존재한다. 역참조 매니저의 이름이 같을 경우이다.
 역참조 매니저의 이름은 사용자가 명시하지 않을 경우 장고가 만드는데, 한 모델 안에 foreignKey나 OneToOneField 같은 필드가 여러 개 있을 경우 이름이 같아 충돌이 발생할 수 있다. 따라서 연결된 필드가 여러 개일 경우는 <code class="language-plaintext highlighter-rouge">related_name</code>을 지정해 주는 것이 좋다.</p>
 
 </div>
@@ -96,7 +98,7 @@
 
     <footer>
   <span>
-    &copy; <time datetime="2023-08-05 10:07:13 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-08-05 14:34:20 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 

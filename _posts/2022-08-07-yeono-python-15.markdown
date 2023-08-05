@@ -1,44 +1,40 @@
 ---
 layout: post
-title:  "연오의 파이썬 공부 15"
-date:   2022-08-07 22:13:19 +0900
-categories: yeono-python
+title: "연오의 파이썬 공부 15"
+date: 2022-08-07 22:13:19 +0900
+tags: yeono-python
 ---
 
-
-
-
 현재 시간 측정 후 해석
+
 ```python
 import time
-now = time.gmtime(time.time()) 
+now = time.gmtime(time.time())
 ```
 
-
 시간 단위 다룰 때 많이 쓰는 datetime 모듈
+
 ```python
 from datetime import time
 time(15, 30, 45) # 15시 30분 45초
 ```
+
 ```
 from datetime import datetime
 datetime(2020, 11, 14, 8, 30)  # 2020년 11월 14일 8시 30분
 ```
 
-
 ```
 now.isoformat()
 '2022-08-07T06:44:30.304039'
 ```
- 날짜와 시간을 `T`로 구별. `now.isoformat((sep=' '))`와 같이 매개변수로 지정할 수 있다.
 
+날짜와 시간을 `T`로 구별. `now.isoformat((sep=' '))`와 같이 매개변수로 지정할 수 있다.
 
-
-
-`strftime()` 메서드는 양식 문자열을 전달받아 시간 정보 객체를 양식화한다. 
-
+`strftime()` 메서드는 양식 문자열을 전달받아 시간 정보 객체를 양식화한다.
 
 코드 11-45
+
 ```python
 from datetime import timedelta
 timedelta(days=5)
@@ -47,9 +43,8 @@ timedelta(weeks=5)
 datetime.timedelta(days=35)
 ```
 
-
-
 연습문제 11-3 -> 논리 오류: 윤년을 생각 못하고, 1년 365일로 계산하였음.
+
 ```python
 from datetime import date
 
@@ -111,8 +106,6 @@ try:
 except Exception as error:
    print(error)
 ```
-
-
 
 연습문제 11-3 update
 
@@ -195,15 +188,11 @@ except Exception as error:
    print(error)
 ```
 
-
-
-
 리스트·사전 등 컬렉션을 중첩한 입체적인 데이터를 파일로 저장하고 읽어 들이기 위해
 약속에 따라 입체적인 데이터를 텍스트나 바이트로 표현하는 것을 직렬화(serialization)라고 한다.
 
-
-
 코드 11-50
+
 ```python
 print('당신의 이름은 무엇인가요?')
 name = input()
@@ -212,8 +201,8 @@ with open('hello.txt', 'w') as file:
    print(name, '님 반가워요.', file=file)
 ```
 
-
 코드 11-51
+
 ```python
 from datetime import date
 today = date.today()
@@ -224,8 +213,8 @@ with open('hello.txt', 'w') as file:
    file.write(text)
 ```
 
-
 코드 11-52
+
 ```python
 from datetime import datetime
 now = datetime.now()
@@ -236,8 +225,8 @@ with open('time.txt', 'a') as file:
    file.write(text)
 ```
 
-
 코드 11-53
+
 ```python
 try:
    with open('once.text', 'x') as file:
@@ -246,8 +235,8 @@ except FileExistsError:
    print('파일이 이미 존재합니다.')
 ```
 
-
 코드 11-54
+
 ```python
 with open('time.txt', 'r') as file:
    date = file.read()
@@ -255,16 +244,16 @@ with open('time.txt', 'r') as file:
 print(date)
 ```
 
-
 코드 11-55
+
 ```python
 with open('time.txt', 'r') as file:
    for line in file:
        print(line, end='')
 ```
 
-
 코드 11-56
+
 ```python
 import csv
 import pprint
@@ -276,8 +265,8 @@ with open('movies.csv') as file:
 pprint.pprint(movies)
 ```
 
-
 코드 11-57
+
 ```python
 import csv
 
@@ -294,8 +283,8 @@ with open('movies_output.csv', 'w', newline='') as file:
    writer.writerows(table)
 ```
 
-
 코드 11-58
+
 ```python
 import json
 
@@ -320,8 +309,8 @@ with open('movies.json', 'w') as file:
    file.write(json_data)
 ```
 
-
 코드 11-59
+
 ```python
 import json
 import pprint
@@ -345,9 +334,8 @@ def ls(path):
 print(ls('/Users')) # macOS라서 다르게 실습
 ```
 
-
-
 코드 11-63
+
 ```python
 from pathlib import Path
 path = Path('/Users')
@@ -357,8 +345,8 @@ print(path_list[0])
 print(path_list[0].is_dir())
 ```
 
-
 코드 11-65
+
 ```python
 from pathlib import Path
 path = Path('/Users')
@@ -373,8 +361,8 @@ Path('dir1/dir2').replace(Path('dir2'))
 Path('dir2').replace('dir3')
 ```
 
-
 코드 11-66
+
 ```python
 from pathlib import Path
 def mv(src, dst):
@@ -389,9 +377,8 @@ def mv(src, dst):
 mv('dir2', 'dir88')
 ```
 
-
-
 연습문제 11-4
+
 ```python
 from pathlib import Path
 
@@ -413,8 +400,8 @@ def cp(src, dst):
 cp('original.txt', 'clone.txt')
 ```
 
-
 연습문제 11-4 모범답안처럼 업데이트
+
 ```python
 def cp(src, dst):
 
@@ -425,9 +412,8 @@ def cp(src, dst):
 cp('original.txt', 'clone.txt')
 ```
 
-
-
 연습문제 11-5
+
 ```python
 import csv
 
@@ -453,8 +439,8 @@ for density in sorted_country_density:
    print(density[0], density[1])
 ```
 
-
 연습문제 11-5 모범답안처럼 업데이트
+
 ```python
 import csv
 
@@ -478,36 +464,24 @@ for density in sorted_country:
    print(density[0], density[3])
 ```
 
-
-
-
-
-## 부록 A 
-
+## 부록 A
 
 HTTP 통신의 과정
 
-1. 웹브라우저가 en.wikipedia.org 호스트에 /wiki/Python_(programming_language)라는 자원을 요청하는 HTTP 요청 메시지를 발송한다. 
-2. en.wikipedia.org 호스트가 클라이언트에 HTTP 응답 메시지를 발송한다. 
+1. 웹브라우저가 en.wikipedia.org 호스트에 /wiki/Python\_(programming_language)라는 자원을 요청하는 HTTP 요청 메시지를 발송한다.
+2. en.wikipedia.org 호스트가 클라이언트에 HTTP 응답 메시지를 발송한다.
 3. 웹브라우저가 응답 메시지를 해석하여 화면에 웹 문서를 출력한다.
 
-
-
-
-
 파이썬은 URL과 웹 요청에 관련된 모듈들을 urllib 패키지도 묶어 제공한다.
-
 
 `urllib.request.urlopen(요청할URL)`: 응답객체(HTTPResponse)를 반환한다.
 `urllib.request.urlopen(요청할URL).read()`: 웹서버가 응답한 데이터를 바이트 배열로 읽어 들임
 `urllib.request.urlopen(요청할URL).read().decode('utf-8')`: 바이트 배열을 문자열로 변환
 
-
-
 HTTPS는 HTTP에 SSL이라는 암·복호화 단계를 적용하여 보안 통신을 수행하는 프로토콜
 
-
 코드 11-68
+
 ```python
 import urllib.request
 def request(url):
@@ -518,9 +492,8 @@ def request(url):
    return text_data
 ```
 
-
-
 코드 11-69
+
 ```python
 import urllib.request
 
@@ -529,8 +502,8 @@ webpage = urllib.request.urlopen(url).read().decode('utf-8')
 print(webpage)
 ```
 
-
 코드 11-70
+
 ```python
 import urllib.request
 
@@ -539,9 +512,8 @@ text_data = urllib.request.urlopen(url).read().decode('-utf-8')
 print(text_data)
 ```
 
-
-
 코드 11-71
+
 ```python
 import urllib.request
 import json
@@ -555,8 +527,8 @@ for movie in sorted_by_year:
    print(str(movie['year']) + ' ' + movie['title'].upper())
 ```
 
-
 코드 11-72
+
 ```python
 import urllib.parse
 
@@ -567,8 +539,8 @@ print(url_parts[1])
 print(url_parts[2])
 ```
 
-
 코드 11-73
+
 ```python
 import urllib.parse
 
@@ -579,16 +551,12 @@ url_parts[2] = '/chapter-11.html'
 print(urllib.parse.urlunsplit(url_parts))
 ```
 
-
 URL에는 영문자, 숫자, 몇몇 기호들만 사용할 수 있다. 아스키 코드가 아닌 문자들을 퍼센트 인코딩 형식으로 바꾸어야 한다.
-
-
 
 http.server 모듈로 간단한 웹 서버를 만들 수 있다.
 
-
-
 코드 11-78
+
 ```python
 import http.server
 
@@ -626,5 +594,3 @@ listener = http.server.HTTPServer(ADDRESS, HTTPRequestHandler)
 print(f'http://{ADDRESS[0]}:{ADDRESS[1]} 주소에서 요청 대기중...')
 listener.serve_forever()
 ```
-
-

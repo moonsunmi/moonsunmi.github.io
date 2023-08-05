@@ -2,7 +2,7 @@
 layout: post
 title: "Likedin Clone Coding"
 date: 2022-10-19 12:18:07 +0900
-categories: react
+tags: React
 ---
 
 리스트에 key를 꼭 넣어야 전부 리스트의 원소를 전부 다 렌더링하지 않게 된다.

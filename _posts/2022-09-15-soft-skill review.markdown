@@ -2,7 +2,7 @@
 layout: post
 title: "독학으로 개발자가 되려는 사람에게 필요한 내용만 정리한 <소프트 스킬>"
 date: 2022-09-15 20:34:31 +0900
-categories: etc
+tags: etc
 ---
 
 ## 경력

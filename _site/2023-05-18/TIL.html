@@ -10,8 +10,8 @@
 <meta property="og:title" content="TIL) swagger 타입 수동으로 지정해 주기 - django" />
 <meta name="author" content="Sunmi Moon" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="swagger 타입을 수동으로 지정하기 swagger가 response의 타입을 잘못 이해하고 있다면, @swagger_auto_schema로 지정해 줄 수 있다." />
-<meta property="og:description" content="swagger 타입을 수동으로 지정하기 swagger가 response의 타입을 잘못 이해하고 있다면, @swagger_auto_schema로 지정해 줄 수 있다." />
+<meta name="description" content="swagger 타입을 수동으로 지정하기" />
+<meta property="og:description" content="swagger 타입을 수동으로 지정하기" />
 <link rel="canonical" href="http://localhost:4000/2023-05-18/TIL" />
 <meta property="og:url" content="http://localhost:4000/2023-05-18/TIL" />
 <meta property="og:site_name" content="주경야독학) 개발공부로그" />
@@ -20,7 +20,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="TIL) swagger 타입 수동으로 지정해 주기 - django" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2023-05-18T12:18:07+09:00","datePublished":"2023-05-18T12:18:07+09:00","description":"swagger 타입을 수동으로 지정하기 swagger가 response의 타입을 잘못 이해하고 있다면, @swagger_auto_schema로 지정해 줄 수 있다.","headline":"TIL) swagger 타입 수동으로 지정해 주기 - django","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2023-05-18/TIL"},"url":"http://localhost:4000/2023-05-18/TIL"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2023-05-18T12:18:07+09:00","datePublished":"2023-05-18T12:18:07+09:00","description":"swagger 타입을 수동으로 지정하기","headline":"TIL) swagger 타입 수동으로 지정해 주기 - django","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2023-05-18/TIL"},"url":"http://localhost:4000/2023-05-18/TIL"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -68,6 +68,7 @@
   </div>
 
   <h3 id="swagger-타입을-수동으로-지정하기">swagger 타입을 수동으로 지정하기</h3>
+
 <p>swagger가 response의 타입을 잘못 이해하고 있다면, @swagger_auto_schema로 지정해 줄 수 있다.</p>
 
 <p>REST framework를 사용한다면 보통 serializer를 사용하므로 이게 좋은 옵션이 될 것 같다.</p>
@@ -80,12 +81,12 @@ def count(self, request, *args, **kwargs):
 </code></pre></div></div>
 
 <h3 id="tip">TIP</h3>
+
 <p>도커를 켜지 않은 채로 배포를 시도하다가 엄청 애를 먹었다.
 배포가 제대로 되지 않음에도 불구하고, 뭔가 잘못되었다는 표시를 해주지 않다.</p>
 
 <p>배포를 자주 하지는 않으니 도커 관련 메시지가 나타나지 않는다는 걸 바로 체감하기는 어려웠다.
 swagger가 바보가 된 것 같다면 도커를 켰는지 꼭 확인하자!!</p>
-
 
 </div>
 
@@ -108,7 +109,7 @@ swagger가 바보가 된 것 같다면 도커를 켰는지 꼭 확인하자!!</p
 
     <footer>
   <span>
-    &copy; <time datetime="2023-08-05 10:07:13 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-08-05 14:34:20 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 

@@ -68,6 +68,7 @@
   </div>
 
   <p>시점에 따라 응답 내용(예: 현재 시간)이 달라지는 동적요청은 웹 서버가 아니라 별도의 애플리케이션에서 작성하는 게 보통임. 그래서 웹 서버는 동적요청을 애플리케이션으로 넘겨주고 그 결과를 받는 기능이 필요하다. 이때 데이터를 주고 받기 위한 규격</p>
+
 <ul>
   <li>WSGI: 웹 서버와 웹 애플리케이션을 연결해주는 규격. 전통적인 웹 CGI 규격 보완. wsgiref 모듈</li>
 </ul>
@@ -95,6 +96,7 @@
 </ol>
 
 <h4 id="wsgirefsimple_server-모듈">wsgiref.simple_server 모듈</h4>
+
 <p>WSGI 웹 서버에 대한 참조 서버. WSGIServer 클래스와 WSGIRequestHandler 클래스를 정의하고 있다.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
@@ -121,11 +123,13 @@
 <h2 id="3장">3장</h2>
 
 <p>장고는 기본적으로 MVC 패턴에 해당하는 MVT 패턴에 따라 개발하도록 설계되었다.</p>
+
 <ul>
   <li>웹 애플리케이션: 웹 사이트의 전체 프로그램 또는 모듈화된 단위 프로그램</li>
 </ul>
 
 <h5 id="애플리케이션-개념을-웹-서버-개발측면에서-좀-더-구체화한-용어들">애플리케이션 개념을 웹 서버 개발측면에서 좀 더 구체화한 용어들</h5>
+
 <ul>
   <li>프로젝트: 웹 사이트에 대한 전체 프로그램</li>
   <li>애플리케이션: 모듈화된 단위 프로그램</li>
@@ -134,9 +138,11 @@
 <p>즉, 애플리케이션 프로그램들이 모여서 프로젝트를 개발하는 개념</p>
 
 <h5 id="mvc-패턴">MVC 패턴</h5>
+
 <p>데이터(Model), 사용자 인터페이스(View), 데이터를 처리하는 로직(Controller)을 구분해서 한 요소가 다른 요소들에 영향을 주지 않도록 설계하는 방식입니다.</p>
 
 <p>#####장고 프레임워크에서는 MVT 패턴.</p>
+
 <ul>
   <li>Model: 데이터베이스에 저장되는 데이터(블로그 내용을 데이터베이스로부터 가지고 오거나 저장, 수정하는 기능)</li>
   <li>Template: 사용자에게 보여주는 UI 부분(화면 출력을 위해 디자인과 테마를 적용해서 보여주는 페이지를 만들어 주는 역할)</li>
@@ -152,6 +158,7 @@
 </ol>
 
 <h5 id="모델이란">모델이란</h5>
+
 <p>사용될 데이터에 대한 정의를 담고 있는 장고의 클래스입니다. 장고는 ORM 기법을 사용하여 애플리케이션에서 사용할 데이터베이스를 클래스로 매핑해서 코딩할 수 있다. 하나의 모델 클래스는 하나의 테이블에 매핑. 모델 클래스의 속성은 테이블의 컬럼에 매핑</p>
 
 <ul>
@@ -186,6 +193,7 @@ URLconf를 로딩해서 urlpatterns 변수에 지정되어 있는 URL 리스트�
 </ol>
 
 <h5 id="template---화면-ui-정의">Template - 화면 UI 정의</h5>
+
 <ol>
   <li>장고가 클라이언트에게 반환하는 최종 응답은 HTML 텍스트이다.</li>
   <li>클라이언트는 응답으로 받은 HTML 텍스트를 해석해서 웹 브라우저 화면에 UI를 보여주는 것.</li>
@@ -211,17 +219,19 @@ URLconf를 로딩해서 urlpatterns 변수에 지정되어 있는 URL 리스트�
 <p>프로젝트에 필요한 디렉터리, 파일을 구성하고 설정 파일을 세팅.</p>
 
 <p>settings.py: 프로젝트에 필요한 설정값 지정해 준다.</p>
+
 <ol>
   <li><code class="language-plaintext highlighter-rouge">ALLOWED_HOSTS</code> 항목을 적절하게 지정해야 한다.
 개발 모드이므로 <code class="language-plaintext highlighter-rouge">DEBUG=True</code>, <code class="language-plaintext highlighter-rouge">ALLOWED_HOSTS = []</code>이더라도, 127.0.0.1, localhost는 자동으로 됨.</li>
   <li>프로젝트에 포함되는 애플리케이션은 모두 설정 파일에 등록되어야 한다.
 <code class="language-plaintext highlighter-rouge">polls</code> 애플리케이션을 만들었으므로, <code class="language-plaintext highlighter-rouge">polls</code> 디렉터리에 자동 생성된 apps.py의 <code class="language-plaintext highlighter-rouge">PollsConfig</code>를 경로까지 지정해줌.</li>
   <li>프로젝트에 사용할 데이터베이스 엔진
- 디폴트로 SQLite3 설정. 변경하고 싶다면 수정.</li>
+디폴트로 SQLite3 설정. 변경하고 싶다면 수정.</li>
   <li>타임존 지정. 한국 시간으로</li>
 </ol>
 
 <h5 id="기본-테이블-생성">기본 테이블 생성</h5>
+
 <p>migrate는 데이터베이스에 변경사항이 있을 때 반영해 주는 명령. 장고는 프로젝트 개발 시점에 이 명령을 실행하여 데이터베이스 생성해둠(?)</p>
 
 <p>runserver: 장고에서 제공하는 간단한 테스트용 웹 서버</p>
@@ -239,11 +249,11 @@ URLconf를 로딩해서 urlpatterns 변수에 지정되어 있는 URL 리스트�
 <p>url 패턴 매칭은 위에서 아래로 진행하므로 정의하는 순서에 유의해야 합니다.</p>
 
 <p>urlpatterns = [
-   path(‘admin/’, admin.site.urls),
-   path(‘polls/’, views.index, name=’index’),
-   path(‘polls/<int:question_id>/', views.detail, name='detail'),
-   path('polls/<int:question_id>/results/', views.results, name='results'),
-   path('polls/<int:question_id>/vote/', views.vote, name='vote'),
+path(‘admin/’, admin.site.urls),
+path(‘polls/’, views.index, name=’index’),
+path(‘polls/<int:question_id>/', views.detail, name='detail'),
+path('polls/<int:question_id>/results/', views.results, name='results'),
+path('polls/<int:question_id>/vote/', views.vote, name='vote'),
 ]</int:question_id></int:question_id></int:question_id></p>
 
 <p><code class="language-plaintext highlighter-rouge">path</code>의 <code class="language-plaintext highlighter-rouge">name</code> 인자: URL 패턴에 붙인 이름. 템플릿 파일에서 주로 사용한다.</p>
@@ -251,6 +261,7 @@ URLconf를 로딩해서 urlpatterns 변수에 지정되어 있는 URL 리스트�
 <p><code class="language-plaintext highlighter-rouge">URLconf</code>를 코딩할 때, mysite/urls.py와 polls/urls.py처럼 2개의 파일에 작성하는 게 더 좋다.</p>
 
 <p>mysite/urls.py</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
 <span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">path</span>
 
@@ -261,6 +272,7 @@ URLconf를 로딩해서 urlpatterns 변수에 지정되어 있는 URL 리스트�
 </code></pre></div></div>
 
 <p>polls/urls.py</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">path</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">views</span>
 
@@ -274,7 +286,6 @@ URLconf를 로딩해서 urlpatterns 변수에 지정되어 있는 URL 리스트�
 </code></pre></div></div>
 
 <p>여기에서 <code class="language-plaintext highlighter-rouge">app_name</code>은 이름공간 역할</p>
-
 
 </div>
 
@@ -297,7 +308,7 @@ URLconf를 로딩해서 urlpatterns 변수에 지정되어 있는 URL 리스트�
 
     <footer>
   <span>
-    &copy; <time datetime="2023-08-05 10:07:13 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-08-05 14:34:20 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 

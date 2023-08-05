@@ -77,7 +77,6 @@
     <li>foo에 bar라는 속성이 있으면 <code class="language-plaintext highlighter-rouge">foo.bar</code></li>
     <li>foo가 리스트면 <code class="language-plaintext highlighter-rouge">foo[bar]</code></li>
   </ol>
-
 </blockquote>
 
 <h3 id="템플릿-필터">템플릿 필터</h3>
@@ -97,9 +96,7 @@
 
 <p>with: 특정 값을 변수에 저장해 두는 기능.</p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% with total=apple.count %}
-    {{ total }}
-{% endwith %}
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% with total=apple.count %} {{ total }} {% endwith %}
 </code></pre></div></div>
 
 <p>load: 사용자 정의 필터 로딩</p>
@@ -116,10 +113,9 @@
 
 <p>자동 이스케이프 기능을 비활성화시키려면 safe 이용한다. ``</p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% autoescape off %}
-Hello {{ name }}
-{% endautoescape %}
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{% autoescape off %} Hello {{ name }} {% endautoescape %}
 </code></pre></div></div>
+
 <p>}</p>
 
 <p><code class="language-plaintext highlighter-rouge">{% extends "base.html" %}</code>의 뜻: base.html 부모 템플릿을 상속받는다.</p>
@@ -152,7 +148,6 @@ Hello {{ name }}
 <p>label 속성: <code class="language-plaintext highlighter-rouge">&lt;label&gt;</code> 엘리먼트로 렌더링됨.
 max_length 속성: 1) 사용자가 100글자 이상 입력하는 것을 브라우저가 방지할 수 있도록 해 준다. 2) 장고가 브라우저로부터 폼 데이터를 받았을 때 데이터의 길이가 유효한지 검사하는 데 사용된다.</p>
 
-
 </div>
 
 
@@ -174,7 +169,7 @@ max_length 속성: 1) 사용자가 100글자 이상 입력하는 것을 브라�
 
     <footer>
   <span>
-    &copy; <time datetime="2023-08-05 10:07:13 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-08-05 14:34:20 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 

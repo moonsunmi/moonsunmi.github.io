@@ -1,15 +1,13 @@
 ---
 layout: post
-title:  "연오의 파이썬 공부 18"
-date:   2022-08-10 18:18:22 +0900
-categories: yeono-python
+title: "연오의 파이썬 공부 18"
+date: 2022-08-10 18:18:22 +0900
+tags: yeono-python
 ---
 
-
-
-
 코드 12-29
-````python
+
+```python
 import urllib.request
 
 TOKEN = '1178934754:AAGUR5T93yTA7ncs_r3m0b_Hxw8h_8fb4y0'
@@ -39,13 +37,11 @@ def request_to_chatbot_api(method, query):
 
 response = request_to_chatbot_api('getUpdates', 'offset=0')
 pprint(response)
-````
-
-
-
+```
 
 코드 12-31
-````python
+
+```python
 import urllib.request
 
 TOKEN = '1178934754:AAGUR5T93yTA7ncs_r3m0b_Hxw8h_8fb4y0'
@@ -95,14 +91,11 @@ def simplify_message(response):
 
 
 print(simplify_message(response))
-````
-
-
-
-
+```
 
 코드 12-33
-````python
+
+```python
 import urllib.request
 import json
 
@@ -156,12 +149,11 @@ response = request_to_chatbot_api('getUpdates', 'offset=0')
 last_update_id, simplified_message = simplify_message(response)
 print(simplified_message)
 print(get_updates(32))
-````
-
-
+```
 
 코드 12-36
-````python
+
+```python
 import urllib.request
 import json
 
@@ -217,12 +209,11 @@ print(simplified_message)
 print(get_updates(32))
 text = urllib.parse.quote('안녕~~')
 request_to_chatbot_api('sendMessage', f'chat_id=219819940&text={text}')
-````
-
-
+```
 
 코드 12-41
-````python
+
+```python
 import urllib.request
 import time
 import urllib.parse
@@ -305,4 +296,4 @@ if __name__ == '__main__':
 
 response = request_to_chatbot_api('getUpdates', 'offset=0')
 send_message(219819940, '안뇽')
-````
+```

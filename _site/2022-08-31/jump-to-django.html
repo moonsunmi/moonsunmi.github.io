@@ -89,12 +89,14 @@ sudo lsof -t -i tcp:8000 | xargs kill -9</p>
 <p>settings.py 파일을 base.py로 바꾸고, settings 폴더 안에 base.py, local.py, prod.py를 넣는다.</p>
 
 <p>local.py</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="n">ALLOWED_HOSTS</span> <span class="o">=</span> <span class="p">[]</span>
 </code></pre></div></div>
 
 <p>prod.py</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="o">*</span>
 
 <span class="n">ALLOWED_HOSTS</span> <span class="o">=</span> <span class="p">[</span><span class="s">'43.200.117.214'</span><span class="p">]</span>
@@ -107,7 +109,6 @@ sudo lsof -t -i tcp:8000 | xargs kill -9</p>
 <p>로컬 설정 자동화를 했는데도 다음과 같은 에러가 난다.</p>
 
 <p><code class="language-plaintext highlighter-rouge">CommandError: You must set settings.ALLOWED_HOSTS if DEBUG is False.</code></p>
-
 
 </div>
 
@@ -130,7 +131,7 @@ sudo lsof -t -i tcp:8000 | xargs kill -9</p>
 
     <footer>
   <span>
-    &copy; <time datetime="2023-08-05 10:07:13 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-08-05 14:34:20 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 

@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "TIL) react-copy-to-clipboard에서 CopyToClipboard가 인식되지 않을 때"
-date:   2023-05-16 12:18:07 +0900
-categories: React
+title: "TIL) react-copy-to-clipboard에서 CopyToClipboard가 인식되지 않을 때"
+date: 2023-05-16 12:18:07 +0900
+tags: React
 ---
 
 텍스트를 복사해 주는 기능을 만들기 위해서 react-copy-to-clipboard를 설치했다.

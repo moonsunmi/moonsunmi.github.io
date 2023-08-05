@@ -121,6 +121,7 @@ css, js, jpg, png와 같은 정적 파일 요청</li>
 <h3 id="aws에-gunicorn-등록하기">AWS에 gunicorn 등록하기</h3>
 
 <p>서비스 파일(/etc/systemd/system/mysite.service)</p>
+
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[Unit]
 Description=gunicorn daemon
 After=network.target
@@ -144,6 +145,7 @@ WantedBy=multi-user.target
 <p>웹서버(Web Server)는 브라우저의 정적 페이지 요청을 처리하고 동적 페이지 요청인 경우 WSGI 서버를 호출하는 역할을 한다.</p>
 
 <p>/etc/nginx/sites-available/mysite</p>
+
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server {
         listen 80;
         server_name 3.37.58.70;
@@ -162,6 +164,7 @@ WantedBy=multi-user.target
 </code></pre></div></div>
 
 <h3 id="서버-관리자">서버 관리자</h3>
+
 <p>서버용 관리자 계정을 만든다.
 Nginx는 범용 웹서버기 때문에 static file의 위치를 잡아 줘야 한다.</p>
 
@@ -182,6 +185,7 @@ Nginx는 범용 웹서버기 때문에 static file의 위치를 잡아 줘야 �
 <h3 id="debug">DEBUG</h3>
 
 <p>config/urls.py</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">django.contrib</span> <span class="kn">import</span> <span class="n">admin</span>
 <span class="kn">from</span> <span class="nn">django.urls</span> <span class="kn">import</span> <span class="n">path</span><span class="p">,</span> <span class="n">include</span>
 <span class="kn">from</span> <span class="nn">pybo.views</span> <span class="kn">import</span> <span class="n">base_views</span>
@@ -199,9 +203,11 @@ Nginx는 범용 웹서버기 때문에 static file의 위치를 잡아 줘야 �
 <span class="n">handler404</span> <span class="o">=</span> <span class="s">'common.views.page_not_found'</span>
 
 </code></pre></div></div>
+
 <p>404 오류가 발생하면 common/views.py 파일의 page_not_found 함수가 호출된다.</p>
 
 <p>common/views.py</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">page_not_found</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">exception</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s">'common/404.html'</span><span class="p">,</span> <span class="p">{})</span>
 </code></pre></div></div>
@@ -212,7 +218,7 @@ Nginx는 범용 웹서버기 때문에 static file의 위치를 잡아 줘야 �
 
 <p>보통 운영 환경에서는 오류 식별을 위해 로그 파일을 사용한다.</p>
 
-<p>로그 레벨은 다음과 같이 5단계로 구성된다. 
+<p>로그 레벨은 다음과 같이 5단계로 구성된다.
 1단계 DEBUG: 디버깅 목적으로 사용
 2단계 INFO: 일반 정보를 출력할 목적으로 사용
 3단계 WARNING: 경고 정보를 출력할 목적으로(작은 문제) 사용
@@ -226,7 +232,6 @@ Nginx는 범용 웹서버기 때문에 static file의 위치를 잡아 줘야 �
 <h2 id="점프투장고-리뷰">점프투장고 리뷰</h2>
 
 <p>점프투 시리즈, 박응용 저자의 책답게 친절하게 써 있다. 설명이 조금 부족하다고 느낄 순 있지만 장고로 웹 프로그래밍을 처음 경험해 봐야 하는 사람에게는 막히지 않게 실습이 잘 진행되는 게 우선인 것 같다. 그 목적을 충분히 달성한 좋은 책이었다.</p>
-
 
 </div>
 
@@ -249,7 +254,7 @@ Nginx는 범용 웹서버기 때문에 static file의 위치를 잡아 줘야 �
 
     <footer>
   <span>
-    &copy; <time datetime="2023-08-05 10:07:13 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-08-05 14:34:20 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 

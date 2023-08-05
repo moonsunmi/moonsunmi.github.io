@@ -68,6 +68,7 @@
   </div>
 
   <p>요청 헤더를 지정해서 보내고 싶다면 ulr 인자에 Request 객체를 지정한다.</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span><span class="p">,</span> <span class="n">Request</span>
 <span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">urlencode</span>
 
@@ -156,6 +157,7 @@
 <p>urllib.request 구글 메인 화면의 이미지 가져오는 예제. 공부하면서 기록할 만한 내용은 주석으로 달았다.</p>
 
 <p>parse_image.py</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span>
 <span class="kn">from</span> <span class="nn">html.parser</span> <span class="kn">import</span> <span class="n">HTMLParser</span>
 
@@ -195,6 +197,7 @@
 </code></pre></div></div>
 
 <p>같은 코드를 외부 라이브러리인 requests와 beautifulsoup4로 작성한 것(부록 A)</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">requests</span>
 <span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
 
@@ -208,11 +211,11 @@
 
 <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
    <span class="n">url</span> <span class="o">=</span> <span class="s">'http://www.google.co.kr'</span>
-  
+
    <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="p">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
    <span class="n">charset</span> <span class="o">=</span> <span class="n">res</span><span class="p">.</span><span class="n">encoding</span>
    <span class="n">data</span> <span class="o">=</span> <span class="n">res</span><span class="p">.</span><span class="n">content</span><span class="p">.</span><span class="n">decode</span><span class="p">(</span><span class="n">charset</span><span class="p">)</span>
-  
+
    <span class="n">data_set</span> <span class="o">=</span> <span class="n">parse_image</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
    <span class="k">print</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">&gt;&gt;&gt;&gt;&gt;&gt;&gt; Fetch Images from'</span><span class="p">,</span> <span class="n">url</span><span class="p">)</span>
    <span class="k">print</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_set</span><span class="p">))</span>
@@ -234,6 +237,7 @@
 </ul>
 
 <p>http.client GET 방식으로</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">http.client</span> <span class="kn">import</span> <span class="n">HTTPConnection</span>
 
 <span class="n">host</span> <span class="o">=</span> <span class="s">'www.example.com'</span>  <span class="c1"># http:// 붙이면 오류가 발생한다.
@@ -258,6 +262,7 @@
 </code></pre></div></div>
 
 <p>http.client HEAD 방식으로</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">http.client</span> <span class="kn">import</span> <span class="n">HTTPConnection</span>
 
 <span class="n">conn</span> <span class="o">=</span> <span class="n">HTTPConnection</span><span class="p">(</span><span class="s">'www.example.com'</span><span class="p">)</span>
@@ -271,6 +276,7 @@
 </code></pre></div></div>
 
 <p>http.client 모듈을 사용하여 POST 메서드로 요청 보내기</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">http.client</span> <span class="kn">import</span> <span class="n">HTTPConnection</span>
 <span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">urlencode</span>
 
@@ -297,6 +303,7 @@
 </code></pre></div></div>
 
 <p>http.client 모듈 사용하여 PUT 메서드로 요청 보내기</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">http.client</span> <span class="kn">import</span> <span class="n">HTTPConnection</span>
 <span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">urlencode</span>
 
@@ -435,6 +442,7 @@
 <p>웹 서버의 역할: http 통신에서 클라이언트의 요청을 받고 이를 처리하여 결과를 되돌려주는 것</p>
 
 <p>간단하지만, 웹 서버를 만드는 가장 기본적인 방법을 따른 것</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">http.server</span> <span class="kn">import</span> <span class="n">HTTPServer</span><span class="p">,</span> <span class="n">BaseHTTPRequestHandler</span>
 
 <span class="k">class</span> <span class="nc">MyHandler</span><span class="p">(</span><span class="n">BaseHTTPRequestHandler</span><span class="p">):</span>
@@ -456,6 +464,7 @@
 <p><code class="language-plaintext highlighter-rouge">HTTPServer</code>와 <code class="language-plaintext highlighter-rouge">BaseHTTPRequestHandler</code>가 기반이 되는 클래스. HTTP 프로토콜을 처리해 주는 기능이 있어서 이 클래스들을 상속받으면 관련 로직을 코딩하지 않아도 된다.</p>
 
 <p>CGI 웹 서버용 CGI 스크립트</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">cgi</span>
 
 <span class="n">form</span> <span class="o">=</span> <span class="n">cgi</span><span class="p">.</span><span class="n">FieldStorage</span><span class="p">()</span>  <span class="c1"># FieldStorage 클래스의 인스턴스를 생성해야 한다.
@@ -473,6 +482,7 @@
 </code></pre></div></div>
 
 <p>CGI 웹 서버 시험용 클라이언트</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span>
 <span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">urlencode</span>
 
@@ -495,7 +505,6 @@
 <p>모든 HTTP 웹 서버는 BaseHTTPServer 모듈의 HTTPServer 클래스를 사용하여 작성된다.
 웹 서버에 사용되는 핸들러는 BaseHTTPServer 모듈의 BaseHTTPRequestHandler를 상속 받아 작성</p>
 
-
 </div>
 
 
@@ -517,7 +526,7 @@
 
     <footer>
   <span>
-    &copy; <time datetime="2023-08-05 10:07:13 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-08-05 14:34:20 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 

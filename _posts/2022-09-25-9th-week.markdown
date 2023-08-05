@@ -2,7 +2,7 @@
 layout: post
 title: "주경야독학) 9주차 - 공부의 방향을 잡기 위해 헤매던 한 주"
 date: 2022-09-25 22:34:31 +0900
-categories: week-report
+tags: week-report
 ---
 
 ## 이번주 공부한 것들

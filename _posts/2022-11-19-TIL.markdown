@@ -2,7 +2,7 @@
 layout: post
 title: "TIL) 뽀모 프로젝트 - 컴포넌트&커스텀훅 패턴 적용"
 date: 2022-11-19 12:18:07 +0900
-categories: react
+tags: React
 ---
 
 ### 파일 구조

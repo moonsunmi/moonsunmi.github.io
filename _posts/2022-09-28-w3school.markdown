@@ -2,7 +2,7 @@
 layout: post
 title: "w3school CSS"
 date: 2022-09-28 22:18:07 +0900
-categories: HTML+CSS
+tags: HTML+CSS
 ---
 
 ### CSS background

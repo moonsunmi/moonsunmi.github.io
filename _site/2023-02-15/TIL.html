@@ -10,8 +10,8 @@
 <meta property="og:title" content="TIL) DRF - 다양한 뷰" />
 <meta name="author" content="Sunmi Moon" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="함수 기반 뷰 함수 기반 뷰(Function Based View, FBV) + 데코레이터" />
-<meta property="og:description" content="함수 기반 뷰 함수 기반 뷰(Function Based View, FBV) + 데코레이터" />
+<meta name="description" content="함수 기반 뷰" />
+<meta property="og:description" content="함수 기반 뷰" />
 <link rel="canonical" href="http://localhost:4000/2023-02-15/TIL" />
 <meta property="og:url" content="http://localhost:4000/2023-02-15/TIL" />
 <meta property="og:site_name" content="주경야독학) 개발공부로그" />
@@ -20,7 +20,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="TIL) DRF - 다양한 뷰" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2023-02-15T12:18:07+09:00","datePublished":"2023-02-15T12:18:07+09:00","description":"함수 기반 뷰 함수 기반 뷰(Function Based View, FBV) + 데코레이터","headline":"TIL) DRF - 다양한 뷰","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2023-02-15/TIL"},"url":"http://localhost:4000/2023-02-15/TIL"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2023-02-15T12:18:07+09:00","datePublished":"2023-02-15T12:18:07+09:00","description":"함수 기반 뷰","headline":"TIL) DRF - 다양한 뷰","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2023-02-15/TIL"},"url":"http://localhost:4000/2023-02-15/TIL"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -68,6 +68,7 @@
   </div>
 
   <h3 id="함수-기반-뷰">함수 기반 뷰</h3>
+
 <p>함수 기반 뷰(Function Based View, FBV) + 데코레이터</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">@</span><span class="n">api_view</span><span class="p">([</span><span class="s">'GET'</span><span class="p">,</span> <span class="s">'POST'</span><span class="p">])</span>
@@ -83,7 +84,7 @@
             <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">serializer</span><span class="p">.</span><span class="n">data</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="p">.</span><span class="n">HTTP_201_CREATED</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">Response</span><span class="p">(</span><span class="n">serializer</span><span class="p">.</span><span class="n">errors</span><span class="p">,</span> <span class="n">status</span><span class="o">=</span><span class="n">status</span><span class="p">.</span><span class="n">HTTP_400_BAD_REQUEST</span><span class="p">)</span>
 
-    
+
 <span class="o">@</span><span class="n">api_view</span><span class="p">([</span><span class="s">'GET'</span><span class="p">])</span>
 <span class="k">def</span> <span class="nf">bookAPI</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">ISBN</span><span class="p">):</span>
     <span class="n">book</span> <span class="o">=</span> <span class="n">get_object_or_404</span><span class="p">(</span><span class="n">Book</span><span class="p">,</span> <span class="n">ISBN</span><span class="o">=</span><span class="n">ISBN</span><span class="p">)</span>
@@ -92,6 +93,7 @@
 </code></pre></div></div>
 
 <h3 id="클래스-기반-뷰">클래스 기반 뷰</h3>
+
 <p>클래스 기반 뷰(Class Based View, CBV) + APIView 상속</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">BooksAPI</span><span class="p">(</span><span class="n">APIView</span><span class="p">):</span>
@@ -116,6 +118,7 @@
 </code></pre></div></div>
 
 <h3 id="mixin">mixin</h3>
+
 <p><code class="language-plaintext highlighter-rouge">request</code>의 메서드(<code class="language-plaintext highlighter-rouge">get</code>, <code class="language-plaintext highlighter-rouge">post</code>)마다 반복되는 시리얼라이즈 코드를 클래스 레벨에서 하도록 한다.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">BooksAPIMixins</span><span class="p">(</span><span class="n">mixins</span><span class="p">.</span><span class="n">ListModelMixin</span><span class="p">,</span> <span class="n">mixins</span><span class="p">.</span><span class="n">CreateModelMixin</span><span class="p">,</span> <span class="n">generics</span><span class="p">.</span><span class="n">GenericAPIView</span><span class="p">):</span>
@@ -145,6 +148,7 @@
 </code></pre></div></div>
 
 <h2 id="generics">generics</h2>
+
 <p>mixin을 여러 개 상속받는 대신, 일종의 mixin 조합을 사용한다.</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">BooksAPIGenerics</span><span class="p">(</span><span class="n">generics</span><span class="p">.</span><span class="n">ListCreateAPIView</span><span class="p">):</span>
@@ -161,6 +165,7 @@
 <h3 id="viewset--router">ViewSet &amp; Router</h3>
 
 <p>Create, Retrieve, Update, Destroy, List 기능을 다 갖춘 ModelViewSet.</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">BookViewSet</span><span class="p">(</span><span class="n">viewsets</span><span class="p">.</span><span class="n">ModelViewSet</span><span class="p">):</span>
     <span class="n">queryset</span> <span class="o">=</span> <span class="n">Book</span><span class="p">.</span><span class="n">objects</span><span class="p">.</span><span class="nb">all</span><span class="p">()</span>
     <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">BookSerializer</span>
@@ -194,7 +199,7 @@
 
     <footer>
   <span>
-    &copy; <time datetime="2023-08-05 10:07:13 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-08-05 14:34:20 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 

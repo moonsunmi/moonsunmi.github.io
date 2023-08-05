@@ -68,6 +68,7 @@
   </div>
 
   <p>코드 8-4</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">coordinate_2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 <span class="n">triangle_2</span> <span class="o">=</span> <span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 <span class="n">rectangle_2</span> <span class="o">=</span> <span class="p">{</span>
@@ -78,6 +79,7 @@
 </code></pre></div></div>
 
 <p>코드 8-5</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 오류가 발생하는 예제
 </span><span class="kn">import</span> <span class="nn">math</span>
 
@@ -114,6 +116,7 @@
 <p>동일한 범주에 속하는 데이터의 유형을 정의하고 그 구조를 동일하게 구성해야 한다.</p>
 
 <p>코드 8-6</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 유형: '좌표'는 다음 키를 가지는 사전이다.
 #   * 'x': x축의 위치 (정수)
 #   * 'y': y축의 위치 (정수)
@@ -178,6 +181,7 @@
 </code></pre></div></div>
 
 <p>코드 8-9</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">math</span>
 
 
@@ -289,6 +293,7 @@
 데이터 유형마다 그에 맞는 함수를 별도로 정의하되, 그 함수가 그 데이터 유형에서만 실행될 수 있도록 강제하자</p>
 
 <p>연습문제 8-1</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 체스말 데이터 유형 정의하기
 #   'x': x축의 위치
 #   'y': y축의 위치
@@ -310,6 +315,7 @@
 </code></pre></div></div>
 
 <p>연습문제 8-2</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 체스말 데이터 유형 정의하기
 #   'x': x축의 위치
 #   'y': y축의 위치
@@ -350,18 +356,19 @@
 
 <p>컴퓨터에서 정보는 메모리 위에 올린 후 처리한다. 메모리 위에 올려둔 정보를 의미 있는 덩어리로 묶어 두기 위한 단위가 필요하다. 파이썬에서는 객체 단위로 메모리 위의 정보를 관리한다.</p>
 
-<p>객체에는 값, 유형, 정체성이라는 세 특성이 있다. 
+<p>객체에는 값, 유형, 정체성이라는 세 특성이 있다.
 값은 메모리에 기록된 내용이다.
-유형은 데이터의 종류로, 유형에 따라 그 값을 어떻게 읽고 다루어야 할지가 결정된다. 
+유형은 데이터의 종류로, 유형에 따라 그 값을 어떻게 읽고 다루어야 할지가 결정된다.
 정체성은 각각의 객체를 식별하기 위한 고유번호로, 객체가 메모리 속에서 위치한 주소 값이기도 하다.</p>
 
 <p>동일한 객체를 다른 변수에 대입하면, 두 변수가 같은 객체를 가리킨다.</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">year</span> <span class="o">=</span> <span class="mi">1789</span>
 <span class="n">same_year</span> <span class="o">=</span> <span class="n">year</span>
 <span class="nb">id</span><span class="p">(</span><span class="n">year</span><span class="p">)</span> <span class="o">==</span> <span class="nb">id</span><span class="p">(</span><span class="n">same_year</span><span class="p">)</span>  <span class="o">=&gt;</span> <span class="bp">True</span>
 </code></pre></div></div>
 
-<p>객체가 어떤 클래스에 속할 때, 그  객체를 해당 클래스의 인스턴스라 한다. 1,2,3은 모두 int 클래스의 인스턴스다.</p>
+<p>객체가 어떤 클래스에 속할 때, 그 객체를 해당 클래스의 인스턴스라 한다. 1,2,3은 모두 int 클래스의 인스턴스다.</p>
 
 <p>검사하려는 객체와 클래스가 정해져 있을 때, <code class="language-plaintext highlighter-rouge">isinstance()</code> 함수로 객체가 그 클래스에 속하는지 검사할 수 있다. 한 객체는 동시에 여러 클래스의 인스턴스일 수 있다.</p>
 
@@ -374,11 +381,12 @@
 <p>연습문제 8-3</p>
 
 <p>a. 아니다. 값이 같을 뿐 객체가 같으려면 정체성이 같아야 한다.
-b. 아니다. 유형이 같을 뿐. 
+b. 아니다. 유형이 같을 뿐.
 c. 맞다.
 d. 아니다. 같은 객체를 가리켜야 함.</p>
 
 <p>연습문제 8-4</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">()</span>
 <span class="p">{}</span>
 <span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">({</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)}))</span>
@@ -390,6 +398,7 @@ d. 아니다. 같은 객체를 가리켜야 함.</p>
 <p>클래스 정의하기</p>
 
 <p>코드 8-22</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Cake</span><span class="p">:</span>
    <span class="s">"""케이크를 나타내는 클래스"""</span>
 
@@ -407,6 +416,7 @@ d. 아니다. 같은 객체를 가리켜야 함.</p>
 클래스의 속성은 클래스 객체뿐 아니라 그 클래스의 모든 인스턴스가 공유한다.</p>
 
 <p>코드 8-23</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Cake</span><span class="p">:</span>
    <span class="s">"""케이크를 나타내는 클래스"""</span>
 
@@ -421,6 +431,7 @@ d. 아니다. 같은 객체를 가리켜야 함.</p>
 </code></pre></div></div>
 
 <p>코드 8-24</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">​​</span><span class="k">class</span> <span class="nc">Cake</span><span class="p">:</span>
    <span class="s">"""케이크를 나타내는 클래스"""</span>
 
@@ -446,6 +457,7 @@ d. 아니다. 같은 객체를 가리켜야 함.</p>
 <p>일반적으로 클래스의 속성은 class 문에서 확정하고, 나중에는 수정하지 않는 게 좋다. 자주 변경되어야 하는 속성이 있다면, 그 속성은 클래스가 아니라 인스턴스 속에 정의되어야 할 가능성이 높다.</p>
 
 <p>코드 8-25</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Cake</span><span class="p">:</span>
    <span class="s">"""케이크를 나타내는 클래스"""</span>
 
@@ -463,6 +475,7 @@ d. 아니다. 같은 객체를 가리켜야 함.</p>
 </code></pre></div></div>
 
 <p>코드 8-26</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Cake</span><span class="p">:</span>
    <span class="s">"""케이크를 나타내는 클래스"""</span>
 
@@ -484,6 +497,7 @@ d. 아니다. 같은 객체를 가리켜야 함.</p>
 <p><code class="language-plaintext highlighter-rouge">dir()</code> 함수는 파이썬의 기본 데이터 유형이나 다른 사람이 정의한 클래스에 어떤 속성이 있는지 확인할 수 있게 해준다.</p>
 
 <p>코드 8-27</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Cake</span><span class="p">:</span>
    <span class="s">"""케이크를 나타내는 클래스"""</span>
 
@@ -501,6 +515,7 @@ d. 아니다. 같은 객체를 가리켜야 함.</p>
 대부분의 메서드는 클래스 공용 속성으로 정의한다. 데이터 유형을 다루는 방법은 데이터 유형에 따라 정하기 때문이다.</p>
 
 <p>코드 8-29</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Cake</span><span class="p">:</span>
    <span class="s">"""케이크를 나타낸는 클래스"""</span>
    <span class="n">coat</span> <span class="o">=</span> <span class="s">'생크림'</span>
@@ -513,6 +528,7 @@ d. 아니다. 같은 객체를 가리켜야 함.</p>
 </code></pre></div></div>
 
 <p>코드 8-30</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Cake</span><span class="p">:</span>
    <span class="s">"""케이크를 나타낸는 클래스"""</span>
    <span class="n">coat</span> <span class="o">=</span> <span class="s">'생크림'</span>
@@ -550,7 +566,7 @@ d. 아니다. 같은 객체를 가리켜야 함.</p>
 
     <footer>
   <span>
-    &copy; <time datetime="2023-08-05 10:07:13 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-08-05 14:34:20 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 

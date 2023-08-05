@@ -2,7 +2,7 @@
 layout: post
 title: "<do-it 자바스크립트 입문> 실전 프로젝트 5~6"
 date: 2022-09-21 22:49:18 +0900
-categories: javascript
+tags: javascript
 ---
 
 ### [실전 5] 로컬 스토리지

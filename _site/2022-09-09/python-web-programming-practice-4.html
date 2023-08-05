@@ -103,6 +103,7 @@ description
 페이지 이동</p>
 
 <h4 id="슬러그slug">슬러그(slug)</h4>
+
 <p>페이지나 포스트를 설명하는 핵심 단어의 집합. 신문, 잡지 등에서 제목을 쓸 때, 중요한 의미를 포함하는 단어만 사용해 제목을 작성하는 방법을 말한다. 웹 개발 분야에서는 콘텐츠 고유 주소로 URL에 사용됨.</p>
 
 <p>reverse() 장고 함수: URL 패턴을 만들어 주는 장고의 내장 함수</p>
@@ -117,6 +118,7 @@ description
 </ul>
 
 <p>DateTimeField의</p>
+
 <ul>
   <li>auto_now_add: 객체가 생성될 때의 시각을 자동으로 기록</li>
   <li>auto_now: 객체가 데이터베이스에 저장될 때의 시각을 자동으로 기록(즉, 변경될 때마다)</li>
@@ -130,7 +132,7 @@ description
 </code></pre></div></div>
 
 <ul>
-  <li>db_table = ‘blog_posts’: 데이터베이스에 저장되는 테이블 이름을 ‘blog_posts’로 저장한다. 디폴트로는 ‘앱명_모델클래스명’을 테이블 명으로 지정한다. 즉, 그대로 두면 blog_post가 되는데, blog_posts로 바꾼 것.</li>
+  <li>db<em>table = ‘blog_posts’: 데이터베이스에 저장되는 테이블 이름을 ‘blog_posts’로 저장한다. 디폴트로는 ‘앱명</em>모델클래스명’을 테이블 명으로 지정한다. 즉, 그대로 두면 blog_post가 되는데, blog_posts로 바꾼 것.</li>
 </ul>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">re_path</span><span class="p">(</span><span class="sa">r</span><span class="s">'^post/(?P&lt;slug&gt;[-\w]+)/$'</span><span class="p">,</span> <span class="n">views</span><span class="p">.</span><span class="n">PostDV</span><span class="p">.</span><span class="n">as_view</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="s">'post_detail'</span><span class="p">),</span>
@@ -159,11 +161,11 @@ description
 </code></pre></div></div>
 
 <p>템플릿 파일에서 URL을 추출하는 문법 2가지</p>
+
 <ul>
   <li>get_absolute_url()</li>
   <li>{% url %}</li>
 </ul>
-
 
 </div>
 
@@ -186,7 +188,7 @@ description
 
     <footer>
   <span>
-    &copy; <time datetime="2023-08-05 10:07:13 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-08-05 14:34:20 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 

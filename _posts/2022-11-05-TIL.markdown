@@ -2,7 +2,7 @@
 layout: post
 title: "TIL) POMO-WEEKLY 프로젝트(타미어 만들기)"
 date: 2022-11-05 12:18:07 +0900
-categories: react
+tags: React
 ---
 
 React는 MVC 등 중에서 뷰만 신경 쓰는 라이브러리이다. 렌더링은 사용자 화면에 뷰를 보여주는 것이다. DOM은 오브젝트로 문서 구조를 표현하는 방법이다.

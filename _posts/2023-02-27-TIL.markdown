@@ -1,15 +1,13 @@
 ---
 layout: post
-title:  "TIL) <파이썬웹프로그래밍:실전편>을 DRF로 실습하기"
-date:   2023-02-27 12:18:07 +0900
-categories: django
+title: "TIL) <파이썬웹프로그래밍:실전편>을 DRF로 실습하기"
+date: 2023-02-27 12:18:07 +0900
+tags: Django
 ---
-
 
 ### model에서 정의한 메서드값은 어떻게 가져오나?
 
-책에서 블로그 앱을 만드는데, ``Post`` 모델은 다음과 같다.
-
+책에서 블로그 앱을 만드는데, `Post` 모델은 다음과 같다.
 
 ```python
 class Post(models.Model):
@@ -51,7 +49,6 @@ class PostDetailSerializer(serializers.ModelSerializer):
                   'modify_dt', 'create_dt', 'absolute_url']
 ```
 
-
 ### ArchiveView는 어떻게 처리하나?
 
 기존의 책에서는 아카이브를 다음과 같이 `django.views.generic.dates`의 [YearArchiveView](https://docs.djangoproject.com/en/4.1/ref/class-based-views/generic-date-based/)를 사용해서 작성했다.
@@ -73,4 +70,3 @@ class PostYearArchiveView(APIView):
         serializer = PostListSerializer(posts, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 ```
-

@@ -2,7 +2,7 @@
 layout: post
 title: "주경야독학) 8주차 - 프런트엔드 공부를 시작하다"
 date: 2022-09-18 22:34:31 +0900
-categories: javascript
+tags: javascript
 ---
 
 프론트엔드를 할지, 백엔드를 할지 정하지도 않았는데 백엔드 공부를 너무 많이 하는 것 같아서 프론트를 공부해 보기로 했다.

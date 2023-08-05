@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "TIL) postgresql permission denied for schema public"
-date:   2023-04-10 12:18:07 +0900
-categories: DB
+title: "TIL) postgresql permission denied for schema public"
+date: 2023-04-10 12:18:07 +0900
+tags: DB
 ---
 
 postgresql의 user를 바꾸게 되었는데, 다음과 같은 에러가 발생했다.

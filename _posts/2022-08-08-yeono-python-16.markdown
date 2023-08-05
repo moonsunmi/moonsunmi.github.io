@@ -1,24 +1,16 @@
 ---
 layout: post
-title:  "연오의 파이썬 공부 16"
-date:   2022-08-08 22:23:28 +0900
-categories: yeono-python
+title: "연오의 파이썬 공부 16"
+date: 2022-08-08 22:23:28 +0900
+tags: yeono-python
 ---
-
-
-
-
-
 
 ## 12장
 
-
 이벤트란 의미 있는 사건을 정의해 둔 것이다. 이벤트를 이용하면 특정한 사건이 일어났을 때 그에 맞는 코드를 실행하도록 준비해 둘 수 있다.
 
-
-
-
 코드 12-3
+
 ```python
 import pygame
 import time
@@ -52,9 +44,8 @@ pygame.display.update()
 time.sleep(3)
 ```
 
-
-
 코드 12-9
+
 ```python
 import pygame
 
@@ -106,10 +97,8 @@ while True:
    pygame.display.update()
 ```
 
-
-
-
 코드 12-11
+
 ```python
 import pygame
 import time
@@ -186,6 +175,3 @@ while True:
    draw_block(screen, GREEN, block_position)
    pygame.display.update()
 ```
-
-
-

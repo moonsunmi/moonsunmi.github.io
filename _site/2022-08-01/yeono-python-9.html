@@ -80,6 +80,7 @@
 </code></pre></div></div>
 
 <p>연습문제 7-2</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">weather_of_9_1</span> <span class="o">=</span> <span class="p">[</span>
    <span class="p">{</span><span class="s">'지역'</span><span class="p">:</span> <span class="s">'경기'</span><span class="p">,</span> <span class="s">'날씨'</span><span class="p">:</span> <span class="s">'맑음'</span><span class="p">,</span> <span class="s">'기온'</span><span class="p">:</span> <span class="mf">27.2</span><span class="p">,</span> <span class="s">'습도'</span><span class="p">:</span> <span class="mf">0.4</span><span class="p">,</span> <span class="s">'강수 확률'</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">},</span>
    <span class="p">{</span><span class="s">'지역'</span><span class="p">:</span> <span class="s">'강원'</span><span class="p">,</span> <span class="s">'날씨'</span><span class="p">:</span> <span class="s">'맑음'</span><span class="p">,</span> <span class="s">'기온'</span><span class="p">:</span> <span class="mf">23.6</span><span class="p">,</span> <span class="s">'습도'</span><span class="p">:</span> <span class="mf">0.6</span><span class="p">,</span> <span class="s">'강수 확률'</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">},</span>
@@ -91,6 +92,7 @@
 </code></pre></div></div>
 
 <p>연습문제 7-3</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pprint</span>
 
 <span class="n">weather_of_9_1</span> <span class="o">=</span> <span class="p">[</span>
@@ -114,6 +116,7 @@
 <p>for 문에 매핑을 그냥 입력하면 키를 순회한다.</p>
 
 <p>코드 7-12</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">drinks</span> <span class="o">=</span> <span class="p">{</span>
    <span class="s">'아메리카노'</span><span class="p">:</span> <span class="mi">2500</span><span class="p">,</span>
    <span class="s">'카페라테'</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span>
@@ -128,6 +131,7 @@
 <p>사전의 키-값 쌍의 시퀀스를 구하는 <code class="language-plaintext highlighter-rouge">item()</code> 메서드</p>
 
 <p>코드 7-13</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">drinks</span> <span class="o">=</span> <span class="p">{</span>
    <span class="s">'아메리카노'</span><span class="p">:</span> <span class="mi">2500</span><span class="p">,</span>
    <span class="s">'카페라테'</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span>
@@ -140,6 +144,7 @@
 </code></pre></div></div>
 
 <p>코드 7-16</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">board</span> <span class="o">=</span> <span class="p">[</span>
    <span class="p">[[</span><span class="s">'black'</span><span class="p">,</span> <span class="s">'룩'</span><span class="p">],</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">],</span>
    <span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="p">[</span><span class="s">'black'</span><span class="p">,</span> <span class="s">'킹'</span><span class="p">],</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">],</span>
@@ -161,6 +166,7 @@
 </code></pre></div></div>
 
 <p>코드 7-16 체스말에 색깔만 구별한 코드</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">board</span> <span class="o">=</span> <span class="p">[</span>
    <span class="p">[[</span><span class="s">'black'</span><span class="p">,</span> <span class="s">'룩'</span><span class="p">],</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">],</span>
    <span class="p">[</span><span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="p">[</span><span class="s">'black'</span><span class="p">,</span> <span class="s">'킹'</span><span class="p">],</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">,</span> <span class="bp">None</span><span class="p">],</span>
@@ -187,6 +193,7 @@
 <p>여러 컬렉션을 나란히 순회하고 싶다면, zip 함수 이용하기</p>
 
 <p>코드 7-18</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">seasons</span> <span class="o">=</span> <span class="p">[</span><span class="s">'봄'</span><span class="p">,</span> <span class="s">'여름'</span><span class="p">,</span> <span class="s">'가을'</span><span class="p">,</span> <span class="s">'겨울'</span><span class="p">]</span>
 <span class="n">mountains</span> <span class="o">=</span> <span class="p">[</span><span class="s">'금강산'</span><span class="p">,</span> <span class="s">'봉래산'</span><span class="p">,</span> <span class="s">'풍악산'</span><span class="p">,</span> <span class="s">'개골산'</span><span class="p">]</span>
 
@@ -194,17 +201,18 @@
    <span class="k">for</span> <span class="n">mountain</span> <span class="ow">in</span> <span class="n">mountains</span><span class="p">:</span>
        <span class="k">print</span><span class="p">(</span><span class="n">season</span> <span class="o">+</span> <span class="s">'에는 '</span> <span class="o">+</span> <span class="n">mountain</span><span class="p">)</span>
 
-      
+
 <span class="n">코드</span> <span class="mi">7</span><span class="o">-</span><span class="mi">20</span>
 <span class="n">seasons</span> <span class="o">=</span> <span class="p">[</span><span class="s">'봄'</span><span class="p">,</span> <span class="s">'여름'</span><span class="p">,</span> <span class="s">'가을'</span><span class="p">,</span> <span class="s">'겨울'</span><span class="p">]</span>
 <span class="n">mountains</span> <span class="o">=</span> <span class="p">[</span><span class="s">'금강산'</span><span class="p">,</span> <span class="s">'봉래산'</span><span class="p">,</span> <span class="s">'풍악산'</span><span class="p">,</span> <span class="s">'개골산'</span><span class="p">]</span>
 
 <span class="k">for</span> <span class="n">season</span><span class="p">,</span> <span class="n">mountain</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">seasons</span><span class="p">,</span> <span class="n">mountains</span><span class="p">):</span>
    <span class="k">print</span><span class="p">(</span><span class="n">season</span> <span class="o">+</span> <span class="s">'에는 '</span> <span class="o">+</span> <span class="n">mountain</span><span class="p">)</span>
-  
+
 </code></pre></div></div>
 
 <p>연습문제 7-4</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">happiness</span> <span class="o">=</span> <span class="p">{</span>
    <span class="s">'호주'</span><span class="p">:</span> <span class="mf">7.95</span><span class="p">,</span>
    <span class="s">'노르웨이'</span><span class="p">:</span> <span class="mf">7.9</span><span class="p">,</span>
@@ -219,6 +227,7 @@
 </span></code></pre></div></div>
 
 <p>연습문제 7-5</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">천간</span> <span class="o">=</span> <span class="p">[</span><span class="s">'갑'</span><span class="p">,</span> <span class="s">'을'</span><span class="p">,</span> <span class="s">'병'</span><span class="p">,</span> <span class="s">'정'</span><span class="p">,</span> <span class="s">'무'</span><span class="p">,</span> <span class="s">'기'</span><span class="p">,</span> <span class="s">'경'</span><span class="p">,</span> <span class="s">'신'</span><span class="p">,</span> <span class="s">'임'</span><span class="p">,</span> <span class="s">'계'</span><span class="p">]</span>
 <span class="n">지지</span> <span class="o">=</span> <span class="p">[</span><span class="s">'자'</span><span class="p">,</span> <span class="s">'축'</span><span class="p">,</span> <span class="s">'인'</span><span class="p">,</span> <span class="s">'묘'</span><span class="p">,</span> <span class="s">'진'</span><span class="p">,</span> <span class="s">'사'</span><span class="p">,</span> <span class="s">'오'</span><span class="p">,</span> <span class="s">'미'</span><span class="p">,</span> <span class="s">'신'</span><span class="p">,</span> <span class="s">'유'</span><span class="p">,</span> <span class="s">'술'</span><span class="p">,</span> <span class="s">'해'</span><span class="p">]</span>
 
@@ -229,6 +238,7 @@
 </code></pre></div></div>
 
 <p>연습문제 7-6</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">plus_elements</span><span class="p">(</span><span class="n">seq1</span><span class="p">,</span> <span class="n">seq2</span><span class="p">):</span>
    <span class="s">"""두 개의 시퀀스를 전달받은 후 각 요소를 순서대로 합한 리스트를 반환한다.
    ex) (1 , 2, 3) [4, 5, 6]   =&gt;    [5, 7, 9] """</span>
@@ -248,6 +258,7 @@
 <p>새 리스트를 만들어 요소 수정해 넣기</p>
 
 <p>코드 7-22</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">prices</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2500</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">1800</span><span class="p">,</span> <span class="mi">3500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">2500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">]</span>
 <span class="n">new_price</span> <span class="o">=</span> <span class="p">[]</span>
 
@@ -270,11 +281,13 @@
 <p>조건제시법은 기존에 정의된 컬렉션이 있어야 한다.</p>
 
 <p>코드 7-23</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="n">e</span> <span class="o">*</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]]</span>
 <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
 </code></pre></div></div>
 
 <p>코드 7-24</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">prices</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2500</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">1800</span><span class="p">,</span> <span class="mi">3500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">2500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">]</span>
 <span class="k">print</span><span class="p">([</span><span class="n">price</span> <span class="o">+</span> <span class="mi">50</span> <span class="k">for</span> <span class="n">price</span> <span class="ow">in</span> <span class="n">prices</span><span class="p">])</span>
 </code></pre></div></div>
@@ -284,6 +297,7 @@
 <p>리스트 조건제시법은 파이썬 문법에 정의된 ‘식’이고, map은 일반적인 ‘함수’이다.</p>
 
 <p>코드 7-25</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">prices</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2500</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">1800</span><span class="p">,</span> <span class="mi">3500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">2500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">]</span>
 <span class="k">def</span> <span class="nf">plus50</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
    <span class="k">return</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">50</span>
@@ -292,11 +306,13 @@
 </code></pre></div></div>
 
 <p>코드 7- 26</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">prices</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2500</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">1800</span><span class="p">,</span> <span class="mi">3500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">2500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">]</span>
 <span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">a</span><span class="p">:</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">50</span><span class="p">,</span> <span class="n">prices</span><span class="p">)))</span>
 </code></pre></div></div>
 
 <p>코드 7-27</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">prices</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2500</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">1800</span><span class="p">,</span> <span class="mi">3500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">2500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">]</span>
 <span class="n">total_price</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">num_items</span> <span class="o">=</span> <span class="mi">0</span>
@@ -309,19 +325,21 @@
 </code></pre></div></div>
 
 <p>코드 7-28</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">prices</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2500</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">1800</span><span class="p">,</span> <span class="mi">3500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">2500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">]</span>
 <span class="n">most_expensive</span> <span class="o">=</span> <span class="mi">0</span>
 
 <span class="k">for</span> <span class="n">price</span> <span class="ow">in</span> <span class="n">prices</span><span class="p">:</span>
    <span class="k">if</span> <span class="n">most_expensive</span> <span class="o">&lt;</span> <span class="n">price</span><span class="p">:</span>
        <span class="n">most_expensive</span> <span class="o">=</span> <span class="n">price</span>
-      
+
 <span class="k">print</span><span class="p">(</span><span class="n">most_expensive</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>컬렉션이 요소를 원하는 조건에 따라 선별하는 방법</p>
 
 <p>코드 7-29</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">prices</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2500</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">1800</span><span class="p">,</span> <span class="mi">3500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">2500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">]</span>
 <span class="n">filtered_prices</span> <span class="o">=</span> <span class="p">[]</span>
 
@@ -333,12 +351,14 @@
 </code></pre></div></div>
 
 <p>코드 7-30</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">prices</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2500</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">1800</span><span class="p">,</span> <span class="mi">3500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">2500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">]</span>
 <span class="k">print</span><span class="p">([</span><span class="n">price</span> <span class="k">for</span> <span class="n">price</span> <span class="ow">in</span> <span class="n">prices</span><span class="p">])</span>
 <span class="k">print</span><span class="p">([</span><span class="n">price</span> <span class="k">for</span> <span class="n">price</span> <span class="ow">in</span> <span class="n">prices</span> <span class="k">if</span> <span class="n">price</span> <span class="o">&lt;=</span> <span class="mi">2000</span><span class="p">])</span>
 </code></pre></div></div>
 
 <p>코드 7-31</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">prices</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2500</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">1800</span><span class="p">,</span> <span class="mi">3500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">3000</span><span class="p">,</span> <span class="mi">2500</span><span class="p">,</span> <span class="mi">2000</span><span class="p">]</span>
 <span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">price</span><span class="p">:</span> <span class="n">price</span> <span class="o">&lt;=</span> <span class="mi">2000</span><span class="p">,</span> <span class="n">prices</span><span class="p">)))</span>
 </code></pre></div></div>
@@ -348,6 +368,7 @@
 <p>거품정렬 진화과정…</p>
 
 <p>코드 7-32</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">coll</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 
 <span class="k">if</span> <span class="n">coll</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">coll</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
@@ -356,6 +377,7 @@
 </code></pre></div></div>
 
 <p>코드 7-33</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">coll</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
 
 <span class="k">if</span> <span class="n">coll</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">coll</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
@@ -368,6 +390,7 @@
 </code></pre></div></div>
 
 <p>코드 7-34</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">coll</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
 
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">coll</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
@@ -392,10 +415,12 @@
 <p><code class="language-plaintext highlighter-rouge">sorted()</code> 함수 사용하기</p>
 
 <p>코드 7-36</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>
 </code></pre></div></div>
 
 <p>코드 7-37</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">coll</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
 <span class="k">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">coll</span><span class="p">))</span>
 <span class="k">print</span><span class="p">(</span><span class="n">coll</span><span class="p">)</span>
@@ -405,12 +430,14 @@
 </code></pre></div></div>
 
 <p>코드 7-38</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">([</span><span class="s">'월'</span><span class="p">,</span> <span class="s">'화'</span><span class="p">,</span> <span class="s">'수'</span><span class="p">,</span> <span class="s">'목'</span><span class="p">,</span> <span class="s">'금'</span><span class="p">]))</span>
 </code></pre></div></div>
 
 <p><code class="language-plaintext highlighter-rouge">sorted()</code> 함수가 반환하는 결과는 리스트이다.</p>
 
 <p>코드 7-39</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">([</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
 <span class="k">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="s">'안녕하세요'</span><span class="p">))</span>
 <span class="k">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">({</span><span class="s">'사자'</span><span class="p">,</span> <span class="s">'박쥐'</span><span class="p">,</span> <span class="s">'늑대'</span><span class="p">,</span> <span class="s">'곰'</span><span class="p">}))</span>
@@ -418,6 +445,7 @@
 
 <p>내림차순 정렬
 코드 7-40</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">]))</span>
 <span class="k">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
 </code></pre></div></div>
@@ -425,6 +453,7 @@
 <p>key 매개변수로 각 요소를 가공한 뒤 정렬하기</p>
 
 <p>코드 7-41</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pprint</span>
 <span class="k">print</span><span class="p">(</span><span class="nb">sorted</span><span class="p">([</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">],</span> <span class="n">key</span><span class="o">=</span><span class="nb">abs</span><span class="p">))</span>
 
@@ -446,10 +475,12 @@
 </code></pre></div></div>
 
 <p>연습문제 7-7 모범답안 방식으로 수정</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">comprehension_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span> <span class="o">*</span> <span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
 </code></pre></div></div>
 
 <p>연습문제 7-8</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">comprehension_list</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
    <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">n</span>
 
@@ -471,6 +502,7 @@
 </code></pre></div></div>
 
 <p>연습문제 7-10</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">longest</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
    <span class="s">"""여러 개의 시퀀스를 입력받아, 그중 가장 많은 요소를 가진 시퀀스를 반환한다."""</span>
 
@@ -490,7 +522,6 @@
 # def longest(*sequences):
 #     return max(*sequences, key=len)
 </span></code></pre></div></div>
-
 
 </div>
 
@@ -513,7 +544,7 @@
 
     <footer>
   <span>
-    &copy; <time datetime="2023-08-05 10:07:13 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-08-05 14:34:20 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 

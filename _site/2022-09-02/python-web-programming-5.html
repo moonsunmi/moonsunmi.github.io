@@ -75,10 +75,12 @@ ORM 방식에서는 관련 변수 메소드를 추가적으로 정의할 수 있
 <p>테이블의 컬럼(장고에서는 테이블의 필드 또는 모델 필드라고 함)은 모델 클래스의 속성으로 정의, 테이블과 관련된 함수는 모델 클래스의 메소드로 정의</p>
 
 <h4 id="마이그레이션">마이그레이션</h4>
+
 <p>데이터베이스의 테이블 및 필드에서 생긴 변경사항을 알려주는 정보이다.
 makemigrations 명령으로 polls/migrations 디렉토리 하위에 마이그레이션 파일들이 생긴다.</p>
 
 <h4 id="import-문법">import 문법</h4>
+
 <p>polls
 ㄴ models.py
 ㄴ admin.py</p>
@@ -102,14 +104,18 @@ makemigrations 명령으로 polls/migrations 디렉토리 하위에 마이그레
 <p>index.html 파일을 작성하면서, 어떤 변수가 필요한지 확인하는 게 중요하다. 그 변수들은 view 함수에서 context로 받아온다.0</p>
 
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"{% url 'polls:vote' question.id %}"</span> <span class="na">method=</span><span class="s">"post"</span><span class="nt">&gt;</span>
-  {% csrf_token %}
-  {% for choice in question.choice_set.all %}
-    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"radio"</span> <span class="na">name=</span><span class="s">"choice"</span> <span class="na">id=</span><span class="s">"choice{{ forloop.counter }}"</span> <span class="na">value=</span><span class="s">"{{ choice.id }}"</span> <span class="nt">/&gt;</span>
-    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"choice{{ forloop.counter }}"</span><span class="nt">&gt;</span>{{ choice.choice_text }}<span class="nt">&lt;/label&gt;&lt;br</span> <span class="nt">/&gt;</span>
+  {% csrf_token %} {% for choice in question.choice_set.all %}
+  <span class="nt">&lt;input</span>
+    <span class="na">type=</span><span class="s">"radio"</span>
+    <span class="na">name=</span><span class="s">"choice"</span>
+    <span class="na">id=</span><span class="s">"choice{{ forloop.counter }}"</span>
+    <span class="na">value=</span><span class="s">"{{ choice.id }}"</span>
+  <span class="nt">/&gt;</span>
+  <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">"choice{{ forloop.counter }}"</span><span class="nt">&gt;</span>{{ choice.choice_text }}<span class="nt">&lt;/label</span>
+  <span class="nt">&gt;&lt;br</span> <span class="nt">/&gt;</span>
   {% endfor %}
-<span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="na">value=</span><span class="s">"Vote"</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="na">value=</span><span class="s">"Vote"</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;/form&gt;</span>
-
 </code></pre></div></div>
 
 <p>폼 데이터는 POST 방식으로 polls:vote URL로 전송된다. vote() 뷰 함수에서 request.POST[‘choice’] 구문으로 액세스한다. <code class="language-plaintext highlighter-rouge">&lt;input&gt;</code> 태그의 name과 value 속성값들이 request.POST 사전에 key, value로 이용된다.</p>
@@ -182,6 +188,7 @@ makemigrations 명령으로 polls/migrations 디렉토리 하위에 마이그레
 <p>한 개의 요소만 있는 게 확실하면 get() 메서드 이용한다.</p>
 
 <h3 id="update">UPDATE</h3>
+
 <p>하나의 수정은 대입문으로.
 한꺼번에 여러 객체를 수정할 경우 update() 메서드</p>
 
@@ -245,7 +252,7 @@ makemigrations 명령으로 polls/migrations 디렉토리 하위에 마이그레
 
     <footer>
   <span>
-    &copy; <time datetime="2023-08-05 10:07:13 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-08-05 14:34:20 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 

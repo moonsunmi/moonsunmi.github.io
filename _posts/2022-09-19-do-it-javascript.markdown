@@ -2,7 +2,7 @@
 layout: post
 title: "<do-it 자바스크립트 입문> 실전 프로젝트 1~2"
 date: 2022-09-19 22:34:31 +0900
-categories: javascript
+tags: javascript
 ---
 
 ### [실전 1] 숫자 맞히기 게임

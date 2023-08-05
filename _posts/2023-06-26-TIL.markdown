@@ -1,10 +1,9 @@
 ---
 layout: post
-title:  "TIL) 모바일에서만 적용되는 기능 추가하기"
-date:   2023-06-26 12:18:07 +0900
-categories: React, javascript, Typescript
+title: "TIL) 모바일에서만 적용되는 기능 추가하기"
+date: 2023-06-26 12:18:07 +0900
+tags: javascript Typescript
 ---
-
 
 모바일 기기에서만 적용되는 기능을 사용하고 싶을 수 있다. 보통은 width를 기준으로 판단하는데, 나는 기기가 정말로 모바일인지를 판단해서 적용해야 했다.
 
@@ -20,7 +19,7 @@ TS2551: Property 'userAgentData' does not exist on type 'Navigator'. Did you mea
 타입스크립트가 아직 userAgentData의 정의를 지원하지 않아서 그러는데, 다음과 같이 하면 잘 된다.
 
 ```typescript
-(window.navigator as any)?.userAgentData?.mobile
+(window.navigator as any)?.userAgentData?.mobile;
 ```
 
 타입 안정성을 해치지 않는 다른 방법도 있는데, 가독성이 너무 떨어진다.

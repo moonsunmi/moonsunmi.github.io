@@ -10,8 +10,8 @@
 <meta property="og:title" content="Hulu Clone Coding(Next.js, Tailwind CSS, Responsive)" />
 <meta name="author" content="Sunmi Moon" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="(달성/목표) 뽀모도리 1일 5/5 1주 5 /40" />
-<meta property="og:description" content="(달성/목표) 뽀모도리 1일 5/5 1주 5 /40" />
+<meta name="description" content="Nav에 query 연결하기" />
+<meta property="og:description" content="Nav에 query 연결하기" />
 <link rel="canonical" href="http://localhost:4000/2022-10-24/TIL" />
 <meta property="og:url" content="http://localhost:4000/2022-10-24/TIL" />
 <meta property="og:site_name" content="주경야독학) 개발공부로그" />
@@ -20,7 +20,7 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Hulu Clone Coding(Next.js, Tailwind CSS, Responsive)" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-10-24T12:18:07+09:00","datePublished":"2022-10-24T12:18:07+09:00","description":"(달성/목표) 뽀모도리 1일 5/5 1주 5 /40","headline":"Hulu Clone Coding(Next.js, Tailwind CSS, Responsive)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-10-24/TIL"},"url":"http://localhost:4000/2022-10-24/TIL"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-10-24T12:18:07+09:00","datePublished":"2022-10-24T12:18:07+09:00","description":"Nav에 query 연결하기","headline":"Hulu Clone Coding(Next.js, Tailwind CSS, Responsive)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-10-24/TIL"},"url":"http://localhost:4000/2022-10-24/TIL"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -67,26 +67,7 @@
     
   </div>
 
-  <table>
-  <thead>
-    <tr>
-      <th>(달성/목표)</th>
-      <th>뽀모도리</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1일</td>
-      <td>5/5</td>
-    </tr>
-    <tr>
-      <td>1주</td>
-      <td>5 /40</td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 id="nav에-query-연결하기">Nav에 query 연결하기</h3>
+  <h3 id="nav에-query-연결하기">Nav에 query 연결하기</h3>
 
 <p><code class="language-plaintext highlighter-rouge">useRouter</code> next의 hook을 사용한다.</p>
 
@@ -95,7 +76,7 @@
 
 <span class="kd">const</span> <span class="nx">Nav</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
   <span class="kd">const</span> <span class="nx">router</span> <span class="o">=</span> <span class="nx">useRouter</span><span class="p">();</span>
-  
+
             <span class="o">&lt;</span><span class="nx">h2</span>
             <span class="nx">key</span><span class="o">=</span><span class="p">{</span><span class="nx">key</span><span class="p">}</span>
             <span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="nx">router</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s2">`/?genre=</span><span class="p">${</span><span class="nx">key</span><span class="p">}</span><span class="s2">`</span><span class="p">)}</span>
@@ -109,20 +90,23 @@
 
 <p>tailwind.conig.js에 다음과 같이 플러그인을 추가해 주고,</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nx">plugins</span><span class="p">:</span> <span class="p">[</span>
-    <span class="nx">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">tailwind-scrollbar-hide</span><span class="dl">'</span><span class="p">)</span>
-    <span class="c1">// ...</span>
-  <span class="p">]</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">plugins</span><span class="p">:</span> <span class="p">[</span>
+  <span class="nx">require</span><span class="p">(</span><span class="dl">"</span><span class="s2">tailwind-scrollbar-hide</span><span class="dl">"</span><span class="p">),</span>
+  <span class="c1">// ...</span>
+<span class="p">];</span>
 </code></pre></div></div>
 
 <p>원하는 위치에서 <code class="language-plaintext highlighter-rouge">scrollbar-hide</code>를 지정해 주기만 하면 된다.</p>
 
 <h3 id="tmdb에서-api-key-가져-오기">tmdb에서 API Key 가져 오기</h3>
+
 <p>회원 가입 후 API Key를 생성한다. 그다음 ‘env.local’ 파일을 만들고 다음과 같이 적어 둔다.</p>
 
 <p>env.local</p>
+
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>API_KEY=thisismyprivatekey
 </code></pre></div></div>
+
 <p>(내 API_KEY로 입력함)</p>
 
 <h3 id="nextjs">Next.js</h3>
@@ -171,7 +155,6 @@
     <span class="p">},</span>
   <span class="p">};</span>
 <span class="p">}</span>
-
 </code></pre></div></div>
 
 <ul>
@@ -187,6 +170,7 @@
 </ul>
 
 <p>그런데 다음과 같은 에러가 났다. 직렬화에서 오류가 났다는데.. google에서 다른 사람의 케이스를 검색해 봤는데, 내 경우와 같지는 않은 것 같았다.</p>
+
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>error - SerializableError: Error serializing `.results` returned from `getServerSideProps` in "/".
 Reason: `undefined` cannot be serialized as JSON. Please use `null` or omit this value.
 </code></pre></div></div>
@@ -225,7 +209,6 @@ ctrl + t: 파일 이름 찾기</p>
   </tbody>
 </table>
 
-
 </div>
 
 
@@ -247,7 +230,7 @@ ctrl + t: 파일 이름 찾기</p>
 
     <footer>
   <span>
-    &copy; <time datetime="2023-08-05 10:07:13 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-08-05 14:34:20 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 

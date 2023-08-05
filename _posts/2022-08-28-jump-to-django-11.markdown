@@ -1,18 +1,17 @@
 ---
 layout: post
-title:  "점프 투 장고 공부 11"
-date:   2022-08-28 22:45:13 +0900
-categories: jumptodjango
+title: "점프 투 장고 공부 11"
+date: 2022-08-28 22:45:13 +0900
+tags: jumptodjango
 ---
-
 
 ## 앵커
 
- 답글을 작성하거나 수정한 후에 항상 페이지 상단으로 스크롤이 이동되기 때문에 본인이 작성한 답변을 확인하려면 다시 스크롤을 내려서 확인해야 한다는 점을 해결한다.
-
+답글을 작성하거나 수정한 후에 항상 페이지 상단으로 스크롤이 이동되기 때문에 본인이 작성한 답변을 확인하려면 다시 스크롤을 내려서 확인해야 한다는 점을 해결한다.
 
 answer_views.py
 {% raw %}
+
 ```python
 
 @login_required(login_url='common:login')
@@ -76,13 +75,12 @@ def answer_vote(request, answer_id):
 
 `resolve_url`은 실제 호출되는 URL 문자열을 리턴하는 장고의 함수이다.
 
-
-
 ## 마크다운
 
 pybo_filter.py
 
 {% raw %}
+
 ```python
 import markdown
 from django import template
@@ -102,102 +100,119 @@ def mark(value):
     extensions = ["nl2br", "fenced_code"]
     return mark_safe(markdown.markdown(value, extensions=extensions))
 ```
-{% endraw %}
 
+{% endraw %}
 
 question_detail.html
 {% raw %}
+
 ```html
 <div class="card-text">{{ answer.content|mark }}</div>
 ```
+
 {% endraw %}
 
-
 > django debugger
-> 
+>
 > javascript나 html에서 오류가 나면, 오탈자도 알아채기가 힘들어 장고용 디버거를 설치했다.
 > `pip install django-debug-toolbar`
 > 자세한 설정은 [이 사이트](https://morningbird.tistory.com/10)를 참고하였음.
 > 장고 4.0 이상에서는 `url(r'^__debug__/', include(debug_toolbar.urls)),`를 `path('__debug__/', include(debug_toolbar.urls)),`로 바꿔 주어야 한다.
-> 
-{% raw %}
+>
+> {% raw %}
+
 ```python
 import logging
 logging.debug('Debug Message')
 if some_error:
     logging.error('Error Message')
 ```
+
 {% endraw %}
-
-
 
 ## 검색
 
 `distinct`는 조회 결과에 중복이 있을 경우 중복을 제거하여 리턴하는 함수
 
 여러 파라미터를 조합하여 게시물 목록을 조회할 때는 GET 방식을 사용하는 것이 좋다.
- 
 
 question_list.html
 
 {% raw %}
+
 ```html
 <div class="row my-3">
-    <div class="col-6">
-        <a href="{% url 'pybo:question_create' %}" class="btn btn-primary">질문 등록하기</a>
+  <div class="col-6">
+    <a href="{% url 'pybo:question_create' %}" class="btn btn-primary"
+      >질문 등록하기</a
+    >
+  </div>
+  <div class="col-6">
+    <div class="input-group">
+      <input
+        type="text"
+        id="search_kw"
+        class="form-control"
+        value="{{ kw|default_if_none:'' }}"
+      />
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="button" id="btn_search">
+          찾기
+        </button>
+      </div>
     </div>
-    <div class="col-6">
-        <div class="input-group">
-            <input type="text" id="search_kw" class="form-control" value="{{ kw|default_if_none:'' }}">
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" id="btn_search">찾기</button>
-            </div>
-        </div>
-    </div>
+  </div>
 </div>
 ... (중략) ...
 
 <form id="searchForm" method="get" action="{% url 'index' %}">
-    <input type="hidden" id="kw" name="kw" value="{{ kw|default_if_none:'' }}">
-    <input type="hidden" id="page" name="page" value="{{ page }}">
+  <input type="hidden" id="kw" name="kw" value="{{ kw|default_if_none:'' }}" />
+  <input type="hidden" id="page" name="page" value="{{ page }}" />
 </form>
 ... (중략) ...
-<a class="page-link" data-page="?page={{ question_list.previous_page_number }}"
-   href="javascript:void(0)">이전</a>
+<a
+  class="page-link"
+  data-page="?page={{ question_list.previous_page_number }}"
+  href="javascript:void(0)"
+  >이전</a
+>
 ```
-{% endraw %}
 
+{% endraw %}
 
 page, kw를 동시에 요청할 수 있는 자바스크립트 추가
 
 question_list.html
 
 {% raw %}
+
 ```html
 {% block script %}
-<script type='text/javascript'>
-const page_elements = document.getElementsByClassName("page-link");
-Array.from(page_elements).forEach(function(element) {
-    element.addEventListener('click', function() {
-        document.getElementById('page').value = this.dataset.page;
-        document.getElementById('searchForm').submit();
+<script type="text/javascript">
+  const page_elements = document.getElementsByClassName("page-link");
+  Array.from(page_elements).forEach(function (element) {
+    element.addEventListener("click", function () {
+      document.getElementById("page").value = this.dataset.page;
+      document.getElementById("searchForm").submit();
     });
-});
-const btn_search = document.getElementById("btn_search");
-btn_search.addEventListener('click', function() {
-    document.getElementById('kw').value = document.getElementById('search_kw').value;
-    document.getElementById('page').value = 1;
-    document.getElementById('searchForm').submit();
-});
+  });
+  const btn_search = document.getElementById("btn_search");
+  btn_search.addEventListener("click", function () {
+    document.getElementById("kw").value =
+      document.getElementById("search_kw").value;
+    document.getElementById("page").value = 1;
+    document.getElementById("searchForm").submit();
+  });
 </script>
 {% endblock %}
 ```
-{% endraw %}
 
+{% endraw %}
 
 base_views.py
 
 {% raw %}
+
 ```python
 from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404
@@ -223,9 +238,8 @@ def index(request):
     return render(request, 'pybo/question_list.html', context)
 
 ```
+
 {% endraw %}
-
-
 
 #### render vs. redirect
 
@@ -243,15 +257,10 @@ render와 redirect는 둘 다 HTTP 응답 객체를 만들어내는데요,
 render는 상태코드 200과 HTML을 넣은 응답을 생성하고
 redirect는 상태코드 302와 참조해야하는 다른 URL을 넣은 응답을 생성합니다.
 
-
-
 #### form vs. template
 
 form은 HTML <FORM> 태그를 생성하고, 사용자가 입력한 내용이 올바른지 검사하는 데 쓰입니다.
+
 <FORM> 태그는 사용자가 웹사이트에 정보를 입력하기 위한 양식을 출력하는 태그입니다.
 
 template은 일반적인 HTML 문서를 생성하는 템플릿입니다.
-
-
-
-

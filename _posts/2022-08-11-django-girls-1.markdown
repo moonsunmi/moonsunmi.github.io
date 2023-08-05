@@ -1,31 +1,26 @@
 ---
 layout: post
-title:  "장고 걸스 공부 1"
-date:   2022-08-11 22:12:55 +0900
-categories: django-girls
+title: "장고 걸스 공부 1"
+date: 2022-08-11 22:12:55 +0900
+tags: django-girls
 ---
-
-
-
 
 장고걸스 튜토리얼 시작!
 경험해 보는 데 의의를 둔다.
 
-
 ## 커맨드라인 시작하기 (맥 OS/리눅스)
-* exit 창을 닫는다
-* cd 디렉터리를 변경한다
-* ls 디렉터리 혹은 파일 목록을 보여준다
-* cp 파일을 복사한다 cp c:\test\test.txt c:\windows\test.txt
-* mv 파일을 이동한다 mv c:\test\test.txt c:\windows\test.txt
-* mkdir 새 디렉터리를 만든다
-* rm 디렉터리 혹은 파일을 지운다
 
+- exit 창을 닫는다
+- cd 디렉터리를 변경한다
+- ls 디렉터리 혹은 파일 목록을 보여준다
+- cp 파일을 복사한다 cp c:\test\test.txt c:\windows\test.txt
+- mv 파일을 이동한다 mv c:\test\test.txt c:\windows\test.txt
+- mkdir 새 디렉터리를 만든다
+- rm 디렉터리 혹은 파일을 지운다
 
 장고란 파이썬으로 만든 무료 오픈소스 웹 애플리케이션 프레임워크
 
 개발환경을 깔끔하게 관리하기 위해서 가상환경 만듦. virtulenv
-
 
 > 객체지향 프로그래밍
 >
@@ -33,11 +28,5 @@ categories: django-girls
 
 객체란 속성과 행동을 모아둔 것
 
-
 장고모델
 장고에서의 모델은 객체의 특별한 종류이다. 이 모델을 저장하면 데이터베이스에 저장된다.
-
-
-
-
-

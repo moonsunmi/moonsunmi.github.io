@@ -2,7 +2,7 @@
 layout: post
 title: "w3school HTML"
 date: 2022-09-25 22:18:07 +0900
-categories: HTML+CSS
+tags: HTML+CSS
 ---
 
 - `<p title="it's toolkit">`: title은 커서를 놓았을 때 뜨는 도움말을 표시해 준다.

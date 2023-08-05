@@ -2,7 +2,7 @@
 layout: post
 title: "TIL) 뽀모 프로젝트 예약 기능 - useInput 커스텀훅 재점검"
 date: 2022-11-24 12:18:07 +0900
-categories: react
+tags: React
 ---
 
 ### 이름 재점검

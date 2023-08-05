@@ -1,31 +1,26 @@
 ---
 layout: post
-title:  "연오의 파이썬 공부 14"
-date:   2022-08-06 22:21:11 +0900
-categories: yeono-python
+title: "연오의 파이썬 공부 14"
+date: 2022-08-06 22:21:11 +0900
+tags: yeono-python
 ---
 
+- 로그: 프로그램을 실행하는 도중에 화면, 파일, 데이터 베이스 등의 장소에 하는 중간 기록
 
-
-
-* 로그: 프로그램을 실행하는 도중에 화면, 파일, 데이터 베이스 등의 장소에 하는 중간 기록
-
-* 단위테스트: 프로그램의 구성요소를 테스트하는 것을 단위 테스트
-
+- 단위테스트: 프로그램의 구성요소를 테스트하는 것을 단위 테스트
 
 예외적인 데이터를 빠트리지 않고 테스트하는 게 중요하다.
+
 > 주의<br>
 > 문자열을 입력받는 함수는 빈 문자열, 매우 긴 문자열, 외국어, 특수문자, 홀수 또는 짝수 길이의 문자열
-정수를 입력받는 함수는 0, 음수, 매우 작거나 매우 큰 수, 0부터 세는가, 1부터 세는가
-
-
-
+> 정수를 입력받는 함수는 0, 음수, 매우 작거나 매우 큰 수, 0부터 세는가, 1부터 세는가
 
 #### 테스트 주도 개발
+
 함수를 작성하기 전에 테스트를 먼저 작성하는 방법. 함수의 입력값과 출력값의 사례를 미리 만들어 두는 것.
 
-
 코드 9-16
+
 ```python
 def frequency(s, c):
    """문자열 s와 문자 c를 입력받아, c가 s에 등장하는 빈도를 구한다.
@@ -69,10 +64,8 @@ def test_frequency():
 print(test_frequency())
 ```
 
-
-
-
 연습문제 9-1
+
 ```python
 def median(data):
    """데이터의 중앙값을 반환한다."""
@@ -85,9 +78,8 @@ print(median([10, 9, 4, 1, 5, 7]))
 # list 인덱스가 실수형이 되었기 때문에 오류가 났었다.(지금은 수정)
 ```
 
-
-
 연습문제 9-2
+
 ```python
 def 삼육구(n):
    """n에 숫자 '3', '6', '9' 중 하나 이상이 있을 경우 '짝'을,
@@ -142,17 +134,13 @@ def test_삼육구():
 print(test_삼육구())
 ```
 
-
-
 연습문제 9-3
 
 수를 0으로 나누려고 할 때 발생하는 오류.
 if 문 등을 이용해서 나눗수가 0이 될 경우 예외 처리를 해 준다.
 
-
-
-
 코드 9-20
+
 ```python
 while True:
    print('0이 아닌 정수를 입력해 주세요:', end=' ')
@@ -173,25 +161,18 @@ while True:
 print( 1 / user_number)
 ```
 
-
-
-
 > if 문을 이용한 예외처리 단점
-> 1. 예외를 나타내는 값(오류 코드)과 정상 값을 구별하기가 어렵다. 
-> 2. 함수를 연달아 호출할 때, 예외를 함수 밖으로 전달하기가 불편하다. 
+>
+> 1. 예외를 나타내는 값(오류 코드)과 정상 값을 구별하기가 어렵다.
+> 2. 함수를 연달아 호출할 때, 예외를 함수 밖으로 전달하기가 불편하다.
 > 3. 예외 상황인지 항상 미리 검사해야 한다.
 
-
-
-예외를 나타내는 값을 정해 둔 것을 오류 코드(error code)라 한다. 오류 코드는 함수마다 제각각 정의하게 될 가능성이 높다. 
-
-
+예외를 나타내는 값을 정해 둔 것을 오류 코드(error code)라 한다. 오류 코드는 함수마다 제각각 정의하게 될 가능성이 높다.
 
 파이썬은 허락을 구한 뒤 일하기보다는, 일을 먼저 하고 문제가 생기면 용서를 구하는 방법을 권장한다.
 
-
-
 코드 9-24
+
 ```python
 try:
    print('0이 아닌 정수를 입력해 주세요:', end=' ')
@@ -205,9 +186,8 @@ except ValueError:
    print('입력한 값은 정수가 아닙니다.')
 ```
 
-
-
 코드 9-25
+
 ```python
 while True:
    try:
@@ -222,20 +202,16 @@ while True:
        print('입력한 값은 정수가 아닙니다.')
 ```
 
-
-
 try 문의 else절을 쓰는 이유는 예외처리의 대상이 되는 코드와 이어서 수행될 코드를 명시적으로 구별하기 위해서다.
 
-
-
-* 311p 중간 ~ 312p 중간까지 실습 아직 x
+- 311p 중간 ~ 312p 중간까지 실습 아직 x
 
 코드 9-27
 
 try문을 사용하면 안쪽에서 발생한 오류를 바깥에서 처리할 수 있다.
 
-
 연습문제 9-4
+
 ```python
 try:
    print('첫 번째 수를 입력하시오: ', end='')
@@ -281,12 +257,10 @@ except ZeroDivisionError:
 
 ```
 
-
-
 파이썬에는 다양한 오류 상황이 예외 클래스로 범주화되어 있다. 예외가 발생하면 예외 상황에 대한 정보를 담은 예외 인스턴스가 만들어진다. 새로운 예외의 종류를 직접 정의하거나 예외 객체를 직접 생성할 수도 있다.
 
-
 코드 9-32
+
 ```python
 def get(index_or_key, collection):
    """컬렉션(collection)에서 인덱스 또는 키(index_or_key)에 해당하는 값을 반환한다.
@@ -302,8 +276,8 @@ def get(index_or_key, collection):
 print(get(3, (1, 2, 3)))
 ```
 
-
 코드 9-33
+
 ```python
 def get(index_or_key, collection):
    """컬렉션(collection)에서 인덱스 또는 키(index_or_key)에 해당하는 값을 반환한다.
@@ -319,19 +293,13 @@ def get(index_or_key, collection):
 print(get(3, (1, 2, 3)))
 ```
 
-
-
 as를 이용하면 except 절 안에서 예외 객체에 담긴 오류 정보를 이용할 수 있다.
-
-
-
 
 파이썬에 기본으로 정의되어 있는 예외는 인터프리터가 적절한 상황에서 자동으로 발생
 하지만 오류 상황을 직접 정의하여 예외를 발생시켜야 할 때는 raise 문 or assert 문 이용
 
-
-
 코드 9-41
+
 ```python
 class DoorException(Exception):
    """문 관련 예외"""
@@ -371,9 +339,8 @@ door.open()
 raise 문은 오류가 이미 발생한 상황에서 예외를 일으키기 위한 명령. 따라서 무조건 예외를 일으킴
 assert 문은 상태를 검증하기 위한 명령. 지정한 검증식을 계산하여 결과가 거짓일 때만 AssertionError 예외를 발생시킨다.
 
-
-
 코드 9-44
+
 ```python
 class DoorException(Exception):
    """문 관련 예외"""
@@ -408,9 +375,8 @@ door.open()
 door.open()
 ```
 
-
-
 연습문제 9-5
+
 ```python
 class AccountException(Exception):
    """은행 계좌 관련 예외"""
@@ -429,9 +395,8 @@ class InvalidTransactionException(AccountException):
    pass
 ```
 
-
-
 연습문제 9-6
+
 ```python
 class AccountException(Exception):
    """은행 계좌 관련 예외"""
@@ -506,8 +471,6 @@ except Exception as error:
    print(error)
 ```
 
-
-
 연습문제 9-7
 
 ```python
@@ -577,9 +540,8 @@ except Exception as error:
 
 디스크, 네트워크, 프린터 등의 시스템 자원은 직접 신경 써서 반납해야 한다.
 
-
-
 코드 9-45
+
 ```python
 total = 0
 file = open('prices.txt')
@@ -589,8 +551,8 @@ print(total)
 file.close()
 ```
 
-
 코드 9-46
+
 ```python
 try:
    total = 0
@@ -606,8 +568,8 @@ else:
 
 finally 절: 예외 발생 여부와 관계 없이 항상 마지막에 실행된다.
 
-
 코드 9-47
+
 ```python
 try:
    total = 0
@@ -622,12 +584,10 @@ finally:
    file.close()
 ```
 
-
 with 문: 뒷정리를 자동으로 처리하는 문법
 
-
-
 코드 9-48
+
 ```python
 with open('prices.txt') as file:
    try:
@@ -644,8 +604,8 @@ with open('prices.txt') as file:
 with 문은 객체의 종류에 관계없이 알아서 준비와 뒷정리를 해 준다.
 준비를 위해 `__enter__()` 메서드를 호출, 뒷정리를 위해 `__exit()__` 메서드를 알아서 호출한다.
 
-
 코드 9-49
+
 ```python
 class NetworkConnection:
    """네트워크 연결을 나타내는 클래스"""
@@ -689,42 +649,22 @@ with NetworkConnection('https://bakyeono.net') as connection:
    print(connection.read())
 ```
 
-
-
-
 ## 10장
-
-
 
 모듈(module)은 프로그램을 구성하는 기능 중에서 독립적으로 구별할 수 있는 것을 모아 분리해 둔 것이다.
 
-
-프로그램 실행의 시작점이 되는 모듈을 최상위(top-level) 모듈이라 한다. 
-
-
+프로그램 실행의 시작점이 되는 모듈을 최상위(top-level) 모듈이라 한다.
 
 `__name__` 전역 변수는 모듈이 최상위로 실행된 경우에는 `__main__`이 되고, 하위 모듈로 실행된 경우에는 그 모듈의 이름이 된다.
 
-
 파이썬의 패키지(package)는 여러 개의 모듈·패키지를 묶은 것이다.
 
-
-
-
-
-* 코드 10-16, 코드 10-17 실습 아직 하지 못함.
-
-
-
-
+- 코드 10-16, 코드 10-17 실습 아직 하지 못함.
 
 각 패키지 디렉터리마다 있는 `__init__.py` 파일의 역할: 파이썬이 디렉터리를 패키지로 인식하도록 한다.
 
+model/**init**.py
 
-
-
-
-model/__init__.py
 ```python
 —-------------------------
 from . import character
@@ -732,17 +672,12 @@ from . import character
 
 현재 패키지인 `model`을 기준으로 character 패키지를 상대경로로 임포트하라는 뜻이다.
 
-
-
-
 ## 11장
 
-
-라이브러리(library)란 다른 프로그램의 구성요소로 사용하기 위해 미리 만들어 둔 프로그램 조각이다. 즉, 자주 사용하는 기능을 모듈·패키지로 만들어 둔 것이다. 
-
-
+라이브러리(library)란 다른 프로그램의 구성요소로 사용하기 위해 미리 만들어 둔 프로그램 조각이다. 즉, 자주 사용하는 기능을 모듈·패키지로 만들어 둔 것이다.
 
 연습문제 11-1
+
 ```python
 import math
 
@@ -772,22 +707,20 @@ print(test_floor_division())
 # 모범답안처럼 assert 문을 사용했으면 더 간단하게 했을 텐데!
 ```
 
-
 코드 11-17
+
 ```python
 print('{0[0]}년 {0[1]}월 {0[2]}일 {1[0]}시 {1[1]}분'.format([2020, 6, 20], [3, 30]))
 ```
 
-
 코드 11-18
+
 ```python
 print('{0[h]}시 {0[m]}분 {0[s]}초'.format({'h': 16, 'm': 30, 's': 0}))
 ```
 
-
-
-
 코드 11-20
+
 ```python
 countries = [
    {'name': 'China', 'population': 1403500365},
@@ -800,8 +733,8 @@ for country in countries:
    print(form.format(country['name'], country['population']))
 ```
 
-
 코드 11-21
+
 ```python
 countries = [
    {'name': 'China', 'population': 1403500365},
@@ -814,10 +747,10 @@ for country in countries:
    print(form.format(country['name'], country['population']))
 ```
 
-
 문자열은 왼쪽, 수는 오른쪽 정렬이 디폴트
 
 코드 11-22
+
 ```python
 countries = [
    {'name': 'China', 'population': 1403500365},
@@ -830,8 +763,8 @@ for country in countries:
    print(form.format(country['name'], country['population']))
 ```
 
-
 코드 11-23
+
 ```python
 countries = [
    {'name': 'China', 'population': 1403500365},
@@ -844,16 +777,15 @@ for country in countries:
    print(form.format(country['name'], country['population']))
 ```
 
-
-
 코드 11-25
+
 ```python
 physics, chemistry, biology = 80, 90, 70
 print(f'물리학: {physics}, 화학: {chemistry}, 생물학: {biology}')
 ```
 
-
 코드 11-26
+
 ```python
 for i in range(2, 10):
    for j in range(1, 10):
@@ -862,8 +794,8 @@ for i in range(2, 10):
 
 텍스트의 패턴을 나타내는 텍스트를 정규식(regular expression)이라 한다.
 
-
 코드 11-27
+
 ```python
 import re
 print(re.search('파이썬', '파이썬'))
@@ -871,8 +803,8 @@ print(re.search('파이썬', '즐거운 파이썬'))
 print(re.search('파이썬', '파이프'))
 ```
 
-
 코드 11-28
+
 ```python
 import re
 match = re.search('파이썬', '파이썬 프로그래밍')
@@ -883,18 +815,16 @@ else:
 
 ```
 
-
-
-
 코드 11-29
+
 ```python
 import re
 print(re.sub('파이썬', '리스프', '즐거운 파이썬 프로그래밍'))
 print(re.sub(' ', '*', '즐거운 파이썬 프로그래밍'))
 ```
 
-
 코드 11-31
+
 ```python
 import re
 sample = '1789Pthon박연오fog'
@@ -903,8 +833,8 @@ match = re.search(pattern, sample)
 print(match.group())
 ```
 
-
 코드 11-32
+
 ```python
 import re
 sample = '이름: 박연오, 연락처: 010-1234-5678, 주소: 부산 어딘가'
@@ -913,9 +843,8 @@ match = re.search(pattern, sample)
 print(match.group())
 ```
 
-
-
 연습문제 11-2
+
 ```python
 import re
 
@@ -933,8 +862,6 @@ def hangul_only(string):
 print(hangul_only('I like 파이썬 programming.'))
 print(hangul_only('a1가b2나c3다d4라e5마f6바g7사'))
 ```
-
-
 
 연습문제 11-2 모범답안처럼 업그레이드
 
@@ -960,5 +887,3 @@ test_hangul_only()
 print(hangul_only('I like 파이썬 programming.'))
 print(hangul_only('a1가b2나c3다d4라e5마f6바g7사'))
 ```
-
-

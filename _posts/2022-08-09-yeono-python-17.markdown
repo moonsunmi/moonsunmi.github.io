@@ -1,13 +1,14 @@
 ---
 layout: post
-title:  "연오의 파이썬 공부 17"
-date:   2022-08-09 22:22:12 +0900
-categories: yeono-python
+title: "연오의 파이썬 공부 17"
+date: 2022-08-09 22:22:12 +0900
+tags: yeono-python
 ---
 
 뱀 게임 완성
 
 snake.py
+
 ```python
 import pygame
 import random
@@ -166,4 +167,3 @@ while True:
    pygame.display.update()
 
 ```
-

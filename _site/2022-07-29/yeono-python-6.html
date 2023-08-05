@@ -68,6 +68,7 @@
   </div>
 
   <h3 id="시퀀스-조작-메서드">시퀀스 조작 메서드</h3>
+
 <p>(시퀀스는 데이터에 순서를 붙여 나열한 것이다.)
 시퀀스의 내용을 수정하는 메서드이기 때문에 튜플 등 불변 시퀀스에는 적용할 수 없으며, 가변 시퀀스인 리스트에 주로 사용된다.</p>
 
@@ -79,12 +80,13 @@
 
 <p>튜플 표현 방법:
 빈 튜플: <code class="language-plaintext highlighter-rouge">()</code>
-요소가 하나인 튜플 <code class="language-plaintext highlighter-rouge">(1,)</code> 또는 <code class="language-plaintext highlighter-rouge">1,</code>  (원자 데이터와 구별 위해서 콤마 꼭 붙임)
+요소가 하나인 튜플 <code class="language-plaintext highlighter-rouge">(1,)</code> 또는 <code class="language-plaintext highlighter-rouge">1,</code> (원자 데이터와 구별 위해서 콤마 꼭 붙임)
 요소가 둘 이상인 튜플 <code class="language-plaintext highlighter-rouge">(1, 2)</code> 또는 <code class="language-plaintext highlighter-rouge">1, 2</code></p>
 
 <p>튜플 뒤에 시퀀스를 연결하는 연산자를 제공하기는 하나, 튜플은 불변 시퀀스이므로 원본이 변하는 건 아니다.</p>
 
 <h3 id="레인지">레인지</h3>
+
 <p>레인지를 사용해 수열을 간단한 함수 호출로 만들 수 있다.</p>
 
 <p>레인지의 내용은 바로 출력되지 않는다. 레인지는 계산하기 위한 규칙만 갖고 있고 요소 자체는 갖고 있지 못하기 때문이다. 필요한 시점에 만듦.</p>
@@ -107,12 +109,14 @@ range의 등차수열의 범위와 공차를 다시 계산하여, 규칙을 가�
 <p>문자열 그 자체도 시퀀스이기 때문에, 개별요소 사이에 구분자를 끼워 넣을 수 있다.</p>
 
 <p>연습문제 5-1</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">multiples_of_8_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
 
 <span class="k">print</span><span class="p">(</span><span class="n">multiples_of_8_list</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>연습문제 5-2</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">center</span><span class="p">(</span><span class="n">sequence</span><span class="p">):</span>
    <span class="s">"""시퀀스를 하나 입력받아, 그 시퀀스의 가운데 요소를 반환한다."""</span>
    <span class="k">return</span> <span class="n">sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sequence</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)]</span>
@@ -126,6 +130,7 @@ range의 등차수열의 범위와 공차를 다시 계산하여, 규칙을 가�
 </span></code></pre></div></div>
 
 <p>연습문제 5-3</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">mirror</span><span class="p">(</span><span class="n">sequence</span><span class="p">):</span>
    <span class="s">"""시퀀스(sequence)를 하나 입력 받아서 그 시퀀스를 뒤집은 시퀀스를 원본에 덧붙여 반환한다.
    단, 원본 시퀀스의 마지막 요소는 덧붙어지 않는다."""</span>
@@ -142,6 +147,7 @@ range의 등차수열의 범위와 공차를 다시 계산하여, 규칙을 가�
 </span></code></pre></div></div>
 
 <p>연습문제 5-4</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">minmax</span><span class="p">(</span><span class="n">sequence</span><span class="p">):</span>
    <span class="s">"""전달받은 시퀀스(sequence)의 최솟값과 최댓값을 리스트에 담아 반환한다."""</span>
 
@@ -154,6 +160,7 @@ range의 등차수열의 범위와 공차를 다시 계산하여, 규칙을 가�
 </span></code></pre></div></div>
 
 <p>연습문제 5-5</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">mean</span><span class="p">(</span><span class="n">sequence</span><span class="p">):</span>
    <span class="s">"""시퀀스(sequence) 하나를 입력 받아 시퀀스 내 모든 요소의 산술평균을 반환한다.
    단, 빈 시퀀스는 입력하지 않기로 약속한다."""</span>
@@ -165,6 +172,7 @@ range의 등차수열의 범위와 공차를 다시 계산하여, 규칙을 가�
 </code></pre></div></div>
 
 <p>연습문제 5-6</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">stations</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">stations</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="s">'서울'</span><span class="p">)</span>  <span class="c1"># ['서울']
 </span><span class="n">stations</span> <span class="o">+=</span> <span class="p">([</span><span class="s">'수원'</span><span class="p">,</span> <span class="s">'대전'</span><span class="p">])</span>  <span class="c1"># ['서울', '수원', 대전']
@@ -184,10 +192,12 @@ range의 등차수열의 범위와 공차를 다시 계산하여, 규칙을 가�
 </span></code></pre></div></div>
 
 <p>연습문제 5-7</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10_000</span><span class="p">,</span> <span class="mi">2</span><span class="p">)))</span>
 </code></pre></div></div>
 
 <p>연습문제 5-8</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">))[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 
 <span class="c1"># range()를 오름차순으로 쓸 생각만 했다. 내림차순으로 하면 되는데...
@@ -195,11 +205,12 @@ range의 등차수열의 범위와 공차를 다시 계산하여, 규칙을 가�
 </span></code></pre></div></div>
 
 <p>연습문제 5-9</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">reverse</span><span class="p">(</span><span class="n">sequence</span><span class="p">):</span>
    <span class="s">"""시퀀스(sequence)를 입력받아 반대 순서로 뒤집어 반환한다."""</span>
    <span class="k">return</span> <span class="n">sequence</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
-  
+
 <span class="k">print</span><span class="p">(</span><span class="n">reverse</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">]))</span>
 <span class="k">print</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="s">'일월화수목금토'</span><span class="p">)))</span>
 <span class="k">print</span><span class="p">(</span><span class="n">reverse</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)))</span>
@@ -225,6 +236,7 @@ range의 등차수열의 범위와 공차를 다시 계산하여, 규칙을 가�
 <p>사전 하나로 덩어리를 저장. 그걸 여러 개 저장하려면? 몇 개가 될지 모르는 여러 개의 데이터를 관리할 때는 리스트를 사용하는 것이 좋다.</p>
 
 <p>연습문제 5-10</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">식재료별_칼로리</span> <span class="o">=</span> <span class="p">{</span><span class="s">'밀가루'</span><span class="p">:</span> <span class="mi">364</span><span class="p">,</span> <span class="s">'피망'</span><span class="p">:</span> <span class="mf">20.1</span><span class="p">,</span> <span class="s">'올리브'</span><span class="p">:</span> <span class="mi">115</span><span class="p">,</span> <span class="s">'돼지고기'</span><span class="p">:</span> <span class="mf">242.1</span><span class="p">}</span>
 <span class="k">print</span><span class="p">(</span><span class="n">식재료별_칼로리</span><span class="p">)</span>
 <span class="c1"># 모범답안에서는 1g당 칼로리를 구했다. 이 문제에서는 100g당으로 해도 상관은 없었지만,
@@ -263,6 +275,7 @@ range의 등차수열의 범위와 공차를 다시 계산하여, 규칙을 가�
 </span></code></pre></div></div>
 
 <p>연습문제 5-12</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">식재료별_칼로리</span> <span class="o">=</span> <span class="p">{</span>
    <span class="s">'밀가루'</span><span class="p">:</span> <span class="mi">364</span> <span class="o">/</span> <span class="mi">100</span><span class="p">,</span>
    <span class="s">'피망'</span><span class="p">:</span> <span class="mf">20.1</span> <span class="o">/</span> <span class="mi">100</span><span class="p">,</span>
@@ -294,6 +307,7 @@ range의 등차수열의 범위와 공차를 다시 계산하여, 규칙을 가�
 <p><code class="language-plaintext highlighter-rouge">remove()</code>는 <code class="language-plaintext highlighter-rouge">discard()</code>와 달리 찾는 요소가 없으면 오류가 발생.</p>
 
 <p>연습문제 5-13</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">모든_요일</span> <span class="o">=</span> <span class="p">{</span><span class="s">'월'</span><span class="p">,</span> <span class="s">'화'</span><span class="p">,</span> <span class="s">'수'</span><span class="p">,</span> <span class="s">'목'</span><span class="p">,</span> <span class="s">'금'</span><span class="p">,</span> <span class="s">'토'</span><span class="p">,</span> <span class="s">'일'</span><span class="p">}</span>
 <span class="n">직장_요일</span> <span class="o">=</span> <span class="p">{</span><span class="s">'월'</span><span class="p">,</span> <span class="s">'화'</span><span class="p">,</span> <span class="s">'수'</span><span class="p">,</span> <span class="s">'목'</span><span class="p">,</span> <span class="s">'금'</span><span class="p">}</span>
 <span class="n">휴식_요일</span> <span class="o">=</span> <span class="p">{</span><span class="s">'토'</span><span class="p">,</span> <span class="s">'일'</span><span class="p">}</span>
@@ -302,6 +316,7 @@ range의 등차수열의 범위와 공차를 다시 계산하여, 규칙을 가�
 </span></code></pre></div></div>
 
 <p>연습문제 5-14</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">days</span> <span class="o">=</span> <span class="p">{</span><span class="s">'월'</span><span class="p">,</span> <span class="s">'화'</span><span class="p">,</span> <span class="s">'수'</span><span class="p">,</span> <span class="s">'목'</span><span class="p">,</span> <span class="s">'금'</span><span class="p">,</span> <span class="s">'토'</span><span class="p">,</span> <span class="s">'일'</span><span class="p">}</span>
 <span class="n">working_days</span> <span class="o">=</span> <span class="p">{</span><span class="s">'월'</span><span class="p">,</span> <span class="s">'화'</span><span class="p">,</span> <span class="s">'수'</span><span class="p">,</span> <span class="s">'목'</span><span class="p">,</span> <span class="s">'금'</span><span class="p">}</span>
 <span class="n">holidays</span> <span class="o">=</span> <span class="p">{</span><span class="s">'토'</span><span class="p">,</span> <span class="s">'일'</span><span class="p">}</span>
@@ -318,6 +333,7 @@ range의 등차수열의 범위와 공차를 다시 계산하여, 규칙을 가�
 </code></pre></div></div>
 
 <p>연습문제 5-15</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 3의 배수 또는 4이 배수
 </span><span class="n">multiple_3</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1_000</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
 <span class="n">multiple_4</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1_000</span><span class="p">,</span> <span class="mi">4</span><span class="p">)))</span>
@@ -326,6 +342,7 @@ range의 등차수열의 범위와 공차를 다시 계산하여, 규칙을 가�
 </code></pre></div></div>
 
 <p>연습문제 5-16</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 3과 4의 공배수
 </span><span class="n">multiple_3</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1_000</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
 <span class="n">multiple_4</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1_000</span><span class="p">,</span> <span class="mi">4</span><span class="p">)))</span>
@@ -334,13 +351,13 @@ range의 등차수열의 범위와 공차를 다시 계산하여, 규칙을 가�
 </code></pre></div></div>
 
 <p>연습문제 5-17</p>
+
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 3과 4의 차집합
 </span><span class="n">multiple_3</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1_000</span><span class="p">,</span> <span class="mi">3</span><span class="p">)))</span>
 <span class="n">multiple_4</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1_000</span><span class="p">,</span> <span class="mi">4</span><span class="p">)))</span>
 
 <span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">multiple_3</span><span class="p">.</span><span class="n">difference</span><span class="p">(</span><span class="n">multiple_4</span><span class="p">)))</span>
 </code></pre></div></div>
-
 
 </div>
 
@@ -363,7 +380,7 @@ range의 등차수열의 범위와 공차를 다시 계산하여, 규칙을 가�
 
     <footer>
   <span>
-    &copy; <time datetime="2023-08-05 10:07:13 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-08-05 14:34:20 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 

@@ -1,12 +1,12 @@
 ---
 layout: post
-title:  "TIL) DRF - 다양한 뷰"
-date:   2023-02-15 12:18:07 +0900
-categories: django
+title: "TIL) DRF - 다양한 뷰"
+date: 2023-02-15 12:18:07 +0900
+tags: DRF Django
 ---
 
-
 ### 함수 기반 뷰
+
 함수 기반 뷰(Function Based View, FBV) + 데코레이터
 
 ```python
@@ -23,7 +23,7 @@ def booksAPI(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    
+
 @api_view(['GET'])
 def bookAPI(request, ISBN):
     book = get_object_or_404(Book, ISBN=ISBN)
@@ -32,6 +32,7 @@ def bookAPI(request, ISBN):
 ```
 
 ### 클래스 기반 뷰
+
 클래스 기반 뷰(Class Based View, CBV) + APIView 상속
 
 ```python
@@ -56,9 +57,9 @@ class BookAPI(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 ```
 
-
 ### mixin
-`request`의 메서드(`get`, `post`)마다 반복되는 시리얼라이즈 코드를 클래스 레벨에서 하도록 한다. 
+
+`request`의 메서드(`get`, `post`)마다 반복되는 시리얼라이즈 코드를 클래스 레벨에서 하도록 한다.
 
 ```python
 class BooksAPIMixins(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
@@ -88,6 +89,7 @@ class BookAPIMixins(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.D
 ```
 
 ## generics
+
 mixin을 여러 개 상속받는 대신, 일종의 mixin 조합을 사용한다.
 
 ```python
@@ -104,7 +106,8 @@ class BookAPIGenerics(generics.RetrieveUpdateDestroyAPIView):
 
 ### ViewSet & Router
 
-Create, Retrieve, Update, Destroy, List 기능을 다 갖춘 ModelViewSet. 
+Create, Retrieve, Update, Destroy, List 기능을 다 갖춘 ModelViewSet.
+
 ```python
 class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()

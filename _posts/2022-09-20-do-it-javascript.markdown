@@ -2,7 +2,7 @@
 layout: post
 title: "<do-it 자바스크립트 입문> 실전 프로젝트 3~4 "
 date: 2022-09-20 22:45:12 +0900
-categories: javascript
+tags: javascript
 ---
 
 ### [실전 3] 온도 변환기

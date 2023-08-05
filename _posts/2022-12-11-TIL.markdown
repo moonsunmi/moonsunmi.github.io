@@ -2,7 +2,7 @@
 layout: post
 title: "TIL) 내 코드 복습&리뉴얼 중"
 date: 2022-12-11 12:18:07 +0900
-categories: react
+tags: React
 ---
 
 ### Context 조금 더 낫게 만들기

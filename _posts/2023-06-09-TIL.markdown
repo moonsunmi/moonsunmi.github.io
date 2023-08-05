@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "TIL) useDispatch vs. dispatch"
-date:   2023-06-09 12:18:07 +0900
-categories: React, Typescript
+title: "TIL) useDispatch vs. dispatch"
+date: 2023-06-09 12:18:07 +0900
+tags: React Typescript
 ---
 
 useAppDispatch와 useAppSelector는 useDispatch, useSelector의 typed version이다.
@@ -12,6 +12,7 @@ useSelector를 쓸 때 state 인자에 RootState를 import해서 타입으로 �
 useAppDispatch를 쓰면 AppDispatch를 매번 import하지 않아도 된다.
 
 실제로 redux/hooks.ts 안에 다음과 같은 내용이 있다.
+
 ```
 export const useAppDispatch: () => AppDispatch = useDispatch;
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;

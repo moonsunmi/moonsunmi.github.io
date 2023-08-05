@@ -1,12 +1,9 @@
 ---
 layout: post
-title:  "TIL) 웹 브라우저의 뒤로가기 버튼 제어하기"
-date:   2023-06-15 12:18:07 +0900
-categories: React, javascript, Typescript
+title: "TIL) 웹 브라우저의 뒤로가기 버튼 제어하기"
+date: 2023-06-15 12:18:07 +0900
+tags: javascript
 ---
-
-
-
 
 뒤로가기 버튼 제어하기
 
@@ -15,17 +12,16 @@ categories: React, javascript, Typescript
 window 인터페이스의 `popstate` 이벤트는 활성화된 세션 기록 바뀔 때 발생한다.
 
 ```javascript
- useEffect(() => {
-    window.history.pushState(null, document.title, window.location.href);
-    window.addEventListener('popstate', handlePrevClick);
+useEffect(() => {
+  window.history.pushState(null, document.title, window.location.href);
+  window.addEventListener("popstate", handlePrevClick);
 
-    return () => {
-      window.removeEventListener('popstate', handlePrevClick);
-    };
-  }, [handlePrevClick]);
+  return () => {
+    window.removeEventListener("popstate", handlePrevClick);
+  };
+}, [handlePrevClick]);
 ```
 
 ‘앞으로가기' 버튼을 눌러도 `popstate` 이벤트가 발생한다. 이렇게 하면 앞으로가기 버튼은 비활성화된다. 사용자가 화면에 있는 ‘다음' 버튼을 누르도록 유도하는 게 더 나은 상황이므로 이렇게 처리해 주었다.
 
 `handlePrevClick`에서는 정말 앞의 페이지로 가야 할 상황인지, 액션만 취소할(사용자가 보기에) 상황인지 판단하여 적절히 대응해 주었다.
-

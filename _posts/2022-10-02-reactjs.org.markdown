@@ -2,7 +2,7 @@
 layout: post
 title: "reactjs.org 튜토리얼 + w3school Javascript"
 date: 2022-10-02 12:18:07 +0900
-categories: reactjs
+tags: React
 ---
 
 ## 움직임 내역 보여주기

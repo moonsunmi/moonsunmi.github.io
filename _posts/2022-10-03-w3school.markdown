@@ -2,7 +2,7 @@
 layout: post
 title: "w3school Javascript"
 date: 2022-10-03 12:18:07 +0900
-categories: javascript
+tags: javascript
 ---
 
 ### Object Properties

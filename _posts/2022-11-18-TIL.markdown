@@ -2,7 +2,7 @@
 layout: post
 title: "TIL) 뽀모 프로젝트 - 컴포넌트 구조 완성도 높이기"
 date: 2022-11-18 12:18:07 +0900
-categories: react
+tags: React
 ---
 
 ### prop-type에서 나만의 타입 함수 만들기

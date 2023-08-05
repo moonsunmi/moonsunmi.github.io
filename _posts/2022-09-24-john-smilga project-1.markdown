@@ -2,7 +2,7 @@
 layout: post
 title: "John-smilga Project"
 date: 2022-09-24 22:18:07 +0900
-categories: HTML+CSS
+tags: HTML+CSS
 ---
 
 ### visual studio code에서 유용한 단축키

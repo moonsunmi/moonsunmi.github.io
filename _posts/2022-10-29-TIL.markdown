@@ -2,7 +2,7 @@
 layout: post
 title: "TIL) Facebook Clone Coding(Next.js, Tailwind CSS, Responsive)"
 date: 2022-10-29 12:18:07 +0900
-categories: react
+tags: React
 ---
 
 gird로 했을 때는, place-items-center로 해야 가운데 정렬이 된다.

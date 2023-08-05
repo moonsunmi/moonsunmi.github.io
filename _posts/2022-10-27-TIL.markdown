@@ -2,7 +2,7 @@
 layout: post
 title: "TIL) Facebook Clone Coding(Next.js, Tailwind CSS, Responsive)"
 date: 2022-10-27 12:18:07 +0900
-categories: react
+tags: React
 ---
 
 `<Image />`: 넥스트에서 제공하는 특별한 이미지 컴포넌트. 이미지를 최적화하고, lazy 로딩함.(레이지 로딩이란, 스크롤을 내리기 전까지 하단의 이미지들이 보여지지 않는 것)
