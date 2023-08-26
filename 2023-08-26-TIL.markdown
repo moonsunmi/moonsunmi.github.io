@@ -1,0 +1,65 @@
+---
+layout: post
+title: "<Optimizing performance in a React app> 블로그 글 공부"
+date: 2023-08-26 12:18:07 +0900
+tags: React post
+---
+
+리액트의 성능을 높이는 데에 관심이 많은 상황인데, 다음 글을 보게 되었다. 딱히 새로울 게 없는 내용이기는 하나, 복습하는 차원에서 읽고 정리해 보았다. (불필요하거나 조금 읭?스러운 것들은 뺐음)
+
+https://blog.logrocket.com/optimizing-performance-react-app/
+
+React.memo, useMemo, useCallback 같은 것들은 내용을 알고 있기는 하나 실전에서 쓸 때는 조금씩 빠뜨리게 되는 것 같다.
+그래도 이런 글을 읽을 때마다 '내 코드 어디에서 사용해 볼 수 있지?'라고 생각하게 되는 점은 좋음...
+
+
+### 1. React가 어떤 식으로 렌더링하는지부터 정확히 이해하기
+
+React는 렌더링하기 전에 가상 DOM 트리를 먼저 그린다. 값이 변할 때마다 React는 이 가상 DOM 트리를 다시 만든다.
+그다음 먼저 그렸던 트리와 새로 그린 트리를 비교해 달라진 부분만 리렌더링한다.
+
+
+컴포넌트가 리렌더링되어야 한다면, 그 안의 자식 컴포넌트는 변경 사항이 없더라도 무조건 리렌더링된다.
+그래서 state는 가능하면 자식 컴포넌트 안에 있어야 쓸모 없이 부모 컴포넌트가 리렌더링되는 일을 막을 수 있다.
+
+
+
+
+### 2. 값을 저장해 두기
+
+주어지는 Props가 변하지 않는 한 다시 렌더링할 필요가 없는 자식 컴포넌트가 있다면 React.memo로 감싸준다. 순수 함수형 컴포넌트를 감쌀 수 있다.
+그런데 이 props가 숫자, 텍스트 같은 값이 아니라 object, array, function 같은 원시 타입이 아닌 값을 전달한다면 React.memo로 감싸더라도 무조건 리렌더링된다.
+UseMemo를 이용해 연산에 시간이 많이 드는 함수의 결과값을 저장해 두는 것도 좋다.
+그런데 이 방법들은 메모리와 시간을 트레이드오프하는 것이라서 꼭 필요할 때만 사용해야 한다.
+
+
+
+### 3. Lazy Loading
+
+import를 동적으로 하여 코드를 분할하는 방법도 있다. Import 문을 필요할 때 불러오도록 해준다. lazy는 꼭 suspense 컴포넌트 안에 써야 한다.
+Suspense는 감싸진 컴포넌트가 제대로 보여지기 전까지 fallback을 화면에서 보여준다.
+
+
+  const ScenarioImage = React.lazy(() => import('../ScenarioImage'));
+
+  ...
+
+      <React.Suspense fallback={<p> loading image </p>}>
+        <ScenarioImage imageType={currentQuestion.questionImageType} />
+      </React.Suspense>
+
+
+
+### 4. 효율을 높여주는 라이브러리 사용하기
+
+* 방대한 양의 list를 렌더링해야 할 경우 일부만 보여준 후 스크롤 다운 할 때 나머지가 나타나도록 한다. react-window, react-virtualized 라이브러리 등이 있다.
+* 이미지의 lazy-loading 기능을 지원하는 라이브러리를 사용한다. react-lazyload, react-lazy-load-image-component 등이 있다.
+* Redux를 사용하면 불필요한 리렌더링이 일어나는 문제가 발생할 수 있다. 이를 방지하기 위해서 Reselctor라는 라이브러리의 사용을 고려해 볼 수 있다.
+
+
+
+
+
+
+
+
