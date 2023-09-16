@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>w3school CSS | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="w3school CSS" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="CSS background" />
+<meta property="og:description" content="CSS background" />
+<link rel="canonical" href="http://localhost:4000/2022-09-28/w3school" />
+<meta property="og:url" content="http://localhost:4000/2022-09-28/w3school" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-09-28T22:18:07+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="w3school CSS" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-09-28T22:18:07+09:00","datePublished":"2022-09-28T22:18:07+09:00","description":"CSS background","headline":"w3school CSS","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-09-28/w3school"},"url":"http://localhost:4000/2022-09-28/w3school"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main><div class="post">
+  <h1 class="post-title">w3school CSS</h1>
+
+  <div class="post-info">
+    
+    <br />
+    <span>on&nbsp;</span
+    ><time datetime="2022-09-28 22:18:07 +0900">September 28, 2022</time>
+    
+  </div>
+
+  <h3 id="css-background">CSS background</h3>
+
+<p>그림이 가로로만 repeat될 수 있도록 하려면</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>body { background-image: url("gradient_bg.png"); background-repeat: repeat-x; }
+</code></pre></div></div>
+
+<p>스크롤하더라도 <code class="language-plaintext highlighter-rouge">background-image</code> 위치가 움직이지 않도록 하려면 <code class="language-plaintext highlighter-rouge">background-attachment: fixed;</code>. 스크롤에 맞추려면 <code class="language-plaintext highlighter-rouge">fixed</code> 대신 <code class="language-plaintext highlighter-rouge">scroll</code>.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>body { background-image: url("img_tree.png"); background-repeat: no-repeat;
+background-position: right top; background-attachment: fixed; }
+</code></pre></div></div>
+
+<h3 id="간단하게-쓰는-법">간단하게 쓰는 법!</h3>
+
+<p>예제 따라 하면서 background와 background-color가 같은 뜻으로 쓰이는 것 같아서 헷갈렸는데 짧은 표기법이었다.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>body { background-color: #ffffff; background-image: url("img_tree.png");
+background-repeat: no-repeat; background-position: right top; }
+</code></pre></div></div>
+
+<p>다음과 같이 쓸 수 있다.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>body { background: #ffffff url("img_tree.png") no-repeat right top; }
+</code></pre></div></div>
+
+<p>짧게 쓰려면 다음 순서를 지키자. 필요 없는 건 빼 놓고 적으면 된다.</p>
+
+<ul>
+  <li>background-color</li>
+  <li>background-image</li>
+  <li>background-repeat</li>
+  <li>background-attachment</li>
+  <li>background-position</li>
+</ul>
+
+<h3 id="css-border">CSS border</h3>
+
+<p>border도 다음과 같이 줄여서 쓸 수 있다.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>p { border: 5px solid red; }
+</code></pre></div></div>
+
+<p>순서는 다음과 같음.</p>
+
+<ul>
+  <li>border-width</li>
+  <li>border-style (required)</li>
+  <li>border-color</li>
+</ul>
+
+<h3 id="css-margin">CSS margin</h3>
+
+<p><code class="language-plaintext highlighter-rouge">margin: 25px 50px 75px 100px;</code>는 다음 순서</p>
+
+<ul>
+  <li>top margin is 25px</li>
+  <li>right margin is 50px</li>
+  <li>bottom margin is 75px</li>
+  <li>left margin is 100px</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">margin: 25px 50px 75px;</code>는 다음 순서</p>
+
+<ul>
+  <li>top margin is 25px</li>
+  <li>right and left margins are 50px</li>
+  <li>bottom margin is 75px</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">margin: 25px 50px;</code>는 다음 순서</p>
+
+<ul>
+  <li>top and bottom margins are 25px</li>
+  <li>right and left margins are 50px</li>
+</ul>
+
+<p><code class="language-plaintext highlighter-rouge">margin: auto;</code>: 가운데 정렬</p>
+
+<p><code class="language-plaintext highlighter-rouge">inherit</code>는 상위 요소의 값을 받아온다.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>p.ex1 { margin-left: inherit; }
+<span class="nt">&lt;div&gt;</span>
+  <span class="nt">&lt;p</span> <span class="na">class=</span><span class="s">"ex1"</span><span class="nt">&gt;&lt;/p&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div></div>
+
+<p>상위 요소인 <code class="language-plaintext highlighter-rouge">div</code>의 <code class="language-plaintext highlighter-rouge">margin-left</code> 값을 받아온다.</p>
+
+<h3 id="margin-collapse">margin collapse</h3>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>h1 { margin: 0 0 50px 0; } h2 { margin: 20px 0 0 0; }
+
+<span class="nt">&lt;h1&gt;</span>hi<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;h2&gt;</span>nu<span class="nt">&lt;/h2&gt;</span>
+</code></pre></div></div>
+
+<p>h1은 하단 마진 50이, h2에는 상단 마진 20이 있다. 둘이 합쳐서 70이 될 거 같지만, 실제로는 margin collapse 때문에 50이 된다.</p>
+
+<h3 id="padding">padding</h3>
+
+<p>다음과 같이 주어졌을 때 div 실제 width는 300px이 아니라 350px이다. 양쪽으로 padding 값이 추가되기 때문에.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>div { width: 300px; padding: 25px; }
+</code></pre></div></div>
+
+<p>다음과 같이 box-sizing: border-box;로 지정해주면, padding 값이 아무리 늘어나도 width를 300으로 유지해 준다.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>div { width: 300px; padding: 25px; box-sizing: border-box; }
+</code></pre></div></div>
+
+<h4 id="outline">outline</h4>
+
+<p>border 바깥쪽에 그려지는 outline. border와 달리 두께로 box width나 height에 영향을 미치지 않는다.</p>
+
+<h3 id="css-text">CSS Text</h3>
+
+<p>양쪽 정렬: <code class="language-plaintext highlighter-rouge">text-align: justify;</code></p>
+
+<p>취소선: <code class="language-plaintext highlighter-rouge">text-decoration: line-through;</code></p>
+
+<p>자동으로 매겨지는 스타일 취소(하이퍼링크에 밑줄+파란색 되는 거라든가) : <code class="language-plaintext highlighter-rouge">text-decoration: none;</code></p>
+
+<h3 id="css-서체">CSS 서체</h3>
+
+<p>다음처럼 비슷한 계열의 폰트로, 여러 개 지정해 두는 게 좋다. 처음 폰트가 없으면, 그다음 폰트를 보여주기 때문에 안전함.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>p { font-family: Tahoma, Verdana, sans-serif; }
+</code></pre></div></div>
+
+<h4 id="안전한-서체들">안전한 서체들</h4>
+
+<p>Arial (sans-serif)
+Verdana (sans-serif)
+Tahoma (sans-serif)
+Trebuchet MS (sans-serif)
+Times New Roman (serif)
+Georgia (serif)
+Garamond (serif)
+Courier New (monospace)
+Brush Script MT (cursive)</p>
+
+<h4 id="대비책-서체들">대비책 서체들</h4>
+
+<p>Serif
+Sans-serif
+Monospace
+Cursive
+Fantasy</p>
+
+<h4 id="서체-단위">서체 단위</h4>
+
+<ul>
+  <li>em: pixels/16=em</li>
+  <li>vw: 1vw = 1% of viewport width</li>
+</ul>
+
+<h4 id="구글-폰트-사용하기">구글 폰트 사용하기</h4>
+
+<table>
+  <tbody>
+    <tr>
+      <td>다음과 같이 하면 구글 폰트 쓸 수 있다. 폰트 여러 개 쓰고 싶으면</td>
+      <td>로 추가함.</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;link</span>
+  <span class="na">rel=</span><span class="s">"stylesheet"</span>
+  <span class="na">href=</span><span class="s">"https://fonts.googleapis.com/css?family=Audiowide|Sofia|Trirong"</span>
+<span class="nt">/&gt;</span>
+</code></pre></div></div>
+
+<h4 id="폰트-정보도-짧게-쓸-수-있다">폰트 정보도 짧게 쓸 수 있다.</h4>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>p.a { font: 20px Arial, sans-serif; }
+</code></pre></div></div>
+
+<h4 id="아이콘-추가">아이콘 추가</h4>
+
+<p>stylesheet 추가하여 아이콘 추가할 수 있다.</p>
+
+<h3 id="링크">링크</h3>
+
+<p>링크 텍스트를 다음처럼 꾸밀 수 있다.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a:link { text-decoration: none; }
+</code></pre></div></div>
+
+<h3 id="list-style">List style</h3>
+
+<p>다음과 같이 하면 리스트 앞에 데코레이션을 그림으로도 할 수 있다.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ul { list-style-image: url('sqpurple.gif'); }
+</code></pre></div></div>
+
+<p>줄넘김되는 다음 줄의 시작을 리스트 점 앞에서 할 건지 뒤에서 할건지 정할 수 있다.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ul.a { list-style-position: outside; }
+</code></pre></div></div>
+
+<h3 id="table">table</h3>
+
+<p>테이블 값이 너무 길어져 페이지를 넘어가지만, 개행하지는 않았으면 할 경우(스크롤)</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;div</span> <span class="na">style=</span><span class="s">"overflow-x:auto;"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;table&gt;</span>
+    ... table content ...
+  <span class="nt">&lt;/table&gt;</span>
+<span class="nt">&lt;/div&gt;</span>
+</code></pre></div></div>
+
+<h3 id="레이아웃을-컨트롤할-때-가장-중요한-display-속성">레이아웃을 컨트롤할 때 가장 중요한! display 속성</h3>
+
+<ul>
+  <li>항목마다 개행되어 보여지는 것을 한 줄에 보이려면, <code class="language-plaintext highlighter-rouge">display: inline;</code></li>
+  <li>inline 형태로 개행되지 않는 걸, 개행하려면 <code class="language-plaintext highlighter-rouge">display: block;</code></li>
+</ul>
+
+<h3 id="css-position">CSS Position</h3>
+
+<p>position values: 얘네는 포지션 속성이 세팅된 후 상대적으로 움직인다.</p>
+
+<ul>
+  <li>static: 평범한 페이지처럼 움직임.</li>
+  <li>relative</li>
+  <li>fixed: 고정값</li>
+  <li>absolute: 가장 가까운 조상을 기준으로.</li>
+  <li>sticky: 예를 들어 <code class="language-plaintext highlighter-rouge">top</code>값이 주어져 있으면 스크롤될 때 그 포지션을 유지한다.</li>
+</ul>
+
+<hr />
+
+<table>
+  <tbody>
+    <tr>
+      <td>radius: 반지름, 반경</td>
+      <td>fallback: 대비책</td>
+      <td>oblique: 사선의, 비스듬한</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+
+
+<div class="pagination">
+  
+  <a href="/2022-09-29/w3school" class="left arrow"
+    >&#8592;</a
+  >
+   
+  <a href="/2022-09-27/w3school" class="right arrow"
+    >&#8594;</a
+  >
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+</main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-08-05 22:38:38 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

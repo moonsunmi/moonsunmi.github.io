@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TIL) 뽀모 프로젝트 예약 기능 - 반복 일정을 위해 rrule | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="TIL) 뽀모 프로젝트 예약 기능 - 반복 일정을 위해 rrule" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="반복되는 일정을 위한 rrule" />
+<meta property="og:description" content="반복되는 일정을 위한 rrule" />
+<link rel="canonical" href="http://localhost:4000/2022-11-23/TIL" />
+<meta property="og:url" content="http://localhost:4000/2022-11-23/TIL" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-11-23T12:18:07+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TIL) 뽀모 프로젝트 예약 기능 - 반복 일정을 위해 rrule" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-11-23T12:18:07+09:00","datePublished":"2022-11-23T12:18:07+09:00","description":"반복되는 일정을 위한 rrule","headline":"TIL) 뽀모 프로젝트 예약 기능 - 반복 일정을 위해 rrule","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-11-23/TIL"},"url":"http://localhost:4000/2022-11-23/TIL"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main><div class="post">
+  <h1 class="post-title">TIL) 뽀모 프로젝트 예약 기능 - 반복 일정을 위해 rrule</h1>
+
+  <div class="post-info">
+    
+    <br />
+    <span>on&nbsp;</span
+    ><time datetime="2022-11-23 12:18:07 +0900">November 23, 2022</time>
+    
+  </div>
+
+  <h3 id="반복되는-일정을-위한-rrule">반복되는 일정을 위한 rrule</h3>
+
+<p>뽀모 프로젝트는 목표 뽀모도리 개수 대비 달성을 보여 주기 때문에 반복되는 일정을 저장해야 한다. 그래서 rrule을 사용한다. 다음은 rrule의 예제</p>
+
+<p>rrule.js</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">RRule</span><span class="p">,</span> <span class="nx">RRuleSet</span><span class="p">,</span> <span class="nx">rrulestr</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">rrule</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">TestingRrule</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">rule</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RRule</span><span class="p">({</span>
+    <span class="na">freq</span><span class="p">:</span> <span class="nx">RRule</span><span class="p">.</span><span class="nx">WEEKLY</span><span class="p">,</span>
+    <span class="na">byweekday</span><span class="p">:</span> <span class="p">[</span><span class="nx">RRule</span><span class="p">.</span><span class="nx">MO</span><span class="p">,</span> <span class="nx">RRule</span><span class="p">.</span><span class="nx">FR</span><span class="p">],</span>
+    <span class="na">dtstart</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="mi">2022</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">),</span>
+    <span class="na">until</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(),</span>
+  <span class="p">});</span>
+  <span class="kd">const</span> <span class="nx">dates</span> <span class="o">=</span> <span class="nx">rule</span><span class="p">.</span><span class="nx">all</span><span class="p">();</span>
+
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">dates</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      TestringRrule.js
+      <span class="si">{</span><span class="nx">dates</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">date</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
+        <span class="p">&lt;</span><span class="nt">span</span><span class="p">&gt;</span><span class="si">{</span><span class="nx">date</span><span class="p">.</span><span class="nx">getUTCMonth</span><span class="p">()</span><span class="si">}</span><span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+      <span class="p">))</span><span class="si">}</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">TestingRrule</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="타임로그-date-타입으로">타임로그 date 타입으로</h3>
+
+<p>타임로그를 date 타입으로 변경했다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">getDateFormat</span><span class="p">(</span><span class="nx">day</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">days</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">일</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">월</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">화</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">수</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">목</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">금</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">토</span><span class="dl">"</span><span class="p">];</span>
+  <span class="k">return</span> <span class="s2">`(</span><span class="p">${</span><span class="nx">days</span><span class="p">[</span><span class="nx">day</span><span class="p">.</span><span class="nx">getDay</span><span class="p">()]}</span><span class="s2">) </span><span class="p">${</span><span class="nx">day</span><span class="p">.</span><span class="nx">getFullYear</span><span class="p">().</span><span class="nx">toString</span><span class="p">().</span><span class="nx">slice</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)}</span><span class="s2">.
+    </span><span class="p">${</span><span class="nx">day</span><span class="p">.</span><span class="nx">getMonth</span><span class="p">().</span><span class="nx">toString</span><span class="p">().</span><span class="nx">padStart</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="dl">"</span><span class="s2">0</span><span class="dl">"</span><span class="p">)}</span><span class="s2">. 
+    </span><span class="p">${</span><span class="nx">day</span><span class="p">.</span><span class="nx">getDate</span><span class="p">().</span><span class="nx">toString</span><span class="p">().</span><span class="nx">padStart</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="dl">"</span><span class="s2">0</span><span class="dl">"</span><span class="p">)}</span><span class="s2">. 
+    </span><span class="p">${</span><span class="nx">day</span><span class="p">.</span><span class="nx">getHours</span><span class="p">().</span><span class="nx">toString</span><span class="p">().</span><span class="nx">padStart</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="dl">"</span><span class="s2">0</span><span class="dl">"</span><span class="p">)}</span><span class="s2"> :
+    </span><span class="p">${</span><span class="nx">day</span><span class="p">.</span><span class="nx">getMinutes</span><span class="p">().</span><span class="nx">toString</span><span class="p">().</span><span class="nx">padStart</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="dl">"</span><span class="s2">0</span><span class="dl">"</span><span class="p">)}</span><span class="s2">`</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">TimeLog</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">timeLog</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// 여기서 useContext를 쓸 수도 있다.</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"logContainer"</span><span class="p">&gt;</span>
+      <span class="si">{</span><span class="nx">getDateFormat</span><span class="p">(</span><span class="nx">timeLog</span><span class="p">.</span><span class="nx">start</span><span class="p">)</span><span class="si">}</span> -<span class="si">{</span><span class="dl">"</span><span class="s2"> </span><span class="dl">"</span><span class="si">}</span>
+      <span class="si">{</span><span class="nx">timeLog</span><span class="p">.</span><span class="nx">end</span> <span class="o">&amp;&amp;</span> <span class="nx">getDateFormat</span><span class="p">(</span><span class="nx">timeLog</span><span class="p">.</span><span class="nx">end</span><span class="p">)</span><span class="si">}</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">TimeLog</span><span class="p">;</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>수) 운동<br /></p>
+
+<ul>
+  <li>덤벨컬 좌우 번갈아가며 5분간</li>
+  <li>
+    <h2 id="크로스-크런치-힘들-때까지-5세트">크로스 크런치 힘들 때까지 5세트</h2>
+  </li>
+</ul>
+
+</div>
+
+
+
+<div class="pagination">
+  
+  <a href="/2022-11-24/TIL" class="left arrow"
+    >&#8592;</a
+  >
+   
+  <a href="/2022-11-22/TIL" class="right arrow"
+    >&#8594;</a
+  >
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+</main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-08-05 22:38:38 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

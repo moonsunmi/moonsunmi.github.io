@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TIL) 뽀모 프로젝트 예약 기능 - useInput 커스텀훅 재점검 | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="TIL) 뽀모 프로젝트 예약 기능 - useInput 커스텀훅 재점검" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="이름 재점검" />
+<meta property="og:description" content="이름 재점검" />
+<link rel="canonical" href="http://localhost:4000/2022-11-24/TIL" />
+<meta property="og:url" content="http://localhost:4000/2022-11-24/TIL" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-11-24T12:18:07+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TIL) 뽀모 프로젝트 예약 기능 - useInput 커스텀훅 재점검" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-11-24T12:18:07+09:00","datePublished":"2022-11-24T12:18:07+09:00","description":"이름 재점검","headline":"TIL) 뽀모 프로젝트 예약 기능 - useInput 커스텀훅 재점검","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-11-24/TIL"},"url":"http://localhost:4000/2022-11-24/TIL"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main><div class="post">
+  <h1 class="post-title">TIL) 뽀모 프로젝트 예약 기능 - useInput 커스텀훅 재점검</h1>
+
+  <div class="post-info">
+    
+    <br />
+    <span>on&nbsp;</span
+    ><time datetime="2022-11-24 12:18:07 +0900">November 24, 2022</time>
+    
+  </div>
+
+  <h3 id="이름-재점검">이름 재점검</h3>
+
+<p>오늘/이번주 뽀모도리 개수 등을 보여주는 부분을 ‘States’라고 했는데, 리액트에서 자주 나오는 상태와 표현이 같다. 헷갈릴 수 있으므로 report로 변경했다.</p>
+
+<h3 id="useinput-훅-재점검">useInput 훅 재점검</h3>
+
+<p>훅 안에 initialInput이 있는 게 이상해서… useInput 훅을 사용하는 쪽에서 initial 값을 넘겨 주게 하려고 했는데 오류가 나 버렸다.ㅠ 내일 고쳐야지…</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useCallback</span><span class="p">,</span> <span class="nx">useReducer</span><span class="p">,</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">PropTypes</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">prop-types</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">inputReducer</span><span class="p">(</span><span class="nx">state</span><span class="p">,</span> <span class="nx">action</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">switch</span> <span class="p">(</span><span class="nx">action</span><span class="p">.</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="dl">"</span><span class="s2">CHANGE</span><span class="dl">"</span><span class="p">:</span> <span class="c1">// type, name, value</span>
+      <span class="k">return</span> <span class="p">{</span> <span class="p">...</span><span class="nx">state</span><span class="p">,</span> <span class="p">[</span><span class="nx">action</span><span class="p">.</span><span class="nx">name</span><span class="p">]:</span> <span class="nx">action</span><span class="p">.</span><span class="nx">value</span> <span class="p">};</span>
+    <span class="k">case</span> <span class="dl">"</span><span class="s2">RESET</span><span class="dl">"</span><span class="p">:</span>
+      <span class="k">return</span> <span class="p">{</span> <span class="p">...</span><span class="nx">action</span><span class="p">.</span><span class="nx">initialInput</span> <span class="p">};</span>
+    <span class="nl">default</span><span class="p">:</span>
+      <span class="k">return</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s2">`Not Handled Action Type </span><span class="p">${</span><span class="nx">action</span><span class="p">.</span><span class="nx">type</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">useInputs</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">initialInput</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">initialInput</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">inputs</span><span class="p">,</span> <span class="nx">dispatch</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useReducer</span><span class="p">(</span><span class="nx">inputReducer</span><span class="p">,</span> <span class="nx">initialInput</span><span class="p">);</span>
+
+  <span class="kd">const</span> <span class="nx">onChangeInput</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">((</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="p">{</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">value</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">;</span>
+    <span class="nx">dispatch</span><span class="p">({</span> <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">CHANGE</span><span class="dl">"</span><span class="p">,</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">value</span> <span class="p">});</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+
+  <span class="kd">const</span> <span class="nx">resetInput</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">dispatch</span><span class="p">({</span> <span class="na">type</span><span class="p">:</span> <span class="dl">"</span><span class="s2">RESET</span><span class="dl">"</span> <span class="p">},</span> <span class="nx">initialInput</span><span class="p">);</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">inputs</span><span class="p">);</span>
+  <span class="k">return</span> <span class="p">[</span><span class="nx">inputs</span><span class="p">,</span> <span class="nx">onChangeInput</span><span class="p">,</span> <span class="nx">resetInput</span><span class="p">];</span>
+<span class="p">};</span>
+
+<span class="nx">useInputs</span><span class="p">.</span><span class="nx">propTypes</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">initialState</span><span class="p">:</span> <span class="nx">PropTypes</span><span class="p">.</span><span class="nx">shape</span><span class="p">({</span>
+    <span class="na">taskName</span><span class="p">:</span> <span class="nx">PropTypes</span><span class="p">.</span><span class="nx">string</span><span class="p">,</span>
+    <span class="na">date</span><span class="p">:</span> <span class="nx">PropTypes</span><span class="p">.</span><span class="nb">Date</span><span class="p">,</span>
+  <span class="p">}),</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">useInputs</span><span class="p">;</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>목) 운동<br /></p>
+
+<ul>
+  <li>허벅지 운동 20회 * 3세트</li>
+</ul>
+
+</div>
+
+
+
+<div class="pagination">
+  
+  <a href="/2022-11-25/TIL" class="left arrow"
+    >&#8592;</a
+  >
+   
+  <a href="/2022-11-23/TIL" class="right arrow"
+    >&#8594;</a
+  >
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+</main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-08-05 22:38:38 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TIL) 리액트를 다루는 기술 | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="TIL) 리액트를 다루는 기술" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="useMemo" />
+<meta property="og:description" content="useMemo" />
+<link rel="canonical" href="http://localhost:4000/2022-11-07/TIL" />
+<meta property="og:url" content="http://localhost:4000/2022-11-07/TIL" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-11-07T12:18:07+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TIL) 리액트를 다루는 기술" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-11-07T12:18:07+09:00","datePublished":"2022-11-07T12:18:07+09:00","description":"useMemo","headline":"TIL) 리액트를 다루는 기술","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-11-07/TIL"},"url":"http://localhost:4000/2022-11-07/TIL"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main><div class="post">
+  <h1 class="post-title">TIL) 리액트를 다루는 기술</h1>
+
+  <div class="post-info">
+    
+    <br />
+    <span>on&nbsp;</span
+    ><time datetime="2022-11-07 12:18:07 +0900">November 07, 2022</time>
+    
+  </div>
+
+  <h3 id="usememo">useMemo</h3>
+
+<p>useMemo: 이전에 사용한 값을 재사용한다는 의미를 가진다.</p>
+
+<p>다음과 같이 user가 바뀔 때만 다시 계산할 필요가 있는 getActiveUserNumber 함수는 useMemo를 이용하고, deps을 users로 지정해 준다. 그러면 user가 바뀔 때만 getActiveUserNumber를 실행해 계산한다. users가 바뀌지 않았다면 저장해둔 그 전값을 바로 사용한다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">getActiveUserNumber</span><span class="p">(</span><span class="nx">users</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">activeUserNumber Function called</span><span class="dl">"</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">users</span><span class="p">.</span><span class="nx">filter</span><span class="p">((</span><span class="nx">user</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">user</span><span class="p">.</span><span class="nx">active</span><span class="p">).</span><span class="nx">length</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">App</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">inputs</span><span class="p">,</span> <span class="nx">setInputs</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">({</span> <span class="na">username</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span> <span class="na">nickname</span><span class="p">:</span> <span class="dl">""</span> <span class="p">});</span>
+  <span class="kd">const</span> <span class="p">{</span> <span class="nx">username</span><span class="p">,</span> <span class="nx">nickname</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">inputs</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">nextId</span> <span class="o">=</span> <span class="nx">useRef</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">users</span><span class="p">,</span> <span class="nx">setUsers</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">([</span>
+    <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">username</span><span class="p">:</span> <span class="dl">"</span><span class="s2">도민준</span><span class="dl">"</span><span class="p">,</span> <span class="na">nickname</span><span class="p">:</span> <span class="dl">"</span><span class="s2">민준맘</span><span class="dl">"</span><span class="p">,</span> <span class="na">active</span><span class="p">:</span> <span class="kc">true</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="na">username</span><span class="p">:</span> <span class="dl">"</span><span class="s2">공유</span><span class="dl">"</span><span class="p">,</span> <span class="na">nickname</span><span class="p">:</span> <span class="dl">"</span><span class="s2">도깨비</span><span class="dl">"</span><span class="p">,</span> <span class="na">active</span><span class="p">:</span> <span class="kc">false</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="na">username</span><span class="p">:</span> <span class="dl">"</span><span class="s2">곽상준</span><span class="dl">"</span><span class="p">,</span> <span class="na">nickname</span><span class="p">:</span> <span class="dl">"</span><span class="s2">각도기</span><span class="dl">"</span><span class="p">,</span> <span class="na">active</span><span class="p">:</span> <span class="kc">false</span> <span class="p">},</span>
+  <span class="p">]);</span>
+
+  <span class="p">...</span>
+
+  <span class="kd">const</span> <span class="nx">activeUserNumber</span> <span class="o">=</span> <span class="nx">useMemo</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">getActiveUserNumber</span><span class="p">(</span><span class="nx">users</span><span class="p">);</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">users</span><span class="p">]);</span>
+
+  <span class="p">...</span>
+
+  <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">활성</span> <span class="nx">사용자</span> <span class="nx">수</span><span class="p">:</span> <span class="p">{</span><span class="nx">activeUserNumber</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/p</span><span class="err">&gt;
+</span></code></pre></div></div>
+
+<h3 id="usecallback--reactmemo">useCallback &amp; React.memo</h3>
+
+<p>useMemo의 함수 버전이 useCallback이다.</p>
+
+<p>useCallback을 사용하고, React.memo로 컴포넌트 렌더링 최적화 작업을 해 주어야 선응이 최적화된다.</p>
+
+<p>얘는 아직 어떻게 되는지 잘 모르겠다.</p>
+
+<p>UserList.js</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useEffect</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">User</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">memo</span><span class="p">(({</span> <span class="nx">user</span><span class="p">,</span> <span class="nx">onRemove</span><span class="p">,</span> <span class="nx">onToggleActive</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">user 값이 설정됨</span><span class="dl">"</span><span class="p">);</span>
+    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">user가 바뀌기 전..</span><span class="dl">"</span><span class="p">);</span>
+    <span class="p">};</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">user</span><span class="p">]);</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">b</span>
+        <span class="nx">style</span><span class="o">=</span><span class="p">{{</span>
+          <span class="na">cursor</span><span class="p">:</span> <span class="dl">"</span><span class="s2">pointer</span><span class="dl">"</span><span class="p">,</span>
+          <span class="na">color</span><span class="p">:</span> <span class="nx">user</span><span class="p">.</span><span class="nx">active</span> <span class="p">?</span> <span class="dl">"</span><span class="s2">green</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">black</span><span class="dl">"</span><span class="p">,</span>
+        <span class="p">}}</span>
+        <span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="nx">onToggleActive</span><span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">id</span><span class="p">)}</span>
+      <span class="o">&gt;</span>
+        <span class="p">{</span><span class="nx">user</span><span class="p">.</span><span class="nx">username</span><span class="p">}</span>
+      <span class="o">&lt;</span><span class="sr">/b&gt;{" "</span><span class="err">}
+</span>      <span class="p">(</span><span class="o">&lt;</span><span class="nx">span</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">user</span><span class="p">.</span><span class="nx">nickname</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/span&gt;</span><span class="err">)
+</span>      <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="nx">onRemove</span><span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">id</span><span class="p">)}</span><span class="o">&gt;</span><span class="nx">삭제</span><span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">});</span>
+
+<span class="kd">const</span> <span class="nx">UserList</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">users</span><span class="p">,</span> <span class="nx">onRemove</span><span class="p">,</span> <span class="nx">onToggleActive</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+      <span class="p">{</span><span class="nx">users</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">user</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">User</span>
+          <span class="nx">user</span><span class="o">=</span><span class="p">{</span><span class="nx">user</span><span class="p">}</span>
+          <span class="nx">key</span><span class="o">=</span><span class="p">{</span><span class="nx">user</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span>
+          <span class="nx">onRemove</span><span class="o">=</span><span class="p">{</span><span class="nx">onRemove</span><span class="p">}</span>
+          <span class="nx">onToggleActive</span><span class="o">=</span><span class="p">{</span><span class="nx">onToggleActive</span><span class="p">}</span>
+        <span class="sr">/</span><span class="err">&gt;
+</span>      <span class="p">))}</span>
+    <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">React</span><span class="p">.</span><span class="nx">memo</span><span class="p">(</span><span class="nx">UserList</span><span class="p">);</span>
+
+</code></pre></div></div>
+
+<p>CreateUser.js</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">CreateUser</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">username</span><span class="p">,</span> <span class="nx">nickname</span><span class="p">,</span> <span class="nx">onChange</span><span class="p">,</span> <span class="nx">onCreate</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">div</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">input</span>
+        <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">username</span><span class="dl">"</span>
+        <span class="nx">placeholder</span><span class="o">=</span><span class="dl">"</span><span class="s2">계정명</span><span class="dl">"</span>
+        <span class="nx">onChange</span><span class="o">=</span><span class="p">{</span><span class="nx">onChange</span><span class="p">}</span>
+        <span class="nx">value</span><span class="o">=</span><span class="p">{</span><span class="nx">username</span><span class="p">}</span>
+      <span class="o">&gt;&lt;</span><span class="sr">/input</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="nx">input</span>
+        <span class="nx">name</span><span class="o">=</span><span class="dl">"</span><span class="s2">nickname</span><span class="dl">"</span>
+        <span class="nx">placeholder</span><span class="o">=</span><span class="dl">"</span><span class="s2">닉네임</span><span class="dl">"</span>
+        <span class="nx">onChange</span><span class="o">=</span><span class="p">{</span><span class="nx">onChange</span><span class="p">}</span>
+        <span class="nx">value</span><span class="o">=</span><span class="p">{</span><span class="nx">nickname</span><span class="p">}</span>
+      <span class="o">&gt;&lt;</span><span class="sr">/input</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">type</span><span class="o">=</span><span class="dl">"</span><span class="s2">submit</span><span class="dl">"</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">onCreate</span><span class="p">}</span><span class="o">&gt;</span>
+        <span class="nx">등록</span>
+      <span class="o">&lt;</span><span class="sr">/button</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">React</span><span class="p">.</span><span class="nx">memo</span><span class="p">(</span><span class="nx">CreateUser</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>App.js</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Info</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./Info</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useCallback</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="dl">"</span><span class="s2">./App.css</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Counter</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./Counter</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">CreateUser</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./CreateUser</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">InputSample</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./InputSample</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">UserList</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./UserList</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">useMemo</span><span class="p">,</span> <span class="nx">useRef</span><span class="p">,</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">getActiveUserNumber</span><span class="p">(</span><span class="nx">users</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">activeUserNumber Function called</span><span class="dl">"</span><span class="p">);</span>
+  <span class="k">return</span> <span class="nx">users</span><span class="p">.</span><span class="nx">filter</span><span class="p">((</span><span class="nx">user</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">user</span><span class="p">.</span><span class="nx">active</span><span class="p">).</span><span class="nx">length</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">App</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">inputs</span><span class="p">,</span> <span class="nx">setInputs</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">({</span> <span class="na">username</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span> <span class="na">nickname</span><span class="p">:</span> <span class="dl">""</span> <span class="p">});</span>
+  <span class="kd">const</span> <span class="p">{</span> <span class="nx">username</span><span class="p">,</span> <span class="nx">nickname</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">inputs</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">nextId</span> <span class="o">=</span> <span class="nx">useRef</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">users</span><span class="p">,</span> <span class="nx">setUsers</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">([</span>
+    <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">username</span><span class="p">:</span> <span class="dl">"</span><span class="s2">도민준</span><span class="dl">"</span><span class="p">,</span> <span class="na">nickname</span><span class="p">:</span> <span class="dl">"</span><span class="s2">민준맘</span><span class="dl">"</span><span class="p">,</span> <span class="na">active</span><span class="p">:</span> <span class="kc">true</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="na">username</span><span class="p">:</span> <span class="dl">"</span><span class="s2">공유</span><span class="dl">"</span><span class="p">,</span> <span class="na">nickname</span><span class="p">:</span> <span class="dl">"</span><span class="s2">도깨비</span><span class="dl">"</span><span class="p">,</span> <span class="na">active</span><span class="p">:</span> <span class="kc">false</span> <span class="p">},</span>
+    <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="na">username</span><span class="p">:</span> <span class="dl">"</span><span class="s2">곽상준</span><span class="dl">"</span><span class="p">,</span> <span class="na">nickname</span><span class="p">:</span> <span class="dl">"</span><span class="s2">각도기</span><span class="dl">"</span><span class="p">,</span> <span class="na">active</span><span class="p">:</span> <span class="kc">false</span> <span class="p">},</span>
+  <span class="p">]);</span>
+
+  <span class="kd">const</span> <span class="nx">onChange</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(</span>
+    <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="p">{</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">value</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">;</span>
+
+      <span class="nx">setInputs</span><span class="p">({</span> <span class="p">...</span><span class="nx">inputs</span><span class="p">,</span> <span class="p">[</span><span class="nx">name</span><span class="p">]:</span> <span class="nx">value</span> <span class="p">});</span>
+    <span class="p">},</span>
+    <span class="p">[</span><span class="nx">inputs</span><span class="p">]</span>
+  <span class="p">);</span>
+
+  <span class="kd">const</span> <span class="nx">onCreate</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">user</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">id</span><span class="p">:</span> <span class="nx">nextId</span><span class="p">.</span><span class="nx">current</span><span class="p">,</span>
+      <span class="nx">username</span><span class="p">,</span>
+      <span class="nx">nickname</span><span class="p">,</span>
+    <span class="p">};</span>
+    <span class="nx">setUsers</span><span class="p">([...</span><span class="nx">users</span><span class="p">,</span> <span class="nx">user</span><span class="p">]);</span>
+    <span class="nx">nextId</span><span class="p">.</span><span class="nx">current</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">users</span><span class="p">);</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">users</span><span class="p">,</span> <span class="nx">username</span><span class="p">,</span> <span class="nx">nickname</span><span class="p">]);</span>
+
+  <span class="kd">const</span> <span class="nx">onRemove</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(</span>
+    <span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">setUsers</span><span class="p">(</span><span class="nx">users</span><span class="p">.</span><span class="nx">filter</span><span class="p">((</span><span class="nx">user</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">user</span><span class="p">.</span><span class="nx">id</span> <span class="o">!=</span> <span class="nx">id</span><span class="p">));</span>
+    <span class="p">},</span>
+    <span class="p">[</span><span class="nx">users</span><span class="p">]</span>
+  <span class="p">);</span>
+
+  <span class="kd">const</span> <span class="nx">onToggleActive</span> <span class="o">=</span> <span class="nx">useCallback</span><span class="p">(</span>
+    <span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">setUsers</span><span class="p">(</span>
+        <span class="nx">users</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">user</span><span class="p">)</span> <span class="o">=&gt;</span>
+          <span class="nx">user</span><span class="p">.</span><span class="nx">id</span> <span class="o">===</span> <span class="nx">id</span> <span class="p">?</span> <span class="p">{</span> <span class="p">...</span><span class="nx">user</span><span class="p">,</span> <span class="na">active</span><span class="p">:</span> <span class="o">!</span><span class="nx">user</span><span class="p">.</span><span class="nx">active</span> <span class="p">}</span> <span class="p">:</span> <span class="nx">user</span>
+        <span class="p">)</span>
+      <span class="p">);</span>
+    <span class="p">},</span>
+    <span class="p">[</span><span class="nx">users</span><span class="p">]</span>
+  <span class="p">);</span>
+
+  <span class="kd">const</span> <span class="nx">activeUserNumber</span> <span class="o">=</span> <span class="nx">useMemo</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">getActiveUserNumber</span><span class="p">(</span><span class="nx">users</span><span class="p">);</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">users</span><span class="p">]);</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">App</span><span class="dl">"</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">CreateUser</span>
+        <span class="nx">username</span><span class="o">=</span><span class="p">{</span><span class="nx">username</span><span class="p">}</span>
+        <span class="nx">nickname</span><span class="o">=</span><span class="p">{</span><span class="nx">nickname</span><span class="p">}</span>
+        <span class="nx">onChange</span><span class="o">=</span><span class="p">{</span><span class="nx">onChange</span><span class="p">}</span>
+        <span class="nx">onCreate</span><span class="o">=</span><span class="p">{</span><span class="nx">onCreate</span><span class="p">}</span>
+      <span class="sr">/</span><span class="err">&gt;
+</span>      <span class="p">{</span><span class="cm">/* props 전달 &lt;InputSample /&gt;*/</span><span class="p">}</span>
+
+      <span class="o">&lt;</span><span class="nx">hr</span> <span class="o">/&gt;</span>
+      <span class="o">&lt;</span><span class="nx">UserList</span>
+        <span class="nx">users</span><span class="o">=</span><span class="p">{</span><span class="nx">users</span><span class="p">}</span>
+        <span class="nx">onRemove</span><span class="o">=</span><span class="p">{</span><span class="nx">onRemove</span><span class="p">}</span>
+        <span class="nx">onToggleActive</span><span class="o">=</span><span class="p">{</span><span class="nx">onToggleActive</span><span class="p">}</span>
+      <span class="sr">/</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">활성</span> <span class="nx">사용자</span> <span class="nx">수</span><span class="p">:</span> <span class="p">{</span><span class="nx">activeUserNumber</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/p</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">App</span><span class="p">;</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>월) 운동</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>종아리</th>
+      <th>앞벅지</th>
+      <th>삼두</th>
+      <th>뒷벅지</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>3/3</td>
+      <td>3/3</td>
+      <td>3/3</td>
+      <td>3/3</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+
+
+<div class="pagination">
+  
+  <a href="/2022-11-09/TIL" class="left arrow"
+    >&#8592;</a
+  >
+   
+  <a href="/2022-11-06/15th-week" class="right arrow"
+    >&#8594;</a
+  >
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+</main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-08-05 22:38:38 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

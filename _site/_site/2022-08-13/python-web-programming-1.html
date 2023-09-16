@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>파이썬 웹 프로그래밍 공부 1 | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="파이썬 웹 프로그래밍 공부 1" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="1장 웹 프로그래밍의 이해 웹 프로그래밍이란? HTTP 프로토콜로 통신하는, 클라이언트와 서버를 개발하는 것. 리눅스 curl 명령은 HTTP, HTTPS, FTP 등 여러 프로토콜을 사용하여 데이터를 송수신할 수 있는 명령. 웹 클라이언트 역할 수행 리눅스 telnet을 사용하려 하는데, 오류가 발생했다. zsh: command not found: telnet macOS에서 telnet 사용하려면 install해야 한다. &gt; https://osxdaily.com/2018/07/18/get-telnet-macos/ homebrew 깔다가 에러가 났다. error: Not a valid ref: refs/remotes/origin/master 찾아보니 brew 설치 중 중단되어서 그런 거 같다. &gt; https://worldseawater.tistory.com/87 오래 걸리길래 잘못되었나 싶어서 중간에 꺼 버렸다… ㅠ doctor가 하라는데로 다음의 명령어를 실행해서 homebrew를 깔았다. &gt; rm -rf &quot;/opt/homebrew/Library/Taps/homebrew/homebrew-core&quot; &gt; brew tap homebrew/core 명의다! 잘 된다. brew install telnet으로 텔넷 설치까지 완료. 직접 만든 클라이언트로 요청할 수도 있다. import urllib.request print(urllib.request.urlopen(&quot;http://www.example.com&quot;).read().decode(&#39;utf-8&#39;)) HTTP 프로토콜: 웹 서버와 웹 클라이언트 사이에서 데이터를 주고받기 위해 사용하는 통신 방식. TCP/IP 프로토콜 위에서 동작한다. #####HTTP 메시지의 구조 스타트라인 (요청 라인 또는 상태라인) ————- 헤더 ———— 빈 줄 ———– 바디 스타트라인은 요청 메시지면 요청라인, 응답 메시지일 때 상태라인이라고 한다. 요청 메시지의 예시 1 2 3 GET http://www.example.com:8080/book/shakespeare HTTP/1.1 요청방식 요청 URL 프로토콜 버전 HTTP 메서드를 통해서 클라이언트가 원하는 처리 방식을 서버에 알려준다. GET : Read POST : Create(블로그에 글을 등록하는 경우처럼 리소스를 생성하는 기능.) PUT: Update DELETE: delete HEAD: 리소스의 헤더 취득 OPTIONS 리소스가 서포트하는 메서드 취득 TRACE: 루프백 시험에 사용 CONNECT: 프록시 동작의 터널 접속으로 변경 폼에서 사용자가 입력한 데이터들을 서버로 보낼 때, GET은 url ? 뒤에 이름=값 쌍으로 이어 붙여 보낸다. (너무 길어지면 못씀) 상태 코드 1xx: 현재 요청까지 처리되었으니 계속 진행하라 2xx: 성공 3xx: 리다이렉션. 완전한 처리를 위해 추가적인 동작이 필요하다. 4xx: 클라이언트 요청 잘못 5xx: 서버 에러 URL 설계: 고객의 요구사항이 정리되면, URL을 먼저 설계하게 된다. 웹 서버 로직 설계의 첫걸음. URL은 웹 클라이언트에서 호출한다는 시점에서 보면, 웹 서버에 존재하는 애플리케이션에 대한 API라고 할 수 있다. #####URL을 API 명명 규칙에 따라 정하는 방법 RPC: 서버가 제공하는 API 함수를 호출하는 방식(대부분 URL 경로가 동사) REST: 서버에 존재하는 요소를 모두 리소스라고 정의하고, URL을 통해 웹 서버의 특정 리소스를 표현한다는 개념. 클라이언트와 서버 간 데이터 교환을 리소스 상태의 교환으로 간주한다. 간편 URL은 쿼리스트링 없이 경로만 가진 간단한 구조의 URL #####웹 서버 vs. 웹 애플리케이션 서버 웹 서버: 주로 정적 페이지를 웹 클라이언트에 제공. 동적 페이지 처리가 필요하면 웹 애플리케이션 서버에 넘김. 웹 애플리케이션 서버: 동적 페이지 요청을 받아서 처리하고, 결과를 웹 서버로 반환. #####정적 페이지 vs. 동적 페이지 정적 페이지: 항상 같은 내용을 표시하는 웹 페이지. 웹 서비스의 제공자가 사전에 준비하여 서버 측에 배치한 것 동적 페이지: 누가, 언제, 어떻게 요구했는지에 따라 다른 내용이 반환되는 페이지. 예) 온라인 쇼핑 몰에서의 사용자마다 다른 카트 내용 점차 동적 페이지에 대한 요구사항이 많아지면서, 웹 서버와는 다른 별도의 프로그램이 필요하게 되었다. 이러한 별도의 프로그램과 웹 서버 사이에 정보를 주고받는 규칙을 정의한 것이 바로 CGI 규격. 파이썬의 경우 mod_wsgi 모듈을 사용하고 있다. 스크립트 엔진을 웹 서버에 내장시켜 애플리케이션의 처리를 고속화함. 또 다른 방식은 애플리케이션을 처리하는 프로세스를 미리 데몬으로 기동시켜 놓은 후, 웹 서버의 요청을 데몬(사용자가 직접 제어하지 않고 백그라운드에서 돌면서 여러 작업을 하는 것)에서 처리하는 것. 웹 애플리케이션 서버에서 정적, 동적 페이지 모두 처리하는 것보단 동적 페이지만 처리하는 게 나음. 2장 파이썬 웹 표준 라이브러리 urllib 패키지: 웹 클라이언트용. 주로 URL 처리와 서버 액세스 관련 API 제공. http 패키지: 서버용과 클라이언트용 라이브러리로 나누어 모듈을 담고 있다. 트위터 구글 같은 인터넷 서비스 제공 회사들이 외부의 프로그램들이 자신의 서비스를 사용할 수 있도록 OpenAPI를 제공하고 있으며, 이런 OpenAPI 대부분이 HTTP 프로토콜을 사용하고 있기 때문에 OpenAPI를 호출하는 프로그램도 웹 클라이언트라고 볼 수 있다. urlparse() 함수는 URL을 파싱한 결과로 ParseResult 인스턴스를 반환한다. from urllib.parse import urlparse result = urlparse(&quot;http://www.python.org:80/guido/python.html;philosophy?overall=3#n10&quot;) print(result) urllib.request 모듈: 주어진 URL에서 데이터를 가져오는 기본 기능을 제공한다. urlopen() 함수: 디폴트는 GET. 웹 서버에 전달할 파라미터가 있으면 질의 문자열을 url 인자에 포함해서 보냄. POST로 보내고 싶으면 data 인자에 포함해서 보냄. URL로 GET/POST 방식의 간단한 요청 처리: urlopen() 함수’만’으로 가능 PUT, HEAD 메서드 등. 헤더 조작이 필요하면: Request 클래스를 ‘같이’ 사용. #####GET 방식 요청 from urllib.request import urlopen f = urlopen(&quot;http://www.example.com&quot;) print(f.read(500).decode(&#39;utf-8&#39;)) HTTP GET 방식을 디폴트로 사용하여 웹 서버에 요청을 보낸다. #####POST 방식 요청 from urllib.request import urlopen data = &quot;language=python&amp;framework=django&quot; f = urlopen(&quot;http://127.0.0.1:8000&quot;, bytes(data, encoding=&#39;utf-8&#39;)) print(f.read(500).decode(&#39;utf-8&#39;)) urlopen() 호출 시 data 인자를 지정해 주면, 자동으로 POST 방식으로 요청을 보냄. data는 바이트스트링 타입이어야 한다.(유니코드 str X)" />
+<meta property="og:description" content="1장 웹 프로그래밍의 이해 웹 프로그래밍이란? HTTP 프로토콜로 통신하는, 클라이언트와 서버를 개발하는 것. 리눅스 curl 명령은 HTTP, HTTPS, FTP 등 여러 프로토콜을 사용하여 데이터를 송수신할 수 있는 명령. 웹 클라이언트 역할 수행 리눅스 telnet을 사용하려 하는데, 오류가 발생했다. zsh: command not found: telnet macOS에서 telnet 사용하려면 install해야 한다. &gt; https://osxdaily.com/2018/07/18/get-telnet-macos/ homebrew 깔다가 에러가 났다. error: Not a valid ref: refs/remotes/origin/master 찾아보니 brew 설치 중 중단되어서 그런 거 같다. &gt; https://worldseawater.tistory.com/87 오래 걸리길래 잘못되었나 싶어서 중간에 꺼 버렸다… ㅠ doctor가 하라는데로 다음의 명령어를 실행해서 homebrew를 깔았다. &gt; rm -rf &quot;/opt/homebrew/Library/Taps/homebrew/homebrew-core&quot; &gt; brew tap homebrew/core 명의다! 잘 된다. brew install telnet으로 텔넷 설치까지 완료. 직접 만든 클라이언트로 요청할 수도 있다. import urllib.request print(urllib.request.urlopen(&quot;http://www.example.com&quot;).read().decode(&#39;utf-8&#39;)) HTTP 프로토콜: 웹 서버와 웹 클라이언트 사이에서 데이터를 주고받기 위해 사용하는 통신 방식. TCP/IP 프로토콜 위에서 동작한다. #####HTTP 메시지의 구조 스타트라인 (요청 라인 또는 상태라인) ————- 헤더 ———— 빈 줄 ———– 바디 스타트라인은 요청 메시지면 요청라인, 응답 메시지일 때 상태라인이라고 한다. 요청 메시지의 예시 1 2 3 GET http://www.example.com:8080/book/shakespeare HTTP/1.1 요청방식 요청 URL 프로토콜 버전 HTTP 메서드를 통해서 클라이언트가 원하는 처리 방식을 서버에 알려준다. GET : Read POST : Create(블로그에 글을 등록하는 경우처럼 리소스를 생성하는 기능.) PUT: Update DELETE: delete HEAD: 리소스의 헤더 취득 OPTIONS 리소스가 서포트하는 메서드 취득 TRACE: 루프백 시험에 사용 CONNECT: 프록시 동작의 터널 접속으로 변경 폼에서 사용자가 입력한 데이터들을 서버로 보낼 때, GET은 url ? 뒤에 이름=값 쌍으로 이어 붙여 보낸다. (너무 길어지면 못씀) 상태 코드 1xx: 현재 요청까지 처리되었으니 계속 진행하라 2xx: 성공 3xx: 리다이렉션. 완전한 처리를 위해 추가적인 동작이 필요하다. 4xx: 클라이언트 요청 잘못 5xx: 서버 에러 URL 설계: 고객의 요구사항이 정리되면, URL을 먼저 설계하게 된다. 웹 서버 로직 설계의 첫걸음. URL은 웹 클라이언트에서 호출한다는 시점에서 보면, 웹 서버에 존재하는 애플리케이션에 대한 API라고 할 수 있다. #####URL을 API 명명 규칙에 따라 정하는 방법 RPC: 서버가 제공하는 API 함수를 호출하는 방식(대부분 URL 경로가 동사) REST: 서버에 존재하는 요소를 모두 리소스라고 정의하고, URL을 통해 웹 서버의 특정 리소스를 표현한다는 개념. 클라이언트와 서버 간 데이터 교환을 리소스 상태의 교환으로 간주한다. 간편 URL은 쿼리스트링 없이 경로만 가진 간단한 구조의 URL #####웹 서버 vs. 웹 애플리케이션 서버 웹 서버: 주로 정적 페이지를 웹 클라이언트에 제공. 동적 페이지 처리가 필요하면 웹 애플리케이션 서버에 넘김. 웹 애플리케이션 서버: 동적 페이지 요청을 받아서 처리하고, 결과를 웹 서버로 반환. #####정적 페이지 vs. 동적 페이지 정적 페이지: 항상 같은 내용을 표시하는 웹 페이지. 웹 서비스의 제공자가 사전에 준비하여 서버 측에 배치한 것 동적 페이지: 누가, 언제, 어떻게 요구했는지에 따라 다른 내용이 반환되는 페이지. 예) 온라인 쇼핑 몰에서의 사용자마다 다른 카트 내용 점차 동적 페이지에 대한 요구사항이 많아지면서, 웹 서버와는 다른 별도의 프로그램이 필요하게 되었다. 이러한 별도의 프로그램과 웹 서버 사이에 정보를 주고받는 규칙을 정의한 것이 바로 CGI 규격. 파이썬의 경우 mod_wsgi 모듈을 사용하고 있다. 스크립트 엔진을 웹 서버에 내장시켜 애플리케이션의 처리를 고속화함. 또 다른 방식은 애플리케이션을 처리하는 프로세스를 미리 데몬으로 기동시켜 놓은 후, 웹 서버의 요청을 데몬(사용자가 직접 제어하지 않고 백그라운드에서 돌면서 여러 작업을 하는 것)에서 처리하는 것. 웹 애플리케이션 서버에서 정적, 동적 페이지 모두 처리하는 것보단 동적 페이지만 처리하는 게 나음. 2장 파이썬 웹 표준 라이브러리 urllib 패키지: 웹 클라이언트용. 주로 URL 처리와 서버 액세스 관련 API 제공. http 패키지: 서버용과 클라이언트용 라이브러리로 나누어 모듈을 담고 있다. 트위터 구글 같은 인터넷 서비스 제공 회사들이 외부의 프로그램들이 자신의 서비스를 사용할 수 있도록 OpenAPI를 제공하고 있으며, 이런 OpenAPI 대부분이 HTTP 프로토콜을 사용하고 있기 때문에 OpenAPI를 호출하는 프로그램도 웹 클라이언트라고 볼 수 있다. urlparse() 함수는 URL을 파싱한 결과로 ParseResult 인스턴스를 반환한다. from urllib.parse import urlparse result = urlparse(&quot;http://www.python.org:80/guido/python.html;philosophy?overall=3#n10&quot;) print(result) urllib.request 모듈: 주어진 URL에서 데이터를 가져오는 기본 기능을 제공한다. urlopen() 함수: 디폴트는 GET. 웹 서버에 전달할 파라미터가 있으면 질의 문자열을 url 인자에 포함해서 보냄. POST로 보내고 싶으면 data 인자에 포함해서 보냄. URL로 GET/POST 방식의 간단한 요청 처리: urlopen() 함수’만’으로 가능 PUT, HEAD 메서드 등. 헤더 조작이 필요하면: Request 클래스를 ‘같이’ 사용. #####GET 방식 요청 from urllib.request import urlopen f = urlopen(&quot;http://www.example.com&quot;) print(f.read(500).decode(&#39;utf-8&#39;)) HTTP GET 방식을 디폴트로 사용하여 웹 서버에 요청을 보낸다. #####POST 방식 요청 from urllib.request import urlopen data = &quot;language=python&amp;framework=django&quot; f = urlopen(&quot;http://127.0.0.1:8000&quot;, bytes(data, encoding=&#39;utf-8&#39;)) print(f.read(500).decode(&#39;utf-8&#39;)) urlopen() 호출 시 data 인자를 지정해 주면, 자동으로 POST 방식으로 요청을 보냄. data는 바이트스트링 타입이어야 한다.(유니코드 str X)" />
+<link rel="canonical" href="http://localhost:4000/2022-08-13/python-web-programming-1" />
+<meta property="og:url" content="http://localhost:4000/2022-08-13/python-web-programming-1" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-08-13T22:12:45+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="파이썬 웹 프로그래밍 공부 1" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-08-13T22:12:45+09:00","datePublished":"2022-08-13T22:12:45+09:00","description":"1장 웹 프로그래밍의 이해 웹 프로그래밍이란? HTTP 프로토콜로 통신하는, 클라이언트와 서버를 개발하는 것. 리눅스 curl 명령은 HTTP, HTTPS, FTP 등 여러 프로토콜을 사용하여 데이터를 송수신할 수 있는 명령. 웹 클라이언트 역할 수행 리눅스 telnet을 사용하려 하는데, 오류가 발생했다. zsh: command not found: telnet macOS에서 telnet 사용하려면 install해야 한다. &gt; https://osxdaily.com/2018/07/18/get-telnet-macos/ homebrew 깔다가 에러가 났다. error: Not a valid ref: refs/remotes/origin/master 찾아보니 brew 설치 중 중단되어서 그런 거 같다. &gt; https://worldseawater.tistory.com/87 오래 걸리길래 잘못되었나 싶어서 중간에 꺼 버렸다… ㅠ doctor가 하라는데로 다음의 명령어를 실행해서 homebrew를 깔았다. &gt; rm -rf &quot;/opt/homebrew/Library/Taps/homebrew/homebrew-core&quot; &gt; brew tap homebrew/core 명의다! 잘 된다. brew install telnet으로 텔넷 설치까지 완료. 직접 만든 클라이언트로 요청할 수도 있다. import urllib.request print(urllib.request.urlopen(&quot;http://www.example.com&quot;).read().decode(&#39;utf-8&#39;)) HTTP 프로토콜: 웹 서버와 웹 클라이언트 사이에서 데이터를 주고받기 위해 사용하는 통신 방식. TCP/IP 프로토콜 위에서 동작한다. #####HTTP 메시지의 구조 스타트라인 (요청 라인 또는 상태라인) ————- 헤더 ———— 빈 줄 ———– 바디 스타트라인은 요청 메시지면 요청라인, 응답 메시지일 때 상태라인이라고 한다. 요청 메시지의 예시 1 2 3 GET http://www.example.com:8080/book/shakespeare HTTP/1.1 요청방식 요청 URL 프로토콜 버전 HTTP 메서드를 통해서 클라이언트가 원하는 처리 방식을 서버에 알려준다. GET : Read POST : Create(블로그에 글을 등록하는 경우처럼 리소스를 생성하는 기능.) PUT: Update DELETE: delete HEAD: 리소스의 헤더 취득 OPTIONS 리소스가 서포트하는 메서드 취득 TRACE: 루프백 시험에 사용 CONNECT: 프록시 동작의 터널 접속으로 변경 폼에서 사용자가 입력한 데이터들을 서버로 보낼 때, GET은 url ? 뒤에 이름=값 쌍으로 이어 붙여 보낸다. (너무 길어지면 못씀) 상태 코드 1xx: 현재 요청까지 처리되었으니 계속 진행하라 2xx: 성공 3xx: 리다이렉션. 완전한 처리를 위해 추가적인 동작이 필요하다. 4xx: 클라이언트 요청 잘못 5xx: 서버 에러 URL 설계: 고객의 요구사항이 정리되면, URL을 먼저 설계하게 된다. 웹 서버 로직 설계의 첫걸음. URL은 웹 클라이언트에서 호출한다는 시점에서 보면, 웹 서버에 존재하는 애플리케이션에 대한 API라고 할 수 있다. #####URL을 API 명명 규칙에 따라 정하는 방법 RPC: 서버가 제공하는 API 함수를 호출하는 방식(대부분 URL 경로가 동사) REST: 서버에 존재하는 요소를 모두 리소스라고 정의하고, URL을 통해 웹 서버의 특정 리소스를 표현한다는 개념. 클라이언트와 서버 간 데이터 교환을 리소스 상태의 교환으로 간주한다. 간편 URL은 쿼리스트링 없이 경로만 가진 간단한 구조의 URL #####웹 서버 vs. 웹 애플리케이션 서버 웹 서버: 주로 정적 페이지를 웹 클라이언트에 제공. 동적 페이지 처리가 필요하면 웹 애플리케이션 서버에 넘김. 웹 애플리케이션 서버: 동적 페이지 요청을 받아서 처리하고, 결과를 웹 서버로 반환. #####정적 페이지 vs. 동적 페이지 정적 페이지: 항상 같은 내용을 표시하는 웹 페이지. 웹 서비스의 제공자가 사전에 준비하여 서버 측에 배치한 것 동적 페이지: 누가, 언제, 어떻게 요구했는지에 따라 다른 내용이 반환되는 페이지. 예) 온라인 쇼핑 몰에서의 사용자마다 다른 카트 내용 점차 동적 페이지에 대한 요구사항이 많아지면서, 웹 서버와는 다른 별도의 프로그램이 필요하게 되었다. 이러한 별도의 프로그램과 웹 서버 사이에 정보를 주고받는 규칙을 정의한 것이 바로 CGI 규격. 파이썬의 경우 mod_wsgi 모듈을 사용하고 있다. 스크립트 엔진을 웹 서버에 내장시켜 애플리케이션의 처리를 고속화함. 또 다른 방식은 애플리케이션을 처리하는 프로세스를 미리 데몬으로 기동시켜 놓은 후, 웹 서버의 요청을 데몬(사용자가 직접 제어하지 않고 백그라운드에서 돌면서 여러 작업을 하는 것)에서 처리하는 것. 웹 애플리케이션 서버에서 정적, 동적 페이지 모두 처리하는 것보단 동적 페이지만 처리하는 게 나음. 2장 파이썬 웹 표준 라이브러리 urllib 패키지: 웹 클라이언트용. 주로 URL 처리와 서버 액세스 관련 API 제공. http 패키지: 서버용과 클라이언트용 라이브러리로 나누어 모듈을 담고 있다. 트위터 구글 같은 인터넷 서비스 제공 회사들이 외부의 프로그램들이 자신의 서비스를 사용할 수 있도록 OpenAPI를 제공하고 있으며, 이런 OpenAPI 대부분이 HTTP 프로토콜을 사용하고 있기 때문에 OpenAPI를 호출하는 프로그램도 웹 클라이언트라고 볼 수 있다. urlparse() 함수는 URL을 파싱한 결과로 ParseResult 인스턴스를 반환한다. from urllib.parse import urlparse result = urlparse(&quot;http://www.python.org:80/guido/python.html;philosophy?overall=3#n10&quot;) print(result) urllib.request 모듈: 주어진 URL에서 데이터를 가져오는 기본 기능을 제공한다. urlopen() 함수: 디폴트는 GET. 웹 서버에 전달할 파라미터가 있으면 질의 문자열을 url 인자에 포함해서 보냄. POST로 보내고 싶으면 data 인자에 포함해서 보냄. URL로 GET/POST 방식의 간단한 요청 처리: urlopen() 함수’만’으로 가능 PUT, HEAD 메서드 등. 헤더 조작이 필요하면: Request 클래스를 ‘같이’ 사용. #####GET 방식 요청 from urllib.request import urlopen f = urlopen(&quot;http://www.example.com&quot;) print(f.read(500).decode(&#39;utf-8&#39;)) HTTP GET 방식을 디폴트로 사용하여 웹 서버에 요청을 보낸다. #####POST 방식 요청 from urllib.request import urlopen data = &quot;language=python&amp;framework=django&quot; f = urlopen(&quot;http://127.0.0.1:8000&quot;, bytes(data, encoding=&#39;utf-8&#39;)) print(f.read(500).decode(&#39;utf-8&#39;)) urlopen() 호출 시 data 인자를 지정해 주면, 자동으로 POST 방식으로 요청을 보냄. data는 바이트스트링 타입이어야 한다.(유니코드 str X)","headline":"파이썬 웹 프로그래밍 공부 1","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-08-13/python-web-programming-1"},"url":"http://localhost:4000/2022-08-13/python-web-programming-1"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main><div class="post">
+  <h1 class="post-title">파이썬 웹 프로그래밍 공부 1</h1>
+
+  <div class="post-info">
+    
+    <br />
+    <span>on&nbsp;</span
+    ><time datetime="2022-08-13 22:12:45 +0900">August 13, 2022</time>
+    
+  </div>
+
+  <h2 id="1장-웹-프로그래밍의-이해">1장 웹 프로그래밍의 이해</h2>
+
+<p>웹 프로그래밍이란? HTTP 프로토콜로 통신하는, 클라이언트와 서버를 개발하는 것.</p>
+
+<p>리눅스 curl 명령은 HTTP, HTTPS, FTP 등 여러 프로토콜을 사용하여 데이터를 송수신할 수 있는 명령. 웹 클라이언트 역할 수행</p>
+
+<blockquote>
+  <p>리눅스 telnet을 사용하려 하는데, 오류가 발생했다.<br />
+zsh: command not found: telnet<br />
+macOS에서 telnet 사용하려면 install해야 한다.<br /> &gt; https://osxdaily.com/2018/07/18/get-telnet-macos/</p>
+</blockquote>
+
+<blockquote>
+  <p>homebrew 깔다가 에러가 났다.<br />
+error: Not a valid ref: refs/remotes/origin/master<br />
+찾아보니 brew 설치 중 중단되어서 그런 거 같다.<br /> &gt; https://worldseawater.tistory.com/87
+오래 걸리길래 잘못되었나 싶어서 중간에 꺼 버렸다… ㅠ doctor가 하라는데로 다음의 명령어를 실행해서 homebrew를 깔았다.<br /> &gt; <code class="language-plaintext highlighter-rouge">rm -rf "/opt/homebrew/Library/Taps/homebrew/homebrew-core"</code><br /> &gt; <code class="language-plaintext highlighter-rouge">brew tap homebrew/core</code>
+명의다! 잘 된다.</p>
+</blockquote>
+
+<p>brew install telnet으로 텔넷 설치까지 완료.</p>
+
+<p>직접 만든 클라이언트로 요청할 수도 있다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">urllib.request</span>
+<span class="k">print</span><span class="p">(</span><span class="n">urllib</span><span class="p">.</span><span class="n">request</span><span class="p">.</span><span class="n">urlopen</span><span class="p">(</span><span class="s">"http://www.example.com"</span><span class="p">).</span><span class="n">read</span><span class="p">().</span><span class="n">decode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">))</span>
+</code></pre></div></div>
+
+<ul>
+  <li>HTTP 프로토콜: 웹 서버와 웹 클라이언트 사이에서 데이터를 주고받기 위해 사용하는 통신 방식. TCP/IP 프로토콜 위에서 동작한다.</li>
+</ul>
+
+<p>#####HTTP 메시지의 구조</p>
+
+<p>스타트라인 (요청 라인 또는 상태라인)<br />
+————-<br />
+헤더<br />
+————<br />
+빈 줄<br />
+———–<br />
+바디<br /></p>
+
+<p>스타트라인은 요청 메시지면 요청라인, 응답 메시지일 때 상태라인이라고 한다.</p>
+
+<h5 id="요청-메시지의-예시">요청 메시지의 예시</h5>
+
+<pre>1   2                                                 3
+GET http://www.example.com:8080/book/shakespeare HTTP/1.1
+</pre>
+
+<ol>
+  <li>요청방식</li>
+  <li>요청 URL</li>
+  <li>프로토콜 버전</li>
+</ol>
+
+<p>HTTP 메서드를 통해서 클라이언트가 원하는 처리 방식을 서버에 알려준다.</p>
+
+<ul>
+  <li>GET : Read</li>
+  <li>POST : Create(블로그에 글을 등록하는 경우처럼 리소스를 생성하는 기능.)</li>
+  <li>PUT: Update</li>
+  <li>DELETE: delete</li>
+  <li>HEAD: 리소스의 헤더 취득</li>
+  <li>OPTIONS 리소스가 서포트하는 메서드 취득</li>
+  <li>TRACE: 루프백 시험에 사용</li>
+  <li>CONNECT: 프록시 동작의 터널 접속으로 변경</li>
+</ul>
+
+<p>폼에서 사용자가 입력한 데이터들을 서버로 보낼 때,
+GET은 url ? 뒤에 이름=값 쌍으로 이어 붙여 보낸다. (너무 길어지면 못씀)</p>
+
+<h5 id="상태-코드">상태 코드</h5>
+
+<ul>
+  <li>1xx: 현재 요청까지 처리되었으니 계속 진행하라</li>
+  <li>2xx: 성공</li>
+  <li>3xx: 리다이렉션. 완전한 처리를 위해 추가적인 동작이 필요하다.</li>
+  <li>4xx: 클라이언트 요청 잘못</li>
+  <li>
+    <p>5xx: 서버 에러</p>
+  </li>
+  <li>URL 설계: 고객의 요구사항이 정리되면, URL을 먼저 설계하게 된다. 웹 서버 로직 설계의 첫걸음.</li>
+</ul>
+
+<p>URL은 웹 클라이언트에서 호출한다는 시점에서 보면, 웹 서버에 존재하는 애플리케이션에 대한 API라고 할 수 있다.</p>
+
+<p>#####URL을 API 명명 규칙에 따라 정하는 방법</p>
+
+<ul>
+  <li>RPC: 서버가 제공하는 API 함수를 호출하는 방식(대부분 URL 경로가 동사)</li>
+  <li>REST: 서버에 존재하는 요소를 모두 리소스라고 정의하고, URL을 통해 웹 서버의 특정 리소스를 표현한다는 개념. 클라이언트와 서버 간 데이터 교환을 리소스 상태의 교환으로 간주한다.</li>
+</ul>
+
+<p>간편 URL은 쿼리스트링 없이 경로만 가진 간단한 구조의 URL</p>
+
+<p>#####웹 서버 vs. 웹 애플리케이션 서버</p>
+
+<ul>
+  <li>웹 서버: 주로 정적 페이지를 웹 클라이언트에 제공. 동적 페이지 처리가 필요하면 웹 애플리케이션 서버에 넘김.</li>
+  <li>웹 애플리케이션 서버: 동적 페이지 요청을 받아서 처리하고, 결과를 웹 서버로 반환.</li>
+</ul>
+
+<p>#####정적 페이지 vs. 동적 페이지</p>
+
+<ul>
+  <li>정적 페이지: 항상 같은 내용을 표시하는 웹 페이지. 웹 서비스의 제공자가 사전에 준비하여 서버 측에 배치한 것</li>
+  <li>동적 페이지: 누가, 언제, 어떻게 요구했는지에 따라 다른 내용이 반환되는 페이지. 예) 온라인 쇼핑 몰에서의 사용자마다 다른 카트 내용</li>
+</ul>
+
+<p>점차 동적 페이지에 대한 요구사항이 많아지면서, 웹 서버와는 다른 별도의 프로그램이 필요하게 되었다. 이러한 별도의 프로그램과 웹 서버 사이에 정보를 주고받는 규칙을 정의한 것이 바로 CGI 규격.</p>
+
+<p>파이썬의 경우 mod_wsgi 모듈을 사용하고 있다. 스크립트 엔진을 웹 서버에 내장시켜 애플리케이션의 처리를 고속화함.</p>
+
+<p>또 다른 방식은 애플리케이션을 처리하는 프로세스를 미리 데몬으로 기동시켜 놓은 후, 웹 서버의 요청을 데몬(사용자가 직접 제어하지 않고 백그라운드에서 돌면서 여러 작업을 하는 것)에서 처리하는 것.</p>
+
+<p>웹 애플리케이션 서버에서 정적, 동적 페이지 모두 처리하는 것보단 동적 페이지만 처리하는 게 나음.</p>
+
+<h2 id="2장-파이썬-웹-표준-라이브러리">2장 파이썬 웹 표준 라이브러리</h2>
+
+<ul>
+  <li>urllib 패키지: 웹 클라이언트용. 주로 URL 처리와 서버 액세스 관련 API 제공.</li>
+  <li>http 패키지: 서버용과 클라이언트용 라이브러리로 나누어 모듈을 담고 있다.</li>
+</ul>
+
+<p>트위터 구글 같은 인터넷 서비스 제공 회사들이 외부의 프로그램들이 자신의 서비스를 사용할 수 있도록 OpenAPI를 제공하고 있으며, 이런 OpenAPI 대부분이 HTTP 프로토콜을 사용하고 있기 때문에 OpenAPI를 호출하는 프로그램도 웹 클라이언트라고 볼 수 있다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">urlparse()</code> 함수는 URL을 파싱한 결과로 <code class="language-plaintext highlighter-rouge">ParseResult</code> 인스턴스를 반환한다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">urlparse</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">urlparse</span><span class="p">(</span><span class="s">"http://www.python.org:80/guido/python.html;philosophy?overall=3#n10"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">urllib.request</code> 모듈: 주어진 URL에서 데이터를 가져오는 기본 기능을 제공한다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">urlopen()</code> 함수: 디폴트는 GET. 웹 서버에 전달할 파라미터가 있으면 질의 문자열을 url 인자에 포함해서 보냄. POST로 보내고 싶으면 data 인자에 포함해서 보냄.</p>
+
+<p>URL로 GET/POST 방식의 간단한 요청 처리: <code class="language-plaintext highlighter-rouge">urlopen()</code> 함수’만’으로 가능</p>
+
+<p>PUT, HEAD 메서드 등. 헤더 조작이 필요하면: Request 클래스를 ‘같이’ 사용.</p>
+
+<p>#####GET 방식 요청</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="s">"http://www.example.com"</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="mi">500</span><span class="p">).</span><span class="n">decode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>HTTP GET 방식을 디폴트로 사용하여 웹 서버에 요청을 보낸다.</p>
+
+<p>#####POST 방식 요청</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span>
+<span class="n">data</span> <span class="o">=</span> <span class="s">"language=python&amp;framework=django"</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="s">"http://127.0.0.1:8000"</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s">'utf-8'</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="p">.</span><span class="n">read</span><span class="p">(</span><span class="mi">500</span><span class="p">).</span><span class="n">decode</span><span class="p">(</span><span class="s">'utf-8'</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">urlopen()</code> 호출 시 <code class="language-plaintext highlighter-rouge">data</code> 인자를 지정해 주면, 자동으로 POST 방식으로 요청을 보냄. <code class="language-plaintext highlighter-rouge">data</code>는 바이트스트링 타입이어야 한다.(유니코드 str X)</p>
+
+</div>
+
+
+
+<div class="pagination">
+  
+  <a href="/2022-08-14/python-web-programming-2" class="left arrow"
+    >&#8592;</a
+  >
+   
+  <a href="/2022-08-13/django-girls-3" class="right arrow"
+    >&#8594;</a
+  >
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+</main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-08-05 22:38:38 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

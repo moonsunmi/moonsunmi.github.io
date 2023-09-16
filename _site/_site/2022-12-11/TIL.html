@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TIL) 내 코드 복습&amp;리뉴얼 중 | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="TIL) 내 코드 복습&amp;리뉴얼 중" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Context 조금 더 낫게 만들기" />
+<meta property="og:description" content="Context 조금 더 낫게 만들기" />
+<link rel="canonical" href="http://localhost:4000/2022-12-11/TIL" />
+<meta property="og:url" content="http://localhost:4000/2022-12-11/TIL" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-12-11T12:18:07+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TIL) 내 코드 복습&amp;리뉴얼 중" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-12-11T12:18:07+09:00","datePublished":"2022-12-11T12:18:07+09:00","description":"Context 조금 더 낫게 만들기","headline":"TIL) 내 코드 복습&amp;리뉴얼 중","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-12-11/TIL"},"url":"http://localhost:4000/2022-12-11/TIL"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main><div class="post">
+  <h1 class="post-title">TIL) 내 코드 복습&리뉴얼 중</h1>
+
+  <div class="post-info">
+    
+    <br />
+    <span>on&nbsp;</span
+    ><time datetime="2022-12-11 12:18:07 +0900">December 11, 2022</time>
+    
+  </div>
+
+  <h3 id="context-조금-더-낫게-만들기">Context 조금 더 낫게 만들기</h3>
+
+<p>Context에는 Provider라는 컴포넌트가 들어 있다. 컴포넌트 간에 공유하고자 하는 값을 value Prop로 설정하면 된다.</p>
+
+<p>Context마다 파일을 따로 만들고 context 폴더 안에 넣어 주었다.</p>
+
+<p>TimeLogsContext.js</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">TimeLogsContext</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createContext</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">TimeLogsContextProvider</span> <span class="o">=</span> <span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">//const [timeLogs, setTimeLogs] = useState([</span>
+  <span class="kd">const</span> <span class="nx">timeLogsState</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">([{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">start</span><span class="p">:</span> <span class="nb">Date</span><span class="p">(),</span> <span class="na">end</span><span class="p">:</span> <span class="nb">Date</span><span class="p">()</span> <span class="p">}]);</span> <span class="c1">// timeLogs 값과, 함수를 배열로 담아서 전달한다.</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nc">TimeLogsContext</span><span class="p">.</span><span class="nc">Provider</span> <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="nx">timeLogsState</span><span class="si">}</span><span class="p">&gt;</span>
+      <span class="si">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">children</span><span class="si">}</span>
+    <span class="p">&lt;/</span><span class="nc">TimeLogsContext</span><span class="p">.</span><span class="nc">Provider</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">TimeLogsContextProvider</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>예전에는 Context로 값만 넘겨 주고, 함수는 props로 넘겨 주었다. (매우 이상한 형태)</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">&lt;</span><span class="nt">timeLogsContext</span><span class="p">.</span><span class="nc">Provider</span> <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="nx">timeLogs</span><span class="si">}</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">tasksContext</span><span class="p">.</span><span class="nc">Provider</span> <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="nx">tasks</span><span class="si">}</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nc">ThemeProvider</span> <span class="na">theme</span><span class="p">=</span><span class="si">{</span><span class="nx">theme</span><span class="si">}</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Header</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;</span><span class="nc">TestingRrule</span> <span class="p">/&gt;</span>
+
+      <span class="p">&lt;</span><span class="nc">Component</span>
+        <span class="si">{</span><span class="p">...</span><span class="nx">pageProps</span><span class="si">}</span>
+        <span class="na">unitPomodori</span><span class="p">=</span><span class="si">{</span><span class="nx">unitPomodori</span><span class="si">}</span>
+        <span class="na">setTimeLogs</span><span class="p">=</span><span class="si">{</span><span class="nx">setTimeLogs</span><span class="si">}</span>
+      <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nc">ThemeProvider</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">tasksContext</span><span class="p">.</span><span class="nc">Provider</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">timeLogsContext</span><span class="p">.</span><span class="nc">Provider</span><span class="p">&gt;</span>
+</code></pre></div></div>
+
+<p>그런데 유동적인 값을 가지는 context는 다음과 같이 value와 function을 배열로 함께 전달해 주면 되는 거였다.(Context를 커스텀 훅으로 만들었다.)</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">useTimeLogsState</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">useContext</span><span class="p">(</span><span class="nx">TimeLogsContext</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>다음과 같이 간단하게 사용할 수 있다. value, function을 가지는 훅이라는 걸 알려주기 위해서 훅 이름에 -State를 붙였다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="p">[</span><span class="nx">timeLogs</span><span class="p">,</span> <span class="nx">setTimeLogs</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useTimeLogsState</span><span class="p">();</span>
+</code></pre></div></div>
+
+</div>
+
+
+
+<div class="pagination">
+  
+  <a href="/2022-12-11/20th-week" class="left arrow"
+    >&#8592;</a
+  >
+   
+  <a href="/2022-12-10/TIL" class="right arrow"
+    >&#8594;</a
+  >
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+</main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-08-05 22:38:38 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

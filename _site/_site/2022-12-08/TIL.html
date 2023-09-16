@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TIL) 모범 사례 react-trello-board 배워서 내 스타일 만들기 | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="TIL) 모범 사례 react-trello-board 배워서 내 스타일 만들기" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="react-trello-board" />
+<meta property="og:description" content="react-trello-board" />
+<link rel="canonical" href="http://localhost:4000/2022-12-08/TIL" />
+<meta property="og:url" content="http://localhost:4000/2022-12-08/TIL" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-12-08T12:18:07+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TIL) 모범 사례 react-trello-board 배워서 내 스타일 만들기" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-12-08T12:18:07+09:00","datePublished":"2022-12-08T12:18:07+09:00","description":"react-trello-board","headline":"TIL) 모범 사례 react-trello-board 배워서 내 스타일 만들기","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-12-08/TIL"},"url":"http://localhost:4000/2022-12-08/TIL"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main><div class="post">
+  <h1 class="post-title">TIL) 모범 사례 react-trello-board 배워서 내 스타일 만들기</h1>
+
+  <div class="post-info">
+    
+    <br />
+    <span>on&nbsp;</span
+    ><time datetime="2022-12-08 12:18:07 +0900">December 08, 2022</time>
+    
+  </div>
+
+  <h3 id="react-trello-board">react-trello-board</h3>
+
+<p>List처럼 여러 컴포넌트를 나열해서 보여주는 곳에서는 maring-bottom 값으로 여백을 추가해 주었다.</p>
+
+<p>input 스타일을 따로 만들어 주었다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">styled</span><span class="p">,</span> <span class="p">{</span> <span class="nx">css</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">styled-components</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">lighten</span><span class="p">,</span> <span class="nx">darken</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">polished</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">Input</span> <span class="o">=</span> <span class="nx">styled</span><span class="p">.</span><span class="nx">input</span><span class="s2">`
+  border-radius: 0.5rem;
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 0.75rem;
+  </span><span class="p">${(</span><span class="nx">props</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">props</span><span class="p">.</span><span class="nx">color</span> <span class="p">?</span> <span class="nx">props</span><span class="p">.</span><span class="nx">theme</span><span class="p">[</span><span class="nx">props</span><span class="p">.</span><span class="nx">color</span><span class="p">]</span> <span class="p">:</span> <span class="nx">props</span><span class="p">.</span><span class="nx">theme</span><span class="p">.</span><span class="nx">primary</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nx">css</span><span class="s2">`
+      ::-webkit-input-placeholder {
+        /* Edge */
+        color: </span><span class="p">${</span><span class="nx">darken</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="nx">color</span><span class="p">)}</span><span class="s2">;
+      }
+
+      :-ms-input-placeholder {
+        /* Internet Explorer 10-11 */
+        color: </span><span class="p">${</span><span class="nx">darken</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="nx">color</span><span class="p">)}</span><span class="s2">;
+      }
+
+      ::placeholder {
+        color: </span><span class="p">${</span><span class="nx">darken</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="nx">color</span><span class="p">)}</span><span class="s2">;
+      }
+      /*background: </span><span class="p">${</span><span class="nx">lighten</span><span class="p">(</span><span class="mf">0.15</span><span class="p">,</span> <span class="nx">color</span><span class="p">)}</span><span class="s2">;*/
+    `</span><span class="p">;</span>
+  <span class="p">}}</span><span class="s2">
+`</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">Input</span><span class="p">;</span>
+</code></pre></div></div>
+
+</div>
+
+
+
+<div class="pagination">
+  
+  <a href="/2022-12-09/TIL" class="left arrow"
+    >&#8592;</a
+  >
+   
+  <a href="/2022-12-07/TIL" class="right arrow"
+    >&#8594;</a
+  >
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+</main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-08-05 22:38:38 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

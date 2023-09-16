@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>연오의 파이썬 공부 13 | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="연오의 파이썬 공부 13" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="코드 8-56 class Food: &quot;&quot;&quot;음식을 나타내는 클래스&quot;&quot;&quot; def __init__(self, taste, calorie): &quot;&quot;&quot;인스턴스를 초기화한다.&quot;&quot;&quot; self._taste = taste self._calorie = calorie def to_string(self): &quot;&quot;&quot;음식을 표현하는 문자열을 반환한다&quot;&quot;&quot; return str(self._taste) + &#39;만큼 맛있고 &#39; + str(self._calorie) + &#39;만큼 든든한 음식&#39; def add(self, other): &quot;&quot;&quot;다른 음식을 더해 새 음식을 반환한다.&quot;&quot;&quot; taste = self._taste + other._taste calorie = self._calorie + other._calorie return Food(taste, calorie) food1 = Food(7, 85) print(food1.to_string()) food2 = Food(12, 266) print(food2.to_string()) food3 = food1.add(food2) print(food3.to_string()) 코드 8-57 # 오류 발생 코드 class Food: &quot;&quot;&quot;음식을 나타내는 클래스&quot;&quot;&quot; def __init__(self, taste, calorie): &quot;&quot;&quot;인스턴스를 초기화한다.&quot;&quot;&quot; self._taste = taste self._calorie = calorie def to_string(self): &quot;&quot;&quot;음식을 표현하는 문자열을 반환한다&quot;&quot;&quot; return str(self._taste) + &#39;만큼 맛있고 &#39; + str(self._calorie) + &#39;만큼 든든한 음식&#39; def add(self, other): &quot;&quot;&quot;다른 음식을 더해 새 음식을 반환한다.&quot;&quot;&quot; taste = self._taste + other._taste calorie = self._calorie + other._calorie return Food(taste, calorie) food1 = Food(7, 85) food2 = Food(12, 266) print(food1) print(food1 + food2) 문자열 변환, 연산자 실행 등 특정한 경우에 저절로 실행되는 메서드를 이중 밑줄 메서드라 한다. 연습문제 8-12 import random class Dice: &quot;&quot;&quot;다면체 주사위&quot;&quot;&quot; def __init__(self, sides): self._sides = sides self._face = random.randint(1, sides) # &lt;&lt;== 잘못된 곳 def top(self): &quot;&quot;&quot;현재 나온 면을 반환한다.&quot;&quot;&quot; return self._face def roll(self): &quot;&quot;&quot;나온 면을 새 임의 값으로 설정하고 반환한다.&quot;&quot;&quot; self._face = random.randint(1, self._sides) return self._face dice_4 = Dice(4) # 사면체 주사위 생성 print(&#39;사면체 주사위 테스트 ----&#39;) print(&#39;처음 나온 면:&#39;, dice_4.top()) print(&#39;다시 굴리기:&#39;, dice_4.roll()) print(&#39;다시 굴리기:&#39;, dice_4.roll()) dice_100 = Dice(100) # 백면체 주사위 생성 print(&#39;백면체 주사위 테스트 ----&#39;) print(&#39;처음 나온 면:&#39;, dice_100.top()) print(&#39;다시 굴리기:&#39;, dice_100.roll()) print(&#39;다시 굴리기:&#39;, dice_100.roll()) # 모범답안에서는 _face를 초기화할 때 roll 메서드를 활용했음. 연습문제 8-13 class Food: &quot;&quot;&quot;음식을 나타내는 클래스&quot;&quot;&quot; def __init__(self, taste, calorie): &quot;&quot;&quot;인스턴스를 초기화한다.&quot;&quot;&quot; self._taste = taste self._calorie = calorie def __str__(self): &quot;&quot;&quot;음식을 표현하는 문자열을 반환한다&quot;&quot;&quot; return str(self._taste) + &#39;만큼 맛있고 &#39; + str(self._calorie) + &#39;만큼 든든한 음식&#39; def __add__(self, other): &quot;&quot;&quot;다른 음식을 더해 새 음식을 반환한다.&quot;&quot;&quot; taste = self._taste + other._taste calorie = self._calorie + other._calorie return Food(taste, calorie) &quot;&quot;&quot; 맛이 좋으면 더 큰것, 같은 맛일 때는 칼로리가 적은 게 큰 것&quot;&quot;&quot; def __lt__(self, other): # self &lt; other if self._taste &lt; other._taste: return True elif self._taste == other._taste: if self._calorie &gt; other._calorie: return True return False def __gt__(self, other): # self &gt; other if self._taste &gt; other._taste: return True elif self._taste == other._taste: if self._calorie &lt; other._calorie: return True return False def __le__(self, other): # self &lt;= other if self.__lt__(other) or self.__eq__(other): return True else: return False def __ge__(self, other): # self &gt;= other if self.__gt__(other) or self.__eq__(other): return True else: return False def __eq__(self, other): # self == other return self._taste == other._taste and self._calorie == other._calorie def __ne__(self, other): # self != other return self._taste != other._taste or self._calorie != other._calorie strawberry = Food(9, 32) potato = Food(6, 66) sweet_potato = Food(12, 131) pizza = Food(13, 266) print(&#39;딸기 &lt; 감자: &#39;, strawberry &lt; potato) print(&#39;감자 + 감자 &lt; 고구마: &#39;, potato + potato &lt; sweet_potato) print(&#39;피자 &gt;= 딸기: &#39;, pizza &gt;= strawberry) print(&#39;피자 &gt;= 피자: &#39;, pizza &gt;= pizza) print(&#39;감자 + 딸기 &lt; 피자: &#39;, potato + strawberry &lt; pizza) print(&#39;딸기 == 딸기: &#39;, potato == potato) 연습문제 8-13 모범 답안에 가깝게 upgrade # 연습문제 8-13을 모범답안에 가깝게 수정한 것 # Food 메서드를 구현할 때, 사용할 수 있는 메서드를 좀 더 이용함. class Food: &quot;&quot;&quot;음식을 나타내는 클래스&quot;&quot;&quot; def __init__(self, taste, calorie): &quot;&quot;&quot;인스턴스를 초기화한다.&quot;&quot;&quot; self._taste = taste self._calorie = calorie def __str__(self): &quot;&quot;&quot;음식을 표현하는 문자열을 반환한다&quot;&quot;&quot; return str(self._taste) + &#39;만큼 맛있고 &#39; + str(self._calorie) + &#39;만큼 든든한 음식&#39; def __add__(self, other): &quot;&quot;&quot;다른 음식을 더해 새 음식을 반환한다.&quot;&quot;&quot; taste = self._taste + other._taste calorie = self._calorie + other._calorie return Food(taste, calorie) &quot;&quot;&quot; 맛이 좋으면 더 큰것, 같은 맛일 때는 칼로리가 적은 게 큰 것&quot;&quot;&quot; def __eq__(self, other): # self == other return self._taste == other._taste and self._calorie == other._calorie def __lt__(self, other): # self &lt; other if self._taste &lt; other._taste: return True elif self._taste == other._taste: if self._calorie &gt; other._calorie: return True return False def __gt__(self, other): # self &gt; other return other &lt; self def __le__(self, other): # self &lt;= other return self &lt; other or self == other def __ge__(self, other): # self &gt;= other return other &lt;= self def __ne__(self, other): # self != other return not self == other strawberry = Food(9, 32) potato = Food(6, 66) sweet_potato = Food(12, 131) pizza = Food(13, 266) print(&#39;딸기 &lt; 감자: &#39;, strawberry &lt; potato) print(&#39;감자 + 감자 &lt; 고구마: &#39;, potato + potato &lt; sweet_potato) print(&#39;피자 &gt;= 딸기: &#39;, pizza &gt;= strawberry) print(&#39;피자 &gt;= 피자: &#39;, pizza &gt;= pizza) print(&#39;감자 + 딸기 &lt; 피자: &#39;, potato + strawberry &lt; pizza) print(&#39;딸기 == 딸기: &#39;, potato == potato) # 메서드를 만든 순간부터, 다른 메서드에서도 활용할 수 있을지 계속 생각해야 겠다. 연습문제 8-14 파이썬 인터프리터가 막는다. 9장 구문오류: 프로그램이 문법적으로 잘못됐다. 실행시간 오류: 프로그램의 지시를 실행할 수 없다. 논리 오류: 프로그램이 논리적으로 잘못됐다." />
+<meta property="og:description" content="코드 8-56 class Food: &quot;&quot;&quot;음식을 나타내는 클래스&quot;&quot;&quot; def __init__(self, taste, calorie): &quot;&quot;&quot;인스턴스를 초기화한다.&quot;&quot;&quot; self._taste = taste self._calorie = calorie def to_string(self): &quot;&quot;&quot;음식을 표현하는 문자열을 반환한다&quot;&quot;&quot; return str(self._taste) + &#39;만큼 맛있고 &#39; + str(self._calorie) + &#39;만큼 든든한 음식&#39; def add(self, other): &quot;&quot;&quot;다른 음식을 더해 새 음식을 반환한다.&quot;&quot;&quot; taste = self._taste + other._taste calorie = self._calorie + other._calorie return Food(taste, calorie) food1 = Food(7, 85) print(food1.to_string()) food2 = Food(12, 266) print(food2.to_string()) food3 = food1.add(food2) print(food3.to_string()) 코드 8-57 # 오류 발생 코드 class Food: &quot;&quot;&quot;음식을 나타내는 클래스&quot;&quot;&quot; def __init__(self, taste, calorie): &quot;&quot;&quot;인스턴스를 초기화한다.&quot;&quot;&quot; self._taste = taste self._calorie = calorie def to_string(self): &quot;&quot;&quot;음식을 표현하는 문자열을 반환한다&quot;&quot;&quot; return str(self._taste) + &#39;만큼 맛있고 &#39; + str(self._calorie) + &#39;만큼 든든한 음식&#39; def add(self, other): &quot;&quot;&quot;다른 음식을 더해 새 음식을 반환한다.&quot;&quot;&quot; taste = self._taste + other._taste calorie = self._calorie + other._calorie return Food(taste, calorie) food1 = Food(7, 85) food2 = Food(12, 266) print(food1) print(food1 + food2) 문자열 변환, 연산자 실행 등 특정한 경우에 저절로 실행되는 메서드를 이중 밑줄 메서드라 한다. 연습문제 8-12 import random class Dice: &quot;&quot;&quot;다면체 주사위&quot;&quot;&quot; def __init__(self, sides): self._sides = sides self._face = random.randint(1, sides) # &lt;&lt;== 잘못된 곳 def top(self): &quot;&quot;&quot;현재 나온 면을 반환한다.&quot;&quot;&quot; return self._face def roll(self): &quot;&quot;&quot;나온 면을 새 임의 값으로 설정하고 반환한다.&quot;&quot;&quot; self._face = random.randint(1, self._sides) return self._face dice_4 = Dice(4) # 사면체 주사위 생성 print(&#39;사면체 주사위 테스트 ----&#39;) print(&#39;처음 나온 면:&#39;, dice_4.top()) print(&#39;다시 굴리기:&#39;, dice_4.roll()) print(&#39;다시 굴리기:&#39;, dice_4.roll()) dice_100 = Dice(100) # 백면체 주사위 생성 print(&#39;백면체 주사위 테스트 ----&#39;) print(&#39;처음 나온 면:&#39;, dice_100.top()) print(&#39;다시 굴리기:&#39;, dice_100.roll()) print(&#39;다시 굴리기:&#39;, dice_100.roll()) # 모범답안에서는 _face를 초기화할 때 roll 메서드를 활용했음. 연습문제 8-13 class Food: &quot;&quot;&quot;음식을 나타내는 클래스&quot;&quot;&quot; def __init__(self, taste, calorie): &quot;&quot;&quot;인스턴스를 초기화한다.&quot;&quot;&quot; self._taste = taste self._calorie = calorie def __str__(self): &quot;&quot;&quot;음식을 표현하는 문자열을 반환한다&quot;&quot;&quot; return str(self._taste) + &#39;만큼 맛있고 &#39; + str(self._calorie) + &#39;만큼 든든한 음식&#39; def __add__(self, other): &quot;&quot;&quot;다른 음식을 더해 새 음식을 반환한다.&quot;&quot;&quot; taste = self._taste + other._taste calorie = self._calorie + other._calorie return Food(taste, calorie) &quot;&quot;&quot; 맛이 좋으면 더 큰것, 같은 맛일 때는 칼로리가 적은 게 큰 것&quot;&quot;&quot; def __lt__(self, other): # self &lt; other if self._taste &lt; other._taste: return True elif self._taste == other._taste: if self._calorie &gt; other._calorie: return True return False def __gt__(self, other): # self &gt; other if self._taste &gt; other._taste: return True elif self._taste == other._taste: if self._calorie &lt; other._calorie: return True return False def __le__(self, other): # self &lt;= other if self.__lt__(other) or self.__eq__(other): return True else: return False def __ge__(self, other): # self &gt;= other if self.__gt__(other) or self.__eq__(other): return True else: return False def __eq__(self, other): # self == other return self._taste == other._taste and self._calorie == other._calorie def __ne__(self, other): # self != other return self._taste != other._taste or self._calorie != other._calorie strawberry = Food(9, 32) potato = Food(6, 66) sweet_potato = Food(12, 131) pizza = Food(13, 266) print(&#39;딸기 &lt; 감자: &#39;, strawberry &lt; potato) print(&#39;감자 + 감자 &lt; 고구마: &#39;, potato + potato &lt; sweet_potato) print(&#39;피자 &gt;= 딸기: &#39;, pizza &gt;= strawberry) print(&#39;피자 &gt;= 피자: &#39;, pizza &gt;= pizza) print(&#39;감자 + 딸기 &lt; 피자: &#39;, potato + strawberry &lt; pizza) print(&#39;딸기 == 딸기: &#39;, potato == potato) 연습문제 8-13 모범 답안에 가깝게 upgrade # 연습문제 8-13을 모범답안에 가깝게 수정한 것 # Food 메서드를 구현할 때, 사용할 수 있는 메서드를 좀 더 이용함. class Food: &quot;&quot;&quot;음식을 나타내는 클래스&quot;&quot;&quot; def __init__(self, taste, calorie): &quot;&quot;&quot;인스턴스를 초기화한다.&quot;&quot;&quot; self._taste = taste self._calorie = calorie def __str__(self): &quot;&quot;&quot;음식을 표현하는 문자열을 반환한다&quot;&quot;&quot; return str(self._taste) + &#39;만큼 맛있고 &#39; + str(self._calorie) + &#39;만큼 든든한 음식&#39; def __add__(self, other): &quot;&quot;&quot;다른 음식을 더해 새 음식을 반환한다.&quot;&quot;&quot; taste = self._taste + other._taste calorie = self._calorie + other._calorie return Food(taste, calorie) &quot;&quot;&quot; 맛이 좋으면 더 큰것, 같은 맛일 때는 칼로리가 적은 게 큰 것&quot;&quot;&quot; def __eq__(self, other): # self == other return self._taste == other._taste and self._calorie == other._calorie def __lt__(self, other): # self &lt; other if self._taste &lt; other._taste: return True elif self._taste == other._taste: if self._calorie &gt; other._calorie: return True return False def __gt__(self, other): # self &gt; other return other &lt; self def __le__(self, other): # self &lt;= other return self &lt; other or self == other def __ge__(self, other): # self &gt;= other return other &lt;= self def __ne__(self, other): # self != other return not self == other strawberry = Food(9, 32) potato = Food(6, 66) sweet_potato = Food(12, 131) pizza = Food(13, 266) print(&#39;딸기 &lt; 감자: &#39;, strawberry &lt; potato) print(&#39;감자 + 감자 &lt; 고구마: &#39;, potato + potato &lt; sweet_potato) print(&#39;피자 &gt;= 딸기: &#39;, pizza &gt;= strawberry) print(&#39;피자 &gt;= 피자: &#39;, pizza &gt;= pizza) print(&#39;감자 + 딸기 &lt; 피자: &#39;, potato + strawberry &lt; pizza) print(&#39;딸기 == 딸기: &#39;, potato == potato) # 메서드를 만든 순간부터, 다른 메서드에서도 활용할 수 있을지 계속 생각해야 겠다. 연습문제 8-14 파이썬 인터프리터가 막는다. 9장 구문오류: 프로그램이 문법적으로 잘못됐다. 실행시간 오류: 프로그램의 지시를 실행할 수 없다. 논리 오류: 프로그램이 논리적으로 잘못됐다." />
+<link rel="canonical" href="http://localhost:4000/2022-08-05/yeono-python-13" />
+<meta property="og:url" content="http://localhost:4000/2022-08-05/yeono-python-13" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-08-05T22:11:40+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="연오의 파이썬 공부 13" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-08-05T22:11:40+09:00","datePublished":"2022-08-05T22:11:40+09:00","description":"코드 8-56 class Food: &quot;&quot;&quot;음식을 나타내는 클래스&quot;&quot;&quot; def __init__(self, taste, calorie): &quot;&quot;&quot;인스턴스를 초기화한다.&quot;&quot;&quot; self._taste = taste self._calorie = calorie def to_string(self): &quot;&quot;&quot;음식을 표현하는 문자열을 반환한다&quot;&quot;&quot; return str(self._taste) + &#39;만큼 맛있고 &#39; + str(self._calorie) + &#39;만큼 든든한 음식&#39; def add(self, other): &quot;&quot;&quot;다른 음식을 더해 새 음식을 반환한다.&quot;&quot;&quot; taste = self._taste + other._taste calorie = self._calorie + other._calorie return Food(taste, calorie) food1 = Food(7, 85) print(food1.to_string()) food2 = Food(12, 266) print(food2.to_string()) food3 = food1.add(food2) print(food3.to_string()) 코드 8-57 # 오류 발생 코드 class Food: &quot;&quot;&quot;음식을 나타내는 클래스&quot;&quot;&quot; def __init__(self, taste, calorie): &quot;&quot;&quot;인스턴스를 초기화한다.&quot;&quot;&quot; self._taste = taste self._calorie = calorie def to_string(self): &quot;&quot;&quot;음식을 표현하는 문자열을 반환한다&quot;&quot;&quot; return str(self._taste) + &#39;만큼 맛있고 &#39; + str(self._calorie) + &#39;만큼 든든한 음식&#39; def add(self, other): &quot;&quot;&quot;다른 음식을 더해 새 음식을 반환한다.&quot;&quot;&quot; taste = self._taste + other._taste calorie = self._calorie + other._calorie return Food(taste, calorie) food1 = Food(7, 85) food2 = Food(12, 266) print(food1) print(food1 + food2) 문자열 변환, 연산자 실행 등 특정한 경우에 저절로 실행되는 메서드를 이중 밑줄 메서드라 한다. 연습문제 8-12 import random class Dice: &quot;&quot;&quot;다면체 주사위&quot;&quot;&quot; def __init__(self, sides): self._sides = sides self._face = random.randint(1, sides) # &lt;&lt;== 잘못된 곳 def top(self): &quot;&quot;&quot;현재 나온 면을 반환한다.&quot;&quot;&quot; return self._face def roll(self): &quot;&quot;&quot;나온 면을 새 임의 값으로 설정하고 반환한다.&quot;&quot;&quot; self._face = random.randint(1, self._sides) return self._face dice_4 = Dice(4) # 사면체 주사위 생성 print(&#39;사면체 주사위 테스트 ----&#39;) print(&#39;처음 나온 면:&#39;, dice_4.top()) print(&#39;다시 굴리기:&#39;, dice_4.roll()) print(&#39;다시 굴리기:&#39;, dice_4.roll()) dice_100 = Dice(100) # 백면체 주사위 생성 print(&#39;백면체 주사위 테스트 ----&#39;) print(&#39;처음 나온 면:&#39;, dice_100.top()) print(&#39;다시 굴리기:&#39;, dice_100.roll()) print(&#39;다시 굴리기:&#39;, dice_100.roll()) # 모범답안에서는 _face를 초기화할 때 roll 메서드를 활용했음. 연습문제 8-13 class Food: &quot;&quot;&quot;음식을 나타내는 클래스&quot;&quot;&quot; def __init__(self, taste, calorie): &quot;&quot;&quot;인스턴스를 초기화한다.&quot;&quot;&quot; self._taste = taste self._calorie = calorie def __str__(self): &quot;&quot;&quot;음식을 표현하는 문자열을 반환한다&quot;&quot;&quot; return str(self._taste) + &#39;만큼 맛있고 &#39; + str(self._calorie) + &#39;만큼 든든한 음식&#39; def __add__(self, other): &quot;&quot;&quot;다른 음식을 더해 새 음식을 반환한다.&quot;&quot;&quot; taste = self._taste + other._taste calorie = self._calorie + other._calorie return Food(taste, calorie) &quot;&quot;&quot; 맛이 좋으면 더 큰것, 같은 맛일 때는 칼로리가 적은 게 큰 것&quot;&quot;&quot; def __lt__(self, other): # self &lt; other if self._taste &lt; other._taste: return True elif self._taste == other._taste: if self._calorie &gt; other._calorie: return True return False def __gt__(self, other): # self &gt; other if self._taste &gt; other._taste: return True elif self._taste == other._taste: if self._calorie &lt; other._calorie: return True return False def __le__(self, other): # self &lt;= other if self.__lt__(other) or self.__eq__(other): return True else: return False def __ge__(self, other): # self &gt;= other if self.__gt__(other) or self.__eq__(other): return True else: return False def __eq__(self, other): # self == other return self._taste == other._taste and self._calorie == other._calorie def __ne__(self, other): # self != other return self._taste != other._taste or self._calorie != other._calorie strawberry = Food(9, 32) potato = Food(6, 66) sweet_potato = Food(12, 131) pizza = Food(13, 266) print(&#39;딸기 &lt; 감자: &#39;, strawberry &lt; potato) print(&#39;감자 + 감자 &lt; 고구마: &#39;, potato + potato &lt; sweet_potato) print(&#39;피자 &gt;= 딸기: &#39;, pizza &gt;= strawberry) print(&#39;피자 &gt;= 피자: &#39;, pizza &gt;= pizza) print(&#39;감자 + 딸기 &lt; 피자: &#39;, potato + strawberry &lt; pizza) print(&#39;딸기 == 딸기: &#39;, potato == potato) 연습문제 8-13 모범 답안에 가깝게 upgrade # 연습문제 8-13을 모범답안에 가깝게 수정한 것 # Food 메서드를 구현할 때, 사용할 수 있는 메서드를 좀 더 이용함. class Food: &quot;&quot;&quot;음식을 나타내는 클래스&quot;&quot;&quot; def __init__(self, taste, calorie): &quot;&quot;&quot;인스턴스를 초기화한다.&quot;&quot;&quot; self._taste = taste self._calorie = calorie def __str__(self): &quot;&quot;&quot;음식을 표현하는 문자열을 반환한다&quot;&quot;&quot; return str(self._taste) + &#39;만큼 맛있고 &#39; + str(self._calorie) + &#39;만큼 든든한 음식&#39; def __add__(self, other): &quot;&quot;&quot;다른 음식을 더해 새 음식을 반환한다.&quot;&quot;&quot; taste = self._taste + other._taste calorie = self._calorie + other._calorie return Food(taste, calorie) &quot;&quot;&quot; 맛이 좋으면 더 큰것, 같은 맛일 때는 칼로리가 적은 게 큰 것&quot;&quot;&quot; def __eq__(self, other): # self == other return self._taste == other._taste and self._calorie == other._calorie def __lt__(self, other): # self &lt; other if self._taste &lt; other._taste: return True elif self._taste == other._taste: if self._calorie &gt; other._calorie: return True return False def __gt__(self, other): # self &gt; other return other &lt; self def __le__(self, other): # self &lt;= other return self &lt; other or self == other def __ge__(self, other): # self &gt;= other return other &lt;= self def __ne__(self, other): # self != other return not self == other strawberry = Food(9, 32) potato = Food(6, 66) sweet_potato = Food(12, 131) pizza = Food(13, 266) print(&#39;딸기 &lt; 감자: &#39;, strawberry &lt; potato) print(&#39;감자 + 감자 &lt; 고구마: &#39;, potato + potato &lt; sweet_potato) print(&#39;피자 &gt;= 딸기: &#39;, pizza &gt;= strawberry) print(&#39;피자 &gt;= 피자: &#39;, pizza &gt;= pizza) print(&#39;감자 + 딸기 &lt; 피자: &#39;, potato + strawberry &lt; pizza) print(&#39;딸기 == 딸기: &#39;, potato == potato) # 메서드를 만든 순간부터, 다른 메서드에서도 활용할 수 있을지 계속 생각해야 겠다. 연습문제 8-14 파이썬 인터프리터가 막는다. 9장 구문오류: 프로그램이 문법적으로 잘못됐다. 실행시간 오류: 프로그램의 지시를 실행할 수 없다. 논리 오류: 프로그램이 논리적으로 잘못됐다.","headline":"연오의 파이썬 공부 13","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-08-05/yeono-python-13"},"url":"http://localhost:4000/2022-08-05/yeono-python-13"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main><div class="post">
+  <h1 class="post-title">연오의 파이썬 공부 13</h1>
+
+  <div class="post-info">
+    
+    <br />
+    <span>on&nbsp;</span
+    ><time datetime="2022-08-05 22:11:40 +0900">August 05, 2022</time>
+    
+  </div>
+
+  <p>코드 8-56</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Food</span><span class="p">:</span>
+   <span class="s">"""음식을 나타내는 클래스"""</span>
+   <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">taste</span><span class="p">,</span> <span class="n">calorie</span><span class="p">):</span>
+       <span class="s">"""인스턴스를 초기화한다."""</span>
+       <span class="bp">self</span><span class="p">.</span><span class="n">_taste</span> <span class="o">=</span> <span class="n">taste</span>
+       <span class="bp">self</span><span class="p">.</span><span class="n">_calorie</span> <span class="o">=</span> <span class="n">calorie</span>
+
+   <span class="k">def</span> <span class="nf">to_string</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="s">"""음식을 표현하는 문자열을 반환한다"""</span>
+       <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">_taste</span><span class="p">)</span> <span class="o">+</span> <span class="s">'만큼 맛있고 '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">_calorie</span><span class="p">)</span> <span class="o">+</span> <span class="s">'만큼 든든한 음식'</span>
+
+   <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+       <span class="s">"""다른 음식을 더해 새 음식을 반환한다."""</span>
+       <span class="n">taste</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_taste</span> <span class="o">+</span> <span class="n">other</span><span class="p">.</span><span class="n">_taste</span>
+       <span class="n">calorie</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_calorie</span> <span class="o">+</span> <span class="n">other</span><span class="p">.</span><span class="n">_calorie</span>
+       <span class="k">return</span> <span class="n">Food</span><span class="p">(</span><span class="n">taste</span><span class="p">,</span> <span class="n">calorie</span><span class="p">)</span>
+
+<span class="n">food1</span> <span class="o">=</span> <span class="n">Food</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">85</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">food1</span><span class="p">.</span><span class="n">to_string</span><span class="p">())</span>
+
+<span class="n">food2</span> <span class="o">=</span> <span class="n">Food</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">266</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">food2</span><span class="p">.</span><span class="n">to_string</span><span class="p">())</span>
+
+<span class="n">food3</span> <span class="o">=</span> <span class="n">food1</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">food2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">food3</span><span class="p">.</span><span class="n">to_string</span><span class="p">())</span>
+</code></pre></div></div>
+
+<p>코드 8-57</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 오류 발생 코드
+</span><span class="k">class</span> <span class="nc">Food</span><span class="p">:</span>
+   <span class="s">"""음식을 나타내는 클래스"""</span>
+   <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">taste</span><span class="p">,</span> <span class="n">calorie</span><span class="p">):</span>
+       <span class="s">"""인스턴스를 초기화한다."""</span>
+       <span class="bp">self</span><span class="p">.</span><span class="n">_taste</span> <span class="o">=</span> <span class="n">taste</span>
+       <span class="bp">self</span><span class="p">.</span><span class="n">_calorie</span> <span class="o">=</span> <span class="n">calorie</span>
+
+   <span class="k">def</span> <span class="nf">to_string</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="s">"""음식을 표현하는 문자열을 반환한다"""</span>
+       <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">_taste</span><span class="p">)</span> <span class="o">+</span> <span class="s">'만큼 맛있고 '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">_calorie</span><span class="p">)</span> <span class="o">+</span> <span class="s">'만큼 든든한 음식'</span>
+
+   <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+       <span class="s">"""다른 음식을 더해 새 음식을 반환한다."""</span>
+       <span class="n">taste</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_taste</span> <span class="o">+</span> <span class="n">other</span><span class="p">.</span><span class="n">_taste</span>
+       <span class="n">calorie</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_calorie</span> <span class="o">+</span> <span class="n">other</span><span class="p">.</span><span class="n">_calorie</span>
+       <span class="k">return</span> <span class="n">Food</span><span class="p">(</span><span class="n">taste</span><span class="p">,</span> <span class="n">calorie</span><span class="p">)</span>
+
+
+<span class="n">food1</span> <span class="o">=</span> <span class="n">Food</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">85</span><span class="p">)</span>
+<span class="n">food2</span> <span class="o">=</span> <span class="n">Food</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">266</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">food1</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">food1</span> <span class="o">+</span> <span class="n">food2</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>문자열 변환, 연산자 실행 등 특정한 경우에 저절로 실행되는 메서드를 이중 밑줄 메서드라 한다.
+연습문제 8-12</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">random</span>
+<span class="k">class</span> <span class="nc">Dice</span><span class="p">:</span>
+   <span class="s">"""다면체 주사위"""</span>
+   <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sides</span><span class="p">):</span>
+       <span class="bp">self</span><span class="p">.</span><span class="n">_sides</span> <span class="o">=</span> <span class="n">sides</span>
+       <span class="bp">self</span><span class="p">.</span><span class="n">_face</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">sides</span><span class="p">)</span>  <span class="c1"># &lt;&lt;== 잘못된 곳
+</span>
+   <span class="k">def</span> <span class="nf">top</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="s">"""현재 나온 면을 반환한다."""</span>
+       <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">_face</span>
+
+   <span class="k">def</span> <span class="nf">roll</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="s">"""나온 면을 새 임의 값으로 설정하고 반환한다."""</span>
+       <span class="bp">self</span><span class="p">.</span><span class="n">_face</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="n">_sides</span><span class="p">)</span>
+       <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">_face</span>
+
+<span class="n">dice_4</span> <span class="o">=</span> <span class="n">Dice</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="c1"># 사면체 주사위 생성
+</span><span class="k">print</span><span class="p">(</span><span class="s">'사면체 주사위 테스트 ----'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'처음 나온 면:'</span><span class="p">,</span> <span class="n">dice_4</span><span class="p">.</span><span class="n">top</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'다시 굴리기:'</span><span class="p">,</span> <span class="n">dice_4</span><span class="p">.</span><span class="n">roll</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'다시 굴리기:'</span><span class="p">,</span> <span class="n">dice_4</span><span class="p">.</span><span class="n">roll</span><span class="p">())</span>
+
+<span class="n">dice_100</span> <span class="o">=</span> <span class="n">Dice</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span> <span class="c1"># 백면체 주사위 생성
+</span><span class="k">print</span><span class="p">(</span><span class="s">'백면체 주사위 테스트 ----'</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'처음 나온 면:'</span><span class="p">,</span> <span class="n">dice_100</span><span class="p">.</span><span class="n">top</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'다시 굴리기:'</span><span class="p">,</span> <span class="n">dice_100</span><span class="p">.</span><span class="n">roll</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'다시 굴리기:'</span><span class="p">,</span> <span class="n">dice_100</span><span class="p">.</span><span class="n">roll</span><span class="p">())</span>
+
+
+<span class="c1"># 모범답안에서는 _face를 초기화할 때 roll 메서드를 활용했음.
+</span></code></pre></div></div>
+
+<p>연습문제 8-13</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">Food</span><span class="p">:</span>
+   <span class="s">"""음식을 나타내는 클래스"""</span>
+   <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">taste</span><span class="p">,</span> <span class="n">calorie</span><span class="p">):</span>
+       <span class="s">"""인스턴스를 초기화한다."""</span>
+       <span class="bp">self</span><span class="p">.</span><span class="n">_taste</span> <span class="o">=</span> <span class="n">taste</span>
+       <span class="bp">self</span><span class="p">.</span><span class="n">_calorie</span> <span class="o">=</span> <span class="n">calorie</span>
+
+   <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="s">"""음식을 표현하는 문자열을 반환한다"""</span>
+       <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">_taste</span><span class="p">)</span> <span class="o">+</span> <span class="s">'만큼 맛있고 '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">_calorie</span><span class="p">)</span> <span class="o">+</span> <span class="s">'만큼 든든한 음식'</span>
+
+   <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+       <span class="s">"""다른 음식을 더해 새 음식을 반환한다."""</span>
+       <span class="n">taste</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_taste</span> <span class="o">+</span> <span class="n">other</span><span class="p">.</span><span class="n">_taste</span>
+       <span class="n">calorie</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_calorie</span> <span class="o">+</span> <span class="n">other</span><span class="p">.</span><span class="n">_calorie</span>
+       <span class="k">return</span> <span class="n">Food</span><span class="p">(</span><span class="n">taste</span><span class="p">,</span> <span class="n">calorie</span><span class="p">)</span>
+
+   <span class="s">""" 맛이 좋으면 더 큰것, 같은 맛일 때는 칼로리가 적은 게 큰 것"""</span>
+   <span class="k">def</span> <span class="nf">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>  <span class="c1"># self &lt; other
+</span>       <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">_taste</span> <span class="o">&lt;</span> <span class="n">other</span><span class="p">.</span><span class="n">_taste</span><span class="p">:</span>
+           <span class="k">return</span> <span class="bp">True</span>
+       <span class="k">elif</span> <span class="bp">self</span><span class="p">.</span><span class="n">_taste</span> <span class="o">==</span> <span class="n">other</span><span class="p">.</span><span class="n">_taste</span><span class="p">:</span>
+           <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">_calorie</span> <span class="o">&gt;</span> <span class="n">other</span><span class="p">.</span><span class="n">_calorie</span><span class="p">:</span>
+               <span class="k">return</span> <span class="bp">True</span>
+       <span class="k">return</span> <span class="bp">False</span>
+
+   <span class="k">def</span> <span class="nf">__gt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>  <span class="c1"># self &gt; other
+</span>       <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">_taste</span> <span class="o">&gt;</span> <span class="n">other</span><span class="p">.</span><span class="n">_taste</span><span class="p">:</span>
+           <span class="k">return</span> <span class="bp">True</span>
+       <span class="k">elif</span> <span class="bp">self</span><span class="p">.</span><span class="n">_taste</span> <span class="o">==</span> <span class="n">other</span><span class="p">.</span><span class="n">_taste</span><span class="p">:</span>
+           <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">_calorie</span> <span class="o">&lt;</span> <span class="n">other</span><span class="p">.</span><span class="n">_calorie</span><span class="p">:</span>
+               <span class="k">return</span> <span class="bp">True</span>
+       <span class="k">return</span> <span class="bp">False</span>
+
+   <span class="k">def</span> <span class="nf">__le__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>  <span class="c1"># self &lt;= other
+</span>       <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">__lt__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">or</span> <span class="bp">self</span><span class="p">.</span><span class="n">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">):</span>
+           <span class="k">return</span> <span class="bp">True</span>
+       <span class="k">else</span><span class="p">:</span>
+           <span class="k">return</span> <span class="bp">False</span>
+
+   <span class="k">def</span> <span class="nf">__ge__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>  <span class="c1"># self &gt;= other
+</span>       <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">__gt__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span> <span class="ow">or</span> <span class="bp">self</span><span class="p">.</span><span class="n">__eq__</span><span class="p">(</span><span class="n">other</span><span class="p">):</span>
+           <span class="k">return</span> <span class="bp">True</span>
+       <span class="k">else</span><span class="p">:</span>
+           <span class="k">return</span> <span class="bp">False</span>
+
+   <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>  <span class="c1"># self == other
+</span>       <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">_taste</span> <span class="o">==</span> <span class="n">other</span><span class="p">.</span><span class="n">_taste</span> <span class="ow">and</span> <span class="bp">self</span><span class="p">.</span><span class="n">_calorie</span> <span class="o">==</span> <span class="n">other</span><span class="p">.</span><span class="n">_calorie</span>
+
+   <span class="k">def</span> <span class="nf">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>  <span class="c1"># self != other
+</span>       <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">_taste</span> <span class="o">!=</span> <span class="n">other</span><span class="p">.</span><span class="n">_taste</span> <span class="ow">or</span> <span class="bp">self</span><span class="p">.</span><span class="n">_calorie</span> <span class="o">!=</span> <span class="n">other</span><span class="p">.</span><span class="n">_calorie</span>
+
+
+<span class="n">strawberry</span> <span class="o">=</span> <span class="n">Food</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span>
+<span class="n">potato</span> <span class="o">=</span> <span class="n">Food</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">66</span><span class="p">)</span>
+<span class="n">sweet_potato</span> <span class="o">=</span> <span class="n">Food</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">131</span><span class="p">)</span>
+<span class="n">pizza</span> <span class="o">=</span> <span class="n">Food</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">266</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'딸기 &lt; 감자: '</span><span class="p">,</span> <span class="n">strawberry</span> <span class="o">&lt;</span> <span class="n">potato</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'감자 + 감자 &lt; 고구마: '</span><span class="p">,</span> <span class="n">potato</span> <span class="o">+</span> <span class="n">potato</span> <span class="o">&lt;</span> <span class="n">sweet_potato</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'피자 &gt;= 딸기: '</span><span class="p">,</span> <span class="n">pizza</span> <span class="o">&gt;=</span> <span class="n">strawberry</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'피자 &gt;= 피자: '</span><span class="p">,</span> <span class="n">pizza</span> <span class="o">&gt;=</span> <span class="n">pizza</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'감자 + 딸기 &lt; 피자: '</span><span class="p">,</span> <span class="n">potato</span> <span class="o">+</span> <span class="n">strawberry</span> <span class="o">&lt;</span> <span class="n">pizza</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'딸기 == 딸기: '</span><span class="p">,</span> <span class="n">potato</span> <span class="o">==</span> <span class="n">potato</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>연습문제 8-13 모범 답안에 가깝게 upgrade</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 연습문제 8-13을 모범답안에 가깝게 수정한 것
+# Food 메서드를 구현할 때, 사용할 수 있는 메서드를 좀 더 이용함.
+</span><span class="k">class</span> <span class="nc">Food</span><span class="p">:</span>
+   <span class="s">"""음식을 나타내는 클래스"""</span>
+   <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">taste</span><span class="p">,</span> <span class="n">calorie</span><span class="p">):</span>
+       <span class="s">"""인스턴스를 초기화한다."""</span>
+       <span class="bp">self</span><span class="p">.</span><span class="n">_taste</span> <span class="o">=</span> <span class="n">taste</span>
+       <span class="bp">self</span><span class="p">.</span><span class="n">_calorie</span> <span class="o">=</span> <span class="n">calorie</span>
+
+   <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+       <span class="s">"""음식을 표현하는 문자열을 반환한다"""</span>
+       <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">_taste</span><span class="p">)</span> <span class="o">+</span> <span class="s">'만큼 맛있고 '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">_calorie</span><span class="p">)</span> <span class="o">+</span> <span class="s">'만큼 든든한 음식'</span>
+
+   <span class="k">def</span> <span class="nf">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+       <span class="s">"""다른 음식을 더해 새 음식을 반환한다."""</span>
+       <span class="n">taste</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_taste</span> <span class="o">+</span> <span class="n">other</span><span class="p">.</span><span class="n">_taste</span>
+       <span class="n">calorie</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">_calorie</span> <span class="o">+</span> <span class="n">other</span><span class="p">.</span><span class="n">_calorie</span>
+       <span class="k">return</span> <span class="n">Food</span><span class="p">(</span><span class="n">taste</span><span class="p">,</span> <span class="n">calorie</span><span class="p">)</span>
+
+   <span class="s">""" 맛이 좋으면 더 큰것, 같은 맛일 때는 칼로리가 적은 게 큰 것"""</span>
+
+   <span class="k">def</span> <span class="nf">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>  <span class="c1"># self == other
+</span>       <span class="k">return</span> <span class="bp">self</span><span class="p">.</span><span class="n">_taste</span> <span class="o">==</span> <span class="n">other</span><span class="p">.</span><span class="n">_taste</span> <span class="ow">and</span> <span class="bp">self</span><span class="p">.</span><span class="n">_calorie</span> <span class="o">==</span> <span class="n">other</span><span class="p">.</span><span class="n">_calorie</span>
+
+   <span class="k">def</span> <span class="nf">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>  <span class="c1"># self &lt; other
+</span>       <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">_taste</span> <span class="o">&lt;</span> <span class="n">other</span><span class="p">.</span><span class="n">_taste</span><span class="p">:</span>
+           <span class="k">return</span> <span class="bp">True</span>
+       <span class="k">elif</span> <span class="bp">self</span><span class="p">.</span><span class="n">_taste</span> <span class="o">==</span> <span class="n">other</span><span class="p">.</span><span class="n">_taste</span><span class="p">:</span>
+           <span class="k">if</span> <span class="bp">self</span><span class="p">.</span><span class="n">_calorie</span> <span class="o">&gt;</span> <span class="n">other</span><span class="p">.</span><span class="n">_calorie</span><span class="p">:</span>
+               <span class="k">return</span> <span class="bp">True</span>
+       <span class="k">return</span> <span class="bp">False</span>
+
+   <span class="k">def</span> <span class="nf">__gt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>  <span class="c1"># self &gt; other
+</span>       <span class="k">return</span> <span class="n">other</span> <span class="o">&lt;</span> <span class="bp">self</span>
+
+   <span class="k">def</span> <span class="nf">__le__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>  <span class="c1"># self &lt;= other
+</span>       <span class="k">return</span> <span class="bp">self</span> <span class="o">&lt;</span> <span class="n">other</span> <span class="ow">or</span> <span class="bp">self</span> <span class="o">==</span> <span class="n">other</span>
+
+   <span class="k">def</span> <span class="nf">__ge__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>  <span class="c1"># self &gt;= other
+</span>       <span class="k">return</span> <span class="n">other</span> <span class="o">&lt;=</span> <span class="bp">self</span>
+
+   <span class="k">def</span> <span class="nf">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>  <span class="c1"># self != other
+</span>       <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span> <span class="o">==</span> <span class="n">other</span>
+
+
+<span class="n">strawberry</span> <span class="o">=</span> <span class="n">Food</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">32</span><span class="p">)</span>
+<span class="n">potato</span> <span class="o">=</span> <span class="n">Food</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">66</span><span class="p">)</span>
+<span class="n">sweet_potato</span> <span class="o">=</span> <span class="n">Food</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">131</span><span class="p">)</span>
+<span class="n">pizza</span> <span class="o">=</span> <span class="n">Food</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mi">266</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'딸기 &lt; 감자: '</span><span class="p">,</span> <span class="n">strawberry</span> <span class="o">&lt;</span> <span class="n">potato</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'감자 + 감자 &lt; 고구마: '</span><span class="p">,</span> <span class="n">potato</span> <span class="o">+</span> <span class="n">potato</span> <span class="o">&lt;</span> <span class="n">sweet_potato</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'피자 &gt;= 딸기: '</span><span class="p">,</span> <span class="n">pizza</span> <span class="o">&gt;=</span> <span class="n">strawberry</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'피자 &gt;= 피자: '</span><span class="p">,</span> <span class="n">pizza</span> <span class="o">&gt;=</span> <span class="n">pizza</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'감자 + 딸기 &lt; 피자: '</span><span class="p">,</span> <span class="n">potato</span> <span class="o">+</span> <span class="n">strawberry</span> <span class="o">&lt;</span> <span class="n">pizza</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'딸기 == 딸기: '</span><span class="p">,</span> <span class="n">potato</span> <span class="o">==</span> <span class="n">potato</span><span class="p">)</span>
+
+<span class="c1"># 메서드를 만든 순간부터, 다른 메서드에서도 활용할 수 있을지 계속 생각해야 겠다.
+</span></code></pre></div></div>
+
+<p>연습문제 8-14</p>
+
+<p>파이썬 인터프리터가 막는다.</p>
+
+<h2 id="9장">9장</h2>
+
+<ul>
+  <li>구문오류: 프로그램이 문법적으로 잘못됐다.</li>
+  <li>실행시간 오류: 프로그램의 지시를 실행할 수 없다.</li>
+  <li>논리 오류: 프로그램이 논리적으로 잘못됐다.</li>
+</ul>
+
+</div>
+
+
+
+<div class="pagination">
+  
+  <a href="/2022-08-06/yeono-python-14" class="left arrow"
+    >&#8592;</a
+  >
+   
+  <a href="/2022-08-04/yeono-python-12" class="right arrow"
+    >&#8594;</a
+  >
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+</main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-08-05 22:38:38 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

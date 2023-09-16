@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TIL) swagger 타입 수동으로 지정해 주기 - django | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="TIL) swagger 타입 수동으로 지정해 주기 - django" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="swagger 타입을 수동으로 지정하기" />
+<meta property="og:description" content="swagger 타입을 수동으로 지정하기" />
+<link rel="canonical" href="http://localhost:4000/2023-05-18/TIL" />
+<meta property="og:url" content="http://localhost:4000/2023-05-18/TIL" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-05-18T12:18:07+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TIL) swagger 타입 수동으로 지정해 주기 - django" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2023-05-18T12:18:07+09:00","datePublished":"2023-05-18T12:18:07+09:00","description":"swagger 타입을 수동으로 지정하기","headline":"TIL) swagger 타입 수동으로 지정해 주기 - django","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2023-05-18/TIL"},"url":"http://localhost:4000/2023-05-18/TIL"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main><div class="post">
+  <h1 class="post-title">TIL) swagger 타입 수동으로 지정해 주기 - django</h1>
+
+  <div class="post-info">
+    
+    <br />
+    <span>on&nbsp;</span
+    ><time datetime="2023-05-18 12:18:07 +0900">May 18, 2023</time>
+    
+  </div>
+
+  <h3 id="swagger-타입을-수동으로-지정하기">swagger 타입을 수동으로 지정하기</h3>
+
+<p>swagger가 response의 타입을 잘못 이해하고 있다면, @swagger_auto_schema로 지정해 줄 수 있다.</p>
+
+<p>REST framework를 사용한다면 보통 serializer를 사용하므로 이게 좋은 옵션이 될 것 같다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@swagger_serializer_method(serializer_or_field=ReferralCountSerializer)
+@action(detail=False, methods=['get'], url_path='count')
+def count(self, request, *args, **kwargs):
+   return Response(ReferralCountSerializer({'count': request.user.get_referred_count()}).data,
+                   status=status.HTTP_200_OK)
+</code></pre></div></div>
+
+<h3 id="tip">TIP</h3>
+
+<p>도커를 켜지 않은 채로 배포를 시도하다가 엄청 애를 먹었다.
+배포가 제대로 되지 않음에도 불구하고, 뭔가 잘못되었다는 표시를 해주지 않다.</p>
+
+<p>배포를 자주 하지는 않으니 도커 관련 메시지가 나타나지 않는다는 걸 바로 체감하기는 어려웠다.
+swagger가 바보가 된 것 같다면 도커를 켰는지 꼭 확인하자!!</p>
+
+</div>
+
+
+
+<div class="pagination">
+  
+  <a href="/2023-06-09/TIL" class="left arrow"
+    >&#8592;</a
+  >
+   
+  <a href="/2023-05-16/TIL" class="right arrow"
+    >&#8594;</a
+  >
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+</main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-08-05 22:38:38 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

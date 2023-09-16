@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TIL) 뽀모 프로젝트 라우팅 기능(useRouter) 추가 | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="TIL) 뽀모 프로젝트 라우팅 기능(useRouter) 추가" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="라우팅" />
+<meta property="og:description" content="라우팅" />
+<link rel="canonical" href="http://localhost:4000/2022-11-16/TIL" />
+<meta property="og:url" content="http://localhost:4000/2022-11-16/TIL" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-11-16T12:18:07+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TIL) 뽀모 프로젝트 라우팅 기능(useRouter) 추가" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-11-16T12:18:07+09:00","datePublished":"2022-11-16T12:18:07+09:00","description":"라우팅","headline":"TIL) 뽀모 프로젝트 라우팅 기능(useRouter) 추가","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-11-16/TIL"},"url":"http://localhost:4000/2022-11-16/TIL"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main><div class="post">
+  <h1 class="post-title">TIL) 뽀모 프로젝트 라우팅 기능(useRouter) 추가</h1>
+
+  <div class="post-info">
+    
+    <br />
+    <span>on&nbsp;</span
+    ><time datetime="2022-11-16 12:18:07 +0900">November 16, 2022</time>
+    
+  </div>
+
+  <h3 id="라우팅">라우팅</h3>
+
+<p>next.js에서는 useRouter 훅을 쓰면 쉽게 라우팅할 수 있었다. next.js에서는 pages 폴더 안의 컴포넌트 이름을 그대로 경로로 바꿔 준다.</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">Header</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">router</span> <span class="o">=</span> <span class="nx">useRouter</span><span class="p">();</span>
+
+  <span class="kd">const</span> <span class="nx">handleClick</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">href</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+    <span class="nx">router</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">href</span><span class="p">);</span>
+  <span class="p">};</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"flex shadow-md w-full bg-gray-50 mb-4 justify-between"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nc">Bars3Icon</span> <span class="na">className</span><span class="p">=</span><span class="s">"text-lime-600 h-7 m-1 mx-4"</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;</span><span class="nt">p</span>
+        <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+          <span class="nx">handleClick</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="dl">"</span><span class="s2">/</span><span class="dl">"</span><span class="p">);</span>
+        <span class="p">}</span><span class="si">}</span>
+        <span class="na">className</span><span class="p">=</span><span class="s">" cursor-pointer font-NotoSansKorea text-xl m-1 text-gray-600 mx-4 text-lime-700  font-semibold"</span>
+      <span class="p">&gt;</span>
+        POMO WEEKLY
+      <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">p</span>
+        <span class="na">className</span><span class="p">=</span><span class="s">" cursor-pointer"</span>
+        <span class="na">onClick</span><span class="p">=</span><span class="si">{</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">handleClick</span><span class="p">(</span><span class="nx">event</span><span class="p">,</span> <span class="dl">"</span><span class="s2">components/Reservation</span><span class="dl">"</span><span class="p">)</span><span class="si">}</span>
+      <span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nc">PlusIcon</span> <span class="na">className</span><span class="p">=</span><span class="s">" border-2 border-lime-600 bg-lime-300 rounded-full text-lime-600 h-7  content-center align-middle m-1 mx-4 shadow-md font-bold"</span> <span class="p">/&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">Header</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="header는-_appjs에-추가">Header는 _app.js에 추가</h3>
+
+<p>Header 컴포넌트를 _app.js에 추가해 주면, 페이지가 바뀌더라도 항상 상단에 떠 있게 할 수 있다. 그리고 전역 변수를 여기에 저장해 두면 접근하기 쉽다.</p>
+
+<p>_app.js</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span><span class="p">,</span> <span class="p">{</span> <span class="nx">useRef</span><span class="p">,</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="dl">"</span><span class="s2">../styles/globals.css</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">Header</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./components/Header</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">timeLogsContext</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createContext</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">nextLogIdContext</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">createContext</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">MyApp</span><span class="p">({</span> <span class="nx">Component</span><span class="p">,</span> <span class="nx">pageProps</span> <span class="p">})</span> <span class="p">{</span>
+  <span class="kd">let</span> <span class="nx">unitPomodori</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">timeLogs</span><span class="p">,</span> <span class="nx">setTimeLogs</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">([{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">start</span><span class="p">:</span> <span class="dl">""</span><span class="p">,</span> <span class="na">end</span><span class="p">:</span> <span class="dl">""</span> <span class="p">}]);</span> <span class="c1">//</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">testTimeLogs</span><span class="p">,</span> <span class="nx">setTestTimeLogs</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">([</span>
+    <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="na">start</span><span class="p">:</span> <span class="nb">Date</span><span class="p">(),</span> <span class="na">end</span><span class="p">:</span> <span class="nb">Date</span><span class="p">()</span> <span class="p">},</span>
+  <span class="p">]);</span>
+
+  <span class="kd">const</span> <span class="nx">nextLogId</span> <span class="o">=</span> <span class="nx">useRef</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">timeLogsContext</span><span class="p">.</span><span class="nc">Provider</span> <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="nx">timeLogs</span><span class="si">}</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">nextLogIdContext</span><span class="p">.</span><span class="nc">Provider</span> <span class="na">value</span><span class="p">=</span><span class="si">{</span><span class="nx">nextLogId</span><span class="si">}</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nc">Header</span> <span class="p">/&gt;</span>
+
+          <span class="p">&lt;</span><span class="nc">Component</span>
+            <span class="si">{</span><span class="p">...</span><span class="nx">pageProps</span><span class="si">}</span>
+            <span class="na">unitPomodori</span><span class="p">=</span><span class="si">{</span><span class="nx">unitPomodori</span><span class="si">}</span>
+            <span class="na">nextLogId</span><span class="p">=</span><span class="si">{</span><span class="nx">nextLogId</span><span class="si">}</span>
+            <span class="na">setTimeLogs</span><span class="p">=</span><span class="si">{</span><span class="nx">setTimeLogs</span><span class="si">}</span>
+          <span class="p">/&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">nextLogIdContext</span><span class="p">.</span><span class="nc">Provider</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">timeLogsContext</span><span class="p">.</span><span class="nc">Provider</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">MyApp</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h3 id="getinitialprops">getInitialProps</h3>
+
+<p>넥스트에서는 getInitialProps라는 함수를 이용해서 페이지 컴포넌트로 속성값을 전달한다. 각 페이지의 getInitialProps 함수는 페이지 진입 직전에 호출된다.</p>
+
+<p>HTTP 요청 객체, 쿼리 파라미터 정보 등 다양한 정보가 전달된다. 이 함수를 이용하면 에러 페이지를 만들 수 있다.</p>
+
+<p>_error.js</p>
+
+<div class="language-jsx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nb">Error</span><span class="p">({</span> <span class="nx">statusCode</span> <span class="p">})</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">className</span><span class="p">=</span><span class="s">"flex justify-center"</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">p</span> <span class="na">className</span><span class="p">=</span><span class="s">"mainContainer justify-center"</span><span class="p">&gt;</span>
+        <span class="si">{</span><span class="nx">statusCode</span>
+          <span class="p">?</span> <span class="s2">`An error </span><span class="p">${</span><span class="nx">statusCode</span><span class="p">}</span><span class="s2"> occurred on server`</span>
+          <span class="p">:</span> <span class="dl">"</span><span class="s2">An error occurred on client</span><span class="dl">"</span><span class="si">}</span>
+      <span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nb">Error</span><span class="p">.</span><span class="nx">getInitialProps</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">err</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">statusCode</span> <span class="o">=</span> <span class="nx">res</span> <span class="p">?</span> <span class="nx">res</span><span class="p">.</span><span class="nx">statusCode</span> <span class="p">:</span> <span class="nx">err</span> <span class="p">?</span> <span class="nx">err</span><span class="p">.</span><span class="nx">statusCode</span> <span class="p">:</span> <span class="mi">404</span><span class="p">;</span>
+  <span class="k">return</span> <span class="p">{</span> <span class="nx">statusCode</span> <span class="p">};</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nb">Error</span><span class="p">;</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>화) 운동<br /></p>
+
+<table>
+  <thead>
+    <tr>
+      <th>이두</th>
+      <th>등</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>3/3</td>
+      <td>3/3</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+
+
+<div class="pagination">
+  
+  <a href="/2022-11-18/TIL" class="left arrow"
+    >&#8592;</a
+  >
+   
+  <a href="/2022-11-15/TIL" class="right arrow"
+    >&#8594;</a
+  >
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+</main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-08-05 22:38:38 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TIL) POMO-WEEKLY 프로젝트 시작 | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="TIL) POMO-WEEKLY 프로젝트 시작" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="pomo-weekly 프로젝트 시작" />
+<meta property="og:description" content="pomo-weekly 프로젝트 시작" />
+<link rel="canonical" href="http://localhost:4000/2022-11-04/TIL" />
+<meta property="og:url" content="http://localhost:4000/2022-11-04/TIL" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-11-04T12:18:07+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TIL) POMO-WEEKLY 프로젝트 시작" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-11-04T12:18:07+09:00","datePublished":"2022-11-04T12:18:07+09:00","description":"pomo-weekly 프로젝트 시작","headline":"TIL) POMO-WEEKLY 프로젝트 시작","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-11-04/TIL"},"url":"http://localhost:4000/2022-11-04/TIL"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main><div class="post">
+  <h1 class="post-title">TIL) POMO-WEEKLY 프로젝트 시작</h1>
+
+  <div class="post-info">
+    
+    <br />
+    <span>on&nbsp;</span
+    ><time datetime="2022-11-04 12:18:07 +0900">November 04, 2022</time>
+    
+  </div>
+
+  <h3 id="pomo-weekly-프로젝트-시작">pomo-weekly 프로젝트 시작</h3>
+
+<p>다음과 같이 next app을 설치한다. tailwindcss를 사용할 것이라 함께 설치해 준다.</p>
+
+<p>폰트는 구글 폰트를 이용했다. https://fonts.google.com/ 해당 사이트에서 나오는 import 문을 global.css에다 추가하고, tailwind.config.js 파일에 다음과 같이 사용할 폰트를 추가해 준다.</p>
+
+<p>tailwind.config.js</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cm">/** @type {import('tailwindcss').Config} */</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">content</span><span class="p">:</span> <span class="p">[</span>
+    <span class="dl">"</span><span class="s2">./pages/**/*.{js,ts,jsx,tsx}</span><span class="dl">"</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">./components/**/*.{js,ts,jsx,tsx}</span><span class="dl">"</span><span class="p">,</span>
+  <span class="p">],</span>
+  <span class="na">theme</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">extend</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">fontFamily</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">NotoSansKorea</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Noto Sans KR</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">sans-serif</span><span class="dl">"</span><span class="p">],</span>
+        <span class="na">NotoSansMono</span><span class="p">:</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Noto Sans Mono</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">monospace</span><span class="dl">"</span><span class="p">],</span>
+      <span class="p">},</span>
+    <span class="p">},</span>
+  <span class="p">},</span>
+  <span class="na">plugins</span><span class="p">:</span> <span class="p">[],</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="countdown">CountDown</h3>
+
+<p>우선 카운트다운을 하는 컴포넌트부터 만들어 보기로 했다. 뽀모도로의 카운트다운은 정해진 시간이 있고, 그걸 쓰는 방식이기 때문에 다음과 같이 작성했다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useEffect</span><span class="p">,</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">TimerContainer</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">minutes</span><span class="p">,</span> <span class="nx">seconds</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// let total_seconds = minutes * 60 + seconds;</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">number</span><span class="p">,</span> <span class="nx">setNumber</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="nx">minutes</span> <span class="o">*</span> <span class="mi">60</span> <span class="o">+</span> <span class="nx">seconds</span><span class="p">);</span>
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">useEffect</span><span class="dl">"</span><span class="p">);</span>
+    <span class="kd">const</span> <span class="nx">interval</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="nx">setNumber</span><span class="p">(</span><span class="nx">number</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+    <span class="k">return</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="nx">clearInterval</span><span class="p">(</span><span class="nx">interval</span><span class="p">);</span>
+  <span class="p">},</span> <span class="p">[</span><span class="nx">number</span><span class="p">]);</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">grid</span><span class="dl">"</span><span class="o">&gt;</span>
+      <span class="p">{</span><span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nx">number</span> <span class="o">/</span> <span class="mi">60</span><span class="p">)}</span> <span class="p">:</span> <span class="p">{</span><span class="nx">number</span> <span class="o">%</span> <span class="mi">60</span><span class="p">}</span>
+      <span class="p">{</span><span class="cm">/*&lt;DigitDisplay number={number} unit="minutes" /&gt;
+      &lt;DigitDisplay number={number} unit="seconds" /&gt;*/</span><span class="p">}</span>
+    <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">TimerContainer</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>그런데 단 setInterval을 단 한 번만 작동시키려면 setTimeOut 사용이 권장된다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">interval</span> <span class="o">=</span> <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">setNumber</span><span class="p">(</span><span class="nx">number</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+  <span class="p">},</span> <span class="mi">1000</span><span class="p">);</span>
+<span class="p">},</span> <span class="p">[</span><span class="nx">number</span><span class="p">]);</span>
+</code></pre></div></div>
+
+<p>setTimeout은 다음과 같이 나오고,
+0 / 1581 requests
+0 B / 71.8 MB transferred
+0 B / 235 MB resources
+Finish: 1.1 hrs
+DOMContentLoaded: 1.1 hrs
+Load: 1.1 hrs</p>
+
+<p>setInterval은 다음과 같이 나온다.
+0 / 1524 requests
+0 B / 66.1 MB transferred
+0 B / 215 MB resources
+Finish: 1.1 hrs
+DOMContentLoaded: 1.1 hrs
+Load: 1.1 hrs</p>
+
+<p>뭘까..? 차이가 없는 것 같고, 결국에는 setTimeout이 더 안 좋아 보이기도 하는데…</p>
+
+<hr />
+
+<p>금) 운동</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>이두</th>
+      <th>등</th>
+      <th>가슴</th>
+      <th>어깨</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>3/3</td>
+      <td>3/3</td>
+      <td>0/3</td>
+      <td>0/3</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+
+
+<div class="pagination">
+  
+  <a href="/2022-11-05/TIL" class="left arrow"
+    >&#8592;</a
+  >
+   
+  <a href="/2022-11-03/TIL" class="right arrow"
+    >&#8594;</a
+  >
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+</main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-08-05 22:38:38 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

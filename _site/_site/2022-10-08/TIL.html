@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>React JS Crash Course | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="React JS Crash Course" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="x 버튼을 누르면 뭔가 되도록 이벤트를 만들어야 한다. 그런데 events들이 App 컴포넌트에 저장되어 있다. 이때 context api와 redux를 이용하면 컴포넌트 안에 있는 state를 쉽게 접근할 수 있지만 지금 여기서는 prop(onDelete={deleteTask})으로 전달하기로 한다." />
+<meta property="og:description" content="x 버튼을 누르면 뭔가 되도록 이벤트를 만들어야 한다. 그런데 events들이 App 컴포넌트에 저장되어 있다. 이때 context api와 redux를 이용하면 컴포넌트 안에 있는 state를 쉽게 접근할 수 있지만 지금 여기서는 prop(onDelete={deleteTask})으로 전달하기로 한다." />
+<link rel="canonical" href="http://localhost:4000/2022-10-08/TIL" />
+<meta property="og:url" content="http://localhost:4000/2022-10-08/TIL" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-10-08T12:18:07+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="React JS Crash Course" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-10-08T12:18:07+09:00","datePublished":"2022-10-08T12:18:07+09:00","description":"x 버튼을 누르면 뭔가 되도록 이벤트를 만들어야 한다. 그런데 events들이 App 컴포넌트에 저장되어 있다. 이때 context api와 redux를 이용하면 컴포넌트 안에 있는 state를 쉽게 접근할 수 있지만 지금 여기서는 prop(onDelete={deleteTask})으로 전달하기로 한다.","headline":"React JS Crash Course","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-10-08/TIL"},"url":"http://localhost:4000/2022-10-08/TIL"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main><div class="post">
+  <h1 class="post-title">React JS Crash Course</h1>
+
+  <div class="post-info">
+    
+    <br />
+    <span>on&nbsp;</span
+    ><time datetime="2022-10-08 12:18:07 +0900">October 08, 2022</time>
+    
+  </div>
+
+  <p>x 버튼을 누르면 뭔가 되도록 이벤트를 만들어야 한다. 그런데 events들이 App 컴포넌트에 저장되어 있다. 이때 context api와 redux를 이용하면 컴포넌트 안에 있는 state를 쉽게 접근할 수 있지만 지금 여기서는 prop(<code class="language-plaintext highlighter-rouge">onDelete={deleteTask}</code>)으로 전달하기로 한다.</p>
+
+<p>App.js</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">deleteTask</span> <span class="o">=</span> <span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">delete</span><span class="dl">"</span><span class="p">,</span> <span class="nx">id</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">return</span> <span class="o">&lt;</span><span class="nx">Tasks</span> <span class="nx">tasks</span><span class="o">=</span><span class="p">{</span><span class="nx">tasks</span><span class="p">}</span> <span class="nx">onDelete</span><span class="o">=</span><span class="p">{</span><span class="nx">deleteTask</span><span class="p">}</span> <span class="sr">/&gt;</span><span class="err">;
+</span></code></pre></div></div>
+
+<p>Tasks.js</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">Tasks</span> <span class="o">=</span> <span class="p">({</span><span class="nx">tasks</span><span class="p">,</span> <span class="nx">onDelete</span><span class="p">}){</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;&gt;</span>
+      <span class="p">{</span><span class="nx">tasks</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">task</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">Task</span> <span class="nx">key</span><span class="o">=</span><span class="p">{</span><span class="nx">task</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span> <span class="nx">task</span><span class="o">=</span><span class="p">{</span><span class="nx">task</span><span class="p">}</span> <span class="nx">onDelete</span><span class="o">=</span><span class="p">{</span><span class="nx">onDelete</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>      <span class="p">))}</span>
+    <span class="o">&lt;</span><span class="sr">/</span><span class="err">&gt;
+</span>  <span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Task.js의 x 아이콘 클릭할 때, <code class="language-plaintext highlighter-rouge">onClick</code></p>
+
+<p>Task.js</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">Task</span> <span class="o">=</span> <span class="p">({</span><span class="nx">task</span><span class="p">,</span> <span class="nx">onDelete</span><span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="o">&lt;</span><span class="nx">FaTimes</span> <span class="p">...</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">onDelete</span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>어떤 task를 지울지 분간하기 위해서 id값을 전달하므로, 단순히 onDelete가 아니라 arrow function 형태로 id를 전달해 주자.</p>
+
+<p>Task.js</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">Task</span> <span class="o">=</span> <span class="p">({</span><span class="nx">task</span><span class="p">,</span> <span class="nx">onDelete</span><span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="o">&lt;</span><span class="nx">FaTimes</span> <span class="p">...</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="nx">onDelete</span><span class="p">(</span><span class="nx">task</span><span class="p">.</span><span class="nx">id</span><span class="p">)}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>tasks.filter()에서 <code class="language-plaintext highlighter-rouge">filter()</code> 배열 메서드. 주어진 조건을 만족하는 배열만 만들어진다.</p>
+
+<p>App.js</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">deleteTask</span> <span class="o">=</span> <span class="p">(</span><span class="nx">id</span><span class="p">){</span>
+  <span class="nx">setTasks</span><span class="p">(</span><span class="nx">tasks</span><span class="p">.</span><span class="nx">filter</span><span class="p">((</span><span class="nx">task</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">task</span><span class="p">.</span><span class="nx">id</span> <span class="o">!==</span> <span class="nx">id</span><span class="p">))</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>spread(…) operation
+말 그대로 펼쳐주는 operation이다.
+<code class="language-plaintext highlighter-rouge">parts = ['two', 'three']</code> &gt; <code class="language-plaintext highlighter-rouge">numbers = ['one', ...pars, 'four']   // numbers: ['one', 'two', 'three', 'four']</code></p>
+
+  <p><code class="language-plaintext highlighter-rouge">var person = {name:'Alex', age: 35}</code> &gt; <code class="language-plaintext highlighter-rouge">&lt;Modal {...person} /&gt;은 다음과 같다.
+</code>&lt;Modal name={person.name} age={person.age} /&gt;`</p>
+</blockquote>
+
+<h3 id="reminder-표시하기">Reminder 표시하기</h3>
+
+<p>task 박스의 왼쪽에 border를 추가해서 Reminder 여부를 표시한다. Reminder는 task 단위로, 스타일은 div에 한다. Reminder가 true일 경우 className을 ‘task remider’로, Reminder가 false일 경우 className을 ‘task’로 하면 된다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">cosnt</span> <span class="nx">Task</span> <span class="o">=</span> <span class="p">({</span><span class="nx">task</span><span class="p">,</span> <span class="nx">onDelete</span><span class="p">,</span> <span class="nx">onToggle</span><span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span><span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">div</span>
+      <span class="nx">className</span><span class="o">=</span><span class="p">{</span><span class="s2">`task </span><span class="p">${</span><span class="nx">task</span><span class="p">.</span><span class="nx">reminder</span><span class="p">?</span> <span class="dl">'</span><span class="s1">reminder</span><span class="dl">'</span> <span class="p">:</span> <span class="dl">''</span><span class="p">}</span><span class="s2">`</span><span class="p">}</span>
+      <span class="nx">onDoubleClick</span> <span class="o">=</span> <span class="p">{()</span> <span class="o">=&gt;</span> <span class="nx">onToggle</span><span class="p">(</span><span class="nx">task</span><span class="p">.</span><span class="nx">id</span><span class="p">)}</span>
+    <span class="o">&gt;</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="addtask">AddTask</h3>
+
+<p>Task 추가하는 부분 만들기. AddTask라는 컴포넌트를 만든다.</p>
+
+<p>AddTask.js</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">AddTask</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">text</span><span class="p">,</span> <span class="nx">setText</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="dl">""</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">day</span><span class="p">,</span> <span class="nx">setDay</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="dl">""</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">reminder</span><span class="p">,</span> <span class="nx">setReminder</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span> <span class="c1">// reminder는 false로 초기화한다.</span>
+
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">form</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">add-form</span><span class="dl">"</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">form-control</span><span class="dl">"</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">label</span><span class="o">&gt;</span><span class="nx">Task</span><span class="o">&lt;</span><span class="sr">/label</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">input</span>
+          <span class="nx">type</span><span class="o">=</span><span class="dl">"</span><span class="s2">text</span><span class="dl">"</span>
+          <span class="nx">placeholder</span><span class="o">=</span><span class="dl">"</span><span class="s2">Add Task</span><span class="dl">"</span>
+          <span class="nx">value</span><span class="o">=</span><span class="p">{</span><span class="nx">text</span><span class="p">}</span>
+          <span class="nx">onChange</span><span class="o">=</span><span class="p">{(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">setText</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">)}</span>
+        <span class="sr">/</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>
+      <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="dl">"</span><span class="s2">submit</span><span class="dl">"</span> <span class="nx">value</span><span class="o">=</span><span class="dl">"</span><span class="s2">Save Task</span><span class="dl">"</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">btn btn-block</span><span class="dl">"</span> <span class="o">/&gt;</span>
+    <span class="o">&lt;</span><span class="sr">/form</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>target 이벤트는 해당 이벤트를 일으킨 엘리먼트를 가리킨다. 따라서 <code class="language-plaintext highlighter-rouge">e.target</code>은 이벤트를 일으킨 <code class="language-plaintext highlighter-rouge">input</code>이 되고, <code class="language-plaintext highlighter-rouge">e.target.value</code>는 input 엘리먼트의 value attribute 값인 text가 된다.</p>
+
+<p>value에는 <code class="language-plaintext highlighter-rouge">{text}</code>, 즉 사용자가 입력하는 값을 주었기 때문에, <code class="language-plaintext highlighter-rouge">e.target.value</code>는 input 엘리먼트에서 사용자가 입력한 값이 되고, setText 메서드가 state에 이 값을 저장하게 되는 것.</p>
+
+<p>Submit을 누른다고 바로 add하지 않겠다. 입력값 validation도 체크해야 하고, 입력 받은 후 칸을 비워주기도 해야 한다.</p>
+
+<p>AddTask.js</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">onSubmit</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span> <span class="c1">// 기본으로 동작하는 걸 막고, 아래 걸 한다.</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">text</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="dl">"</span><span class="s2">Please add a task</span><span class="dl">"</span><span class="p">);</span>
+    <span class="k">return</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nx">onAdd</span><span class="p">({</span> <span class="nx">text</span><span class="p">,</span> <span class="nx">day</span><span class="p">,</span> <span class="nx">reminder</span> <span class="p">});</span>
+
+  <span class="nx">setText</span><span class="p">(</span><span class="dl">""</span><span class="p">);</span>
+  <span class="nx">setDay</span><span class="p">(</span><span class="dl">""</span><span class="p">);</span>
+  <span class="nx">setReminder</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>이제 App.js에 있는 addTask를 추가할 차례.</p>
+
+<p>App.js</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">addTask</span> <span class="o">=</span> <span class="p">(</span><span class="nx">task</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">id</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">10000</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="kd">const</span> <span class="nx">newTask</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">id</span><span class="p">,</span> <span class="p">...</span><span class="nx">task</span> <span class="p">};</span>
+  <span class="nx">setTasks</span><span class="p">([...</span><span class="nx">tasks</span><span class="p">,</span> <span class="nx">task</span><span class="p">]);</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="addtask-입력란을-숨기기">addTask 입력란을 숨기기</h3>
+
+<p>addTask 입력란을 숨겼다가 보여줬다가 하는 걸 toggle로 만들자.</p>
+
+<p>App.js</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">App</span><span class="p">(){</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">showAddTask</span><span class="p">,</span> <span class="nx">setAddTask</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+  <span class="p">...</span>
+  <span class="k">return</span><span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">div</span> <span class="p">...</span>
+      <span class="o">&lt;</span><span class="nx">Header</span>
+        <span class="nx">onAdd</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="nx">setShowAddTask</span><span class="p">(</span><span class="o">!</span><span class="nx">showAddTask</span><span class="p">)}</span>
+        <span class="nx">showAdd</span><span class="o">=</span><span class="p">{</span><span class="nx">showAddTask</span><span class="p">}</span>
+      <span class="sr">/</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Header.js</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">Header</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">title</span><span class="p">,</span> <span class="nx">onAdd</span><span class="p">,</span> <span class="nx">showAdd</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="o">&lt;</span><span class="nx">Button</span> <span class="nx">color</span><span class="o">=</span><span class="p">{</span><span class="nx">showAdd</span> <span class="p">?</span> <span class="dl">"</span><span class="s2">red</span><span class="dl">"</span> <span class="p">:</span> <span class="dl">"</span><span class="s2">green</span><span class="dl">"</span><span class="p">}</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">onAdd</span><span class="p">}</span> <span class="sr">/&gt;</span><span class="err">;
+</span><span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="production-build">production Build</h3>
+
+<p>터미널 창에서 <code class="language-plaintext highlighter-rouge">npm run build</code>를 하면, build 폴더가 생긴다. 이게 배포할 파일들이다.</p>
+
+<p><code class="language-plaintext highlighter-rouge">sudo npm i -g serve</code>를 한 다음에,</p>
+
+<p><code class="language-plaintext highlighter-rouge">serve -s build -p 8000</code>를 하면.</p>
+
+<p>production build가 된다.</p>
+
+<h3 id="json-server">JSON server</h3>
+
+<p>mock server에서 돌려 보자. json-server install하기.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm i json-server
+</code></pre></div></div>
+
+<p>package.json에서 디버그 부분 추가하기</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="dl">"</span><span class="s2">server</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">json-server --watch db.json --port 5000</span><span class="dl">"</span>
+</code></pre></div></div>
+
+<p>그다음 <code class="language-plaintext highlighter-rouge">npm run server</code>를 입력하면 ‘db.json’ 파일이 생성된다. 터미널 추가해서 <code class="language-plaintext highlighter-rouge">npm start</code>로 서버를 실행시킨다.</p>
+
+<p>db.json 파일을 열어서 app.js에서 저장해 두었던 tasks들을 옮겨 온다. json 파일 스타일대로 약간의 수정이 필요.</p>
+
+<h3 id="useeffect">useEffect</h3>
+
+<p>useEffect라는 훅을 쓸 예정이다. side effect를 만들거나 다루는 것.</p>
+
+<p>useState 하단에 다음을 적자.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">App</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">fetchTasks</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">res</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">http://localhost:5000/tasks</span><span class="dl">"</span><span class="p">);</span>
+      <span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+
+      <span class="k">return</span> <span class="nx">data</span><span class="p">;</span>
+    <span class="p">};</span>
+    <span class="nx">fetchTasks</span><span class="p">();</span>
+  <span class="p">},</span> <span class="p">[]);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>fetch는 promise를 호출하므로 promise를 await한다. 나중을 위해서 defendency array(<code class="language-plaintext highlighter-rouge">[]</code>)를 추가한다.</p>
+
+<p>그런데 이 fetchTasks를 다른 데서도 쓸 수 있기 때문에 useEffect() 밖으로 빼자. getTasks도 async로. fetchTasks가 promise를 반환하기 때문에.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">useEffect</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">getTasks</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">taskFromServer</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetchTasks</span><span class="p">();</span>
+    <span class="nx">setTasks</span><span class="p">(</span><span class="nx">taskFromServer</span><span class="p">);</span>
+  <span class="p">};</span>
+  <span class="nx">getTasks</span><span class="p">();</span>
+<span class="p">},</span> <span class="p">[]);</span>
+
+<span class="kd">const</span> <span class="nx">fetchTasks</span> <span class="o">=</span> <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">res</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="dl">"</span><span class="s2">http://localhost:5000/tasks</span><span class="dl">"</span><span class="p">);</span>
+  <span class="kd">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">res</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
+
+  <span class="k">return</span> <span class="nx">data</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<p>이제 deleteTask가 mock server에 있는 데이터를 지우도록 만들자. deleteTask를 async로 만들고, ‘DELETE’ method로 데이터를 가져오면 된다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">deleteTask</span> <span class="o">=</span> <span class="k">async</span> <span class="p">(</span><span class="nx">id</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">await</span> <span class="nx">fetch</span><span class="p">(</span><span class="s2">`http://localhost:5000/tasks/</span><span class="p">${</span><span class="nx">id</span><span class="p">}</span><span class="s2">`</span><span class="p">,</span> <span class="p">{</span> <span class="na">method</span><span class="p">:</span> <span class="dl">"</span><span class="s2">DELETE</span><span class="dl">"</span> <span class="p">});</span>
+  <span class="nx">setTasks</span><span class="p">(</span><span class="nx">tasks</span><span class="p">.</span><span class="nx">filter</span><span class="p">((</span><span class="nx">task</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">task</span><span class="p">.</span><span class="nx">id</span> <span class="o">!==</span> <span class="nx">id</span><span class="p">));</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>mock: 모조품
+fetch: 불러오다</p>
+
+</div>
+
+
+
+<div class="pagination">
+  
+  <a href="/2022-10-09/TIL" class="left arrow"
+    >&#8592;</a
+  >
+   
+  <a href="/2022-10-07/w3school" class="right arrow"
+    >&#8594;</a
+  >
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+</main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-08-05 22:38:38 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

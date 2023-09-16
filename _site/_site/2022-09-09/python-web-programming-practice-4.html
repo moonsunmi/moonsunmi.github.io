@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>파이썬 웹 프로그래밍 공부 실전편 4 | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="파이썬 웹 프로그래밍 공부 실전편 4" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="북마크 앱 만들기" />
+<meta property="og:description" content="북마크 앱 만들기" />
+<link rel="canonical" href="http://localhost:4000/2022-09-09/python-web-programming-practice-4" />
+<meta property="og:url" content="http://localhost:4000/2022-09-09/python-web-programming-practice-4" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-09-09T22:38:33+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="파이썬 웹 프로그래밍 공부 실전편 4" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-09-09T22:38:33+09:00","datePublished":"2022-09-09T22:38:33+09:00","description":"북마크 앱 만들기","headline":"파이썬 웹 프로그래밍 공부 실전편 4","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-09-09/python-web-programming-practice-4"},"url":"http://localhost:4000/2022-09-09/python-web-programming-practice-4"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main><div class="post">
+  <h1 class="post-title">파이썬 웹 프로그래밍 공부 실전편 4</h1>
+
+  <div class="post-info">
+    
+    <br />
+    <span>on&nbsp;</span
+    ><time datetime="2022-09-09 22:38:33 +0900">September 09, 2022</time>
+    
+  </div>
+
+  <h2 id="북마크-앱-만들기">북마크 앱 만들기</h2>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">@</span><span class="n">admin</span><span class="p">.</span><span class="n">register</span><span class="p">(</span><span class="n">BookMark</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">BookmarkAdmin</span><span class="p">(</span><span class="n">admin</span><span class="p">.</span><span class="n">ModelAdmin</span><span class="p">):</span>
+    <span class="n">list_display</span> <span class="o">=</span> <span class="p">(</span><span class="s">'id'</span><span class="p">,</span> <span class="s">'title'</span><span class="p">,</span> <span class="s">'url'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>python3 manage.py showmigrations: 모든 마이그레이션을 보여주고, 각 마이그레이션별 적용 여부를 알 수 있다.</p>
+
+<p>python3 manage.py sqlmigrate bookmark 0001: bookmark 앱의 0001번 마이그레이션을 적용할 때 사용될 SQL 문장을 보여준다.</p>
+
+<p>장고가 알아서 해 주는 것?</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">BookList</span><span class="p">(</span><span class="n">ListView</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Book</span>
+
+</code></pre></div></div>
+
+<p>Book 테이블로부터 모든 레코드를 가져와 object_list라는 컨텍스트 변수를 구성한다. 템플릿 파일은 디폴트로 books/book_list.html 파일(앱이름/모델이름.html)이 된다.</p>
+
+<p>장고가 알아서 해 주는 것?</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">BookList</span><span class="p">(</span><span class="n">DetailView</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Book</span>
+</code></pre></div></div>
+
+<p>컨텍스트 변수로 object를 사용한다. 템플릿 파일은 디폴트로 books/book_detail.html 파일(앱이름/모델이름_detail.html)이 된다. 테이블 조회 조건에 사용되는 Primary Key 값은 URLconf에서 넘겨받는데, 이에 대한 처리는 DetailView 제네릭 뷰에서 알아서 처리해 준다.</p>
+
+<h2 id="블로그-앱-만들기">블로그 앱 만들기</h2>
+
+<p>title
+modify_date
+description
+페이지 이동</p>
+
+<h4 id="슬러그slug">슬러그(slug)</h4>
+
+<p>페이지나 포스트를 설명하는 핵심 단어의 집합. 신문, 잡지 등에서 제목을 쓸 때, 중요한 의미를 포함하는 단어만 사용해 제목을 작성하는 방법을 말한다. 웹 개발 분야에서는 콘텐츠 고유 주소로 URL에 사용됨.</p>
+
+<p>reverse() 장고 함수: URL 패턴을 만들어 주는 장고의 내장 함수</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">slug</span> <span class="o">=</span> <span class="n">models</span><span class="p">.</span><span class="n">SlugField</span><span class="p">(</span><span class="s">'SLUG'</span><span class="p">,</span> <span class="n">unique</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">allow_unicode</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">help_text</span><span class="o">=</span><span class="s">'one word for title alias.'</span><span class="p">)</span>
+
+</code></pre></div></div>
+
+<ul>
+  <li>unique=True: 특정 포스트를 검색할 때 기본 키 대신 사용된다.</li>
+  <li>allow_unicode: 한글 처리 가능</li>
+</ul>
+
+<p>DateTimeField의</p>
+
+<ul>
+  <li>auto_now_add: 객체가 생성될 때의 시각을 자동으로 기록</li>
+  <li>auto_now: 객체가 데이터베이스에 저장될 때의 시각을 자동으로 기록(즉, 변경될 때마다)</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">verbose_name</span> <span class="o">=</span> <span class="s">'post'</span>
+        <span class="n">verbose_name_plural</span> <span class="o">=</span> <span class="s">'posts'</span>
+        <span class="n">db_table</span> <span class="o">=</span> <span class="s">'blog_posts'</span>
+        <span class="n">ordering</span> <span class="o">=</span> <span class="p">(</span><span class="s">'-modify_dt'</span><span class="p">,)</span>
+</code></pre></div></div>
+
+<ul>
+  <li>db<em>table = ‘blog_posts’: 데이터베이스에 저장되는 테이블 이름을 ‘blog_posts’로 저장한다. 디폴트로는 ‘앱명</em>모델클래스명’을 테이블 명으로 지정한다. 즉, 그대로 두면 blog_post가 되는데, blog_posts로 바꾼 것.</li>
+</ul>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">re_path</span><span class="p">(</span><span class="sa">r</span><span class="s">'^post/(?P&lt;slug&gt;[-\w]+)/$'</span><span class="p">,</span> <span class="n">views</span><span class="p">.</span><span class="n">PostDV</span><span class="p">.</span><span class="n">as_view</span><span class="p">(),</span> <span class="n">name</span><span class="o">=</span><span class="s">'post_detail'</span><span class="p">),</span>
+</code></pre></div></div>
+
+<p>파이썬에서는 정규표현식 그룹에서 숫자로 인덱싱하는 대신, 그룹이름으로 지정할 수 있다. (?P<그룹명>정규식)</그룹명></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">PostAV</span><span class="p">(</span><span class="n">ArchiveIndexView</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Post</span>
+    <span class="n">date_field</span> <span class="o">=</span> <span class="s">'modify_dt'</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">modify_dt</code>를 기준으로 Post를 보여준다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">PostYAV</span><span class="p">(</span><span class="n">YearArchiveView</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">Post</span>
+    <span class="n">date_field</span> <span class="o">=</span> <span class="s">'modify_dt'</span>
+    <span class="n">make_object_list</span> <span class="o">=</span> <span class="bp">True</span>
+</code></pre></div></div>
+
+<p>make_object_list가 True이면 해당 연도에 해당하는 객체의 리스트를 만들어서 템플릿에 넘겨줍니다. 템플릿 파일에서는 object_list 컨텍스트 변수를 사용할 수 있습니다.</p>
+
+<p>날짜를 “July 07, 2019” 형식으로 출력한다.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{{ post.modify_dt|date:"N d, Y" }}
+</code></pre></div></div>
+
+<p>템플릿 파일에서 URL을 추출하는 문법 2가지</p>
+
+<ul>
+  <li>get_absolute_url()</li>
+  <li>{% url %}</li>
+</ul>
+
+</div>
+
+
+
+<div class="pagination">
+  
+  <a href="/2022-09-10/python-web-programming-practice-5" class="left arrow"
+    >&#8592;</a
+  >
+   
+  <a href="/2022-09-07/python-web-programming-practice-3" class="right arrow"
+    >&#8594;</a
+  >
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+</main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-08-05 22:38:38 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

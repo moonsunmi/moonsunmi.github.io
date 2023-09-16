@@ -32,6 +32,7 @@ UseMemo를 이용해 연산에 시간이 많이 드는 함수의 결과값을 �
 import를 동적으로 하여 코드를 분할하는 방법도 있다. Import 문을 필요할 때 불러오도록 해준다. lazy는 꼭 suspense 컴포넌트 안에 써야 한다.
 Suspense는 감싸진 컴포넌트가 제대로 보여지기 전까지 fallback을 화면에서 보여준다.
 
+```javascript
 const ScenarioImage = React.lazy(() => import('../ScenarioImage'));
 
 ...
@@ -39,6 +40,7 @@ const ScenarioImage = React.lazy(() => import('../ScenarioImage'));
       <React.Suspense fallback={<p> loading image </p>}>
         <ScenarioImage imageType={currentQuestion.questionImageType} />
       </React.Suspense>
+```
 
 ### 4. 효율을 높여주는 라이브러리 사용하기
 

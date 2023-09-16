@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Likedin Clone Coding | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="Likedin Clone Coding" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="CSS" />
+<meta property="og:description" content="CSS" />
+<link rel="canonical" href="http://localhost:4000/2022-10-17/TIL" />
+<meta property="og:url" content="http://localhost:4000/2022-10-17/TIL" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-10-17T12:18:07+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Likedin Clone Coding" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-10-17T12:18:07+09:00","datePublished":"2022-10-17T12:18:07+09:00","description":"CSS","headline":"Likedin Clone Coding","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-10-17/TIL"},"url":"http://localhost:4000/2022-10-17/TIL"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main><div class="post">
+  <h1 class="post-title">Likedin Clone Coding</h1>
+
+  <div class="post-info">
+    
+    <br />
+    <span>on&nbsp;</span
+    ><time datetime="2022-10-17 12:18:07 +0900">October 17, 2022</time>
+    
+  </div>
+
+  <h3 id="css">CSS</h3>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">object-fit: cover</code>: 이미지의 사이즈와 다르게 width, height를 지정해 주더라도 가로:세로 1:1 비율이 깨지지 않도록 유지해 준다. 1:1 비율을 넘는 부분은 잘린다.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">justify-content</code>: 컨테이너 아이템들의 배치 방법을 지정한다.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">flex: 1</code>: 남은 공간 전부 차지하도록</p>
+  </li>
+</ul>
+
+<p>Header.js</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">SearchIcon</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@mui/icons-material/Search</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">HomeIcon</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@mui/icons-material/Home</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">GroupIcon</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@mui/icons-material/Group</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">WorkIcon</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@mui/icons-material/Work</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">TextsmsIcon</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@mui/icons-material/Textsms</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">NotificationsIcon</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@mui/icons-material/Notifications</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">AccountCircleIcon</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@mui/icons-material/AccountCircle</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="k">import</span> <span class="dl">"</span><span class="s2">./Header.css</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">HeaderOption</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./HeaderOption</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">Header</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">header</span><span class="dl">"</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">header__left</span><span class="dl">"</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">img</span>
+          <span class="nx">src</span><span class="o">=</span><span class="dl">"</span><span class="s2">https://drive.google.com/uc?export=view&amp;id=14Ut_BLcjdgZnDZ-2o9ZelmSMkUfGYGa3</span><span class="dl">"</span>
+          <span class="nx">alt</span><span class="o">=</span><span class="dl">""</span>
+        <span class="o">/&gt;</span>
+
+        <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">header__search</span><span class="dl">"</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">SearchIcon</span> <span class="o">/&gt;</span>
+          <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="dl">"</span><span class="s2">text</span><span class="dl">"</span> <span class="o">/&gt;</span>
+        <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">header__right</span><span class="dl">"</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">HeaderOption</span> <span class="nx">Icon</span><span class="o">=</span><span class="p">{</span><span class="nx">HomeIcon</span><span class="p">}</span> <span class="nx">title</span><span class="o">=</span><span class="dl">"</span><span class="s2">Home</span><span class="dl">"</span> <span class="o">/&gt;</span>
+        <span class="o">&lt;</span><span class="nx">HeaderOption</span> <span class="nx">Icon</span><span class="o">=</span><span class="p">{</span><span class="nx">GroupIcon</span><span class="p">}</span> <span class="nx">title</span><span class="o">=</span><span class="dl">"</span><span class="s2">My Network</span><span class="dl">"</span> <span class="o">/&gt;</span>
+        <span class="o">&lt;</span><span class="nx">HeaderOption</span> <span class="nx">Icon</span><span class="o">=</span><span class="p">{</span><span class="nx">WorkIcon</span><span class="p">}</span> <span class="nx">title</span><span class="o">=</span><span class="dl">"</span><span class="s2">Job</span><span class="dl">"</span> <span class="o">/&gt;</span>
+        <span class="o">&lt;</span><span class="nx">HeaderOption</span> <span class="nx">Icon</span><span class="o">=</span><span class="p">{</span><span class="nx">TextsmsIcon</span><span class="p">}</span> <span class="nx">title</span><span class="o">=</span><span class="dl">"</span><span class="s2">Chat</span><span class="dl">"</span> <span class="o">/&gt;</span>
+        <span class="o">&lt;</span><span class="nx">HeaderOption</span> <span class="nx">Icon</span><span class="o">=</span><span class="p">{</span><span class="nx">NotificationsIcon</span><span class="p">}</span> <span class="nx">title</span><span class="o">=</span><span class="dl">"</span><span class="s2">Notifications</span><span class="dl">"</span> <span class="o">/&gt;</span>
+        <span class="o">&lt;</span><span class="nx">HeaderOption</span> <span class="nx">Icon</span><span class="o">=</span><span class="p">{</span><span class="nx">AccountCircleIcon</span><span class="p">}</span> <span class="nx">title</span><span class="o">=</span><span class="dl">"</span><span class="s2">me</span><span class="dl">"</span> <span class="o">/&gt;</span>
+      <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">Header</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Header.css</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.header</span> <span class="p">{</span>
+  <span class="nl">position</span><span class="p">:</span> <span class="n">sticky</span><span class="p">;</span>
+  <span class="nl">top</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="no">white</span><span class="p">;</span>
+  <span class="nl">display</span><span class="p">:</span> <span class="n">flex</span><span class="p">;</span>
+  <span class="nl">justify-content</span><span class="p">:</span> <span class="n">space-evenly</span><span class="p">;</span>
+  <span class="nl">border-bottom</span><span class="p">:</span> <span class="m">0.1px</span> <span class="nb">solid</span> <span class="n">lightgray</span><span class="p">;</span>
+  <span class="nl">padding-top</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+  <span class="nl">padding-bottom</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+  <span class="nl">width</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+  <span class="nl">z-index</span><span class="p">:</span> <span class="m">999</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.header__left</span> <span class="p">{</span>
+  <span class="nl">display</span><span class="p">:</span> <span class="n">flex</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.header__left</span> <span class="o">&gt;</span> <span class="nt">img</span> <span class="p">{</span>
+  <span class="nl">object-fit</span><span class="p">:</span> <span class="n">contain</span><span class="p">;</span>
+  <span class="nl">height</span><span class="p">:</span> <span class="m">40px</span><span class="p">;</span>
+  <span class="nl">margin-right</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.header__search</span> <span class="p">{</span>
+  <span class="nl">padding</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+  <span class="nl">display</span><span class="p">:</span> <span class="n">flex</span><span class="p">;</span>
+  <span class="nl">align-items</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
+  <span class="nl">border-radius</span><span class="p">:</span> <span class="m">5px</span><span class="p">;</span>
+  <span class="nl">height</span><span class="p">:</span> <span class="m">22px</span><span class="p">;</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="n">grey</span><span class="p">;</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="m">#eef3f8</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.header__search</span> <span class="o">&gt;</span> <span class="nt">input</span> <span class="p">{</span>
+  <span class="nl">outline</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+  <span class="nl">border</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+  <span class="nl">background</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.header__right</span> <span class="p">{</span>
+  <span class="nl">display</span><span class="p">:</span> <span class="n">flex</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>HeaderOption.js</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="dl">"</span><span class="s2">./HeaderOption.css</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">HeaderOption</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">avatar</span><span class="p">,</span> <span class="nx">Icon</span><span class="p">,</span> <span class="nx">title</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">headerOption</span><span class="dl">"</span><span class="o">&gt;</span>
+      <span class="p">{</span><span class="nx">Icon</span> <span class="o">&amp;&amp;</span> <span class="o">&lt;</span><span class="nx">Icon</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">headerOption__icon</span><span class="dl">"</span> <span class="o">/&gt;</span><span class="p">}</span>
+      <span class="o">&lt;</span><span class="nx">h3</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">headerOption__title</span><span class="dl">"</span><span class="o">&gt;</span> <span class="p">{</span><span class="nx">title</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/h3</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">HeaderOption</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>HeaderOption.css</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.headerOption</span> <span class="p">{</span>
+  <span class="nl">display</span><span class="p">:</span> <span class="n">flex</span><span class="p">;</span>
+  <span class="nl">flex-direction</span><span class="p">:</span> <span class="n">column</span><span class="p">;</span>
+  <span class="nl">align-items</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
+  <span class="nl">margin-right</span><span class="p">:</span> <span class="m">20px</span><span class="p">;</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="no">gray</span><span class="p">;</span>
+  <span class="nl">cursor</span><span class="p">:</span> <span class="nb">pointer</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.headerOption__title</span> <span class="p">{</span>
+  <span class="nl">font-size</span><span class="p">:</span> <span class="m">12px</span><span class="p">;</span>
+  <span class="nl">font-weight</span><span class="p">:</span> <span class="m">400</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.headerOption__icon</span> <span class="p">{</span>
+  <span class="nl">object-fit</span><span class="p">:</span> <span class="n">contain</span><span class="p">;</span>
+  <span class="nl">height</span><span class="p">:</span> <span class="m">25px</span> <span class="cp">!important</span><span class="p">;</span>
+  <span class="nl">width</span><span class="p">:</span> <span class="m">25px</span> <span class="cp">!important</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.headerOption</span><span class="nd">:hover</span> <span class="p">{</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="no">black</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Sidebar.js</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">React</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="dl">"</span><span class="s2">./Sidebar.css</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">Avatar</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">@mui/material</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">Sidebar</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">recentItem</span> <span class="o">=</span> <span class="p">(</span><span class="nx">topic</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">sidebar__recentItem</span><span class="dl">"</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">span</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">sidebar__hash</span><span class="dl">"</span><span class="o">&gt;</span><span class="err">#</span><span class="o">&lt;</span><span class="sr">/span</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="p">{</span><span class="nx">topic</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/p</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">sidebar</span><span class="dl">"</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">sidebar__top</span><span class="dl">"</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">img</span>
+          <span class="nx">src</span><span class="o">=</span><span class="dl">"</span><span class="s2">https://drive.google.com/uc?export=view&amp;id=1xeTuuFf5NNugOgSf-2yjtUXi3whybZp2</span><span class="dl">"</span>
+          <span class="nx">alt</span><span class="o">=</span><span class="dl">""</span>
+        <span class="o">/&gt;</span>
+        <span class="o">&lt;</span><span class="nx">Avatar</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">sidebar__avatar</span><span class="dl">"</span> <span class="o">/&gt;</span>
+        <span class="o">&lt;</span><span class="nx">h2</span><span class="o">&gt;</span><span class="nx">Sonny</span> <span class="nx">Sangha</span><span class="o">&lt;</span><span class="sr">/h2</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">h4</span><span class="o">&gt;</span><span class="nx">sonny</span><span class="p">.</span><span class="nx">sangha</span><span class="p">@</span><span class="nd">gmail</span><span class="p">.</span><span class="nx">com</span><span class="o">&lt;</span><span class="sr">/h4</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>
+      <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">sidebar__stats</span><span class="dl">"</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">sidebar__stat</span><span class="dl">"</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">Who</span> <span class="nx">viwed</span> <span class="nx">you</span><span class="o">&lt;</span><span class="sr">/p</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">p</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">sidebar__statNumber</span><span class="dl">"</span><span class="o">&gt;</span><span class="mi">2</span><span class="p">,</span><span class="mi">543</span><span class="o">&lt;</span><span class="sr">/p</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">sidebar__stat</span><span class="dl">"</span><span class="o">&gt;</span>
+          <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">Views</span> <span class="nx">on</span> <span class="nx">post</span><span class="o">&lt;</span><span class="sr">/p</span><span class="err">&gt;
+</span>          <span class="o">&lt;</span><span class="nx">p</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">sidebar__statNumber</span><span class="dl">"</span><span class="o">&gt;</span><span class="mi">2</span><span class="p">,</span><span class="mi">400</span><span class="o">&lt;</span><span class="sr">/p</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>
+      <span class="o">&lt;</span><span class="nx">div</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">sidebar__bottom</span><span class="dl">"</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span><span class="nx">Recent</span><span class="o">&lt;</span><span class="sr">/p</span><span class="err">&gt;
+</span>        <span class="p">{</span><span class="nx">recentItem</span><span class="p">(</span><span class="dl">"</span><span class="s2">reactJs</span><span class="dl">"</span><span class="p">)}</span>
+        <span class="p">{</span><span class="nx">recentItem</span><span class="p">(</span><span class="dl">"</span><span class="s2">programming</span><span class="dl">"</span><span class="p">)}</span>
+        <span class="p">{</span><span class="nx">recentItem</span><span class="p">(</span><span class="dl">"</span><span class="s2">softwareenginering</span><span class="dl">"</span><span class="p">)}</span>
+        <span class="p">{</span><span class="nx">recentItem</span><span class="p">(</span><span class="dl">"</span><span class="s2">developer</span><span class="dl">"</span><span class="p">)}</span>
+      <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/div</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">Sidebar</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Sidebar.css</p>
+
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nc">.sidebar</span> <span class="p">{</span>
+  <span class="nl">position</span><span class="p">:</span> <span class="n">sticky</span><span class="p">;</span>
+  <span class="nl">top</span><span class="p">:</span> <span class="m">80px</span><span class="p">;</span>
+  <span class="nl">flex</span><span class="p">:</span> <span class="m">0.2</span><span class="p">;</span>
+  <span class="nl">border-radius</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+  <span class="nl">text-align</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
+  <span class="nl">height</span><span class="p">:</span> <span class="n">fit-content</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.sidebar__avatar</span> <span class="p">{</span>
+  <span class="nl">margin-bottom</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.sidebar__top</span> <span class="p">{</span>
+  <span class="nl">display</span><span class="p">:</span> <span class="n">flex</span><span class="p">;</span>
+  <span class="nl">flex-direction</span><span class="p">:</span> <span class="n">column</span><span class="p">;</span>
+  <span class="nl">align-items</span><span class="p">:</span> <span class="nb">center</span><span class="p">;</span>
+  <span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="n">lightgray</span><span class="p">;</span>
+  <span class="nl">border-bottom</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+  <span class="nl">border-top-left-radius</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+  <span class="nl">border-top-right-radius</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="no">white</span><span class="p">;</span>
+  <span class="nl">padding-bottom</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.sidebar__top</span> <span class="o">&gt;</span> <span class="nt">h4</span> <span class="p">{</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="no">gray</span><span class="p">;</span>
+  <span class="nl">font-size</span><span class="p">:</span> <span class="m">12px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.sidebar__top</span> <span class="o">&gt;</span> <span class="nt">h2</span> <span class="p">{</span>
+  <span class="nl">font-size</span><span class="p">:</span> <span class="m">18px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.sidebar__top</span> <span class="o">&gt;</span> <span class="nt">img</span> <span class="p">{</span>
+  <span class="nl">margin-bottom</span><span class="p">:</span> <span class="m">-10px</span><span class="p">;</span>
+  <span class="nl">width</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+  <span class="nl">height</span><span class="p">:</span> <span class="m">60px</span><span class="p">;</span>
+  <span class="nl">border-top-left-radius</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+  <span class="nl">border-top-right-radius</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+  <span class="nl">object-fit</span><span class="p">:</span> <span class="n">cover</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.sidebar__stat</span> <span class="p">{</span>
+  <span class="nl">margin-top</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+  <span class="nl">display</span><span class="p">:</span> <span class="n">flex</span><span class="p">;</span>
+  <span class="nl">justify-content</span><span class="p">:</span> <span class="n">space-between</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.sidebar__stat</span> <span class="o">&gt;</span> <span class="nt">p</span> <span class="p">{</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="no">gray</span><span class="p">;</span>
+  <span class="nl">font-size</span><span class="p">:</span> <span class="m">13px</span><span class="p">;</span>
+  <span class="nl">font-weight</span><span class="p">:</span> <span class="m">600</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.sidebar__stats</span> <span class="p">{</span>
+  <span class="nl">padding</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+  <span class="nl">margin-bottom</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+  <span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="n">lightgray</span><span class="p">;</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="no">white</span><span class="p">;</span>
+  <span class="nl">border-bottom-left-radius</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+  <span class="nl">border-bottom-right-radius</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.sidebar__statNumber</span> <span class="p">{</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="m">#0a66c2</span> <span class="cp">!important</span><span class="p">;</span>
+  <span class="nl">font-weight</span><span class="p">:</span> <span class="nb">bold</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.sidebar__bottom</span> <span class="p">{</span>
+  <span class="nl">text-align</span><span class="p">:</span> <span class="nb">left</span><span class="p">;</span>
+  <span class="nl">padding</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+  <span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="n">lightgray</span><span class="p">;</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="no">white</span><span class="p">;</span>
+  <span class="nl">border-radius</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+  <span class="nl">margin-top</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.sidebar__bottom</span> <span class="o">&gt;</span> <span class="nt">p</span> <span class="p">{</span>
+  <span class="nl">font-size</span><span class="p">:</span> <span class="m">13px</span><span class="p">;</span>
+  <span class="nl">padding-bottom</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.sidebar__recentItem</span> <span class="p">{</span>
+  <span class="nl">display</span><span class="p">:</span> <span class="n">flex</span><span class="p">;</span>
+  <span class="nl">font-size</span><span class="p">:</span> <span class="m">13px</span><span class="p">;</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="n">grey</span><span class="p">;</span>
+  <span class="nl">font-weight</span><span class="p">:</span> <span class="nb">bolder</span><span class="p">;</span>
+  <span class="c">/* cursor: pointer;*/</span>
+  <span class="nl">margin-bottom</span><span class="p">:</span> <span class="m">5px</span><span class="p">;</span>
+  <span class="nl">padding</span><span class="p">:</span> <span class="m">5px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.sidebar__recentItem</span><span class="nd">:hover</span> <span class="p">{</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="no">whitesmoke</span><span class="p">;</span>
+  <span class="nl">border-radius</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+  <span class="nl">cursor</span><span class="p">:</span> <span class="nb">pointer</span><span class="p">;</span>
+  <span class="nl">color</span><span class="p">:</span> <span class="no">black</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.sidebar__hash</span> <span class="p">{</span>
+  <span class="nl">margin-left</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+  <span class="nl">margin-right</span><span class="p">:</span> <span class="m">5px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+</div>
+
+
+
+<div class="pagination">
+  
+  <a href="/2022-10-18/TIL" class="left arrow"
+    >&#8592;</a
+  >
+   
+  <a href="/2022-10-16/12th-week" class="right arrow"
+    >&#8594;</a
+  >
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+</main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-08-05 22:38:38 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TIL) Facebook Clone Coding(Next.js, Tailwind CSS, Responsive) | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="TIL) Facebook Clone Coding(Next.js, Tailwind CSS, Responsive)" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="firebase 연결하기" />
+<meta property="og:description" content="firebase 연결하기" />
+<link rel="canonical" href="http://localhost:4000/2022-10-31/TIL" />
+<meta property="og:url" content="http://localhost:4000/2022-10-31/TIL" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-10-31T12:18:07+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TIL) Facebook Clone Coding(Next.js, Tailwind CSS, Responsive)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-10-31T12:18:07+09:00","datePublished":"2022-10-31T12:18:07+09:00","description":"firebase 연결하기","headline":"TIL) Facebook Clone Coding(Next.js, Tailwind CSS, Responsive)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-10-31/TIL"},"url":"http://localhost:4000/2022-10-31/TIL"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main><div class="post">
+  <h1 class="post-title">TIL) Facebook Clone Coding(Next.js, Tailwind CSS, Responsive)</h1>
+
+  <div class="post-info">
+    
+    <br />
+    <span>on&nbsp;</span
+    ><time datetime="2022-10-31 12:18:07 +0900">October 31, 2022</time>
+    
+  </div>
+
+  <h3 id="firebase-연결하기">firebase 연결하기</h3>
+
+<p>firebase.js</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">initializeApp</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">firebase/app</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">getFirestore</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">firebase/firestore</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">firebaseConfig</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">apiKey</span><span class="p">:</span> <span class="dl">"</span><span class="s2">AIzaSyBdvdvEFk9YxucomOCGV0v3aPcq9VHt2dY</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">authDomain</span><span class="p">:</span> <span class="dl">"</span><span class="s2">facebook-clone-yt-70415.firebaseapp.com</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">projectId</span><span class="p">:</span> <span class="dl">"</span><span class="s2">facebook-clone-yt-70415</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">storageBucket</span><span class="p">:</span> <span class="dl">"</span><span class="s2">facebook-clone-yt-70415.appspot.com</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">messagingSenderId</span><span class="p">:</span> <span class="dl">"</span><span class="s2">993020480137</span><span class="dl">"</span><span class="p">,</span>
+  <span class="na">appId</span><span class="p">:</span> <span class="dl">"</span><span class="s2">1:993020480137:web:9e894ab90b8db0d055d458</span><span class="dl">"</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">initializeApp</span><span class="p">(</span><span class="nx">firebaseConfig</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">db</span> <span class="o">=</span> <span class="nx">getFirestore</span><span class="p">(</span><span class="nx">app</span><span class="p">);</span>
+
+<span class="k">export</span> <span class="p">{</span> <span class="nx">db</span> <span class="p">};</span>
+</code></pre></div></div>
+
+<p>post를 입력하면, firebase에 저장한다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">sendPost</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">inputRef</span><span class="p">.</span><span class="nx">current</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+
+  <span class="k">try</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">docRef</span> <span class="o">=</span> <span class="nx">addDoc</span><span class="p">(</span><span class="nx">collection</span><span class="p">(</span><span class="nx">db</span><span class="p">,</span> <span class="dl">"</span><span class="s2">post</span><span class="dl">"</span><span class="p">),</span> <span class="p">{</span>
+      <span class="na">message</span><span class="p">:</span> <span class="nx">inputRef</span><span class="p">.</span><span class="nx">current</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span>
+      <span class="na">name</span><span class="p">:</span> <span class="nx">session</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+      <span class="na">email</span><span class="p">:</span> <span class="nx">session</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">email</span><span class="p">,</span>
+      <span class="na">image</span><span class="p">:</span> <span class="nx">session</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">image</span><span class="p">,</span>
+      <span class="na">timestamp</span><span class="p">:</span> <span class="nx">serverTimestamp</span><span class="p">(),</span>
+    <span class="p">});</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Document written with ID: </span><span class="dl">"</span><span class="p">,</span> <span class="nx">docRef</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">"</span><span class="s2">Error adding document: </span><span class="dl">"</span><span class="p">,</span> <span class="nx">e</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="nx">inputRef</span><span class="p">.</span><span class="nx">current</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="dl">""</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="useref-vs-usestate">useRef vs useState</h3>
+
+<p>useRef: 렌더링이 되더라도 값을 지켜야 할 때 쓴다. 그래서 바로 전 값을 사용하고자 할 때 주로 쓴다. 렌더링과 무관한 값을 저장할 때 쓴다. useRef는 딱 하나만 반환한다. <code class="language-plaintext highlighter-rouge">current</code> 오브젝트. useRef는 값이 변해도 렌더링되지 않는다. 하지만 useState는 값이 업데이트되면 바로 렌더링된다.</p>
+
+<p>그런데 useRef는 상태값 관리가 아니라, 요소의 이름을 짓는 용도로도 사용된다. 여기에서는 요소에 이름을 짓는 용도가 쓰인다.</p>
+
+<p>다음과 같이 input 박스에 ref 속성을 추가해 useRef를 지정했다. inputRef는 inputbox를 가리키는 큰 손가락으로 생각하면 된다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">inputRef</span> <span class="o">=</span> <span class="nx">useRef</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+<span class="p">...</span>
+<span class="o">&lt;</span><span class="nx">input</span> <span class="p">...</span> <span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">inputRef</span><span class="p">}</span> <span class="nx">placeholder</span><span class="o">=</span><span class="p">{</span><span class="s2">`What's on your mind, </span><span class="p">${</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">}</span><span class="s2">?`</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span></code></pre></div></div>
+
+<p>input 박스에 입력된 값을 사용할 때 쓰고 있다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">collection</span><span class="p">,</span> <span class="nx">addDoc</span><span class="p">,</span> <span class="nx">serverTimestamp</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">firebase/firestore</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">InputBox</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="p">{</span> <span class="na">data</span><span class="p">:</span> <span class="nx">session</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">useSession</span><span class="p">();</span>
+  <span class="kd">const</span> <span class="nx">inputRef</span> <span class="o">=</span> <span class="nx">useRef</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+
+  <span class="kd">const</span> <span class="nx">sendPost</span> <span class="o">=</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">e</span><span class="p">.</span><span class="nx">preventDefault</span><span class="p">();</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">inputRef</span><span class="p">.</span><span class="nx">current</span><span class="p">.</span><span class="nx">value</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">docRef</span> <span class="o">=</span> <span class="nx">addDoc</span><span class="p">(</span><span class="nx">collection</span><span class="p">(</span><span class="nx">db</span><span class="p">,</span> <span class="dl">"</span><span class="s2">post</span><span class="dl">"</span><span class="p">),</span> <span class="p">{</span>
+        <span class="na">message</span><span class="p">:</span> <span class="nx">inputRef</span><span class="p">.</span><span class="nx">current</span><span class="p">.</span><span class="nx">value</span><span class="p">,</span>
+        <span class="na">name</span><span class="p">:</span> <span class="nx">session</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+        <span class="na">email</span><span class="p">:</span> <span class="nx">session</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">email</span><span class="p">,</span>
+        <span class="na">image</span><span class="p">:</span> <span class="nx">session</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">image</span><span class="p">,</span>
+        <span class="na">timestamp</span><span class="p">:</span> <span class="nx">serverTimestamp</span><span class="p">(),</span>
+      <span class="p">});</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Document written with ID: </span><span class="dl">"</span><span class="p">,</span> <span class="nx">docRef</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="dl">"</span><span class="s2">Error adding document: </span><span class="dl">"</span><span class="p">,</span> <span class="nx">e</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="nx">inputRef</span><span class="p">.</span><span class="nx">current</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="dl">""</span><span class="p">;</span>
+  <span class="p">};</span>
+</code></pre></div></div>
+
+<h3 id="이미지-업로드하기">이미지 업로드하기</h3>
+
+<p>이미지 업로드하는 기능은 photo/Image 아이콘을 누르면 type 프러퍼티가 file인 input 엘리먼트가 작동되게 만든다. 이 input 엘리먼트는 숨겨 두고, photo/Image 아이콘이 눌리면(<code class="language-plaintext highlighter-rouge">onChange</code>) 반응하게 만들어 둔다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">div</span>
+  <span class="nx">onClick</span><span class="o">=</span><span class="p">{()</span> <span class="o">=&gt;</span> <span class="nx">filepickerRef</span><span class="p">.</span><span class="nx">current</span><span class="p">.</span><span class="nx">click</span><span class="p">()}</span>
+  <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">inputIcon</span><span class="dl">"</span>
+<span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="nx">CameraIcon</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">h-7 text-green-500</span><span class="dl">"</span> <span class="o">/&gt;</span>
+  <span class="o">&lt;</span><span class="nx">p</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">text-xs sm:text-sm xl:text-base</span><span class="dl">"</span><span class="o">&gt;</span><span class="nx">Photo</span><span class="o">/</span><span class="nx">Video</span><span class="o">&lt;</span><span class="sr">/p</span><span class="err">&gt;
+</span>  <span class="o">&lt;</span><span class="nx">input</span>
+    <span class="nx">ref</span><span class="o">=</span><span class="p">{</span><span class="nx">filepickerRef</span><span class="p">}</span>
+    <span class="nx">onChange</span><span class="o">=</span><span class="p">{</span><span class="nx">addImageToPost</span><span class="p">}</span>
+    <span class="nx">type</span><span class="o">=</span><span class="dl">"</span><span class="s2">file</span><span class="dl">"</span>
+    <span class="nx">hidden</span>
+  <span class="o">/&gt;</span>
+</code></pre></div></div>
+
+<p>우리 눈에 보이는 버튼에 해당하는 div를 클릭하면, input 엘리먼트를 가리키는 filepickerRef를 이용해서, input 엘리먼트가 click되었다고 처리한다. input 엘리먼트는 onChange가 되면 addImageToPost를 실행시킨다.</p>
+
+<hr />
+
+<p>edge cases: 극단적인 경우</p>
+
+<hr />
+
+<p>월) 운동</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>삼두</th>
+      <th>뒷벅지</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>3/3</td>
+      <td>3/3</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+
+
+<div class="pagination">
+  
+  <a href="/2022-11-01/TIL" class="left arrow"
+    >&#8592;</a
+  >
+   
+  <a href="/2022-10-30/14th-week" class="right arrow"
+    >&#8594;</a
+  >
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+</main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-08-05 22:38:38 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

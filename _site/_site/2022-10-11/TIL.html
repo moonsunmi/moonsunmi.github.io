@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>w3school React | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="w3school React" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="JSX" />
+<meta property="og:description" content="JSX" />
+<link rel="canonical" href="http://localhost:4000/2022-10-11/TIL" />
+<meta property="og:url" content="http://localhost:4000/2022-10-11/TIL" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-10-11T12:18:07+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="w3school React" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-10-11T12:18:07+09:00","datePublished":"2022-10-11T12:18:07+09:00","description":"JSX","headline":"w3school React","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-10-11/TIL"},"url":"http://localhost:4000/2022-10-11/TIL"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main><div class="post">
+  <h1 class="post-title">w3school React</h1>
+
+  <div class="post-info">
+    
+    <br />
+    <span>on&nbsp;</span
+    ><time datetime="2022-10-11 12:18:07 +0900">October 11, 2022</time>
+    
+  </div>
+
+  <h3 id="jsx">JSX</h3>
+
+<p>JSX: JavaScript XML. React 안에 HTML을 쓸 수 있게 한다.</p>
+
+<p>JSX에서 식은 {}로 감싸서 쓴다.</p>
+
+<p>긴 줄은 다음과 같이 쓰면 된다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">myElement</span> <span class="o">=</span> <span class="p">(</span>
+  <span class="o">&lt;</span><span class="nx">ul</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;</span><span class="nx">Apples</span><span class="o">&lt;</span><span class="sr">/li</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;</span><span class="nx">Bananas</span><span class="o">&lt;</span><span class="sr">/li</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;</span><span class="nx">Cherries</span><span class="o">&lt;</span><span class="sr">/li</span><span class="err">&gt;
+</span>  <span class="o">&lt;</span><span class="sr">/ul</span><span class="err">&gt;
+</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">root</span> <span class="o">=</span> <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">creatRoot</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">root</span><span class="dl">"</span><span class="p">));</span>
+<span class="nx">root</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="nx">myElement</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>HTML 코드는 꼭 단 ‘하나’의 top 레벨 엘리먼트로 감싸져야 한다. 여러 개의 엘리먼트를 쓰고 싶다면 <code class="language-plaintext highlighter-rouge">&lt;&gt;...&lt;/&gt;</code>로 감싸도 된다.</p>
+
+<p>비어 있는 엘리먼트는 다음과 같이 닫아 준다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">myElement</span> <span class="o">=</span> <span class="o">&lt;</span><span class="nx">input</span> <span class="nx">type</span><span class="o">=</span><span class="dl">"</span><span class="s2">text</span><span class="dl">"</span> <span class="o">/&gt;</span><span class="p">;</span>
+</code></pre></div></div>
+
+<h4 id="jsx에서의-규칙">JSX에서의 규칙</h4>
+
+<ul>
+  <li>JSX에서는 class 대신에 className을 써준다.</li>
+  <li>if문을 쓸 수 없으므로, ternary expression을 쓴다. (<code class="language-plaintext highlighter-rouge">x&gt;10? 'big': 'small'</code>)</li>
+</ul>
+
+<h3 id="react-components">React Components</h3>
+
+<p>컴포넌트는 HTML 엘리먼트를 반환하는 함수와 같다. <code class="language-plaintext highlighter-rouge">&lt;h2&gt;</code> HTML 엘리먼트를 반환하는 <code class="language-plaintext highlighter-rouge">Car</code> 컴포넌트.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Car</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="o">&lt;</span><span class="nx">h2</span><span class="o">&gt;</span><span class="nx">Hi</span><span class="p">,</span> <span class="nx">I</span><span class="dl">'</span><span class="s1">m a Car!&lt;/h2&gt;;
+}
+</span></code></pre></div></div>
+
+<p>이제 이 컴포넌트는 <code class="language-plaintext highlighter-rouge">&lt;Car /&gt;</code>라는 평범한 HTML처럼 이용할 수 있다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">root</span> <span class="o">=</span> <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">createRoot</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">root</span><span class="dl">"</span><span class="p">));</span>
+<span class="nx">root</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">Car</span> <span class="o">/&gt;</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">props</code>는 함수의 arguments처럼 다른 컴포넌트의 attribute로 보내 줄 수 있다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Car</span><span class="p">(</span><span class="nx">props</span><span class="p">){</span>
+  <span class="k">return</span> <span class="o">&lt;</span><span class="nx">h2</span><span class="o">&gt;</span><span class="nx">I</span> <span class="nx">am</span> <span class="nx">a</span> <span class="p">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">color</span><span class="p">}</span> <span class="nx">car</span><span class="o">!</span> <span class="o">&lt;</span><span class="sr">/h2&gt;</span><span class="err">;
+</span><span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">root</span> <span class="o">=</span> <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">createRoot</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">root));
+root.render(&lt;Car color="red" /&gt;);
+</span></code></pre></div></div>
+
+<p>이 컴포넌트들 import/export할 수 있다.</p>
+
+<h3 id="react-props">React Props</h3>
+
+<p>props는 컴포넌트 안으로 전달되는 arguments들이다. props는 HTML attribute를 통해서 컴포넌트의 프러퍼티로 전달된다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Car</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="o">&lt;</span><span class="nx">h2</span><span class="o">&gt;</span><span class="nx">I</span> <span class="nx">am</span> <span class="nx">a</span> <span class="p">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">brand</span><span class="p">}</span> <span class="nx">car</span><span class="o">!</span> <span class="o">&lt;</span><span class="sr">/h2&gt;</span><span class="err">;
+</span><span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">Garage</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;&gt;</span>
+      <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">Who</span> <span class="nx">lives</span> <span class="k">in</span> <span class="nx">my</span> <span class="nx">garage</span><span class="p">?</span><span class="o">&lt;</span><span class="sr">/h1</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="nx">Car</span> <span class="nx">brand</span><span class="o">=</span><span class="dl">"</span><span class="s2">Ford</span><span class="dl">"</span> <span class="o">/&gt;</span>
+    <span class="o">&lt;</span><span class="sr">/</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">}</span>
+<span class="kd">const</span> <span class="nx">root</span> <span class="o">=</span> <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">creatRoot</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">root</span><span class="dl">"</span><span class="p">));</span>
+<span class="nx">root</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">Garage</span> <span class="o">/&gt;</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="react-events">React Events</h3>
+
+<p>리액트는 HTML과 같은 이벤트들을 가집니다. 클릭, 변경 등등…</p>
+
+<ul>
+  <li>리액트 이벤트는 camelCase 문법으로 표기한다. onclick이 아니라 <code class="language-plaintext highlighter-rouge">onClick</code>.</li>
+  <li>리액트 이벤트 핸들러는 onClick=”shoot()”이 아니라 <code class="language-plaintext highlighter-rouge">onClick={shoot}</code></li>
+</ul>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Football</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">shoot</span> <span class="o">=</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="dl">"</span><span class="s2">Great Shot!</span><span class="dl">"</span><span class="p">);</span>
+  <span class="p">};</span>
+  <span class="k">return</span> <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">shoot</span><span class="p">}</span><span class="o">&gt;</span><span class="nx">Take</span> <span class="nx">the</span> <span class="nx">shot</span><span class="o">!&lt;</span><span class="sr">/button&gt;</span><span class="err">;
+</span><span class="p">}</span>
+<span class="kd">const</span> <span class="nx">root</span> <span class="o">=</span> <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">createRoot</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">root</span><span class="dl">"</span><span class="p">));</span>
+<span class="nx">root</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">Football</span> <span class="o">/&gt;</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h4 id="arguments-전달하기">arguments 전달하기</h4>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Football</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">shoot</span> <span class="o">=</span> <span class="p">(</span><span class="nx">what</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="nx">what</span><span class="p">);</span>
+  <span class="p">};</span>
+  <span class="k">return</span> <span class="o">&lt;</span><span class="nx">button</span> <span class="nx">onClick</span><span class="o">=</span><span class="p">{</span><span class="nx">shoot</span><span class="p">(</span><span class="dl">"</span><span class="s2">Goal</span><span class="dl">"</span><span class="p">)}</span><span class="o">&gt;</span><span class="nx">Take</span> <span class="nx">the</span> <span class="nx">shot</span><span class="o">!&lt;</span><span class="sr">/button&gt;</span><span class="err">;
+</span><span class="p">}</span>
+<span class="kd">const</span> <span class="nx">root</span> <span class="o">=</span> <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">createRoot</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">root</span><span class="dl">"</span><span class="p">));</span>
+<span class="nx">root</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">Football</span> <span class="o">/&gt;</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="선택적으로-동작하기">선택적으로 동작하기</h3>
+
+<p>리액트에서는 컴포넌트를 선택적으로 렌더링할 수 있다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Goal</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">props</span><span class="p">.</span><span class="nx">isGoal</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="o">&lt;</span><span class="nx">MadeGoal</span> <span class="o">/&gt;</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="o">&lt;</span><span class="nx">MissedGoal</span> <span class="o">/&gt;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">root</span> <span class="o">=</span> <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">createRoot</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">root</span><span class="dl">"</span><span class="p">));</span>
+<span class="nx">root</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">Goal</span> <span class="nx">isGoal</span><span class="o">=</span><span class="p">{</span><span class="kc">false</span><span class="p">}</span> <span class="sr">/&gt;</span><span class="se">)</span><span class="err">;
+</span></code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">{ }</code>를 이용하면 JSX 안에 자바스크립트 문법을 사용할 수도 있다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Garage</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">cars</span> <span class="o">=</span> <span class="nx">props</span><span class="p">.</span><span class="nx">cars</span><span class="p">;</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;&gt;</span>
+      <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">Garage</span><span class="o">&lt;</span><span class="sr">/h1</span><span class="err">&gt;
+</span>      <span class="p">{</span><span class="nx">cars</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="o">&lt;</span><span class="nx">h2</span><span class="o">&gt;</span> <span class="nx">You</span> <span class="nx">have</span> <span class="p">{</span><span class="nx">cars</span><span class="p">.</span><span class="nx">length</span><span class="p">}</span> <span class="nx">cars</span><span class="p">.</span> <span class="o">&lt;</span><span class="sr">/h2&gt;</span><span class="err">}
+</span>    <span class="o">&lt;</span><span class="sr">/</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">}</span>
+<span class="kd">const</span> <span class="nx">cars</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Ford</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">BMW</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Audi</span><span class="dl">"</span><span class="p">];</span>
+<span class="kd">const</span> <span class="nx">root</span> <span class="o">=</span> <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">createRoot</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">root</span><span class="dl">"</span><span class="p">));</span>
+<span class="nx">root</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">Garage</span> <span class="nx">cars</span><span class="o">=</span><span class="p">{</span><span class="nx">cars</span><span class="p">}</span> <span class="sr">/&gt;</span><span class="se">)</span><span class="err">;
+</span></code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Goal</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">isGoal</span> <span class="o">=</span> <span class="nx">props</span><span class="p">.</span><span class="nx">isGoal</span><span class="p">;</span>
+  <span class="k">return</span> <span class="o">&lt;&gt;</span><span class="p">{</span><span class="nx">isGoal</span> <span class="p">?</span> <span class="o">&lt;</span><span class="nx">MadeGoal</span> <span class="o">/&gt;</span> <span class="p">:</span> <span class="o">&lt;</span><span class="nx">MissedGoal</span> <span class="o">/&gt;</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/&gt;</span><span class="err">;
+</span><span class="p">}</span>
+<span class="kd">const</span> <span class="nx">root</span> <span class="o">=</span> <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">createRoot</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">root</span><span class="dl">"</span><span class="p">));</span>
+<span class="nx">root</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">Goal</span> <span class="nx">isGoal</span><span class="o">=</span><span class="p">{</span><span class="kc">false</span><span class="p">}</span> <span class="sr">/&gt;</span><span class="se">)</span><span class="err">;
+</span></code></pre></div></div>
+
+<h3 id="lists">Lists</h3>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Car</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;</span><span class="nx">I</span> <span class="nx">am</span> <span class="nx">a</span> <span class="p">{</span><span class="nx">props</span><span class="p">.</span><span class="nx">brand</span><span class="p">}</span><span class="o">&lt;</span><span class="sr">/li&gt;</span><span class="err">;
+</span><span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">Garage</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">cars</span> <span class="o">=</span> <span class="p">[</span><span class="dl">"</span><span class="s2">Ford</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">BMW</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Audi</span><span class="dl">"</span><span class="p">];</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;&gt;</span>
+      <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">Who</span> <span class="nx">lives</span> <span class="k">in</span> <span class="nx">the</span> <span class="nx">garage</span><span class="p">?</span><span class="o">&lt;</span><span class="sr">/h1</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="nx">ul</span><span class="o">&gt;</span>
+        <span class="p">{</span><span class="nx">cars</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">car</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
+          <span class="o">&lt;</span><span class="nx">Car</span> <span class="nx">brand</span><span class="o">=</span><span class="p">{</span><span class="nx">car</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>        <span class="p">))}</span>
+      <span class="o">&lt;</span><span class="sr">/ul</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">root</span> <span class="o">=</span> <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">createRoot</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">"</span><span class="s2">root</span><span class="dl">"</span><span class="p">));</span>
+<span class="nx">root</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">Garage</span> <span class="o">/&gt;</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h4 id="keys">Keys</h4>
+
+<p>Key는 리액트가 엘리먼트를 계속 뒤를 밟게 해 준다. list에서 어떤 아이템이 수정되었을 때, list 전부를 다시 render하는 게 아니라, 수정된 것만 다시 render한다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">Car</span><span class="p">(</span><span class="nx">props</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="o">&lt;</span><span class="nx">li</span><span class="o">&gt;</span><span class="nx">I</span> <span class="nx">am</span> <span class="nx">a</span> <span class="p">{</span> <span class="nx">props</span><span class="p">.</span><span class="nx">brand</span> <span class="p">}</span><span class="o">&lt;</span><span class="sr">/li&gt;</span><span class="err">;
+</span><span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">Garage</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kd">const</span> <span class="nx">cars</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">{</span><span class="na">id</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="na">brand</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Ford</span><span class="dl">'</span><span class="p">},</span>
+    <span class="p">{</span><span class="na">id</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="na">brand</span><span class="p">:</span> <span class="dl">'</span><span class="s1">BMW</span><span class="dl">'</span><span class="p">},</span>
+    <span class="p">{</span><span class="na">id</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="dl">'</span><span class="s1">Audi</span><span class="dl">'</span><span class="p">}</span>
+  <span class="p">];</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;&gt;</span>
+      <span class="o">&lt;</span><span class="nx">h1</span><span class="o">&gt;</span><span class="nx">Who</span> <span class="nx">lives</span> <span class="k">in</span> <span class="nx">the</span> <span class="nx">garage</span><span class="p">?</span><span class="o">&lt;</span><span class="sr">/h1</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="nx">ul</span><span class="o">&gt;</span>
+        <span class="p">{</span> <span class="nx">cars</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">car</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="o">&lt;</span><span class="nx">Car</span> <span class="nx">key</span><span class="o">=</span><span class="p">{</span><span class="nx">car</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span> <span class="nx">brand</span><span class="o">=</span><span class="p">{</span><span class="nx">car</span><span class="p">.</span><span class="nx">brand</span><span class="p">}</span> <span class="sr">/&gt;</span><span class="se">)</span><span class="sr"> </span><span class="err">}
+</span>      <span class="o">&lt;</span><span class="sr">/ul</span><span class="err">&gt;
+</span>    <span class="o">&lt;</span><span class="sr">/</span><span class="err">&gt;
+</span>  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">root</span> <span class="o">=</span> <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">createRoot</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">root</span><span class="dl">'</span><span class="p">));</span>
+<span class="nx">root</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">Garage</span> <span class="o">/&gt;</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h3 id="react-forms">React Forms</h3>
+
+<p>HTML에서는 form data가 DOM에 의해 핸들링된다.
+리액트에서는 form data가 컴포넌트에 의해 핸들링된다.</p>
+
+<p>컴포넌트에 의해 데이터가 핸들링될 때는 모든 데이터가 컴포넌트 state에 저장되어 있어야 한다.(useState) onChange attribute 안에 이벤트 핸들러를 추가해서 변화를 컨트롤할 수 있다.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">useState</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">MyForm</span><span class="p">(){</span>
+  <span class="kd">const</span> <span class="p">[</span><span class="nx">name</span><span class="p">,</span> <span class="nx">setName</span><span class="p">]</span> <span class="o">=</span> <span class="nx">useState</span><span class="p">(</span><span class="dl">""</span><span class="p">);</span>
+
+  <span class="k">return</span><span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">form</span><span class="o">&gt;</span>
+      <span class="o">&lt;</span><span class="nx">input</span>
+        <span class="nx">type</span><span class="o">=</span><span class="dl">"</span><span class="s2">text</span><span class="dl">"</span>
+        <span class="nx">value</span><span class="o">=</span><span class="p">{</span><span class="nx">name</span><span class="p">}</span>
+        <span class="nx">onChange</span><span class="o">=</span><span class="p">{(</span><span class="nx">e</span><span class="p">)</span><span class="o">=&gt;</span> <span class="nx">setName</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">)}</span>
+    <span class="o">&lt;</span><span class="sr">/form</span><span class="err">&gt;
+</span>  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">const</span> <span class="nx">root</span> <span class="o">=</span> <span class="nx">ReactDOM</span><span class="p">.</span><span class="nx">createRoot</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="dl">'</span><span class="s1">root</span><span class="dl">'</span><span class="p">));</span>
+<span class="nx">root</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="o">&lt;</span><span class="nx">MyForm</span> <span class="o">/&gt;</span><span class="p">);</span>
+</code></pre></div></div>
+
+<hr />
+
+<p>ternary: 셋으로 이루어지는 세 개의, 세 겹의</p>
+
+</div>
+
+
+
+<div class="pagination">
+  
+  <a href="/2022-10-12/TIL" class="left arrow"
+    >&#8592;</a
+  >
+   
+  <a href="/2022-10-10/TIL" class="right arrow"
+    >&#8594;</a
+  >
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+</main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-08-05 22:38:38 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

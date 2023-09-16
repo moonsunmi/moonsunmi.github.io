@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Part 1 | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="Part 1" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Git 시작하기" />
+<meta property="og:description" content="Git 시작하기" />
+<link rel="canonical" href="http://localhost:4000/2022-09-22/github" />
+<meta property="og:url" content="http://localhost:4000/2022-09-22/github" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-09-22T22:20:18+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Part 1" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-09-22T22:20:18+09:00","datePublished":"2022-09-22T22:20:18+09:00","description":"Git 시작하기","headline":"Part 1","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-09-22/github"},"url":"http://localhost:4000/2022-09-22/github"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main><div class="post">
+  <h1 class="post-title"><팀 개발을 위한 Git Github 시작하기> Part 1</h1>
+
+  <div class="post-info">
+    
+    <br />
+    <span>on&nbsp;</span
+    ><time datetime="2022-09-22 22:20:18 +0900">September 22, 2022</time>
+    
+  </div>
+
+  <h3 id="git-시작하기">Git 시작하기</h3>
+
+<p>버전 관리를 하고 싶은 폴더의 경로에서 <code class="language-plaintext highlighter-rouge">git init</code> 명령을 이용해 초기화한다.</p>
+
+<ul>
+  <li>내 정보 저장하기
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">git config --global user.email "celebmoon@naver.com</code></li>
+      <li><code class="language-plaintext highlighter-rouge">git config --global user.name "moonsunmi"</code></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="git-명령어">git 명령어</h3>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">git add README.txt</code> (업데이트하려는 파일을 지정)</li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">git commit -m "README 작성"</code> (커밋)</p>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">git log</code> (저장해둔 버전 목록 확인)</li>
+  <li><code class="language-plaintext highlighter-rouge">git checkout eea6787045</code> (log에서 확인한 커밋 아이디로 지정된 버전으로 돌아가기. 커밋 아이디는 ‘7글자 이상 + ~’을 입력하거나 전체 ID 다 입력)</li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">git checkout -</code> (최신 커밋으로 돌아가기. ‘-‘를 입력하는 것)</p>
+  </li>
+  <li>
+    <p>내 github 레포지토리와 연결하기</p>
+
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">git add origin https://github.com/moonsunmi/github.git</code></li>
+      <li><code class="language-plaintext highlighter-rouge">git push origin master</code></li>
+    </ul>
+  </li>
+  <li>github에 있는 레포지토리 클론해 오기
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">git clone https://github.com/Cat-Hanbit/iTshirt.git .</code></li>
+      <li>마지막에 마침표를 붙여야 해당 폴더에 저장된다. 아니라면 [폴더이름]-[폴더이름] 이 구조로 저장된다. 내가 자주 겪었던 어려움…</li>
+    </ul>
+  </li>
+</ul>
+
+</div>
+
+
+
+<div class="pagination">
+  
+  <a href="/2022-09-23/github" class="left arrow"
+    >&#8592;</a
+  >
+   
+  <a href="/2022-09-21/do-it-javascript" class="right arrow"
+    >&#8594;</a
+  >
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+</main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-08-05 22:38:38 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

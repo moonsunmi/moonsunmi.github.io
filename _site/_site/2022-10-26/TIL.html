@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TIL) Hulu Clone Coding(Next.js, Tailwind CSS, Responsive) | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="TIL) Hulu Clone Coding(Next.js, Tailwind CSS, Responsive)" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="flip 애니메이션" />
+<meta property="og:description" content="flip 애니메이션" />
+<link rel="canonical" href="http://localhost:4000/2022-10-26/TIL" />
+<meta property="og:url" content="http://localhost:4000/2022-10-26/TIL" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-10-26T12:18:07+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TIL) Hulu Clone Coding(Next.js, Tailwind CSS, Responsive)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2022-10-26T12:18:07+09:00","datePublished":"2022-10-26T12:18:07+09:00","description":"flip 애니메이션","headline":"TIL) Hulu Clone Coding(Next.js, Tailwind CSS, Responsive)","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2022-10-26/TIL"},"url":"http://localhost:4000/2022-10-26/TIL"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main><div class="post">
+  <h1 class="post-title">TIL) Hulu Clone Coding(Next.js, Tailwind CSS, Responsive)</h1>
+
+  <div class="post-info">
+    
+    <br />
+    <span>on&nbsp;</span
+    ><time datetime="2022-10-26 12:18:07 +0900">October 26, 2022</time>
+    
+  </div>
+
+  <h3 id="flip-애니메이션">flip 애니메이션</h3>
+
+<p>react-flip-move 설치 후</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nx">Thumbnail</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">./Thumbnail</span><span class="dl">"</span><span class="p">;</span>
+<span class="k">import</span> <span class="nx">FlipMove</span> <span class="k">from</span> <span class="dl">"</span><span class="s2">react-flip-move</span><span class="dl">"</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">Results</span> <span class="o">=</span> <span class="p">({</span> <span class="nx">results</span> <span class="p">})</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span>
+    <span class="o">&lt;</span><span class="nx">FlipMove</span> <span class="nx">className</span><span class="o">=</span><span class="dl">"</span><span class="s2">px-5 my-10 sm:grid md:grid-cols-2 xl:grid-cols-3 3xl:flex flex-wrap justify-center</span><span class="dl">"</span><span class="o">&gt;</span>
+      <span class="p">{</span><span class="nx">results</span><span class="p">.</span><span class="nx">map</span><span class="p">((</span><span class="nx">result</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">(</span>
+        <span class="o">&lt;</span><span class="nx">Thumbnail</span> <span class="nx">key</span><span class="o">=</span><span class="p">{</span><span class="nx">result</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span> <span class="nx">result</span><span class="o">=</span><span class="p">{</span><span class="nx">result</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>      <span class="p">))}</span>
+    <span class="o">&lt;</span><span class="sr">/FlipMove</span><span class="err">&gt;
+</span>  <span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="nx">Results</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">forwardRef</code>: 부모 컴포넌트로부터 레퍼런스를 받는다. 유효한 키를 가지고 있어야 제대로 렌더링되기 때문에</p>
+
+<h3 id="배포">배포</h3>
+
+<p>vercel 사이트에서 접속한다. import project를 이용해서.
+이떄, ‘환경 변수’ 부분을 등록해 줘야 한다. <code class="language-plaintext highlighter-rouge">.env.local</code>에서 지정해 주었던 API_KEY 값을 지정해 주면 된다.</p>
+
+<p>배포하려는데, 에러가 났다. 살펴보니 더 이상 <code class="language-plaintext highlighter-rouge">FlipMove</code>를 지원하지 않는다고 한다.(official을 본 게 아니라 개인의 댓글을 본 거라 확실하지는 않다.)</p>
+
+<p>우선은 FlipMove를 div로 바꾸어서 만들었다.</p>
+
+<h2 id="facebook-clone-coding">Facebook Clone Coding</h2>
+
+<p>tailwindcss를 사용하면 h1, h2 같은 스타일들을 잃게 된다. 다음 세 줄 전부 같은 스타일로 나온다.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;h1&gt;</span>Let's build facebook<span class="nt">&lt;/h1&gt;</span>
+<span class="nt">&lt;h2&gt;</span>Let's build facebook<span class="nt">&lt;/h2&gt;</span>
+<span class="nt">&lt;h3&gt;</span>Let's build facebook<span class="nt">&lt;/h3&gt;</span>
+</code></pre></div></div>
+
+<p>왜냐하면 tailwindcss는 빈 캔버스 방식에서 시작하기 때문이다.</p>
+
+<p>components 디렉터리를 만들고, 그 안에 새로 만들 컴포넌트들을 넣도록 하자. pages 디렉터리는 정말 특정 페이지를 말한다. 컴포넌트는 재사용 가능한 컴포넌트를 말한다.</p>
+
+<hr />
+
+<p>수) 운동</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>의자스쿼트</th>
+      <th>종아리</th>
+      <th>이두</th>
+      <th>등</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>3/3</td>
+      <td>3/3</td>
+      <td>3/3</td>
+      <td>3/3</td>
+    </tr>
+  </tbody>
+</table>
+
+</div>
+
+
+
+<div class="pagination">
+  
+  <a href="/2022-10-27/TIL" class="left arrow"
+    >&#8592;</a
+  >
+   
+  <a href="/2022-10-25/TIL" class="right arrow"
+    >&#8594;</a
+  >
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+</main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-08-05 22:38:38 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>

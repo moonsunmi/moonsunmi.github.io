@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>TIL) serializer fields 넣어줄 때 유의점 | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="TIL) serializer fields 넣어줄 때 유의점" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="모델의 정의와 밀접한 관련이 있는 serializer를 만들 게 될 경우가 많다." />
+<meta property="og:description" content="모델의 정의와 밀접한 관련이 있는 serializer를 만들 게 될 경우가 많다." />
+<link rel="canonical" href="http://localhost:4000/2023-05-14/TIL" />
+<meta property="og:url" content="http://localhost:4000/2023-05-14/TIL" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-05-14T12:18:07+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="TIL) serializer fields 넣어줄 때 유의점" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2023-05-14T12:18:07+09:00","datePublished":"2023-05-14T12:18:07+09:00","description":"모델의 정의와 밀접한 관련이 있는 serializer를 만들 게 될 경우가 많다.","headline":"TIL) serializer fields 넣어줄 때 유의점","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2023-05-14/TIL"},"url":"http://localhost:4000/2023-05-14/TIL"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main><div class="post">
+  <h1 class="post-title">TIL) serializer fields 넣어줄 때 유의점</h1>
+
+  <div class="post-info">
+    
+    <br />
+    <span>on&nbsp;</span
+    ><time datetime="2023-05-14 12:18:07 +0900">May 14, 2023</time>
+    
+  </div>
+
+  <p>모델의 정의와 밀접한 관련이 있는 serializer를 만들 게 될 경우가 많다.</p>
+
+<p>모델에서 만든 필드를 전부 serializer로 만들고 싶다면 다음과 같이 <code class="language-plaintext highlighter-rouge">fields = ‘__all__’</code>을 지정해 주면 된다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class AccountSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Account
+        fields = '__all__'
+</code></pre></div></div>
+
+<p>그런데 이걸 쓰는 게 좋지 않을 수도 있다. 나중에 모델의 필드가 변경될 수도 있는데, 공개되면 안 되는 필드가 추가되었어도 모르고 넘어가 버릴 수 있기 때문이다.</p>
+
+<p>다음과 같이 모든 필드를 그냥 나열해 주는 게 낫다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class AccountSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Account
+        fields = ['id', 'account_name', 'users', 'created']
+</code></pre></div></div>
+
+</div>
+
+
+
+<div class="pagination">
+  
+  <a href="/2023-05-16/TIL" class="left arrow"
+    >&#8592;</a
+  >
+   
+  <a href="/2023-04-10/TIL" class="right arrow"
+    >&#8594;</a
+  >
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+</main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-08-05 22:38:38 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>
