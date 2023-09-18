@@ -1,4 +1,229 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-08-05T22:38:38+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">주경야독학) 개발공부로그</title><subtitle>주경야독, 독학으로 웹 프로그래밍을 공부하고 있습니다.</subtitle><author><name>Sunmi Moon</name><email>celebmoon@naver.com</email></author><entry><title type="html">TIL) CORS 에러와 Django에서 해결</title><link href="http://localhost:4000/2023-07-28/TIL" rel="alternate" type="text/html" title="TIL) CORS 에러와 Django에서 해결" /><published>2023-07-28T12:18:07+09:00</published><updated>2023-07-28T12:18:07+09:00</updated><id>http://localhost:4000/2023-07-28/TIL</id><content type="html" xml:base="http://localhost:4000/2023-07-28/TIL"><![CDATA[<p>프론트에서 다음과 같은 CORS 에러가 발생했다.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2023-09-18T16:09:48+09:00</updated><id>http://localhost:4000/feed.xml</id><title type="html">주경야독학) 개발공부로그</title><subtitle>주경야독, 독학으로 웹 프로그래밍을 공부하고 있습니다.</subtitle><author><name>Sunmi Moon</name><email>celebmoon@naver.com</email></author><entry><title type="html">HTTP Server 만들기 - 기초적인 네트워크 소켓 프로그래밍</title><link href="http://localhost:4000/2023-09-18/http-server" rel="alternate" type="text/html" title="HTTP Server 만들기 - 기초적인 네트워크 소켓 프로그래밍" /><published>2023-09-18T12:18:07+09:00</published><updated>2023-09-18T12:18:07+09:00</updated><id>http://localhost:4000/2023-09-18/http-server</id><content type="html" xml:base="http://localhost:4000/2023-09-18/http-server"><![CDATA[<p>HTTP는 통신 규약이다. 쉽게 말해, 서버와 클라이언트 사이에서 통신을 하기 위해 필요한 약속이다. 이 약속은 특정 패턴을 지키는 텍스트로 구현되어 있다.</p>
+
+<h3 id="네트워크-소켓">네트워크 소켓</h3>
+
+<p>네트워크 애플리케이션(네트워크 통신을 이용하는 모든 애플리케이션)을 만들려면 네트워크 소켓이 필요하다. 네트워크 소켓은 운영체제에서 지원하는 추상화된 인터페이스로, 네트워크를 통해 바이트 단위의 데이터를 주고받을 수 있게 한다. 통신 간의 endpoint로(흔히 창구로 비유를 많이 한다), 통신을 하려면 반드시 소켓을 열고, 통신하려는 곳의 소켓과 연결되어야 한다.</p>
+
+<h3 id="서버-프로그램">서버 프로그램</h3>
+
+<p>클라이언트는 소켓을 만들고 연결만 하면 되는 반면(<code class="language-plaintext highlighter-rouge">socket()</code>, <code class="language-plaintext highlighter-rouge">connect()</code>) 서버는 <code class="language-plaintext highlighter-rouge">socket()</code>, <code class="language-plaintext highlighter-rouge">bind()</code>, <code class="language-plaintext highlighter-rouge">listen()</code>, <code class="language-plaintext highlighter-rouge">accept()</code>을 해야 한다.</p>
+
+<h4 id="서버-소켓-만들기">서버 소켓 만들기</h4>
+
+<p>소켓을 만들 때는 다음과 같이 하면 된다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import socket
+
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+</code></pre></div></div>
+
+<p>여기서 <code class="language-plaintext highlighter-rouge">AF_INET</code>은 주소 체계를 나타낸다. 우리가 대부분 IPv4를 사용하기는 하지만, 다른 주소 체계도 존재하므로(IPv6 등) 이에 대한 언급을 해주는 것이다. <code class="language-plaintext highlighter-rouge">AF_INET</code>은 IPv4를 나타낸다. IPv6를 사용하고 싶다면 <code class="language-plaintext highlighter-rouge">AF_INET6</code>를 쓴다.</p>
+
+<h4 id="서버에-연결-가능한-주소-지정하기">서버에 연결 가능한 주소 지정하기</h4>
+
+<p>IPv4 주소용으로 만든 소켓을 패밀리 주소와 연결해야 한다. 이게 binding 작업.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>server_socket.bind(('', 8080))
+</code></pre></div></div>
+
+<p>안 쓰는(비어 있는) 포트 번호에 소켓을 연결시켜 주었다. 패밀리 주소에 빈칸을 넣어 두었는데, 빈칸은 모든 네트워크 인터페이스를 뜻한다. 즉, 어떤 클라이언트라도 8080 포트 번호를 통해 해당 소켓에 연결될 수 있다는 이야기다. 여기에서 바인딩 인자는 튜플 형태로 받으므로, <code class="language-plaintext highlighter-rouge">('', 8080)</code> 자체를 넣어주어야 한다는 걸 잊지 말자. (코드에서 보이기에 괄호 두 개)</p>
+
+<h4 id="서버를-연결-가능한-상태로-만들기">서버를 연결 가능한 상태로 만들기</h4>
+
+<p>이제 서버를 연결 가능한 상태로 만든다. 다음과 같이 <code class="language-plaintext highlighter-rouge">listen()</code>을 이용한다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>socket_server.listen(1)
+</code></pre></div></div>
+
+<p>여기에서 <code class="language-plaintext highlighter-rouge">1</code>은 backlog값을 뜻한다. 여러 클라이언트가 동시에 접속하는 상황에서, 서버가 한번에 처리하지 못한 일이 발생했을 때 이 작업을 몇 개까지 큐에 넣어둘 것인지를 지정하는 것이다. 0보다 적은 숫자를 입력하면, 0으로 세팅하고, 숫자를 지정하지 않는다면 파이썬이 알아서 적정 값을 정한다.</p>
+
+<p>이제 서버는 연결 가능한 상태로, 클라이언트를 기다리게 된다.</p>
+
+<h4 id="실제-연결">실제 연결</h4>
+
+<p>서버는 <code class="language-plaintext highlighter-rouge">accept()</code> 전까지의 작업을 한 후 클라이언트를 기다리고 있다가 클라이언트가 접속해 오면, 그제서야 <code class="language-plaintext highlighter-rouge">accept()</code>가 반환하는 값을 전달해 준다. 클라이언트가 서버에 시도하는 연결을 말 그대로 수락하는 것이다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>conn, addr = socket_server.accept()
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">accept()</code>가 반환하는 것은 연결이 된 새로운 소켓과 그 소켓에 연결된 클라이언트 주소이다. <code class="language-plaintext highlighter-rouge">socket_server</code>는 실제 연결이 되기 전까지 대기하는 소켓이었고, <code class="language-plaintext highlighter-rouge">accept()</code>가 실제 연결된 소켓을 반환하였으니 연결된 상태의 소켓을 사용하려면 이제 <code class="language-plaintext highlighter-rouge">conn</code>을 사용하면 된다.</p>
+
+<h3 id="클라이언트-프로그램">클라이언트 프로그램</h3>
+
+<p>클라이언트는 소켓을 만든 후 <code class="language-plaintext highlighter-rouge">connect()</code>만 해 주면 된다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import socket
+
+client_socket = socket.socket(AF_INET, SOCK_STREAM)
+client_socket.connect(('127.0.0.1', 8080))
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">127.0.0.1</code>은 나 자신을 의미하므로, 내가 8080 포트를 이용해서 서버 프로그램에 접속하겠다는 뜻이 된다.</p>
+
+<h3 id="소켓을-통해-데이터-송수신하기">소켓을 통해 데이터 송수신하기</h3>
+
+<p>데이터를 주고 받을 때는 <code class="language-plaintext highlighter-rouge">recv()</code>와 <code class="language-plaintext highlighter-rouge">send()</code>를 이용하면 된다. 상단에서 언급하였듯이 소켓은 ‘바이트 단위의 데이터’를 주고받을 수 있게 한다. 따라서 파이썬 오브젝트인 데이터는 꼭 바이트 단위 형태로 바꾸어 주어야 한다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>msg = 'hi'
+conn.send(msg.encode('utf-8'))
+</code></pre></div></div>
+
+<p>받을 때는 다음과 같이 한다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>msg = conn.recv(1024)
+print(msg.decode('utf-8'))
+</code></pre></div></div>
+
+<p>encode했으니 decode하는 건 이해가 가는데, <code class="language-plaintext highlighter-rouge">recv(1024)</code>라는 게 눈에 띈다.</p>
+
+<p>통신에 시간이 걸릴 수도 있고 사이즈가 매우 클 수도 있기 때문에, <code class="language-plaintext highlighter-rouge">recv()</code>는 데이터를 몇 번씩 나눠서 가져온다. 여기서 1024는 <code class="language-plaintext highlighter-rouge">bufsize</code>를 나타내며, 한번에 가져올 수 있는 최대의 바이트 수를 나타낸다.</p>
+
+<h3 id="샘플-코드-만들기">샘플 코드 만들기</h3>
+
+<p>서버와 클라이언트가 다음과 같이 통신하는 프로그램이다. 서버는 클라이언트의 주소를 받아 다음과 같이 출력한다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sever:
+I'm connected with  ('127.0.0.1', 51467)
+</code></pre></div></div>
+
+<p>클라이언트는 자신이 보낸 메시지에 ‘You said that’라고 붙여 반응하는 서버의 메시지를 출력한다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>client:
+You say that Hello? anyone is there? I am client
+</code></pre></div></div>
+
+<p>코드는 다음과 같다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sever.py
+
+import socket
+
+server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+server_socket.bind(('', 8080))
+server_socket.listen(1)
+conn, client_addr = server_socket.accept()
+received_msg = conn.recv(1024)
+server_msg = 'You say that '
+conn.send(server_msg.encode('utf-8') + received_msg)
+print("I'm connected with ", client_addr)
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>client.py
+
+import socket
+
+client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+client_socket.connect(('127.0.0.1', 8080))
+msg = 'Hello? anyone is there? I am client'
+client_socket.send(msg.encode('utf-8'))
+sever_msg = client_socket.recv(1024)
+print(sever_msg.decode('utf-8'))
+
+</code></pre></div></div>
+
+<p>서버를 실행하면, 아무것도 출력되지 않는다. 클라이언트를 기다리고 있는 것이다. 클라이언트를 실행하면 그제서야 결과물을 출력하고 종료한다. 클라이언트는 즉시 결과물을 출력하고 종료한다.</p>]]></content><author><name>Sunmi Moon</name><email>celebmoon@naver.com</email></author><category term="Python" /><category term="server" /><summary type="html"><![CDATA[HTTP는 통신 규약이다. 쉽게 말해, 서버와 클라이언트 사이에서 통신을 하기 위해 필요한 약속이다. 이 약속은 특정 패턴을 지키는 텍스트로 구현되어 있다.]]></summary></entry><entry><title type="html">파이썬 클린코드) docstring과 어노테이션</title><link href="http://localhost:4000/2023-09-16/book" rel="alternate" type="text/html" title="파이썬 클린코드) docstring과 어노테이션" /><published>2023-09-16T12:18:07+09:00</published><updated>2023-09-16T12:18:07+09:00</updated><id>http://localhost:4000/2023-09-16/book</id><content type="html" xml:base="http://localhost:4000/2023-09-16/book"><![CDATA[<p>우선 문서화에 대한 이야기부터 시작한다. 문서화의 필요성과 중요성은 굳이 언급하지 않아도 될 만큼 많이 알고 있다. 그런데 주석과 문서화는 다른 이야기다. 주석은 코드 구현에 대한 설명이고 지양해야 할 것이지만, 문서화는 코드의 역할과 사용법을 위해 꼭 필요한 것이다.(주석을 달아도 되는 경우 중 하나는, 외부 라이브러리에 오류가 있어 현재의 코드로는 그 위험성을 알 수 없을 때가 있다.) dostring과 어노테이션은 파이썬 코드의 문서화와 관련이 깊다.</p>
+
+<h3 id="docstring">docstring</h3>
+
+<p>docstring은 코드에 포함된 문서이다. <code class="language-plaintext highlighter-rouge">help</code> 명령어를 이용하면 다음과 같이 작성된 docstring을 확인할 수 있다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">help</span><span class="p">(</span><span class="nb">dict</span><span class="p">.</span><span class="n">update</span><span class="p">)</span>
+<span class="n">Help</span> <span class="n">on</span> <span class="n">method_descriptor</span><span class="p">:</span>
+<span class="n">update</span><span class="p">(...)</span>
+    <span class="n">D</span><span class="p">.</span><span class="n">update</span><span class="p">([</span><span class="n">E</span><span class="p">,</span> <span class="p">]</span><span class="o">**</span><span class="n">F</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">.</span>  <span class="n">Update</span> <span class="n">D</span> <span class="k">from</span> <span class="nb">dict</span><span class="o">/</span><span class="n">iterable</span> <span class="n">E</span> <span class="ow">and</span> <span class="n">F</span><span class="p">.</span>
+    <span class="n">If</span> <span class="n">E</span> <span class="ow">is</span> <span class="n">present</span> <span class="ow">and</span> <span class="n">has</span> <span class="n">a</span> <span class="p">.</span><span class="n">keys</span><span class="p">()</span> <span class="n">method</span><span class="p">,</span> <span class="n">then</span> <span class="n">does</span><span class="p">:</span>  <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">E</span><span class="p">:</span> <span class="n">D</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">E</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+    <span class="n">If</span> <span class="n">E</span> <span class="ow">is</span> <span class="n">present</span> <span class="ow">and</span> <span class="n">lacks</span> <span class="n">a</span> <span class="p">.</span><span class="n">keys</span><span class="p">()</span> <span class="n">method</span><span class="p">,</span> <span class="n">then</span> <span class="n">does</span><span class="p">:</span>  <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">E</span><span class="p">:</span> <span class="n">D</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+    <span class="n">In</span> <span class="n">either</span> <span class="n">case</span><span class="p">,</span> <span class="n">this</span> <span class="ow">is</span> <span class="n">followed</span> <span class="n">by</span><span class="p">:</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">F</span><span class="p">:</span>  <span class="n">D</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">F</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+
+</code></pre></div></div>
+
+<p>docstring을 쓰는 게 중요하다는 것, 그리고 타입, 역할을 명시해 줘야 한다는 건 알지만 그것이 어떤 형태로 쓰여야 하는지는 잘 감이 안 온다.
+그래서 update의 경우 어떤 정보를 나열했는지 조금 더 정확히 알아보았다.</p>
+
+<ol>
+  <li>인자에 <code class="language-plaintext highlighter-rouge">keys()</code> 메서드가 있는 경우(즉, E가 딕셔너리인 경우): key와 value 값을 같이 알 수 있으므로 그것을 기준으로 D에 업데이트한다.
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">D</span><span class="p">.</span><span class="n">update</span><span class="p">({</span><span class="s">'a'</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
+</code></pre></div>    </div>
+  </li>
+  <li>인자에 <code class="language-plaintext highlighter-rouge">keys()</code> 메서드가 없는 경우(E가 반복 가능한 객체일 경우): <code class="language-plaintext highlighter-rouge">(키, 쌍)</code> 값의 형태로 받아서 D에 업데이트한다.
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">D</span><span class="p">.</span><span class="n">update</span><span class="p">([(</span><span class="s">'a'</span><span class="p">,</span> <span class="mi">1</span><span class="p">)])</span>
+</code></pre></div>    </div>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">a=b</code>처럼 키워드 인자를 전달하는 것도 가능하다.
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">D</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>해당 메서드가 어떤 타입을 인자로 받을 수 있는지, 타입에 따라 어떤 결과물을 나타내는지 정확히 보여주고 있다.</p>
+
+<h3 id="어노테이션">어노테이션</h3>
+
+<p>어노테이션은 인자에 어떤 값이 와야 하는지 사용자에게 힌트를 주는 역할을 한다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">class</span> <span class="nc">Point</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="nb">long</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">lat</span> <span class="o">=</span> <span class="n">lat</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">log</span> <span class="o">=</span> <span class="nb">long</span>
+
+    <span class="k">def</span> <span class="nf">locate</span><span class="p">(</span><span class="n">latitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">longitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Point</span><span class="p">:</span>
+
+</code></pre></div></div>
+
+<p>locate의 latitude와 longitude 인자가 float 타입이라는 점, 그리고 Point 인스턴스를 반환한다는 것을 해당 어노테이션을 통해 알 수 있다.</p>
+
+<p>단순히 힌트만 주기 때문에 타입스크립트처럼 타입 오류를 발생시키지도 않는다. 아니, 애시당초 타입 검사를 하지도, 사용자에게 해당 타입을 사용할 것을 강제하지도 않는다.
+만약 타입 검사를 적극적으로 하려면 Mypy 같은 린터를 써도 좋다. Mypy는 가장 많이 쓰이는 파이썬 정적 타입 검사 도구다.</p>
+
+<p>https://mypy.readthedocs.io/en/stable/</p>
+
+<h3 id="어노테이션으로-docstring을-대체할-수-있을까">어노테이션으로 docstring을 대체할 수 있을까?</h3>
+
+<p>어노테이션에 타입에 대한 힌트가 있으므로 docstring의 일부분을 대체할 수 있을 것 같다. 하지만 완전히 대체하기는 힘들다.
+특히, 예외는 이에 대한 정보가 어노테이션에 없기 때문에 docstring으로 표기해 줄 필요가 있다. 예시를 보여줄 수도 있고.</p>]]></content><author><name>Sunmi Moon</name><email>celebmoon@naver.com</email></author><category term="Python" /><summary type="html"><![CDATA[우선 문서화에 대한 이야기부터 시작한다. 문서화의 필요성과 중요성은 굳이 언급하지 않아도 될 만큼 많이 알고 있다. 그런데 주석과 문서화는 다른 이야기다. 주석은 코드 구현에 대한 설명이고 지양해야 할 것이지만, 문서화는 코드의 역할과 사용법을 위해 꼭 필요한 것이다.(주석을 달아도 되는 경우 중 하나는, 외부 라이브러리에 오류가 있어 현재의 코드로는 그 위험성을 알 수 없을 때가 있다.) dostring과 어노테이션은 파이썬 코드의 문서화와 관련이 깊다.]]></summary></entry><entry><title type="html">‘Optimizing performance in a React app’ 블로그 글 공부</title><link href="http://localhost:4000/2023-08-26/TIL" rel="alternate" type="text/html" title="‘Optimizing performance in a React app’ 블로그 글 공부" /><published>2023-08-26T12:18:07+09:00</published><updated>2023-08-26T12:18:07+09:00</updated><id>http://localhost:4000/2023-08-26/TIL</id><content type="html" xml:base="http://localhost:4000/2023-08-26/TIL"><![CDATA[<p>리액트의 성능을 높이는 데에 관심이 많은 상황인데, 다음 글을 보게 되었다. 딱히 새로울 게 없는 내용이기는 하나, 복습하는 차원에서 읽고 정리해 보았다. (불필요하거나 조금 읭?스러운 것들은 뺐음)</p>
+
+<p>https://blog.logrocket.com/optimizing-performance-react-app/</p>
+
+<p>React.memo, useMemo, useCallback 같은 것들은 내용을 알고 있기는 하나 실전에서 쓸 때는 조금씩 빠뜨리게 되는 것 같다.
+그래도 이런 글을 읽을 때마다 ‘내 코드 어디에서 사용해 볼 수 있지?’라고 생각하게 되는 점은 좋음…</p>
+
+<h3 id="1-react가-어떤-식으로-렌더링하는지부터-정확히-이해하기">1. React가 어떤 식으로 렌더링하는지부터 정확히 이해하기</h3>
+
+<p>React는 렌더링하기 전에 가상 DOM 트리를 먼저 그린다. 값이 변할 때마다 React는 이 가상 DOM 트리를 다시 만든다.
+그다음 먼저 그렸던 트리와 새로 그린 트리를 비교해 달라진 부분만 리렌더링한다.</p>
+
+<p>컴포넌트가 리렌더링되어야 한다면, 그 안의 자식 컴포넌트는 변경 사항이 없더라도 무조건 리렌더링된다.
+그래서 state는 가능하면 자식 컴포넌트 안에 있어야 쓸모 없이 부모 컴포넌트가 리렌더링되는 일을 막을 수 있다.</p>
+
+<h3 id="2-값을-저장해-두기">2. 값을 저장해 두기</h3>
+
+<p>주어지는 Props가 변하지 않는 한 다시 렌더링할 필요가 없는 자식 컴포넌트가 있다면 React.memo로 감싸준다. 순수 함수형 컴포넌트를 감쌀 수 있다.
+그런데 이 props가 숫자, 텍스트 같은 값이 아니라 object, array, function 같은 원시 타입이 아닌 값을 전달한다면 React.memo로 감싸더라도 무조건 리렌더링된다.
+UseMemo를 이용해 연산에 시간이 많이 드는 함수의 결과값을 저장해 두는 것도 좋다.
+그런데 이 방법들은 메모리와 시간을 트레이드오프하는 것이라서 꼭 필요할 때만 사용해야 한다.</p>
+
+<h3 id="3-lazy-loading">3. Lazy Loading</h3>
+
+<p>import를 동적으로 하여 코드를 분할하는 방법도 있다. Import 문을 필요할 때 불러오도록 해준다. lazy는 꼭 suspense 컴포넌트 안에 써야 한다.
+Suspense는 감싸진 컴포넌트가 제대로 보여지기 전까지 fallback을 화면에서 보여준다.</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">ScenarioImage</span> <span class="o">=</span> <span class="nx">React</span><span class="p">.</span><span class="nx">lazy</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="k">import</span><span class="p">(</span><span class="dl">'</span><span class="s1">../ScenarioImage</span><span class="dl">'</span><span class="p">));</span>
+
+<span class="p">...</span>
+
+      <span class="o">&lt;</span><span class="nx">React</span><span class="p">.</span><span class="nx">Suspense</span> <span class="nx">fallback</span><span class="o">=</span><span class="p">{</span><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span> <span class="nx">loading</span> <span class="nx">image</span> <span class="o">&lt;</span><span class="sr">/p&gt;}</span><span class="err">&gt;
+</span>        <span class="o">&lt;</span><span class="nx">ScenarioImage</span> <span class="nx">imageType</span><span class="o">=</span><span class="p">{</span><span class="nx">currentQuestion</span><span class="p">.</span><span class="nx">questionImageType</span><span class="p">}</span> <span class="sr">/</span><span class="err">&gt;
+</span>      <span class="o">&lt;</span><span class="sr">/React.Suspense</span><span class="err">&gt;
+</span></code></pre></div></div>
+
+<h3 id="4-효율을-높여주는-라이브러리-사용하기">4. 효율을 높여주는 라이브러리 사용하기</h3>
+
+<ul>
+  <li>방대한 양의 list를 렌더링해야 할 경우 일부만 보여준 후 스크롤 다운 할 때 나머지가 나타나도록 한다. react-window, react-virtualized 라이브러리 등이 있다.</li>
+  <li>이미지의 lazy-loading 기능을 지원하는 라이브러리를 사용한다. react-lazyload, react-lazy-load-image-component 등이 있다.</li>
+  <li>Redux를 사용하면 불필요한 리렌더링이 일어나는 문제가 발생할 수 있다. 이를 방지하기 위해서 Reselctor라는 라이브러리의 사용을 고려해 볼 수 있다.</li>
+</ul>]]></content><author><name>Sunmi Moon</name><email>celebmoon@naver.com</email></author><category term="React" /><category term="post" /><summary type="html"><![CDATA[리액트의 성능을 높이는 데에 관심이 많은 상황인데, 다음 글을 보게 되었다. 딱히 새로울 게 없는 내용이기는 하나, 복습하는 차원에서 읽고 정리해 보았다. (불필요하거나 조금 읭?스러운 것들은 뺐음)]]></summary></entry><entry><title type="html">TIL) CORS 에러와 Django에서 해결</title><link href="http://localhost:4000/2023-07-28/TIL" rel="alternate" type="text/html" title="TIL) CORS 에러와 Django에서 해결" /><published>2023-07-28T12:18:07+09:00</published><updated>2023-07-28T12:18:07+09:00</updated><id>http://localhost:4000/2023-07-28/TIL</id><content type="html" xml:base="http://localhost:4000/2023-07-28/TIL"><![CDATA[<p>프론트에서 다음과 같은 CORS 에러가 발생했다.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Access to XMLHttpRequest at 'https://...' from origin 'http://localhost:3000' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
 </code></pre></div></div>
@@ -7,7 +232,7 @@
 origin은 출처를 말하는데, protocol + host(사이트 도메인) + 포트번호
 즉, 나의 경우는 http://localhost:3000</p>
 
-<p>공유 정책에는 Same Origin 정책과 Cross Origin 	정책이 있고, 그 정책들은 HTTP 요청에 따라 다른 정책으로 지원한다.</p>
+<p>공유 정책에는 Same Origin 정책과 Cross Origin 정책이 있고, 그 정책들은 HTTP 요청에 따라 다른 정책으로 지원한다.</p>
 
 <p>SOP는 동일 출처 정책으로, 동일한 출처에서만 리소스를 공유할 수 있다. 동일 출처가 아닌 경우 접근을 차단하는 정책. 다른 사이트에서 리소스를 가져오지 않으니 해커의 공격에 조금 더 안전하다.</p>
 
@@ -23,6 +248,7 @@ SOP 정책을 위반하더라도 CORS 정책을 지키면 다른 출처의 리�
 <p>Django에서는 Access-Controll-Allow-Origin을 Django-cors-headers를 사용해서 추가할 수 있다.</p>
 
 <p>setting을 다음과 같이 해 주면, 교차 출처 리소스를 무조건 가져올 수 있다. 하지만 보안상 권장되지 않으며, 기본값은 <code class="language-plaintext highlighter-rouge">False</code>이다.</p>
+
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CORS_ALLOW_ALL_ORIGINS = True
 </code></pre></div></div>
 
@@ -31,70 +257,114 @@ SOP 정책을 위반하더라도 CORS 정책을 지키면 다른 출처의 리�
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
 ]
-</code></pre></div></div>]]></content><author><name>Sunmi Moon</name><email>celebmoon@naver.com</email></author><category term="Django" /><summary type="html"><![CDATA[프론트에서 다음과 같은 CORS 에러가 발생했다.]]></summary></entry><entry><title type="html">TIL) csv import/export in Django</title><link href="http://localhost:4000/2023-07-24/TIL" rel="alternate" type="text/html" title="TIL) csv import/export in Django" /><published>2023-07-24T12:18:07+09:00</published><updated>2023-07-24T12:18:07+09:00</updated><id>http://localhost:4000/2023-07-24/TIL</id><content type="html" xml:base="http://localhost:4000/2023-07-24/TIL"><![CDATA[<p>admin 화면을 구성하려면 csv 등의 파일을 improt하거나 export하는 게 필요할 때가 있다. admin에서 export만 구현하려면 다음과 같이 하면 된다.
+</code></pre></div></div>
+
+<p>앞에서 서술하였듯 origin은 프로토콜 + 호스트 + 포트번호를 뜻하므로, 이 세 가지 정보를 함께 적어 주어야 한다.</p>]]></content><author><name>Sunmi Moon</name><email>celebmoon@naver.com</email></author><category term="Django" /><category term="post" /><summary type="html"><![CDATA[프론트에서 다음과 같은 CORS 에러가 발생했다.]]></summary></entry><entry><title type="html">csv import/export in Django 코드 살펴보기</title><link href="http://localhost:4000/2023-07-24/TIL" rel="alternate" type="text/html" title="csv import/export in Django 코드 살펴보기" /><published>2023-07-24T12:18:07+09:00</published><updated>2023-07-24T12:18:07+09:00</updated><id>http://localhost:4000/2023-07-24/TIL</id><content type="html" xml:base="http://localhost:4000/2023-07-24/TIL"><![CDATA[<p>admin 화면을 구성하려면 csv 등의 파일을 improt하거나 export하는 게 필요할 때가 있다. admin에서 export만 구현하려면 다음과 같이 하면 된다.
 서비스 내에서 자체적인 콘텐츠를 제공하는 형태가 아니라면 export로도 충분할 수 있다.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="k">def</span> <span class="nf">export_as_csv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">queryset</span><span class="p">):</span>
-     <span class="n">meta</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">model</span><span class="p">.</span><span class="n">_meta</span>
-     <span class="n">field_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">field</span><span class="p">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">meta</span><span class="p">.</span><span class="n">fields</span><span class="p">]</span>
+<h3 id="modeladmin에-액션-추가하기">ModelAdmin에 액션 추가하기</h3>
 
+<p>django admin에서 csv export 기능을 만드는 것은, action을 추가하는 것이다.</p>
 
-     <span class="n">response</span> <span class="o">=</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="n">content_type</span><span class="o">=</span><span class="s">'text/csv'</span><span class="p">,</span> <span class="n">charset</span><span class="o">=</span><span class="s">'euc-kr'</span><span class="p">)</span>
-     <span class="n">response</span><span class="p">[</span><span class="s">'Content-Disposition'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'attachment; filename={}.csv'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">meta</span><span class="p">)</span>
-     <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="p">.</span><span class="n">writer</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">@</span><span class="n">register</span><span class="p">(</span><span class="n">User</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">UserAdmin</span><span class="p">(</span><span class="n">ExportCsvMixin</span><span class="p">,</span> <span class="n">ModelAdmin</span><span class="p">):</span>
+    <span class="n">list_display</span> <span class="o">=</span> <span class="p">(</span><span class="s">'email'</span><span class="p">,</span> <span class="s">'name'</span><span class="p">,</span> <span class="s">'phone'</span><span class="p">,</span> <span class="s">'birthday'</span><span class="p">,</span> <span class="s">'gender'</span><span class="p">)</span>
+    <span class="n">search_fields</span> <span class="o">=</span> <span class="p">(</span><span class="s">'email'</span><span class="p">,</span> <span class="s">'name'</span><span class="p">,</span> <span class="s">'phone'</span><span class="p">,</span> <span class="s">'birthday'</span><span class="p">)</span>
 
-
-     <span class="n">writer</span><span class="p">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">field_names</span><span class="p">)</span>
-     <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">queryset</span><span class="p">:</span>
-         <span class="n">row</span> <span class="o">=</span> <span class="n">writer</span><span class="p">.</span><span class="n">writerow</span><span class="p">([</span><span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">field</span><span class="p">)</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">field_names</span><span class="p">])</span>
-
-
-     <span class="k">return</span> <span class="n">response</span>
- <span class="n">export_as_csv</span><span class="p">.</span><span class="n">short_description</span> <span class="o">=</span> <span class="s">"Export Selected"</span>
+    <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="s">'export_as_csv'</span><span class="p">]</span>
 </code></pre></div></div>
 
-<p>자체 콘텐츠가 있고, 그 콘텐츠를 서비스에서 제공하는 형태라면 import 기능도 필요할 수 있다.</p>
+<p>액션은 이렇게 actions에 원하는 액션 함수만 추가해 주면 된다.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">import_as_csv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
-   <span class="k">if</span> <span class="n">request</span><span class="p">.</span><span class="n">method</span> <span class="o">==</span> <span class="s">'POST'</span><span class="p">:</span>
-       <span class="n">csv_file</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="n">FILES</span><span class="p">[</span><span class="s">'csv_file'</span><span class="p">]</span>
-       <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="p">.</span><span class="n">reader</span><span class="p">(</span><span class="n">csv_file</span><span class="p">)</span>
-       <span class="bp">self</span><span class="p">.</span><span class="n">message_user</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s">'Your csv file has been imported'</span><span class="p">)</span>
-       <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s">'..'</span><span class="p">)</span>
-   <span class="n">form</span> <span class="o">=</span> <span class="n">CsvImportForm</span><span class="p">()</span>
-   <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span><span class="s">'form'</span><span class="p">:</span> <span class="n">form</span><span class="p">}</span>
-   <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s">'admin/csv_form.html'</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span>
+<h3 id="액션-함수-만들기">액션 함수 만들기</h3>
+
+<p>우선 액션 함수는 다음과 같이 만들어진다. 정형화된 코드라 검색을 하면 이거랑 다 비슷하게 나온다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">export_as_csv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">queryset</span><span class="p">):</span>
+    <span class="n">meta</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">model</span><span class="p">.</span><span class="n">_meta</span>
+    <span class="n">field_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">field</span><span class="p">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">meta</span><span class="p">.</span><span class="n">fields</span><span class="p">]</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="n">content_type</span><span class="o">=</span><span class="s">'text/csv'</span><span class="p">,</span> <span class="n">charset</span><span class="o">=</span><span class="s">'euc-kr'</span><span class="p">)</span>
+    <span class="n">response</span><span class="p">[</span><span class="s">'Content-Disposition'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'attachment; filename={}.csv'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">meta</span><span class="p">)</span>
+    <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="p">.</span><span class="n">writer</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+    <span class="n">writer</span><span class="p">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">field_names</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">queryset</span><span class="p">:</span>
+    <span class="n">writer</span><span class="p">.</span><span class="n">writerow</span><span class="p">([</span><span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">field</span><span class="p">)</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">field_names</span><span class="p">])</span>
+
+    <span class="k">return</span> <span class="n">response</span>
+
+<span class="n">export_as_csv</span><span class="p">.</span><span class="n">short_description</span> <span class="o">=</span> <span class="s">"Export Selected"</span>
 </code></pre></div></div>
 
-<p>그런데 보다시피, csv 파일을 업로드할 페이지(csv_form.html)를 따로 만들어야 한다.</p>
+<p>Admin Action은 다음과 같이 세 개의 파라미터를 가진다.</p>
 
-<div class="language-django highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="cp">{%</span> <span class="k">extends</span> <span class="s1">'admin/base.html'</span> <span class="cp">%}</span>
+<ol>
+  <li>현재의 ModelAdmin</li>
+  <li>HttpRequest</li>
+  <li>사용자가 선택한 object들의 쿼리셋(즉, export하겠다고 선택한 데이터를 말한다.)</li>
+</ol>
 
-<span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}</span>
-    <span class="nt">&lt;div&gt;</span>
-        <span class="nt">&lt;form</span> <span class="na">action=</span><span class="s">"."</span> <span class="na">method=</span><span class="s">"POST"</span> <span class="na">enctype=</span><span class="s">"multipart/form-data"</span><span class="nt">&gt;</span>
-            <span class="cp">{{</span> <span class="nv">form.as_p</span> <span class="cp">}}</span>
-            <span class="cp">{%</span> <span class="nv">csrf_token</span> <span class="cp">%}</span>
+<h3 id="meta-데이터">meta 데이터</h3>
 
-                <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">"submit"</span><span class="nt">&gt;</span>Upload CSV<span class="nt">&lt;/button&gt;</span>
-        <span class="nt">&lt;/form&gt;</span>
-    <span class="nt">&lt;/div&gt;</span>
-    <span class="nt">&lt;br</span> <span class="nt">/&gt;</span>
+<p>우선 csv에서 맨 윗줄이 될 field들의 이름을 가져온다. model의 <code class="language-plaintext highlighter-rouge">_meta</code> 값에 field 정보들이 있다.</p>
 
-<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+<p><code class="language-plaintext highlighter-rouge">Action</code> 클래스를 보면, <code class="language-plaintext highlighter-rouge">opts</code> 값이 다음과 같이 지정되어 있다(https://docs.djangoproject.com/en/4.2/ref/models/meta/).
+<code class="language-plaintext highlighter-rouge">opts = self.model._meta</code></p>
+
+<p>따라서 다음을 이렇게 해 줘도 좋다.</p>
+
+<p>변경 전: <code class="language-plaintext highlighter-rouge">meta = self.model._meta</code>
+변경 후: <code class="language-plaintext highlighter-rouge">option = self.opts</code></p>
+
+<h3 id="content-disposition">content-disposition</h3>
+
+<p>Response Header에는 content-disposition라는 항목이 있다. 요청한 데이터를 어떤 식으로 받을 건지 나타낸다. 브라우저 안에서 보여질 것인지(inline), 브라우저의 일부분으로 보여질 것인지(multi-part), 첨부 파일로 제공될 것인지(attachment) 선택할 수 있다. 당연히 디폴트값은 <code class="language-plaintext highlighter-rouge">inline</code>.</p>
+
+<p>첨부 파일로 제공하려면 이 값을 attachment로 바꿔야 하므로, content-disposision 항목을 건드려야 한다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">response</span><span class="p">[</span><span class="s">'Content-Disposition'</span><span class="p">]</span> <span class="o">=</span> <span class="s">'attachment; filename={}.csv'</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">meta</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="getattr">getattr</h3>
+
+<p>데이터들의 값은 다음과 같이 한 줄씩 적어준다. 한 칸 씩 한 줄을 만들고, 한 줄씩 적어나는 것이므로 사실상 이중 for 문 형태다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="n">queryset</span><span class="p">:</span>
+    <span class="n">row</span> <span class="o">=</span> <span class="n">writer</span><span class="p">.</span><span class="n">writerow</span><span class="p">([</span><span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">field</span><span class="p">)</span> <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="n">field_names</span><span class="p">])</span>
+</code></pre></div></div>
+
+<p>여기에서 getattr를 쓰는데, 문자열 형태의 filed 이름으로 모델 인스턴스에 접근하기 위해서다. obj.name으로 접근할 수는 있는데, obj[‘name’]으로는 접근할 수 없다.</p>
+
+<h3 id="템플릿-파일-만들기">템플릿 파일 만들기</h3>
+
+<p>import 시에는 템플릿 파일이 추가적으로 필요하다. csv 파일을 업로드할 때, 파일을 선택하는 페이지가 있다. admin 화면에서도 이렇게 csv 파일을 업로드할 페이지(csv_form.html)를 따로 만들어야 한다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="p">{</span><span class="o">%</span> <span class="n">extends</span> <span class="s">'admin/base.html'</span> <span class="o">%</span><span class="p">}</span>
+
+<span class="p">{</span><span class="o">%</span> <span class="n">block</span> <span class="n">content</span> <span class="o">%</span><span class="p">}</span>
+    <span class="o">&lt;</span><span class="n">div</span><span class="o">&gt;</span>
+        <span class="o">&lt;</span><span class="n">form</span> <span class="n">action</span><span class="o">=</span><span class="s">"."</span> <span class="n">method</span><span class="o">=</span><span class="s">"POST"</span> <span class="n">enctype</span><span class="o">=</span><span class="s">"multipart/form-data"</span><span class="o">&gt;</span>
+            <span class="p">{{</span> <span class="n">form</span><span class="p">.</span><span class="n">as_p</span> <span class="p">}}</span>
+            <span class="p">{</span><span class="o">%</span> <span class="n">csrf_token</span> <span class="o">%</span><span class="p">}</span>
+
+                <span class="o">&lt;</span><span class="n">button</span> <span class="nb">type</span><span class="o">=</span><span class="s">"submit"</span><span class="o">&gt;</span><span class="n">Upload</span> <span class="n">CSV</span><span class="o">&lt;/</span><span class="n">button</span><span class="o">&gt;</span>
+        <span class="o">&lt;/</span><span class="n">form</span><span class="o">&gt;</span>
+    <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="n">br</span> <span class="o">/&gt;</span>
+
+<span class="p">{</span><span class="o">%</span> <span class="n">endblock</span> <span class="o">%</span><span class="p">}</span>
 
 </code></pre></div></div>
 
-<p>(장고 template 정말 오랜만에 봄..)</p>
+<p>Rest API를 만들 때만 Django를 사용하고 있었다면, 상당히 어색해 보일 수 있다.</p>
 
-<p>django-rest-framework를 사용하면서 템플릿을 하나도 안 쓰고 있는데, csv export 때문에 template을 만드는 건 좀 어색한 것 같았다.</p>
+<h3 id="django-import-export-라이브러리">django-import-export 라이브러리</h3>
 
-<p>다른 방법으로 django-import-export 라이브러리를 사용할 수도 있다. 당연히 그냥 장고를 쓸 때도 쓸 수 있다.</p>
+<p>다른 방법으로 django-import-export 라이브러리를 사용할 수도 있다. csv뿐 아니라 다양한 형태의 파일의 import, export를 제공한다. 그래서 이 라이브러리를 쓰는 것도 괜찮은 방법이 될 수 있다.</p>
 
-<p>https://django-import-export.readthedocs.io/en/latest/</p>
-
-<p>쉽게 구현할 수 있고, csv 외의 다른 파일 형태도 많이 지원한다.</p>]]></content><author><name>Sunmi Moon</name><email>celebmoon@naver.com</email></author><category term="Django" /><category term="DRF" /><summary type="html"><![CDATA[admin 화면을 구성하려면 csv 등의 파일을 improt하거나 export하는 게 필요할 때가 있다. admin에서 export만 구현하려면 다음과 같이 하면 된다. 서비스 내에서 자체적인 콘텐츠를 제공하는 형태가 아니라면 export로도 충분할 수 있다.]]></summary></entry><entry><title type="html">TIL) 모바일에서만 적용되는 기능 추가하기</title><link href="http://localhost:4000/2023-06-26/TIL" rel="alternate" type="text/html" title="TIL) 모바일에서만 적용되는 기능 추가하기" /><published>2023-06-26T12:18:07+09:00</published><updated>2023-06-26T12:18:07+09:00</updated><id>http://localhost:4000/2023-06-26/TIL</id><content type="html" xml:base="http://localhost:4000/2023-06-26/TIL"><![CDATA[<p>모바일 기기에서만 적용되는 기능을 사용하고 싶을 수 있다. 보통은 width를 기준으로 판단하는데, 나는 기기가 정말로 모바일인지를 판단해서 적용해야 했다.</p>
+<p>https://django-import-export.readthedocs.io/en/latest/</p>]]></content><author><name>Sunmi Moon</name><email>celebmoon@naver.com</email></author><category term="Django" /><category term="post" /><summary type="html"><![CDATA[admin 화면을 구성하려면 csv 등의 파일을 improt하거나 export하는 게 필요할 때가 있다. admin에서 export만 구현하려면 다음과 같이 하면 된다. 서비스 내에서 자체적인 콘텐츠를 제공하는 형태가 아니라면 export로도 충분할 수 있다.]]></summary></entry><entry><title type="html">TIL) 모바일에서만 적용되는 기능 추가하기</title><link href="http://localhost:4000/2023-06-26/TIL" rel="alternate" type="text/html" title="TIL) 모바일에서만 적용되는 기능 추가하기" /><published>2023-06-26T12:18:07+09:00</published><updated>2023-06-26T12:18:07+09:00</updated><id>http://localhost:4000/2023-06-26/TIL</id><content type="html" xml:base="http://localhost:4000/2023-06-26/TIL"><![CDATA[<p>모바일 기기에서만 적용되는 기능을 사용하고 싶을 수 있다. 보통은 width를 기준으로 판단하는데, 나는 기기가 정말로 모바일인지를 판단해서 적용해야 했다.</p>
 
 <p><code class="language-plaintext highlighter-rouge">navigator.userAgentData.mobile</code>은 웹사이트에 접속한 기기가 모바일인지 아닌지 boolean 값으로 반환한다. 이를 조건절로 사용해 css나 기능을 추가할 수 있다.</p>
 
@@ -166,68 +436,4 @@ swagger가 바보가 된 것 같다면 도커를 켰는지 꼭 확인하자!!</p
 <p>타입스크립트를 사용하므로 다음도 실행해 주었더니 작동한다.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yarn add @types/react-copy-to-clipboard
-</code></pre></div></div>]]></content><author><name>Sunmi Moon</name><email>celebmoon@naver.com</email></author><category term="React" /><summary type="html"><![CDATA[텍스트를 복사해 주는 기능을 만들기 위해서 react-copy-to-clipboard를 설치했다.]]></summary></entry><entry><title type="html">TIL) serializer fields 넣어줄 때 유의점</title><link href="http://localhost:4000/2023-05-14/TIL" rel="alternate" type="text/html" title="TIL) serializer fields 넣어줄 때 유의점" /><published>2023-05-14T12:18:07+09:00</published><updated>2023-05-14T12:18:07+09:00</updated><id>http://localhost:4000/2023-05-14/TIL</id><content type="html" xml:base="http://localhost:4000/2023-05-14/TIL"><![CDATA[<p>모델의 정의와 밀접한 관련이 있는 serializer를 만들 게 될 경우가 많다.</p>
-
-<p>모델에서 만든 필드를 전부 serializer로 만들고 싶다면 다음과 같이 <code class="language-plaintext highlighter-rouge">fields = ‘__all__’</code>을 지정해 주면 된다.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class AccountSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Account
-        fields = '__all__'
-</code></pre></div></div>
-
-<p>그런데 이걸 쓰는 게 좋지 않을 수도 있다. 나중에 모델의 필드가 변경될 수도 있는데, 공개되면 안 되는 필드가 추가되었어도 모르고 넘어가 버릴 수 있기 때문이다.</p>
-
-<p>다음과 같이 모든 필드를 그냥 나열해 주는 게 낫다.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class AccountSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Account
-        fields = ['id', 'account_name', 'users', 'created']
-</code></pre></div></div>]]></content><author><name>Sunmi Moon</name><email>celebmoon@naver.com</email></author><category term="DRF" /><summary type="html"><![CDATA[모델의 정의와 밀접한 관련이 있는 serializer를 만들 게 될 경우가 많다.]]></summary></entry><entry><title type="html">TIL) postgresql permission denied for schema public</title><link href="http://localhost:4000/2023-04-10/TIL" rel="alternate" type="text/html" title="TIL) postgresql permission denied for schema public" /><published>2023-04-10T12:18:07+09:00</published><updated>2023-04-10T12:18:07+09:00</updated><id>http://localhost:4000/2023-04-10/TIL</id><content type="html" xml:base="http://localhost:4000/2023-04-10/TIL"><![CDATA[<p>postgresql의 user를 바꾸게 되었는데, 다음과 같은 에러가 발생했다.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>django.db.migrations.exceptions.MigrationSchemaMissing: Unable to create the django_migrations table (permission denied for schema public
-LINE 1: CREATE TABLE "django_migrations" ("id" bigserial NOT NULL PR...
-</code></pre></div></div>
-
-<p>다음과 같은 명령어를 이용해 새로 만든 계정에 모든 privilege도 다 주었는데, 왜 안 되는 걸까 한참 찾았다.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GRANT ALL ON DATABASE mydb TO admin;
-</code></pre></div></div>
-
-<p>알고 보니, 소유자가 아니면 public 스키마의 데이터 베이스 생성이 안 된다고 한다.</p>
-
-<p>열심히 검색하다가 다음과 같은 문구를 발견했다.</p>
-
-<p>PostgreSQL 15 also revokes the CREATE permission from all users except a database owner from the public (or default) schema.</p>
-
-<p>소유자가 아닌 사용자에게는 CREATE 권한을 거부한다는 것이다.</p>
-
-<p>나는 superuser에서 새 계정과 새 데이터베이스를 만들었었다. 그래서 새 데이터베이스의 주인은 superuser였다. 그래서 다음과 같이 소유자를 바꾸어 주었다.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ALTER DATABASE mydb OWNER TO admin;
-</code></pre></div></div>
-
-<p>소유자를 사용하려는 계정으로 바꿔 주었더니 정상 작동했다!</p>]]></content><author><name>Sunmi Moon</name><email>celebmoon@naver.com</email></author><category term="DB" /><summary type="html"><![CDATA[postgresql의 user를 바꾸게 되었는데, 다음과 같은 에러가 발생했다.]]></summary></entry><entry><title type="html">TIL) 네트워크의 기초</title><link href="http://localhost:4000/2023-04-05/TIL" rel="alternate" type="text/html" title="TIL) 네트워크의 기초" /><published>2023-04-05T12:18:07+09:00</published><updated>2023-04-05T12:18:07+09:00</updated><id>http://localhost:4000/2023-04-05/TIL</id><content type="html" xml:base="http://localhost:4000/2023-04-05/TIL"><![CDATA[<h3 id="네트워크">네트워크</h3>
-
-<p>네트워크란 노드와 링크가 연결되어 있거나 연결되어 있지 않은 집합체를 의미한다. 컴퓨터들을 연결한 걸 네트워크라고 할 수 있다. 데이터를 주고받는 시스템 전체를 일컫는 용어로 쓰이기도 한다.</p>
-
-<h3 id="라우터">라우터</h3>
-
-<p>라우터는 자신에게 물려 있는 장치들의 데이터 패킷(데이터 전송에서 사용되는 데이터의 묶음)을 제어해 주는 것을 말하며, 여러 네트워크를 연결하는 역할도 한다. 인터넷 공유기도 라우터의 한 종류가 될 수 있는데, 보통 스위치와 결합되어 제공된다.</p>
-
-<h3 id="처리량throughput">처리량(throughput)</h3>
-
-<p>링크를 통해 전달되는 단위 시간당 데이터양을 말한다. 스루풋이라고도 하며, 백엔드에서 관심을 가져야 할 부분이다. 백엔드 단에서 만든 코드의 성능이 나쁘다면 스루풋이 안 좋아진다.</p>
-
-<h3 id="트래픽">트래픽</h3>
-
-<p>서버에 전송되어지는 요청의 양과 서버에서 전송하는 응답의 양을 말한다.</p>
-
-<h3 id="지연시간">지연시간</h3>
-
-<p>요청이 처리되는 시간을 말한다. 요청이 서버로 오는 시간, 서버에서 작업하는 시간, 서버에서 클라이언트로 응답이 가는 시간을 포함한다. 요즘에는 인터넷이 많이 빨라지면서 서버에서 코드가 얼마나 효율적으로 돌아가느냐가 지연시간에 큰 영향을 미치게 되었다.</p>
-
-<h3 id="네트워크-토폴로지">네트워크 토폴로지</h3>
-
-<p>네트워크를 설계할 때, 노드와 링크를 어떻게 배치하는지에 대한 배치 방식이자 연결 형태를 말한다. 트리, 버스, 스타, 링형, 메시 등의 종류가 있다.</p>]]></content><author><name>Sunmi Moon</name><email>celebmoon@naver.com</email></author><category term="CS" /><summary type="html"><![CDATA[네트워크]]></summary></entry></feed>
+</code></pre></div></div>]]></content><author><name>Sunmi Moon</name><email>celebmoon@naver.com</email></author><category term="React" /><summary type="html"><![CDATA[텍스트를 복사해 주는 기능을 만들기 위해서 react-copy-to-clipboard를 설치했다.]]></summary></entry></feed>

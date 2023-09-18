@@ -369,6 +369,63 @@
   
     
   
+    
+  
+    
+  
+    
+  
+
+  
+    <a href="/2022-09-09/python-web-programming-practice-4" class="catalogue-item">
+  <div>
+    
+    <time datetime="2022-09-09 22:38:33 +0900" class="catalogue-time"
+      >September 09, 2022</time
+    >
+    <h1 class="catalogue-title">파이썬 웹 프로그래밍 공부 실전편 4</h1>
+    <div class="catalogue-line"></div>
+
+    <p class="wrapped-text">
+      
+      북마크 앱 만들기 @admin.register(BookMark) class BookmarkAdmin(admin.ModelAdmin): list_display = ('id', 'title', 'url') python3 manage.py showmigrations: 모든 마이그레이션을 보여주고, 각 마이그레이션별 적용 여부를 알 수 있다. python3 manage.py sqlmigrate bookmark 0001: bookmark... 
+    </p>
+  </div>
+</a>
+
+  
+    <a href="/2022-09-07/python-web-programming-practice-3" class="catalogue-item">
+  <div>
+    
+    <time datetime="2022-09-07 22:08:42 +0900" class="catalogue-time"
+      >September 07, 2022</time
+    >
+    <h1 class="catalogue-title">파이썬 웹 프로그래밍 공부 실전편 3</h1>
+    <div class="catalogue-line"></div>
+
+    <p class="wrapped-text">
+      
+      마이그레이션: 테이블 및 필드의 생성, 삭제, 변경 등과 같은 데이터베이스에 대한 변경 사항을 알려주는 정보 URLconf 프로젝트 URL과 앱들의 URL로 나누어 정의하는 걸 추천한다. 프로젝트 템플릿 디렉터리는 TEMPLATES 설정의 DIRS... 
+    </p>
+  </div>
+</a>
+
+  
+    <a href="/2022-09-06/python-web-programming-9" class="catalogue-item">
+  <div>
+    
+    <time datetime="2022-09-06 22:11:17 +0900" class="catalogue-time"
+      >September 06, 2022</time
+    >
+    <h1 class="catalogue-title">파이썬 웹 프로그래밍 공부 9 & 리뷰</h1>
+    <div class="catalogue-line"></div>
+
+    <p class="wrapped-text">
+      
+      6장 Django의 웹 서버 연동 원리 wsgi.py 파일에는 application 객체가 정의되어 있다. 장고는 웹 애플리케이션을 만들어주는 프레임워크고, WSGI 규격의 애플리케이션 스펙을 구혆기 위해 wsgi.py 파일을 제공한다. 규격에 따라 WSGI 서버에서는... 
+    </p>
+  </div>
+</a>
 
   
     <a href="/2022-09-05/python-web-programming-8" class="catalogue-item">
@@ -490,57 +547,6 @@
 </a>
 
   
-    <a href="/2022-08-29/python-web-programming-practice-1" class="catalogue-item">
-  <div>
-    
-    <time datetime="2022-08-29 22:45:13 +0900" class="catalogue-time"
-      >August 29, 2022</time
-    >
-    <h1 class="catalogue-title">파이썬 웹 프로그래밍 실전편 공부 1(13장)</h1>
-    <div class="catalogue-line"></div>
-
-    <p class="wrapped-text">
-      
-      13장 Model 모델 정의 models.py 파일에는 테이블을 정의하는 것이 기본. ORM 방식에서는 관련 변수 메소드를 추가적으로 정의할 수 있는 장점이 있다. 테이블의 컬럼(장고에서는 테이블의 필드 또는 모델 필드라고 함)은 모델... 
-    </p>
-  </div>
-</a>
-
-  
-    <a href="/2022-08-28/jump-to-django-11" class="catalogue-item">
-  <div>
-    
-    <time datetime="2022-08-28 22:45:13 +0900" class="catalogue-time"
-      >August 28, 2022</time
-    >
-    <h1 class="catalogue-title">점프 투 장고 공부 11</h1>
-    <div class="catalogue-line"></div>
-
-    <p class="wrapped-text">
-      
-      앵커 답글을 작성하거나 수정한 후에 항상 페이지 상단으로 스크롤이 이동되기 때문에 본인이 작성한 답변을 확인하려면 다시 스크롤을 내려서 확인해야 한다는 점을 해결한다. answer_views.py @login_required(login_url='common:login') def answer_create(request, question_id): question = get_object_or_404(Question,... 
-    </p>
-  </div>
-</a>
-
-  
-    <a href="/2022-08-27/jump-to-django-10" class="catalogue-item">
-  <div>
-    
-    <time datetime="2022-08-27 22:00:55 +0900" class="catalogue-time"
-      >August 27, 2022</time
-    >
-    <h1 class="catalogue-title">점프 투 장고 공부 10</h1>
-    <div class="catalogue-line"></div>
-
-    <p class="wrapped-text">
-      
-      질문 수정 views.py @login_required(login_url='common:login') def question_modify(request, question_id): question = get_object_or_404(Question, pk=question_id) if request.user != question.author: messages.error(request, '수정권한이 없습니다.') return redirect('pybo:detail', question_id=question.id) if request.method == 'POST': form = QuestionForm(request.POST, instance=question) if... 
-    </p>
-  </div>
-</a>
-
-  
 </div>
 
 <div class="pagination">
@@ -637,7 +643,7 @@
 
     <footer>
   <span>
-    &copy; <time datetime="2023-08-05 22:38:38 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+    &copy; <time datetime="2023-09-18 16:09:48 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
   </span>
 </footer>
 

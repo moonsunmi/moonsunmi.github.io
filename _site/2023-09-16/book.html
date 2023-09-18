@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>파이썬 클린코드) docstring과 어노테이션 | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="파이썬 클린코드) docstring과 어노테이션" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="우선 문서화에 대한 이야기부터 시작한다. 문서화의 필요성과 중요성은 굳이 언급하지 않아도 될 만큼 많이 알고 있다. 그런데 주석과 문서화는 다른 이야기다. 주석은 코드 구현에 대한 설명이고 지양해야 할 것이지만, 문서화는 코드의 역할과 사용법을 위해 꼭 필요한 것이다.(주석을 달아도 되는 경우 중 하나는, 외부 라이브러리에 오류가 있어 현재의 코드로는 그 위험성을 알 수 없을 때가 있다.) dostring과 어노테이션은 파이썬 코드의 문서화와 관련이 깊다." />
+<meta property="og:description" content="우선 문서화에 대한 이야기부터 시작한다. 문서화의 필요성과 중요성은 굳이 언급하지 않아도 될 만큼 많이 알고 있다. 그런데 주석과 문서화는 다른 이야기다. 주석은 코드 구현에 대한 설명이고 지양해야 할 것이지만, 문서화는 코드의 역할과 사용법을 위해 꼭 필요한 것이다.(주석을 달아도 되는 경우 중 하나는, 외부 라이브러리에 오류가 있어 현재의 코드로는 그 위험성을 알 수 없을 때가 있다.) dostring과 어노테이션은 파이썬 코드의 문서화와 관련이 깊다." />
+<link rel="canonical" href="http://localhost:4000/2023-09-16/book" />
+<meta property="og:url" content="http://localhost:4000/2023-09-16/book" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-09-16T12:18:07+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="파이썬 클린코드) docstring과 어노테이션" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2023-09-16T12:18:07+09:00","datePublished":"2023-09-16T12:18:07+09:00","description":"우선 문서화에 대한 이야기부터 시작한다. 문서화의 필요성과 중요성은 굳이 언급하지 않아도 될 만큼 많이 알고 있다. 그런데 주석과 문서화는 다른 이야기다. 주석은 코드 구현에 대한 설명이고 지양해야 할 것이지만, 문서화는 코드의 역할과 사용법을 위해 꼭 필요한 것이다.(주석을 달아도 되는 경우 중 하나는, 외부 라이브러리에 오류가 있어 현재의 코드로는 그 위험성을 알 수 없을 때가 있다.) dostring과 어노테이션은 파이썬 코드의 문서화와 관련이 깊다.","headline":"파이썬 클린코드) docstring과 어노테이션","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2023-09-16/book"},"url":"http://localhost:4000/2023-09-16/book"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main><div class="post">
+  <h1 class="post-title">파이썬 클린코드) docstring과 어노테이션</h1>
+
+  <div class="post-info">
+    
+    <br />
+    <span>on&nbsp;</span
+    ><time datetime="2023-09-16 12:18:07 +0900">September 16, 2023</time>
+    
+  </div>
+
+  <p>우선 문서화에 대한 이야기부터 시작한다. 문서화의 필요성과 중요성은 굳이 언급하지 않아도 될 만큼 많이 알고 있다. 그런데 주석과 문서화는 다른 이야기다. 주석은 코드 구현에 대한 설명이고 지양해야 할 것이지만, 문서화는 코드의 역할과 사용법을 위해 꼭 필요한 것이다.(주석을 달아도 되는 경우 중 하나는, 외부 라이브러리에 오류가 있어 현재의 코드로는 그 위험성을 알 수 없을 때가 있다.) dostring과 어노테이션은 파이썬 코드의 문서화와 관련이 깊다.</p>
+
+<h3 id="docstring">docstring</h3>
+
+<p>docstring은 코드에 포함된 문서이다. <code class="language-plaintext highlighter-rouge">help</code> 명령어를 이용하면 다음과 같이 작성된 docstring을 확인할 수 있다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="n">help</span><span class="p">(</span><span class="nb">dict</span><span class="p">.</span><span class="n">update</span><span class="p">)</span>
+<span class="n">Help</span> <span class="n">on</span> <span class="n">method_descriptor</span><span class="p">:</span>
+<span class="n">update</span><span class="p">(...)</span>
+    <span class="n">D</span><span class="p">.</span><span class="n">update</span><span class="p">([</span><span class="n">E</span><span class="p">,</span> <span class="p">]</span><span class="o">**</span><span class="n">F</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="bp">None</span><span class="p">.</span>  <span class="n">Update</span> <span class="n">D</span> <span class="k">from</span> <span class="nb">dict</span><span class="o">/</span><span class="n">iterable</span> <span class="n">E</span> <span class="ow">and</span> <span class="n">F</span><span class="p">.</span>
+    <span class="n">If</span> <span class="n">E</span> <span class="ow">is</span> <span class="n">present</span> <span class="ow">and</span> <span class="n">has</span> <span class="n">a</span> <span class="p">.</span><span class="n">keys</span><span class="p">()</span> <span class="n">method</span><span class="p">,</span> <span class="n">then</span> <span class="n">does</span><span class="p">:</span>  <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">E</span><span class="p">:</span> <span class="n">D</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">E</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+    <span class="n">If</span> <span class="n">E</span> <span class="ow">is</span> <span class="n">present</span> <span class="ow">and</span> <span class="n">lacks</span> <span class="n">a</span> <span class="p">.</span><span class="n">keys</span><span class="p">()</span> <span class="n">method</span><span class="p">,</span> <span class="n">then</span> <span class="n">does</span><span class="p">:</span>  <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">E</span><span class="p">:</span> <span class="n">D</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+    <span class="n">In</span> <span class="n">either</span> <span class="n">case</span><span class="p">,</span> <span class="n">this</span> <span class="ow">is</span> <span class="n">followed</span> <span class="n">by</span><span class="p">:</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">F</span><span class="p">:</span>  <span class="n">D</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">F</span><span class="p">[</span><span class="n">k</span><span class="p">]</span>
+
+</code></pre></div></div>
+
+<p>docstring을 쓰는 게 중요하다는 것, 그리고 타입, 역할을 명시해 줘야 한다는 건 알지만 그것이 어떤 형태로 쓰여야 하는지는 잘 감이 안 온다.
+그래서 update의 경우 어떤 정보를 나열했는지 조금 더 정확히 알아보았다.</p>
+
+<ol>
+  <li>인자에 <code class="language-plaintext highlighter-rouge">keys()</code> 메서드가 있는 경우(즉, E가 딕셔너리인 경우): key와 value 값을 같이 알 수 있으므로 그것을 기준으로 D에 업데이트한다.
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">D</span><span class="p">.</span><span class="n">update</span><span class="p">({</span><span class="s">'a'</span><span class="p">:</span> <span class="mi">1</span><span class="p">})</span>
+</code></pre></div>    </div>
+  </li>
+  <li>인자에 <code class="language-plaintext highlighter-rouge">keys()</code> 메서드가 없는 경우(E가 반복 가능한 객체일 경우): <code class="language-plaintext highlighter-rouge">(키, 쌍)</code> 값의 형태로 받아서 D에 업데이트한다.
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">D</span><span class="p">.</span><span class="n">update</span><span class="p">([(</span><span class="s">'a'</span><span class="p">,</span> <span class="mi">1</span><span class="p">)])</span>
+</code></pre></div>    </div>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">a=b</code>처럼 키워드 인자를 전달하는 것도 가능하다.
+    <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">D</span><span class="p">.</span><span class="n">update</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+</ol>
+
+<p>해당 메서드가 어떤 타입을 인자로 받을 수 있는지, 타입에 따라 어떤 결과물을 나타내는지 정확히 보여주고 있다.</p>
+
+<h3 id="어노테이션">어노테이션</h3>
+
+<p>어노테이션은 인자에 어떤 값이 와야 하는지 사용자에게 힌트를 주는 역할을 한다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">class</span> <span class="nc">Point</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="nb">long</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">lat</span> <span class="o">=</span> <span class="n">lat</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">log</span> <span class="o">=</span> <span class="nb">long</span>
+
+    <span class="k">def</span> <span class="nf">locate</span><span class="p">(</span><span class="n">latitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">longitude</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Point</span><span class="p">:</span>
+
+</code></pre></div></div>
+
+<p>locate의 latitude와 longitude 인자가 float 타입이라는 점, 그리고 Point 인스턴스를 반환한다는 것을 해당 어노테이션을 통해 알 수 있다.</p>
+
+<p>단순히 힌트만 주기 때문에 타입스크립트처럼 타입 오류를 발생시키지도 않는다. 아니, 애시당초 타입 검사를 하지도, 사용자에게 해당 타입을 사용할 것을 강제하지도 않는다.
+만약 타입 검사를 적극적으로 하려면 Mypy 같은 린터를 써도 좋다. Mypy는 가장 많이 쓰이는 파이썬 정적 타입 검사 도구다.</p>
+
+<p>https://mypy.readthedocs.io/en/stable/</p>
+
+<h3 id="어노테이션으로-docstring을-대체할-수-있을까">어노테이션으로 docstring을 대체할 수 있을까?</h3>
+
+<p>어노테이션에 타입에 대한 힌트가 있으므로 docstring의 일부분을 대체할 수 있을 것 같다. 하지만 완전히 대체하기는 힘들다.
+특히, 예외는 이에 대한 정보가 어노테이션에 없기 때문에 docstring으로 표기해 줄 필요가 있다. 예시를 보여줄 수도 있고.</p>
+
+</div>
+
+
+
+<div class="pagination">
+  
+  <a href="/2023-09-18/http-server" class="left arrow"
+    >&#8592;</a
+  >
+   
+  <a href="/2023-08-26/TIL" class="right arrow"
+    >&#8594;</a
+  >
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+</main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-09-18 16:09:48 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>
