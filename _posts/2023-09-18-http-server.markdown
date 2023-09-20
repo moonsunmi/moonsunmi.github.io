@@ -140,3 +140,8 @@ print(sever_msg.decode('utf-8'))
 ```
 
 서버를 실행하면, 아무것도 출력되지 않는다. 클라이언트를 기다리고 있는 것이다. 클라이언트를 실행하면 그제서야 결과물을 출력하고 종료한다. 클라이언트는 즉시 결과물을 출력하고 종료한다.
+
+#### 레퍼런스
+
+- https://seolin.tistory.com/97
+- https://docs.python.org/3/library/socket.html

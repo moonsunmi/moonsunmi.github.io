@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>HTTP Server 만들기 - index, 404 page 추가해 보기 | 주경야독학) 개발공부로그</title>
+<meta name="generator" content="Jekyll v4.3.2" />
+<meta property="og:title" content="HTTP Server 만들기 - index, 404 page 추가해 보기" />
+<meta name="author" content="Sunmi Moon" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="HTTP의 정의를 다시 한번 살펴보고 시작한다." />
+<meta property="og:description" content="HTTP의 정의를 다시 한번 살펴보고 시작한다." />
+<link rel="canonical" href="http://localhost:4000/2023-09-20/http-server" />
+<meta property="og:url" content="http://localhost:4000/2023-09-20/http-server" />
+<meta property="og:site_name" content="주경야독학) 개발공부로그" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-09-20T12:18:07+09:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="HTTP Server 만들기 - index, 404 page 추가해 보기" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Sunmi Moon","url":"https://moonsunmi.github.io"},"dateModified":"2023-09-20T12:18:07+09:00","datePublished":"2023-09-20T12:18:07+09:00","description":"HTTP의 정의를 다시 한번 살펴보고 시작한다.","headline":"HTTP Server 만들기 - index, 404 page 추가해 보기","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/2023-09-20/http-server"},"url":"http://localhost:4000/2023-09-20/http-server"}</script>
+<!-- End Jekyll SEO tag -->
+
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+
+  <!-- RSS -->
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="주경야독학) 개발공부로그" />
+
+  <!-- Google Analytics-->
+  
+</head>
+
+
+  <body>
+    <nav class="nav">
+  <div class="nav-container">
+    <a href="/">
+      <h2 class="nav-title">주경야독학) 개발공부로그</h2>
+    </a>
+    <ul>
+      <li><a href="/">Posts</a></li>
+      <li><a href="/tags">Tags</a></li>
+      <li><a href="/about">About</a></li>
+    </ul>
+  </div>
+</nav>
+
+
+    <main><div class="post">
+  <h1 class="post-title">HTTP Server 만들기 - index, 404 page 추가해 보기</h1>
+
+  <div class="post-info">
+    
+    <br />
+    <span>on&nbsp;</span
+    ><time datetime="2023-09-20 12:18:07 +0900">September 20, 2023</time>
+    
+  </div>
+
+  <p>HTTP의 정의를 다시 한번 살펴보고 시작한다.</p>
+
+<p>HTTP는 통신 규약이다. 서버와 클라이언트의 통신에 지켜야 할 규약이다. 이는 텍스트 패턴을 지키는 것으로 얻을 수 있다. HTTP의 구조에서 Header에는 어떤 내용이 포함되어 있고, body는 어떻게 구성되고 하는 것들이 지켜져야 할 텍스트 구성을 나타내는 것이다.</p>
+
+<p>다음은 GET 메서드로 통신했을 때 얻을 수 있는 간단한 HTTP 예제이다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET /index.html HTTP/1.0
+User-Agent: Mozilla/5.0
+
+</code></pre></div></div>
+
+<p>header와 body 사이에는 공백이 있어야 하므로 공백 한 줄까지 포함되어 있다.</p>
+
+<p>내가 만드는 HTTP Sever도 이 텍스트 패턴을 지키도록 해야 한다.</p>
+
+<h3 id="계속-동작하는-서버-만들기">계속 동작하는 서버 만들기</h3>
+
+<p>앞 글에서 만들었던 기초적인 서버는 클라이언트 요청을 한 번 처리하면 바로 종료되었다. 진짜 서버처럼 동작하도록 수정한다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">socket</span>
+
+<span class="n">SERVER_HOST</span> <span class="o">=</span> <span class="s">'0.0.0.0'</span>
+<span class="n">SERVER_PORT</span> <span class="o">=</span> <span class="mi">8080</span>
+
+<span class="n">server_socket</span> <span class="o">=</span> <span class="n">socket</span><span class="p">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="p">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="p">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+<span class="n">server_socket</span><span class="p">.</span><span class="n">setsockopt</span><span class="p">(</span><span class="n">socket</span><span class="p">.</span><span class="n">SOL_SOCKET</span><span class="p">,</span> <span class="n">socket</span><span class="p">.</span><span class="n">SO_REUSEADDR</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">server_socket</span><span class="p">.</span><span class="n">bind</span><span class="p">((</span><span class="n">SERVER_HOST</span><span class="p">,</span> <span class="n">SERVER_PORT</span><span class="p">))</span>
+<span class="n">server_socket</span><span class="p">.</span><span class="n">listen</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">client_conn</span><span class="p">,</span> <span class="n">client_addr</span> <span class="o">=</span> <span class="n">server_socket</span><span class="p">.</span><span class="n">accept</span><span class="p">()</span>
+
+        <span class="n">request</span> <span class="o">=</span> <span class="n">client_conn</span><span class="p">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">).</span><span class="n">decode</span><span class="p">()</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="s">'HTTP/1.0 200 OK</span><span class="se">\n</span><span class="s">Content-Type: text/html</span><span class="se">\n\n</span><span class="s">Hello, World'</span>
+        <span class="n">client_conn</span><span class="p">.</span><span class="n">sendall</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">encode</span><span class="p">())</span>
+        <span class="n">client_conn</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="k">finally</span><span class="p">:</span>
+    <span class="n">server_socket</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+
+
+</code></pre></div></div>
+
+<p>다음 코드는 새롭게 추가된 것이다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">socket</span><span class="p">.</span><span class="n">setsockopt</span><span class="p">(</span><span class="n">socket</span><span class="p">.</span><span class="n">SOL_SOCKET</span><span class="p">,</span> <span class="n">socket</span><span class="p">.</span><span class="n">SO_REUSEADDR</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>서버가 비정상적으로 종료되었을 때를 대비해서 소켓 옵션을 설정한 것이다.</p>
+
+<p>서버가 클라이언트에게 보낼 때, <code class="language-plaintext highlighter-rouge">send()</code> 대신 <code class="language-plaintext highlighter-rouge">sendall()</code>을 사용했는데, 이렇게 하면 에러가 나거나 모든 데이터를 다 보낼 때까지 send를 계속 진행한다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">client_conn</span><span class="p">.</span><span class="n">sendall</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">encode</span><span class="p">())</span>
+</code></pre></div></div>
+
+<p>앞에서는 클라이언트를 만들었지만, 이번에는 브라우저를 통해서 접속해 본다. 브라우저는 HTTP 사용자 에이전트이므로, 서버의 데이터를 받아서 알아서 사용자에게 보여준다.</p>
+
+<h3 id="서버가-가져간-클라이언트의-정보">서버가 가져간 클라이언트의 정보</h3>
+
+<p>웹 브라우저를 통해 클라이언트가 접속하면, 클라이언트의 다음 정보를 서버에서 출력한다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET / HTTP/1.1
+Host: localhost:8080
+Connection: keep-alive
+Cache-Control: max-age=0
+sec-ch-ua: "Not.A/Brand";v="8", "Chromium";v="114", "Google Chrome";v="114"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "macOS"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) ...
+...
+</code></pre></div></div>
+
+<h3 id="서버에서-indexhtml을-띄우게-하기">서버에서 index.html을 띄우게 하기</h3>
+
+<p>이제 이 서버에 접속하면 index.html을 띄우도록 해 보자. 클라이언트에 응답할 때 index.html 파일 내용에 헤더를 붙여서 전달해 주면 된다. 내가 만드는 html은 <code class="language-plaintext highlighter-rouge">pages</code> 안에 저장하도록 했다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fin</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'pages/index.html'</span><span class="p">)</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">fin</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">fin</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="s">'HTTP/1.0 200 OK</span><span class="se">\n</span><span class="s">Content-Type: text/html</span><span class="se">\n\n</span><span class="s">'</span> <span class="o">+</span> <span class="n">content</span>
+</code></pre></div></div>
+
+<h3 id="루트-페이지-외의-나머지-페이지-띄워-주기">루트 페이지 외의 나머지 페이지 띄워 주기</h3>
+
+<p>페이지를 이동한면 다른 페이지를 띄워 줘야 한다. request 맨 윗줄의 <code class="language-plaintext highlighter-rouge">GET</code> 다음에 있는 <code class="language-plaintext highlighter-rouge">/</code>가 경로 정보이다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GET / HTTP/1.1
+</code></pre></div></div>
+
+<p>만약 <code class="language-plaintext highlighter-rouge">http://localhost:8080/hello.html</code> 같은 식으로 접속한다면 <code class="language-plaintext highlighter-rouge">/</code> 대신 <code class="language-plaintext highlighter-rouge">/hello.html</code>가 전달된다. 그러므로 이 부분을 파싱하여 열어줄 파일 이름에 매칭시킨다.</p>
+
+<p>그런데 존재하지 않는 경로로 접근할 경우 다음과 같은 에러가 발생하면서 서버가 종료된다. 따라서 예외 처리도 함께 해 준다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FileNotFoundError: [Errno 2] No such file or directory: 'pages/hello'
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">try</span><span class="p">:</span>
+    <span class="n">fin</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'pages'</span> <span class="o">+</span> <span class="n">filename</span><span class="p">)</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">fin</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="n">fin</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="s">'HTTP/1.1 200 OK</span><span class="se">\n</span><span class="s">Content-Type: text/html</span><span class="se">\n\n</span><span class="s">'</span> <span class="o">+</span> <span class="n">content</span>
+
+<span class="k">except</span> <span class="nb">FileNotFoundError</span><span class="p">:</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="s">'HTTP/1.1 404 NOT FOUND</span><span class="se">\n</span><span class="s">Content-Type: text/html</span><span class="se">\n\n</span><span class="s">File Not Found'</span>
+</code></pre></div></div>
+
+<h4 id="웹-브라우저-외의-접근-처리하기">웹 브라우저 외의 접근 처리하기</h4>
+
+<p>그런데 서버를 띄워두고, 클라이언트에서 직접 뭔가를 요청하지 않았는데도 다음과 같이 parsing 에러가 발생하기도 했다.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    filename = headers[0].split()[1]
+IndexError: list index out of range
+</code></pre></div></div>
+
+<p>네트워크 스캔 도구 등 웹 브라우저 외의 다른 곳에서도 이 서버에 접근하기도 하는데, 이때 정상적인 HTTP 요청 형식을 따르지 않기도 하기 때문이다. 따라서 이런 상황에서의 처리도 다음과 같이 해 주었다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">request</span> <span class="o">=</span> <span class="n">client_conn</span><span class="p">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">).</span><span class="n">decode</span><span class="p">()</span>
+<span class="n">headers</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="n">first_header_parts</span> <span class="o">=</span> <span class="n">headers</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">split</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">first_header_parts</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="p">...</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"Invalid HTTP Request line"</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">"Empty Request"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="간단한-서버-프로그램">간단한 서버 프로그램</h3>
+
+<p>간단한 서버 프로그램을 다음과 같이 완성했다. favicon.ico를 자동으로 호출하게 되는데, 보통은 static 폴더 안에 저장한다. 여기서는 간단하게 서버를 만들어 볼 목적이었으므로, favicon.ico에 대한 호출을 무시하도록 했다.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">socket</span>
+
+<span class="n">SERVER_HOST</span> <span class="o">=</span> <span class="s">'0.0.0.0'</span>
+<span class="n">SERVER_PORT</span> <span class="o">=</span> <span class="mi">8080</span>
+
+<span class="n">server_socket</span> <span class="o">=</span> <span class="n">socket</span><span class="p">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="p">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="p">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+<span class="n">server_socket</span><span class="p">.</span><span class="n">setsockopt</span><span class="p">(</span><span class="n">socket</span><span class="p">.</span><span class="n">SOL_SOCKET</span><span class="p">,</span> <span class="n">socket</span><span class="p">.</span><span class="n">SO_REUSEADDR</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">server_socket</span><span class="p">.</span><span class="n">bind</span><span class="p">((</span><span class="n">SERVER_HOST</span><span class="p">,</span> <span class="n">SERVER_PORT</span><span class="p">))</span>
+<span class="n">server_socket</span><span class="p">.</span><span class="n">listen</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="n">client_conn</span><span class="p">,</span> <span class="n">client_addr</span> <span class="o">=</span> <span class="n">server_socket</span><span class="p">.</span><span class="n">accept</span><span class="p">()</span>
+
+        <span class="n">request</span> <span class="o">=</span> <span class="n">client_conn</span><span class="p">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">).</span><span class="n">decode</span><span class="p">()</span>
+        <span class="n">headers</span> <span class="o">=</span> <span class="n">request</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">headers</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">first_header_parts</span> <span class="o">=</span> <span class="n">headers</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="n">split</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">first_header_parts</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">filename</span> <span class="o">==</span> <span class="s">'/'</span><span class="p">:</span>
+                    <span class="n">filename</span> <span class="o">=</span> <span class="s">'/index.html'</span>
+
+                <span class="k">if</span> <span class="n">filename</span> <span class="o">!=</span> <span class="s">'/favicon.ico'</span><span class="p">:</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">fin</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s">'pages'</span> <span class="o">+</span> <span class="n">filename</span><span class="p">)</span>
+                        <span class="n">content</span> <span class="o">=</span> <span class="n">fin</span><span class="p">.</span><span class="n">read</span><span class="p">()</span>
+                        <span class="n">fin</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+                        <span class="n">response</span> <span class="o">=</span> <span class="s">'HTTP/1.1 200 OK</span><span class="se">\n</span><span class="s">Content-Type: text/html</span><span class="se">\n\n</span><span class="s">'</span> <span class="o">+</span> <span class="n">content</span>
+
+                    <span class="k">except</span> <span class="nb">FileNotFoundError</span><span class="p">:</span>
+                        <span class="n">response</span> <span class="o">=</span> <span class="s">'HTTP/1.1 404 NOT FOUND</span><span class="se">\n</span><span class="s">Content-Type: text/html</span><span class="se">\n\n</span><span class="s">File Not Found'</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">print</span><span class="p">(</span><span class="s">"Invalid HTTP Request line"</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span><span class="s">"Empty Request"</span><span class="p">)</span>
+
+        <span class="n">client_conn</span><span class="p">.</span><span class="n">sendall</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">encode</span><span class="p">())</span>
+        <span class="n">client_conn</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="k">finally</span><span class="p">:</span>
+    <span class="n">server_socket</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div></div>
+
+</div>
+
+
+
+<div class="pagination">
+   
+  <a href="/2023-09-18/http-server" class="right arrow"
+    >&#8594;</a
+  >
+  
+
+  <a href="#" class="top">Top</a>
+</div>
+</main>
+
+    <footer>
+  <span>
+    &copy; <time datetime="2023-09-20 20:43:43 +0900">2023</time> Sunmi Moon. Made with Jekyll using the <a href="https://github.com/chesterhow/tale/">Tale</a> theme.
+  </span>
+</footer>
+
+  </body>
+</html>
