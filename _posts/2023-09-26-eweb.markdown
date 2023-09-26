@@ -1,0 +1,57 @@
+---
+layout: post
+title: "파이썬으로 web framework 만들기 1 - 기초와 이론"
+date: 2023-09-26 12:18:07 +0900
+tags: Python server
+---
+
+웹 프레임워크를 만드는 유투브 영상을 따라 해 보면서, 어떤 개념을 공부해야 하는지 알아보려고 한다. (https://www.youtube.com/watch?v=riJQ-fpHM-w)
+
+### 웹 서버와 웹 애플리케이션 서버
+
+웹 클라이언트가 요청하는 일을 처리해 주는 서버를 웹 서버라고 하지만, 웹 서버는 엄밀히 말하면 웹 서버와 웹 애플리케이션 서버로 분류된다. 웹 서버는 주로 정적 페이지를 처리하는데, 동적 페이지를 처리해야 하면 웹 애플리케이션 서버로 작업을 넘긴다.
+
+정적 페이지는 누가, 언제 요청하더라도 언제 같은 페이지를 보여준다. 반면에 동적 페이지는 사람, 시간 등에 따라 다른 화면을 보여준다. 상황에 따라 다른 페이지를 보여 주려면 그것을 처리하는 프로그램이 있어야 한다. 따라서 동적 페이지를 처리하는 웹 애플리케이션 서버는 HTML 파일을 생성하는 프로그래밍 코드가 포함되어 있다.
+
+동적 페이지에 대한 수요가 증가하면서, 이 페이지를 생성하기 위한 별도의 프로그램이 필요해졌다. 그리고 이 프로그램이 만든 동적 페이지를 웹 서버로 전달하기 위해서 이 둘(웹 서버와 웹 애플리케이션) 간의 정보 전달의 규격을 지킬 필요가 생겼다. 이 규칙을 정의한 것이 바로 CGI(Common Gateway Interface)이다.
+
+### CGI와 WSGI
+
+이 CGI를 지키기만 하면 되므로, 프로그램을 어떤 언어로 만들어도 상관 없다. 그런데 이 CGI는 클라이언트 요청이 있을 때마다 별도의 프로세스를 만들어 작업을 진행하기 때문에, 요청이 많아질수록 프로세스도 많아지고 쉽게 과부하에 걸릴 수 있다. 그래서 요즘에는 CGI는 거의 쓰지 않고, 보완된 방법을 사용한다.
+
+그중 하나가 WSGI이다. WSGI는 CGI의 단점을 보완하고, 파이썬 언어에 맞춘 규격이다. WSGI 규격이 CGI를 포함하므로 WSGI를 만들 때도 CGI의 도움을 받아야 한다. 여기서는 wsgi의 간단한 버전을 만들어 본다.
+
+#### WSGI 환경의 Request 클래스
+
+WSGI(Web Server Gateway Interface) 환경에서 HTTP로 들어온 요청을 처리하는 Request 클래스를 다음과 같이 정의한다. environ에서 요청 본문을 읽고, parse_qs을 이용해서 queryset을 파싱한다. 기본적인 구조는 다음과 같다.
+
+```python
+class Request:
+    def __init__(self, environ, start_response):
+        self.environ = environ
+        self.http_host = environ.get('HTTP_HOST')
+        self.http_user_agent = environ.get('HTTP_USER_AGENT')
+        self.lang = environ.get('LANG')
+        self.method = environ.get('REQUEST_METHOD')
+        self.path = environ.get('PATH_INFO')
+        self.host_address = environ.get('HOST_ADDRESS')
+        self.gateway_interface = environ.get('GATEWAY_INTERFACE')
+        self.server_port = environ.get('SERVER_PORT')
+        self.remote_host = environ.get('REMOTE_HOST')
+        self.content_type = environ.get('CONTENT_TYPE')
+        self.content_length = environ.get('CONTENT_LENGTH')
+        self.body = environ.get('BODY')
+        self.query_string = environ.get('QUERY_STRING')
+        self.server_protocol = environ.get('SERVER_PROTOCOL')
+        self.server_software = environ.get('SERVER_SOFTWARE')
+        self.start_response = start_response
+
+        self.parse_qs()
+
+    def parse_qs(self):
+        if self.method != 'POST':
+            return
+        environ = self.environ
+```
+
+POST 요청에서만 queryset을 파싱하기 때문에 HTTP의 메서드가 POST가 아닐 경우에는 바로 return 처리해 준다.
