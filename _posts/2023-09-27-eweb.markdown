@@ -1,0 +1,91 @@
+---
+layout: post
+title: "파이썬으로 web framework 만들기 2 - POST 요청 파싱, XSS 공격 방지"
+date: 2023-09-27 12:18:07 +0900
+tags: Python server
+---
+
+클라이언트 요청에 담긴 질의에 접근하기 위해서는 `FieldStorage`의 인스턴스를 생성해야 한다. (cgi 모듈은 곧 deprecated될 예정이다. 추후 이 모듈을 사용하지 않도록 수정할 예정)
+
+```python
+import cgi
+
+...
+
+def parse_qs(self):
+    if self.method != 'POST':
+        return
+    environ = self.environ
+    field_storage = cgi.FieldStorage(
+        fp=environ.get('wsgi.input'),
+        environ=environ,
+        keep_blank_values=True,
+    )
+```
+
+- `fp` : 요청 본문에 접근할 수 있는 입력 스트림이다. `read()`, `readline()` 등의 메서드를 이용해서 입력 값을 순차적으로 받아 올 수 있다.
+- `environ` : 환경 변수를 담고 있는 딕셔너리. 디폴트는 `os.environ`. 주로 웹 서버로부터 받은 메타 데이터가 들어 있다.
+- `keep_blank_values` : 쿼리 문자열에 빈 값이 있을 때, 그 값의 키를 유지할지 말지를 결정한다. 예를 들어 이 값이 `True`일 경우 `'key=1&value='`와 같이 `value`라는 키가 있고, 값은 없을 때 `value` 키값을 유지할 수 있다.
+
+### POST 요청 중 파일 업로드
+
+POST 요청 중에서 파일 업로드 상황일 경우를 따로 처리한다. 파일 업로드 요청의 경우 `filename`이 존재하므로 다음과 같이 추가해 준다. 자세한 내용은 하단에 나오는 POSTBody 클래스와 관련 메서드들을 만든 후에 추가할 예정.
+
+```python
+def parse_qs(self):
+    if self.method != 'POST':
+        return
+    environ = self.environ
+    field_storage = cgi.FieldStorage(
+        fp=environ.get('wsgi.input'),
+        environ=environ,
+        keep_blank_values=True,
+    )
+    for item in field_storage.list:
+        if not item.filename:
+            pass
+```
+
+### POSTBody 처리하기
+
+다른 메서드와 달리 POST의 경우는 본문을 처리해야 한다. 따라서 `POSTBody`라는 클래스를 따로 만들어 다루도록 한다.
+
+```python
+class POSTBody:
+    def __init__(self, data):
+        self.data = data
+
+    def get(self, key):
+        value = self.data.get(key, [''])
+        if type(value) == str:
+            value = cgi.escape(value)
+        return value
+
+    def set(self, key, value):
+        self.data[key] = value
+
+    def __iter__(self):
+        for key, value in self.data:
+            yield key, value
+```
+
+### XSS 공격 방지하기
+
+나머지는 코드 자체로 설명이 가능한데, 다음의 코드가 눈에 띈다.
+
+```python
+if type(value) == str:
+    value = cgi.escape(value)
+```
+
+코드 자체는 문자열에 포함된 특수문자를 HTML 엔티티로 바꿔 주는 역할을 할 뿐이다. 예를 들어, `<` 같은 것을 `&lt;`로 바꿔 주는 것이다.
+
+이는 XSS(Cross Site Scripting) 공격을 방지하는 역할을 한다. XSS는 악의적인 사용자가 입력 폼에 스크립트를 심어 우리가 원하지 않는 기능을 작동하도록 하게 한다.
+
+그러나 이렇게 만들어 주면, `<script>` 같은 엘리먼트가 `&lt;script&gt;`의 텍스트로 변환되기 때문에 스크립트로 인식되지 않는다. 이 기능을 `cgi.escape()`가 제공한다.
+
+물론 이걸로 XSS 공격을 완벽히 막아낼 수 있는 건 아니다. 추가적인 보안 장치가 필요하며, 이 조치는 쉽고 기본적으로 할 수 있는 것이다.
+
+### 레퍼런스
+
+https://www.youtube.com/watch?v=riJQ-fpHM-w
