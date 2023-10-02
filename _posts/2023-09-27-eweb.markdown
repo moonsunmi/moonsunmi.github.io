@@ -29,7 +29,7 @@ def parse_qs(self):
 
 ### POST 요청 중 파일 업로드
 
-POST 요청 중에서 파일 업로드 상황일 경우를 따로 처리한다. 파일 업로드 요청의 경우 `filename`이 존재하므로 다음과 같이 추가해 준다. 자세한 내용은 하단에 나오는 POSTBody 클래스와 관련 메서드들을 만든 후에 추가할 예정.
+POST 요청 중에서 파일 업로드 상황일 경우를 따로 처리한다. 파일 업로드 요청의 경우 `filename`이 존재하므로 다음과 같이 추가해 준다.
 
 ```python
 def parse_qs(self):
@@ -43,7 +43,9 @@ def parse_qs(self):
     )
     for item in field_storage.list:
         if not item.filename:
-            pass
+            self.post.set(item.key, item.value)
+        else:
+            self.post.set(item.key, item)
 ```
 
 ### POSTBody 처리하기
