@@ -88,4 +88,5 @@ if type(value) == str:
 
 ### 레퍼런스
 
-https://www.youtube.com/watch?v=riJQ-fpHM-w
+- https://www.youtube.com/watch?v=riJQ-fpHM-w
+- https://docs.python.org/3/library/cgi.html#cgi.FieldStorage
