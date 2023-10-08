@@ -1,0 +1,63 @@
+---
+layout: post
+title: "파이썬으로 web framework 만들기 5 - 실제 호출하기"
+date: 2023-10-08 12:18:07 +0900
+tags: Python server
+---
+
+이제 WSGI 규격을 지키는 App 클래스를 만들어 보자.
+
+`Path` 객체를 통해 url과 실행 함수를 매칭시켜 둔 상태를 가정한다. path 객체는 router 객체에 저장된다. 클라이언트로부터 받은 request를 보고 실행할 함수나 메서드를 호출한다.
+
+```python
+class App:
+    def __init__(self):
+        self.router = Router()
+
+    def __call__(self, environ, start_response):
+        print(f'environ: f{environ}')
+        request = Request(environ, start_response)
+        try:
+            print(f'Incoming request: f{request.path}')
+            func = self.router.get_route(request.path)
+            if func is not None:
+                response = func(request)
+                return response.make_response()
+            return Http404(request).make_response()
+        except Exception as e:
+            print(e)
+            return Http404(request).make_response()
+```
+
+`environ`은 요청에 대한 정보가 있다. `start_response`는 응답을 할 준비가 되어 있음을 나타내는 콜백 함수이다. `start_response`는 `status`와 헤더 정보를 설정하고 저장한다.
+
+서버나 게이트웨이는 header가 정상적으로 작성되어 있는지를 확인한 후 만약 내용이 누락되었거나 하면 필요한 정보를 기록하기도 한다.
+
+### 실행 확인을 위한 예제
+
+```python
+
+from app import App
+from request import Request
+from response import HttpResponse, JsonResponse
+from router import Path
+from wsgiref.simple_server import make_server
+
+app = App()
+
+def hello_world(request: Request):
+    return HttpResponse(request, 'Hello World')
+
+def json_world(request: Request):
+    return JsonResponse(request, {"hello": "world"})
+
+
+routes = [
+    Path('/', hello_world),
+    Path('/json', json_world),
+]
+app.set_routes(routes)
+server = make_server("127.0.0.1", 8000, app)
+server.serve_forever()
+
+```
