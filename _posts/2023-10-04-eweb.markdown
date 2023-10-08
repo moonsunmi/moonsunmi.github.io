@@ -1,43 +1,60 @@
 ---
 layout: post
-title: "파이썬으로 web framework 만들기 3 - Router"
+title: "파이썬으로 web framework 만들기 4 - Response"
 date: 2023-10-04 12:18:07 +0900
 tags: Python server
 ---
 
-이제 라우터를 만들어 본다.
+클라이언트에게 받은 요청을 토대로 응답을 해 줘야 한다. `start_response`는 WSGI에 따른 함수이다. 주로 `status_code`와 `headers`를 인자로 받는다. 응답상태와 헤더를 받는다.
 
-라우터는 클라이언트로부터 받은 요청(URL과 HTTP 메서드)을 분석하여 어떤 작업을 할지 판단한다. 그리고 그에 맞는 핸들러(handler)나 컨트롤러(controller)를 호출한다.
-
-router.py
+`status_code`의 경우 `200 OK` 같은 형태의 string이므로 `str`임을 언급해 주었다.
 
 ```python
-class Path:
-    def __init__(self, path, func):
-        self.path = path
-        self.func = func
+from typing import Callable
 
-    def match(self, path):
-        if self.path == path:
-            return True
-        else:
-            return False
+class Response:
+    def __init__(self, request, status_code, content_type):
+        self.headers: list = [('Content-type', content_type)]
+        self.start_response: Callable = request.start_response
+        self.status_code: str = status_code
+        self.content_type: str = content_type
+        self.response_content: list = []
 
-
-class Router:
-    def __init__(self, routes=None):
-        self.routes = list(routes) if routes else []
-
-    def add_route(self, route):
-        self.routes.append(route)
-
-    def get_route(self, path):
-        for route in self.routes:
-            if route.match(path):
-                return route.func
-        return None
-
+    def make_response(self):
+        self.start_response(self.status_code, self.headers)
+        return self.response_content
 ```
 
-여러 경로를 저장해 두는 `Router`와 하나의 경로를 의미하는 `Path`를 만든다.
-`Router`에는 새 경로를 추가할 수 있고, 인자로 받은 `path`가 해당 `Router`에 등록되어 있다면 해당 함수를 반환한다.
+서버의 응답은 content의 타입에 따라 다르게 다루기 위해 다음과 같이 만들어 준다. Http와 Json 응답을 할 수 있다. `HttpResponse`와 `JsonResponse`는 `Response`를 상속 받는다.
+
+Content-type에는 메시지에 담긴 객체의 미디어 타입을 나타낸다. 미디어 타입에 대한 자세한 내용은 다음 경로에서 찾아볼 수 있다.
+
+https://developer.mozilla.org/ko/docs/Web/HTTP/Basics_of_HTTP/MIME_types
+
+우선 여기에서는 Json과 Text 미디어 타입의 응답을 만들어 본다. restful API 개발 시 Json 형태의 응답을 주로 한다.
+
+### 텍스트와 json의 응답
+
+```python
+class HttpResponse(Response):
+    def __init__(self, request, content, status_code, content_type='text/html'):
+        super().__init__(request, status_code, content_type)
+        if type(content) == str:
+            content = content.encode()
+        self.response_content.append(content)
+
+class JsonResponse(Response):
+    def __init__(self, request, content, status_code, content_type='application/json'):
+        super().__init__(request, status_code, content_type)
+        content = json.dumps(content)
+        self.response_content.append(content)
+```
+
+HTTP 응답은 바이트 스트림으로 전송되므로, 다음과 같이 인코딩 작업을 해 주어야 한다.
+
+```python
+if type(content) == str:
+    content = content.encode()
+```
+
+`json.dumps()`를 이용해 파이썬 객체를 Json 형태로 바꾼다.
