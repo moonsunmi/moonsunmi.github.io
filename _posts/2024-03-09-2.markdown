@@ -1,0 +1,43 @@
+---
+layout: post
+title: "React deep dive) JSX의 변환 원리를 이용해 중복 코드 줄이기"
+date: 2024-03-09 12:18:07 +0900
+tags: deepdive
+---
+
+JSX는 속성을 가진 트리 구조를 나타내기 위해 만들어졌다. 트래스파일러를 거쳐 자바스크립트 코드로 변환된다. 자바스크립트에서는 표현하기 까다로운 XML 스타일의 트리 구문을 작성하는 데 도움을 준다.
+
+### JSX의 기본 구성
+
+JSX는
+`JSXElement`, `JSXAttributes`, `JSXChildren`, `JSXStrings` 컴포넌트로 구성되어 있다.
+
+JSX에서 컴포넌트를 만들면 `createElement` 자바스크립트 코드로 변환된다. 이를 활용하면, `JSXElement`만 다르고, `JSXAttribues`, `JSXChildren`은 같은 상황에서 유리하게 중복되지 않게 코드를 작성할 수 있다.
+
+```js
+function TextOrHeading({
+  isHeading,
+  children,
+}: PropsWithChildren<{ isHeading: boolean }>) {
+  return isHeading ? (
+    <h1 className="text">{children}</h1>
+  ) : (
+    <span className="text">{children}</span>
+  );
+}
+```
+
+`isHeading` 값에 따라 `h1`과 `span` 엘리먼트 중 하나로 선택된다. 하지만 나머지 코드는 전부 같아서 중복되어야 한다.
+
+```js
+function TextOrHeadingByElement({
+  isHeading,
+  children,
+}: PropsWithChildren<{ isHeading: boolean }>) {
+  return createElement(
+    isHeading ? "h1" : "span",
+    { className: "text" },
+    children
+  );
+}
+```

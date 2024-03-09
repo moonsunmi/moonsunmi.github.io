@@ -1,0 +1,145 @@
+---
+layout: post
+title: "React deep dive) 리액트에서 애용되는 JS 문법 & 타입스크립트"
+date: 2024-03-09 12:18:07 +0900
+tags: deepdive
+---
+
+바벨은 자바스크립트의 최신 문법을 다양한 브라우저에서도 일관적으로 지원할 수 있도록 코드를 변환한다.
+
+구조 분해 할당: 배열이나 객체의 값을 말 그대로 분해해 개별 변수에 즉시 할당하는 것을 의미한다.
+
+동적 이름으로 할당할 경우
+
+```js
+let dynamicKey = "name";
+
+let user = {
+  [dynamicKey]: "도로롱",
+  age: 3,
+};
+
+let { [dynamicKey]: userName, age } = user;
+
+console.log(userName); // 출력: 도로롱
+console.log(age); // 출력: 3
+```
+
+객체 분해 구문이나 객체 전개 구문의 경우, 바벨로 변환할 경우 코드가 상당히 복잡해 진다. 번들링이 커지므로 사용에 유의한다.
+
+번들링은 여러 개의 파일과 모듈을 하나의 파일로 합치는 과정을 의미한다. 파일을 하나로 합치면 HTTP 요청을 덜할 수 있기 때문에 웹 사이트의 로딩 속도가 향상된다. 대표적인 번들러로는 Webpack, Browserify, Parcel 등이 있다.
+
+### array prototype method
+
+- map
+- filter
+- reduce
+- foreach
+
+`reduce`는 배열의 모든 요소를 콜백 함수의 로직대로 처리하면서, 최종 결괏값을 누적한다.
+
+`foreach`는 단순히 배열의 모든 요소에 콜백 함수를 실행한다. `map`과 달리 배열을 반환하는 게 아니라, 실행만 한다. 따라서 콜백 함수에 `return` 문이 있더라도 결괏값은 `undefined`가 된다. `foreach`는 실행이 되면, `break`, `return` 등 어떤 것으로도 배열의 순회를 막을 수 없다는 점에 유의한다.
+
+### 기타
+
+삼항 조건 연산자는 중첩해서 쓰지 않는 게 좋다.
+
+## 타입스크립트
+
+타입스크립트는 자바스크립트의 슈퍼셋이다. 타입 체크를 런타임이 아닌 빌드 타입에 수행할 수 있게 해준다.
+
+타입을 아직 단정지을 수 없다면, `any`가 아니라 `unknown`을 쓰자. `any`는 불가피한 상황이 아니면 쓰지 않는다.
+
+`unknown`은 top type으로 어떤 타입이든 될 수 있다. `any`와 다른 점은 타입이 정해지기 전까지는 이 값을 사용할 수 없다.
+
+`never`는 bottom type으로 존재가 불가능한 타입을 나타낸다. 다음과 같은 경우를 보자.
+
+```js
+function unknownApple(x: never): never {
+  throw new Error("unknown color");
+}
+
+type Color = "red" | "green" | "blue";
+
+function getAppleColor(c: Color): string {
+  switch (c) {
+    case "red":
+      return "red apple";
+    case "green":
+      return "green apple";
+    default:
+      return unknownApple(c);
+  }
+}
+```
+
+`getAppleColor`은 `red`와 `green`에 대해서만 다루고 있다. 그런데 `c` 매개변수는 `Color` 타입이기 때문에 `blue` 값이 들어올 수가 있다.
+
+`blue`가 들어오면 `unknownApple` 함수가 실행된다. 전달된 인자는 `never` 타입, 즉 불가능한 값에 대한 타입으로 다룬다.
+
+### 타입 가드
+
+`instanceof` 말 그대로, 인스턴스가 특정 클래스의 것인지 확인해 준다.
+`typeof` 특정 요소의 자료형인지 확인해준다.
+`in`은 특정 object에 지정한 property가 존재하는지 확인해 준다.
+
+### 제네릭
+
+제네릭은 클래스나 메서드에서 사용할 내부 데이터 타입을 컴파일 시에 지정하는 방법이다. 제네릭을 이용하면 함수나 클래스 등에서 사용하는 데이터 타입을 외부에서 지정해 줄 수 있다.
+
+원소가 어떤 자료형이든 상관 없이, 배열의 첫 원소를 반환하는 함수를 작성한다고 가정해 보자. 배열의 타입을 `unknown`으로 지정해도 될까?
+
+결괏값인 첫 원소 또한 `unknown` 타입이 되기 때문에 부적절하다.
+
+이럴 때 제네릭을 이용하면 함수로 전달된 배열의 타입이 컴파일 시에 지정되고, 반환값을 그 타입과 같게 만들 수 있다.
+
+```js
+function getFirst<T>(list: T[]): T {
+  return array[0];
+}
+```
+
+### 인덱스 시그니처
+
+key에 해당하는 값에도 type을 지정할 수 있다.
+
+```js
+type Hello = Record<"Hello" | "Hi", string>;
+
+const Hello = {
+  Hello: "hello",
+  Hi: "hi",
+};
+```
+
+그런데 `Object.keys`는 `string`을 반환하도록 되어 있어서, key 값의 타입을 지정했을 때 type 에러가 발생할 수 있다.
+
+```js
+type GreetingWords = { [word in 'Korean' | 'English']: string };
+
+const greetings: GreetingWords = {
+    Korean: '안녕하세요',
+    English: 'Hello',
+};
+
+Object.keys(greetings).map((language) => {
+    const greetingPhrase = greetings[language];
+    return greetingPhrase;
+});
+```
+
+그래서 다음과 같이 `keyof`를 설정해 주어야 한다.
+
+```js
+type GreetingWords = { [word in "Korean" | "English"]: string };
+
+const greetings: GreetingWords = {
+  Korean: "안녕하세요",
+  English: "Hello",
+};
+
+(Object.keys(greetings) as Array<keyof GreetingWords>).map((language) => {
+  const greetingPhrase = greetings[language];
+  return greetingPhrase;
+});
+```
