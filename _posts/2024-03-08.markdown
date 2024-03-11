@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "React deep dive) 클로저"
-date: 2024-03-07 12:18:07 +0900
+date: 2024-03-07 12:08:07 +0900
 tags: deepdive
 ---
 
@@ -17,9 +17,9 @@ tags: deepdive
 
 클로저는 함수와, 함수가 정의된 환경의 조합이다. `innerFunction` 함수를 기준으로 보면, 자신의 바깥 환경인 `outerFunction`에 선언되어 있는 변수에 대한 정보도 가지고 있다. 즉, 자기자신인 `innerFunction`과, 자신이 정의되어 있는 `outerFunction`에 대한 정보를 기억하고 있는 함수를 클로저라고 한다.
 
-```
+```js
 function outerFunction() {
-  let outerVariable = '나는 밖에 있어!';
+  let outerVariable = "나는 밖에 있어!";
 
   function innerFunction() {
     console.log(outerVariable); // '나는 밖에 있어!'
@@ -40,33 +40,33 @@ myInnerFunction(); // 이제 myInnerFunction은 innerFunction을 참조
 
 ### 클로저와 스코프
 
-```
+```js
 function foo() {
-    var x = 100;
-    var y = 5555;
-    console.log(x);
+  var x = 100;
+  var y = 5555;
+  console.log(x);
 
-    function bar(){
-        var x = 1000000;
-        console.log(x);  // bar 함수의 지역 스코프에서 x를 찾아 출력.
-        console.log(y);  // bar가 클로저 함수라 y가 출력됨.
-    }
+  function bar() {
+    var x = 1000000;
+    console.log(x); // bar 함수의 지역 스코프에서 x를 찾아 출력.
+    console.log(y); // bar가 클로저 함수라 y가 출력됨.
+  }
 
-    bar()
+  bar();
 }
 
-foo() // 출력: 1000000 5555
+foo(); // 출력: 1000000 5555
 ```
 
 ### 클로저 사용 시 유의 사항
 
 `setTimeout`은 두 번째 인자의 초(minute)만큼 첫 번째 인자의 콜백 함수 실행을 미룬다. `var`는 함수 레벨 스코프 변수이다.
 
-```
-for (var i = 0; i < 5; i++){
-    setTimeout(function () {
-        console.log(i);
-    }, i * 1000)
+```js
+for (var i = 0; i < 5; i++) {
+  setTimeout(function () {
+    console.log(i);
+  }, i * 1000);
 }
 ```
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "React deep dive) 자바스크립트의 동등 비교"
-date: 2024-03-07 12:18:07 +0900
+date: 2024-03-07 12:08:07 +0900
 tags: deepdive
 ---
 
@@ -23,7 +23,7 @@ tags: deepdive
 
 ES6에서 새롭게 추가된 타입이 있다. Symbol 타입. 중복되지 않는 고유의 값을 나타내기 위한 타입이다.
 
-```
+```js
 const key1 = Symbol(‘key’)
 const key2 = Symbol(‘key’)
 key1 === key2 // false
@@ -31,9 +31,9 @@ key1 === key2 // false
 
 값 자체의 비교를 위해서는 다음과 같이 한다.
 
-```
-const key1 = Symbol.for('key');
-const key2 = Symbol.for('key');
+```js
+const key1 = Symbol.for("key");
+const key2 = Symbol.for("key");
 key1 === key2; // true
 ```
 

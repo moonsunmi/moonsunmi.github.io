@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "React deep dive) JSX의 변환 원리를 이용해 중복 코드 줄이기"
-date: 2024-03-09 12:18:07 +0900
+date: 2024-03-09 12:38:07 +0900
 tags: deepdive
 ---
 
