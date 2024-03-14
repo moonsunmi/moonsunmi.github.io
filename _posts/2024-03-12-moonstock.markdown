@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Next.js와 styled-component 사용하기 - fast refresh 관련 이슈"
+title: "Next.js와 styled-component 사용하기"
 date: 2024-03-12 12:18:07 +0900
 tags: moonstock
 ---

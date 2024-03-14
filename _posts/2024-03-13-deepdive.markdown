@@ -1,0 +1,65 @@
+---
+layout: post
+title: "React deep dive) 리액트 훅(useState)"
+date: 2024-03-13 12:18:07 +0900
+tags: deepdive
+---
+
+###### \<모던 리액트 Deep Dive\>의 내용을 제가 이해한 바로 다시 정리한 글입니다.
+
+### useState
+
+`useState`에서 반환하는 값은 `state`와 해당 `state`의 setter 함수이다. 리액트는 상태값이 바뀌지 않았더라도 setter 함수가 호출되기만 하면 렌더링을 한다.
+
+```js
+// bad example
+export default function Component() {
+  const [, triggerRender] = useState();
+  let state = "hello";
+
+  function handleButtonClick() {
+    state = "hi";
+    triggerRender();
+  }
+```
+
+그러나 렌더링은 함수 단위로 이루어지기 때문에, 렌더링 시, `let state="hello"`가 다시 실행되고, `state`값은 바뀌지 않는다.
+
+#### 게으른 초기화
+
+`useState`는 초깃값을 인수로 받는다. 초깃값이 지정되지 않는다면 `undefined`가 된다.
+
+이 초깃값에 함수를 넣어줄 수도 있다. 이를 게으른 초기화라고 한다. 이 게으른 초기화 함수는 `state`가 처음 만들어질 때만 사용된다.
+
+복잡하거나 무거운 연산을 포함할 때 사용한다. `localStorage`나 `sessionStorage`에 대한 접근, `map, filter, find` 같은 배열에 대한 접근 등에도 사용된다.
+
+```javascript
+const [userLanguage, setUserLanguage] = useState(() => {
+  const savedLang = localStorage.getItem("language");
+  return savedLang || "en"; // 'en'은 기본값
+});
+```
+
+### UseEffect
+
+UseEffect의 정의: 애플리케이션 내 컴포넌트의 여러 값들을 활용해 '동기적으로' 부수 효과를 만드는 메커니즘이다.
+
+`state`와 `props`의 변화 속에서 일어나는 렌더링 과정에서 실행되는 부수 효과 함수이다.
+
+**클린업 함수**는 초기 렌더링 시 실행되지 않고 있다. `state`가 `0`이 초깃값이면 `state`가 `1`로 변하는 조건이 되는 순간, `0`에 해당하는 클린업 함수가 실행된 후 바로 나머지 작업이 진행된다.
+
+클린업 함수는 이벤트를 등록하고 지울 때 사용해야 한다.
+
+### useEffect의 활용
+
+컴포넌트의 생명 주기와 `useEffect` 작업의 관계는 다음과 같다.
+
+1. 마운팅: 컴포넌트가 DOM에 처음 삽입되는 단계. 빈(`[]`) 배열을 의존성 배열에 추가할 경우에 해당한다. 초기 설정이나 API 호출 등
+2. 업데이트: props나 state가 변경되어 다시 렌더링되는 단계. 의존성 배열에 값이 들어 있는 경우에 해당한다. 데이터 fetching 등
+3. 언마운팅: 컴포넌트가 DOM에서 사라지는 단계. `return` 문의 클린업 함수에 해당한다. 이벤트 리스터의 제거, 구독 취소 등
+
+(의존성 배열을 아예 추가하지 않으면 매 렌더링마다 `useEffect`가 실행된다)
+
+생명 주기는 개발자가 직접 관리해줄 필요는 없다. 리액트가 자동으로 처리해 준다.
+
+그런데 마운팅될 때, 업데이트될 때, 언마운팅될 때 특별한 부수 효과를 발생시키고 싶다면 `useEffect`를 이용하면 된다.
