@@ -1,0 +1,58 @@
+---
+layout: post
+title: "React deep dive) 리액트 훅(useEffect)"
+date: 2024-03-14 12:18:07 +0900
+tags: deepdive
+---
+
+###### \<모던 리액트 Deep Dive\>의 내용을 제가 이해한 바로 다시 정리한 글입니다.
+
+### UseEffect
+
+UseEffect의 정의: 애플리케이션 내 컴포넌트의 여러 값들을 활용해 '동기적으로' 부수 효과를 만드는 메커니즘이다.
+
+`state`와 `props`의 변화 속에서 일어나는 렌더링 과정에서 실행되는 부수 효과 함수이다.
+
+**클린업 함수**는 초기 렌더링 시 실행되지 않고 있다. `state`가 `0`이 초깃값이면 `state`가 `1`로 변하는 조건이 되는 순간, `0`에 해당하는 클린업 함수가 실행된 후 바로 나머지 작업이 진행된다.
+
+클린업 함수는 이벤트를 등록하고 지울 때 사용해야 한다.
+
+### useEffect의 활용
+
+컴포넌트의 생명 주기와 `useEffect` 작업의 관계는 다음과 같다.
+
+1. 마운팅: 컴포넌트가 DOM에 처음 삽입되는 단계. 빈(`[]`) 배열을 의존성 배열에 추가할 경우에 해당한다. 초기 설정이나 API 호출 등
+2. 업데이트: props나 state가 변경되어 다시 렌더링되는 단계. 의존성 배열에 값이 들어 있는 경우에 해당한다. 데이터 fetching 등
+3. 언마운팅: 컴포넌트가 DOM에서 사라지는 단계. `return` 문의 클린업 함수에 해당한다. 이벤트 리스터의 제거, 구독 취소 등
+
+(의존성 배열을 아예 추가하지 않으면 매 렌더링마다 `useEffect`가 실행된다)
+
+생명 주기는 개발자가 직접 관리해줄 필요는 없다. 리액트가 자동으로 처리해 준다.
+
+그런데 마운팅될 때, 업데이트될 때, 언마운팅될 때 특별한 부수 효과를 발생시키고 싶다면 `useEffect`를 이용하면 된다.
+
+### useEffect 사용 시 유의점
+
+1. 의존성 배열로 빈 배열(`[]`)을 둔 채 콜백 함수 안에서 특정값을 사용하는 것은 가급적 피해야 한다. 필요하다고 느낀다면, `useEffect`의 실행 위치가 부모 컴포넌트에서 이루어져야 하는 건 아닌지 다시 한번 생각해 본다.
+2. 가독성을 위해 `useEffect`의 콜백 함수에 해당 함수의 역할을 알 수 있는 이름을 지어주면 좋다.
+3. `useEffect`를 너무 크게 만들지 않는다. 불가피할 경우에는 `useEffect` 자체를 여러 개로 나누는 게 좋다. 불가피하게 의존성 배열에 여러 변수가 들어가야 한다면 `useCallback`과 `useMemo`로 사전에 정제한 내용들만 담는 것도 방법이다.
+4. `useEffect` 내에서 사용할 부수 효과라면, 해당 콜백 함수를 바깥에 두지 않고 `useEffect` 안에 포함해 둔다.
+5. 비동기 함수를 실행할 때는, AbortController를 활용한다.
+
+```js
+useEffect(() => {
+  let shouldIgnore = false;
+
+  async function fetchData() {
+    const response = await fetch("http://some.data.com");
+    const result = await response.json();
+    if (!shouldIgnore) {
+      setData(result);
+    }
+  }
+
+  return () => {
+    shouldIgnore = true;
+  };
+}, []);
+```
