@@ -1,0 +1,59 @@
+---
+layout: post
+title: "React deep dive) 사용자 훅 vs. 고차 컴포넌트"
+date: 2024-03-22 12:28:07 +0900
+tags: deepdive
+---
+
+고차 컴포넌트 기법으로 가장 유명한 컴포넌트가 `React.memo` API이다.
+
+렌더링하기 전에 props를 이전 값과 비교해서 변동이 없으면 재렌더링하지 않고, 기억해둔 컴포넌트를 반환한다.
+
+#### useMemo와의 차이
+
+useMemo는 값을 반환 받기 때문에, JSX 함수 방식이 아니라, {}를 사용한 할당식을 사용해야 한다. 따라서 웬만하면 React.memo를 사용하는 게 낫다.
+
+### 고차 컴포넌트
+
+고차 컴포넌트는 컴포넌트 전체를 감쌀 수 있다는 점에서 사용자 정의 훅보다 더 큰 영향을 미칠 수 있다.
+
+with를 접두사로 쓰고, 너무 복잡해질 수 있으니 최소한으로만 사용하는 게 좋다.
+
+```tsx
+import { ComponentType } from "react";
+
+interface LoginProps {
+  loginRequired?: boolean;
+}
+
+function withLoginComponent<T>(Component: ComponentType<T>) {
+  return function (props: T & LoginProps) {
+    const { loginRequired, ...restProps } = props;
+    if (loginRequired) {
+      return <>로그인이 필요합니다.</>;
+    }
+
+    return <Component {...(restProps as T)} />;
+  };
+}
+
+const Component = withLoginComponent((props: { value: string }) => {
+  return (
+    <>
+      <h3>{props.value}</h3>
+    </>
+  );
+});
+
+export default function App() {
+  const isLogin = false;
+  return (
+    <>
+      <Component value="text" loginRequired={isLogin} />
+      <Component value="hi" />
+    </>
+  );
+}
+```
+
+렌더링의 결과물에도 영향을 미치는 공통 로직이라면 고차 함수를 사용하는 걸 고려해 본다.
