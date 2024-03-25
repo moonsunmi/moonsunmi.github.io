@@ -1,0 +1,122 @@
+---
+layout: post
+title: "React deep dive) 서버 사이드 렌더링을 위한 리액트 API"
+date: 2024-03-24 12:28:07 +0900
+tags: deepdive
+---
+
+### renderToString
+
+말그대로 리액트 컴포넌트를 렌더링해서 HTML 문자열로 반환하는 함수이다.
+
+```tsx
+import ReactDomServer from "react-dom/server";
+import { useEffect, createElement } from "react";
+
+function ChildrenComponent({ fruits }: { fruits: Array<string> }) {
+  useEffect(() => {
+    console.log(fruits);
+  }, [fruits]);
+
+  function handleClick() {
+    console.log("hello");
+  }
+
+  return (
+    <ul>
+      {fruits.map((fruit) => (
+        <li key={fruit} onClick={handleClick}>
+          {fruit}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function SampleComponent() {
+  return (
+    <>
+      <div>hello</div>
+      <ChildrenComponent fruits={["apple", "banana", "peach"]} />
+    </>
+  );
+}
+
+const result = ReactDomServer.renderToString(
+  createElement("div", { id: "root" }, <SampleComponent />)
+);
+```
+
+result는 다음과 같은 문자열을 반환한다.
+
+```js
+<div id="root" data-reactroo="">
+  <div>hello>
+  <ul>
+    <li>apple</li>
+    <li>banana</li>
+    <li>peach</li>
+  </ul>
+</div>
+```
+
+서버사이드 렌더링이므로, 당연히 `useEffect`, `handleClick` 등은 처리하지 않는다.
+
+`data-reactroot`가 보이는데, 리액트 컴포넌트의 루트 엘리먼트가 무엇인지 식별하는 역할을 한다. 리액트 루트 엘리먼트에 `data-reactroot` 속성이 있다. 이 속성은 이후에 자바스크립트 실행하기 위한 `hydrate` 함수에서 루트를 식별하는 기준이 된다.
+
+### renderToStaticMarkup
+
+`renderToStaticMarkup` 함수는 `renderToString`과 같은 역할을 하지만 `data-reactroot` 속성을 추가하지는 않는다. 그러면 추후에 `useEffect` 같은 브라우저 API를 절대로 사용할 수 없다. hydrate를 하지 않는다는 가정하에 순수 HTML만 반환하기 때문이다.
+
+### renderToNodeStream
+
+Node.js의 ReadableStream을 반환한다. 혹시 브라우저에서 사용하면 에러가 발생한다. 완벽히 Node.js 환경에 의존하고 있다.
+
+`renderToNodeStream`은 스트림 방식을 이용하기 때문에, 큰 데이터를 조금씩 나눠서 가져올 수 있다. 따라서 대부분의 리액트 서버 사이드 렌더링 프레임워크는 모두 `renderToString` 대신에 이걸 사용한다.
+
+### renderToStaticNodeStream
+
+리액트 자바스크립트에 필요한 속성을 제공하지 않으며 스트림 방식으로 제공한다.
+
+### hydrate
+
+`renderToString`과 `renderToNodeStream`으로 생성된 정적인 HTML에 이벤트와 핸들러를 붙여서 완전한 웹 페이지 결과물을 만든다.
+
+브라우저에서만 사용되는 `render` 함수와 비슷한 역할을 하는데, 차이점은 hydrate의 경우 렌더링된 HTML이 있다는 전제하에 진행된다는 것이다. 반면에 `render`는 아무것도 없는 빈 HTML에 정보를 렌더링한다.
+
+hydrate는 렌더링되지 않은 상태의 인수를 전달하더라도 제대로 된 결과를 내기는 하는데, 이는 hydrate가 렌더링을 한 번 수행하면서 결과물과 비교해 보는 작업을 하기 때문이다.
+
+## 프로젝트 예제에서의 파일 정보
+
+### index.tsx
+
+hydrate가 여기에 포함된다. 서버로부터 받은 HTML을 이용해 완성된 형태의 웹 애플리케이션으로 만든다.
+
+```tsx
+import { fetchTodo } from "./fetch";
+
+async function main() {
+  const result = await fetchTodo();
+
+  const app = <App todos={result} />;
+  const el = document.getElementById("root");
+
+  hydrate(app, el);
+}
+
+main();
+```
+
+클라이언트 렌더링 부분인 `app`, `el`는 서버 사이드에서 렌더링이 완료되어 전달받은 것이다.
+`app`은 따로 `fetchTodo`에서 todos를 가져오고, `el`과 비교하여 서로 일치하는지 확인한다.
+
+App.tsx는 사용자가 만드는 리액트 애플리케이션의 시작점이 된다.
+
+### server.js
+
+서버에서는 사용자의 요청 주소에 따라 어떤 리소스를 내려줄지 결정하는 역할을 한다. 특히 서버 사이드 렌더링을 위해 이 파일에서 리액트 트리를 만드는 역할도 담당한다.
+
+- `createServer`: http 모듈을 이용해서 간단한 서버를 만들 수 있는 Node.js의 기본 라이브러리다.
+- `serverHandler`: `createServer`로 넘겨주는 인수로, HTTP 서버가 라우트(주소)별로 어떻게 작동할지를 정의한다.
+- browser.js: 애플리케이션에서 작성한 리액트 및 관련 코드를 제공하는 파일로, 웹팩이 생성한다.
+- browser.js.map: browser.js와 관련된 소스맵 파일로, 디버깅 용도로 쓴다.
