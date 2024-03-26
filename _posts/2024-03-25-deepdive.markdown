@@ -1,0 +1,87 @@
+---
+layout: post
+title: "React deep dive) Next.js 톺아보기"
+date: 2024-03-25 12:28:07 +0900
+tags: deepdive
+---
+
+### next.config.js
+
+Next.js의 환경 설정을 담당한다.
+
+`reactStrictMode`: 리액트의 엄격 모드와 관련된 옵션이다. 개발자에게 잠재적인 문제를 알려주므로 켜두는 것을 추천한다.
+`
+SWC는 오픈소스로, 번들링과 컴파일을 더욱 빠르게 수행한다.
+
+### pages/\_app.tsx
+
+에러 바운더리를 이용해 애플리케이션 전역에서 발생하는 에러 처리
+reset.css 같은 전역 CSS tjsdjs
+모든 페이지에 공통적으로 사용, 제공하는 데이터
+
+### pages/\_document.tsx
+
+`\_app.tsx`가 애플리케이션 페이지 전체를 초기화하는 곳이자 Next.js를 초기화하는 곳이라면, `\_document.tsx`는 애플리케이션의 HTML을 초기화하는 곳이자 Next.js로 만드는 웹사이트의 뼈대가 되는 HTML 설정과 관련된 코드를 추가하는 곳이다.
+
+- <html>이나 <body>에 DOM 속성을 추가하고 싶다면 `\_document.tsx`에.
+- \_app.tsx는 상황에 따라 서버나 클라이언트에 저장될 수 있지만, \_document.tsx는 무조건 서버에서 실행된다. 따라서 이벤트 핸들러 등을 추가하는 것이 불가능하다.
+- \_document.tsx에서만 사용 가능한 head는 title을 포함할 수 없다.
+- getServerSideProps, getStaticProps 등의 함수를 사용할 수 없다.
+
+### pages/\_error.tsx
+
+서버에서 발생하는 500 에러를 처리할 목적으로 만들어졌다. 따라서 응답코드도, 에러코드도 없다면 클라이언트에서 발생하는 에러인 것이다.
+
+개발 모드에서는 이 페이지에 방문할 수가 없으므로, 제대로 확인해 보려면 프로덕션으로 빌드해서 확인해 봐야 한다.
+
+### pages/404.tsx
+
+404 페이지를 정의할 수 있다.
+
+### pages/500tsx
+
+서버에서 발생하는 에러를 핸들링한다. \_error.tsx와 500.tsx가 둘 다 있다면 500.tsx가 우선이다.
+
+### pages/index.tsx
+
+Next.js의 라우팅 구조는 /pages 디렉터리를 기초로 구성되며, 각 페이지에 있는 default export로 내보낸 함수가 해당 페이지의 루트 컴포넌트가 된다.
+
+pages/index.tsx는 웹 사이트의 루트가 된다.
+
+### Link
+
+Link로 이동하는 경우, 클라이언트에서 필요한 자바스크립트만 불러오고 클라이언트 라우팅/렌더링 방식으로 동작한다. 서버사이드렌더링이면서, 싱글 페이지 애플리케이션의 장점을 살린 것이다.
+
+따라서 웬만하면 `<a>` 대신 `<Link>`를 사용하고, `window.location.push` 대신 `router.push`를 사용한다.
+
+### getServerSideProps가 있는 빌드
+
+```tsx
+export default function Home() {
+  console.log(typeof window === "undefined" ? "server" : "client");
+  return <>hello</>;
+}
+
+export const getServerSideProps = () => {
+  return {
+    props: {},
+  };
+};
+```
+
+이 파일에서 보면, `getServerSideProps`는 아무 역할도 하지 않는 것처럼 보인다. 그러나 빌드를 해 보면 다른 걸 눈으로 화인할 수가 있다.
+
+```
+┌ ○ /                                     2.59 kB        81.3 kB
+├   /_app                                 0 B            78.7 kB
+├ λ /404                                  402 B          79.1 kB
+└ λ /hello                                292 B            79 kB
++ First Load JS shared by all             78.7 kB
+  ├ chunks/framework-07cfeff0db3c4553.js  45.2 kB
+  ├ chunks/main-0acc9857f3798774.js       31.8 kB
+  └ other shared chunks (total)           1.76 kB
+○  (Static)   prerendered as static content
+λ  (Dynamic)  server-rendered on demand using Node.js
+```
+
+hello에 람다 표시가 되어 있다. 서버에서 렌더링이 필요하다는 것이다. 하지만 `getServerSideProps`가 없으면 서버에서 실행하지 않아도 되는 페이지로 간주해 버린다.
