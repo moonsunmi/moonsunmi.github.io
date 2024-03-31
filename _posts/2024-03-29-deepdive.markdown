@@ -1,0 +1,47 @@
+---
+layout: post
+title: "React deep dive) Next.js 스타일 적용과 세팅"
+date: 2024-03-24 12:28:07 +0900
+tags: deepdive
+---
+
+### 전역 스타일
+
+스타일 초기화 등 전체에 공통적으로 적용하고 싶다면 `_app.tsx`에 직접 import해 오면 된다.
+
+### 컴포넌트 레벨 CSS
+
+`[name].module.css`로 추가하면 컴포넌트 레벨의 CSS가 된다.
+
+styled_components를 추가하려면(다른 CSS-in-S도 마찬가지) 서버에서 스타일을 모아 서버 사이드 렌더링 시 일괄 적용하는 과정을 거친다. 이를 위해 `_documnet.tsx`에 그 부분을 세팅하는 코드를 넣어 주어야 한다.(공식 문서에 코드 나옴)
+
+### \_app.tsx 응용하기
+
+웹 서비스를 최초에 접근했을 때만 실행하고 싶은 내용을 `app.getInitialProps` 내부에 담아둘 수 있다. 다음과 같은 조건이면 최초에 접근했을 때 한 번만에 해당한다.
+
+```tsx
+if(req &&
+    !req.url?.startsWith('/_next') &&
+    !['/500', '/404', '/_error'].includes(pathname))
+```
+
+### next.config.js
+
+`basePath`: 애플리케이션을 실행했을 때 시작되는 주소. 지정하지 않으면 `/`가 된다.
+
+`poweredByHeader`: Next.js는 헤더에서 X-Power-by: Next.js 정보를 제공한다. 이는 보안 면에서 좋지 않으므로 false로 설정하는 게 좋다.
+
+`redirects`: 특정 주소를 다른 주소로 보낸다.
+
+```js
+{
+  source: '/tag/:tag',
+  destination: '/tags/:tag/pages/1',
+  permanent: true,
+}
+```
+
+`reactStrictMode`: 다가올 리액트 업데이트에 미리 대비할 수 있다.
+
+`assertPrefix`: 빌드된 결과물을 동일한 호스트가 아닌 다른 CDN 등에 업로드하고자 한다면 이 옵션에 해당 CDN 주소를 명시한다.
+CDN은 전세계에 분산된 서버 네트워크를 통해 웹 콘텐츠를 사용자에게 빠르게 제공하는 기술.
