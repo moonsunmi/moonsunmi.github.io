@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "React deep dive) 렌더링"
-date: 2024-03-10 12:18:07 +0900
+date: 2024-03-10 14:18:07 +0900
 tags: deepdive
 ---
 
@@ -41,6 +41,40 @@ A - B - C - D 순서로 부모 자식 간의 관계를 이룬다고 해 보자. 
 D의 컴포넌트는 값이 업데이트되지 않는다고 가정해 보자. 그러더라도 B나 C가 업데이트되면 리렌더링된다. 그러므로 이럴 때는 메모이제이션을 해 주면 좋다.
 
 ```js
+export default function A() {
+  return (
+    <div className="App">
+      <h1>Hello React!</h1>
+      <B />
+    </div>
+  );
+}
+
+function B() {
+  const [counter, setCoutner] = useState(0);
+
+  function handleButtonClick() {
+    setCoutner((previous) => previous + 1);
+  }
+
+  return (
+    <>
+      <label>
+        <C number={counter} />
+      </label>
+      <button onClick={handleButtonClick}>+</button>
+    </>
+  );
+}
+
+function C({ number }) {
+  return (
+    <div>
+      {number} <D />
+    </div>
+  );
+}
+
 const D = memo(() => {
   return <>리액트 재밌다!</>;
 });
