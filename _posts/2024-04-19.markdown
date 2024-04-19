@@ -1,0 +1,23 @@
+---
+layout: post
+title: "Next.js의 Link와 MUI의 UI Link/Button 함께 쓰기"
+date: 2024-04-07 12:28:07 +0900
+tags: post
+---
+
+MUI에서도 Link를 담당하는 기능이 있다.
+
+하지만 Next.js에서 제공하는 클라이언트 사이드 내비게이션 기능을 포기하고 싶지 않다면, 스타일링은 MUI에서 제공하는 Link로, 본래의 기능은 Next.js에서 제공하는 Link로 사용해야 한다.
+
+```tsx
+import NextLink from "next/link";
+import { LinkProps, Link as MuiLink } from "@mui/material";
+
+export default function Link(props: LinkProps<"a">) {
+  return <MuiLink component={NextLink} {...props} />;
+}
+```
+
+LinkProps 같은 경우는 정말 Link의 Props만을 타입만을 담당하는 게 아니다. (이름 때문에 헷갈렸음) Link뿐 아니라 Button 등 다양한 HTML 엘리먼트의 속성을 나타낼 수 있으므로, 제네릭에 대상 엘리먼트를 지정해 주어야 한다. 'a'는 HTML 'a' 엘리먼트를 나타낸다.
+
+[Next.js Link + Material UI Link/Button components bundled with forwardRef](https://gist.github.com/kachar/028b6994eb6b160e2475c1bb03e33e6a)
