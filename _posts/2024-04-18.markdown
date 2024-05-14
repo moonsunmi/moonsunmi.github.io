@@ -18,20 +18,17 @@ yarn add @mui/material-nextjs @emotion/cache
    app/layout.tsx에서 body 태그 안에 AppRouterCacheProvider를 사용해 children을 감싼다.
 
 ```tsx
-+import { AppRouterCacheProvider } from '@mui/material-nextjs/v14-appRouter';
+import { AppRouterCacheProvider } from "@mui/material-nextjs/v14-appRouter";
 
- export default function RootLayout(props) {
-   return (
-     <html lang="en">
-       <body>
-        <AppRouterCacheProvider>
-           {props.children}
-        </AppRouterCacheProvider>
-       </body>
-     </html>
-   );
- }
-
+export default function RootLayout(props) {
+  return (
+    <html>
+      <body>
+        <AppRouterCacheProvider>{props.children}</AppRouterCacheProvider>
+      </body>
+    </html>
+  );
+}
 ```
 
 import 문에서 v14는 Next.js의 버전을 의미한다. 나는 14를 써서 14로 표기했다.

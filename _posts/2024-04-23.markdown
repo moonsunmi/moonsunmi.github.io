@@ -1,0 +1,72 @@
+---
+layout: post
+title: "클라이언트 컴포넌트에서 서버 컴포넌트를 import할 순 없지만, 자식으로 삼을 순 있다"
+date: 2024-04-23 12:28:07 +0900
+tags: post
+---
+
+내가 클라이언트 컴포넌트에 대해서 헷갈렸던 것.
+
+클라이언트와 서버 컴포넌트의 사용 구분을 명확히 하기 위해서 각 컴포넌트 사용에 몇 가지 제한들이 있다. 그중 나를 헷갈리게 했던 부분이 있다.
+
+react: Client Components can only import other Client Components.
+
+그러므로 client 컴포넌트가 포함하는 컴포넌트들은 전부 클라이언트 컴포넌트가 될 수밖에 없다. 원래 디폴트로 서버 컴포넌트기 때문에, 클라이언트 컴포넌트가 쓰이는 순간부터 계속 클라이언트 컴포넌트가 나오는데, 그렇기 때문에 `use client`를 최상위 클라이언트 컴포넌트에 한번만 언급해 줘도 된다.
+
+그리고 트리상에서 보면 서버 컴포넌트와 클라이언트 컴포넌트가 구분되는 영역이 생기고, 이걸 클라이언트 바운더리라고 한다.(https://www.joshwcomeau.com/react/server-components/)
+
+### Next.js의 가능한 패턴
+
+그런데 Next.js에서는 다음과 같이 나온다.
+
+next.js: You can pass a Server Component as a child or prop of a Client Component.
+
+언뜻 보면 클라이언트 컴포넌트에 대한 리액트의 제한을 어기는 것 같다. 하지만 아니다.
+
+다음은 Next.js의 코드이다.(https://nextjs.org/docs/app/building-your-application/rendering/composition-patterns#interleaving-server-and-client-components)
+
+```tsx
+"use client";
+
+import { useState } from "react";
+
+export default function ClientComponent({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const [count, setCount] = useState(0);
+
+  return (
+    <>
+      <button onClick={() => setCount(count + 1)}>{count}</button>
+      {children}
+    </>
+  );
+}
+```
+
+클라이언트 컴포넌트의 자식 컴포넌트를 children으로 비워두었다. 그래서 그 자리에 서버 컴포넌트가 들어갈 수 있다. 실제로 이 클라이언트 컴포넌트에서는 서버 컴포넌트를 임포트하지 않았기 때문에 리액트의 룰에 어긋나지 않는다.
+
+app/page.tsx
+
+```tsx
+// This pattern works:
+// You can pass a Server Component as a child or prop of a
+// Client Component.
+import ClientComponent from "./client-component";
+import ServerComponent from "./server-component";
+
+// Pages in Next.js are Server Components by default
+export default function Page() {
+  return (
+    <ClientComponent>
+      <ServerComponent />
+    </ClientComponent>
+  );
+}
+```
+
+이렇게 하면, ClientComponent의 자식인 ServerComponent는 서버에서 먼저 렌더링되어 클라이언트로 전달되고, ClientComponent는 클라이언트로 전달된 후에 렌더링된다.
+
+즉, 클라이언트 컴포넌트에서 서버 컴포넌트를 임포트할 수는 없지만, 자식으로 삼을 수는 있다.
