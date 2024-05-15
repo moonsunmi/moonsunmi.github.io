@@ -1,0 +1,71 @@
+---
+layout: post
+title: "item 1) 생성자에 매개변수가 많다면 빌더를 고려하라(계)"
+date: 2024-05-15 12:28:07 +0900
+tags: EffectiveJava
+---
+
+인스턴스화하려 할 때 값을 지정해야 할 매개변수가 너무 많다면, 빌더를 고려해볼 수 있다. 다음과 같이 선언할 수 있기 때문에 인자들만 나열되어 있는 것보다 훨씬 가독성이 좋다.
+
+```java
+NutritionFacts cocaCola = new NutritionFacts.Builder(240, 1)
+        .calories(100).sodium(35).carbohydrate(27).build();
+```
+
+다음은 빌더 패턴을 구현한 것.
+
+```java
+public class NutritionFacts {
+    private final int servingSize; // (ml, 1회 제공량) 필수
+    private final int servings; // (회, 총 n회 제공량) 필수
+    private final int calories; // (1회 제공량당) 선택
+    private final int fat; // (g/1회 제공량) 선택
+    private final int sodium; // (mg/1회 제공량) 선택
+    private final int carbohydrate; // (g/1회 제공량) 선택
+
+    public static class Builder{
+        private final int servingSize; // (ml, 1회 제공량) 필수
+        private final int servings; // (회, 총 n회 제공량) 필수
+
+        private int calories        = 0;
+        private int fat             = 0;
+        private int sodium          = 0;
+        private int carbohydrate    = 0;
+
+        public Builder(int servingSize, int servings){
+            this.servingSize = servingSize;
+            this.servings = servings;
+        }
+
+        public Builder calories(int value){
+            this.calories = value;
+            return this;
+        }
+
+        public Builder fat(int value){
+            this.fat = value;
+            return this;
+        }
+
+        public Builder sodium(int value){
+            this.sodium = value;
+            return this;
+        }
+
+        public Builder carbohydrate(int value){
+            this.carbohydrate = value;
+            return this;
+        }
+
+        public NutritionFacts build(){
+            return new NutritionFacts(this);
+        }
+    }
+}
+```
+
+`Builder` 클래스는 `NutritionFacts` 객체의 인스턴스 없이도 사용할 수 있어야 하므로 `static`으로 선언했다.
+
+`Builder`의 메서드들은 전부 `public`으로 하여 클라이언트 코드에서 해당 값을 지정해 줄 수 있도록 한다. 그리고 이 메서드들은 `return this`로 객체 자신을 반환하여 체이닝을 가능하도록 한다.
+
+`Builder` 클래스 안에서 값을 전부 받아온 후 마지막에 `build` 메서드를 호출한다. 그러면 이 메서드 안에서 전달 받은 인자들을 한꺼번에 이용해서 원래 만들고자 했던 `NutritionFacts`의 인스턴스를 생성한다.
