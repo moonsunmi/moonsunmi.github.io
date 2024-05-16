@@ -1,0 +1,138 @@
+---
+layout: post
+title: "item 2) 생성자에 매개변수가 많다면 빌더를 고려하라(계층적 구조)"
+date: 2024-05-15 12:28:07 +0900
+tags: EffectiveJava
+---
+
+인스턴스화하려 할 때 값을 지정해야 할 매개변수가 너무 많다면, 빌더를 고려해볼 수 있다. 특히 계층적으로 설계된 클래스에서 더 유리하다.
+
+```java
+public abstract class Animal {
+    protected String name;
+
+    public abstract class Builder<T extends Builder<T>>{
+    }
+}
+
+public class Cat extends Animal {
+    protected int lives;
+
+    public class Builder extends Animal.Builder<Builder>{
+
+    }
+}
+```
+
+여기서 Animal의 Builder는 서브 클래스의 Cat Builder 타입을 가져오기 위해서 제너릭 타입이 이용되었다. 그런데 여기서 `Builder<T>`가 아니라 `Builder<T extends Builder<T>>`로 지정한 게 보인다. 이렇게 함으로써 이 Animal의 `Builder`는 Animal을 상속 받은 클래스만 사용할 수 있다.
+
+`protected`는 같은 패키지 내의 클래스나 서브 클래스에서 접근이 가능하다. 외부에서는 접근할 수 없게 하면서도, 상속 받는 관계의 두 클래스가 서로 변수를 공유하도록 하기 위해서 `protected`로 변수를 지정했다.
+
+### Pizza를 상속하는 NyPizza와 Calzone
+
+```java
+public abstract class Pizza {
+    public enum Topping { HAM, MUSHROOM, ONION, PEPPER, SAUSAGE }
+    final Set<Topping> toppings;
+
+    abstract static class Builder<T extends Builder<T>>{
+        EnumSet<Topping> toppings = EnumSet.noneOf(Topping.class);
+
+        public T addTopping(Topping topping){
+            this.toppings.add(Objects.requireNonNull(topping));
+            return self();
+        }
+        abstract Pizza build();
+        protected abstract T self();
+    }
+
+    Pizza(Builder<?> build){
+        this.toppings = build.toppings.clone();
+    }
+}
+
+public class Calzone extends Pizza {
+    private boolean sauceInside;
+
+    public static class Builder extends Pizza.Builder<Builder>{
+        private boolean sauceInside = false;
+
+        public Builder sauceInside(){
+            this.sauceInside = true;
+            return this;
+        }
+
+        @Override
+        protected Builder self(){
+            return this;
+        }
+
+        @Override
+        public Calzone build(){
+            return new Calzone(this);
+        }
+    }
+
+    private Calzone(Builder build){
+        super(build);
+        this.sauceInside = build.sauceInside;
+    }
+}
+
+public class NyPizza extends Pizza {
+    public enum Size = {SMALL, MEDIUM, LARGE}
+    private final Size size;
+
+    public static class Builder extends Pizza.Builder<Builder>{
+        private final Size size;
+
+        public Builder(Size size){
+            this.size = Objects.requireNonNull(Size.class);
+        }
+
+        @Override
+        protected Builder self(){
+            return this;
+        }
+
+        @Override
+        public NyPizza build(){
+            return new NyPizza(this);
+        }
+    }
+
+    private NyPizza(Builder builder){
+        super(builder);
+        this.size = builder.size;
+    }
+}
+
+```
+
+```java
+public class Main {
+    public static void main(String[] args){
+        Calzone calzone = new Calzone.Builder().addTopping(HAM).sauceInside().build()
+    }
+}
+```
+
+다음과 같이 toppings을 final로 지정하면, toppings가 가리키는 참조값(즉, Topping)은 한번 지정된 후 바뀌지 않는다. 하지만 Topping의 ENUM 값은 바뀔 수 있다.
+
+```java
+final Set<Topping> toppings;
+```
+
+#### super
+
+`super` 구문은 상속 관계에 있는 부모 클래스의 생성자를 호출해 온다. 자바에서는 상속 관계를 이룬다면, 자식 클래스의 생성자에서 super를 무조건 호출해와야 한다. 물론 인자가 없을 때 생략할 수는 있지만, 그건 컴파일러에서 super를 대신 써 주기 때문에 근본적으로는 super가 추가되는 것이다.
+
+`super`를 통해 인스턴스 생성 시, 부모 클래스의 필드나 메서드를 초기화한다.
+
+#### 추상 메서드
+
+추상 메서드는 추상 클래스처럼 그 자체로 사용될 수 없고, 상속받은 서브 클래스가 반드시 구현해야만 한다. 즉, 서브 클래스에서 꼭 오버라이드되어야 한다. 그렇지 않으면 에러가 발생한다.
+
+결국 구현을 서브 클래스에서 하지만 추상 메서드가 부모 클래스에 존재하는 이유는 일관된 인터페이스를 제공하기 위해서다.
+
+추상 메서드는 메서드 시그니처(이름, 파라미터 타입, 반환 타입)를 제공하는데, 그로 인해 이 메서드 시그니처들이 서브 클래스에서 모두 동일하게 존재할 수 있다.

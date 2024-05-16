@@ -1,0 +1,32 @@
+---
+layout: post
+title: "item 1) 생성자 대신 정적 팩터리 메서드를 고려하라"
+date: 2024-05-13 12:28:07 +0900
+tags: EffectiveJava
+---
+
+생성자 대신 정적 팩터리 메서드를 이용하면 몇 가지 장점이 있다. 가독성이 좋고, 호출할 때마다 인스턴스를 생성하지는 않아도 되는 등.
+
+```java
+
+public class Vehicle{
+    String name;
+    private Vehicle(String name){
+        this.name = name;
+    }
+
+    public static Vehicle createCar(String name){
+        Vehicle car = new Vehicle(name);
+        return car;
+    }
+}
+
+public class Main{
+    public static void main(String[] args){
+        Vehicle car = Vehicle.createCar("K3");
+    }
+}
+
+```
+
+`Vehicle`의 생성자를 `private`로 지정해 숨긴 후, `Vehicle`의 인스턴스는 `createCar` 메서드를 이용해서 만들 수 있도록 했다. 인스턴스를 생성하지 않아도 메서드를 호출할 수 있도록 `static`으로 설정.
