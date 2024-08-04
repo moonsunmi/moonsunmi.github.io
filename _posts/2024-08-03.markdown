@@ -1,0 +1,66 @@
+---
+layout: post
+title: "fetch 시 new promise가 필요할까?"
+date: 2024-08-04 12:28:07 +0900
+tags: react, javascript
+---
+
+<리액트로 웹앱 만들기>라는 책에서는 랜덤한 user를 Fetch해 오는 함수를 다음과 같이 만들었다.
+
+```js
+export const fetchRandomUser = (): Promise<IRandomUser> =>
+  new Promise((resolve, reject) => {
+    fetch('https://randomuser.me/api/')
+      .then(res => res.json)
+      .then((data: unknown) => {
+        console.log('data:', data)
+        const {results} = data as {results: IRandomUser[]}
+        console.log(results)
+        resolve(convertRandomUser(results[0]))
+      })
+      .catch(reject)
+  })
+```
+
+그런데 fetch는 원래 promise를 반환하므로 다음과 같이 해도 되는 거 아닌가 싶었다.
+
+```js
+export const fetchNoPromiseRandomUser = (): Promise<IRandomUser> =>
+  fetch('https://randomuser.me/api/')
+    .then(res => res.json())
+    .then((data: unknown) => {
+      console.log('data:', data)
+      const {results} = data as {results: IRandomUser[]}
+      console.log(results)
+      return convertRandomUser(results[0])
+    })
+    .catch(error => {
+      console.error('error', error)
+      throw error
+    })
+```
+
+처음과 같이 굳이 new Promise로 감싼 이유는 무얼까?
+
+단순한 비동기 작업에서라면 두 번째처럼, fetch를 그냥 해도 된다. 하지만 비동기 로직이 복잡해서 resolve와 reject를 따로 명확히 제어할 필요가 있다면, 첫 번째 방식이 더 유용하다.
+
+예를 들어, API 두 개를 순서대로 호출해야 한다면 첫 번째 방식을 쓰는 게 훨씬 낫다.
+
+```js
+const fetchUserAndDetails = (): Promise<IUserDetails> =>
+  new Promise((resolve, reject) => {
+    fetchUser()
+      .then((user) => {
+        console.log("User:", user);
+        return fetchUserDetails(user.id);
+      })
+      .then((userDetails) => {
+        console.log("User Details:", userDetails);
+        resolve(userDetails);
+      })
+      .catch((error) => {
+        console.error("Error fetching user or user details:", error);
+        reject(error);
+      });
+  });
+```
